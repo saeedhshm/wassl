@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/profile/info.dart';
+import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/custom_checkbox.dart';
 import 'package:wassl/views/reusable_widgets/main_button.dart';
 import '../../../helpers/constants/sring_constans.dart';
@@ -68,7 +69,7 @@ class LoginPage extends StatelessWidget {
                     hintText: '*********',
                     labelText: null,
                     secureText: true,
-                    icon: Icon(Icons.visibility_off_outlined,color: AppColors.mainDeepGreyColor,),
+                    icon: Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
                   ),
                   SizedBox(height: 10,),
                   CustomCheckbox(title: 'remember_me', onChanged: (bool value){})
@@ -76,7 +77,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 70,),
               MainButtonWidget(btnTitle: 'login', onPressed: (){
-                Get.to(InfoPage());
+                Get.to(()=>UserProfilePage());
               }),
               SizedBox(height: 20,),
               MainTitleText("forget_password?"),

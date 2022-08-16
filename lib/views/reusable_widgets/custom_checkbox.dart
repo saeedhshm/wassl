@@ -39,7 +39,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
           ),
           SizedBox(width: 10,),
           LocalizedText(widget.title,textStyle: TextStyle(
-              color: AppColors.borderTextFieldColor
+              color: AppColors.lightGreyTextColor
           ),)
         ],
       ),

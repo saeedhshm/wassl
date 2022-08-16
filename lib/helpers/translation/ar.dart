@@ -5,6 +5,13 @@ Map<String,String>  arabicStrings = {
   "password":"كلمة المرور",
   "login":"تسجيل الدخول",
   "forget_password?":"نسيت كلمة المرور؟",
-  "remember_me":"تذكرني"
-
+  "remember_me":"تذكرني",
+  "anual_vacations":"الاجازات السنوية",
+  "profile":"الملف الشخصي",
+  "profile_info":"البيانات الشخصية",
+  "work_info":"بيانات العمل",
+  "money_info":"التفاصيل المالية",
+  "docs":"المستندات",
+  "contracts":"العقود",
+  "Custodys":"عهد الموظف"
 } ;
