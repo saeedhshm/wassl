@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 
 import 'helpers/translation/local_strings.dart';
 
 void main() {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+
   runApp(const MyApp());
 }
 
