@@ -26,12 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     timer = Timer(Duration(seconds: 3),
-            ()=>Navigator.pushReplacement(context,
-            MaterialPageRoute(builder:
-                (context) =>
-                LoginPage()
+            ()=>Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation1, animation2) => LoginPage(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero,
+              ),
             )
-        )
     );
   }
 
@@ -52,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: double.infinity,
         child: Center(
           child: SizedBox(
-            width: 230,
+            width: 250,
             child: Hero(
               tag: logoAppHeroTag,
               child: SvgWidget("assets/images/wasl.svg"),

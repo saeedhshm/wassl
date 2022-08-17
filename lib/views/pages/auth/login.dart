@@ -11,13 +11,53 @@ import '../../reusable_widgets/localized_text.dart';
 import '../../reusable_widgets/main_title_text.dart';
 import '../../reusable_widgets/svg_widget.dart';
 import '../main_tabs_page.dart';
+import 'login_widgets.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
 
+
+   LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+  bool startAnim = true;
+  bool showRestItems = false;
+
+  late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, (Get.size.height / 3.75)), end: Offset.zero)
+      .animate(emailController);
+  late AnimationController emailController = AnimationController(
+    duration: const Duration(milliseconds: 400),
+    vsync: this,
+  );
+
+  double _width = 250, _height = 250;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailController.addListener(() {
+      setState(() {});
+    });
+    Future.delayed(Duration(milliseconds: 500),(){
+      setState((){
+        startAnim = false;
+        _height = 100;
+        _width = 200;
+        emailController.forward();
+      });
+      Future.delayed(Duration(milliseconds: 1500),(){
+        setState(()=>showRestItems = true);
+      });
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         width: double.infinity,
@@ -28,60 +68,22 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50,),
-              Hero(
-                tag: logoAppHeroTag,
-                child: Container(
-                    // color: Colors.blue,
-                    width: 150,
-                    height: 100,
-                    child: SvgWidget("assets/images/wasl.svg")),
-              ),
-              Container(
-                child: LocalizedText(
-                  "welcome_to_wasl",
-                  textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: AppColors.darkGreyTextColor,),
+              SizedBox(height:  50,),
+              Transform.translate(
+                offset: emailOffset.value,
+                child: Hero(
+                  tag: logoAppHeroTag,
+                  child: AnimatedContainer(
+                      // color: Colors.blue,
+                      width: _width,
+                      height: _height,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn,
+                      child: SvgWidget("assets/images/wasl.svg")),
                 ),
               ),
-              Container(
-                child: LocalizedText(
-                  "you_can_enter_to_account",
-                  textStyle: TextStyle(
-                      fontSize: 20,
-                      // fontWeight: FontWeight.bold,
-                      color: Colors.grey),
-                ),
-              ),
-              SizedBox(height: 50,),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(width:double.infinity,child: MainTitleText("email_or_job_number")),
-                  SizedBox(height: 10,),
-                  CustomTextFormField(
-                    hintText: 'email_address@email.com',
-                    labelText: null,
-                  ),
-                  SizedBox(height: 20,),
-                  SizedBox(width:double.infinity,child: MainTitleText("password")),
-                  SizedBox(height: 10,),
-                  CustomTextFormField(
-                    hintText: '⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆',
-                    labelText: null,
-                    secureText: true,
-                    icon: Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
-                  ),
-                  SizedBox(height: 10,),
-                  CustomCheckbox(title: 'remember_me', onChanged: (bool value){})
-                ],
-              ),
-              SizedBox(height: 70,),
-              MainButtonWidget(btnTitle: 'login', onPressed: (){
-                Get.to(()=>const MainTabsPage());
-              }),
-              SizedBox(height: 20,),
-              MainTitleText("forget_password?"),
-              SizedBox(height: 20,),
+              RestWidgets()
+
             ],
           ),
         ),
