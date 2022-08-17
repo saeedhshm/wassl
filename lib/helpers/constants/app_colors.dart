@@ -10,4 +10,9 @@ class AppColors{
   static var borderTextFieldColor = Colors.grey.withOpacity(0.4);
   static const lightGreyTextColor = Color(0xff7f8baf);
   static const darkGreyTextColor = Color(0xff5c6277);
+
+  static const gradiantGreen = [
+    Color(0xff2dc78d),
+    Color(0xff00a7a3),
+  ];
 }

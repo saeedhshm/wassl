@@ -42,7 +42,7 @@ class InfoPage extends StatelessWidget {
                   SizedBox(height: 16,),
                   Row(
                     children: [
-                      DarkTextWidget("general_info",fontSize: 29,),
+                      DarkTextWidget("general_info",fontSize: 24,),
                       Spacer(),
                       InkWell(onTap: (){
 
@@ -56,11 +56,11 @@ class InfoPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 10,),
-                          LightTextWidget(items[i].title!,fontSize: 20,),
-                          SizedBox(height: 10,),
-                          DarkTextWidget(items[i].value!,fontSize: 20,),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 5,),
+                          LightTextWidget(items[i].title!,fontSize: 17,),
+                          // SizedBox(height: 10,),
+                          DarkTextWidget(items[i].value!,fontSize: 17,),
+                          SizedBox(height: 5,),
                           Divider()
                         ],
                       ),

@@ -10,6 +10,7 @@ import '../../reusable_widgets/custom_text_form_field.dart';
 import '../../reusable_widgets/localized_text.dart';
 import '../../reusable_widgets/main_title_text.dart';
 import '../../reusable_widgets/svg_widget.dart';
+import '../main_tabs_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -39,10 +40,9 @@ class LoginPage extends StatelessWidget {
               Container(
                 child: LocalizedText(
                   "welcome_to_wasl",
-                  textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: AppColors.darkGreyTextColor,),
                 ),
               ),
-              SizedBox(height: 10,),
               Container(
                 child: LocalizedText(
                   "you_can_enter_to_account",
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                       color: Colors.grey),
                 ),
               ),
-              SizedBox(height: 70,),
+              SizedBox(height: 50,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(width:double.infinity,child: MainTitleText("password")),
                   SizedBox(height: 10,),
                   CustomTextFormField(
-                    hintText: '*********',
+                    hintText: '⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆',
                     labelText: null,
                     secureText: true,
                     icon: Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: 70,),
               MainButtonWidget(btnTitle: 'login', onPressed: (){
-                Get.to(()=>UserProfilePage());
+                Get.to(()=>const MainTabsPage());
               }),
               SizedBox(height: 20,),
               MainTitleText("forget_password?"),

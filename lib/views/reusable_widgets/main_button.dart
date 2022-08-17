@@ -19,7 +19,7 @@ class MainButtonWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(btnTitle.tr,
-              style: TextStyle(color: Colors.white,fontSize: 18),
+              style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),
             ),
           ),
         ),

@@ -80,10 +80,10 @@ flutter:
   fonts:
     - family: AraHamah
       fonts:
-        - asset: assets/fonts/arabic/AraHamah-Bold.ttf
-        - asset: assets/fonts/arabic/AraHamah-Regular.ttf
-#        - asset: assets/fonts/arabic/Amin-Medium.otf
-#        - asset: assets/fonts/arabic/Amin-Regular.otf
+        - asset: assets/fonts/arabic/jazeera/ArbFONTS-Al-Jazeera-Arabic-Bold.ttf
+        - asset: assets/fonts/arabic/jazeera/ArbFONTS-Al-Jazeera-Arabic-Bold-1.ttf
+        - asset: assets/fonts/arabic/jazeera/ArbFONTS-Al-Jazeera-Arabic-Light.ttf
+        - asset: assets/fonts/arabic/jazeera/ArbFONTS-Al-Jazeera-Arabic-Regular.ttf
 
   #         style: italic
   #   - family: Trajan Pro
