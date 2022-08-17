@@ -11,6 +11,8 @@ class MainTabsPage extends StatefulWidget {
 }
 
 class _MainTabsPageState extends State<MainTabsPage> {
+
+  int _index = 1;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).viewPadding.bottom;
@@ -44,19 +46,54 @@ class _MainTabsPageState extends State<MainTabsPage> {
                       children: [
                         Expanded(
                             child:
-                                Image.asset("assets/images/bottom_nav/4.png")),
+                            GestureDetector(
+                              onTap: (){
+                                _index = 4;
+                                setState((){});
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
+                              ),
+                            )),
                         Expanded(
                             child:
-                                Image.asset("assets/images/bottom_nav/2.png")),
+                            GestureDetector(
+                              onTap: (){
+                                _index = 3;
+                                setState((){});
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
+                              ),
+                            )),
                         Spacer(),
                         Expanded(
                             child:
-                                Image.asset("assets/images/bottom_nav/1.png")),
+                            GestureDetector(
+                              onTap: (){
+                                _index = 2;
+                                setState((){});
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                              ),
+                            )),
                         Expanded(
-                            child: Image.asset(
-                          "assets/images/bottom_nav/3.png",
-                          color: AppColors.mainGreenColor,
-                        )),
+                            child:  GestureDetector(
+                              onTap: (){
+                                _index = 1;
+                                setState((){});
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SvgWidget(
+                          "assets/images/bottom_nav/${_index == 1 ? 'active' : ''}1.svg",
+                        ),
+                              ),
+                            )),
                       ],
                     ),
                   ),
