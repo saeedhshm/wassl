@@ -19,104 +19,108 @@ class _MainTabsPageState extends State<MainTabsPage> {
     // var height = Get.bottomBarHeight;
     print("height ----->>> $height");
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
           Expanded(child: const UserProfilePage()),
-          Container(
+          Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Container(
+
 // color:Colors.red,
-            height: 100,
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 25, left: 16, right: 16, bottom: 16),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
+              height: 100,
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 25, left: 16, right: 16, bottom: 16),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child:
+                              GestureDetector(
+                                onTap: (){
+                                  _index = 4;
+                                  setState((){});
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
+                                ),
+                              )),
+                          Expanded(
+                              child:
+                              GestureDetector(
+                                onTap: (){
+                                  _index = 3;
+                                  setState((){});
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
+                                ),
+                              )),
+                          Spacer(),
+                          Expanded(
+                              child:
+                              GestureDetector(
+                                onTap: (){
+                                  _index = 2;
+                                  setState((){});
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                                ),
+                              )),
+                          Expanded(
+                              child:  GestureDetector(
+                                onTap: (){
+                                  _index = 1;
+                                  setState((){});
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgWidget(
+                            "assets/images/bottom_nav/${_index == 1 ? 'active' : ''}1.svg",
                           ),
+                                ),
+                              )),
                         ],
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child:
-                            GestureDetector(
-                              onTap: (){
-                                _index = 4;
-                                setState((){});
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
-                              ),
-                            )),
-                        Expanded(
-                            child:
-                            GestureDetector(
-                              onTap: (){
-                                _index = 3;
-                                setState((){});
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
-                              ),
-                            )),
-                        Spacer(),
-                        Expanded(
-                            child:
-                            GestureDetector(
-                              onTap: (){
-                                _index = 2;
-                                setState((){});
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
-                              ),
-                            )),
-                        Expanded(
-                            child:  GestureDetector(
-                              onTap: (){
-                                _index = 1;
-                                setState((){});
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SvgWidget(
-                          "assets/images/bottom_nav/${_index == 1 ? 'active' : ''}1.svg",
-                        ),
-                              ),
-                            )),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: FractionalOffset.topCenter,
-                  child: Container(
-                    height: 70,
-                    width: 70,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                  Align(
+                    alignment: FractionalOffset.topCenter,
+                    child: Container(
+                      height: 70,
+                      width: 70,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                      ),
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerRight,
+                            end: Alignment.centerLeft,
+                            colors: AppColors.gradiantGreen,
+                          ),
+                          borderRadius: BorderRadius.circular(100)),
                     ),
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                          colors: AppColors.gradiantGreen,
-                        ),
-                        borderRadius: BorderRadius.circular(100)),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )
         ],

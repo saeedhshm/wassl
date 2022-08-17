@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/profile/info.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
-import 'package:wassl/views/reusable_widgets/localized_text.dart';
-
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
@@ -75,6 +73,9 @@ class UserProfilePage extends StatelessWidget {
                   title: "Custodys",
                   icon: "assets/images/profile/6.png",
                 ),
+
+
+                SizedBox(height: 110,)
               ],
             ),
           ),
