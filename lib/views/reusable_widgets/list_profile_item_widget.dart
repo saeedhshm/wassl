@@ -24,7 +24,7 @@ class ListProfileItemWidget extends StatelessWidget {
               children: [
                 Image.asset(icon,width: 35,color: AppColors.darkGreyTextColor,),
                 SizedBox(width: 5,),
-                DarkTextWidget(title),
+                DarkTextWidget(title,fontSize: 20,),
                 Spacer(),
                 Image.asset('assets/images/list_arrow_item.png',width: 35,)
 

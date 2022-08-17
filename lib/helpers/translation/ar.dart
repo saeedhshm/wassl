@@ -13,5 +13,7 @@ Map<String,String>  arabicStrings = {
   "money_info":"التفاصيل المالية",
   "docs":"المستندات",
   "contracts":"العقود",
-  "Custodys":"عهد الموظف"
+  "Custodys":"عهد الموظف",
+  "personal":"شخصي",
+  "general_info":"المعلومات العامة"
 } ;
