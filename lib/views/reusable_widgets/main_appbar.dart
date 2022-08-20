@@ -45,7 +45,11 @@ class MainAppbarWidget extends StatelessWidget {
           ),
         ),
       ),
-      decoration: BoxDecoration(color: AppColors.mainGreenColor),
+      decoration: BoxDecoration(  gradient: LinearGradient(
+        begin: Alignment.centerRight,
+        end: Alignment.centerLeft,
+        colors: AppColors.gradiantGreen,
+      ),),
     );
   }
 }

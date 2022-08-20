@@ -60,7 +60,7 @@ class CustomTextFormField extends StatelessWidget {
                 filled: true,
 
                 hintText: hintText.tr,
-                hintStyle: TextStyle(color: isValideField ? AppColors.lightGreyTextColor : Colors.red,backgroundColor: Colors.white),
+                hintStyle: TextStyle(color: isValideField ? Colors.grey : Colors.red,backgroundColor: Colors.white),
                 label:labelText == null ? null : Text(labelText!.tr,style: TextStyle(color:isValideField ? AppColors.lightGreyTextColor : Colors.red,backgroundColor: Colors.white),),
                 suffixIcon:icon
             ),

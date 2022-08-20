@@ -21,7 +21,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(child: const UserProfilePage()),
+          const UserProfilePage(),
           Align(
             alignment: FractionalOffset.bottomCenter,
             child: Container(
@@ -55,7 +55,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                   setState((){});
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
                                 ),
                               )),
@@ -67,7 +67,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                   setState((){});
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
                                 ),
                               )),
@@ -80,7 +80,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                   setState((){});
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
                                 ),
                               )),
@@ -91,9 +91,10 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                   setState((){});
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: SvgWidget(
                             "assets/images/bottom_nav/${_index == 1 ? 'active' : ''}1.svg",
+
                           ),
                                 ),
                               )),
@@ -104,10 +105,10 @@ class _MainTabsPageState extends State<MainTabsPage> {
                   Align(
                     alignment: FractionalOffset.topCenter,
                     child: Container(
-                      height: 70,
-                      width: 70,
+                      height: 65,
+                      width: 65,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(15.0),
                         child: SvgWidget('assets/images/bottom_nav/plus.svg'),
                       ),
                       decoration: BoxDecoration(

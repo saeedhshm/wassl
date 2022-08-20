@@ -22,9 +22,9 @@ class ListProfileItemWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Image.asset(icon,width: 35,color: AppColors.darkGreyTextColor,),
+                Image.asset(icon,width: 30,color: AppColors.darkGreyTextColor,),
                 SizedBox(width: 5,),
-                DarkTextWidget(title,fontSize: 16,),
+                DarkTextWidget(title,fontSize: 15,),
                 Spacer(),
                 Image.asset('assets/images/list_arrow_item.png',width: 35,)
 

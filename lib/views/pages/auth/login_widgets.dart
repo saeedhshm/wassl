@@ -45,18 +45,19 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
 
         child: Column(
           children: [
+            SizedBox(height: 50,),
             Container(
 
               child: LocalizedText(
                 "welcome_to_wasl",
-                textStyle: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: AppColors.darkGreyTextColor,),
+                textStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Colors.black,),
               ),
             ),
             Container(
               child: LocalizedText(
                 "you_can_enter_to_account",
                 textStyle: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     // fontWeight: FontWeight.bold,
                     color: Colors.grey),
               ),
@@ -84,7 +85,7 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
                 CustomCheckbox(title: 'remember_me', onChanged: (bool value){})
               ],
             ),
-            SizedBox(height: 70,),
+            SizedBox(height: 120,),
             MainButtonWidget(btnTitle: 'login', onPressed: (){
               Get.to(()=>const MainTabsPage());
             }),

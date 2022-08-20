@@ -27,22 +27,23 @@ class UserProfilePage extends StatelessWidget {
               children: [
                 // SizedBox(height: ,),
                 CircularWidget(
-                  size: 130,
+                  size: 100,
                   child: Image.asset('assets/images/profile/1.png'),
                 ),
                 SizedBox(height: 10,),
                 DarkTextWidget('اسم الموظف بالكامل',fontSize: 20,),
                 SizedBox(height: 0,),
-                DarkTextWidget('مصمم جرافيكس',fontSize: 16,),
+                DarkTextWidget('مصمم جرافيكس',fontSize: 15,),
                 SizedBox(height: 20,),
-                SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 20,)),
+                SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
+                  ,)),
                 SizedBox(height: 10,),
                 ListProfileItemWidget(
                   title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
                   icon: "assets/images/profile/vacation.png",
                 ),
                 SizedBox(height: 20,),
-                SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 20,)),
+                SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 15,)),
                 SizedBox(height: 10,),
                 InkWell(
                   onTap: (){

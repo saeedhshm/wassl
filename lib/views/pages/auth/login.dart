@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height:  50,),
+              SizedBox(height:  60,),
               Transform.translate(
                 offset: emailOffset.value,
                 child: Hero(

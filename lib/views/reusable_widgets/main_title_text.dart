@@ -11,9 +11,9 @@ class MainTitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LocalizedText(text,textStyle: TextStyle(
-      color: AppColors.darkGreyTextColor,
+      color: Colors.black,
       fontSize: 17,
-      fontWeight: FontWeight.bold
+      fontWeight: FontWeight.w400
     ),);
   }
 }
