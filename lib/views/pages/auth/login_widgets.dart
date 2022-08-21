@@ -45,7 +45,7 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
 
         child: Column(
           children: [
-            SizedBox(height: 50,),
+            SizedBox(height: 30,),
             Container(
 
               child: LocalizedText(

@@ -44,8 +44,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     Future.delayed(Duration(milliseconds: 500),(){
       setState((){
         startAnim = false;
-        _height = 100;
-        _width = 200;
+        _height = 50;
+        _width = 130;
         emailController.forward();
       });
       Future.delayed(Duration(milliseconds: 1500),(){

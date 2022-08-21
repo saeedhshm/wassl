@@ -13,7 +13,7 @@ class ListProfileItemWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.lightBackgroundColor,
+        color: AppColors.lightBackgroundColor.withOpacity(0.4),
         borderRadius: BorderRadius.circular(5)
       ),
       child: Column(
