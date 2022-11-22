@@ -24,7 +24,7 @@ class MainAppbarWidget extends StatelessWidget {
             children: [
               LocalizedText(
                 title,
-                textStyle: TextStyle(color: Colors.white, fontSize: 25,fontWeight: FontWeight.bold),
+                textStyle: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
               ),
               Spacer(),
               InkWell(

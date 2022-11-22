@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/views/pages/orders/new_order.dart';
 import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
@@ -104,20 +106,25 @@ class _MainTabsPageState extends State<MainTabsPage> {
                   ),
                   Align(
                     alignment: FractionalOffset.topCenter,
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(()=>NewOrder());
+                      },
+                      child: Container(
+                        height: 65,
+                        width: 65,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                        ),
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                              colors: AppColors.gradiantGreen,
+                            ),
+                            borderRadius: BorderRadius.circular(100)),
                       ),
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
-                            colors: AppColors.gradiantGreen,
-                          ),
-                          borderRadius: BorderRadius.circular(100)),
                     ),
                   ),
                 ],
