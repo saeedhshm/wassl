@@ -27,7 +27,7 @@ class MainAppbarWidget extends StatelessWidget {
                 textStyle: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
               ),
               Spacer(),
-              InkWell(
+              onBack != null ?   InkWell(
                 onTap: (){
                   if(onBack != null){
                     onBack!();
@@ -40,7 +40,7 @@ class MainAppbarWidget extends StatelessWidget {
                       'assets/images/back_arrow.png',
                       width: 50,
                     )),
-              ),
+              ) : SizedBox(),
             ],
           ),
         ),

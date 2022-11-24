@@ -5,6 +5,8 @@ import 'package:wassl/views/pages/orders/new_order.dart';
 import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
+import 'attendance/attendance_form.dart';
+
 class MainTabsPage extends StatefulWidget {
   const MainTabsPage({Key? key}) : super(key: key);
 
@@ -23,7 +25,8 @@ class _MainTabsPageState extends State<MainTabsPage> {
     return Scaffold(
       body: Stack(
         children: [
-          const UserProfilePage(),
+           // const UserProfilePage(),
+          const AttendancePage(),
           Align(
             alignment: FractionalOffset.bottomCenter,
             child: Container(

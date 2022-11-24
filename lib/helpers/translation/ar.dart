@@ -17,5 +17,7 @@ Map<String,String>  arabicStrings = {
   "personal":"شخصي",
   "general_info":"المعلومات العامة",
   "order_type":"نوع الطلب",
-  "finance":"المالية"
+  "finance":"المالية",
+  'attendance_records':'سجلات الحضور',
+  'today':'اليوم'
 } ;
