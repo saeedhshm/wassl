@@ -1,4 +1,5 @@
 Map<String,String>  arabicStrings = {
+  'lang':'ar',
   'welcome_to_wasl':'مرحبا بك في وصل' ,
   "you_can_enter_to_account":"يمكنك تسجيل الدخول لحسابك",
   "email_or_job_number":"البريد او الرقم الوظيفي",
@@ -19,5 +20,9 @@ Map<String,String>  arabicStrings = {
   "order_type":"نوع الطلب",
   "finance":"المالية",
   'attendance_records':'سجلات الحضور',
-  'today':'اليوم'
+  'today':'اليوم',
+  'working_time':'مواعيد العمل',
+  'attend':'الحضور',
+  'leaving':'الانصراف',
+  'attending':'حضور'
 } ;

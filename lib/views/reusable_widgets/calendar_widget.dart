@@ -16,105 +16,100 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child:Directionality(
-          textDirection: TextDirection.ltr,
-          child: Calendar(
-            startOnMonday: true,
-            weekDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            // eventsList: _eventList,
-            isExpandable: false,
-            eventDoneColor: Colors.green,
-            selectedColor: Colors.pink,
-            selectedTodayColor: Colors.red,
-            todayColor: Colors.blue,
-            eventColor: null,
-            locale: 'ar',
-            // todayButtonText: 'Heute',
-            // allDayEventText: 'Ganztägig',
-            multiDayEndText: 'Ende',
-            isExpanded: true,
-            // expandableDateFormat: '',
-            // datePickerType: DatePickerType.date,
-            hideBottomBar: true,
-            todayButtonText: 'today'.tr,
-            onDateSelected: (dateTime){
-              // _currentDate = dateTime;
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Calendar(
+        startOnMonday: true,
+        weekDays: const ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        // eventsList: _eventList,
+        isExpandable: false,
+        eventDoneColor: Colors.green,
+        selectedColor: Colors.pink,
+        selectedTodayColor: Colors.red,
+        todayColor: Colors.blue,
+        eventColor: null,
+        locale: 'ar',
+        // todayButtonText: 'Heute',
+        // allDayEventText: 'Ganztägig',
+        multiDayEndText: 'Ende',
+        isExpanded: true,
+        // expandableDateFormat: '',
+        // datePickerType: DatePickerType.date,
+        hideBottomBar: true,
+        todayButtonText: 'today'.tr,
+        onDateSelected: (dateTime){
+          // _currentDate = dateTime;
 
-              setState(() {
+          setState(() {
 
-              });
-            },
-            dayBuilder: (context,dateTime){
-              // print('--->>>> ${dateTime.month}');
-              if(compareTowDays(dateTime, DateTime.now())){
-                return Center(
+          });
+        },
+        dayBuilder: (context,dateTime){
+          // print('--->>>> ${dateTime.month}');
+          if(compareTowDays(dateTime, DateTime.now())){
+            return Center(
 
-                  child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.mainGreenColor,width: 2),
-                          borderRadius: BorderRadius.circular(100)
-                      ),
-                      child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),))),
-                );
-              }
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.mainGreenColor,width: 2),
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),))),
+            );
+          }
 
-              if(dateTime.day == 5 || dateTime.day == 10 || dateTime.day == 15 || dateTime.day == 25  ){
-                return Center(
+          if(dateTime.day == 5 || dateTime.day == 10 || dateTime.day == 15 || dateTime.day == 25  ){
+            return Center(
 
-                  child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.withOpacity(0.5),width: 2),
-                          borderRadius: BorderRadius.circular(100)
-                      ),
-                      child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),))),
-                );
-              }
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.withOpacity(0.5),width: 2),
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),))),
+            );
+          }
 
-              if(dateTime.month == _currentMonth.month && dateTime.month == _currentMonth.month ){
-                return Center(
+          if(dateTime.month == _currentMonth.month && dateTime.month == _currentMonth.month ){
+            return Center(
 
-                  child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
-                      width: double.infinity,
-                      // decoration: BoxDecoration(
-                      //     border: Border.all(color: Colors.red,width: 0),
-                      //     borderRadius: BorderRadius.circular(100)
-                      // ),
-                      child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),))),
-                );
-              }
-              return null;
-            },
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  // decoration: BoxDecoration(
+                  //     border: Border.all(color: Colors.red,width: 0),
+                  //     borderRadius: BorderRadius.circular(100)
+                  // ),
+                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),))),
+            );
+          }
+          return null;
+        },
 
-            defaultOutOfMonthDayColor: Colors.green,
-            defaultDayColor: Colors.grey,
-            onMonthChanged: (dateTime){
-              print('--->>>> ${dateTime.month}');
-              _currentMonth = dateTime;
-              setState(() {
+        defaultOutOfMonthDayColor: Colors.green,
+        defaultDayColor: Colors.grey,
+        onMonthChanged: (dateTime){
+          print('--->>>> ${dateTime.month}');
+          _currentMonth = dateTime;
+          setState(() {
 
-              });
-            },
+          });
+        },
 
-            dayOfWeekStyle: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w800, fontSize: 11),
+        dayOfWeekStyle: TextStyle(
+            color: Colors.black, fontWeight: FontWeight.w800, fontSize: 11),
 
-          ),
-        ),
       ),
-
     );
   }
 

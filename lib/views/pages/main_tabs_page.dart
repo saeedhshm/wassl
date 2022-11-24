@@ -17,6 +17,13 @@ class MainTabsPage extends StatefulWidget {
 class _MainTabsPageState extends State<MainTabsPage> {
 
   int _index = 1;
+
+  var pages = [
+    const UserProfilePage(),
+    Center(child: Text('الطلبات'),),
+    const AttendancePage(),
+    Center(child: Text('الرئيسية'),),
+  ];
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).viewPadding.bottom;
@@ -25,8 +32,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
     return Scaffold(
       body: Stack(
         children: [
-           // const UserProfilePage(),
-          const AttendancePage(),
+         pages[_index-1],
           Align(
             alignment: FractionalOffset.bottomCenter,
             child: Container(
