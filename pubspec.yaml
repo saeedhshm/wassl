@@ -34,6 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  dropdown_button2:
+    path: ../wassl/plugins/dropdown_button2-1.9.1
   flutter_svg:
     path: ../wassl/plugins/flutter_svg-1.1.6
   get:

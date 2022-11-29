@@ -24,5 +24,16 @@ Map<String,String>  arabicStrings = {
   'working_time':'مواعيد العمل',
   'attend':'الحضور',
   'leaving':'الانصراف',
-  'attending':'حضور'
+  'attending':'حضور',
+  'order_laon':'طلب سلفة',
+  'loan_type':'نوع السلفة',
+  'value':'القيمة',
+  'start_cutting_amount':'بداية استقطاع الخصم',
+  'loan_details':'تفاصيل السلفة',
+  'calculate_loan_installment_way':'آلية حساب القسط المقترح',
+  'month_installment':'القسط الشهري',
+  'clear_reason':'توضيح السبب',
+  'attach_file':'إضافة مرفق',
+  'the_reason':'السبب',
+  'send':'ارسال'
 } ;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/pages/orders/new_order.dart';
 import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import 'attendance/attendance_form.dart';
+import 'orders/loan_order.dart';
 
 class MainTabsPage extends StatefulWidget {
   const MainTabsPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class MainTabsPage extends StatefulWidget {
 
 class _MainTabsPageState extends State<MainTabsPage> {
 
-  int _index = 1;
+  int _index = 4;
 
   var pages = [
     const UserProfilePage(),
@@ -117,7 +117,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                     alignment: FractionalOffset.topCenter,
                     child: InkWell(
                       onTap: (){
-                        Get.to(()=>NewOrder());
+                        Get.to(()=>NewLoanOrder());
                       },
                       child: Container(
                         height: 65,

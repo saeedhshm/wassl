@@ -11,11 +11,38 @@
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example_nav2/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example_nav2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example_nav2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_neat_and_clean_calendar-0.3.9+23/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_svg-1.1.6/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/get-4.6.5/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/.dart_tool" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
-    <orderEntry type="library" name="Dart Packages" level="project" />
     <orderEntry type="library" name="Flutter Plugins" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>

@@ -36,7 +36,7 @@ class InfoPage extends StatelessWidget {
                 children: [
                   // SizedBox(height: ,),
                   CircularWidget(
-                    size: 130,
+                    size: 100,
                     child: Image.asset('assets/images/profile/1.png'),
                   ),
                   SizedBox(height: 16,),

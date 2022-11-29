@@ -79,7 +79,7 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
                   hintText: '⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆',
                   labelText: null,
                   secureText: true,
-                  icon: Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
+                  suffixIcon: Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
                 ),
                 SizedBox(height: 5,),
                 CustomCheckbox(title: 'remember_me', onChanged: (bool value){})

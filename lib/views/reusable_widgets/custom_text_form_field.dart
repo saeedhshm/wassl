@@ -6,7 +6,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final String hintText;
   final String? labelText;
-  final Widget? icon;
+  final Widget? suffixIcon;
   final bool secureText;
   final String? errorMessage;
   final TextEditingController? controller;
@@ -18,7 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function (String)?onChange;
   final TextCapitalization textCapitalization;
 
-   CustomTextFormField({Key? key,this.maxLines = 1,required this.hintText,this.labelText,this.icon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
+   CustomTextFormField({Key? key,this.maxLines = 1,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class CustomTextFormField extends StatelessWidget {
                 hintText: hintText.tr,
                 hintStyle: TextStyle(color: isValideField ? Colors.grey : Colors.red,backgroundColor: Colors.white),
                 label:labelText == null ? null : Text(labelText!.tr,style: TextStyle(color:isValideField ? AppColors.lightGreyTextColor : Colors.red,backgroundColor: Colors.white),),
-                suffixIcon:icon
+                suffixIcon:suffixIcon
             ),
             // validator: (value){
             //        return value == '' ? '' : null;
