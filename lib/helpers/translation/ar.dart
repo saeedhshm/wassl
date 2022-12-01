@@ -35,5 +35,16 @@ Map<String,String>  arabicStrings = {
   'clear_reason':'توضيح السبب',
   'attach_file':'إضافة مرفق',
   'the_reason':'السبب',
-  'send':'ارسال'
+  'send':'ارسال',
+  'request_type':'نوع الطلب',
+  'loans':'السلف',
+  'Financialـcompensation':'تعويض مالي',
+  'correct':'تصحيح',
+  'extra_work':'عمل إضافي',
+  'others':'أخرى',
+  'holidays':'الاجازات',
+  'passport':'تأشيرة خروج وعودة',
+  'letter':'خطاب',
+  'employment':'توظيف',
+  'custody':'عهدة'
 } ;
