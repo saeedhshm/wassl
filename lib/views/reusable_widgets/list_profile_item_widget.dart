@@ -6,7 +6,11 @@ class ListProfileItemWidget extends StatelessWidget {
 
   final String icon;
   final String title;
-   ListProfileItemWidget({Key? key,required this.title,required this.icon}) : super(key: key);
+  final double spaceInBetween;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final double iconSize;
+   ListProfileItemWidget({Key? key,this.iconSize = 30,required this.title,required this.icon,this.spaceInBetween = 8,this.fontSize = 15,this.fontWeight = FontWeight.w500}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,9 @@ class ListProfileItemWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Image.asset(icon,width: 30,color: AppColors.darkGreyTextColor,),
-                SizedBox(width: 5,),
-                DarkTextWidget(title,fontSize: 15,),
+                Image.asset(icon,width: iconSize,color: AppColors.darkGreyTextColor,),
+                SizedBox(width: spaceInBetween,),
+                DarkTextWidget(title,fontSize: fontSize,fontWeight: fontWeight,),
                 Spacer(),
                 Image.asset('assets/images/list_arrow_item.png',width: 35,)
 

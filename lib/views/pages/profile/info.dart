@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -24,7 +25,9 @@ class InfoPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          MainAppbarWidget("personal"),
+          MainAppbarWidget("personal",onBack: (){
+            Get.back();
+          },),
           Expanded(child: SingleChildScrollView(
             child: Padding(
               padding:  EdgeInsets.only(

@@ -5,6 +5,7 @@ import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
+import '../settings/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -26,9 +27,30 @@ class UserProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 // SizedBox(height: ,),
-                CircularWidget(
-                  size: 100,
-                  child: Image.asset('assets/images/profile/1.png'),
+                Stack(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularWidget(
+                          size: 100,
+                          child: Image.asset('assets/images/profile/1.png'),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      left: 0,
+                      child: InkWell(
+                        onTap: (){
+                          Get.to(()=>SettingsPage());
+                        },
+                        child: SizedBox(
+                            width: 45,
+                            child: Image.asset('assets/images/profile/setting.png')),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 10,),
                 DarkTextWidget('اسم الموظف بالكامل',fontSize: 20,),

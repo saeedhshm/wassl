@@ -46,5 +46,10 @@ Map<String,String>  arabicStrings = {
   'passport':'تأشيرة خروج وعودة',
   'letter':'خطاب',
   'employment':'توظيف',
-  'custody':'عهدة'
+  'custody':'عهدة',
+  'settings':'الإعدادات',
+  'notifs':'الإعدادات',
+  'change_password':'تغيير كلمة المرور',
+  'change_lang':'تغيير اللغة',
+  'logout':'تسجيل الخروج'
 } ;
