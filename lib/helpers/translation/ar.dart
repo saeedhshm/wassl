@@ -48,8 +48,10 @@ Map<String,String>  arabicStrings = {
   'employment':'توظيف',
   'custody':'عهدة',
   'settings':'الإعدادات',
-  'notifs':'الإعدادات',
+  'notifs':'الإشعارات',
   'change_password':'تغيير كلمة المرور',
   'change_lang':'تغيير اللغة',
-  'logout':'تسجيل الخروج'
+  'logout':'تسجيل الخروج',
+  'work':'العمل',
+  'occasions':'المناسبات'
 } ;

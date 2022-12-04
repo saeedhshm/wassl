@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/pages/settings/pages/notifs_page.dart';
 
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
@@ -27,13 +28,18 @@ class SettingsPage extends StatelessWidget {
               children: [
                 DarkTextWidget('settings'.tr,fontSize: 18,fontWeight: FontWeight.bold,),
                 SizedBox(height: 8,),
-                ListProfileItemWidget(
-                  title: "notifs".tr,
-                  spaceInBetween: 16,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  iconSize: 35,
-                  icon: "assets/images/profile/vacation.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>NotifsPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "notifs".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/profile/vacation.png",
+                  ),
                 ),
                 ListProfileItemWidget(
                   title: "change_password".tr,

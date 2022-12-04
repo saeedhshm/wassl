@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 
 import '../../helpers/constants/app_colors.dart';
+import '../consts/gradiants.dart';
 
 class MainAppbarWidget extends StatelessWidget {
   final String title;
@@ -45,11 +46,9 @@ class MainAppbarWidget extends StatelessWidget {
           ),
         ),
       ),
-      decoration: BoxDecoration(  gradient: LinearGradient(
-        begin: Alignment.centerRight,
-        end: Alignment.centerLeft,
-        colors: AppColors.gradiantGreen,
-      ),),
+      decoration: BoxDecoration(
+        gradient: greenGradiantAppBar,
+      ),
     );
   }
 }
