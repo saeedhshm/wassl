@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/pages/orders/loan_order.dart';
+import 'package:wassl/views/pages/orders/pages/correcting_fingerprint.dart';
+import 'package:wassl/views/pages/orders/pages/custody_leaving.dart';
+import 'package:wassl/views/pages/orders/pages/custody_request.dart';
+import 'package:wassl/views/pages/orders/pages/emp_request.dart';
+import 'package:wassl/views/pages/orders/pages/extra_work.dart';
+import 'package:wassl/views/pages/orders/pages/finance_spended_request.dart';
+import 'package:wassl/views/pages/orders/pages/holday_request.dart';
+import 'package:wassl/views/pages/orders/pages/letter_request.dart';
+import 'package:wassl/views/pages/orders/pages/loan_order.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../reusable_widgets/main_appbar.dart';
@@ -75,7 +83,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const FinanceSpendedRequest());
                        },
                        child: Row(
                          children: [
@@ -118,7 +126,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const CorrectingFingerprintRequest());
                        },
                        child: Row(
                          children: [
@@ -145,7 +153,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const ExtraWorkRequest());
                        },
                        child: Row(
                          children: [
@@ -188,7 +196,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const HolidayRequestPage());
                        },
                        child: Row(
                          children: [
@@ -215,7 +223,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         // Get.to(()=>const NewLoanOrder());
                        },
                        child: Row(
                          children: [
@@ -242,7 +250,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const LetterRequestPage());
                        },
                        child: Row(
                          children: [
@@ -269,7 +277,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const EmploymentRequest());
                        },
                        child: Row(
                          children: [
@@ -296,7 +304,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=>const CustodyRequestPage());
                        },
                        child: Row(
                          children: [
@@ -307,6 +315,33 @@ class RequestsPage extends StatelessWidget {
                            ),
                            const SizedBox(width: gapBetweenIconAndTitle,),
                            Text('custody'.tr,style: const TextStyle(
+                               fontSize: itemFontSize,
+                               color: AppColors.darkGreyTextColor
+                           ),)
+                         ],
+                       ),
+
+                     ),
+                     Container(
+                       width: double.infinity,
+                       height: 0.5,
+                       decoration: BoxDecoration(
+                           color: Colors.grey.withOpacity(0.1)
+                       ),
+                     ),
+                     InkWell(
+                       onTap: (){
+                         Get.to(()=>const CustodyLeavingOrder());
+                       },
+                       child: Row(
+                         children: [
+                           const SizedBox(
+                             width:iconSize,
+                             height: iconSize,
+                             child: SvgWidget('assets/images/custody.svg'),
+                           ),
+                           const SizedBox(width: gapBetweenIconAndTitle,),
+                           Text('custody_leaving'.tr,style: const TextStyle(
                                fontSize: itemFontSize,
                                color: AppColors.darkGreyTextColor
                            ),)

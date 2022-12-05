@@ -20,12 +20,12 @@ class ChangeLangPage extends StatelessWidget {
             },
           ),
           Expanded(child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DarkTextWidget('change_lang'.tr,fontSize: 18,fontWeight: FontWeight.bold,),
-                SizedBox(height: 16,),
+                const SizedBox(height: 16,),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.07),
@@ -38,8 +38,8 @@ class ChangeLangPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Text('arabic'.tr),
-                            Spacer(),
-                            Icon(Icons.check)
+                            const Spacer(),
+                            const Icon(Icons.check)
                           ],
                         ),
                       ),
@@ -49,8 +49,8 @@ class ChangeLangPage extends StatelessWidget {
                         child: Row(
                           children: [
                             Text('english'.tr),
-                            Spacer(),
-                            Icon(Icons.check)
+                            const Spacer(),
+                            // const Icon(Icons.check)
                           ],
                         ),
                       ),

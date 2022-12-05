@@ -6,7 +6,7 @@ import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import 'attendance/attendance_form.dart';
-import 'orders/loan_order.dart';
+import 'orders/pages/loan_order.dart';
 
 class MainTabsPage extends StatefulWidget {
   const MainTabsPage({Key? key}) : super(key: key);

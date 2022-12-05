@@ -40,7 +40,7 @@ class SettingsPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     iconSize: 35,
-                    icon: "assets/images/profile/vacation.png",
+                    icon: "assets/images/settingicons/12.png",
                   ),
                 ),
                 InkWell(
@@ -53,7 +53,7 @@ class SettingsPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     iconSize: 35,
-                    icon: "assets/images/profile/vacation.png",
+                    icon: "assets/images/settingicons/13.png",
                   ),
                 ),
                 InkWell(
@@ -66,7 +66,7 @@ class SettingsPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     iconSize: 35,
-                    icon: "assets/images/profile/vacation.png",
+                    icon: "assets/images/settingicons/14.png",
                   ),
                 ),
                 ListProfileItemWidget(
@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   iconSize: 35,
-                  icon: "assets/images/profile/vacation.png",
+                  icon: "assets/images/settingicons/11.png",
                 ),
               ],
             ),

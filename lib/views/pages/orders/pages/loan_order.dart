@@ -4,9 +4,10 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
-import '../../reusable_widgets/drop_down_widget.dart';
-import '../../reusable_widgets/svg_widget.dart';
-import '../../reusable_widgets/textfield_with_icons.dart';
+import '../../../consts/gradiants.dart';
+import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/svg_widget.dart';
+import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class NewLoanOrder extends StatelessWidget {
   const NewLoanOrder({Key? key}) : super(key: key);
@@ -142,11 +143,7 @@ class NewLoanOrder extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(  
                           borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
-                          colors: AppColors.gradiantGreen,
-                        ),),
+                          gradient: greenGradiantAppBar,),
                       ),
                       const SizedBox(height: 25,),
                     ],

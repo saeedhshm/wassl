@@ -44,7 +44,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                 hintText: widget.hintText,
                 fillColor: Colors.white,
 
-                prefixIcon: widget.prefixIcon,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: widget.prefixIcon,
+                ),
                 // prefixIconConstraints: BoxConstraints(maxWidth: 400),
                 suffixIconColor: AppColors.borderTextFieldColor,
                 focusColor: AppColors.mainGreenColor,
