@@ -53,5 +53,12 @@ Map<String,String>  arabicStrings = {
   'change_lang':'تغيير اللغة',
   'logout':'تسجيل الخروج',
   'work':'العمل',
-  'occasions':'المناسبات'
+  'occasions':'المناسبات',
+  'current_password':'كلمة المرور الحالية',
+  'new_password':'كلمة المرور الجديدة',
+  'confirm_password':'تأكييد كلمة المرور',
+  'change_password':'تغغير كلمة المرور',
+  // 'change_lang':'',
+  'english':'الإنجليزية',
+  'arabic':'العربية'
 } ;

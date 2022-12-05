@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/pages/settings/pages/change_lang.dart';
+import 'package:wassl/views/pages/settings/pages/change_password.dart';
 import 'package:wassl/views/pages/settings/pages/notifs_page.dart';
 
 import '../../reusable_widgets/dark_text_widget.dart';
@@ -41,21 +43,31 @@ class SettingsPage extends StatelessWidget {
                     icon: "assets/images/profile/vacation.png",
                   ),
                 ),
-                ListProfileItemWidget(
-                  title: "change_password".tr,
-                  spaceInBetween: 16,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  iconSize: 35,
-                  icon: "assets/images/profile/vacation.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>ChangePasswordPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "change_password".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/profile/vacation.png",
+                  ),
                 ),
-                ListProfileItemWidget(
-                  title: "change_lang".tr,
-                  spaceInBetween: 16,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  iconSize: 35,
-                  icon: "assets/images/profile/vacation.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>ChangeLangPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "change_lang".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/profile/vacation.png",
+                  ),
                 ),
                 ListProfileItemWidget(
                   title: "logout".tr,
