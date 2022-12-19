@@ -6,7 +6,9 @@ import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import 'attendance/attendance_form.dart';
+import 'home/home_page.dart';
 import 'orders/pages/loan_order.dart';
+import 'orders/previous_orders/page.dart';
 
 class MainTabsPage extends StatefulWidget {
   const MainTabsPage({Key? key}) : super(key: key);
@@ -21,9 +23,9 @@ class _MainTabsPageState extends State<MainTabsPage> {
 
   var pages = [
     const UserProfilePage(),
-    Center(child: Text('الطلبات'),),
+    Center(child: PerviuosRequestsPage(),),
     const AttendancePage(),
-    Center(child: Text('الرئيسية'),),
+    Center(child: HomePage(),),
   ];
   @override
   Widget build(BuildContext context) {

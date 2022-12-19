@@ -28,6 +28,15 @@ Map<String,String>  arabicStrings = {
   'order_laon':'طلب سلفة',
   'loan_type':'نوع السلفة',
   'value':'القيمة',
+  'more':'المزيد',
+  'requests':'الطلبات',
+  'confirmed':'مؤكد',
+  'whole_day':'اليوم كامل',
+  'sickـleave':'أجازة مرضية',
+  '2_days':'يومين',
+  'correcting_request':'',
+  'leaving_request':'طلب استئذان',
+  'previous_requests':'الطلبات السابقة',
   'start_cutting_amount':'بداية استقطاع الخصم',
   'loan_details':'تفاصيل السلفة',
   'calculate_loan_installment_way':'آلية حساب القسط المقترح',
@@ -97,5 +106,8 @@ Map<String,String>  arabicStrings = {
   'emp_details':'تفاصيل التوظيف',
   'job_title':'المسمى الوظيفي',
   'join_date':'تاريخ الإلتحاق',
-  'employees_numb':'عدد الموظفين'
+  'employees_numb':'عدد الموظفين',
+  'welcome':'مرحبا',
+  'egypt':'مصر',
+  'working_period':'نوبة دوام'
 } ;

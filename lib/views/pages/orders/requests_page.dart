@@ -19,7 +19,7 @@ class RequestsPage extends StatelessWidget {
   static const double titleFontSizes = 18;
   static const double itemFontSize = 17;
 
-  static const double iconSize = 35;
+  static const double iconSize = 30;
 
   static const double gapBetweenIconAndTitle = 15;
 
