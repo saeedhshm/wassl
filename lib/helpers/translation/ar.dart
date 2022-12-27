@@ -35,6 +35,7 @@ Map<String,String>  arabicStrings = {
   'sickـleave':'أجازة مرضية',
   '2_days':'يومين',
   'error':'خطأ',
+  'reg_attend':'تسجيل الحضور',
   'wrong_username_password':'البريد الالكتروني او كلمة المرور غير صالحين',
   'correcting_request':'',
   'leaving_request':'طلب استئذان',

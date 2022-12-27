@@ -1,3 +1,3 @@
 const String logoAppHeroTag = "logoAppHeroTag";
-const String appStorageEmail = "logoAppHeroTag";
-const String appStoragePassword = "logoAppHeroTag";
+const String appStorageEmail = "appStorageEmail";
+const String appStoragePassword = "appStoragePassword";

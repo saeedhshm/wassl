@@ -50,8 +50,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: (){
-                    appController.logout();
+                  onTap: () async{
+
                     Get.to(()=>ChangePasswordPage());
                   },
                   child: ListProfileItemWidget(
@@ -77,8 +77,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: (){
-
+                  onTap: () async {
+                    await appController.logout();
                     Get.to(()=>LoginPage());
                   },
                   child: ListProfileItemWidget(

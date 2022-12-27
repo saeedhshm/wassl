@@ -135,7 +135,7 @@ class HomePage extends StatelessWidget {
                                           height: 50,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
-                                            child: SvgWidget('assets/images/finger_print.svg'),
+                                            child: SvgWidget('assets/images/holidays.svg'),
                                           ),
                                           decoration: BoxDecoration(
                                               color: AppColors.mainBackgroundColor,
@@ -221,7 +221,7 @@ class HomePage extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('login'.tr,style: TextStyle(
+                              Text('reg_attend'.tr,style: TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold

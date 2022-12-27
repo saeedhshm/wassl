@@ -20,6 +20,7 @@ class AppController extends GetxController{
   var rememberMe = false;
   
   Future<bool> login({required String email,required String password}) async {
+    println('=-=-=-=->>> rememberMe $rememberMe');
     if(rememberMe){
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(appStorageEmail, email);
@@ -36,12 +37,12 @@ class AppController extends GetxController{
     loading.value = false;
       if(statusCode == 200){
         Map<String,dynamic> json = jsonDecode(response.body);
-        println(json);
+        // println(json);
         loginModel.value.fromJson(json);
-        println('=-=-=-=-=->> ${loginModel.value.user?.email}');
-        println('=-=-=-=-=->> ${loginModel.value.user?.name}');
-        println('=-=-=-=-=->> ${loginModel.value.user?.fatherName}');
-        println('=-=-=-=-=->> ${loginModel.value.user?.probationPeriod}');
+        // println('=-=-=-=-=->> ${loginModel.value.user?.email}');
+        // println('=-=-=-=-=->> ${loginModel.value.user?.name}');
+        // println('=-=-=-=-=->> ${loginModel.value.user?.fatherName}');
+        // println('=-=-=-=-=->> ${loginModel.value.user?.probationPeriod}');
         return true;
       }
 
@@ -50,13 +51,26 @@ class AppController extends GetxController{
   }
 
 
-  logout() async{
+ Future logout() async{
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(appStorageEmail, 'null');
-    await prefs.setString(appStoragePassword, 'null');
+   await prefs.setString(appStorageEmail, 'null');
+   await prefs.setString(appStoragePassword, 'null');
+    final String email = prefs.getString(appStorageEmail) ?? 'null';
+    final String password = prefs.getString(appStoragePassword) ?? 'null';
+    println('=-=-=-=->>> retrieveUserAuth email $email');
+    println('=-=-=-=->>> retrieveUserAuth password $password');
     loginModel.value = LoginModel();
   }
 
+  Future<Map<String,String>> retrieveUserAuth() async {
+    var userCreds = <String,String>{};
+    final prefs = await SharedPreferences.getInstance();
+    final String email = prefs.getString(appStorageEmail) ?? 'null';
+    final String password = prefs.getString(appStoragePassword) ?? 'null';
+
+    userCreds.addAll({'email':email,'password':password});
+    return userCreds;
+  }
   @override
   void onInit() {
     // TODO: implement onInit
