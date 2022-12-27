@@ -34,6 +34,8 @@ Map<String,String>  arabicStrings = {
   'whole_day':'اليوم كامل',
   'sickـleave':'أجازة مرضية',
   '2_days':'يومين',
+  'error':'خطأ',
+  'wrong_username_password':'البريد الالكتروني او كلمة المرور غير صالحين',
   'correcting_request':'',
   'leaving_request':'طلب استئذان',
   'previous_requests':'الطلبات السابقة',

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 
 import '../../helpers/constants/app_colors.dart';
-import '../consts/gradiants.dart';
+import '../consts_widgets/gradiants.dart';
 
 class MainAppbarWidget extends StatelessWidget {
   final String title;

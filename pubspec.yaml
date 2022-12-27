@@ -44,6 +44,8 @@ dependencies:
     path: ../wassl/plugins/flutter_neat_and_clean_calendar-0.3.9+23
   http:
     path: ../wassl/plugins/http-0.13.5
+  shared_preferences:
+    path: ../wassl/plugins/shared_preferences-2.0.15
 
 dev_dependencies:
   flutter_test:

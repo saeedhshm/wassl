@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/consts/gradiants.dart';
+import 'package:wassl/views/consts_widgets/gradiants.dart';
 
 import '../../../reusable_widgets/custom_text_form_field.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';

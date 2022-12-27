@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/consts/gradiants.dart';
+import 'package:wassl/views/consts_widgets/gradiants.dart';
 
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';

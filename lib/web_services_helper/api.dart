@@ -16,16 +16,15 @@ class AppApiHandler {
     callback(response);
   }
 
-  static Future sendData(
+  static Future<http.Response> sendData(
       {required String url,
       required dynamic body,
-      Map<String, String>? header,
-      required callback}) async {
+      Map<String, String>? header}) async {
     var uri = Uri.parse(url);
 
     final response = await http.post(uri, body: body, headers: header);
 
-    callback(response);
+    return response;
   }
 
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
+// import 'package:get/get_utils/get_utils.dart';
+import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/consts/gradiants.dart';
+import 'package:wassl/views/consts_widgets/gradiants.dart';
 
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/svg_widget.dart';
@@ -10,7 +12,9 @@ class HomePage extends StatelessWidget {
 
    HomePage({Key? key}) : super(key: key);
 
-  String name = 'محمد حسين';
+   AppController appController = Get.find();
+
+  // String name = 'محمد حسين';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,7 @@ class HomePage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text('welcome'.tr +' : ' + name,style: TextStyle(
+                Text('welcome'.tr +' : ' + appController.loginModel.value.user!.fullName!,style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold

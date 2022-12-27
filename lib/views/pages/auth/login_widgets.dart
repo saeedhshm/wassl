@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 
 import '../../../helpers/constants/app_colors.dart';
+import '../../consts_widgets/loading_widgets.dart';
 import '../../reusable_widgets/custom_checkbox.dart';
 import '../../reusable_widgets/custom_text_form_field.dart';
 import '../../reusable_widgets/localized_text.dart';
@@ -24,6 +26,8 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
 
   final userNameCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
+
+  var securePassword = true;
 
   late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, Get.size.height), end: Offset.zero)
       .animate(emailController);
@@ -82,20 +86,37 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
               CustomTextFormField(
                 hintText: '⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆',
                 labelText: null,
-                secureText: true,
+                secureText: securePassword,
                 controller: passwordCtrl,
-                suffixIcon: const Icon(Icons.visibility_off_outlined,color: AppColors.lightGreyTextColor,),
+                suffixIcon:  InkWell(
+                  onTap: (){
+                    securePassword = !securePassword;
+                    setState(() {
+
+                    });
+                  },
+                  child:  Icon(securePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,color: AppColors.lightGreyTextColor,),
+                ),
               ),
               const SizedBox(height: 5,),
-              CustomCheckbox(title: 'remember_me', onChanged: (bool value){})
+              CustomCheckbox(title: 'remember_me', onChanged: (bool value){
+                appController.rememberMe = value;
+              })
             ],
           ),
           const SizedBox(height: 120,),
-          MainButtonWidget(btnTitle: 'login', onPressed: () async {
-            println('botton login pressed');
-           await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);
-            // Get.to(()=>const MainTabsPage());
-          }),
+           Obx(() => appController.loading.value ? Center(
+             child: SendingLoadingWidget(),
+           ) : MainButtonWidget(btnTitle: 'login', onPressed: () async {
+
+             final isLogged = await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);
+             if(isLogged){
+               Get.to(()=>const MainTabsPage());
+             }else{
+               SnackBars.showErrorSnackBar('error'.tr, 'wrong_username_password'.tr);
+             }
+             //
+           }),),
           const SizedBox(height: 10,),
           MainTitleText("forget_password?"),
           const SizedBox(height: 20,),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/settings/pages/change_lang.dart';
 import 'package:wassl/views/pages/settings/pages/change_password.dart';
 import 'package:wassl/views/pages/settings/pages/notifs_page.dart';
@@ -7,9 +8,14 @@ import 'package:wassl/views/pages/settings/pages/notifs_page.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../../reusable_widgets/main_appbar.dart';
+import '../auth/login.dart';
+import '../intro/splash_screen.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+
+   SettingsPage({Key? key}) : super(key: key);
+
+  final AppController appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +51,7 @@ class SettingsPage extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: (){
+                    appController.logout();
                     Get.to(()=>ChangePasswordPage());
                   },
                   child: ListProfileItemWidget(
@@ -69,13 +76,19 @@ class SettingsPage extends StatelessWidget {
                     icon: "assets/images/settingicons/14.png",
                   ),
                 ),
-                ListProfileItemWidget(
-                  title: "logout".tr,
-                  spaceInBetween: 16,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  iconSize: 35,
-                  icon: "assets/images/settingicons/11.png",
+                InkWell(
+                  onTap: (){
+
+                    Get.to(()=>LoginPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "logout".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/settingicons/11.png",
+                  ),
                 ),
               ],
             ),
