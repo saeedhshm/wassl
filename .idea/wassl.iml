@@ -38,6 +38,9 @@
       <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/build" />
       <excludeFolder url="file://$MODULE_DIR$/plugins/dropdown_button2-1.9.1/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/http-0.13.5/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/http-0.13.5/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/http-0.13.5/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

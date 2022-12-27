@@ -58,20 +58,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const NewLoanOrder());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/loan_type.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('loans'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child: ItemWidget(icon: 'assets/images/loan_type.svg',title: 'loans'.tr,),
 
                      ),
                      Container(
@@ -85,20 +72,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const FinanceSpendedRequest());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/money_on_hand.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('Financialـcompensation'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/money_on_hand.svg',title: 'Financialـcompensation'.tr,),
 
                      ),
                    ],
@@ -128,20 +102,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const CorrectingFingerprintRequest());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/finger_print.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('correct'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child: ItemWidget(icon: 'assets/images/finger_print.svg',title: 'correct'.tr,),
 
                      ),
                      Container(
@@ -155,20 +116,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const ExtraWorkRequest());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/extra_work.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('extra_work'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/extra_work.svg',title: 'extra_work'.tr,),
 
                      ),
                    ],
@@ -198,20 +146,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const HolidayRequestPage());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/holidays.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('holidays'.tr,style: const TextStyle(
-                             fontSize: itemFontSize,
-                             color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/holidays.svg',title: 'holidays'.tr,),
 
                      ),
                      Container(
@@ -225,20 +160,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          // Get.to(()=>const NewLoanOrder());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/passport.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('passport'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/passport.svg',title: 'passport'.tr,),
 
                      ),
                      Container(
@@ -252,20 +174,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const LetterRequestPage());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/letter.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('letter'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/letter.svg',title: 'letter'.tr,),
 
                      ),
                      Container(
@@ -279,20 +188,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const EmploymentRequest());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/employment.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('employment'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/employment.svg',title: 'employment'.tr,),
 
                      ),
                      Container(
@@ -306,20 +202,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const CustodyRequestPage());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/custody.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('custody'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody'.tr,),
 
                      ),
                      Container(
@@ -333,20 +216,7 @@ class RequestsPage extends StatelessWidget {
                        onTap: (){
                          Get.to(()=>const CustodyLeavingOrder());
                        },
-                       child: Row(
-                         children: [
-                           const SizedBox(
-                             width:iconSize,
-                             height: iconSize,
-                             child: SvgWidget('assets/images/custody.svg'),
-                           ),
-                           const SizedBox(width: gapBetweenIconAndTitle,),
-                           Text('custody_leaving'.tr,style: const TextStyle(
-                               fontSize: itemFontSize,
-                               color: AppColors.darkGreyTextColor
-                           ),)
-                         ],
-                       ),
+                       child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody_leaving'.tr,),
 
                      ),
                    ],
@@ -359,6 +229,39 @@ class RequestsPage extends StatelessWidget {
            ],
          ))
        ],
+      ),
+    );
+  }
+}
+
+class ItemWidget extends StatelessWidget {
+  const ItemWidget({
+    Key? key,
+    required this.icon,
+    required this.title
+  }) : super(key: key);
+
+final String icon;
+final String title;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+           SizedBox(
+            width:30,
+            height: 30,
+            child: SvgWidget(icon),
+          ),
+           SizedBox(width: 15,),
+          Text(title,style:  TextStyle(
+              fontSize: 17,
+              color: AppColors.darkGreyTextColor
+          ),)
+        ],
       ),
     );
   }

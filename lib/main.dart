@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
-
+import 'package:get/get.dart';
 import 'helpers/translation/local_strings.dart';
 
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  AppController appController = Get.put(AppController());
 
   runApp(const MyApp());
 }
