@@ -32,8 +32,8 @@ class User {
   String? noticePeriod;
   String? lastWorkingDay;
   int? fullFinal;
-  Null? createdAt;
-  Null? updatedAt;
+  dynamic createdAt;
+  dynamic updatedAt;
   String? email;
   String? fullName;
 

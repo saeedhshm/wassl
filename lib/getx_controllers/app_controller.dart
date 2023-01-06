@@ -6,8 +6,7 @@ import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
-import 'package:http/http.dart' as http;
-
+import 'package:geolocator/geolocator.dart';
 import '../helpers/constants/sring_constans.dart';
 
 class AppController extends GetxController{
@@ -18,7 +17,9 @@ class AppController extends GetxController{
 
   var loginModel = LoginModel().obs;
   var rememberMe = false;
-  
+
+  late Position position;
+
   Future<bool> login({required String email,required String password}) async {
     println('=-=-=-=->>> rememberMe $rememberMe');
     if(rememberMe){
@@ -33,11 +34,12 @@ class AppController extends GetxController{
     });
     int statusCode = response.statusCode;
 
-
+println(response.statusCode);
+println(response.body);
     loading.value = false;
       if(statusCode == 200){
         Map<String,dynamic> json = jsonDecode(response.body);
-        // println(json);
+
         loginModel.value.fromJson(json);
         // println('=-=-=-=-=->> ${loginModel.value.user?.email}');
         // println('=-=-=-=-=->> ${loginModel.value.user?.name}');
@@ -75,6 +77,51 @@ class AppController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getMyLocation();
+  }
 
+  getMyLocation() async {
+    position  = await _determinePosition();
+
+  }
+  /// Determine the current position of the device.
+  ///
+  /// When the location services are not enabled or permissions
+  /// are denied the `Future` will return an error.
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
   }
 }

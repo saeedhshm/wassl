@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:get/get_utils/get_utils.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
+import 'package:wassl/getx_controllers/home/home_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/svg_widget.dart';
@@ -12,7 +15,7 @@ class HomePage extends StatelessWidget {
 
    HomePage({Key? key}) : super(key: key);
 
-   AppController appController = Get.find();
+   final HomeController controller = Get.put(HomeController());
 
   // String name = 'محمد حسين';
 
@@ -33,7 +36,7 @@ class HomePage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text('welcome'.tr +' : ' + appController.loginModel.value.user!.fullName!,style: TextStyle(
+                Text('welcome'.tr +' : ' + controller.appController.loginModel.value.user!.fullName!,style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold
@@ -88,13 +91,13 @@ class HomePage extends StatelessWidget {
                                   ),
                                   child: Row(
                                     children: [
-                                      Text('requests'.tr,style: TextStyle(
+                                      Text('requests'.tr,style: const TextStyle(
                                           color: AppColors.darkGreyTextColor,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold
                                       ),),
-                                      Spacer(),
-                                      Text('more'.tr,style: TextStyle(
+                                      const Spacer(),
+                                      Text('more'.tr,style: const TextStyle(
                                           color: AppColors.darkGreyTextColor,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold
@@ -111,8 +114,8 @@ class HomePage extends StatelessWidget {
                                         Container(
                                           width: 50,
                                           height: 50,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: SvgWidget('assets/images/finger_print.svg'),
                                           ),
                                           decoration: BoxDecoration(
@@ -120,7 +123,7 @@ class HomePage extends StatelessWidget {
                                             borderRadius: BorderRadius.circular(15)
                                           ),
                                         ),
-                                        SizedBox(height: 5,),
+                                        const SizedBox(height: 5,),
                                         Text('correct'.tr,
                                         style: TextStyle(
                                           color: AppColors.darkGreyTextColor
@@ -155,8 +158,8 @@ class HomePage extends StatelessWidget {
                                         Container(
                                           width: 50,
                                           height: 50,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: SvgWidget('assets/images/finger_print.svg'),
                                           ),
                                           decoration: BoxDecoration(
@@ -164,9 +167,9 @@ class HomePage extends StatelessWidget {
                                               borderRadius: BorderRadius.circular(15)
                                           ),
                                         ),
-                                        SizedBox(height: 5,),
+                                        const SizedBox(height: 5,),
                                         Text('correct'.tr,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: AppColors.darkGreyTextColor
                                           ),)
                                       ],
@@ -197,58 +200,75 @@ class HomePage extends StatelessWidget {
                   children: [
                     Container(
                       margin:EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          SizedBox(width: 16,),
-                          Container(
+                      child: Obx(()=>IgnorePointer(
+                        ignoring: controller.sendingAttendance.value,
+                        // ignoring: false,
+                        child: InkWell(
+                          onTap: () async{
+                            if(controller.isAttended.value){
+                              controller.registerLeaving();
+                            }else {
+                              controller.registerAttendance();
+                            }
 
-                            child: CircularWidget(size: 50,borderWidth: 0,padding: 0,borderColor: Colors.transparent,
-                            child: Image.asset('assets/images/profile/1.png')),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: Offset(0, 1),
-                                  blurRadius: 1,
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: 10,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          },
+                          child: controller.sendingAttendance.value ? Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: SendingLoadingWidget(),
+                          ) :  Row(
                             children: [
-                              Text('reg_attend'.tr,style: TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              // SizedBox(height: 10,),
-                              Text('8:00 ${'am'.tr}',style: TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
+                              SizedBox(width: 16,),
+                              Container(
+
+                                child: CircularWidget(size: 50,borderWidth: 0,padding: 0,borderColor: Colors.transparent,
+                                    child: Image.asset('assets/images/profile/1.png')),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(50),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: Offset(0, 1),
+                                      blurRadius: 1,
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(controller.isAttended.value ? 'reg_leaving'.tr : 'reg_attend'.tr,style: TextStyle(
+                                      color: AppColors.darkGreyTextColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold
+                                  ),),
+                                  // SizedBox(height: 10,),
+                                  Text('${controller.hours}:${controller.minutes} ${controller.am_pm}',style: TextStyle(
+                                      color: AppColors.darkGreyTextColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold
+                                  ),),
+                                ],
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
+                                child: SizedBox(
+                                  width: 50,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(20),
+                                      ),
+                                      child:Image.asset('assets/images/attend_print_ic.png')),
+                                ),
+                              )
                             ],
                           ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
-                            child: SizedBox(
-                              width: 50,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                  ),
-                                  child: Image.asset('assets/images/attend_print_ic.png')),
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                      )),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30),

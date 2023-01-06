@@ -46,6 +46,7 @@ dependencies:
     path: ../wassl/plugins/http-0.13.5
   shared_preferences:
     path: ../wassl/plugins/shared_preferences-2.0.15
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

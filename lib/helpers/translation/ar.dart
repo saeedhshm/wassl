@@ -36,6 +36,7 @@ Map<String,String>  arabicStrings = {
   '2_days':'يومين',
   'error':'خطأ',
   'reg_attend':'تسجيل الحضور',
+  'reg_leaving':'تسجيل الانصراف',
   'wrong_username_password':'البريد الالكتروني او كلمة المرور غير صالحين',
   'correcting_request':'',
   'leaving_request':'طلب استئذان',

@@ -41,8 +41,8 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
     // TODO: implement initState
     super.initState();
 
-    userNameCtrl.text = 'test@wasl.com';
-    passwordCtrl.text = '123456';
+    userNameCtrl.text = 'hr@wasl.com';
+    passwordCtrl.text = '1234567';
 
     emailController.addListener(() {
       setState(() {});
