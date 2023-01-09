@@ -3,8 +3,16 @@
 const String _appDomain = 'https://waslhr.com';
 const String _apiVrsion = '/api/v1';
 class AppUrls {
-  static const String login = '$_appDomain$_apiVrsion/auth/login';
-  static const String attendance = '$_appDomain$_apiVrsion/assign/attendance';
-  static const String leaving = '$_appDomain$_apiVrsion/assign/leave';
+
+  static const String _authApi = '$_appDomain$_apiVrsion/auth';
+  static const String _assignApi = '$_appDomain$_apiVrsion/assign';
+
+  //https://waslhr.com/api/v1/auth
+  static const String login = '$_authApi/login';
+
+  //https://waslhr.com/api/v1/assign
+  static const String attendance = '$_assignApi/attendance';
+  static const String leaving = '$_assignApi/leave';
+  static const String attendanceCheck = '$_assignApi/check';
 }
 

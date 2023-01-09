@@ -21,7 +21,7 @@ class AppController extends GetxController{
   late Position position;
 
   Future<bool> login({required String email,required String password}) async {
-    println('=-=-=-=->>> rememberMe $rememberMe');
+
     if(rememberMe){
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(appStorageEmail, email);
@@ -41,10 +41,7 @@ println(response.body);
         Map<String,dynamic> json = jsonDecode(response.body);
 
         loginModel.value.fromJson(json);
-        // println('=-=-=-=-=->> ${loginModel.value.user?.email}');
-        // println('=-=-=-=-=->> ${loginModel.value.user?.name}');
-        // println('=-=-=-=-=->> ${loginModel.value.user?.fatherName}');
-        // println('=-=-=-=-=->> ${loginModel.value.user?.probationPeriod}');
+
         return true;
       }
 
@@ -59,8 +56,7 @@ println(response.body);
    await prefs.setString(appStoragePassword, 'null');
     final String email = prefs.getString(appStorageEmail) ?? 'null';
     final String password = prefs.getString(appStoragePassword) ?? 'null';
-    println('=-=-=-=->>> retrieveUserAuth email $email');
-    println('=-=-=-=->>> retrieveUserAuth password $password');
+
     loginModel.value = LoginModel();
   }
 

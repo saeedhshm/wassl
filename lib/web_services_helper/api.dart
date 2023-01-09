@@ -2,18 +2,18 @@ import 'package:http/http.dart' as http;
 
 
 class AppApiHandler {
-  static void getData(
+
+  static  Future<http.Response> getData(
       {required String url,
       Map<String, String>? header,
-      Map<String, dynamic>? body,
-      required callback}) async {
+      Map<String, dynamic>? body}) async {
 
 
     var uri = Uri.parse(url);
     final response = await http.get(uri, headers: header);
 
 
-    callback(response);
+    return response;
   }
 
   static Future<http.Response> sendData(

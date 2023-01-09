@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../web_services_helper/api.dart';
@@ -12,13 +14,14 @@ class HomeController extends GetxController{
 
   final AppController appController = Get.find();
 
-  // Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);var
   var sendingAttendance = false.obs;
   var isAttended = false.obs;
+  late AttendanceChecker attendanceChecker;
 
   var dt = DateTime.now().obs;
 
-  registerAttendance() async {
+  // page :- apis retriever
+ Future<bool> registerAttendance() async {
     sendingAttendance.value = true;
     var body = {
       'longitude':'${appController.position.longitude}',
@@ -29,43 +32,59 @@ class HomeController extends GetxController{
       'bearer ${appController.loginModel.value.token?.accessToken}',
       // "x-localization": 'lang_code'.tr,
     };
-    final response = await AppApiHandler.sendData(url: AppUrls.attendance, body: body,header: headers);
+
+    var url = '';
+    if(!isAttended.value){
+      url = AppUrls.attendance;
+    }else {
+      url = AppUrls.leaving;
+    }
+    println(url);
+    final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
     sendingAttendance.value = false;
-    isAttended.value = true;
-    println(body);
-    println(response.statusCode);
-    println(response.body);
+
+    if(response.statusCode == 200){
+      isAttended.value = !isAttended.value;
+      return true;
+    }
+    return false;
   }
 
-  registerLeaving() async {
-    sendingAttendance.value = true;
 
-    var body = {
-      'longitude':'${appController.position.longitude}',
-      'latitude':'${appController.position.latitude}'
-    };
-    var headers = {
-      'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
-    final response = await AppApiHandler.sendData(url: AppUrls.leaving, body: body,header: headers);
-    sendingAttendance.value = false;
-    isAttended.value = false;
-    println(body);
-    println(response.statusCode);
-    println(response.body);
-  }
+  checkForAttendance() async {
+   var url = AppUrls.attendanceCheck;
+   var headers = {
+     'Authorization':
+     'bearer ${appController.loginModel.value.token?.accessToken}',
+     // "x-localization": 'lang_code'.tr,
+   };
+   sendingAttendance.value = true;
+   var response = await AppApiHandler.getData(url: url, header: headers);
+   sendingAttendance.value = false;
+   println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
+   println(response.statusCode);
+   println(response.body);
+   println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
+   if(response.statusCode == 200){
+     var json = jsonDecode(response.body);
+     attendanceChecker = AttendanceChecker.fromJson(json);
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      dt.value = DateTime.now();
-    });
+     println(attendanceChecker.attendanceStatus);
+     println(attendanceChecker.message);
+     isAttended.value = attendanceChecker.attendanceStatus == 2;
+   }
 
   }
+
+  /// page variables
+  String get attendanceStatus{
+    return isAttended.value ? 'reg_leaving'.tr : 'reg_attend'.tr ;
+  }
+
+  String get currentTime{
+    return '${hours}:${minutes} ${am_pm}';
+  }
+
 
   String get hours {
 
@@ -79,4 +98,18 @@ class HomeController extends GetxController{
   String get am_pm{
     return dt.value.hour > 11 ? 'pm'.tr :'am'.tr;
   }
+
+
+  //controller lifecycle
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    checkForAttendance();
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      dt.value = DateTime.now();
+    });
+
+  }
+
 }
