@@ -34,7 +34,7 @@ class HomeController extends GetxController{
     };
 
     var url = '';
-    if(!isAttended.value){
+    if(isAttended.value){
       url = AppUrls.attendance;
     }else {
       url = AppUrls.leaving;
@@ -42,7 +42,10 @@ class HomeController extends GetxController{
     println(url);
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
     sendingAttendance.value = false;
-
+    println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
+    println(response.statusCode);
+    println(response.body);
+    println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
     if(response.statusCode == 200){
       isAttended.value = !isAttended.value;
       return true;
