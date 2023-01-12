@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+// import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
+import 'getx_controllers/calendar/calendar_controller.dart';
 import 'helpers/translation/local_strings.dart';
 
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  AppController appController = Get.put(AppController());
 
-  runApp(const MyApp());
+  AppController appController = Get.put(AppController());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

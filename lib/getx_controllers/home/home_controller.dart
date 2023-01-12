@@ -9,6 +9,7 @@ import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../web_services_helper/api.dart';
+import '../calendar/calendar_controller.dart';
 
 class HomeController extends GetxController{
 
@@ -17,7 +18,7 @@ class HomeController extends GetxController{
   var sendingAttendance = false.obs;
   var isAttended = false.obs;
   late AttendanceChecker attendanceChecker;
-
+ final CalendarController calendarController = Get.find();
   var dt = DateTime.now().obs;
 
   // page :- apis retriever
@@ -34,18 +35,16 @@ class HomeController extends GetxController{
     };
 
     var url = '';
-    if(isAttended.value){
+    if(!isAttended.value){
       url = AppUrls.attendance;
     }else {
       url = AppUrls.leaving;
     }
     println(url);
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
+    await calendarController.checkForMonthAttendance(DateTime.now());
     sendingAttendance.value = false;
-    println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
-    println(response.statusCode);
-    println(response.body);
-    println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
+
     if(response.statusCode == 200){
       isAttended.value = !isAttended.value;
       return true;
@@ -64,10 +63,7 @@ class HomeController extends GetxController{
    sendingAttendance.value = true;
    var response = await AppApiHandler.getData(url: url, header: headers);
    sendingAttendance.value = false;
-   println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
-   println(response.statusCode);
-   println(response.body);
-   println('=-=-=-=-=-=-=-==-=-=-???? checkForAttendance -----');
+
    if(response.statusCode == 200){
      var json = jsonDecode(response.body);
      attendanceChecker = AttendanceChecker.fromJson(json);

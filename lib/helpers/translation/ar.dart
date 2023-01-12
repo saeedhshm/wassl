@@ -116,5 +116,8 @@ Map<String,String>  arabicStrings = {
   'employees_numb':'عدد الموظفين',
   'welcome':'مرحبا',
   'egypt':'مصر',
-  'working_period':'نوبة دوام'
+  'working_period':'نوبة دوام',
+  'attendance':'حضور',
+  'holiday':'أجازة',
+  'absent':'غياب'
 } ;

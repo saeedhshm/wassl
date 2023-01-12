@@ -8,6 +8,7 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 import 'package:geolocator/geolocator.dart';
 import '../helpers/constants/sring_constans.dart';
+import 'calendar/calendar_controller.dart';
 
 class AppController extends GetxController{
 
@@ -16,9 +17,10 @@ class AppController extends GetxController{
   var loaginSuccessed = false.obs;
 
   var loginModel = LoginModel().obs;
-  var rememberMe = false;
+  var rememberMe = true;
 
   late Position position;
+
 
   Future<bool> login({required String email,required String password}) async {
 
@@ -51,13 +53,23 @@ println(response.body);
 
 
  Future logout() async{
-    final prefs = await SharedPreferences.getInstance();
-   await prefs.setString(appStorageEmail, 'null');
-   await prefs.setString(appStoragePassword, 'null');
-    final String email = prefs.getString(appStorageEmail) ?? 'null';
-    final String password = prefs.getString(appStoragePassword) ?? 'null';
+   var headers = {
+     'Authorization':
+     'bearer ${loginModel.value.token?.accessToken}',
+     // "x-localization": 'lang_code'.tr,
+   };
+   final response = await AppApiHandler.getData(url: AppUrls.logout,header: headers,);
 
-    loginModel.value = LoginModel();
+   println(response.body);
+   if(response.statusCode == 200){
+     final prefs = await SharedPreferences.getInstance();
+     await prefs.setString(appStorageEmail, 'null');
+     await prefs.setString(appStoragePassword, 'null');
+     final String email = prefs.getString(appStorageEmail) ?? 'null';
+     final String password = prefs.getString(appStoragePassword) ?? 'null';
+
+     loginModel.value = LoginModel();
+   }
   }
 
   Future<Map<String,String>> retrieveUserAuth() async {

@@ -13,7 +13,7 @@ class CustomCheckbox extends StatefulWidget {
 }
 
 class _CustomCheckboxState extends State<CustomCheckbox> {
-  bool isChecked = false;
+  bool isChecked = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

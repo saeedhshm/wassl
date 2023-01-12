@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/reusable_widgets/calendar_widget.dart';
 
 import '../../reusable_widgets/main_appbar.dart';
 
 class AttendancePage extends StatelessWidget {
-  const AttendancePage({Key? key}) : super(key: key);
+   AttendancePage({Key? key}) : super(key: key);
+
+   final CalendarController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       // backgroundColor: Colors.blue,
-      body: Column(
+      body: Obx(()=>controller.loading.value ? Center() : Column(
         children: [
           MainAppbarWidget("attendance_records",),
-          Expanded(child: Column(
+          Expanded(child:Column(
             children: [
               Expanded(child: CalendarWidget()),
               Expanded(child: SingleChildScrollView(
-                child: Padding(
+                child: Obx(()=>Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
                     children: [
@@ -38,6 +44,8 @@ class AttendancePage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text('working_time'.tr),
+
+                                  Text(controller.selectedDay.value.day ?? ''),
                                   SizedBox(height: 5,),
                                   Row(
                                     children: [
@@ -66,9 +74,9 @@ class AttendancePage extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
-                              child: Text('attending'.tr,
+                              child: Text('${controller.selectedDay.value.status}'.tr,
                                 style: TextStyle(
-                                  color: AppColors.mainGreenColor
+                                    color: AppColors.mainGreenColor
                                 ),
                               ),
                             ),
@@ -76,21 +84,22 @@ class AttendancePage extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 15,),
+                      controller.selectedDay.value.attendanceDay != null ?
                       Row(
                         children: [
                           Expanded(child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.grey.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(100)
+                                borderRadius: BorderRadius.circular(100)
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Column(
-                              children: [
-                                Text('attend'.tr),
-                                Text('7:00 ص'.tr)
-                              ],
-                          ),
+                                children: [
+                                  Text('attend'.tr),
+                                  Text(controller.selectedDay.value.attendanceTime + ' '+ 'am'.tr)
+                                ],
+                              ),
                             ),)),
                           SizedBox(width: 10,),
                           Expanded(child: Container(
@@ -103,20 +112,22 @@ class AttendancePage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text('leaving'.tr),
-                                  Text('3:00 م'.tr)
+                                  Text(controller.selectedDay.value.leaveTime + ' '+ 'pm'.tr)
                                 ],
                               ),
                             ),)),
                         ],
-                      )
+                      ) :
+                      SizedBox(),
+
                     ],
                   ),
-                ),
-              )),
+                )),
+              ))
             ],
           )),
         ],
-      ),
+      )),
     );
   }
 }

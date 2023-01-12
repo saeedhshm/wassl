@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../helpers/constants/app_colors.dart';
 
@@ -13,6 +16,8 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
+
+  final CalendarController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         todayButtonText: 'today'.tr,
         onDateSelected: (dateTime){
           // _currentDate = dateTime;
-
+          println(dateTime.toString());
+          controller.setSelectedDate(dateTime);
           setState(() {
 
           });
@@ -62,7 +68,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
-          if(dateTime.day == 5 || dateTime.day == 10 || dateTime.day == 15 || dateTime.day == 25  ){
+
+
+          if((controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].status == 'holiday') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].day ?? '')?.month == dateTime.month ){
             return Center(
 
               child: Container(
@@ -77,6 +85,23 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                   ),))),
             );
           }
+
+          if((controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].status == 'absent') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].day ?? '')?.month == dateTime.month ){
+            return Center(
+
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black.withOpacity(1),width: 2),
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),))),
+            );
+          }
+
 
           if(dateTime.month == _currentMonth.month && dateTime.month == _currentMonth.month ){
             return Center(
@@ -99,8 +124,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         defaultOutOfMonthDayColor: Colors.green,
         defaultDayColor: Colors.grey,
         onMonthChanged: (dateTime){
-          print('--->>>> ${dateTime.month}');
+          print('--->>>> onMonthChanged ${dateTime}');
           _currentMonth = dateTime;
+          
+          // controller.checkForMonthAttendance(dateTime);
           setState(() {
 
           });
