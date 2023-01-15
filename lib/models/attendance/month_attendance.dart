@@ -1,3 +1,5 @@
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
+
 class MonthAttendance {
   TotalAttendances? totalAttendances;
   List<MonthDay>? attendancesOfMonth;
@@ -95,17 +97,19 @@ class MonthDay {
   // var selected = false;
 
   String get attendanceTime{
+    var time = '----';
     if(attendanceDay != null){
-      return (attendanceDay?.attendanceTime ?? '').split(' ')[1];
+      time =  (attendanceDay?.attendanceTime ?? '').split(' ')[1];
     }
-   return '----';
+   return time.formatedTime();
   }
 
   String get leaveTime{
+    var time = '----';
     if(attendanceDay != null){
-      return attendanceDay?.leaveTime == null ? (attendanceDay?.leaveTime ?? '.......') : (attendanceDay?.leaveTime ?? '.......').split(' ')[1] ;
+      time = attendanceDay?.leaveTime == null ? (attendanceDay?.leaveTime ?? '.......') : (attendanceDay?.leaveTime ?? '.......').split(' ')[1] ;
     }
-    return '----';
+    return time.formatedTime();
 
   }
 

@@ -1,3 +1,4 @@
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/auth/user.dart';
 
 class LoginModel {
@@ -9,20 +10,28 @@ class LoginModel {
 
   fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    token = json['token'] != null ? Token.fromJson(json['token']) : null;
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    token = json['token'] != null ? new Token.fromJson(json['token']) : null;
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    if (token != null) {
-      data['token'] = token!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['success'] = this.success;
+    if (this.token != null) {
+      data['token'] = this.token!.toJson();
     }
-    if (user != null) {
-      data['user'] = user!.toJson();
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
     }
     return data;
+  }
+
+  String get timeIn {
+    return (user?.schedule?.info?.timeIn ?? '').formatedTime();
+  }
+
+  String get timeOut {
+    return (user?.schedule?.info?.timeOut ?? '').formatedTime();
   }
 }
 
@@ -40,11 +49,18 @@ class Token {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['access_token'] = accessToken;
-    data['token_type'] = tokenType;
-    data['expires_in'] = expiresIn;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['access_token'] = this.accessToken;
+    data['token_type'] = this.tokenType;
+    data['expires_in'] = this.expiresIn;
     return data;
   }
 }
+
+
+
+
+
+
+
 

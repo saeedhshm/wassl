@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.bold
           ),),
           const SizedBox(height: 10,),
-          Text('8:00 ${'am'.tr} - 3:00 ${'pm'.tr}',style: const TextStyle(
+          Text('${controller.appController.loginModel.value.timeIn} - ${controller.appController.loginModel.value.timeOut}',style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold

@@ -49,8 +49,8 @@ class AttendancePage extends StatelessWidget {
                                   SizedBox(height: 5,),
                                   Row(
                                     children: [
-                                      Expanded(child: Center(child: Text('7:00 ص'))),
-                                      Expanded(child: Center(child: Text('3:00 م'))),
+                                      Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn))),
+                                      Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut))),
                                     ],
                                   )
                                 ],
@@ -97,7 +97,7 @@ class AttendancePage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text('attend'.tr),
-                                  Text(controller.selectedDay.value.attendanceTime + ' '+ 'am'.tr)
+                                  Text(controller.selectedDay.value.attendanceTime)
                                 ],
                               ),
                             ),)),
@@ -112,7 +112,7 @@ class AttendancePage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text('leaving'.tr),
-                                  Text(controller.selectedDay.value.leaveTime + ' '+ 'pm'.tr)
+                                  Text(controller.selectedDay.value.leaveTime)
                                 ],
                               ),
                             ),)),
