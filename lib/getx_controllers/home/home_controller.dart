@@ -43,7 +43,7 @@ class HomeController extends GetxController{
     }
     println(url);
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
-    await calendarController.checkForMonthAttendance(DateTime.now());
+    await calendarController.checkForMonthAttendance();
     sendingAttendance.value = false;
     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
     println(url);

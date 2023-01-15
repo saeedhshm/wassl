@@ -18,7 +18,9 @@ class AttendancePage extends StatelessWidget {
 
     return Scaffold(
       // backgroundColor: Colors.blue,
-      body: Obx(()=>controller.loading.value ? Center() : Column(
+      body: Obx(()=>controller.loading.value ? Center(
+        child: SendingLoadingWidget(),
+      ) : Column(
         children: [
           MainAppbarWidget("attendance_records",),
           Expanded(child:Column(

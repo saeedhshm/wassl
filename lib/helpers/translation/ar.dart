@@ -119,5 +119,6 @@ Map<String,String>  arabicStrings = {
   'working_period':'نوبة دوام',
   'attendance':'حضور',
   'holiday':'أجازة',
-  'absent':'غياب'
+  'absent':'غياب',
+  'weekEnd':'نهاية الأسبوع'
 } ;

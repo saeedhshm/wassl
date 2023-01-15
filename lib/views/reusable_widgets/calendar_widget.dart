@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_neat_and_clean_calendar/date_picker_config.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
@@ -28,6 +29,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         weekDays: const ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         // eventsList: _eventList,
         isExpandable: false,
+        initialDate: controller.dateTime,
+        datePickerConfig: DatePickerConfig(
+          initialDate: controller.dateTime
+        ),
         eventDoneColor: Colors.green,
         selectedColor: Colors.pink,
         selectedTodayColor: Colors.red,
@@ -51,7 +56,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           });
         },
         dayBuilder: (context,dateTime){
-          // print('--->>>> ${dateTime.month}');
+          print('--->>>> calendar date ${dateTime.toString()}');
+          print('--->>>> controller date ${controller.dateTime.toString()}');
+          print('--->>>> api date ${controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day}');
           if(compareTowDays(dateTime, DateTime.now())){
             return Center(
 
@@ -70,7 +77,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
 
 
-          if((controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].status == 'holiday') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].day ?? '')?.month == dateTime.month ){
+          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'holiday') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
             return Center(
 
               child: Container(
@@ -86,7 +93,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
-          if((controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].status == 'absent') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth![dateTime.day-1].day ?? '')?.month == dateTime.month ){
+          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'absent') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
             return Center(
 
               child: Container(
@@ -102,8 +109,24 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
+          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'weekEnd') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
+            return Center(
 
-          if(dateTime.month == _currentMonth.month && dateTime.month == _currentMonth.month ){
+              child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.red.withOpacity(1),width: 2),
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                      fontWeight: FontWeight.bold
+                  ),))),
+            );
+          }
+
+
+          if(dateTime.month == controller.dateTime.month  ){
             return Center(
 
               child: Container(
@@ -125,9 +148,12 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         defaultDayColor: Colors.grey,
         onMonthChanged: (dateTime){
           print('--->>>> onMonthChanged ${dateTime}');
+
           _currentMonth = dateTime;
-          
-          // controller.checkForMonthAttendance(dateTime);
+          if(controller.dateTime.month != dateTime.month) {
+            controller.dateTime = dateTime;
+            controller.checkForMonthAttendance();
+          }
           setState(() {
 
           });
@@ -148,28 +174,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     Colors.brown
   ];
 
-  final List<NeatCleanCalendarEvent> _eventList = [
-    NeatCleanCalendarEvent('MultiDay Event A',
-        startTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day, 10, 0),
-        endTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day + 2, 12, 0),
-        color: Colors.orange,
-        isMultiDay: true),
-    NeatCleanCalendarEvent('Allday Event B',
-        startTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day - 2, 14, 30),
-        endTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day + 2, 17, 0),
-        color: Colors.pink,
-        isAllDay: true),
-    NeatCleanCalendarEvent('Normal Event D',
-        startTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day, 14, 30),
-        endTime: DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day, 17, 0),
-        color: Colors.indigo),
-  ];
 
   DateTime _currentMonth = DateTime.now();
 
@@ -178,7 +182,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   }
 
 
-  DateTime _currentDate = DateTime.now();
+
 
 
 }

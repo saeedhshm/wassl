@@ -2,13 +2,12 @@ import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 class MonthAttendance {
   TotalAttendances? totalAttendances;
-  List<MonthDay>? attendancesOfMonth;
+  List<MonthDay> attendancesOfMonth = [];
   TodayAttendance? todayAttendance;
   Schedule? schedule;
 
   MonthAttendance(
       {this.totalAttendances,
-        this.attendancesOfMonth,
         this.todayAttendance,
         this.schedule});
 
@@ -19,7 +18,7 @@ class MonthAttendance {
     if (json['attendancesOfMonth'] != null) {
       attendancesOfMonth = <MonthDay>[];
       json['attendancesOfMonth'].forEach((v) {
-        attendancesOfMonth!.add(MonthDay.fromJson(v));
+        attendancesOfMonth.add(MonthDay.fromJson(v));
       });
     }
     todayAttendance = json['todayAttendance'] != null
@@ -37,7 +36,7 @@ class MonthAttendance {
     }
     if (this.attendancesOfMonth != null) {
       data['attendancesOfMonth'] =
-          this.attendancesOfMonth!.map((v) => v.toJson()).toList();
+          this.attendancesOfMonth.map((v) => v.toJson()).toList();
     }
     if (this.todayAttendance != null) {
       data['todayAttendance'] = this.todayAttendance!.toJson();

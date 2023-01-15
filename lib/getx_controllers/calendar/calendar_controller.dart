@@ -15,34 +15,36 @@ class CalendarController extends GetxController{
   var loading = false.obs;
   var attendanceOfMonth = MonthAttendance().obs;
   var selectedDay = MonthDay().obs;
+  late DateTime dateTime;
 
- Future<void> checkForMonthAttendance(DateTime dateTime) async {
+ Future<void> checkForMonthAttendance() async {
     var headers = {
       'Authorization':
       'bearer ${appController.loginModel.value.token?.accessToken}',
       // "x-localization": 'lang_code'.tr,
     };
-    // var body = {
-    //   "day": "${dateTime.year}-${dateTime.month}-${dateTime.day}",
-    //   "status": "",
-    //   "attendance": null
-    // };
-println('sdifoisdhfiosdf>>>>>>>>> checkForMonthAttendance');
-    println('${AppUrls.monthlyAttendance}=${dateTime.month}&year=${dateTime.year}');
-    println(headers);
+
+    println('sdifoisdhfiosdf>>>>>>>>> checkForMonthAttendance');
+
+
     loading.value = true;
-    // final url = '${AppUrls.monthlyAttendance}=${dateTime.month}&year=${dateTime.year}';
-    const url = AppUrls.monthlyAttendance;
+    attendanceOfMonth.value.attendancesOfMonth.clear();
+    final url = '${AppUrls.monthlyAttendance}?month=${dateTime.month}&year=${dateTime.year}';
+    // const url = AppUrls.monthlyAttendance;
     final response = await AppApiHandler.getData(url: url,header: headers,);
+    println('=-=-=-=-=-=-=-==-=-=-???? CalendarController -----');
+    println(url);
+    // println(headers);
     println(response.statusCode);
-    println(response.body);
+    // println(response.body);
     println('=-=-=-=-=-=-=-==-=-=-???? CalendarController -----');
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-      attendanceOfMonth.value = MonthAttendance.fromJson(json);
-      println('=-=-=-=-=-=-=-==-=-=-???? CalendarController ----- ${attendanceOfMonth.value.attendancesOfMonth?.length}');
 
-      for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth ?? []){
+      attendanceOfMonth.value = MonthAttendance.fromJson(json);
+      println('=-=-=-=-=-=-=-==-=-=-???? CalendarController ----- ${attendanceOfMonth.value.attendancesOfMonth.length}');
+
+      for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth ){
         println(day.day);
         println(day.status);
         setSelectedDate(DateTime.now());
@@ -55,7 +57,7 @@ println('sdifoisdhfiosdf>>>>>>>>> checkForMonthAttendance');
 
 
 setSelectedDate(DateTime dateTime){
-  for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth ?? []){
+  for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth){
 
     if(DateTime.tryParse(day.day ?? '') == DateTime(dateTime.year,dateTime.month,dateTime.day)){
       selectedDay.value = day;
@@ -68,7 +70,9 @@ setSelectedDate(DateTime dateTime){
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    checkForMonthAttendance(DateTime.now());
+    dateTime = DateTime(DateTime.now().year,2);
+    println('-===-=-->>>> init date = $dateTime');
+    checkForMonthAttendance();
   }
 
 
