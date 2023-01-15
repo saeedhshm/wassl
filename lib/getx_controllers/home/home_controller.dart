@@ -16,7 +16,7 @@ class HomeController extends GetxController{
   final AppController appController = Get.find();
 
   var sendingAttendance = false.obs;
-  var isAttended = false.obs;
+  var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
  final CalendarController calendarController = Get.find();
   var dt = DateTime.now().obs;
@@ -35,18 +35,23 @@ class HomeController extends GetxController{
     };
 
     var url = '';
-    if(!isAttended.value){
-      url = AppUrls.attendance;
-    }else {
+    if(attendanceStatus.value == 2){
       url = AppUrls.leaving;
+    }else {
+      url = AppUrls.attendance;
+
     }
     println(url);
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
     await calendarController.checkForMonthAttendance(DateTime.now());
     sendingAttendance.value = false;
-
+    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
+    println(url);
+    println(response.statusCode);
+    println(response.body);
+    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
     if(response.statusCode == 200){
-      isAttended.value = !isAttended.value;
+      attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
       return true;
     }
     return false;
@@ -63,21 +68,25 @@ class HomeController extends GetxController{
    sendingAttendance.value = true;
    var response = await AppApiHandler.getData(url: url, header: headers);
    sendingAttendance.value = false;
-
+   println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
+   println(url);
+   println(response.statusCode);
+   println(response.body);
+   println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
    if(response.statusCode == 200){
      var json = jsonDecode(response.body);
      attendanceChecker = AttendanceChecker.fromJson(json);
-
+     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
      println(attendanceChecker.attendanceStatus);
      println(attendanceChecker.message);
-     isAttended.value = attendanceChecker.attendanceStatus == 2;
+     attendanceStatus.value = attendanceChecker.attendanceStatus ?? 0;
    }
 
   }
 
   /// page variables
-  String get attendanceStatus{
-    return isAttended.value ? 'reg_leaving'.tr : 'reg_attend'.tr ;
+  String get attendanceStatusValue{
+    return attendanceStatus.value == 2 ? 'reg_leaving'.tr : 'reg_attend'.tr ;
   }
 
   String get currentTime{

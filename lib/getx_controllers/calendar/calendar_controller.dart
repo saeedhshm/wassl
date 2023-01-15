@@ -43,8 +43,8 @@ println('sdifoisdhfiosdf>>>>>>>>> checkForMonthAttendance');
       println('=-=-=-=-=-=-=-==-=-=-???? CalendarController ----- ${attendanceOfMonth.value.attendancesOfMonth?.length}');
 
       for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth ?? []){
-        // println(day.day);
-        // println(day.attendanceDay?.leaveTime);
+        println(day.day);
+        println(day.status);
         setSelectedDate(DateTime.now());
       }
 

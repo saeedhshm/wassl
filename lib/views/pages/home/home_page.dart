@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_utils/get_utils.dart';
-import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/getx_controllers/home/home_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
@@ -202,7 +199,7 @@ class HomePage extends StatelessWidget {
                     Container(
                       margin:const EdgeInsets.symmetric(horizontal: 20),
                       child: Obx(()=>IgnorePointer(
-                        ignoring: controller.sendingAttendance.value,
+                        ignoring: controller.attendanceStatus.value == 3 || controller.sendingAttendance.value,
                         // ignoring: false,
                         child: InkWell(
                           onTap: () async{
@@ -210,7 +207,7 @@ class HomePage extends StatelessWidget {
                             var attendanceDone = await controller.registerAttendance();
                             if(attendanceDone){
                               var message = '';
-                              if(controller.isAttended.value){
+                              if(controller.attendanceStatus.value == 2){
                                 message = 'attendance_done_successfully'.tr;
                               }else {
                                 message = 'leaving_done_successfully'.tr;
@@ -248,7 +245,7 @@ class HomePage extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(controller.attendanceStatus,style: const TextStyle(
+                                  Text(controller.attendanceStatusValue,style: const TextStyle(
                                       color: AppColors.darkGreyTextColor,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold
