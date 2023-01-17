@@ -1,4 +1,6 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
@@ -24,58 +26,108 @@ class AttendanceWidget extends StatelessWidget {
             // ignoring: false,
             child: InkWell(
               onTap: () async{
+                controller.sendingAttendance.value = true;
+                LocationPermission permission = await controller.appController.determinePosition();
 
-                Get.defaultDialog(
-                  title: controller.attendanceStatus.value == 1 ? 'reg_attend'.tr : 'reg_leaving'.tr,
-                  middleText: controller.attendanceStatus.value == 1 ? 'sure_to_attend?'.tr : 'sure_to_leave?'.tr,
-                  cancel: InkWell(
-                    onTap: (){
-                      Get.back();
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          color:Colors.red,
-                          borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
-                          child: Text('cancel'.tr,style: const TextStyle(
-                            color: Colors.white
-                          ),),
-                        )),
-                  ),
-                  confirm: InkWell(
-                    onTap: ()async{
-                      Get.back();
-                      var attendanceDone = await controller.registerAttendance();
-                      if(attendanceDone){
-                        var message = '';
-                        if(controller.attendanceStatus.value == 2){
-                          message = 'attendance_done_successfully'.tr;
-                        }else {
-                          message = 'leaving_done_successfully'.tr;
+                if(permission == LocationPermission.whileInUse){
+                  Get.defaultDialog(
+                    title: controller.attendanceStatus.value == 1 ? 'reg_attend'.tr : 'reg_leaving'.tr,
+                    middleText: controller.attendanceStatus.value == 1 ? 'sure_to_attend?'.tr : 'sure_to_leave?'.tr,
+                    cancel: InkWell(
+                      onTap: (){
+                        Get.back();
+                        controller.sendingAttendance.value = false;
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color:Colors.red,
+                              borderRadius: BorderRadius.circular(16)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
+                            child: Text('cancel'.tr,style: const TextStyle(
+                                color: Colors.white
+                            ),),
+                          )),
+                    ),
+                    confirm: InkWell(
+                      onTap: ()async{
+                        Get.back();
+                        var attendanceDone = await controller.registerAttendance();
+                        if(attendanceDone){
+                          var message = '';
+                          if(controller.attendanceStatus.value == 2){
+                            message = 'attendance_done_successfully'.tr;
+                          }else {
+                            message = 'leaving_done_successfully'.tr;
+                          }
+                          SnackBars.showConfirmedSnackBar('', message);
+                        }else{
+                          SnackBars.showErrorSnackBar('error', 'something_wrong_try_again'.tr);
                         }
-                        SnackBars.showConfirmedSnackBar('', message);
-                      }else{
-                        SnackBars.showErrorSnackBar('error', 'something_wrong_try_again'.tr);
-                      }
 
-                    },
-                    child: Container(
+                      },
+                      child: Container(
 
-                        decoration: BoxDecoration(
-                            color:AppColors.mainGreenColor,
-                            borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
-                          child: Text(controller.attendanceStatus.value == 1 ? 'attendance'.tr : 'leaving'.tr,style: const TextStyle(
-                              color: Colors.white
-                          ),),
-                        )),
-                  ),
+                          decoration: BoxDecoration(
+                              color:AppColors.mainGreenColor,
+                              borderRadius: BorderRadius.circular(16)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
+                            child: Text(controller.attendanceStatus.value == 1 ? 'attendance'.tr : 'leaving'.tr,style: const TextStyle(
+                                color: Colors.white
+                            ),),
+                          )),
+                    ),
 
-                );
+                  );
+                }else if(permission == LocationPermission.denied){
+                  controller.sendingAttendance.value = false;
+                }else{
+                  controller.sendingAttendance.value = false;
+                  Get.defaultDialog(
+                    title: 'location_error'.tr,
+                    middleText: 'must_enable_location'.tr,
+                    cancel: InkWell(
+                      onTap: (){
+                        Get.back();
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color:Colors.red,
+                              borderRadius: BorderRadius.circular(16)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
+                            child: Text('cancel'.tr,style: const TextStyle(
+                                color: Colors.white
+                            ),),
+                          )),
+                    ),
+                    confirm: InkWell(
+                      onTap: ()async{
+                        Get.back();
+                        AppSettings.openAppSettings();
+
+                      },
+                      child: Container(
+
+                          decoration: BoxDecoration(
+                              color:AppColors.mainGreenColor,
+                              borderRadius: BorderRadius.circular(16)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 30),
+                            child: Text('settings'.tr ,style: const TextStyle(
+                                color: Colors.white
+                            ),),
+                          )),
+                    ),
+
+                  );
+                }
+
 
 
 
@@ -104,12 +156,12 @@ class AttendanceWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10,),
-                  Column(
+                  Expanded(child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(controller.attendanceStatusValue,style: const TextStyle(
-                          color: AppColors.darkGreyTextColor,
-                          fontSize: 18,
+                      Text(controller.attendanceStatusValue,style:  TextStyle(
+                          color: AppColors.darkGreyTextColor ,
+                          fontSize:18 ,
                           fontWeight: FontWeight.bold
                       ),),
                       // SizedBox(height: 10,),
@@ -119,8 +171,8 @@ class AttendanceWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold
                       ),),
                     ],
-                  ),
-                  const Spacer(),
+                  ),),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 20,left: 20,right: 20),
                     child: SizedBox(

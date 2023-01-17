@@ -15,18 +15,28 @@ class HomeBarWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(
-              top: 35,
+              top: 45,
               bottom: 20,
               left: 16,
               right: 16
           ),
           child: Row(
             children: [
-              Text('welcome'.tr +' : ' + controller.appController.loginModel.value.user!.fullName!,style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold
-              ),),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('welcome'.tr +' : ',style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                  ),),
+                  Text(controller.appController.loginModel.value.user!.fullName!,style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                  ),),
+                ],
+              ),
               const Spacer(),
               SizedBox(height: 35,width:55,child: Image.asset('assets/images/settingicons/12.png',color: Colors.white,)),
             ],

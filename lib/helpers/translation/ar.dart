@@ -124,5 +124,8 @@ Map<String,String>  arabicStrings = {
   'shift_done':'تم انتهاء الدوام',
   'cancel':'إلغاء',
   'sure_to_attend?':'هل تريد تسجيل الحضور؟',
-  'sure_to_leave?':'هل تريد تسجيل الانصراف'
+  'sure_to_leave?':'هل تريد تسجيل الانصراف',
+  'must_enable_location':' يجب تفعيل خدمات الموقع اولا لتتمكن من تسجيل الحضور والانصراف',
+  'location_error':'خطأ',
+
 } ;

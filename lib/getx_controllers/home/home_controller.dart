@@ -23,10 +23,14 @@ class HomeController extends GetxController{
 
   // page :- apis retriever
  Future<bool> registerAttendance() async {
+
+
+
+
     sendingAttendance.value = true;
     var body = {
-      'longitude':'${appController.position.longitude}',
-      'latitude':'${appController.position.latitude}'
+      'longitude':'${appController.position?.longitude}',
+      'latitude':'${appController.position?.latitude}'
     };
     var headers = {
       'Authorization':
@@ -41,7 +45,11 @@ class HomeController extends GetxController{
       url = AppUrls.attendance;
 
     }
+
+    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
     println(url);
+    println(body);
+
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
     await calendarController.checkForMonthAttendance();
     sendingAttendance.value = false;
@@ -86,6 +94,7 @@ class HomeController extends GetxController{
 
   /// page variables
   String get attendanceStatusValue{
+
     return attendanceStatus.value == 2 ? 'reg_leaving'.tr : attendanceStatus.value == 1 ?  'reg_attend'.tr : 'shift_done'.tr;
   }
 
@@ -107,6 +116,10 @@ class HomeController extends GetxController{
     return dt.value.hour > 11 ? 'pm'.tr :'am'.tr;
   }
 
+  bool get isLocationDisabled {
+   return appController.position == null;
+  }
+
 
   //controller lifecycle
   @override
@@ -117,7 +130,7 @@ class HomeController extends GetxController{
     Timer.periodic(Duration(seconds: 1), (timer) {
       dt.value = DateTime.now();
     });
-
+   appController.determinePosition();
   }
 
 }
