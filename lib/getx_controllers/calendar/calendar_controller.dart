@@ -70,7 +70,7 @@ setSelectedDate(DateTime dateTime){
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    dateTime = DateTime(DateTime.now().year,2);
+    dateTime = DateTime.now();
     println('-===-=-->>>> init date = $dateTime');
     checkForMonthAttendance();
   }

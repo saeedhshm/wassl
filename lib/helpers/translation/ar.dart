@@ -120,5 +120,9 @@ Map<String,String>  arabicStrings = {
   'attendance':'حضور',
   'holiday':'أجازة',
   'absent':'غياب',
-  'weekEnd':'نهاية الأسبوع'
+  'weekEnd':'نهاية الأسبوع',
+  'shift_done':'تم انتهاء الدوام',
+  'cancel':'إلغاء',
+  'sure_to_attend?':'هل تريد تسجيل الحضور؟',
+  'sure_to_leave?':'هل تريد تسجيل الانصراف'
 } ;

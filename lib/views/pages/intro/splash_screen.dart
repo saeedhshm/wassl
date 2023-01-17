@@ -44,17 +44,10 @@ class _SplashScreenState extends State<SplashScreen> {
     timer = Timer(Duration(seconds: 3),
             (){
               if(response){
-                Get.to(()=>const MainTabsPage());
+                Get.offAll(()=>const MainTabsPage(),duration: Duration.zero);
               }else {
-                Navigator.pushReplacement(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) =>
-                        LoginPage(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero,
-                  ),
-                );
+                Get.offAll(()=> LoginPage(),duration: Duration.zero);
+
               }
             }
     );

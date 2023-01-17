@@ -22,36 +22,37 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>  {
   bool startAnim = true;
   bool showRestItems = false;
 
-  late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, (Get.size.height / 3.75)), end: Offset.zero)
-      .animate(emailController);
-  late AnimationController emailController = AnimationController(
-    duration: const Duration(milliseconds: 400),
-    vsync: this,
-  );
+  // late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, (Get.size.height / 3.75)), end: Offset.zero)
+  //     .animate(emailController);
+  // late AnimationController emailController = AnimationController(
+  //   duration: const Duration(milliseconds: 400),
+  //   vsync: this,
+  // );
 
-  double _width = 250, _height = 250;
+  double _width = 130, _height = 50;
+  // double _width = 250, _height = 250;
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    emailController.addListener(() {
-      setState(() {});
-    });
-    Future.delayed(Duration(milliseconds: 500),(){
-      setState((){
-        startAnim = false;
-        _height = 50;
-        _width = 130;
-        emailController.forward();
-      });
-      Future.delayed(Duration(milliseconds: 1500),(){
-        setState(()=>showRestItems = true);
-      });
-    });
+    // emailController.addListener(() {
+    //   setState(() {});
+    // });
+    // Future.delayed(Duration(milliseconds: 500),(){
+    //   setState((){
+    //     startAnim = false;
+    //     _height = 50;
+    //     _width = 130;
+    //     emailController.forward();
+    //   });
+    //   Future.delayed(Duration(milliseconds: 1500),(){
+    //     setState(()=>showRestItems = true);
+    //   });
+    // });
 
   }
   @override
@@ -69,10 +70,10 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height:  60,),
-              Transform.translate(
-                offset: emailOffset.value,
-                child: Hero(
-                  tag: logoAppHeroTag,
+              // Transform.translate(
+                // offset: emailOffset.value,
+                Hero(
+                  tag: 'logoAppHeroTag',
                   child: AnimatedContainer(
                       // color: Colors.blue,
                       width: _width,
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       curve: Curves.fastOutSlowIn,
                       child: SvgWidget("assets/images/wasl.svg")),
                 ),
-              ),
+              // ),
               RestWidgets()
 
             ],

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
@@ -20,7 +21,7 @@ class RestWidgets extends StatefulWidget {
   State<RestWidgets> createState() => _RestWidgetsState();
 }
 
-class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin {
+class _RestWidgetsState extends State<RestWidgets>  {
 
   AppController appController = Get.find<AppController>();
 
@@ -29,33 +30,36 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
 
   var securePassword = true;
 
-  late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, Get.size.height), end: Offset.zero)
-      .animate(emailController);
-  late AnimationController emailController = AnimationController(
-    duration: const Duration(milliseconds: 400),
-    vsync: this,
-  );
+  // late Animation<Offset> emailOffset = Tween<Offset>(begin: Offset( 0.0, Get.size.height), end: Offset.zero)
+  //     .animate(emailController);
+  // late AnimationController emailController = AnimationController(
+  //   duration: const Duration(milliseconds: 400),
+  //   vsync: this,
+  // );
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    userNameCtrl.text = 'hr@wasl.com';
-    passwordCtrl.text = '1234567';
+    if (kDebugMode) {
+      userNameCtrl.text = 'saeedhshm@gmail.com';
+      passwordCtrl.text = '123456';
+    }
 
-    emailController.addListener(() {
-      setState(() {});
-    });
-    Future.delayed(const Duration(milliseconds: 1500),(){
-      emailController.forward();
-    });
+
+    // emailController.addListener(() {
+    //   setState(() {});
+    // });
+    // Future.delayed(const Duration(milliseconds: 1500),(){
+    //   emailController.forward();
+    // });
   }
   @override
   Widget build(BuildContext context) {
-    return Transform.translate(
-      offset: emailOffset.value,
-      child: Column(
+    // return Transform.translate(
+    //   offset: emailOffset.value,
+    return  Column(
         children: [
           const SizedBox(height: 30,),
           LocalizedText(
@@ -105,13 +109,14 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
             ],
           ),
           const SizedBox(height: 120,),
-           Obx(() => appController.loading.value ? Center(
+           Obx(() => appController.loading.value ? const Center(
              child: SendingLoadingWidget(),
            ) : MainButtonWidget(btnTitle: 'login', onPressed: () async {
 
              final isLogged = await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);
              if(isLogged){
-               Get.to(()=>const MainTabsPage());
+               // Get.to(()=>const MainTabsPage(),duration: Duration.zero);
+               Get.offAll(()=>const MainTabsPage(),duration: Duration.zero);
              }else{
                SnackBars.showErrorSnackBar('error'.tr, 'wrong_username_password'.tr);
              }
@@ -121,7 +126,7 @@ class _RestWidgetsState extends State<RestWidgets> with TickerProviderStateMixin
           MainTitleText("forget_password?"),
           const SizedBox(height: 20,),
         ],
-      ),
-    );
+      );
+    // );
   }
 }

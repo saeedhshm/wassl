@@ -10,7 +10,7 @@ extension NumberParsing on String {
 
 extension FormatedDateTimeExtension on String{
   String formatedTime(){
-    var myTime = 'unsupported_time';
+    var myTime = '----';
     var timeSpieces = this.split(':');
 
     if(timeSpieces.length > 1){

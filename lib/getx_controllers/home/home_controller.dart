@@ -86,7 +86,7 @@ class HomeController extends GetxController{
 
   /// page variables
   String get attendanceStatusValue{
-    return attendanceStatus.value == 2 ? 'reg_leaving'.tr : 'reg_attend'.tr ;
+    return attendanceStatus.value == 2 ? 'reg_leaving'.tr : attendanceStatus.value == 1 ?  'reg_attend'.tr : 'shift_done'.tr;
   }
 
   String get currentTime{
