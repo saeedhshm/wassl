@@ -36,8 +36,7 @@ class AppController extends GetxController{
     });
     int statusCode = response.statusCode;
 
-println(response.statusCode);
-println(response.body);
+
     loading.value = false;
       if(statusCode == 200){
         Map<String,dynamic> json = jsonDecode(response.body);
@@ -51,6 +50,43 @@ println(response.body);
     return false;
   }
 
+  Future<String> changeMyPassword({required String currentPassword, required String newPassword, required String confirmPassword})async{
+
+    final prefs = await SharedPreferences.getInstance();
+    String oldPassword = prefs.getString(appStoragePassword) ?? '';
+
+    if(oldPassword != currentPassword){
+      return Future.error('oldPassword_didnt_match_currentPassword');
+    }
+
+    if(newPassword.length < 6){
+      return Future.error('password less than 6 characters');
+    }
+
+    if(newPassword != confirmPassword) {
+      return Future.error('newPassword_didnt_match_confirmPassword');
+    }
+
+    loading.value = true;
+    var headers = {
+
+      'Authorization':
+      'bearer ${loginModel.value.token?.accessToken}',
+      "x-localization": 'lang_code'.tr,
+    };
+    final response = await AppApiHandler.sendData(url: AppUrls.changePassword,header: headers ,body: {
+      'currentPassword':currentPassword,
+      'password':newPassword,
+      'confirmPassword':newPassword
+    });
+
+    loading.value = false;
+    if(response.statusCode == 200){
+      await prefs.setString(appStoragePassword, newPassword);
+      return 'password_changed';
+    }
+    return Future.error('password_didnt_change');
+  }
 
  Future logout() async{
    var headers = {
@@ -65,8 +101,6 @@ println(response.body);
      final prefs = await SharedPreferences.getInstance();
      await prefs.setString(appStorageEmail, 'null');
      await prefs.setString(appStoragePassword, 'null');
-     final String email = prefs.getString(appStorageEmail) ?? 'null';
-     final String password = prefs.getString(appStoragePassword) ?? 'null';
 
      loginModel.value = LoginModel();
    }
@@ -81,6 +115,9 @@ println(response.body);
     userCreds.addAll({'email':email,'password':password});
     return userCreds;
   }
+
+
+
   @override
   void onInit() {
     // TODO: implement onInit

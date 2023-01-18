@@ -53,6 +53,12 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/shared_preferences_ios/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
