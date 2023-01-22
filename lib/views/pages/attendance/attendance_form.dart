@@ -25,107 +25,109 @@ class AttendancePage extends StatelessWidget {
           MainAppbarWidget("attendance_records",),
           Expanded(child:Column(
             children: [
-              Expanded(child: CalendarWidget()),
-              Expanded(child: SingleChildScrollView(
-                child: Obx(()=>Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
+              Expanded(
+                flex:5,
+                  child: CalendarWidget()),
+              Expanded(
+                flex: 3,
+                  child: Obx(()=>Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
 
 
-                          Container(
+                        Container(
 
-                            decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(100)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  Text('working_time'.tr),
-
-                                  Text(controller.selectedDay.value.day ?? ''),
-                                  SizedBox(height: 5,),
-                                  Row(
-                                    children: [
-                                      Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn))),
-                                      Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut))),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                            margin: const EdgeInsets.only(top: 20),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(100)
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(100),
-                              boxShadow: const <BoxShadow>[
-                                BoxShadow(
-                                    color: Colors.black54,
-                                    blurRadius: 6.0,
-                                    offset: Offset(0.0, 3.0),
-                                    spreadRadius: 0.0
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                Text('working_time'.tr),
+
+                                Text(controller.selectedDay.value.day ?? ''),
+                                SizedBox(height: 5,),
+                                Row(
+                                  children: [
+                                    Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn))),
+                                    Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut))),
+                                  ],
                                 )
                               ],
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
-                              child: Text('${controller.selectedDay.value.status}'.tr,
-                                style: TextStyle(
-                                    color: AppColors.mainGreenColor
-                                ),
+                          ),
+                          margin: const EdgeInsets.only(top: 20),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(100),
+                            boxShadow: const <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.black54,
+                                  blurRadius: 6.0,
+                                  offset: Offset(0.0, 3.0),
+                                  spreadRadius: 0.0
+                              )
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
+                            child: Text('${controller.selectedDay.value.status}'.tr,
+                              style: const TextStyle(
+                                  color: AppColors.mainGreenColor
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 15,),
-                      controller.selectedDay.value.attendanceDay != null ?
-                      Row(
-                        children: [
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(100)
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 15,),
+                    controller.selectedDay.value.attendanceDay != null ?
+                    Row(
+                      children: [
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(100)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                Text('attend'.tr),
+                                Text(controller.selectedDay.value.attendanceTime)
+                              ],
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  Text('attend'.tr),
-                                  Text(controller.selectedDay.value.attendanceTime)
-                                ],
-                              ),
-                            ),)),
-                          SizedBox(width: 10,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(100)
+                          ),)),
+                        SizedBox(width: 10,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(100)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Column(
+                              children: [
+                                Text('leaving'.tr),
+                                Text(controller.selectedDay.value.leaveTime)
+                              ],
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                children: [
-                                  Text('leaving'.tr),
-                                  Text(controller.selectedDay.value.leaveTime)
-                                ],
-                              ),
-                            ),)),
-                        ],
-                      ) :
-                      SizedBox(),
+                          ),)),
+                      ],
+                    ) :
+                    const SizedBox(),
 
-                    ],
-                  ),
-                )),
-              ))
+                  ],
+                ),
+              )))
             ],
           )),
         ],
