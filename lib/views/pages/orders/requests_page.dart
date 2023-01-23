@@ -30,12 +30,15 @@ class RequestsPage extends StatelessWidget {
     return Scaffold(
       body: Column(
        children: [
-         MainAppbarWidget(
-           'request_type'.tr,
-           onBack: () {
-             Get.back();
-           },
-         ),
+         MainAppbarWidget("request_type",onBack: (){
+           Get.back();
+         },),
+         // MainAppbarWidget(
+         //   'request_type'.tr,
+         //   // onBack: () {
+         //   //   Get.back();
+         //   // },
+         // ),
          Expanded(child: Column(
            children: [
              const SizedBox(height: 16,),

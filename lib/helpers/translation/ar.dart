@@ -132,5 +132,10 @@ Map<String,String>  arabicStrings = {
   'sure_to_leave?':'هل تريد تسجيل الانصراف',
   'must_enable_location':' يجب تفعيل خدمات الموقع اولا لتتمكن من تسجيل الحضور والانصراف',
   'location_error':'خطأ',
+  'job_code':'الرقم الوظيفي',
+  'full_name':'الاسم كاملا',
+  'email':'البريد الإلكتروني',
+  'date_of_birth':'تاريخ الميلاد',
+  'mobile_number':'رقم الهاتف'
 
 } ;

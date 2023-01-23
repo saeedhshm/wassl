@@ -21,11 +21,11 @@ class MainTabsPage extends StatefulWidget {
 
 class _MainTabsPageState extends State<MainTabsPage> {
 
-  int _index = 4;
+  int _index = 3;
   final CalendarController calendarController =  Get.put(CalendarController());
   var pages = [
-    const UserProfilePage(),
-    Center(child: PerviuosRequestsPage(),),
+     UserProfilePage(),
+    // Center(child: PerviuosRequestsPage(),),
     AttendancePage(),
     Center(child: HomePage(),),
   ];
@@ -67,28 +67,14 @@ class _MainTabsPageState extends State<MainTabsPage> {
                               child:
                               GestureDetector(
                                 onTap: (){
-                                  _index = 4;
-                                  setState((){});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
-                                ),
-                              )),
-                          Expanded(
-                              child:
-                              GestureDetector(
-                                onTap: (){
                                   _index = 3;
-
                                   setState((){});
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}4.svg"),
                                 ),
                               )),
-                          Spacer(),
                           Expanded(
                               child:
                               GestureDetector(
@@ -99,9 +85,23 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}3.svg"),
                                 ),
                               )),
+                          // Spacer(),
+                          // Expanded(
+                          //     child:
+                          //     GestureDetector(
+                          //       onTap: (){
+                          //         _index = 2;
+                          //
+                          //         setState((){});
+                          //       },
+                          //       child: Padding(
+                          //         padding: const EdgeInsets.all(12.0),
+                          //         child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                          //       ),
+                          //     )),
                           Expanded(
                               child:  GestureDetector(
                                 onTap: (){
@@ -120,29 +120,29 @@ class _MainTabsPageState extends State<MainTabsPage> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: FractionalOffset.topCenter,
-                    child: InkWell(
-                      onTap: (){
-                        Get.to(()=>const RequestsPage());
-                      },
-                      child: Container(
-                        height: 65,
-                        width: 65,
-                        child: const Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: SvgWidget('assets/images/bottom_nav/plus.svg'),
-                        ),
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                              colors: AppColors.gradiantGreen,
-                            ),
-                            borderRadius: BorderRadius.circular(100)),
-                      ),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: FractionalOffset.topCenter,
+                  //   child: InkWell(
+                  //     onTap: (){
+                  //       Get.to(()=>const RequestsPage());
+                  //     },
+                  //     child: Container(
+                  //       height: 65,
+                  //       width: 65,
+                  //       child: const Padding(
+                  //         padding: EdgeInsets.all(15.0),
+                  //         child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                  //       ),
+                  //       decoration: BoxDecoration(
+                  //           gradient: const LinearGradient(
+                  //             begin: Alignment.centerRight,
+                  //             end: Alignment.centerLeft,
+                  //             colors: AppColors.gradiantGreen,
+                  //           ),
+                  //           borderRadius: BorderRadius.circular(100)),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

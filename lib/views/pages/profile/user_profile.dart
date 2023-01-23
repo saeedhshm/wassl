@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/profile/info.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
+import '../../../getx_controllers/app_controller.dart';
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../settings/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+
+   UserProfilePage({Key? key}) : super(key: key);
+   final AppController appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).viewPadding.top;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -53,17 +57,17 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10,),
-                DarkTextWidget('اسم الموظف بالكامل',fontSize: 20,),
+                DarkTextWidget(appController.loginModel.value.user?.fullName ?? '',fontSize: 20,),
                 SizedBox(height: 0,),
                 DarkTextWidget('مصمم جرافيكس',fontSize: 15,),
                 SizedBox(height: 20,),
-                SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
-                  ,)),
-                SizedBox(height: 10,),
-                ListProfileItemWidget(
-                  title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
-                  icon: "assets/images/profile/vacation.png",
-                ),
+                // SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
+                //   ,)),
+                // SizedBox(height: 10,),
+                // ListProfileItemWidget(
+                //   title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
+                //   icon: "assets/images/profile/vacation.png",
+                // ),
                 SizedBox(height: 20,),
                 SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 15,)),
                 SizedBox(height: 10,),
@@ -76,26 +80,26 @@ class UserProfilePage extends StatelessWidget {
                     icon: "assets/images/profile/1.png",
                   ),
                 ),
-                ListProfileItemWidget(
-                  title: "work_info",
-                  icon: "assets/images/profile/2.png",
-                ),
-                ListProfileItemWidget(
-                  title: "money_info",
-                  icon: "assets/images/profile/3.png",
-                ),
-                ListProfileItemWidget(
-                  title: "docs",
-                  icon: "assets/images/profile/4.png",
-                ),
-                ListProfileItemWidget(
-                  title: "contracts",
-                  icon: "assets/images/profile/5.png",
-                ),
-                ListProfileItemWidget(
-                  title: "Custodys",
-                  icon: "assets/images/profile/6.png",
-                ),
+                // ListProfileItemWidget(
+                //   title: "work_info",
+                //   icon: "assets/images/profile/2.png",
+                // ),
+                // ListProfileItemWidget(
+                //   title: "money_info",
+                //   icon: "assets/images/profile/3.png",
+                // ),
+                // ListProfileItemWidget(
+                //   title: "docs",
+                //   icon: "assets/images/profile/4.png",
+                // ),
+                // ListProfileItemWidget(
+                //   title: "contracts",
+                //   icon: "assets/images/profile/5.png",
+                // ),
+                // ListProfileItemWidget(
+                //   title: "Custodys",
+                //   icon: "assets/images/profile/6.png",
+                // ),
 
 
                 SizedBox(height: 110,)

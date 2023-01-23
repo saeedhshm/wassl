@@ -3,21 +3,26 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
+import '../../../getx_controllers/app_controller.dart';
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/light_text_widget.dart';
 
 class InfoPage extends StatelessWidget {
 
-  var items = [
-    ValuesOfInfoPage(title: 'الرقم الوظيفي', value: '12054'),
-    ValuesOfInfoPage(title: 'الاسم الأول', value: 'سعيد'),
-    ValuesOfInfoPage(title: 'الاسم الأخير', value: 'هاشم'),
-    ValuesOfInfoPage(title: 'البريد الإلكتروني', value: 'email@email.com'),
-    ValuesOfInfoPage(title: 'تاريخ الميلاد', value: '12/12/1212'),
-    ValuesOfInfoPage(title: 'رقم الهاتف', value: '012333665555'),
-  ];
-   InfoPage({Key? key}) : super(key: key);
+  final AppController appController = Get.find();
+  var items = [];
+
+   InfoPage({Key? key}) : super(key: key){
+      items = [
+       ValuesOfInfoPage(title: 'job_code'.tr, value: appController.loginModel.value.user?.code ?? ''),
+       ValuesOfInfoPage(title: 'full_name'.tr, value: appController.loginModel.value.user?.fullName ?? ''),
+       // ValuesOfInfoPage(title: 'الاسم الأخير', value: 'هاشم'),
+       ValuesOfInfoPage(title: 'email'.tr, value: appController.loginModel.value.user?.email ?? ''),
+       ValuesOfInfoPage(title: 'date_of_birth'.tr, value: appController.loginModel.value.user?.dateOfBirth ?? ''),
+       ValuesOfInfoPage(title: 'mobile_number'.tr, value: appController.loginModel.value.user?.number ?? ''),
+     ];
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +52,9 @@ class InfoPage extends StatelessWidget {
                     children: [
                       DarkTextWidget("general_info",fontSize: 24,),
                       Spacer(),
-                      InkWell(onTap: (){
-
-                      },child: Image.asset("assets/images/profile/edit_profile.png",width: 30,)),
+                      // InkWell(onTap: (){
+                      //
+                      // },child: Image.asset("assets/images/profile/edit_profile.png",width: 30,)),
 
                     ],
                   ),

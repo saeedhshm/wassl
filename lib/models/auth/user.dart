@@ -7,7 +7,7 @@ class User {
   int? nationalityId;
   Null? photo;
   String? code;
-  String? fullName;
+  String? _fullName;
   int? status;
   int? gender;
   String? dateOfBirth;
@@ -38,45 +38,50 @@ class User {
   String? typeId;
   Schedule? schedule;
 
-  User(
-      {this.id,
-        this.jobId,
-        this.companyId,
-        this.branchId,
-        this.nationalityId,
-        this.photo,
-        this.code,
-        this.fullName,
-        this.status,
-        this.gender,
-        this.dateOfBirth,
-        this.dateOfJoining,
-        this.number,
-        this.qualification,
-        this.emergencyNumber,
-        this.panNumber,
-        this.fullNameEn,
-        this.currentAddress,
-        this.permanentAddress,
-        this.formalities,
-        this.offerAcceptance,
-        this.probationPeriod,
-        this.dateOfConfirmation,
-        this.departmentId,
-        this.salary,
-        this.accountNumber,
-        this.bankName,
-        this.unNumber,
-        this.dateOfResignation,
-        this.noticePeriod,
-        this.lastWorkingDay,
-        this.fullFinal,
-        this.createdAt,
-        this.updatedAt,
-        this.email,
-        this.typeId,
-        this.schedule});
 
+
+  // User(
+  //     {this.id,
+  //       this.jobId,
+  //       this.companyId,
+  //       this.branchId,
+  //       this.nationalityId,
+  //       this.photo,
+  //       this.code,
+  //       this.fullName,
+  //       this.status,
+  //       this.gender,
+  //       this.dateOfBirth,
+  //       this.dateOfJoining,
+  //       this.number,
+  //       this.qualification,
+  //       this.emergencyNumber,
+  //       this.panNumber,
+  //       this.fullNameEn,
+  //       this.currentAddress,
+  //       this.permanentAddress,
+  //       this.formalities,
+  //       this.offerAcceptance,
+  //       this.probationPeriod,
+  //       this.dateOfConfirmation,
+  //       this.departmentId,
+  //       this.salary,
+  //       this.accountNumber,
+  //       this.bankName,
+  //       this.unNumber,
+  //       this.dateOfResignation,
+  //       this.noticePeriod,
+  //       this.lastWorkingDay,
+  //       this.fullFinal,
+  //       this.createdAt,
+  //       this.updatedAt,
+  //       this.email,
+  //       this.typeId,
+  //       this.schedule});
+
+  String get fullName{
+    return _fullName ?? '';
+  }
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     jobId = json['job_id'];
@@ -85,7 +90,7 @@ class User {
     nationalityId = json['nationality_id'];
     photo = json['photo'];
     code = json['code'];
-    fullName = json['full_name'];
+    _fullName = json['full_name'];
     status = json['status'];
     gender = json['gender'];
     dateOfBirth = json['date_of_birth'];
@@ -128,7 +133,7 @@ class User {
     data['nationality_id'] = this.nationalityId;
     data['photo'] = this.photo;
     data['code'] = this.code;
-    data['full_name'] = this.fullName;
+    data['full_name'] = _fullName;
     data['status'] = this.status;
     data['gender'] = this.gender;
     data['date_of_birth'] = this.dateOfBirth;

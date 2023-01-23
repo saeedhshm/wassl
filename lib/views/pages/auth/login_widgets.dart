@@ -43,8 +43,8 @@ class _RestWidgetsState extends State<RestWidgets>  {
     super.initState();
 
     if (kDebugMode) {
-      userNameCtrl.text = 'saeedhshm@gmail.com';
-      passwordCtrl.text = '1234567890';
+      userNameCtrl.text = 'test@waslhr.com';
+      passwordCtrl.text = '1234567';
     }
 
 
