@@ -44,7 +44,7 @@ class _RestWidgetsState extends State<RestWidgets>  {
 
     if (kDebugMode) {
       userNameCtrl.text = 'saeedhshm@gmail.com';
-      passwordCtrl.text = '123456';
+      passwordCtrl.text = '1234567890';
     }
 
 
