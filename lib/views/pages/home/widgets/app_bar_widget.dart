@@ -38,7 +38,7 @@ class HomeBarWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              SizedBox(height: 35,width:55,child: Image.asset('assets/images/settingicons/12.png',color: Colors.white,)),
+              // SizedBox(height: 35,width:55,child: Image.asset('assets/images/settingicons/12.png',color: Colors.white,)),
             ],
           ),
         ),
