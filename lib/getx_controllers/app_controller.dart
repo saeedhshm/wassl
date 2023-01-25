@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';
@@ -165,7 +166,8 @@ class AppController extends GetxController{
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
-      return Future.error('Location services are disabled.');
+      throw LocationDisabledException();
+      // return Future.error('Location services are disabled.');
     }
 
     permission = await Geolocator.checkPermission();
@@ -181,14 +183,16 @@ class AppController extends GetxController{
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
 
-        return permission;
+        throw LocationDeniedException();
+        // return permission;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
 
-      return permission;
+      throw LocationDisabledException();
+      // return permission;
     }
 
     // When we reach here, permissions are granted and we can

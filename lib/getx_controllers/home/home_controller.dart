@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
@@ -111,6 +112,7 @@ class HomeController extends GetxController{
   }
 
   String get currentTime{
+   // return '${dt.value}'.formatedTime();
     return '${hours}:${minutes} ${am_pm}';
   }
 
