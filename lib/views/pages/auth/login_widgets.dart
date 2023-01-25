@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
+
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 
 import '../../../helpers/constants/app_colors.dart';
+import '../../../helpers/exceptions/no_internet.dart';
 import '../../consts_widgets/loading_widgets.dart';
 import '../../reusable_widgets/custom_checkbox.dart';
 import '../../reusable_widgets/custom_text_form_field.dart';
@@ -113,12 +114,18 @@ class _RestWidgetsState extends State<RestWidgets>  {
              child: SendingLoadingWidget(),
            ) : MainButtonWidget(btnTitle: 'login', onPressed: () async {
 
-             final isLogged = await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);
-             if(isLogged){
-               // Get.to(()=>const MainTabsPage(),duration: Duration.zero);
-               Get.offAll(()=>const MainTabsPage(),duration: Duration.zero);
-             }else{
-               SnackBars.showErrorSnackBar('error'.tr, 'wrong_username_password'.tr);
+             try{
+               appController.loading.value = false;
+               await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);
+
+                 Get.offAll(()=>const MainTabsPage(),duration: Duration.zero);
+
+             }on NoInternetException catch(e){
+
+               SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
+             }on UserNotFoundException catch(e){
+
+               SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
              }
              //
            }),),

@@ -36,19 +36,19 @@ class SettingsPage extends StatelessWidget {
               children: [
                 DarkTextWidget('settings'.tr,fontSize: 18,fontWeight: FontWeight.bold,),
                 SizedBox(height: 8,),
-                // InkWell(
-                //   onTap: (){
-                //     Get.to(()=>NotifsPage());
-                //   },
-                //   child: ListProfileItemWidget(
-                //     title: "notifs".tr,
-                //     spaceInBetween: 16,
-                //     fontWeight: FontWeight.bold,
-                //     fontSize: 16,
-                //     iconSize: 35,
-                //     icon: "assets/images/settingicons/12.png",
-                //   ),
-                // ),
+                appController.deployingForApple ? const SizedBox() : InkWell(
+                  onTap: (){
+                    Get.to(()=>NotifsPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "notifs".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/settingicons/12.png",
+                  ),
+                ),
                 InkWell(
                   onTap: () async{
 
@@ -63,19 +63,19 @@ class SettingsPage extends StatelessWidget {
                     icon: "assets/images/settingicons/13.png",
                   ),
                 ),
-                // InkWell(
-                //   onTap: (){
-                //     Get.to(()=>ChangeLangPage());
-                //   },
-                //   child: ListProfileItemWidget(
-                //     title: "change_lang".tr,
-                //     spaceInBetween: 16,
-                //     fontWeight: FontWeight.bold,
-                //     fontSize: 16,
-                //     iconSize: 35,
-                //     icon: "assets/images/settingicons/14.png",
-                //   ),
-                // ),
+                appController.deployingForApple ? const SizedBox() :  InkWell(
+                  onTap: (){
+                    Get.to(()=>const ChangeLangPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "change_lang".tr,
+                    spaceInBetween: 16,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    iconSize: 35,
+                    icon: "assets/images/settingicons/14.png",
+                  ),
+                ),
                 InkWell(
                   onTap: () async {
                     await appController.logout();

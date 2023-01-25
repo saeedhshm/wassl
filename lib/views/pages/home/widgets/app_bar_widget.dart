@@ -30,7 +30,7 @@ class HomeBarWidget extends StatelessWidget {
                       fontSize: 18,
                       fontWeight: FontWeight.bold
                   ),),
-                  Text(controller.appController.loginModel.value.user!.fullName!,style: const TextStyle(
+                  Text(controller.appController.loginModel.value.user!.fullName,style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold

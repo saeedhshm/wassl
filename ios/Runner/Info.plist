@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Wasl app needs access to location when in the background.</string>
+	<string>Wasl app needs to access your location to assign your attendance.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Wasl app needs access to location when open.</string>
+	<string>Wasl app needs to access your location to assign your attendance.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

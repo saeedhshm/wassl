@@ -53,18 +53,14 @@ class AttendanceWidget extends StatelessWidget {
                     confirm: InkWell(
                       onTap: ()async{
                         Get.back();
-                        var attendanceDone = await controller.registerAttendance();
-                        if(attendanceDone){
-                          var message = '';
-                          if(controller.attendanceStatus.value == 2){
-                            message = 'attendance_done_successfully'.tr;
-                          }else {
-                            message = 'leaving_done_successfully'.tr;
-                          }
-                          SnackBars.showConfirmedSnackBar('', message);
-                        }else{
-                          SnackBars.showErrorSnackBar('error', 'something_wrong_try_again'.tr);
+                        try{
+                          var attendanceDone = await controller.registerAttendance();
+                          SnackBars.showConfirmedSnackBar('success'.tr, attendanceDone);
+                        }catch(exception){
+                          var errorMessage = 'something_wrong_try_again'.tr;
+                          SnackBars.showErrorSnackBar('error', exception.toString());
                         }
+
 
                       },
                       child: Container(

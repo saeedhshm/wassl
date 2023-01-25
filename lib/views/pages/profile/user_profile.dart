@@ -18,7 +18,7 @@ class UserProfilePage extends StatelessWidget {
     var height = MediaQuery.of(context).viewPadding.top;
 
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: SingleChildScrollView(
@@ -56,21 +56,21 @@ class UserProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 DarkTextWidget(appController.loginModel.value.user?.fullName ?? '',fontSize: 20,),
-                SizedBox(height: 0,),
+                const SizedBox(height: 0,),
                 DarkTextWidget('مصمم جرافيكس',fontSize: 15,),
-                SizedBox(height: 20,),
-                // SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
-                //   ,)),
-                // SizedBox(height: 10,),
-                // ListProfileItemWidget(
-                //   title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
-                //   icon: "assets/images/profile/vacation.png",
-                // ),
-                SizedBox(height: 20,),
-                SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 15,)),
-                SizedBox(height: 10,),
+                const SizedBox(height: 20,),
+                appController.deployingForApple ? const SizedBox() :  const SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
+                  ,)),
+                appController.deployingForApple ? const SizedBox() :  const SizedBox(height: 10,),
+                appController.deployingForApple ? const SizedBox() : ListProfileItemWidget(
+                  title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
+                  icon: "assets/images/profile/vacation.png",
+                ),
+                const SizedBox(height: 20,),
+                const SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 15,)),
+                const SizedBox(height: 10,),
                 InkWell(
                   onTap: (){
                     Get.to(()=>InfoPage());
@@ -80,29 +80,29 @@ class UserProfilePage extends StatelessWidget {
                     icon: "assets/images/profile/1.png",
                   ),
                 ),
-                // ListProfileItemWidget(
-                //   title: "work_info",
-                //   icon: "assets/images/profile/2.png",
-                // ),
-                // ListProfileItemWidget(
-                //   title: "money_info",
-                //   icon: "assets/images/profile/3.png",
-                // ),
-                // ListProfileItemWidget(
-                //   title: "docs",
-                //   icon: "assets/images/profile/4.png",
-                // ),
-                // ListProfileItemWidget(
-                //   title: "contracts",
-                //   icon: "assets/images/profile/5.png",
-                // ),
-                // ListProfileItemWidget(
-                //   title: "Custodys",
-                //   icon: "assets/images/profile/6.png",
-                // ),
+                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                  title: "work_info",
+                  icon: "assets/images/profile/2.png",
+                ),
+                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                  title: "money_info",
+                  icon: "assets/images/profile/3.png",
+                ),
+                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                  title: "docs",
+                  icon: "assets/images/profile/4.png",
+                ),
+                appController.deployingForApple ? const SizedBox() :   ListProfileItemWidget(
+                  title: "contracts",
+                  icon: "assets/images/profile/5.png",
+                ),
+                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                  title: "Custodys",
+                  icon: "assets/images/profile/6.png",
+                ),
 
 
-                SizedBox(height: 110,)
+                const SizedBox(height: 110,)
               ],
             ),
           ),

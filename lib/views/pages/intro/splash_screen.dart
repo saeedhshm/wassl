@@ -8,15 +8,11 @@ import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../helpers/constants/sring_constans.dart';
+import '../../../helpers/exceptions/no_internet.dart';
 import '../main_tabs_page.dart';
 
 class SplashScreen extends StatefulWidget {
-
-
-
-   SplashScreen({Key? key}) : super(key: key){
-
-  }
+  SplashScreen({Key? key}) : super(key: key) {}
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -32,37 +28,41 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     onStartScreen();
-
   }
 
-  onStartScreen() async{
+  onStartScreen() async {
     var userCreds = await appController.retrieveUserAuth();
     var email = userCreds['email'] ?? '';
     var password = userCreds['password'] ?? '';
-   var response = await appController.login(email: email, password: password);
+    timer = Timer(Duration(seconds: 3), ()async {
+    try {
 
-    timer = Timer(Duration(seconds: 3),
-            (){
-              if(response){
-                Get.offAll(()=>const MainTabsPage(),duration: Duration.zero);
-              }else {
-                Get.offAll(()=> LoginPage(),duration: Duration.zero);
+          await appController.login(email: email, password: password);
 
-              }
-            }
-    );
+          Get.offAll(() => const MainTabsPage(), duration: Duration.zero);
+
+
+    } on NoInternetException catch (e) {
+      Get.defaultDialog(
+          title: 'error'.tr,
+          middleText: e.errorMessage,
+          barrierDismissible: false);
+    } on UserNotFoundException catch (e) {
+      println(e.errorMessage);
+      Get.offAll(() => LoginPage(), duration: Duration.zero);
+    }
+  });
+
   }
 
   @override
   void dispose() {
     timer!.cancel();
     super.dispose();
-
   }
+
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       body: Container(
         color: Colors.white,

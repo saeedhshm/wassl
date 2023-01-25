@@ -22,7 +22,7 @@ class HomeController extends GetxController{
   var dt = DateTime.now().obs;
 
   // page :- apis retriever
- Future<bool> registerAttendance() async {
+ Future<String> registerAttendance() async {
 
 
 
@@ -51,7 +51,7 @@ class HomeController extends GetxController{
     println(body);
 
     final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
-    await calendarController.checkForMonthAttendance();
+
     sendingAttendance.value = false;
     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
     println(url);
@@ -59,10 +59,22 @@ class HomeController extends GetxController{
     println(response.body);
     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
     if(response.statusCode == 200){
-      attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
-      return true;
+
+      var json = jsonDecode(response.body);
+      if(json['success'] == true) {
+        attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
+        await calendarController.checkForMonthAttendance();
+        if (attendanceStatus.value == 2) {
+          return 'attendance_done_successfully'.tr;
+        } else {
+          return 'leaving_done_successfully'.tr;
+        }
+      }else{
+        Future.error(json['message']);
+      }
+
     }
-    return false;
+    return Future.error('${response.body}\n${appController.position?.longitude},${appController.position?.latitude}');
   }
 
 
@@ -104,10 +116,10 @@ class HomeController extends GetxController{
 
 
   String get hours {
+    if(dt.value.hour == 0) return '12';
 
-    if(dt.value.hour > 12)
-      return '${dt.value.hour - 12}';
-    return '${dt.value.hour}';
+    if(dt.value.hour > 12) return '${dt.value.hour - 12}';
+    return '0${dt.value.hour}';
   }
   String get minutes {
     return '${dt.value.minute}';

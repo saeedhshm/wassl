@@ -1,14 +1,16 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 import 'package:geolocator/geolocator.dart';
 import '../helpers/constants/sring_constans.dart';
-import 'calendar/calendar_controller.dart';
+
 
 class AppController extends GetxController{
 
@@ -21,14 +23,12 @@ class AppController extends GetxController{
 
   Position? position;
 
+  var deployingForApple = false;
 
-  Future<bool> login({required String email,required String password}) async {
 
-    if(rememberMe){
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(appStorageEmail, email);
-      await prefs.setString(appStoragePassword, password);
-    }
+  Future<void> login({required String email,required String password}) async {
+
+
     loading.value = true;
    final response = await AppApiHandler.sendData(url: AppUrls.login, body: {
       'email':email,
@@ -39,15 +39,21 @@ class AppController extends GetxController{
 
     loading.value = false;
       if(statusCode == 200){
+        if(rememberMe){
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(appStorageEmail, email);
+          await prefs.setString(appStoragePassword, password);
+        }
         Map<String,dynamic> json = jsonDecode(response.body);
 
         loginModel.value.fromJson(json);
 
-        return true;
+      }else{
+        throw UserNotFoundException();
       }
 
 
-    return false;
+
   }
 
   Future<String> changeMyPassword({required String currentPassword, required String newPassword, required String confirmPassword})async{
@@ -124,7 +130,18 @@ class AppController extends GetxController{
     super.onInit();
     // getMyLocation();
     // determinePosition();
+    var listener = InternetConnectionChecker().onStatusChange.listen((status) {
+      switch (status) {
+        case InternetConnectionStatus.connected:
+          print('Data connection is available.');
+          break;
+        case InternetConnectionStatus.disconnected:
+          print('You are disconnected from the internet.');
+          break;
+      }
+    });
   }
+
 
   // Future getMyLocation() async {
   //   position  = await _determinePosition();
@@ -180,4 +197,11 @@ class AppController extends GetxController{
     position = await Geolocator.getCurrentPosition();
     return permission;
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
 }

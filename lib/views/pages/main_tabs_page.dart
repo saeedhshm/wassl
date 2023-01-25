@@ -88,20 +88,20 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                   child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}3.svg"),
                                 ),
                               )),
-                          // Spacer(),
-                          // Expanded(
-                          //     child:
-                          //     GestureDetector(
-                          //       onTap: (){
-                          //         _index = 2;
-                          //
-                          //         setState((){});
-                          //       },
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.all(12.0),
-                          //         child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
-                          //       ),
-                          //     )),
+                          calendarController.appController.deployingForApple ? SizedBox() : Spacer(),
+                          calendarController.appController.deployingForApple ? SizedBox() : Expanded(
+                              child:
+                              GestureDetector(
+                                onTap: (){
+                                  _index = 2;
+
+                                  setState((){});
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                                ),
+                              )),
                           Expanded(
                               child:  GestureDetector(
                                 onTap: (){
@@ -120,29 +120,29 @@ class _MainTabsPageState extends State<MainTabsPage> {
                       ),
                     ),
                   ),
-                  // Align(
-                  //   alignment: FractionalOffset.topCenter,
-                  //   child: InkWell(
-                  //     onTap: (){
-                  //       Get.to(()=>const RequestsPage());
-                  //     },
-                  //     child: Container(
-                  //       height: 65,
-                  //       width: 65,
-                  //       child: const Padding(
-                  //         padding: EdgeInsets.all(15.0),
-                  //         child: SvgWidget('assets/images/bottom_nav/plus.svg'),
-                  //       ),
-                  //       decoration: BoxDecoration(
-                  //           gradient: const LinearGradient(
-                  //             begin: Alignment.centerRight,
-                  //             end: Alignment.centerLeft,
-                  //             colors: AppColors.gradiantGreen,
-                  //           ),
-                  //           borderRadius: BorderRadius.circular(100)),
-                  //     ),
-                  //   ),
-                  // ),
+                 calendarController.appController.deployingForApple ? SizedBox() : Align(
+                    alignment: FractionalOffset.topCenter,
+                    child: InkWell(
+                      onTap: (){
+                        Get.to(()=>const RequestsPage());
+                      },
+                      child: Container(
+                        height: 65,
+                        width: 65,
+                        child: const Padding(
+                          padding: EdgeInsets.all(15.0),
+                          child: SvgWidget('assets/images/bottom_nav/plus.svg'),
+                        ),
+                        decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                              colors: AppColors.gradiantGreen,
+                            ),
+                            borderRadius: BorderRadius.circular(100)),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
