@@ -137,6 +137,7 @@ Map<String,String>  arabicStrings = {
   'email':'البريد الإلكتروني',
   'date_of_birth':'تاريخ الميلاد',
   'mobile_number':'رقم الهاتف',
-  'no_internet_exception':'لا يوجد اتصال بالانترنت، يجب تفعيل الاتصال'
+  'no_internet_exception':'لا يوجد اتصال بالانترنت، يجب تفعيل الاتصال',
+  'tap_to_refresh':'اضغط لاعادة التحميل'
 
 } ;

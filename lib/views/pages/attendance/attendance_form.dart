@@ -18,8 +18,22 @@ class AttendancePage extends StatelessWidget {
 
     return Scaffold(
       // backgroundColor: Colors.blue,
-      body: Obx(()=>controller.loading.value ? Center(
+      body: Obx(()=>controller.loading.value ? const Center(
         child: SendingLoadingWidget(),
+      ) :controller.noInternetAvailable.value != ''? Center(
+        child: InkWell(
+          onTap: (){
+            controller.retrieveAttendanceData();
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(controller.noInternetAvailable.value),
+              Text('tap_to_refresh'.tr),
+              const Icon(Icons.refresh,size: 40,color: Colors.blue,),
+            ],
+          ),
+        ),
       ) : Column(
         children: [
           MainAppbarWidget("attendance_records",),

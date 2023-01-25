@@ -56,9 +56,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           });
         },
         dayBuilder: (context,dateTime){
-          print('--->>>> calendar date ${dateTime.toString()}');
-          print('--->>>> controller date ${controller.dateTime.toString()}');
-          print('--->>>> api date ${controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day}');
+
           if(compareTowDays(dateTime, DateTime.now())){
             return Center(
 
@@ -147,12 +145,12 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         defaultOutOfMonthDayColor: Colors.green,
         defaultDayColor: Colors.grey,
         onMonthChanged: (dateTime){
-          print('--->>>> onMonthChanged ${dateTime}');
+
 
           _currentMonth = dateTime;
           if(controller.dateTime.month != dateTime.month) {
             controller.dateTime = dateTime;
-            controller.checkForMonthAttendance();
+            controller.retrieveAttendanceData();
           }
           setState(() {
 

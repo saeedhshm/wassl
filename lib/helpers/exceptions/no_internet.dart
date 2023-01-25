@@ -9,3 +9,7 @@ class NoInternetException implements Exception{
 class UserNotFoundException implements Exception{
   String errorMessage = 'wrong_username_password'.tr;
 }
+
+class NoDataAvailableException implements Exception{
+
+}

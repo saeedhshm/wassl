@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -63,15 +64,15 @@ class AppController extends GetxController{
     String oldPassword = prefs.getString(appStoragePassword) ?? '';
 
     if(oldPassword != currentPassword){
-      return Future.error('oldPassword_didnt_match_currentPassword');
+      throw CurrentPasswordException();
     }
 
     if(newPassword.length < 6){
-      return Future.error('password less than 6 characters');
+      throw PasswordLengthException();
     }
 
     if(newPassword != confirmPassword) {
-      return Future.error('newPassword_didnt_match_confirmPassword');
+      throw NewPassConfirmedPassException();
     }
 
     loading.value = true;
@@ -88,6 +89,9 @@ class AppController extends GetxController{
     });
 
     loading.value = false;
+    if(response.statusCode != 200){
+      throw ChangePasswordException();
+    }
     if(response.statusCode == 200){
       await prefs.setString(appStoragePassword, newPassword);
       return 'password_changed';
@@ -131,16 +135,7 @@ class AppController extends GetxController{
     super.onInit();
     // getMyLocation();
     // determinePosition();
-    var listener = InternetConnectionChecker().onStatusChange.listen((status) {
-      switch (status) {
-        case InternetConnectionStatus.connected:
-          print('Data connection is available.');
-          break;
-        case InternetConnectionStatus.disconnected:
-          print('You are disconnected from the internet.');
-          break;
-      }
-    });
+
   }
 
 

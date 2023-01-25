@@ -64,7 +64,7 @@ class HomeController extends GetxController{
       var json = jsonDecode(response.body);
       if(json['success'] == true) {
         attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
-        await calendarController.checkForMonthAttendance();
+        calendarController.retrieveAttendanceData();
         if (attendanceStatus.value == 2) {
           return 'attendance_done_successfully'.tr;
         } else {
