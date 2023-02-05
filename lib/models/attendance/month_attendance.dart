@@ -100,7 +100,7 @@ class MonthDay {
     if(attendanceDay != null){
       time =  (attendanceDay?.attendanceTime ?? '').split(' ')[1];
     }
-   return time.formatedTime();
+   return time.formattedTime();
   }
 
   String get leaveTime{
@@ -108,7 +108,7 @@ class MonthDay {
     if(attendanceDay != null){
       time = attendanceDay?.leaveTime == null ? (attendanceDay?.leaveTime ?? '.......') : (attendanceDay?.leaveTime ?? '.......').split(' ')[1] ;
     }
-    return time.formatedTime();
+    return time.formattedTime();
 
   }
 

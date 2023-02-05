@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
         color: Colors.white,
         width: double.infinity,
         height: double.infinity,
-        child: Center(
+        child: const Center(
           child: SizedBox(
             width: 250,
             child: Hero(

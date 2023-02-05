@@ -1,7 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
@@ -20,12 +21,17 @@ class AppController extends GetxController{
 
   var loaginSuccessed = false.obs;
 
+  var canUpdate = false;
+  var appURL = '';
+
   var loginModel = LoginModel().obs;
   var rememberMe = true;
 
   Position? position;
 
-  var deployingForApple = false;
+  var deployingForApple = true;
+
+  final _checker = AppVersionChecker();
 
 
   Future<void> login({required String email,required String password}) async {
@@ -133,11 +139,28 @@ class AppController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    // getMyLocation();
-    // determinePosition();
+    checkVersion();
 
   }
 
+  void checkVersion() async {
+    var value = await _checker.checkUpdate();
+    println('][][][][][][][][][][]][][][][]');
+    canUpdate = value.canUpdate;
+    appURL = value.appURL ?? '';
+    println(value.canUpdate); //return true if update is available
+    println(value.currentVersion); //return current app version
+    println(value.newVersion); //return the new app version
+
+    println(value.appURL); //return the app url
+    println(value.errorMessage); //return error message if found else it will return null
+    println('][][][][][][][][][][]][][][][]');
+  }
+
+  gotoStore() async {
+    // println(appURL);
+    await launchUrl(Uri.parse(appURL));
+  }
 
   // Future getMyLocation() async {
   //   position  = await _determinePosition();

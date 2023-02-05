@@ -112,7 +112,7 @@ class HomeController extends GetxController{
   }
 
   String get currentTime{
-   // return '${dt.value}'.formatedTime();
+   return '${dt.value}'.formattedTimeFromDateTime();
     return '${hours}:${minutes} ${am_pm}';
   }
 

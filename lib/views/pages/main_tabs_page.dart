@@ -4,9 +4,11 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/requests_page.dart';
 import 'package:wassl/views/pages/profile/user_profile.dart';
+import 'package:wassl/views/pages/updating_page.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../getx_controllers/calendar/calendar_controller.dart';
+import '../../getx_controllers/orders/previous_requests.dart';
 import 'attendance/attendance_form.dart';
 import 'home/home_page.dart';
 import 'orders/pages/loan_order.dart';
@@ -21,21 +23,22 @@ class MainTabsPage extends StatefulWidget {
 
 class _MainTabsPageState extends State<MainTabsPage> {
 
-  int _index = 3;
+  int _index = 4;
+
   final CalendarController calendarController =  Get.put(CalendarController());
+  final PreviousRequestsController controller = Get.put(PreviousRequestsController());
+
   var pages = [
      UserProfilePage(),
-    // Center(child: PerviuosRequestsPage(),),
+    Center(child: PreviousRequestsPage(),),
     AttendancePage(),
     Center(child: HomePage(),),
   ];
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).viewPadding.bottom;
-    // var height = Get.bottomBarHeight;
-    print("height ----->>> $height");
+
     return Scaffold(
-      body: Stack(
+      body:calendarController.appController.canUpdate ? UpdatingAppPage(): Stack(
         children: [
          pages[_index-1],
           Align(
@@ -67,29 +70,29 @@ class _MainTabsPageState extends State<MainTabsPage> {
                               child:
                               GestureDetector(
                                 onTap: (){
-                                  _index = 3;
+                                  _index = 4;
                                   setState((){});
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}4.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
                                 ),
                               )),
                           Expanded(
                               child:
                               GestureDetector(
                                 onTap: (){
-                                  _index = 2;
+                                  _index = 3;
 
                                   setState((){});
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}3.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
                                 ),
                               )),
-                          calendarController.appController.deployingForApple ? SizedBox() : Spacer(),
-                          calendarController.appController.deployingForApple ? SizedBox() : Expanded(
+                          calendarController.appController.deployingForApple ? SizedBox() :  Spacer(),
+                          Expanded(
                               child:
                               GestureDetector(
                                 onTap: (){

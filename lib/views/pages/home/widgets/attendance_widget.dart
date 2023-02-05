@@ -181,7 +181,7 @@ class AttendanceWidget extends StatelessWidget {
                                 children: [
                                   Text(
                                     controller.attendanceStatusValue,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: AppColors.darkGreyTextColor,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),

@@ -2,32 +2,50 @@ PODS:
   - "app_settings (3.0.0+1)":
     - Flutter
   - Flutter (1.0.0)
+  - flutter_app_version_checker (0.0.1):
+    - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
   - shared_preferences_ios (0.0.1):
+    - Flutter
+  - url_launcher_ios (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - Flutter (from `Flutter`)
+  - flutter_app_version_checker (from `.symlinks/plugins/flutter_app_version_checker/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 EXTERNAL SOURCES:
   app_settings:
     :path: ".symlinks/plugins/app_settings/ios"
   Flutter:
     :path: Flutter
+  flutter_app_version_checker:
+    :path: ".symlinks/plugins/flutter_app_version_checker/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   shared_preferences_ios:
     :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
   app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_app_version_checker: 2beb5e211990c45ebfc17b81aa4d08ebd7edb757
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
+  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
+  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
 

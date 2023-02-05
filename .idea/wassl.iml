@@ -59,6 +59,30 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/app_settings/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/package_info_plus/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_app_version_checker-0.3.2/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_app_version_checker/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/url_launcher_ios/example/.dart_tool" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

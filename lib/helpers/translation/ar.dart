@@ -138,6 +138,9 @@ Map<String,String>  arabicStrings = {
   'date_of_birth':'تاريخ الميلاد',
   'mobile_number':'رقم الهاتف',
   'no_internet_exception':'لا يوجد اتصال بالانترنت، يجب تفعيل الاتصال',
-  'tap_to_refresh':'اضغط لاعادة التحميل'
+  'tap_to_refresh':'اضغط لاعادة التحميل',
+  'outdated_version':'يجب تحديث التطبيق من المتجر',
+  'update':'تحديث',
+  'no_previous_requests':'لا توجد طلبات سابقة بعد'
 
 } ;
