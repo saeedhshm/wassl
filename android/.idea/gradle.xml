@@ -6,6 +6,18 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/app_settings-4.2.0/android" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_app_version_checker-0.3.2/android" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-4.1.4/android" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/package_info_plus-1.4.3+1/android" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_android-2.0.14/android" />
+            <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_android-6.0.23/android" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>

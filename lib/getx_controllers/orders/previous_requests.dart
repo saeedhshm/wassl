@@ -1,5 +1,44 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/models/orders/AllOrders.dart';
+import 'package:wassl/web_services_helper/api.dart';
+import 'package:wassl/web_services_helper/urls.dart';
+
+import '../../helpers/exceptions/no_internet.dart';
+import '../app_controller.dart';
 
 class PreviousRequestsController extends GetxController{
+  var previousRequests = AllOrders().obs;
+  final AppController appController = Get.find();
 
+  Future getAllOrders() async {
+    var headers = {
+      'Authorization':
+      'bearer ${appController.loginModel.value.token?.accessToken}',
+      // "x-localization": 'lang_code'.tr,
+    };
+
+    appController.loading.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.getAllOrders,header: headers);
+    appController.loading.value = false;
+    println('=-=-=-=-=-=-=-=- getAllOrders() ====--==-=-= ');
+    println(response.statusCode);
+    println(response.body);
+    println('=-=-=-=-=-=-=-=- getAllOrders() ====--==-=-= ');
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+      var json = jsonDecode(response.body);
+      previousRequests.value = AllOrders.fromJson(json);
+
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getAllOrders();
+  }
 }

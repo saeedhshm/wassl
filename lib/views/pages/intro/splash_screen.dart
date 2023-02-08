@@ -7,12 +7,13 @@ import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
-import '../../../helpers/constants/sring_constans.dart';
+import '../../../helpers/constants/string_constants.dart';
 import '../../../helpers/exceptions/no_internet.dart';
 import '../main_tabs_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key) {}
+
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     var userCreds = await appController.retrieveUserAuth();
     var email = userCreds['email'] ?? '';
     var password = userCreds['password'] ?? '';
-    timer = Timer(Duration(seconds: 3), ()async {
+    timer = Timer(const Duration(seconds: 3), ()async {
     try {
 
           await appController.login(email: email, password: password);

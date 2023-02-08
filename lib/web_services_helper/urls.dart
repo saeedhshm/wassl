@@ -7,6 +7,7 @@ class AppUrls {
   static const String _authApi = '$_appDomain$_apiVrsion/auth';
   static const String _assignApi = '$_appDomain$_apiVrsion/assign';
   static const String _attendanceApi = '$_appDomain$_apiVrsion/attendance';
+  static const String _ordersApi = '$_appDomain$_apiVrsion/orders';
 
   //https://waslhr.com/api/v1/auth
   static const String login = '$_authApi/login';
@@ -18,6 +19,8 @@ class AppUrls {
   static const String leaving = '$_assignApi/leave';
   static const String attendanceCheck = '$_assignApi/check';
 
+  ///orders/get
+  static const String getAllOrders = '$_ordersApi/get';
   //attendance
   static const String monthlyAttendance = '$_attendanceApi/month';
 }

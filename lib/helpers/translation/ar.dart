@@ -141,6 +141,16 @@ Map<String,String>  arabicStrings = {
   'tap_to_refresh':'اضغط لاعادة التحميل',
   'outdated_version':'يجب تحديث التطبيق من المتجر',
   'update':'تحديث',
-  'no_previous_requests':'لا توجد طلبات سابقة بعد'
+  'no_previous_requests':'لا توجد طلبات سابقة بعد',
 
+  'LoansData':'طلب قرض',
+  'LetterDate':'طلب خطاب',
+  'FinancialExpensesDate':'طلب مصاريف مالية',
+  'CustodyDate':'طلب عهدة',
+  'HolidaysData':'طلب اجازة',
+  'FingerprintCorrectionsData':'طلب تصحيح بصمة',
+
+  'not_confirmed':'غير مؤكد',
+  'reason':'السبب',
+  'unspecified':"غير محدد"
 } ;

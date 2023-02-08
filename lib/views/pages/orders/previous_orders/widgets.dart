@@ -5,7 +5,13 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 import '../../../../helpers/constants/app_colors.dart';
 
 class PreviousRequestsItemWidget extends StatelessWidget {
-  const PreviousRequestsItemWidget({Key? key}) : super(key: key);
+
+  final String orderType;
+  final String orderDate;
+  final String orderStatus;
+  final String orderReason;
+
+  const PreviousRequestsItemWidget({Key? key,required this.orderType,required this.orderDate,required this.orderStatus,required this.orderReason}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +23,14 @@ class PreviousRequestsItemWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text('leaving_request'.tr,style: TextStyle(
+                Text(orderType.tr,style: TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18
                 ),),
                 Spacer(),
-                Text('confirmed'.tr,style: TextStyle(
-                  color: AppColors.mainGreenColor
+                Text(orderStatus.tr,style: TextStyle(
+                  color: orderStatus == 'not_confirmed' ? Colors.red : AppColors.mainGreenColor
                 ),)
               ],
             ),
@@ -36,13 +42,28 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   height: 25,
                   child: SvgWidget('assets/images/pref_calendar_icon.svg'),
                 ),
-                Text('2022 /5/10',style: TextStyle(
+                Text(orderDate,style: TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontSize: 16
                 ),)
               ],
             ),
             Row(
+              children: [
+                Text('reason'.tr + ': ',style: TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15
+                ),),
+                Text(orderReason.tr,style: TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15
+                ),)
+              ],
+            ),
+            SizedBox(height: 10,),
+            orderType == 'HolidaysData' ? Row(
               children: [
                 Expanded(
                   child: Container(
@@ -98,7 +119,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ) : SizedBox()
           ],
         ),
       ),

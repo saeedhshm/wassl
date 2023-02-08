@@ -12,14 +12,14 @@ import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 import 'package:geolocator/geolocator.dart';
-import '../helpers/constants/sring_constans.dart';
+import '../helpers/constants/string_constants.dart';
 
 
 class AppController extends GetxController{
 
   var loading = false.obs;
 
-  var loaginSuccessed = false.obs;
+  // var loaginSuccessed = false.obs;
 
   var canUpdate = false;
   var appURL = '';
@@ -29,7 +29,7 @@ class AppController extends GetxController{
 
   Position? position;
 
-  var deployingForApple = true;
+  var deployingForApple = !true;
 
   final _checker = AppVersionChecker();
 

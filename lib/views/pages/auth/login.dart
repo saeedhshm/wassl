@@ -5,7 +5,7 @@ import 'package:wassl/views/pages/profile/info.dart';
 import 'package:wassl/views/pages/profile/user_profile.dart';
 import 'package:wassl/views/reusable_widgets/custom_checkbox.dart';
 import 'package:wassl/views/reusable_widgets/main_button.dart';
-import '../../../helpers/constants/sring_constans.dart';
+import '../../../helpers/constants/string_constants.dart';
 import '../../reusable_widgets/custom_text_form_field.dart';
 import '../../reusable_widgets/localized_text.dart';
 import '../../reusable_widgets/main_title_text.dart';
