@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
@@ -8,21 +9,41 @@ import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
 import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
-class PreviousRequestsPage extends StatelessWidget {
+class PreviousRequestsPage extends StatefulWidget {
 
-  final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
 
-   PreviousRequestsPage({Key? key}) : super(key: key);
+   PreviousRequestsPage({Key? key}) : super(key: key){
+     // retrieveAllOrders();
+   }
+
+  @override
+  State<PreviousRequestsPage> createState() => _PreviousRequestsPageState();
+}
+
+class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
+  final PreviousRequestsController controller = Get.put(PreviousRequestsController());
+
 
    retrieveAllOrders() async{
-     try{
-
-     }catch (e){
-
-     }finally{
-       controller.appController.loading.value = false;
-     }
+     Future.delayed(Duration.zero,()async{
+       try{
+         await controller.getAllOrders();
+       }catch (e){
+         println('============ getall orders =========');
+         println(e);
+         println('============ getall orders =========getall orders =========');
+       }finally{
+         controller.appController.loading.value = false;
+       }
+     });
    }
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    retrieveAllOrders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +54,7 @@ class PreviousRequestsPage extends StatelessWidget {
             'previous_requests'.tr,
 
           ),
-          Expanded(child:controller.appController.loading.value ? SendingLoadingWidget() : controller.previousRequests.value.isEmpty ? Center(
+          Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.isEmpty ? Center(
             child: Text('no_previous_requests'.tr,style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
@@ -78,7 +99,7 @@ class OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreviousRequestsItemWidget(orderType: order.orderType,orderDate: order.orderDate,orderStatus: order.orderStatus,orderReason: order.reason,) ;
+    return PreviousRequestsItemWidget(order: order) ;
   }
 }
 

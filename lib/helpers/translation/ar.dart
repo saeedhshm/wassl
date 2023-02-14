@@ -35,7 +35,12 @@ Map<String,String>  arabicStrings = {
   'sickـleave':'أجازة مرضية',
   '2_days':'يومين',
   'error':'خطأ',
-  'something_wrong_try_again':'هناك خطأ ما حاول مرة اخرى',
+  'day':'يوم',
+  'days':'أيام',
+  'SAR':'ريال',
+  'directed_to':'موجه إلى',
+  'installment_method':'طريقة الاستقطاع',
+  'something_wrong_try_again':'هناك خطأ ما، حاول مرة اخرى',
   'reg_attend':'تسجيل الحضور',
   'reg_leaving':'تسجيل الانصراف',
   'attendance_done_successfully':'تم تسجيل حضورك بنجاح',
@@ -152,5 +157,21 @@ Map<String,String>  arabicStrings = {
 
   'not_confirmed':'غير مؤكد',
   'reason':'السبب',
-  'unspecified':"غير محدد"
+  'unspecified':"غير محدد",
+
+  'annual':'أجازة سنوية',
+  'un_paid':'غير مدفوعة',
+  'death':'وفاة أقارب',
+  'exams':'اختبارات',
+  'illness':'أجازة مرضية',
+  'select_start_date_first':'يجب اختيار تاريخ بداية الاجازة أولاً',
+
+  'HolidayReasonException':'ادخل سبب الاجازة',
+  'StartDateException':'اختر تاريخ بداية الاجازة',
+  'HolidayTypeException':'اختر نوع الاجازة',
+  'EndDateException':'اختر تاريخ انتهاء الاجازة',
+  'holiday_request_added':'تم إضافة طلب الأجازة بنجاح',
+  '':'',
+  '':'',
+
 } ;

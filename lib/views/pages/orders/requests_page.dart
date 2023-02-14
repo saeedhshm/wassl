@@ -147,7 +147,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const HolidayRequestPage());
+                         Get.to(()=> HolidayRequestPage());
                        },
                        child:ItemWidget(icon: 'assets/images/holidays.svg',title: 'holidays'.tr,),
 

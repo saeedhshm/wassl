@@ -43,4 +43,34 @@ class AppApiHandler {
     return response;
   }
 
+  static Future<http.StreamedResponse> sendDataWithFile(
+      {required String url,
+        required dynamic body,
+        Map<String, String>? header,String? fileName}) async {
+
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result) {
+      throw NoInternetException();
+    }
+
+    var uri = Uri.parse(url);
+
+
+    var request = http.MultipartRequest('POST', uri);
+    if(header != null){
+      request.headers.addAll(header);
+    }
+
+    request.fields.addAll(body);
+
+    if(fileName != null){
+      request.files.add(await http.MultipartFile.fromPath(
+          'file', fileName));
+    }
+    return request.send();
+
+
+
+  }
 }
+

@@ -64,6 +64,14 @@ class AppController extends GetxController{
 
   }
 
+  Map<String,String> get appHeader{
+    return {
+  'Authorization':
+  'bearer ${loginModel.value.token?.accessToken}',
+  // "x-localization": 'lang_code'.tr,
+  };
+}
+
   Future<String> changeMyPassword({required String currentPassword, required String newPassword, required String confirmPassword})async{
 
     final prefs = await SharedPreferences.getInstance();

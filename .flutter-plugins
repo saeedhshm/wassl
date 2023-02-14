@@ -1,6 +1,8 @@
 # This is a generated file; do not edit or check into version control.
 app_settings=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/app_settings-4.2.0/
+file_picker=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-5.2.5/
 flutter_app_version_checker=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_app_version_checker-0.3.2/
+flutter_plugin_android_lifecycle=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/
 geolocator=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-9.0.2/
 geolocator_android=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-4.1.4/
 geolocator_apple=/Users/mac/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-2.2.3/

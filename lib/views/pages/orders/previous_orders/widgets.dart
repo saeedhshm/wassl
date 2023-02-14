@@ -3,15 +3,17 @@ import 'package:get/get.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
+import '../../../../models/orders/AllOrders.dart';
+import '../../../../models/orders/financial_expenses.dart';
+import '../../../../models/orders/holiday.dart';
+import '../../../../models/orders/letter.dart';
+import '../../../../models/orders/loan_order.dart';
 
 class PreviousRequestsItemWidget extends StatelessWidget {
 
-  final String orderType;
-  final String orderDate;
-  final String orderStatus;
-  final String orderReason;
+  final Order order;
 
-  const PreviousRequestsItemWidget({Key? key,required this.orderType,required this.orderDate,required this.orderStatus,required this.orderReason}) : super(key: key);
+  const PreviousRequestsItemWidget({Key? key,required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,31 @@ class PreviousRequestsItemWidget extends StatelessWidget {
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(orderType.tr,style: TextStyle(
-                  color: AppColors.darkGreyTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18
-                ),),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(order.orderType.tr,style: TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                    ),),
+                    order.orderType == 'LetterDate' ?  Text('directed_to'.tr + ' : ' +((order as LetterDate).directedToAr ?? ''),style: TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15
+                    ),) : SizedBox(),
+                    order.orderType == 'LoansData' ?  Text('installment_method'.tr + ' : ' +((order as LoansData).monthlyInstallment ?? ''),style: TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15
+                    ),) : SizedBox(),
+                  ],
+                ),
                 Spacer(),
-                Text(orderStatus.tr,style: TextStyle(
-                  color: orderStatus == 'not_confirmed' ? Colors.red : AppColors.mainGreenColor
+                Text(order.orderStatus.tr,style: TextStyle(
+                  color: order.orderStatus == 'not_confirmed' ? Colors.red : AppColors.mainGreenColor
                 ),)
               ],
             ),
@@ -42,46 +60,62 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   height: 25,
                   child: SvgWidget('assets/images/pref_calendar_icon.svg'),
                 ),
-                Text(orderDate,style: TextStyle(
+                Text(order.orderDate,style: TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontSize: 16
                 ),)
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('reason'.tr + ': ',style: TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.normal,
                     fontSize: 15
                 ),),
-                Text(orderReason.tr,style: TextStyle(
+                Expanded(child: Text(order.reason.tr,style: TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.normal,
                     fontSize: 15
-                ),)
+                ),))
               ],
             ),
             SizedBox(height: 10,),
-            orderType == 'HolidaysData' ? Row(
+            order.orderType == 'HolidaysData' ? Row(
               children: [
-                Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('whole_day'.tr,
-                        style: TextStyle(
-                          color: AppColors.darkGreyTextColor
-                        ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                ),
+                Text('start'.tr + ' : '+ ((order as HolidaysData).holidayStart ?? ''),style: TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15
+                ),),
+                Spacer(),
+                Text('end'.tr + ' : '+ ((order as HolidaysData).holidayEnd ?? ''),style: TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 15
+                ),),
+              ],
+            ) : SizedBox(),
+            order.orderType == 'HolidaysData' ? Row(
+              children: [
+                // Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Text('whole_day'.tr,
+                //         style: TextStyle(
+                //           color: AppColors.darkGreyTextColor
+                //         ),),
+                //       ),
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: AppColors.mainBackgroundColor,
+                //       borderRadius: BorderRadius.circular(50),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -106,7 +140,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('2_days'.tr,
+                        child: Text(((order as HolidaysData).differenceInDays),
                           style: TextStyle(
                               color: AppColors.darkGreyTextColor
                           ),),
@@ -119,7 +153,121 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   ),
                 ),
               ],
-            ) : SizedBox()
+            ) : SizedBox(),
+            order.orderType == 'FinancialExpensesDate' ? Row(
+              children: [
+                // Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Text('whole_day'.tr,
+                //         style: TextStyle(
+                //           color: AppColors.darkGreyTextColor
+                //         ),),
+                //       ),
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: AppColors.mainBackgroundColor,
+                //       borderRadius: BorderRadius.circular(50),
+                //     ),
+                //   ),
+                // ),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text((order as FinancialExpensesDate).name ?? '',
+                          style: TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(((order as FinancialExpensesDate).amount.toString() + ' ' + 'SAR'.tr),
+                          style: TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+              ],
+            ) : SizedBox(),
+            order.orderType == 'LoansData' ? Row(
+              children: [
+                // Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Text('whole_day'.tr,
+                //         style: TextStyle(
+                //           color: AppColors.darkGreyTextColor
+                //         ),),
+                //       ),
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: AppColors.mainBackgroundColor,
+                //       borderRadius: BorderRadius.circular(50),
+                //     ),
+                //   ),
+                // ),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text((order as LoansData).amount.toString()  + ' ' + 'SAR'.tr,
+                          style: TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(((order as LoansData).installmentAmount.toString() + ' ' + 'SAR'.tr),
+                          style: TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+              ],
+            ) : SizedBox(),
           ],
         ),
       ),

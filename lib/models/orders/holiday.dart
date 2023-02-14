@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 
 import 'AllOrders.dart';
 
@@ -49,6 +50,23 @@ class HolidaysData implements Order{
   }
 
 
+  String get differenceInDays{
+    String difference = '';
+    var startDayARR = (holidayStart ?? '').split('-');
+    var endDayARR = (holidayEnd ?? '').split('-');
+
+    final startDay = DateTime(int.parse(startDayARR[0]),int.parse(startDayARR[1]),int.parse(startDayARR[2]));
+    final endDay = DateTime(int.parse(endDayARR[0]),int.parse(endDayARR[1]),int.parse(endDayARR[2]));
+
+    println('=-==-=--=-=-=-= startDay =-===-=-');
+    println(startDay);
+    println(endDay);
+    println('=-==-=--=-=-=-= startDay =-===-=-');
+
+    final days = (endDay.difference(startDay).inDays + 1);
+    difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : (days.toString() + ' ' + 'days'.tr);
+    return difference;
+  }
 
   @override
   // TODO: implement orderType

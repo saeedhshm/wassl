@@ -42,7 +42,7 @@ class LoansData implements Order{
   @override
   // TODO: implement orderDate
   String get orderDate {
-    return (createdAt ?? '').split('T')[0];
+    return (month ?? '');
   }
 
   @override

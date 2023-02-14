@@ -8,6 +8,7 @@ class AppUrls {
   static const String _assignApi = '$_appDomain$_apiVrsion/assign';
   static const String _attendanceApi = '$_appDomain$_apiVrsion/attendance';
   static const String _ordersApi = '$_appDomain$_apiVrsion/orders';
+  static const String _holidayApi = '$_appDomain$_apiVrsion/holiday';
 
   //https://waslhr.com/api/v1/auth
   static const String login = '$_authApi/login';
@@ -23,5 +24,8 @@ class AppUrls {
   static const String getAllOrders = '$_ordersApi/get';
   //attendance
   static const String monthlyAttendance = '$_attendanceApi/month';
+
+  ///holiday/add
+  static const String addHolidayRequest = '$_holidayApi/add';
 }
 

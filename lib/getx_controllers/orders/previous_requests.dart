@@ -22,7 +22,7 @@ class PreviousRequestsController extends GetxController{
 
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: AppUrls.getAllOrders,header: headers);
-    appController.loading.value = false;
+    // appController.loading.value = false;
     println('=-=-=-=-=-=-=-=- getAllOrders() ====--==-=-= ');
     println(response.statusCode);
     println(response.body);
@@ -35,10 +35,10 @@ class PreviousRequestsController extends GetxController{
 
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-    getAllOrders();
-  }
+  // @override
+  // void onInit() async{
+  //   // TODO: implement onInit
+  //   super.onInit();
+  //  await getAllOrders();
+  // }
 }

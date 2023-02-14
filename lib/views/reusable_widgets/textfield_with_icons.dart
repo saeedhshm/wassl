@@ -14,13 +14,14 @@ class TextFormFieldWithIcons extends StatelessWidget {
   final bool isValideField;
   final int maxLines;
   final bool readOnly;
+  final bool enabled;
   final  TextInputType keyboardType;
   final Function (String)?onFieldSubmitted;
   final Function (String)?onChange;
   final TextCapitalization textCapitalization;
   final double height;
 
-  TextFormFieldWithIcons({Key? key,this.height = 50,this.maxLines = 1,this.prefixIcon,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
+  TextFormFieldWithIcons({Key? key,this.enabled = true,this.height = 50,this.maxLines = 1,this.prefixIcon,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +50,7 @@ class TextFormFieldWithIcons extends StatelessWidget {
                 textCapitalization:textCapitalization,
                 onFieldSubmitted: onFieldSubmitted,
                 onChanged: onChange,
+                enabled: enabled,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Colors.white,

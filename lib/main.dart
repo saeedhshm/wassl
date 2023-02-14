@@ -43,7 +43,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         fontFamily: 'AraHamah',
       ),
-      home:  SplashScreen(),
+      home:  Obx(()=>IgnorePointer(
+        ignoring: appController.loading.value,
+        child: const SplashScreen(),
+      )),
     );
   }
 }

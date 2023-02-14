@@ -37,7 +37,7 @@ class FingerprintCorrectionsData implements Order{
   @override
   // TODO: implement orderDate
   String get orderDate {
-    return (createdAt ?? '').split('T')[0];
+    return (date ?? '');
   }
 
   @override
