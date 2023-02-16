@@ -59,7 +59,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const NewLoanOrder());
+                         Get.to(()=> NewLoanOrder());
                        },
                        child: ItemWidget(icon: 'assets/images/loan_type.svg',title: 'loans'.tr,),
 
@@ -103,7 +103,7 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const CorrectingFingerprintRequest());
+                         Get.to(()=> CorrectingFingerprintRequest());
                        },
                        child: ItemWidget(icon: 'assets/images/finger_print.svg',title: 'correct'.tr,),
 

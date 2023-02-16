@@ -155,6 +155,7 @@ Map<String,String>  arabicStrings = {
   'HolidaysData':'طلب اجازة',
   'FingerprintCorrectionsData':'طلب تصحيح بصمة',
 
+  'inter_date_exception':'يجب ادخال التاريخ الصحيح',
   'not_confirmed':'غير مؤكد',
   'reason':'السبب',
   'unspecified':"غير محدد",
@@ -171,7 +172,25 @@ Map<String,String>  arabicStrings = {
   'HolidayTypeException':'اختر نوع الاجازة',
   'EndDateException':'اختر تاريخ انتهاء الاجازة',
   'holiday_request_added':'تم إضافة طلب الأجازة بنجاح',
-  '':'',
-  '':'',
+
+  'choose_attend_leave':'اختر وقت الحضور أو الانصراف',
+  'EnterReasonException':'ادخل السبب',
+  'ChooseTimeException':'اختر الوقت الصحيح',
+  'your_request_done':'تم ارسال طلبكم بنجاح',
+
+  'residential':'سكني',
+
+  'emergency':'عاجل',
+  'travelling_fees':'مصاريف سفر',
+
+  'installmentMonthlyAmount':'قيمة القسط الشهري',
+  'monthly_installment_method':'مثال: تحديد مبلغ شهري معيّن',
+
+  'loanType_exception':'يجب اختيار نوع القرض',
+  'amount_exception':'يجب ادخال المبلغ المطلوب',
+  'loanStartingDate_exception':'يجب اختيار تاريخ بداية القرض',
+  'installmentMonthlyAmount_exception':'يجب ادخال القسط الشهري',
+  'installmentMonthlyMethod_exception':'يجب ادخال الية القسط',
+  'reason_exception':'يجب ادخال السبب',
 
 } ;

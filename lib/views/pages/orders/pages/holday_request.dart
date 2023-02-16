@@ -189,7 +189,10 @@ class HolidayRequestPage extends StatelessWidget {
                             const SizedBox(height: 15,),
                             InkWell(
                               onTap: () async {
-                                FilePickerResult? result = await FilePicker.platform.pickFiles();
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf'],
+                                );
 
                                 if (result != null) {
                                   String filePath = result.files.single.path ?? '';
@@ -224,16 +227,19 @@ class HolidayRequestPage extends StatelessWidget {
                                 try{
                                   await controller.sendHolidayRequest();
                                   SnackBars.showConfirmedSnackBar('success'.tr, 'holiday_request_added'.tr);
+                                  Future.delayed(Duration(milliseconds: 4600),(){
+                                    Get.back();
+                                  });
                                 }on StartDateException {
                                   println('StartDateException ==== ');
                                   SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
-                                }on HolidayTypeException {
+                                }on ChooseTypeException {
                                   println('HolidayTypeException ==== ');
                                   SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
                                 }on EndDateException{
                                   println('EndDateException ==== ');
                                   SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
-                                }on HolidayReasonException{
+                                }on EnterReasonException{
                                   SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
                                 }on NoInternetException catch(e){
                                   SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);

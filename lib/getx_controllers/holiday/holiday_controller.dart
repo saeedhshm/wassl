@@ -30,7 +30,7 @@ class HolidayController extends GetxController{
 
 
     if(holidayType == null){
-      throw HolidayTypeException();
+      throw ChooseTypeException();
     }
 
     if(startDate == null){
@@ -40,7 +40,7 @@ class HolidayController extends GetxController{
       throw EndDateException();
     }
     if(holidayReason == null || holidayReason?.trim() == ''){
-      throw HolidayReasonException();
+      throw EnterReasonException();
     }
 
     // body parameters

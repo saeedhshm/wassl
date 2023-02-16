@@ -14,7 +14,8 @@ class SnackBars{
     Get.snackbar(title, message,
         colorText: Colors.white,
         backgroundColor: Colors.green,
-        duration: const Duration(milliseconds: 3500)
+        duration: const Duration(milliseconds: 3500),
+      
     );
   }
 }

@@ -7,10 +7,15 @@ class EndDateException implements Exception{
 
 }
 
-class HolidayTypeException implements Exception{
+class ChooseTypeException implements Exception{
 
 }
 
-class HolidayReasonException implements Exception{
+class EnterReasonException implements Exception{
 
 }
+
+class ChooseTimeException implements Exception{
+
+}
+

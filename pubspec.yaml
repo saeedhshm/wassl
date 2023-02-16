@@ -51,6 +51,7 @@ dependencies:
   flutter_app_version_checker: ^0.3.2
   url_launcher: ^6.1.8
   file_picker: ^5.2.5
+  month_year_picker: ^0.2.0+3
 
 dev_dependencies:
   flutter_test:

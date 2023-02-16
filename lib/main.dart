@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 // import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
@@ -29,7 +30,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       translations: LocalString(),
       locale: Locale("ar",""),
+      localizationsDelegates: [
+
+        // GlobalMaterialLocalizations.delegate,
+        MonthYearPickerLocalizations.delegate,
+      ],
       debugShowCheckedModeBanner: !appController.deployingForApple,
+
       theme: ThemeData(
         // This is the theme of your application.
         //
