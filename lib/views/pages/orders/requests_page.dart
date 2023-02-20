@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/orders/pages/correcting_fingerprint.dart';
 import 'package:wassl/views/pages/orders/pages/custody_leaving.dart';
@@ -23,7 +24,9 @@ class RequestsPage extends StatelessWidget {
 
   static const double gapBetweenIconAndTitle = 15;
 
-  const RequestsPage({Key? key}) : super(key: key);
+   RequestsPage({Key? key}) : super(key: key);
+
+  final AppController appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +67,14 @@ class RequestsPage extends StatelessWidget {
                        child: ItemWidget(icon: 'assets/images/loan_type.svg',title: 'loans'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() :  Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                          color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          Get.to(()=>const FinanceSpendedRequest());
                        },
@@ -108,14 +111,14 @@ class RequestsPage extends StatelessWidget {
                        child: ItemWidget(icon: 'assets/images/finger_print.svg',title: 'correct'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() : Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                            color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          Get.to(()=>const ExtraWorkRequest());
                        },
@@ -152,14 +155,14 @@ class RequestsPage extends StatelessWidget {
                        child:ItemWidget(icon: 'assets/images/holidays.svg',title: 'holidays'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() : Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                            color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          // Get.to(()=>const NewLoanOrder());
                        },
@@ -175,47 +178,47 @@ class RequestsPage extends StatelessWidget {
                      ),
                      InkWell(
                        onTap: (){
-                         Get.to(()=>const LetterRequestPage());
+                         Get.to(()=> LetterRequestPage());
                        },
                        child:ItemWidget(icon: 'assets/images/letter.svg',title: 'letter'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() : Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                            color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          Get.to(()=>const EmploymentRequest());
                        },
                        child:ItemWidget(icon: 'assets/images/employment.svg',title: 'employment'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() :  Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                            color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          Get.to(()=>const CustodyRequestPage());
                        },
                        child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody'.tr,),
 
                      ),
-                     Container(
+                     appController.deployingForApple ? const SizedBox() : Container(
                        width: double.infinity,
                        height: 0.5,
                        decoration: BoxDecoration(
                            color: Colors.grey.withOpacity(0.1)
                        ),
                      ),
-                     InkWell(
+                     appController.deployingForApple ? const SizedBox() : InkWell(
                        onTap: (){
                          Get.to(()=>const CustodyLeavingOrder());
                        },

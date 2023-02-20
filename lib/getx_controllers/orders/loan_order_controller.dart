@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:wassl/models/orders/loans/lonas_types.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
@@ -10,11 +13,15 @@ import '../app_controller.dart';
 class LoanOrderController extends GetxController{
 
   var loading = false.obs;
+  var loadingLoansTypes = false.obs;
+
+  var loansTypes = LoansTypes().obs;
+
   final AppController appController = Get.find();
 
   String? reason;
   String? filePath;
-  int? loanType;
+  LoanType? selectedLoanType;
   String? amount;
   DateTime? loanStartingDate;
   String? installmentMonthlyAmount;
@@ -28,7 +35,7 @@ class LoanOrderController extends GetxController{
    // [8:24 am, 15/02/2023] محمد مبارك السودان: 3 = عاجل
    // [8:25 am, 15/02/2023] محمد مبارك السودان: 4 = مصاريف سفر
 
-   if(loanType == null){
+   if(selectedLoanType == null){
      throw CustomException(errorMessage:'loanType_exception');
    }
    if(amount == null || amount == ''){
@@ -49,10 +56,10 @@ class LoanOrderController extends GetxController{
    }
 
     var body = {
-      'type':"$loanType",
+      'type':"${selectedLoanType?.id}",
       'amount':"$amount",
       'month':"${loanStartingDate?.year}-${loanStartingDate?.month}-${loanStartingDate?.day}",
-      'monthly_installment':"تحديد مبلغ شهري معيّن",
+      'monthly_installment':"$monthlyInstallmentMethod",
       'installment_amount':"$installmentMonthlyAmount",
       'reason':"$reason",
     };
@@ -62,7 +69,7 @@ class LoanOrderController extends GetxController{
     println(appController.appHeader);
 
     loading.value = true;
-    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addloan, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addLoan, body: body,header: appController.appHeader,fileName: filePath);
     println(response.statusCode);
     println(await response.stream.bytesToString());
     loading.value = false;
@@ -72,4 +79,26 @@ class LoanOrderController extends GetxController{
 
 
   }
+
+  getLoansTypes() async {
+
+    loadingLoansTypes.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.getLoansTypes,header: appController.appHeader);
+
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      loansTypes.value = LoansTypes.fromJson(json);
+    }
+    loadingLoansTypes.value = false;
+    println(response.statusCode);
+    println(response.body);
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getLoansTypes();
+  }
+
 }

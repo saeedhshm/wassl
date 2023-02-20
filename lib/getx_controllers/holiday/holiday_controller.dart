@@ -1,35 +1,38 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/exceptions/date_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/models/orders/holday/holiday_type.dart';
+import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../helpers/constants/print_ln.dart';
 
 class HolidayController extends GetxController{
+
   final AppController appController = Get.find();
 
   DateTime? startDate;
   DateTime? endDate;
-  HolidayType? holidayType;
+  var  holidayTypes = HolidayTypes().obs;
+  OrderType? orderType;
   String? filePath;
-
+  var loadingHolidayTypes = false.obs;
   String? holidayReason;
 
-  List<String> get holidaysType {
-    return holidayTypes.map((e) => (e.name ?? '').tr).toList();
-  }
+
 
 
 
   Future sendHolidayRequest() async {
 
-    println(holidayType?.name);
 
 
-    if(holidayType == null){
+
+    if(orderType == null){
       throw ChooseTypeException();
     }
 
@@ -46,7 +49,7 @@ class HolidayController extends GetxController{
     // body parameters
 
     var body = {
-      'type':'${holidayType?.id}',
+      'type':'${orderType?.id}',
       'holiday_start':'${startDate?.year}-${startDate?.month}-${startDate?.day}',
       'holiday_end':'${endDate?.year}-${endDate?.month}-${endDate?.day}',
       'reason':'$holidayReason'
@@ -59,5 +62,28 @@ class HolidayController extends GetxController{
     throw NoDataAvailableException();
   }
   }
+
+
+  getHolidaysTypes() async {
+
+    loadingHolidayTypes.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.getHolidayTypes,header: appController.appHeader);
+
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      holidayTypes.value = HolidayTypes.fromJson(json);
+    }
+    loadingHolidayTypes.value = false;
+    println(response.statusCode);
+    println(response.body);
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getHolidaysTypes();
+  }
+
 
 }

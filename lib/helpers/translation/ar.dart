@@ -154,12 +154,16 @@ Map<String,String>  arabicStrings = {
   'CustodyDate':'طلب عهدة',
   'HolidaysData':'طلب اجازة',
   'FingerprintCorrectionsData':'طلب تصحيح بصمة',
-
+  'type':'النوع',
+  'loan':'القرض',
+  'installment':'القسط الشهري',
   'inter_date_exception':'يجب ادخال التاريخ الصحيح',
   'not_confirmed':'غير مؤكد',
   'reason':'السبب',
   'unspecified':"غير محدد",
-
+  'time':'الوقت',
+  'request':'الطلب',
+  'loan':'القرض: ',
   'annual':'أجازة سنوية',
   'un_paid':'غير مدفوعة',
   'death':'وفاة أقارب',
@@ -179,6 +183,8 @@ Map<String,String>  arabicStrings = {
   'your_request_done':'تم ارسال طلبكم بنجاح',
 
   'residential':'سكني',
+
+  'letter_type':'نوع الخطاب',
 
   'emergency':'عاجل',
   'travelling_fees':'مصاريف سفر',

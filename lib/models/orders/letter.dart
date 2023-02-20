@@ -1,11 +1,12 @@
 
 import 'AllOrders.dart';
+import 'order_type.dart';
 
 class LetterDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  String? type;
+  OrderType? type;
   String? directedToEn;
   String? directedToAr;
   String? _reason;
@@ -20,7 +21,7 @@ class LetterDate implements Order{
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    type = json['type'];
+    type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     directedToEn = json['directed_to_en'];
     directedToAr = json['directed_to_ar'];
     _reason = json['reason'];
@@ -32,6 +33,7 @@ class LetterDate implements Order{
 
 
 
+  String get letterType => type?.name ?? '';
   @override
   // TODO: implement orderType
   String get orderType => 'LetterDate';

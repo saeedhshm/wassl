@@ -95,7 +95,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                     child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
                                   ),
                                 )),
-                            calendarController.appController.deployingForApple ? SizedBox() :  Spacer(),
+                            const Spacer(),
                             Expanded(
                                 child:
                                 GestureDetector(
@@ -127,11 +127,11 @@ class _MainTabsPageState extends State<MainTabsPage> {
                         ),
                       ),
                     ),
-                    calendarController.appController.deployingForApple ? SizedBox() : Align(
+                   Align(
                       alignment: FractionalOffset.topCenter,
                       child: InkWell(
                         onTap: (){
-                          Get.to(()=>const RequestsPage());
+                          Get.to(()=> RequestsPage());
                         },
                         child: Container(
                           height: 65,

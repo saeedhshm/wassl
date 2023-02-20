@@ -1,16 +1,23 @@
-class HolidayType {
-  int? id;
-  String? name;
+import 'package:wassl/models/orders/order_type.dart';
 
-  HolidayType({this.name,this.id});
+class HolidayTypes {
+  bool? success;
+  List<OrderType>? data;
+  String? message;
+
+  HolidayTypes({this.success, this.data, this.message});
+
+  HolidayTypes.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    if (json['data'] != null) {
+      data = <OrderType>[];
+      json['data'].forEach((v) {
+        data!.add(OrderType.fromJson(v));
+      });
+    }
+    message = json['message'];
+  }
 
 }
 
 
-final holidayTypes = [
-  HolidayType(name: 'annual',id:1 ),
-  HolidayType(name: 'un_paid' ,id: 2),
-  HolidayType(name: 'death',id: 3),
-  HolidayType(name: 'exams',id: 4),
-  HolidayType(name: 'illness',id: 5),
-];

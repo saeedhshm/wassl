@@ -1,23 +1,26 @@
 
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
 import 'AllOrders.dart';
+import 'order_type.dart';
 
 class HolidaysData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  String? type;
+  OrderType? _holidayType;
   String? holidayStart;
   String? holidayEnd;
   String? ticket;
-  String? ticketType;
+  OrderType? ticketType;
   String? goDate;
   String? returnDate;
   String? exitAndReturnVisa;
   String? visaType;
-  String? visaTime;
+  OrderType? visaTime;
   String? visaRequireBefore;
   String? _reason;
   dynamic status;
@@ -28,19 +31,25 @@ class HolidaysData implements Order{
  HolidaysData();
 
   HolidaysData.fromJson(Map<String, dynamic> json) {
+    println('=-=-=-=-=-=->>>>>> holidays ============');
+    println(json['type']['name']);
+    println('=-=-=-=-=-=->>>>>> holidays ============');
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    type = json['type'];
+
     holidayStart = json['holiday_start'];
+    // final validMap =
+    // jsonDecode(jsonEncode(json['type'])) as Map<String, dynamic>;
+    _holidayType = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     holidayEnd = json['holiday_end'];
     ticket = json['ticket'];
-    ticketType = json['ticket_type'];
+    ticketType = json['ticket_type'] != null ? OrderType.fromJson(json['ticket_type']) : null ;
     goDate = json['go_date'];
     returnDate = json['return_date'];
     exitAndReturnVisa = json['exit_and_return_visa'];
     visaType = json['visa_type'];
-    visaTime = json['visa_time'];
+    visaTime = json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null  ;
     visaRequireBefore = json['visa_require_before'];
     _reason = json['reason'];
     status = json['status'];
@@ -72,6 +81,8 @@ class HolidaysData implements Order{
   // TODO: implement orderType
   String get orderType => 'HolidaysData';
 
+  String get holidayType => '${_holidayType?.name}';
+
   @override
   // TODO: implement orderDate
   String get orderDate {
@@ -86,10 +97,3 @@ class HolidaysData implements Order{
   // TODO: implement reason
   String get reason => (_reason == null || _reason == '') ? 'unspecified' : (_reason ?? '');
 }
-
-// @override
-// // TODO: implement reason
-// String get reason {
-//   print('=-=-=-=-=-=-=-=-=-=- reason $_reason');
-//   return (_reason == null || _reason == '') ? 'unspecified'.tr : (_reason ?? '');
-// }

@@ -43,7 +43,10 @@ class HolidayRequestPage extends StatelessWidget {
               },
             ),
             Expanded(
-                child: SingleChildScrollView(
+                child:controller.loadingHolidayTypes.value ?
+                const Center(
+                  child: SendingLoadingWidget(),
+                ) : SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
@@ -65,9 +68,9 @@ class HolidayRequestPage extends StatelessWidget {
                             // DropDownMenu(textHint: 'loan_type'.tr,)
                             DropDownWidget(
                               hintText: 'holiday_type'.tr,
-                              items:  controller.holidaysType,
+                              items:  controller.holidayTypes.value.data!.map((e) => e.name ?? '').toList(),
                               onSelectedIndex: (int i) {
-                                controller.holidayType = holidayTypes[i];
+                                controller.orderType = controller.holidayTypes.value.data![i];
                               },
                               prefixIcon: const SizedBox(
                                   width: 5,

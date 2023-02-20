@@ -27,31 +27,31 @@ class AllOrders {
     if (json['LoansData'] != null) {
 
       json['LoansData'].forEach((v) {
-        loansData.add(new LoansData.fromJson(v));
+        loansData.add( LoansData.fromJson(v));
       });
     }
     if (json['LetterDate'] != null) {
 
       json['LetterDate'].forEach((v) {
-        letterDate.add(new LetterDate.fromJson(v));
+        letterDate.add( LetterDate.fromJson(v));
       });
     }
     if (json['FinancialExpensesDate'] != null) {
 
       json['FinancialExpensesDate'].forEach((v) {
-        financialExpensesDate.add(new FinancialExpensesDate.fromJson(v));
+        financialExpensesDate.add( FinancialExpensesDate.fromJson(v));
       });
     }
     if (json['CustodyDate'] != null) {
 
       json['CustodyDate'].forEach((v) {
-        custodyDate.add(new CustodyDate.fromJson(v));
+        custodyDate.add( CustodyDate.fromJson(v));
       });
     }
     if (json['HolidaysData'] != null) {
 
       json['HolidaysData'].forEach((v) {
-        holidaysData.add(new HolidaysData.fromJson(v));
+        holidaysData.add( HolidaysData.fromJson(v));
       });
     }
     // if (json['AskPermissionsData'] != null) {

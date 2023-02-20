@@ -2,12 +2,13 @@
 import 'package:get/get.dart';
 
 import 'AllOrders.dart';
+import 'order_type.dart';
 
 class CustodyDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  String? type;
+  OrderType? type;
   String? _reason;
   dynamic status;
   dynamic file;
@@ -20,7 +21,7 @@ class CustodyDate implements Order{
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    type = json['type'];
+    type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     _reason = json['reason'];
     status = json['status'];
     file = json['file'];

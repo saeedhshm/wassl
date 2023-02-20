@@ -1,12 +1,14 @@
 
 import 'AllOrders.dart';
+import 'order_type.dart';
 
 class FingerprintCorrectionsData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
   String? date;
-  String? workingType;
+  OrderType? _workingType;
+  String? time;
   dynamic _reason;
   dynamic status;
   dynamic file;
@@ -20,7 +22,8 @@ class FingerprintCorrectionsData implements Order{
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     date = json['date'];
-    workingType = json['working_type'];
+    time = json['time'];
+    _workingType = json['working_type'] != null ? OrderType.fromJson(json['working_type']) : null;
     _reason = json['reason'];
     status = json['status'];
     file = json['file'];
@@ -29,6 +32,8 @@ class FingerprintCorrectionsData implements Order{
   }
 
 
+
+  String get workingType => '${_workingType?.name}';
 
   @override
   // TODO: implement orderType

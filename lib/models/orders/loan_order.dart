@@ -1,10 +1,12 @@
+import 'package:wassl/models/orders/order_type.dart';
+
 import 'AllOrders.dart';
 
 class LoansData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  String? type;
+  OrderType? type;
   int? amount;
   String? month;
   String? monthlyInstallment;
@@ -21,7 +23,7 @@ class LoansData implements Order{
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    type = json['type'];
+    type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     amount = json['amount'];
     month = json['month'];
     monthlyInstallment = json['monthly_installment'];
@@ -33,6 +35,8 @@ class LoansData implements Order{
     updatedAt = json['updated_at'];
   }
 
+
+  String get loanType => type?.name ?? '';
 
 
   @override
