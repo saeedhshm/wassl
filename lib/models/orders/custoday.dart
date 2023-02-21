@@ -2,6 +2,7 @@
 import 'package:get/get.dart';
 
 import 'AllOrders.dart';
+import 'order_status.dart';
 import 'order_type.dart';
 
 class CustodyDate implements Order{
@@ -10,7 +11,7 @@ class CustodyDate implements Order{
   int? displayOrdersTo;
   OrderType? type;
   String? _reason;
-  dynamic status;
+  Status? status;
   dynamic file;
   String? createdAt;
   String? updatedAt;
@@ -23,7 +24,7 @@ class CustodyDate implements Order{
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     _reason = json['reason'];
-    status = json['status'];
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -42,7 +43,7 @@ class CustodyDate implements Order{
 
   @override
   // TODO: implement orderStatus
-  String get orderStatus => status == null  ? 'not_confirmed' : '$status';
+  String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
   @override
   // TODO: implement reason

@@ -1,27 +1,29 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/reusable_widgets/localized_text.dart';
-import 'package:wassl/views/reusable_widgets/main_appbar.dart';
+import 'package:wassl/getx_controllers/orders/ask_permission.dart';
 
-import '../../../../getx_controllers/orders/financial_expenses.dart';
+import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/localized_text.dart';
+import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
-class FinanceSpendedRequest extends StatelessWidget {
+class AskPermissionPage extends StatelessWidget {
 
-   FinanceSpendedRequest({Key? key}) : super(key: key);
+   AskPermissionPage({Key? key}) : super(key: key);
 
-   final FinanceSpendedRequestController controller = Get.put(FinanceSpendedRequestController());
-   final dateCtrl = TextEditingController();
-   final fileCtrl = TextEditingController();
+   final AskPermissionController controller = Get.put(AskPermissionController());
+
+  final dateCtrl = TextEditingController();
+  final fileCtrl = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,16 @@ class FinanceSpendedRequest extends StatelessWidget {
       body: Obx(()=>Column(
         children: [
           MainAppbarWidget(
-            'order_Financialـcompensation',
+            'ask_permission',
             onBack: () {
               Get.back();
             },
           ),
           Expanded(
-              child: SingleChildScrollView(
+              child:controller.loadingTypes.value ?
+              const Center(
+                child: SendingLoadingWidget(),
+              ) : SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
@@ -55,56 +60,29 @@ class FinanceSpendedRequest extends StatelessWidget {
                             ),
                           ),
                           // DropDownMenu(textHint: 'loan_type'.tr,)
-                          // DropDownWidget(
-                          //   hintText: 'element_type'.tr,
-                          //   items: const ['done', 'not done'],
-                          //   onSelectedIndex: (int i) {},
-                          //   prefixIcon: const SizedBox(
-                          //       width: 5,
-                          //       height: 35,
-                          //       child:
-                          //       SvgWidget('assets/images/loan_type.svg')),
-                          // ),
-                          TextFormFieldWithIcons(
-                            prefixIcon: const SvgWidget('assets/images/loan_type.svg'),
-                            onChange: (value){
-                              controller.title = value;
-                            },
-                            hintText: 'title'.tr,
-                            // suffixIcon: const SizedBox(
-                            //   width: 25,
-                            //   child: Center(
-                            //     child: Text('ر.س',style: TextStyle(
-                            //         color: Colors.grey
-                            //     ),),
-                            //   ),
-                            // ),
 
-                          ),
                           const SizedBox(height: 15,),
-                          TextFormFieldWithIcons(
-                            prefixIcon: const SvgWidget('assets/images/money_on_hand.svg'),
-                            hintText: 'value'.tr,
-                            onChange: (value){
-                              controller.amount = value;
+                          DropDownWidget(
+                            hintText: 'permission_type'.tr,
+                            items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
+                            onSelectedIndex: (int i) {
+                              controller.selectedType = controller.orderTypes.value.data![i];
+                              println('${controller.selectedType?.id}');
+                              println('${controller.selectedType?.name}');
                             },
-                            suffixIcon: const SizedBox(
-                              width: 25,
-                              child: Center(
-                                child: Text('ر.س',style: TextStyle(
-                                    color: Colors.grey
-                                ),),
-                              ),
-                            ),
-
+                            prefixIcon: const SizedBox(
+                                width: 5,
+                                height: 35,
+                                child:
+                                SvgWidget('assets/images/extra_work.svg')),
                           ),
                           const SizedBox(height: 15,),
                           InkWell(
                             onTap: () async {
                               var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-                              controller.date = selectedDate ?? controller.date;
-                              if(controller.date != null){
-                                dateCtrl.text = '${controller.date?.year}-${controller.date?.month}-${controller.date?.day} ';
+                              controller.permissionDate = selectedDate ?? controller.permissionDate;
+                              if(controller.permissionDate != null){
+                                dateCtrl.text = '${controller.permissionDate?.year}-${controller.permissionDate?.month}-${controller.permissionDate?.day} ';
                               }else{
                                 dateCtrl.text = '';
                               }
@@ -112,22 +90,28 @@ class FinanceSpendedRequest extends StatelessWidget {
                             child: TextFormFieldWithIcons(
                               prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
                               hintText: 'date'.tr,
-                              controller: dateCtrl,
                               enabled: false,
+                              controller: dateCtrl,
+
                             ),
                           ),
                           const SizedBox(height: 15,),
-                          TextFormFieldWithIcons(
-                            prefixIcon: SizedBox(
-                              child: Image.asset('assets/images/conversation.png'),
-                            ),
-                            hintText: 'description'.tr,
-                            onChange: (value){
-                              controller.description = value;
+                          DropDownWidget(
+                            hintText: 'reason_type'.tr,
+                            items:   ['personal_permission'.tr,'illness_permission'.tr,'emergency_permission'.tr],
+                            onSelectedIndex: (int i) {
+                              controller.reasonType = i+1;
+                              println('${controller.reasonType}');
+
                             },
-                            // height: 130,
+                            prefixIcon: const SizedBox(
+                                width: 5,
+                                height: 35,
+                                child:
+                                SvgWidget('assets/images/extra_work.svg')),
                           ),
                           const SizedBox(height: 15,),
+
 
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -146,7 +130,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                               child: Image.asset('assets/images/conversation.png'),
                             ),
                             maxLines: 5,
-                            hintText: 'reason'.tr,
+                            hintText: 'the_reason'.tr,
                             height: 130,
                             onChange: (value){
                               controller.reason = value;
@@ -178,32 +162,32 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 child: Image.asset('assets/images/attach.png'),
                               ),
                               hintText: 'attach_file'.tr,
-                              controller: fileCtrl,
                               enabled: false,
+                              controller: fileCtrl,
+
                             ),
                           ),
-
                           const SizedBox(height: 15,),
                           const SizedBox(height: 15,),
                           const SizedBox(height: 15,),
                           controller.loading.value ? const Center(child: SendingLoadingWidget(),) : InkWell(
-                              onTap: ()async{
-                                try{
-                                  await controller.addNewRequest();
-                                  SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
-                                  Future.delayed(const Duration(milliseconds: 4600),(){
-                                    Get.back();
-                                  });
-                                }on NoInternetException catch(e){
-                                  SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
+                            onTap: ()async{
+                              try{
+                                await controller.addNewPermission();
+                                SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
+                                Future.delayed(Duration(milliseconds: 4600),(){
+                                  Get.back();
+                                });
+                              }on NoInternetException catch(e){
+                                SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
 
-                                }on CustomException catch(e){
-                                  SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
+                              }on CustomException catch(e){
+                                SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
 
-                                }finally{
-                                  controller.loading.value = false;
-                                }
-                              },
+                              }finally{
+                                controller.loading.value = false;
+                              }
+                            },
                             child: Container(
                               width: double.infinity,
                               child: Padding(

@@ -4,6 +4,7 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../models/orders/AllOrders.dart';
+import '../../../../models/orders/ask_permission.dart';
 import '../../../../models/orders/financial_expenses.dart';
 import '../../../../models/orders/finger_print.dart';
 import '../../../../models/orders/holiday.dart';
@@ -27,13 +28,13 @@ class PreviousRequestsItemWidget extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
+                Expanded(child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(order.orderType.tr,style: const TextStyle(
-                      color: AppColors.darkGreyTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
                     ),),
                     order.orderType == 'LetterDate' ?  Text('directed_to'.tr + ' : ' +((order as LetterDate).directedToAr ?? ''),style: const TextStyle(
                         color: AppColors.darkGreyTextColor,
@@ -46,8 +47,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                         fontSize: 15
                     ),) : const SizedBox(),
                   ],
-                ),
-                const Spacer(),
+                )),
                 Text(order.orderStatus.tr,style: TextStyle(
                   color: order.orderStatus == 'not_confirmed' ? Colors.red : AppColors.mainGreenColor
                 ),)
@@ -280,7 +280,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   ),),
                 ),
                 Expanded(
-                  child: Text('loan'.tr + ' : ',style: const TextStyle(
+                  child: Text('loan'.tr + ' ',style: const TextStyle(
                       color: AppColors.darkGreyTextColor,
                       fontWeight: FontWeight.normal,
                       fontSize: 15
@@ -407,6 +407,88 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
+              ],
+            ) : const SizedBox(),
+            order.orderType == 'AskPermissionsData' ? Row(
+              children: [
+                Expanded(
+                  child: Text('type'.tr + ' : ',style: const TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15
+                  ),),
+                ),
+                // Expanded(
+                //   child: Text('loan'.tr + ' : ',style: const TextStyle(
+                //       color: AppColors.darkGreyTextColor,
+                //       fontWeight: FontWeight.normal,
+                //       fontSize: 15
+                //   ),),
+                // ),
+                Expanded(
+                  child: Text('reason_type'.tr + ' : ',style: const TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15
+                  ),),
+                ),
+              ],
+            ) : const SizedBox(),
+            order.orderType == 'AskPermissionsData' ? Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text((order as AskPermissionsData).type?.name ?? '',
+                          style: TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20,),
+                // Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Text((order as LoansData).amount.toString()  + ' ' + 'SAR'.tr,
+                //           style: const TextStyle(
+                //               color: AppColors.darkGreyTextColor
+                //           ),),
+                //       ),
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: AppColors.mainBackgroundColor,
+                //       borderRadius: BorderRadius.circular(50),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text((order as AskPermissionsData).reasonType?.name ?? '' ,
+                          style: const TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
               ],
             ) : const SizedBox(),
           ],

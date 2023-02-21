@@ -1,6 +1,7 @@
 import 'package:wassl/models/orders/order_type.dart';
 
 import 'AllOrders.dart';
+import 'order_status.dart';
 
 class LoansData implements Order{
   int? id;
@@ -12,7 +13,7 @@ class LoansData implements Order{
   String? monthlyInstallment;
   int? installmentAmount;
   String? _reason;
-  dynamic status;
+  Status? status;
   dynamic file;
   String? createdAt;
   String? updatedAt;
@@ -29,7 +30,7 @@ class LoansData implements Order{
     monthlyInstallment = json['monthly_installment'];
     installmentAmount = json['installment_amount'];
     _reason = json['reason'];
-    status = json['status'];
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -51,7 +52,7 @@ class LoansData implements Order{
 
   @override
   // TODO: implement orderStatus
-  String get orderStatus => status == null  ? 'not_confirmed' : '$status';
+  String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
 
   @override

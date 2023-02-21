@@ -60,11 +60,10 @@ class NewLoanOrder extends StatelessWidget {
                       // DropDownMenu(textHint: 'loan_type'.tr,)
                       DropDownWidget(
                         hintText: 'loan_type'.tr,
-                        items:  controller.loansTypes.value.data!.map((e) => e.name ?? '').toList(),
+                        items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
                         onSelectedIndex: (int i) {
-                          controller.selectedLoanType = controller.loansTypes.value.data![i];
-                          println('${controller.selectedLoanType?.id}');
-                          println('${controller.selectedLoanType?.name}');
+                          controller.selectedType = controller.orderTypes.value.data![i];
+
                         },
                         prefixIcon: const SizedBox(
                             width: 5,

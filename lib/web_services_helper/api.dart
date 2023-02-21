@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 
 
@@ -61,15 +62,18 @@ class AppApiHandler {
       request.headers.addAll(header);
     }
 
+    println('=-0=0=-0=-0=-0==-n adding body');
+    println(body);
+    println('=-0=0=-0=-0=-0==-n adding body');
     request.fields.addAll(body);
 
     if(fileName != null){
       request.files.add(await http.MultipartFile.fromPath(
           'file', fileName));
     }
-    return request.send();
-
-
+    var response = await request.send();
+    println('=-=-=-=-===m response.statusCode ${response.statusCode}');
+    return response;
 
   }
 }

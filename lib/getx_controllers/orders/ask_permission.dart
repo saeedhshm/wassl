@@ -1,41 +1,39 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/models/orders/letter/letter_types.dart';
+import 'package:wassl/models/orders/order_type.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
-import '../../models/orders/order_type.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 import 'order_types_controller.dart';
 
-class LetterRequestController extends GetxController{
+class AskPermissionController extends GetxController{
 
-  var loading = false.obs;
-  var loadingLetterTypes = false.obs;
+  var loadingTypes = false.obs;
   final AppController appController = Get.find();
-
-  String? reason;
-  String? filePath;
-  int? type;
-  String? directedToAr;
-  String? directedToEn;
   var orderTypes = OrderTypesRetriever().obs;
   OrderType? selectedType;
+  String? reason;
+  String? filePath;
+  var loading = false.obs;
+  DateTime? permissionDate;
+  int? reasonType;
 
 
-  Future addNewLetter()async{
+
+  Future addNewPermission()async{
 
     if(selectedType == null) {
-      throw CustomException(errorMessage: 'letter_type_exception');
+      throw CustomException(errorMessage: 'permission_type_exception');
     }
-    if(directedToAr == null || directedToAr == ''){
-      throw CustomException(errorMessage: 'directed_to_ar_exception');
+    if(permissionDate == null){
+      throw CustomException(errorMessage: 'inter_date_exception');
     }
-    if(directedToEn == null || directedToEn == ''){
-      throw CustomException(errorMessage: 'directed_to_en_exception');
+    if(reasonType == null){
+      throw CustomException(errorMessage: 'reasonType_exception');
     }
     if(reason == null || reason == ''){
       throw CustomException(errorMessage:'reason_exception');
@@ -43,18 +41,18 @@ class LetterRequestController extends GetxController{
 
     var body = {
       'type': '${selectedType?.id}',
-      'directed_to_en': '$directedToEn',
-      'directed_to_ar': '$directedToAr',
+      'date': '${permissionDate?.year}-${permissionDate?.month}-${permissionDate?.day}',
+      'reason_type': '$reasonType',
       'reason': '$reason'
     };
-    println(body);
+    println(body.runtimeType);
 
 
     println(body);
-    println(appController.appHeader);
+    // println(appController.appHeader);
 
     loading.value = true;
-    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addLetter, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addPermission, body: body,header: appController.appHeader,fileName: filePath);
     println(response.statusCode);
     println(await response.stream.bytesToString());
     loading.value = false;
@@ -64,16 +62,17 @@ class LetterRequestController extends GetxController{
 
   }
 
-  getLetterTypes() async {
 
-    loadingLetterTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.getLetterTypes,header: appController.appHeader);
+  getPermissionsTypes() async {
+
+    loadingTypes.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.getPermissionsTypes,header: appController.appHeader);
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
-    loadingLetterTypes.value = false;
+    loadingTypes.value = false;
     println(response.statusCode);
     println(response.body);
   }
@@ -82,7 +81,8 @@ class LetterRequestController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getLetterTypes();
+    getPermissionsTypes();
   }
+
 
 }

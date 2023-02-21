@@ -1,53 +1,63 @@
-
 import 'AllOrders.dart';
 import 'order_status.dart';
 import 'order_type.dart';
 
-class LetterDate implements Order{
+class AskPermissionsData implements Order {
   int? id;
   int? employeeId;
   int? displayOrdersTo;
   OrderType? type;
-  String? directedToEn;
-  String? directedToAr;
+  String? date;
+  OrderType? reasonType;
   String? _reason;
-  dynamic status;
-  dynamic file;
+  Status? status;
+  String? file;
   String? createdAt;
   String? updatedAt;
 
-  LetterDate();
+  AskPermissionsData(
+      {this.id,
+        this.employeeId,
+        this.displayOrdersTo,
+        this.type,
+        this.date,
+        this.reasonType,
+        this.status,
+        this.file,
+        this.createdAt,
+        this.updatedAt});
 
-  LetterDate.fromJson(Map<String, dynamic> json) {
+  AskPermissionsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
-    directedToEn = json['directed_to_en'];
-    directedToAr = json['directed_to_ar'];
+    date = json['date'];
+    reasonType = json['reason_type'] != null
+        ? OrderType.fromJson(json['reason_type'])
+        : null;
     _reason = json['reason'];
-    status = json['status'] != null ? Status.fromJson(json['status']) : null;
+    status =
+    json['status'] != null ?Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
 
-
-  String get letterType => type?.name ?? '';
   @override
   // TODO: implement orderType
-  String get orderType => 'LetterDate';
+  String get orderType => 'AskPermissionsData';
+
   @override
   // TODO: implement orderDate
   String get orderDate {
-    return (createdAt ?? '').split('T')[0];
+    return (date ?? '').split('T')[0];
   }
 
   @override
   // TODO: implement orderStatus
   String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
-
 
   @override
   // TODO: implement reason

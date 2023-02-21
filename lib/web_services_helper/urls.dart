@@ -12,6 +12,8 @@ class AppUrls {
   static const String _fingerprintCorrectionApi = '$_apiVrsion/fingerprint_correction';
   static const String _loanApi = '$_apiVrsion/loan';
   static const String _letterApi = '$_apiVrsion/letter';
+  static const String _askPermissionApi = '$_apiVrsion/ask_permission';
+  static const String _financialExpensesApi = '$_apiVrsion/financial_expenses';
 
   //https://waslhr.com/api/v1/auth
   static const String login = '$_authApi/login';
@@ -45,6 +47,13 @@ class AppUrls {
   static const String getLetterTypes = '$_apiVrsion/get_letter_types';
   //{{domain}}/letter/add
   static const String addLetter = '$_letterApi/add';
+
+  //{{domain}}/get_ask_permission_types
+  static const String getPermissionsTypes = '$_apiVrsion/get_ask_permission_types';
+  //{{domain}}/ask_permission/add
+  static const String addPermission = '$_askPermissionApi/add';
+  //{{domain}}/financial_expenses/add
+  static const String addFinancialExpenses = '$_financialExpensesApi/add';
 
 }
 

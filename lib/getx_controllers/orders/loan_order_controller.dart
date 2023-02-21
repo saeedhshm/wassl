@@ -6,22 +6,24 @@ import 'package:wassl/models/orders/loans/lonas_types.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
+import '../../models/orders/order_type.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
+import 'order_types_controller.dart';
 
 class LoanOrderController extends GetxController{
 
   var loading = false.obs;
   var loadingLoansTypes = false.obs;
 
-  var loansTypes = LoansTypes().obs;
 
   final AppController appController = Get.find();
 
   String? reason;
   String? filePath;
-  LoanType? selectedLoanType;
+  var orderTypes = OrderTypesRetriever().obs;
+  OrderType? selectedType;
   String? amount;
   DateTime? loanStartingDate;
   String? installmentMonthlyAmount;
@@ -35,7 +37,7 @@ class LoanOrderController extends GetxController{
    // [8:24 am, 15/02/2023] محمد مبارك السودان: 3 = عاجل
    // [8:25 am, 15/02/2023] محمد مبارك السودان: 4 = مصاريف سفر
 
-   if(selectedLoanType == null){
+   if(selectedType == null){
      throw CustomException(errorMessage:'loanType_exception');
    }
    if(amount == null || amount == ''){
@@ -56,7 +58,7 @@ class LoanOrderController extends GetxController{
    }
 
     var body = {
-      'type':"${selectedLoanType?.id}",
+      'type':"${selectedType?.id}",
       'amount':"$amount",
       'month':"${loanStartingDate?.year}-${loanStartingDate?.month}-${loanStartingDate?.day}",
       'monthly_installment':"$monthlyInstallmentMethod",
@@ -87,7 +89,7 @@ class LoanOrderController extends GetxController{
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-      loansTypes.value = LoansTypes.fromJson(json);
+      orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingLoansTypes.value = false;
     println(response.statusCode);

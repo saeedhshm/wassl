@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
 import 'AllOrders.dart';
+import 'order_status.dart';
 import 'order_type.dart';
 
 class HolidaysData implements Order{
@@ -31,9 +32,7 @@ class HolidaysData implements Order{
  HolidaysData();
 
   HolidaysData.fromJson(Map<String, dynamic> json) {
-    println('=-=-=-=-=-=->>>>>> holidays ============');
-    println(json['type']['name']);
-    println('=-=-=-=-=-=->>>>>> holidays ============');
+
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
@@ -52,7 +51,7 @@ class HolidaysData implements Order{
     visaTime = json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null  ;
     visaRequireBefore = json['visa_require_before'];
     _reason = json['reason'];
-    status = json['status'];
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -91,7 +90,7 @@ class HolidaysData implements Order{
 
   @override
   // TODO: implement orderStatus
-  String get orderStatus => status == null  ? 'not_confirmed' : '$status';
+  String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
   @override
   // TODO: implement reason

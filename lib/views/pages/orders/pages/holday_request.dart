@@ -68,9 +68,9 @@ class HolidayRequestPage extends StatelessWidget {
                             // DropDownMenu(textHint: 'loan_type'.tr,)
                             DropDownWidget(
                               hintText: 'holiday_type'.tr,
-                              items:  controller.holidayTypes.value.data!.map((e) => e.name ?? '').toList(),
+                              items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
                               onSelectedIndex: (int i) {
-                                controller.orderType = controller.holidayTypes.value.data![i];
+                                controller.selectedType = controller.orderTypes.value.data![i];
                               },
                               prefixIcon: const SizedBox(
                                   width: 5,

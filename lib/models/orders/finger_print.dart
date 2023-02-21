@@ -1,5 +1,6 @@
 
 import 'AllOrders.dart';
+import 'order_status.dart';
 import 'order_type.dart';
 
 class FingerprintCorrectionsData implements Order{
@@ -10,7 +11,7 @@ class FingerprintCorrectionsData implements Order{
   OrderType? _workingType;
   String? time;
   dynamic _reason;
-  dynamic status;
+  Status? status;
   dynamic file;
   String? createdAt;
   String? updatedAt;
@@ -25,7 +26,7 @@ class FingerprintCorrectionsData implements Order{
     time = json['time'];
     _workingType = json['working_type'] != null ? OrderType.fromJson(json['working_type']) : null;
     _reason = json['reason'];
-    status = json['status'];
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -47,7 +48,7 @@ class FingerprintCorrectionsData implements Order{
 
   @override
   // TODO: implement orderStatus
-  String get orderStatus => status == null  ? 'not_confirmed' : '$status';
+  String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
 
   @override

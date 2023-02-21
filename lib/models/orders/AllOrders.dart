@@ -1,3 +1,6 @@
+import 'package:wassl/helpers/constants/print_ln.dart';
+
+import 'ask_permission.dart';
 import 'custoday.dart';
 import 'financial_expenses.dart';
 import 'finger_print.dart';
@@ -15,7 +18,7 @@ class AllOrders {
   List<FinancialExpensesDate> financialExpensesDate = [];
   List<CustodyDate> custodyDate = [];
   List<HolidaysData> holidaysData = [];
-  // List<Null>? askPermissionsData;
+  List<AskPermissionsData> askPermissionsData = [];
   List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
   // List<Null>? orderVisaData;
   String? message;
@@ -54,19 +57,20 @@ class AllOrders {
         holidaysData.add( HolidaysData.fromJson(v));
       });
     }
-    // if (json['AskPermissionsData'] != null) {
-    //   askPermissionsData = <Null>[];
-    //   json['AskPermissionsData'].forEach((v) {
-    //     askPermissionsData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    if (json['FingerprintCorrectionsData'] != null) {
 
-      json['FingerprintCorrectionsData'].forEach((v) {
-        fingerprintCorrectionsData
-            .add(new FingerprintCorrectionsData.fromJson(v));
+    if (json['AskPermissionsData'] != null) {
+
+      json['AskPermissionsData'].forEach((v) {
+        askPermissionsData.add( AskPermissionsData.fromJson(v));
       });
     }
+    // if (json['FingerprintCorrectionsData'] != null) {
+    //
+    //   json['FingerprintCorrectionsData'].forEach((v) {
+    //     fingerprintCorrectionsData
+    //         .add( FingerprintCorrectionsData.fromJson(v));
+    //   });
+    // }
     // if (json['OrderVisaData'] != null) {
     //   orderVisaData = <Null>[];
     //   json['OrderVisaData'].forEach((v) {
@@ -74,6 +78,7 @@ class AllOrders {
     //   });
     // }
     orders.addAll(holidaysData);
+    orders.addAll(askPermissionsData);
     orders.addAll(fingerprintCorrectionsData);
     orders.addAll(custodyDate);
     orders.addAll(financialExpensesDate);
@@ -83,9 +88,9 @@ class AllOrders {
     message = json['message'];
   }
 
-  bool get isEmpty{
-    return loansData.isEmpty && letterDate.isEmpty && financialExpensesDate.isEmpty && custodyDate.isEmpty && holidaysData.isEmpty && fingerprintCorrectionsData.isEmpty;
-}
+//   bool get isEmpty{
+//     return loansData.isEmpty && letterDate.isEmpty && financialExpensesDate.isEmpty && custodyDate.isEmpty && holidaysData.isEmpty && fingerprintCorrectionsData.isEmpty && askPermissionsData.isEmpty;
+// }
 
 }
 abstract class Order{

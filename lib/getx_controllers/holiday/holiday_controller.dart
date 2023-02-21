@@ -10,6 +10,7 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../helpers/constants/print_ln.dart';
+import '../orders/order_types_controller.dart';
 
 class HolidayController extends GetxController{
 
@@ -17,8 +18,8 @@ class HolidayController extends GetxController{
 
   DateTime? startDate;
   DateTime? endDate;
-  var  holidayTypes = HolidayTypes().obs;
-  OrderType? orderType;
+  var orderTypes = OrderTypesRetriever().obs;
+  OrderType? selectedType;
   String? filePath;
   var loadingHolidayTypes = false.obs;
   String? holidayReason;
@@ -32,7 +33,7 @@ class HolidayController extends GetxController{
 
 
 
-    if(orderType == null){
+    if(selectedType == null){
       throw ChooseTypeException();
     }
 
@@ -49,7 +50,7 @@ class HolidayController extends GetxController{
     // body parameters
 
     var body = {
-      'type':'${orderType?.id}',
+      'type':'${selectedType?.id}',
       'holiday_start':'${startDate?.year}-${startDate?.month}-${startDate?.day}',
       'holiday_end':'${endDate?.year}-${endDate?.month}-${endDate?.day}',
       'reason':'$holidayReason'
@@ -71,7 +72,7 @@ class HolidayController extends GetxController{
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-      holidayTypes.value = HolidayTypes.fromJson(json);
+      orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingHolidayTypes.value = false;
     println(response.statusCode);

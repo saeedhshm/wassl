@@ -40,7 +40,7 @@ class LetterRequestPage extends StatelessWidget {
                 },
               ),
               Expanded(
-                  child: controller.letterTypes.value.data == null ? Center(
+                  child: controller.orderTypes.value.data == null ? Center(
                       child: Text('no_letter_types_loaded'.tr,style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -68,9 +68,9 @@ class LetterRequestPage extends StatelessWidget {
                               // DropDownMenu(textHint: 'loan_type'.tr,)
                               DropDownWidget(
                                 hintText: 'letter_type'.tr,
-                                items: controller.letterTypes.value.data!.map((e) => e.name ?? '').toList(),
+                                items: controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
                                 onSelectedIndex: (int i) {
-                                  controller.selectedLetterType = controller.letterTypes.value.data![i];
+                                  controller.selectedType = controller.orderTypes.value.data![i];
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

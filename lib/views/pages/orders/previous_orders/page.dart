@@ -54,7 +54,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
             'previous_requests'.tr,
 
           ),
-          Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.isEmpty ? Center(
+          Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
             child: Text('no_previous_requests'.tr,style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

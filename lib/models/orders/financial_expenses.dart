@@ -1,5 +1,6 @@
 
 import 'AllOrders.dart';
+import 'order_status.dart';
 
 class FinancialExpensesDate implements Order{
   int? id;
@@ -10,7 +11,7 @@ class FinancialExpensesDate implements Order{
   String? date;
   dynamic description;
   dynamic _reason;
-  dynamic status;
+  Status? status;
   dynamic file;
   String? createdAt;
   String? updatedAt;
@@ -26,7 +27,7 @@ class FinancialExpensesDate implements Order{
     date = json['date'];
     description = json['description'];
     _reason = json['reason'];
-    status = json['status'];
+    status = json['status'] != null ? Status.fromJson(json['status']) : null;
     file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -44,7 +45,7 @@ class FinancialExpensesDate implements Order{
   }
   @override
   // TODO: implement orderStatus
-  String get orderStatus => status == null  ? 'not_confirmed' : '$status';
+  String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
 
   @override

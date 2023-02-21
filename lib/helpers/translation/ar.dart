@@ -169,14 +169,16 @@ Map<String,String>  arabicStrings = {
   'death':'وفاة أقارب',
   'exams':'اختبارات',
   'illness':'أجازة مرضية',
+  'permission_type':'نوع الاستئذان',
+  'reason_type':'نوع السبب',
   'select_start_date_first':'يجب اختيار تاريخ بداية الاجازة أولاً',
-
+  'ask_permission':'طلب استئذان',
   'HolidayReasonException':'ادخل سبب الاجازة',
   'StartDateException':'اختر تاريخ بداية الاجازة',
   'HolidayTypeException':'اختر نوع الاجازة',
   'EndDateException':'اختر تاريخ انتهاء الاجازة',
   'holiday_request_added':'تم إضافة طلب الأجازة بنجاح',
-
+  'title':'العنوان',
   'choose_attend_leave':'اختر وقت الحضور أو الانصراف',
   'EnterReasonException':'ادخل السبب',
   'ChooseTimeException':'اختر الوقت الصحيح',
@@ -198,5 +200,20 @@ Map<String,String>  arabicStrings = {
   'installmentMonthlyAmount_exception':'يجب ادخال القسط الشهري',
   'installmentMonthlyMethod_exception':'يجب ادخال الية القسط',
   'reason_exception':'يجب ادخال السبب',
+
+  'permission_type_exception':'يجب اختيار نوع الاستئذان',
+  'reasonType_exception':'يجب اختيار نوع السبب',
+  'AskPermissionsData':'طلب استئذان',
+
+  'finencial_title_exception':'يرجى ادخال العنوان',
+  'finencial_amount_exception':'يرجى ادخال القيمة المالية',
+  'description_exception':'يرجي ادخال الوصف',
+  '':'',
+  '':'',
+  '':'',
+
+  'personal_permission':'شخصي',
+  'illness_permission':'مرضي',
+  'emergency_permission':'حالة طارئة',
 
 } ;
