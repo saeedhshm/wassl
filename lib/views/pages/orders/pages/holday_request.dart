@@ -7,7 +7,7 @@ import 'package:wassl/getx_controllers/holiday/holiday_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
-import 'package:wassl/models/orders/holday/holiday_type.dart';
+// import 'package:wassl/models/orders/holday/holiday_type.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';

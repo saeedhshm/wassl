@@ -1,4 +1,5 @@
-import 'package:wassl/helpers/constants/print_ln.dart';
+
+import 'package:wassl/models/orders/visa_order.dart';
 
 import 'ask_permission.dart';
 import 'custoday.dart';
@@ -20,7 +21,7 @@ class AllOrders {
   List<HolidaysData> holidaysData = [];
   List<AskPermissionsData> askPermissionsData = [];
   List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
-  // List<Null>? orderVisaData;
+  List<OrderVisaData> orderVisaData = [];
   String? message;
 
   AllOrders();
@@ -64,26 +65,28 @@ class AllOrders {
         askPermissionsData.add( AskPermissionsData.fromJson(v));
       });
     }
-    // if (json['FingerprintCorrectionsData'] != null) {
-    //
-    //   json['FingerprintCorrectionsData'].forEach((v) {
-    //     fingerprintCorrectionsData
-    //         .add( FingerprintCorrectionsData.fromJson(v));
-    //   });
-    // }
-    // if (json['OrderVisaData'] != null) {
-    //   orderVisaData = <Null>[];
-    //   json['OrderVisaData'].forEach((v) {
-    //     orderVisaData!.add(new Null.fromJson(v));
-    //   });
-    // }
-    orders.addAll(holidaysData);
-    orders.addAll(askPermissionsData);
-    orders.addAll(fingerprintCorrectionsData);
-    orders.addAll(custodyDate);
-    orders.addAll(financialExpensesDate);
-    orders.addAll(letterDate);
-    orders.addAll(loansData);
+    if (json['FingerprintCorrectionsData'] != null) {
+
+      json['FingerprintCorrectionsData'].forEach((v) {
+        fingerprintCorrectionsData
+            .add( FingerprintCorrectionsData.fromJson(v));
+      });
+    }
+    if (json['OrderVisaData'] != null) {
+      orderVisaData = <OrderVisaData>[];
+      json['OrderVisaData'].forEach((v) {
+        orderVisaData.add(OrderVisaData.fromJson(v));
+      });
+    }
+
+    // orders.addAll(holidaysData);
+    // orders.addAll(askPermissionsData);
+    // orders.addAll(fingerprintCorrectionsData);
+    // orders.addAll(custodyDate);
+    // orders.addAll(financialExpensesDate);
+    // orders.addAll(letterDate);
+    // orders.addAll(loansData);
+    orders.addAll(orderVisaData);
 
     message = json['message'];
   }
@@ -98,6 +101,7 @@ abstract class Order{
   String get orderDate;
   String get orderStatus;
   String get reason;
+  String get file;
 }
 
 

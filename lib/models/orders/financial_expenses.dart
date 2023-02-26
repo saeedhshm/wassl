@@ -12,7 +12,7 @@ class FinancialExpensesDate implements Order{
   dynamic description;
   dynamic _reason;
   Status? status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -28,11 +28,14 @@ class FinancialExpensesDate implements Order{
     description = json['description'];
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
+
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

@@ -10,6 +10,7 @@ import '../../../../models/orders/finger_print.dart';
 import '../../../../models/orders/holiday.dart';
 import '../../../../models/orders/letter.dart';
 import '../../../../models/orders/loan_order.dart';
+import '../../../../models/orders/visa_order.dart';
 
 class PreviousRequestsItemWidget extends StatelessWidget {
 
@@ -46,6 +47,9 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                         fontSize: 15
                     ),) : const SizedBox(),
+
+                    // Spacer(),
+
                   ],
                 )),
                 Text(order.orderStatus.tr,style: TextStyle(
@@ -53,6 +57,22 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),)
               ],
             ),
+
+            order.orderType == 'OrderVisaData' ?  Row(
+              children: [
+                Text('visa_type'.tr + ' : ' +((order as OrderVisaData).visaType ?? ''),style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13
+                ),),
+                Spacer(),
+                Text(((order as OrderVisaData).ticketType ?? ''),style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13
+                ),),
+              ],
+            ) : const SizedBox(),
             const SizedBox(height: 10,),
             Row(
               children: [
@@ -61,12 +81,41 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   height: 25,
                   child: SvgWidget('assets/images/pref_calendar_icon.svg'),
                 ),
-                Text(order.orderDate,style: const TextStyle(
+                Text((order.orderType == 'OrderVisaData' ? '${'required_before'.tr} : ' : '') + order.orderDate,style: const TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontSize: 16
                 ),)
               ],
             ),
+            (order as OrderVisaData).hasTicket ? Row(
+              children: [
+                const SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: Icon(Icons.flight_takeoff_outlined,color: AppColors.lightGreyTextColor,),
+                  // child: SvgWidget('assets/images/pref_calendar_icon.svg'),
+                ),
+                SizedBox(width: 5,),
+                Text((order as OrderVisaData).goDate ?? '',style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontSize: 14
+                ),),
+                Spacer(),
+                (order as OrderVisaData).hasBackTicket ?  const SizedBox(
+                  width: 25,
+                  height: 25,
+                  child: Icon(Icons.flight_land_outlined,color: AppColors.lightGreyTextColor,),
+                  // child: SvgWidget('assets/images/pref_calendar_icon.svg'),
+                ) : const SizedBox(),
+                SizedBox(width: 5,),
+                (order as OrderVisaData).hasBackTicket ? Text( (order as OrderVisaData).backDate ?? '',style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontSize: 14
+                ),) : const SizedBox(),
+
+
+              ],
+            ) : const SizedBox(),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -491,6 +540,8 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
+
+
           ],
         ),
       ),

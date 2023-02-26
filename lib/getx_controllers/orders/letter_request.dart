@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/models/orders/letter/letter_types.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';

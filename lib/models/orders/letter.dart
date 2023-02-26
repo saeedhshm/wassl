@@ -12,7 +12,7 @@ class LetterDate implements Order{
   String? directedToAr;
   String? _reason;
   dynamic status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -27,7 +27,7 @@ class LetterDate implements Order{
     directedToAr = json['directed_to_ar'];
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -35,6 +35,10 @@ class LetterDate implements Order{
 
 
   String get letterType => type?.name ?? '';
+
+  @override
+  String get file => _file ?? '';
+
   @override
   // TODO: implement orderType
   String get orderType => 'LetterDate';

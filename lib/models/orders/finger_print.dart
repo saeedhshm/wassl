@@ -12,7 +12,7 @@ class FingerprintCorrectionsData implements Order{
   String? time;
   dynamic _reason;
   Status? status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -27,7 +27,7 @@ class FingerprintCorrectionsData implements Order{
     _workingType = json['working_type'] != null ? OrderType.fromJson(json['working_type']) : null;
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -35,6 +35,9 @@ class FingerprintCorrectionsData implements Order{
 
 
   String get workingType => '${_workingType?.name}';
+
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

@@ -14,7 +14,7 @@ class LoansData implements Order{
   int? installmentAmount;
   String? _reason;
   Status? status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -31,7 +31,7 @@ class LoansData implements Order{
     installmentAmount = json['installment_amount'];
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -39,6 +39,8 @@ class LoansData implements Order{
 
   String get loanType => type?.name ?? '';
 
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

@@ -12,7 +12,7 @@ class CustodyDate implements Order{
   OrderType? type;
   String? _reason;
   Status? status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -25,11 +25,13 @@ class CustodyDate implements Order{
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

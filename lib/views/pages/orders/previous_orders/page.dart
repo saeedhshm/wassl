@@ -7,6 +7,7 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
+import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
      Future.delayed(Duration.zero,()async{
        try{
          await controller.getAllOrders();
-       }catch (e){
+       }on NoDataAvailableException catch (e){
          println('============ getall orders =========');
          println(e);
          println('============ getall orders =========getall orders =========');

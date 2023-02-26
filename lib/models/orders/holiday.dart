@@ -16,16 +16,16 @@ class HolidaysData implements Order{
   String? holidayStart;
   String? holidayEnd;
   String? ticket;
-  OrderType? ticketType;
+  OrderType? _ticketType;
   String? goDate;
   String? returnDate;
   String? exitAndReturnVisa;
-  String? visaType;
-  OrderType? visaTime;
+  OrderType? _visaType;
+  OrderType? _visaTime;
   String? visaRequireBefore;
   String? _reason;
   dynamic status;
-  dynamic file;
+  dynamic _file;
   String? createdAt;
   String? updatedAt;
 
@@ -43,16 +43,16 @@ class HolidaysData implements Order{
     _holidayType = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     holidayEnd = json['holiday_end'];
     ticket = json['ticket'];
-    ticketType = json['ticket_type'] != null ? OrderType.fromJson(json['ticket_type']) : null ;
+    _ticketType = json['ticket_type'] != null ? OrderType.fromJson(json['ticket_type']) : null ;
     goDate = json['go_date'];
     returnDate = json['return_date'];
     exitAndReturnVisa = json['exit_and_return_visa'];
-    visaType = json['visa_type'];
-    visaTime = json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null  ;
+    _visaType = json['visa_type'] != null ? OrderType.fromJson(json['visa_type']) : null  ;
+    _visaTime = json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null  ;
     visaRequireBefore = json['visa_require_before'];
     _reason = json['reason'];
     status = json['status'] != null ? Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -75,6 +75,9 @@ class HolidaysData implements Order{
     difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : (days.toString() + ' ' + 'days'.tr);
     return difference;
   }
+
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

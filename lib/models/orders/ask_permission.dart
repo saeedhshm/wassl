@@ -11,21 +11,11 @@ class AskPermissionsData implements Order {
   OrderType? reasonType;
   String? _reason;
   Status? status;
-  String? file;
+  String? _file;
   String? createdAt;
   String? updatedAt;
 
-  AskPermissionsData(
-      {this.id,
-        this.employeeId,
-        this.displayOrdersTo,
-        this.type,
-        this.date,
-        this.reasonType,
-        this.status,
-        this.file,
-        this.createdAt,
-        this.updatedAt});
+
 
   AskPermissionsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,11 +29,13 @@ class AskPermissionsData implements Order {
     _reason = json['reason'];
     status =
     json['status'] != null ?Status.fromJson(json['status']) : null;
-    file = json['file'];
+    _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
+  @override
+  String get file => _file ?? '';
 
   @override
   // TODO: implement orderType

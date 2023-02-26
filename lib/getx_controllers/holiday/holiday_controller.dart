@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/exceptions/date_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
-import 'package:wassl/models/orders/holday/holiday_type.dart';
 import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';

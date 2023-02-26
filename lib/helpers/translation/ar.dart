@@ -209,12 +209,13 @@ Map<String,String>  arabicStrings = {
   'finencial_amount_exception':'يرجى ادخال القيمة المالية',
   'description_exception':'يرجي ادخال الوصف',
 
-  'visa_type':'نوع الفيزا',
-  'visa_time':'مدة الفيزا',
+  'visa_type':'نوع التأشيرة',
+  'visa_time':'مدة التأشيرة',
   'date_before':'قبل تاريخ',
   'go_date':'تاريخ الذهاب',
   'back_date':'تاريخ العودة',
   'ticket_type':'نوع التذكرة',
+  'without_ticket':'بدون تذكرة',
 
   'request_visa':'طلب تأشيرة',
 
@@ -238,6 +239,11 @@ Map<String,String>  arabicStrings = {
 
   'overtime_ends':'العمل الإضافي ينتهي في',
   'overtime_starts': 'العمل الإضافي يبدأ في' ,
+  'OrderVisaData':'طلب تأشيرة',
+  'required_before':'تطلب قبل',
+  '':'',
+  '':'',
+  '':'',
   '':'',
   '':'',
 
