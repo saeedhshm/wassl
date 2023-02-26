@@ -14,6 +14,9 @@ class AppUrls {
   static const String _letterApi = '$_apiVrsion/letter';
   static const String _askPermissionApi = '$_apiVrsion/ask_permission';
   static const String _financialExpensesApi = '$_apiVrsion/financial_expenses';
+  static const String _custodyApi = '$_apiVrsion/custody';
+  static const String _visaApi = '$_apiVrsion/visa';
+  static const String _overtimeApi = '$_apiVrsion/overtime';
 
   //https://waslhr.com/api/v1/auth
   static const String login = '$_authApi/login';
@@ -55,5 +58,22 @@ class AppUrls {
   //{{domain}}/financial_expenses/add
   static const String addFinancialExpenses = '$_financialExpensesApi/add';
 
+
+  //{{domain}}/get_custody_types
+  static const String getCustodyTypes = '$_apiVrsion/get_custody_types';
+  //{{domain}}/custody/add
+  static const String addCustody = '$_custodyApi/add';
+
+  //{{domain}}/get_ticket_types
+  static const String getTicketTypes = '$_apiVrsion/get_ticket_types';
+  //{{domain}}/get_visa_time
+  static const String getVisaTime = '$_apiVrsion/get_visa_time';
+//{{domain}}/get_visa_types
+  static const String getVisaTypes = '$_apiVrsion/get_visa_types';
+  //{{domain}}/visa/add
+  static const String addVisa = '$_visaApi/add';
+
+  //{{domain}}/overtime/add
+  static const String addOvertimeApi = '$_overtimeApi/add';
 }
 

@@ -208,12 +208,37 @@ Map<String,String>  arabicStrings = {
   'finencial_title_exception':'يرجى ادخال العنوان',
   'finencial_amount_exception':'يرجى ادخال القيمة المالية',
   'description_exception':'يرجي ادخال الوصف',
-  '':'',
-  '':'',
-  '':'',
+
+  'visa_type':'نوع الفيزا',
+  'visa_time':'مدة الفيزا',
+  'date_before':'قبل تاريخ',
+  'go_date':'تاريخ الذهاب',
+  'back_date':'تاريخ العودة',
+  'ticket_type':'نوع التذكرة',
+
+  'request_visa':'طلب تأشيرة',
+
 
   'personal_permission':'شخصي',
   'illness_permission':'مرضي',
   'emergency_permission':'حالة طارئة',
+
+  'visa_type_exception':'يرجى اختيار نوع التأشيرة',
+  'visa_time_exception':'يرجى اختيار مدة التأشيرة',
+  'date_before_exception':'يرجى اختيار تاريخ طلب التأشيرة',
+  'ticket_type_exception':'يرجى اختيار نوع التذكرة',
+  'go_date_exception':'يرجى اختيار تاريخ الذهاب',
+  'back_date_exception':'يرجى اختيار تاريخ العودة',
+
+  'start_time_empty':'يرجي اختيار بداية الوقت أولاً',
+
+  'date_exception':'يرجى اختيار التاريخ الصحيح',
+  'startTime_exception':'يرجى اختيار بداية ساعات العمل الاضافي',
+  'endTime_exception':'يرجى اختيار نهاية ساعات العمل الاضافي',
+
+  'overtime_ends':'العمل الإضافي ينتهي في',
+  'overtime_starts': 'العمل الإضافي يبدأ في' ,
+  '':'',
+  '':'',
 
 } ;

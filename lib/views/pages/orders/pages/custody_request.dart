@@ -1,20 +1,30 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/orders/custoday_controller.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 
+import '../../../../helpers/constants/print_ln.dart';
+import '../../../../helpers/exceptions/custom_exception.dart';
+import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
+import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class CustodyRequestPage extends StatelessWidget {
-  const CustodyRequestPage({Key? key}) : super(key: key);
+
+   CustodyRequestPage({Key? key}) : super(key: key);
+   final CustodyRequestController controller = Get.put(CustodyRequestController());
+   final fileCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Obx(()=>Column(
         children: [
           MainAppbarWidget(
             'order_custody',
@@ -23,7 +33,10 @@ class CustodyRequestPage extends StatelessWidget {
             },
           ),
           Expanded(
-              child: SingleChildScrollView(
+              child: controller.loadingTypes.value ?
+              const Center(
+                child: SendingLoadingWidget(),
+              ) : SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
@@ -45,8 +58,12 @@ class CustodyRequestPage extends StatelessWidget {
                           // DropDownMenu(textHint: 'loan_type'.tr,)
                           DropDownWidget(
                             hintText: 'custody_type'.tr,
-                            items: const ['done', 'not done'],
-                            onSelectedIndex: (int i) {},
+                            items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
+                            onSelectedIndex: (int i) {
+                              controller.selectedType = controller.orderTypes.value.data![i];
+                              println('${controller.selectedType?.id}');
+                              println('${controller.selectedType?.name}');
+                            },
                             prefixIcon: const SizedBox(
                                 width: 5,
                                 height: 35,
@@ -73,34 +90,78 @@ class CustodyRequestPage extends StatelessWidget {
                             maxLines: 5,
                             hintText: 'the_reason'.tr,
                             height: 130,
+                            onChange: (value){
+                              controller.reason = value;
+                            },
                           ),
                           const SizedBox(height: 15,),
-                          TextFormFieldWithIcons(
-                            prefixIcon: SizedBox(
-                              child: Image.asset('assets/images/attach.png'),
+                          InkWell(
+                            onTap: () async {
+                              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                type: FileType.custom,
+                                allowedExtensions: ['pdf'],
+                              );
+
+                              if (result != null) {
+                                String filePath = result.files.single.path ?? '';
+
+                                if(filePath.isNotEmpty){
+                                  controller.filePath = filePath;
+                                  fileCtrl.text = filePath.split('/').last;
+                                  // File file = File(filePath);
+                                }
+
+                              } else {
+                                // User canceled the picker
+                              }
+                            },
+                            child: TextFormFieldWithIcons(
+                              prefixIcon: SizedBox(
+                                child: Image.asset('assets/images/attach.png'),
+                              ),
+                              hintText: 'attach_file'.tr,
+
+                              enabled: false,
+                              controller: fileCtrl,
                             ),
-                            hintText: 'attach_file'.tr,
-
-
                           ),
                           const SizedBox(height: 15,),
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  'send'.tr,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17
+                          controller.loading.value ? const Center(child: SendingLoadingWidget(),) : InkWell(
+                            onTap: ()async{
+                              try{
+                                await controller.addNewPermission();
+                                SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
+                                Future.delayed(Duration(milliseconds: 4600),(){
+                                  Get.back();
+                                });
+                              }on NoInternetException catch(e){
+                                SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
+
+                              }on CustomException catch(e){
+                                SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
+
+                              }finally{
+                                controller.loading.value = false;
+                              }
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Center(
+                                  child: Text(
+                                    'send'.tr,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17
+                                    ),
                                   ),
                                 ),
                               ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: greenGradiantAppBar,),
                             ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              gradient: greenGradiantAppBar,),
                           ),
                           const SizedBox(height: 25,),
                         ],
@@ -110,7 +171,7 @@ class CustodyRequestPage extends StatelessWidget {
                 ),
               ))
         ],
-      ),
+      )),
     );
   }
 }

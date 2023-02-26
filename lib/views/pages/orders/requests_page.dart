@@ -12,6 +12,7 @@ import 'package:wassl/views/pages/orders/pages/finance_spended_request.dart';
 import 'package:wassl/views/pages/orders/pages/holday_request.dart';
 import 'package:wassl/views/pages/orders/pages/letter_request.dart';
 import 'package:wassl/views/pages/orders/pages/loan_order.dart';
+import 'package:wassl/views/pages/orders/pages/visa_request.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../reusable_widgets/main_appbar.dart';
@@ -127,16 +128,16 @@ class RequestsPage extends StatelessWidget {
                          child:ItemWidget(icon: 'assets/images/extra_work.svg',title: 'ask_permission'.tr,),
 
                        ),
-                       appController.deployingForApple ? const SizedBox() : Container(
+                       Container(
                          width: double.infinity,
                          height: 0.5,
                          decoration: BoxDecoration(
                              color: Colors.grey.withOpacity(0.1)
                          ),
                        ),
-                       appController.deployingForApple ? const SizedBox() : InkWell(
+                       InkWell(
                          onTap: (){
-                           Get.to(()=>const ExtraWorkRequest());
+                           Get.to(()=> ExtraWorkRequest());
                          },
                          child:ItemWidget(icon: 'assets/images/extra_work.svg',title: 'extra_work'.tr,),
 
@@ -171,16 +172,16 @@ class RequestsPage extends StatelessWidget {
                          child:ItemWidget(icon: 'assets/images/holidays.svg',title: 'holidays'.tr,),
 
                        ),
-                       appController.deployingForApple ? const SizedBox() : Container(
+                       Container(
                          width: double.infinity,
                          height: 0.5,
                          decoration: BoxDecoration(
                              color: Colors.grey.withOpacity(0.1)
                          ),
                        ),
-                       appController.deployingForApple ? const SizedBox() : InkWell(
+                       InkWell(
                          onTap: (){
-                           // Get.to(()=>const NewLoanOrder());
+                           Get.to(()=> VisaRequestPage());
                          },
                          child:ItemWidget(icon: 'assets/images/passport.svg',title: 'passport'.tr,),
 
@@ -213,16 +214,16 @@ class RequestsPage extends StatelessWidget {
                          child:ItemWidget(icon: 'assets/images/employment.svg',title: 'employment'.tr,),
 
                        ),
-                       appController.deployingForApple ? const SizedBox() :  Container(
+                       Container(
                          width: double.infinity,
                          height: 0.5,
                          decoration: BoxDecoration(
                              color: Colors.grey.withOpacity(0.1)
                          ),
                        ),
-                       appController.deployingForApple ? const SizedBox() : InkWell(
+                       InkWell(
                          onTap: (){
-                           Get.to(()=>const CustodyRequestPage());
+                           Get.to(()=> CustodyRequestPage());
                          },
                          child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody'.tr,),
 

@@ -127,44 +127,7 @@ class HolidayRequestPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 15,),
 
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //     color: Colors.white
-                            //   ),
-                            //   child: Column(
-                            //     children: [
-                            //       Row(
-                            //         children: [
-                            //           LocalizedText(
-                            //             'traviling_ticket'.tr,
-                            //             textStyle: const TextStyle(
-                            //                 fontWeight: FontWeight.bold
-                            //             ),
-                            //           ),
-                            //           Spacer(),
-                            //           Directionality(textDirection: TextDirection.ltr, child: Switch(value: false, onChanged: (value){},activeColor: AppColors.mainGreenColor,))
-                            //         ],
-                            //       ),
-                            //       Container(
-                            //         color: Colors.grey.withOpacity(0.5),
-                            //         width: double.infinity,
-                            //         height: 0.5,
-                            //       ),
-                            //       Row(
-                            //         children: [
-                            //           LocalizedText(
-                            //             'go_return'.tr,
-                            //             textStyle: const TextStyle(
-                            //                 fontWeight: FontWeight.bold
-                            //             ),
-                            //           ),
-                            //           Spacer(),
-                            //          Directionality(textDirection: TextDirection.ltr, child: Switch(value: false, onChanged: (value){},activeColor: AppColors.mainGreenColor,))
-                            //         ],
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
+
 
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -225,33 +188,7 @@ class HolidayRequestPage extends StatelessWidget {
                             controller.appController.loading.value ? const Center(
                               child: SendingLoadingWidget(),
                             ) : InkWell(
-                              onTap: () async {
-                                controller.appController.loading.value = true;
-                                try{
-                                  await controller.sendHolidayRequest();
-                                  SnackBars.showConfirmedSnackBar('success'.tr, 'holiday_request_added'.tr);
-                                  Future.delayed(Duration(milliseconds: 4600),(){
-                                    Get.back();
-                                  });
-                                }on StartDateException {
-                                  println('StartDateException ==== ');
-                                  SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
-                                }on ChooseTypeException {
-                                  println('HolidayTypeException ==== ');
-                                  SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
-                                }on EndDateException{
-                                  println('EndDateException ==== ');
-                                  SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
-                                }on EnterReasonException{
-                                  SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
-                                }on NoInternetException catch(e){
-                                  SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-                                }on NoDataAvailableException catch(e){
-                                  SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              },
+                              onTap: _sendData,
                               child: Container(
                                 width: double.infinity,
                                 child: Padding(
@@ -282,5 +219,33 @@ class HolidayRequestPage extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  _sendData() async {
+    controller.appController.loading.value = true;
+    try{
+      await controller.sendHolidayRequest();
+      SnackBars.showConfirmedSnackBar('success'.tr, 'holiday_request_added'.tr);
+      Future.delayed(Duration(milliseconds: 4600),(){
+        Get.back();
+      });
+    }on StartDateException {
+      println('StartDateException ==== ');
+      SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
+    }on ChooseTypeException {
+      println('HolidayTypeException ==== ');
+      SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
+    }on EndDateException{
+      println('EndDateException ==== ');
+      SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
+    }on EnterReasonException{
+      SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
+    }on NoInternetException catch(e){
+      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
+    }on NoDataAvailableException catch(e){
+      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+    }finally{
+      controller.appController.loading.value = false;
+    }
   }
 }
