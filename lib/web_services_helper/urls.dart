@@ -43,19 +43,30 @@ class AppUrls {
   //{{domain}}/holiday/cancel/9
   static const String cancelHolidayRequest = '$_holidayApi/cancel';
 
+
   //fingerprint_correction/add
   static const String addFingerPrintCorrection = '$_fingerprintCorrectionApi/add';
+//{{domain}}/fingerprint_correction/cancel/8
+  static const String cancelFingerPrintCorrection = '$_fingerprintCorrectionApi/cancel';
+  //{{domain}}/fingerprint_correction/update/5
+  static const String updateFingerPrintCorrection = '$_fingerprintCorrectionApi/update';
+
+
 
   //{{domain}}/get_loan_types
   static const String getLoansTypes = '$_apiVrsion/get_loan_types';
   //loan/add
   static const String addLoan = '$_loanApi/add';
 
+
   //{{domain}}/get_letter_types
   static const String getLetterTypes = '$_apiVrsion/get_letter_types';
   //{{domain}}/letter/add
   static const String addLetter = '$_letterApi/add';
-
+  // {{domain}}/letter/update/5
+  static const String updateLetter = '$_letterApi/update';
+  //{{domain}}/letter/cancel/7
+  static const String cancelLetter = '$_letterApi/cancel';
 
   //{{domain}}/get_ask_permission_types
   static const String getPermissionsTypes = '$_apiVrsion/get_ask_permission_types';
@@ -70,12 +81,19 @@ class AppUrls {
 
   //{{domain}}/financial_expenses/add
   static const String addFinancialExpenses = '$_financialExpensesApi/add';
-
+  //{{domain}}/financial_expenses/update/4
+  static const String updateFinancialExpenses = '$_financialExpensesApi/update';
+  // {{domain}}/financial_expenses/cancel/6
+  static const String cancelFinancialExpenses = '$_financialExpensesApi/cancel';
 
   //{{domain}}/get_custody_types
   static const String getCustodyTypes = '$_apiVrsion/get_custody_types';
   //{{domain}}/custody/add
   static const String addCustody = '$_custodyApi/add';
+  //{{domain}}/custody/cancel/3
+  static const String cancelCustody = '$_custodyApi/cancel';
+  //{{domain}}/custody/update/3
+  static const String updateCustody = '$_custodyApi/update';
 
   //{{domain}}/get_ticket_types
   static const String getTicketTypes = '$_apiVrsion/get_ticket_types';
@@ -88,5 +106,9 @@ class AppUrls {
 
   //{{domain}}/overtime/add
   static const String addOvertimeApi = '$_overtimeApi/add';
+  //{{domain}}/overtime/update/2
+  static const String updateOvertimeApi = '$_overtimeApi/update';
+  // {{domain}}/overtime/cancel/2
+  static const String cancelOvertimeApi = '$_overtimeApi/cancel';
 }
 

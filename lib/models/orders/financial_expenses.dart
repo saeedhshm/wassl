@@ -7,7 +7,7 @@ class FinancialExpensesDate implements Order{
   int? employeeId;
   int? displayOrdersTo;
   String? name;
-  int? amount;
+  dynamic? amount;
   String? date;
   dynamic description;
   dynamic _reason;

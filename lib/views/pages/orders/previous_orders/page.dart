@@ -12,7 +12,12 @@ import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../pages/ask_permission.dart';
+import '../pages/correcting_fingerprint.dart';
+import '../pages/custody_request.dart';
+import '../pages/extra_work.dart';
+import '../pages/finance_spended_request.dart';
 import '../pages/holday_request.dart';
+import '../pages/letter_request.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
 
@@ -125,13 +130,52 @@ class OrderWidget extends StatelessWidget {
               },));
               break;
             case 'CustodyDate':
-              println('order is CustodyDate');
+              Get.to(()=> CustodyRequestPage(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'FinancialExpensesDate':
-              println('order is FinancialExpensesDate');
+              Get.to(()=> FinanceSpendedRequest(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'FingerprintCorrectionsData':
-              println('order is FingerprintCorrectionsData');
+              Get.to(()=> CorrectingFingerprintRequest(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'HolidaysData':
               Get.to(()=> HolidayRequestPage(order: order,onClose: (){
@@ -150,13 +194,39 @@ class OrderWidget extends StatelessWidget {
               },));
               break;
             case 'LetterDate':
-              println('order is LetterDate');
+              Get.to(()=> LetterRequestPage(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'LoansData':
               println('order is LoansData');
               break;
             case 'OvertimeData':
-              println('order is OvertimeData');
+              Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'OrderVisaData':
               println('order is OrderVisaData');

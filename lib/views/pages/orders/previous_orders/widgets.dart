@@ -232,7 +232,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).workingType ?? ''),
+                        child: Text('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).workingType?.name ?? ''),
                           style: const TextStyle(
                               color: AppColors.darkGreyTextColor
                           ),),
@@ -250,7 +250,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('time'.tr + ' : '+ ((order as FingerprintCorrectionsData).time ?? ''),
+                        child: Text('time'.tr + ' : '+ ((order as FingerprintCorrectionsData).time ?? '').timeFromTimeSelection,
                           style: const TextStyle(
                               color: AppColors.darkGreyTextColor
                           ),),

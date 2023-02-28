@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
+import '../../helpers/exceptions/no_internet.dart';
 import '../../models/orders/order_type.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
@@ -63,6 +64,56 @@ class LetterRequestController extends GetxController{
 
   }
 
+  Future updateRequest(String orderId)async{
+
+    if(selectedType == null) {
+      throw CustomException(errorMessage: 'letter_type_exception');
+    }
+    if(directedToAr == null || directedToAr == ''){
+      throw CustomException(errorMessage: 'directed_to_ar_exception');
+    }
+    if(directedToEn == null || directedToEn == ''){
+      throw CustomException(errorMessage: 'directed_to_en_exception');
+    }
+    if(reason == null || reason == ''){
+      throw CustomException(errorMessage:'reason_exception');
+    }
+
+    var body = {
+      'type': '${selectedType?.id}',
+      'directed_to_en': '$directedToEn',
+      'directed_to_ar': '$directedToAr',
+      'reason': '$reason'
+    };
+    println(body);
+
+
+    println(body);
+    println(appController.appHeader);
+
+    loading.value = true;
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLetter}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    println(response.statusCode);
+    println(await response.stream.bytesToString());
+    loading.value = false;
+    if(response.statusCode != 200){
+      throw CustomException();
+    }
+
+  }
+
+  Future cancelRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelHolidayRequest}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelLetter}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
+
   getLetterTypes() async {
 
     loadingLetterTypes.value = true;
@@ -76,6 +127,8 @@ class LetterRequestController extends GetxController{
     println(response.statusCode);
     println(response.body);
   }
+
+
 
   @override
   void onInit() {

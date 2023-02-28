@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/date_exceptions.dart';
+import 'package:wassl/models/orders/order_type.dart';
 
 import '../../helpers/exceptions/no_internet.dart';
 import '../../web_services_helper/api.dart';
@@ -13,7 +14,7 @@ class FingerPrintController extends GetxController{
 
   DateTime? correctionDate;
   //1 = attend, 2 = leaving
-  int? attendanceStatus;
+  OrderType? attendanceStatus;
 
   String? reason;
   String? filePath;
@@ -39,7 +40,7 @@ class FingerPrintController extends GetxController{
 //2023-01-22
     var body = {
       'date':'${correctionDate?.year}-${correctionDate?.month}-${correctionDate?.day}',
-      'working_type':'$attendanceStatus',
+      'working_type':'${attendanceStatus?.id}',
       'time':'${correctionTime.value}:00',
       'reason':'$reason'
     };
@@ -55,6 +56,50 @@ class FingerPrintController extends GetxController{
       throw NoDataAvailableException();
     }
 
+  }
+
+  Future updateRequest(String orderId) async{
+    if(correctionDate == null){
+      throw StartDateException();
+    }
+    if(attendanceStatus == null){
+      throw ChooseTypeException();
+    }
+    if(correctionTime.value.isEmpty){
+      throw ChooseTimeException();
+    }
+
+    if(reason == null){
+      throw EnterReasonException();
+    }
+//2023-01-22
+    var body = {
+      'date':'${correctionDate?.year}-${correctionDate?.month}-${correctionDate?.day}',
+      'working_type':'${attendanceStatus?.id}',
+      'time':'${correctionTime.value}:00',
+      'reason':'$reason'
+    };
+
+
+    println(body);
+    println('${AppUrls.updateFingerPrintCorrection}/$orderId');
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateFingerPrintCorrection}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    println(await response.stream.bytesToString());
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
+
+  Future cancelRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelHolidayRequest}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelFingerPrintCorrection}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
   }
 
   String get timeOfDay{
@@ -73,5 +118,12 @@ class FingerPrintController extends GetxController{
 
     return time;
   }
+
+
+
+  var attendTypes = [
+    OrderType(id: 1,name: 'attending'.tr),
+    OrderType(id: 2,name: 'leaving'.tr),
+  ];
 
 }
