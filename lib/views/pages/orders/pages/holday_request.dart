@@ -283,7 +283,7 @@ class HolidayRequestPage extends StatelessWidget {
                                             ),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(8),
-                                              gradient: greenGradiantAppBar,),
+                                              gradient: redGradiantCancel,),
                                           ),
                                         ),
                                       ),
@@ -351,7 +351,7 @@ class HolidayRequestPage extends StatelessWidget {
 
      try{
        println('update holiday request ${order?.orderID}');
-       await controller.updateHolidayRequest('${order?.orderID}');
+       await controller.updateRequest('${order?.orderID}');
        SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
        Future.delayed(const Duration(milliseconds: 4600),(){
          if(onClose != null){
@@ -380,10 +380,10 @@ class HolidayRequestPage extends StatelessWidget {
   }
 
   _cancelHolidayRequst() async{
-    println('update holiday request ${order?.orderID}');
+
     controller.loading.value = true;
     try{
-      await controller.cancelHolidayRequest('${order?.orderID}');
+      await controller.cancelRequest('${order?.orderID}');
       SnackBars.showConfirmedSnackBar('success'.tr, 'request_canceled'.tr);
       Future.delayed(const Duration(milliseconds: 4600),(){
         if(onClose != null){

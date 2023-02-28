@@ -64,7 +64,7 @@ class HolidayController extends GetxController{
   }
   }
 
-  Future updateHolidayRequest(String orderId) async{
+  Future updateRequest(String orderId) async{
     if(selectedType == null){
       throw ChooseTypeException();
     }
@@ -96,7 +96,7 @@ class HolidayController extends GetxController{
     }
   }
 
-  Future cancelHolidayRequest(String orderId) async{
+  Future cancelRequest(String orderId) async{
 
 
     println('${AppUrls.cancelHolidayRequest}/$orderId');

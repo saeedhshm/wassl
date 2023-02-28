@@ -56,10 +56,18 @@ class AppUrls {
   //{{domain}}/letter/add
   static const String addLetter = '$_letterApi/add';
 
+
   //{{domain}}/get_ask_permission_types
   static const String getPermissionsTypes = '$_apiVrsion/get_ask_permission_types';
   //{{domain}}/ask_permission/add
   static const String addPermission = '$_askPermissionApi/add';
+  // {{domain}}/ask_permission/cancel/9
+  static const String cancelPermission = '$_askPermissionApi/cancel';
+  //{{domain}}/ask_permission/update/7
+  static const String updatePermission = '$_askPermissionApi/update';
+
+
+
   //{{domain}}/financial_expenses/add
   static const String addFinancialExpenses = '$_financialExpensesApi/add';
 

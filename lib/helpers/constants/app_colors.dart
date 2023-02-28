@@ -15,4 +15,9 @@ class AppColors{
     Color(0xff2dc78d),
     Color(0xff00a7a3),
   ];
+
+  static const gradiantRed = [
+    Color(0xffFF6240),
+    Color(0xffE73B32),
+  ];
 }

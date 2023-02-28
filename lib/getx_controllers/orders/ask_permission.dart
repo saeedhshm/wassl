@@ -5,6 +5,7 @@ import 'package:wassl/models/orders/order_type.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
+import '../../helpers/exceptions/no_internet.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
@@ -20,7 +21,7 @@ class AskPermissionController extends GetxController{
   String? filePath;
   var loading = false.obs;
   DateTime? permissionDate;
-  int? reasonType;
+  OrderType? reasonType;
 
 
 
@@ -42,7 +43,7 @@ class AskPermissionController extends GetxController{
     var body = {
       'type': '${selectedType?.id}',
       'date': '${permissionDate?.year}-${permissionDate?.month}-${permissionDate?.day}',
-      'reason_type': '$reasonType',
+      'reason_type': '${reasonType?.id}',
       'reason': '$reason'
     };
     println(body.runtimeType);
@@ -60,6 +61,49 @@ class AskPermissionController extends GetxController{
       throw CustomException();
     }
 
+  }
+
+  Future updateRequest(String orderId) async{
+    if(selectedType == null) {
+      throw CustomException(errorMessage: 'permission_type_exception');
+    }
+    if(permissionDate == null){
+      throw CustomException(errorMessage: 'inter_date_exception');
+    }
+    if(reasonType == null){
+      throw CustomException(errorMessage: 'reasonType_exception');
+    }
+    if(reason == null || reason == ''){
+      throw CustomException(errorMessage:'reason_exception');
+    }
+
+    var body = {
+      'type': '${selectedType?.id}',
+      'date': '${permissionDate?.year}-${permissionDate?.month}-${permissionDate?.day}',
+      'reason_type': '${reasonType?.id}',
+      'reason': '$reason'
+    };
+
+
+    println(body);
+    println(appController.appHeader);
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updatePermission}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
+
+
+  Future cancelRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelPermission}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelPermission}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
   }
 
 
@@ -83,6 +127,11 @@ class AskPermissionController extends GetxController{
     super.onInit();
     getPermissionsTypes();
   }
-
+  var reasonTypes = [
+    OrderType(id: 1,name: 'personal_permission'.tr,),
+    OrderType(id: 2,name: 'illness_permission'.tr,),
+    OrderType(id: 3,name: 'emergency_permission'.tr,),
+  ];
 
 }
+

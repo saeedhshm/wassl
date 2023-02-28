@@ -11,6 +11,7 @@ import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
+import '../pages/ask_permission.dart';
 import '../pages/holday_request.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
@@ -108,7 +109,20 @@ class OrderWidget extends StatelessWidget {
         if(order.statusID == 1){
           switch(order.orderType){
             case 'AskPermissionsData':
-              println('order is AskPermissionsData');
+              Get.to(()=> AskPermissionPage(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'CustodyDate':
               println('order is CustodyDate');
