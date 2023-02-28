@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
@@ -10,6 +11,7 @@ import '../../../../models/orders/finger_print.dart';
 import '../../../../models/orders/holiday.dart';
 import '../../../../models/orders/letter.dart';
 import '../../../../models/orders/loan_order.dart';
+import '../../../../models/orders/over_time.dart';
 import '../../../../models/orders/visa_order.dart';
 
 class PreviousRequestsItemWidget extends StatelessWidget {
@@ -87,7 +89,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),)
               ],
             ),
-            (order as OrderVisaData).hasTicket ? Row(
+            (order.orderType == 'OrderVisaData' &&(order as OrderVisaData).hasTicket) ? Row(
               children: [
                 const SizedBox(
                   width: 25,
@@ -527,6 +529,64 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text((order as AskPermissionsData).reasonType?.name ?? '' ,
+                          style: const TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+              ],
+            ) : const SizedBox(),
+
+            order.orderType == 'OvertimeData' ? Row(
+              children: [
+                // Expanded(
+                //   child: Container(
+                //     child: Center(
+                //       child: Padding(
+                //         padding: const EdgeInsets.all(8.0),
+                //         child: Text('whole_day'.tr,
+                //         style: TextStyle(
+                //           color: AppColors.darkGreyTextColor
+                //         ),),
+                //       ),
+                //     ),
+                //     decoration: BoxDecoration(
+                //       color: AppColors.mainBackgroundColor,
+                //       borderRadius: BorderRadius.circular(50),
+                //     ),
+                //   ),
+                // ),
+                const SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('starts'.tr + ((order as OvertimeData).startTime ?? '').timeFromTimeSelection.tr,
+                          style: const TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('ends'.tr + ((order as OvertimeData).endTime ?? '').timeFromTimeSelection,
                           style: const TextStyle(
                               color: AppColors.darkGreyTextColor
                           ),),

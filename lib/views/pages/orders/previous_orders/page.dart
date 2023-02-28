@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
+import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/main_appbar.dart';
+import '../../../reusable_widgets/snack_bars.dart';
+import '../pages/holday_request.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
 
@@ -100,7 +103,57 @@ class OrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PreviousRequestsItemWidget(order: order) ;
+    return InkWell(
+      onTap: (){
+        if(order.statusID == 1){
+          switch(order.orderType){
+            case 'AskPermissionsData':
+              println('order is AskPermissionsData');
+              break;
+            case 'CustodyDate':
+              println('order is CustodyDate');
+              break;
+            case 'FinancialExpensesDate':
+              println('order is FinancialExpensesDate');
+              break;
+            case 'FingerprintCorrectionsData':
+              println('order is FingerprintCorrectionsData');
+              break;
+            case 'HolidaysData':
+              Get.to(()=> HolidayRequestPage(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
+              break;
+            case 'LetterDate':
+              println('order is LetterDate');
+              break;
+            case 'LoansData':
+              println('order is LoansData');
+              break;
+            case 'OvertimeData':
+              println('order is OvertimeData');
+              break;
+            case 'OrderVisaData':
+              println('order is OrderVisaData');
+              break;
+
+          }
+        }else{
+          SnackBars.showErrorSnackBar('error'.tr, 'cannot_update_order'.tr);
+        }
+      },
+        child: PreviousRequestsItemWidget(order: order)) ;
   }
 }
 

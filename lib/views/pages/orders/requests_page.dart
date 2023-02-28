@@ -193,25 +193,12 @@ class RequestsPage extends StatelessWidget {
                              color: Colors.grey.withOpacity(0.1)
                          ),
                        ),
+
                        InkWell(
                          onTap: (){
                            Get.to(()=> LetterRequestPage());
                          },
                          child:ItemWidget(icon: 'assets/images/letter.svg',title: 'letter'.tr,),
-
-                       ),
-                       appController.deployingForApple ? const SizedBox() : Container(
-                         width: double.infinity,
-                         height: 0.5,
-                         decoration: BoxDecoration(
-                             color: Colors.grey.withOpacity(0.1)
-                         ),
-                       ),
-                       appController.deployingForApple ? const SizedBox() : InkWell(
-                         onTap: (){
-                           Get.to(()=>const EmploymentRequest());
-                         },
-                         child:ItemWidget(icon: 'assets/images/employment.svg',title: 'employment'.tr,),
 
                        ),
                        Container(
@@ -228,20 +215,7 @@ class RequestsPage extends StatelessWidget {
                          child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody'.tr,),
 
                        ),
-                       appController.deployingForApple ? const SizedBox() : Container(
-                         width: double.infinity,
-                         height: 0.5,
-                         decoration: BoxDecoration(
-                             color: Colors.grey.withOpacity(0.1)
-                         ),
-                       ),
-                       appController.deployingForApple ? const SizedBox() : InkWell(
-                         onTap: (){
-                           Get.to(()=>const CustodyLeavingOrder());
-                         },
-                         child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody_leaving'.tr,),
-
-                       ),
+                       // extraItems()
                      ],
                    ),
                  ),
@@ -256,6 +230,42 @@ class RequestsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget extraItems(){
+  return Column(
+    children: [
+      Container(
+        width: double.infinity,
+        height: 0.5,
+        decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.1)
+        ),
+      ),
+      InkWell(
+        onTap: (){
+          Get.to(()=>const EmploymentRequest());
+        },
+        child:ItemWidget(icon: 'assets/images/employment.svg',title: 'employment'.tr,),
+
+      ),
+
+      Container(
+        width: double.infinity,
+        height: 0.5,
+        decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.1)
+        ),
+      ),
+      InkWell(
+        onTap: (){
+          Get.to(()=>const CustodyLeavingOrder());
+        },
+        child:ItemWidget(icon: 'assets/images/custody.svg',title: 'custody_leaving'.tr,),
+
+      ),
+    ],
+  );
 }
 
 class ItemWidget extends StatelessWidget {

@@ -32,7 +32,6 @@ extension FormatedDateTimeExtension on String {
 
   String get timeFromTimeSelection {
     var time = '-----';
-    println('===== ==== ==== timeFromTimeSelection $this');
     if (isNotEmpty) {
       var timeList = this.split(':');
       int hours = int.tryParse(timeList[0]) ?? 0;

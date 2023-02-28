@@ -35,8 +35,13 @@ class AppUrls {
 
   //{{domain}}/get_holiday_types
   static const String getHolidayTypes = '$_apiVrsion/get_holiday_types';
+
   ///holiday/add
   static const String addHolidayRequest = '$_holidayApi/add';
+  //{{domain}}/holiday/update/22
+  static const String updateHolidayRequest = '$_holidayApi/update';
+  //{{domain}}/holiday/cancel/9
+  static const String cancelHolidayRequest = '$_holidayApi/cancel';
 
   //fingerprint_correction/add
   static const String addFingerPrintCorrection = '$_fingerprintCorrectionApi/add';

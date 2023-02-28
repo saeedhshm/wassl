@@ -56,4 +56,12 @@ class LetterDate implements Order{
   @override
   // TODO: implement reason
   String get reason => (_reason == null || _reason == '') ? 'unspecified' : (_reason ?? '');
+
+  @override
+  // TODO: implement orderStatus
+  int get statusID => status == null  ? 1 : status?.id ?? 1;
+
+  @override
+  // TODO: implement orderStatus
+  int get orderID =>  id ?? -1;
 }

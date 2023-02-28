@@ -241,10 +241,11 @@ Map<String,String>  arabicStrings = {
   'overtime_starts': 'العمل الإضافي يبدأ في' ,
   'OrderVisaData':'طلب تأشيرة',
   'required_before':'تطلب قبل',
-  '':'',
-  '':'',
-  '':'',
-  '':'',
-  '':'',
+  'starts':'يبدأ: ',
+  'ends':'ينتهي: ',
+  'OvertimeData':'طلب عمل إضافي',
+  'cannot_update_order':'لايمكن التعديل على هذا الطلب',
+  'request_updated':'تم تحديث الطلب بنجاح',
+  'request_canceled':'تم إلغاء الطلب بنجاح'
 
 } ;

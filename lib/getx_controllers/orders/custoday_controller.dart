@@ -42,7 +42,7 @@ class CustodyRequestController extends GetxController{
     // println(appController.appHeader);
 
     loading.value = true;
-    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addCustody, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addCustody, body: body,header: appController.appHeader,fileName: filePath);
     println(response.statusCode);
     println(await response.stream.bytesToString());
     loading.value = false;

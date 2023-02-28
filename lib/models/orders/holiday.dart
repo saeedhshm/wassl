@@ -66,15 +66,13 @@ class HolidaysData implements Order{
     final startDay = DateTime(int.parse(startDayARR[0]),int.parse(startDayARR[1]),int.parse(startDayARR[2]));
     final endDay = DateTime(int.parse(endDayARR[0]),int.parse(endDayARR[1]),int.parse(endDayARR[2]));
 
-    println('=-==-=--=-=-=-= startDay =-===-=-');
-    println(startDay);
-    println(endDay);
-    println('=-==-=--=-=-=-= startDay =-===-=-');
 
     final days = (endDay.difference(startDay).inDays + 1);
     difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : (days.toString() + ' ' + 'days'.tr);
     return difference;
   }
+
+  OrderType? get myOrderType => _holidayType;
 
   @override
   String get file => _file ?? '';
@@ -98,4 +96,12 @@ class HolidaysData implements Order{
   @override
   // TODO: implement reason
   String get reason => (_reason == null || _reason == '') ? 'unspecified' : (_reason ?? '');
+
+  @override
+  // TODO: implement orderStatus
+  int get statusID => status == null  ? 1 : status?.id ?? 1;
+
+  @override
+  // TODO: implement orderStatus
+  int get orderID =>  id ?? -1;
 }

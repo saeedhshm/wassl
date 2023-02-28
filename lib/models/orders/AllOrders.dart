@@ -8,6 +8,7 @@ import 'finger_print.dart';
 import 'holiday.dart';
 import 'letter.dart';
 import 'loan_order.dart';
+import 'over_time.dart';
 
 class AllOrders {
 
@@ -22,6 +23,7 @@ class AllOrders {
   List<AskPermissionsData> askPermissionsData = [];
   List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
   List<OrderVisaData> orderVisaData = [];
+  List<OvertimeData> overtimeData = [];
   String? message;
 
   AllOrders();
@@ -79,14 +81,22 @@ class AllOrders {
       });
     }
 
-    // orders.addAll(holidaysData);
+    if (json['OvertimeData'] != null) {
+
+      json['OvertimeData'].forEach((v) {
+        overtimeData.add( OvertimeData.fromJson(v));
+      });
+    }
+
+    orders.addAll(holidaysData);
     // orders.addAll(askPermissionsData);
     // orders.addAll(fingerprintCorrectionsData);
     // orders.addAll(custodyDate);
     // orders.addAll(financialExpensesDate);
     // orders.addAll(letterDate);
     // orders.addAll(loansData);
-    orders.addAll(orderVisaData);
+    // orders.addAll(orderVisaData);
+    // orders.addAll(overtimeData);
 
     message = json['message'];
   }
@@ -102,6 +112,8 @@ abstract class Order{
   String get orderStatus;
   String get reason;
   String get file;
+  int get statusID;
+  int get orderID;
 }
 
 

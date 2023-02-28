@@ -21,6 +21,7 @@ class HolidayController extends GetxController{
   OrderType? selectedType;
   String? filePath;
   var loadingHolidayTypes = false.obs;
+  var loading = false.obs;
   String? holidayReason;
 
 
@@ -57,12 +58,55 @@ class HolidayController extends GetxController{
 
     println(body);
     println(appController.appHeader);
-  var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addHolidayRequest, body: body,header: appController.appHeader,fileName: filePath);
+  var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addHolidayRequest, body: body,header: appController.appHeader,fileName: filePath);
   if(response.statusCode != 200){
     throw NoDataAvailableException();
   }
   }
 
+  Future updateHolidayRequest(String orderId) async{
+    if(selectedType == null){
+      throw ChooseTypeException();
+    }
+
+    if(startDate == null){
+      throw StartDateException();
+    }
+    if(endDate == null){
+      throw EndDateException();
+    }
+    if(holidayReason == null || holidayReason?.trim() == ''){
+      throw EnterReasonException();
+    }
+
+    // body parameters
+
+    var body = {
+      'type':'${selectedType?.id}',
+      'holiday_start':'${startDate?.year}-${startDate?.month}-${startDate?.day}',
+      'holiday_end':'${endDate?.year}-${endDate?.month}-${endDate?.day}',
+      'reason':'$holidayReason'
+    };
+
+    println(body);
+    println(appController.appHeader);
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateHolidayRequest}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
+
+  Future cancelHolidayRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelHolidayRequest}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelHolidayRequest}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
 
   getHolidaysTypes() async {
 

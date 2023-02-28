@@ -42,7 +42,7 @@ class OverTimeController extends GetxController{
     println(AppUrls.addOvertimeApi);
 
     loading.value = true;
-    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addOvertimeApi, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addOvertimeApi, body: body,header: appController.appHeader,fileName: filePath);
     println(response.statusCode);
     println(await response.stream.bytesToString());
     loading.value = false;

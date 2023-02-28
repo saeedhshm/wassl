@@ -29,7 +29,7 @@ class AppApiHandler {
     return response;
   }
 
-  static Future<http.Response> sendData(
+  static Future<http.Response> postData(
       {required String url,
       required dynamic body,
       Map<String, String>? header}) async {
@@ -44,7 +44,23 @@ class AppApiHandler {
     return response;
   }
 
-  static Future<http.StreamedResponse> sendDataWithFile(
+
+  static Future<http.Response> putData(
+      {required String url,
+        dynamic body,
+        Map<String, String>? header}) async {
+    var uri = Uri.parse(url);
+
+    bool result = await InternetConnectionChecker().hasConnection;
+    if(!result) {
+      throw NoInternetException();
+    }
+    final response = await http.put(uri, body: body, headers: header);
+
+    return response;
+  }
+
+  static Future<http.StreamedResponse> postDataWithFile(
       {required String url,
         required dynamic body,
         Map<String, String>? header,String? fileName}) async {
@@ -67,9 +83,11 @@ class AppApiHandler {
     println('=-0=0=-0=-0=-0==-n adding body');
     request.fields.addAll(body);
 
-    if(fileName != null){
-      request.files.add(await http.MultipartFile.fromPath(
-          'file', fileName));
+    if(fileName != null ){
+      if(!fileName.contains('public/file/')) {
+        request.files.add(await http.MultipartFile.fromPath(
+            'file', fileName));
+      }
     }
     var response = await request.send();
     println('=-=-=-=-===m response.statusCode ${response.statusCode}');

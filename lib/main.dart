@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:month_year_picker/month_year_picker.dart';
-// import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
-import 'getx_controllers/calendar/calendar_controller.dart';
 import 'helpers/translation/local_strings.dart';
+import 'package:timezone/data/latest.dart' as tz;
+
 
 void main() {
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-
+  tz.initializeTimeZones();
   AppController appController = Get.put(AppController());
   runApp( MyApp());
 }
@@ -50,10 +50,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         fontFamily: 'AraHamah',
       ),
-      home:  Obx(()=>IgnorePointer(
-        ignoring: appController.loading.value,
-        child: const SplashScreen(),
-      )),
+      home:   SplashScreen(),
     );
   }
 }

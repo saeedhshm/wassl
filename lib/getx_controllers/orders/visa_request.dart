@@ -84,7 +84,7 @@ class VisaRequestController extends GetxController{
 
 
     loading.value = true;
-    var response = await  AppApiHandler.sendDataWithFile(url: AppUrls.addVisa, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addVisa, body: body,header: appController.appHeader,fileName: filePath);
     println(response.statusCode);
     println(await response.stream.bytesToString());
     loading.value = false;

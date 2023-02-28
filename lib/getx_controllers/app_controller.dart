@@ -38,7 +38,7 @@ class AppController extends GetxController{
 
 
     loading.value = true;
-   final response = await AppApiHandler.sendData(url: AppUrls.login, body: {
+   final response = await AppApiHandler.postData(url: AppUrls.login, body: {
       'email':email,
       'password':password
     });
@@ -96,7 +96,7 @@ class AppController extends GetxController{
       'bearer ${loginModel.value.token?.accessToken}',
       "x-localization": 'lang_code'.tr,
     };
-    final response = await AppApiHandler.sendData(url: AppUrls.changePassword,header: headers ,body: {
+    final response = await AppApiHandler.postData(url: AppUrls.changePassword,header: headers ,body: {
       'currentPassword':currentPassword,
       'password':newPassword,
       'confirmPassword':newPassword

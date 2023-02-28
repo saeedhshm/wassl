@@ -11,6 +11,8 @@ import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
+import 'package:timezone/standalone.dart' as tz;
+
 
 class HomeController extends GetxController{
 
@@ -51,7 +53,7 @@ class HomeController extends GetxController{
     println(url);
     println(body);
 
-    final response = await AppApiHandler.sendData(url: url, body: body,header: headers);
+    final response = await AppApiHandler.postData(url: url, body: body,header: headers);
 
     sendingAttendance.value = false;
     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
@@ -140,9 +142,14 @@ class HomeController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    // tz.timeZoneDatabase.locations.forEach((key, value) {
+    //   println('key $key, location: ${value.name}');
+    // });
+    final detroit = tz.getLocation('Asia/Riyadh');
+    // dt.value = tz.TZDateTime.from(dt.value, detroit);
     checkForAttendance();
     Timer.periodic(Duration(seconds: 1), (timer) {
-      dt.value = DateTime.now();
+      dt.value = tz.TZDateTime.from(DateTime.now(), detroit);
     });
    appController.determinePosition();
   }

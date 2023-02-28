@@ -220,8 +220,7 @@ class ExtraWorkRequest extends StatelessWidget {
      try{
        await controller.addNewRequest();
        SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
-       return;
-       Future.delayed(Duration(milliseconds: 4600),(){
+       Future.delayed(const Duration(milliseconds: 4600),(){
          Get.back();
        });
      }on NoInternetException catch(e){

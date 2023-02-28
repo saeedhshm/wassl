@@ -1,44 +1,37 @@
-import 'package:get/get.dart';
-
 import 'AllOrders.dart';
 import 'order_status.dart';
-import 'order_type.dart';
 
-
-
-class OrderVisaData  implements Order{
+class OvertimeData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  OrderType? _type;
-  OrderType? _visaTime;
-  String? requiredBefore;
-  String? ticket;
-  OrderType? _ticketType;
-  String? goDate;
-  String? backDate;
+  String? startTime;
+  String? endTime;
+  String? date;
   String? _reason;
   Status? status;
   String? _file;
   String? createdAt;
   String? updatedAt;
 
+  OvertimeData(
+      {this.id,
+        this.employeeId,
+        this.displayOrdersTo,
+        this.startTime,
+        this.endTime,
+        this.date,
+        this.status,
+        this.createdAt,
+        this.updatedAt});
 
-
-  OrderVisaData.fromJson(Map<String, dynamic> json) {
+  OvertimeData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    _type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
-    _visaTime =
-    json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null;
-    requiredBefore = json['required_before'];
-    ticket = json['ticket'];
-    _ticketType = json['ticket_type'] != null
-        ? OrderType.fromJson(json['ticket_type'])
-        : null;
-    goDate = json['go_date'];
-    backDate = json['back_date'];
+    startTime = json['start_time'];
+    endTime = json['end_time'];
+    date = json['date'];
     _reason = json['reason'];
     status =
     json['status'] != null ? Status.fromJson(json['status']) : null;
@@ -47,23 +40,18 @@ class OrderVisaData  implements Order{
     updatedAt = json['updated_at'];
   }
 
-  String get visaType => _type?.name ?? '';
-  String get ticketType => _ticketType?.name != null ? 'ticket_type'.tr + ': '+'${_ticketType?.name}' : 'without_ticket'.tr;
-  String get visaTime => _visaTime?.name ?? '';
 
-  bool get hasTicket => (ticket ?? '') == 'on';
-  bool get hasBackTicket => (backDate ?? '') != '';
 
   @override
   String get file => _file ?? '';
 
   @override
   // TODO: implement orderType
-  String get orderType => 'OrderVisaData';
+  String get orderType => 'OvertimeData';
   @override
   // TODO: implement orderDate
   String get orderDate {
-    return (requiredBefore ?? '').split('T')[0];
+    return (date ?? '').split('T')[0];
   }
 
   @override
@@ -84,7 +72,3 @@ class OrderVisaData  implements Order{
   int get orderID =>  id ?? -1;
 
 }
-
-
-
-
