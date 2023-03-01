@@ -8,10 +8,10 @@ class LoansData implements Order{
   int? employeeId;
   int? displayOrdersTo;
   OrderType? type;
-  int? amount;
+  dynamic amount;
   String? month;
   String? monthlyInstallment;
-  int? installmentAmount;
+  dynamic installmentAmount;
   String? _reason;
   Status? status;
   dynamic _file;

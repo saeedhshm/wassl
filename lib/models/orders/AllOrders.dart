@@ -94,9 +94,9 @@ class AllOrders {
     // orders.addAll(custodyDate);
     // orders.addAll(financialExpensesDate);
     // orders.addAll(letterDate);
-    // orders.addAll(loansData);
-    // orders.addAll(orderVisaData);
-    orders.addAll(overtimeData);
+    orders.addAll(loansData);
+    orders.addAll(orderVisaData);
+    // orders.addAll(overtimeData);
 
     message = json['message'];
   }

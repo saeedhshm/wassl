@@ -10,11 +10,14 @@ class OrderVisaData  implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  OrderType? _type;
-  OrderType? _visaTime;
+
+  OrderType? orderVisaType;
+  OrderType? orderVisaTime;
+  OrderType? orderVisaTicketType;
+
   String? requiredBefore;
   String? ticket;
-  OrderType? _ticketType;
+
   String? goDate;
   String? backDate;
   String? _reason;
@@ -29,12 +32,12 @@ class OrderVisaData  implements Order{
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    _type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
-    _visaTime =
+    orderVisaType = json['type'] != null ? OrderType.fromJson(json['type']) : null;
+    orderVisaTime =
     json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null;
     requiredBefore = json['required_before'];
     ticket = json['ticket'];
-    _ticketType = json['ticket_type'] != null
+    orderVisaTicketType = json['ticket_type'] != null
         ? OrderType.fromJson(json['ticket_type'])
         : null;
     goDate = json['go_date'];
@@ -47,9 +50,9 @@ class OrderVisaData  implements Order{
     updatedAt = json['updated_at'];
   }
 
-  String get visaType => _type?.name ?? '';
-  String get ticketType => _ticketType?.name != null ? 'ticket_type'.tr + ': '+'${_ticketType?.name}' : 'without_ticket'.tr;
-  String get visaTime => _visaTime?.name ?? '';
+  String get visaType => orderVisaType?.name ?? '';
+  String get ticketType => orderVisaTicketType?.name != null ? 'ticket_type'.tr + ': '+'${orderVisaTicketType?.name}' : 'without_ticket'.tr;
+  String get visaTime => orderVisaTime?.name ?? '';
 
   bool get hasTicket => (ticket ?? '') == 'on';
   bool get hasBackTicket => (backDate ?? '') != '';

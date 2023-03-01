@@ -57,6 +57,10 @@ class AppUrls {
   static const String getLoansTypes = '$_apiVrsion/get_loan_types';
   //loan/add
   static const String addLoan = '$_loanApi/add';
+  //{{domain}}/loan/update/7
+  static const String updateLoan = '$_loanApi/update';
+  // {{domain}}/loan/cancel/9
+  static const String cancelLoan = '$_loanApi/cancel';
 
 
   //{{domain}}/get_letter_types
@@ -103,6 +107,12 @@ class AppUrls {
   static const String getVisaTypes = '$_apiVrsion/get_visa_types';
   //{{domain}}/visa/add
   static const String addVisa = '$_visaApi/add';
+  //{{domain}}/visa/update/3
+  static const String updateVisa = '$_visaApi/update';
+  //{{domain}}/visa/cancel/3
+  static const String cancelVisa = '$_visaApi/cancel';
+
+
 
   //{{domain}}/overtime/add
   static const String addOvertimeApi = '$_overtimeApi/add';

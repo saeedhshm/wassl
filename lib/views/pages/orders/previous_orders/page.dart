@@ -18,6 +18,8 @@ import '../pages/extra_work.dart';
 import '../pages/finance_spended_request.dart';
 import '../pages/holday_request.dart';
 import '../pages/letter_request.dart';
+import '../pages/loan_order.dart';
+import '../pages/visa_request.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
 
@@ -210,7 +212,20 @@ class OrderWidget extends StatelessWidget {
               },));
               break;
             case 'LoansData':
-              println('order is LoansData');
+              Get.to(()=> NewLoanOrder(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
             case 'OvertimeData':
               Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
@@ -229,7 +244,20 @@ class OrderWidget extends StatelessWidget {
               },));
               break;
             case 'OrderVisaData':
-              println('order is OrderVisaData');
+              Get.to(()=> VisaRequestPage(order: order,onClose: (){
+                final PreviousRequestsController controller = Get.find();
+                Future.delayed(Duration.zero,()async{
+                  try{
+                    await controller.getAllOrders();
+                  }on NoDataAvailableException catch (e){
+                    println('============ getall orders =========');
+                    println(e);
+                    println('============ getall orders =========getall orders =========');
+                  }finally{
+                    controller.appController.loading.value = false;
+                  }
+                });
+              },));
               break;
 
           }

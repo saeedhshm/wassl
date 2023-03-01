@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
+import '../../helpers/exceptions/no_internet.dart';
 import '../../models/orders/order_type.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
@@ -20,9 +21,11 @@ class VisaRequestController extends GetxController{
   var ticketTypes = OrderTypesRetriever().obs;
   var haveTicket = true.obs;
   var goAndBackTicket = true.obs;
+
   OrderType? selectedType;
   OrderType? selectedTime;
   OrderType? selectedTicketType;
+
   DateTime? dateBefore;
   DateTime? goDate;
   DateTime? backDate;
@@ -94,6 +97,81 @@ class VisaRequestController extends GetxController{
 
   }
 
+  Future updateRequest(String orderId) async{
+
+
+    if(selectedType == null) {
+      throw CustomException(errorMessage: 'visa_type_exception');
+    }
+    if(selectedTime == null){
+      throw CustomException(errorMessage: 'visa_time_exception');
+    }
+    if(dateBefore == null){
+      throw CustomException(errorMessage: 'date_before_exception');
+    }
+    if(haveTicket.value){
+      if(selectedTicketType == null){
+        throw CustomException(errorMessage: 'ticket_type_exception');
+      }
+      if(goDate == null){
+        throw CustomException(errorMessage: 'go_date_exception');
+      }
+      if(goAndBackTicket.value){
+        if(backDate == null){
+          throw CustomException(errorMessage: 'back_date_exception');
+        }
+      }
+    }
+
+    if(reason == null || reason == ''){
+      throw CustomException(errorMessage:'reason_exception');
+    }
+
+    var body = {
+      'type': '${selectedType?.id}',
+      'visa_time': '${selectedTime?.id}',
+      'required_before': '${dateBefore?.year}-${dateBefore?.month}-${dateBefore?.day}',
+      'reason': '$reason'
+    };
+    if(haveTicket.value){
+      body.addAll({
+        'ticket': 'on',
+        'ticket_type': '${selectedTicketType?.id}',
+        'go_date': '${goDate?.year}-${goDate?.month}-${goDate?.day}',
+      });
+    }
+    if(goAndBackTicket.value){
+      body.addAll({
+        'back_date': '${backDate?.year}-${backDate?.month}-${backDate?.day}',
+      });
+    }
+
+
+
+
+
+    loading.value = true;
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateVisa}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    println(response.statusCode);
+    println(await response.stream.bytesToString());
+    loading.value = false;
+    if(response.statusCode != 200){
+      throw CustomException();
+    }
+
+  }
+
+  Future cancelRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelOvertimeApi}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelVisa}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
 
   getTypes() async {
 

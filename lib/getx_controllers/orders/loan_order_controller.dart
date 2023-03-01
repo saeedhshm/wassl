@@ -81,6 +81,71 @@ class LoanOrderController extends GetxController{
 
   }
 
+  Future updateRequest(String orderId) async {
+
+
+    // [8:24 am, 15/02/2023] محمد مبارك السودان: 1 = سكني
+    // [8:24 am, 15/02/2023] محمد مبارك السودان: 2 = شخصي
+    // [8:24 am, 15/02/2023] محمد مبارك السودان: 3 = عاجل
+    // [8:25 am, 15/02/2023] محمد مبارك السودان: 4 = مصاريف سفر
+
+    if(selectedType == null){
+      throw CustomException(errorMessage:'loanType_exception');
+    }
+    if(amount == null || amount == ''){
+      throw CustomException(errorMessage:'amount_exception');
+    }
+    if(loanStartingDate == null){
+      throw CustomException(errorMessage:'loanStartingDate_exception');
+    }
+    if(installmentMonthlyAmount == null || installmentMonthlyAmount == ''){
+      throw CustomException(errorMessage:'installmentMonthlyAmount_exception');
+    }
+
+    if(monthlyInstallmentMethod == null || monthlyInstallmentMethod == ''){
+      throw CustomException(errorMessage:'installmentMonthlyMethod_exception');
+    }
+    if(reason == null || reason == ''){
+      throw CustomException(errorMessage:'reason_exception');
+    }
+
+    var body = {
+      'type':"${selectedType?.id}",
+      'amount':"$amount",
+      'month':"${loanStartingDate?.year}-${loanStartingDate?.month}-${loanStartingDate?.day}",
+      'monthly_installment':"$monthlyInstallmentMethod",
+      'installment_amount':"$installmentMonthlyAmount",
+      'reason':"$reason",
+    };
+    // loading.value = true;
+
+    println(body);
+    println(appController.appHeader);
+
+    loading.value = true;
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLoan}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    println(response.statusCode);
+    println(await response.stream.bytesToString());
+    loading.value = false;
+    if(response.statusCode != 200){
+      throw CustomException();
+    }
+
+
+  }
+
+  Future cancelRequest(String orderId) async{
+
+
+    println('${AppUrls.cancelOvertimeApi}/$orderId');
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelLoan}/$orderId',header: appController.appHeader, );
+    println(response.statusCode);
+    println(response.body);
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+  }
+
   getLoansTypes() async {
 
     loadingLoansTypes.value = true;
