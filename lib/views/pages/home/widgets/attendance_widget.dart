@@ -14,6 +14,9 @@ import '../../../reusable_widgets/snack_bars.dart';
 
 class AttendanceWidget extends StatelessWidget {
   final HomeController controller = Get.find();
+
+  Map<String, dynamic> _deviceData = <String, dynamic>{};
+
   AttendanceWidget({Key? key}) : super(key: key);
 
   @override
@@ -96,7 +99,7 @@ class AttendanceWidget extends StatelessWidget {
                         );
                       }
                     } on LocationDeniedException {
-                      println('denied location');
+                      SnackBars.showErrorSnackBar('error'.tr, 'LocationDeniedException');
                     } catch (e) {
                       Get.defaultDialog(
                         title: 'location_error'.tr,

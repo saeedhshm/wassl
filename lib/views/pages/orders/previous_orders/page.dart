@@ -33,6 +33,7 @@ class PreviousRequestsPage extends StatefulWidget {
 }
 
 class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
+
   final PreviousRequestsController controller = Get.put(PreviousRequestsController());
 
 
@@ -84,7 +85,7 @@ class OrdersListWidget extends StatelessWidget {
    OrdersListWidget({
     Key? key,
   }) : super(key: key);
-  final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
+   final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,9 +106,11 @@ class OrdersListWidget extends StatelessWidget {
 }
 
 class OrderWidget extends StatelessWidget {
+
+  final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
   
   final Order order;
-  const OrderWidget(this.order,{Key? key}) : super(key: key);
+   OrderWidget(this.order,{Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -266,6 +269,20 @@ class OrderWidget extends StatelessWidget {
         }
       },
         child: PreviousRequestsItemWidget(order: order)) ;
+  }
+
+  retrieveAllOrders() async{
+    Future.delayed(Duration.zero,()async{
+      try{
+        await controller.getAllOrders();
+      }on NoDataAvailableException catch (e){
+        println('============ getall orders =========');
+        println(e);
+        println('============ getall orders =========getall orders =========');
+      }finally{
+        controller.appController.loading.value = false;
+      }
+    });
   }
 }
 

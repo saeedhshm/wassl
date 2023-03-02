@@ -54,6 +54,7 @@ dependencies:
   file_picker: ^5.2.5
   month_year_picker: ^0.2.0+3
   timezone: ^0.9.1
+  device_info_plus: ^8.1.0
 
 dev_dependencies:
   flutter_test:

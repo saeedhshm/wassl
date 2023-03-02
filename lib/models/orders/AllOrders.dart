@@ -88,15 +88,15 @@ class AllOrders {
       });
     }
 
-    // orders.addAll(holidaysData);
-    // orders.addAll(askPermissionsData);
-    // orders.addAll(fingerprintCorrectionsData);
-    // orders.addAll(custodyDate);
-    // orders.addAll(financialExpensesDate);
-    // orders.addAll(letterDate);
+    orders.addAll(holidaysData);
+    orders.addAll(askPermissionsData);
+    orders.addAll(fingerprintCorrectionsData);
+    orders.addAll(custodyDate);
+    orders.addAll(financialExpensesDate);
+    orders.addAll(letterDate);
     orders.addAll(loansData);
     orders.addAll(orderVisaData);
-    // orders.addAll(overtimeData);
+    orders.addAll(overtimeData);
 
     message = json['message'];
   }

@@ -48,19 +48,21 @@ class HomeController extends GetxController{
       url = AppUrls.attendance;
 
     }
+    var listOfErrors = <String>[];
+    listOfErrors.clear();
+    listOfErrors.addAll(appController.listOfErrors);
 
-    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
-    println(url);
-    println(body);
+    appController.listOfErrors.clear();
+    appController.listOfErrors.addAll(listOfErrors);
+    appController.listOfErrors.add('url: $url');
+    appController.listOfErrors.add('body: $body');
 
     final response = await AppApiHandler.postData(url: url, body: body,header: headers);
 
     sendingAttendance.value = false;
-    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
-    println(url);
-    println(response.statusCode);
-    println(response.body);
-    println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendance');
+    appController.listOfErrors.add('response.statusCode  ${response.statusCode }');
+    appController.listOfErrors.add('response.body  ${response.body }');
+
     if(response.statusCode == 200){
 
       var json = jsonDecode(response.body);
@@ -91,17 +93,11 @@ class HomeController extends GetxController{
    sendingAttendance.value = true;
    var response = await AppApiHandler.getData(url: url, header: headers);
    sendingAttendance.value = false;
-   println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
-   println(url);
-   println(response.statusCode);
-   println(response.body);
-   println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
+
    if(response.statusCode == 200){
      var json = jsonDecode(response.body);
      attendanceChecker = AttendanceChecker.fromJson(json);
-     println('=-=-===>>>>>>>>>>>>>>>>>>>> AppUrls.attendanceCheck');
-     println(attendanceChecker.attendanceStatus);
-     println(attendanceChecker.message);
+
      attendanceStatus.value = attendanceChecker.attendanceStatus ?? 0;
    }
 

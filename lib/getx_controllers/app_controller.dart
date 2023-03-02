@@ -21,6 +21,8 @@ class AppController extends GetxController{
 
   // var loaginSuccessed = false.obs;
 
+  var listOfErrors = <String>[].obs;
+
   var canUpdate = false;
   var appURL = '';
 
@@ -153,16 +155,10 @@ class AppController extends GetxController{
 
   void checkVersion() async {
     var value = await _checker.checkUpdate();
-    println('][][][][][][][][][][]][][][][]');
+
     canUpdate = value.canUpdate;
     appURL = value.appURL ?? '';
-    println(value.canUpdate); //return true if update is available
-    println(value.currentVersion); //return current app version
-    println(value.newVersion); //return the new app version
 
-    println(value.appURL); //return the app url
-    println(value.errorMessage); //return error message if found else it will return null
-    println('][][][][][][][][][][]][][][][]');
   }
 
   gotoStore() async {
@@ -187,11 +183,13 @@ class AppController extends GetxController{
     LocationPermission permission;
 
     // Test if location services are enabled.
+    listOfErrors.add('enter determinePosition');
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
+      listOfErrors.add('serviceEnabled is false');
       throw LocationDisabledException();
       // return Future.error('Location services are disabled.');
     }
@@ -208,7 +206,7 @@ class AppController extends GetxController{
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-
+        listOfErrors.add(' LocationPermission.denied is LocationDeniedException');
         throw LocationDeniedException();
         // return permission;
       }
@@ -216,7 +214,7 @@ class AppController extends GetxController{
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-
+      listOfErrors.add('permission == LocationPermission.deniedForever');
       throw LocationDisabledException();
       // return permission;
     }
@@ -225,6 +223,7 @@ class AppController extends GetxController{
     // continue accessing the position of the device.
 
     position = await Geolocator.getCurrentPosition();
+    listOfErrors.add('getCurrentPosition lat: ${position?.latitude} long: ${position?.longitude}');
     return permission;
   }
 
