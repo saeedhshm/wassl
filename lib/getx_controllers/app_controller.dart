@@ -121,9 +121,11 @@ class AppController extends GetxController{
      'bearer ${loginModel.value.token?.accessToken}',
      // "x-localization": 'lang_code'.tr,
    };
+   loading.value = true;
    final response = await AppApiHandler.getData(url: AppUrls.logout,header: headers,);
 
    println(response.body);
+   loading.value = false;
    if(response.statusCode == 200){
      final prefs = await SharedPreferences.getInstance();
      await prefs.setString(appStorageEmail, 'null');
