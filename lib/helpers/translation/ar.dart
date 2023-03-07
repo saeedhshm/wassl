@@ -242,6 +242,8 @@ Map<String,String>  arabicStrings = {
   'OrderVisaData':'طلب تأشيرة',
   'required_before':'تطلب قبل',
   'starts':'يبدأ: ',
+  'SA':'السعودية',
+  'EG':'مصر',
   'ends':'ينتهي: ',
   'OvertimeData':'طلب عمل إضافي',
   'cannot_update_order':'لايمكن التعديل على هذا الطلب',

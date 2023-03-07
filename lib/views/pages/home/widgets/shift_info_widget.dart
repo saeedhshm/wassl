@@ -11,9 +11,9 @@ class ShiftInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Obx(() => Column(
       children: [
-        Text('egypt'.tr,style: const TextStyle(
+        Text(controller.appController.loginModel.value.user!.branch?.nameAr ?? '',style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold
@@ -32,6 +32,6 @@ class ShiftInfoWidget extends StatelessWidget {
         ),),
 
       ],
-    );
+    ));
   }
 }

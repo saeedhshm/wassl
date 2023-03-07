@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,6 +24,8 @@ class AppController extends GetxController{
 
   var canUpdate = false;
   var appURL = '';
+
+  var countryCode = ''.obs;
 
   var loginModel = LoginModel().obs;
   var rememberMe = true;
@@ -157,6 +158,12 @@ class AppController extends GetxController{
 
   void checkVersion() async {
     var value = await _checker.checkUpdate();
+    println('return true if update is available ${value.canUpdate}'); //return true if update is available
+    println('return current app version ${value.currentVersion}'); //return current app version
+    println('return the new app version ${value.newVersion}'); //return the new app version
+    println('return the app url ${value.appURL}'); //return the app url
+    println('return error message if found else it will return null ${value.errorMessage}'); //return error message if found else it will return null
+
 
     canUpdate = value.canUpdate;
     appURL = value.appURL ?? '';
@@ -226,6 +233,11 @@ class AppController extends GetxController{
 
     position = await Geolocator.getCurrentPosition();
     listOfErrors.add('getCurrentPosition lat: ${position?.latitude} long: ${position?.longitude}');
+
+    // final coordinates = new Coordinates(position.latitude, position.longitude);
+    // var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    // var first = addresses.first;
+    // return first.countryName; // this will return country name
     return permission;
   }
 

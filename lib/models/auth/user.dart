@@ -1,4 +1,3 @@
-
 class User {
   int? id;
   int? jobId;
@@ -37,51 +36,47 @@ class User {
   String? email;
   String? typeId;
   Schedule? schedule;
+  Branch? branch;
 
+  User(
+      {this.id,
+        this.jobId,
+        this.companyId,
+        this.branchId,
+        this.nationalityId,
+        this.photo,
+        this.code,
+        this.status,
+        this.gender,
+        this.dateOfBirth,
+        this.dateOfJoining,
+        this.number,
+        this.qualification,
+        this.emergencyNumber,
+        this.panNumber,
+        this.fullNameEn,
+        this.currentAddress,
+        this.permanentAddress,
+        this.formalities,
+        this.offerAcceptance,
+        this.probationPeriod,
+        this.dateOfConfirmation,
+        this.departmentId,
+        this.salary,
+        this.accountNumber,
+        this.bankName,
+        this.unNumber,
+        this.dateOfResignation,
+        this.noticePeriod,
+        this.lastWorkingDay,
+        this.fullFinal,
+        this.createdAt,
+        this.updatedAt,
+        this.email,
+        this.typeId,
+        this.schedule,
+        this.branch});
 
-
-  // User(
-  //     {this.id,
-  //       this.jobId,
-  //       this.companyId,
-  //       this.branchId,
-  //       this.nationalityId,
-  //       this.photo,
-  //       this.code,
-  //       this.fullName,
-  //       this.status,
-  //       this.gender,
-  //       this.dateOfBirth,
-  //       this.dateOfJoining,
-  //       this.number,
-  //       this.qualification,
-  //       this.emergencyNumber,
-  //       this.panNumber,
-  //       this.fullNameEn,
-  //       this.currentAddress,
-  //       this.permanentAddress,
-  //       this.formalities,
-  //       this.offerAcceptance,
-  //       this.probationPeriod,
-  //       this.dateOfConfirmation,
-  //       this.departmentId,
-  //       this.salary,
-  //       this.accountNumber,
-  //       this.bankName,
-  //       this.unNumber,
-  //       this.dateOfResignation,
-  //       this.noticePeriod,
-  //       this.lastWorkingDay,
-  //       this.fullFinal,
-  //       this.createdAt,
-  //       this.updatedAt,
-  //       this.email,
-  //       this.typeId,
-  //       this.schedule});
-
-  String get fullName{
-    return _fullName ?? '';
-  }
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     jobId = json['job_id'];
@@ -122,6 +117,8 @@ class User {
     schedule = json['schedule'] != null
         ? new Schedule.fromJson(json['schedule'])
         : null;
+    branch =
+    json['branch'] != null ? new Branch.fromJson(json['branch']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -133,7 +130,7 @@ class User {
     data['nationality_id'] = this.nationalityId;
     data['photo'] = this.photo;
     data['code'] = this.code;
-    data['full_name'] = _fullName;
+    data['full_name'] = this._fullName;
     data['status'] = this.status;
     data['gender'] = this.gender;
     data['date_of_birth'] = this.dateOfBirth;
@@ -165,8 +162,16 @@ class User {
     if (this.schedule != null) {
       data['schedule'] = this.schedule!.toJson();
     }
+    if (this.branch != null) {
+      data['branch'] = this.branch!.toJson();
+    }
     return data;
   }
+
+  String get fullName{
+    return _fullName ?? '';
+  }
+
 }
 
 class Schedule {
@@ -233,6 +238,43 @@ class Info {
     data['week_end_days'] = this.weekEndDays;
     data['time_in'] = this.timeIn;
     data['time_out'] = this.timeOut;
+    return data;
+  }
+}
+
+class Branch {
+  int? id;
+  int? companyId;
+  String? nameAr;
+  String? nameEn;
+  String? createdAt;
+  String? updatedAt;
+
+  Branch(
+      {this.id,
+        this.companyId,
+        this.nameAr,
+        this.nameEn,
+        this.createdAt,
+        this.updatedAt});
+
+  Branch.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    companyId = json['company_id'];
+    nameAr = json['name_ar'];
+    nameEn = json['name_en'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['company_id'] = this.companyId;
+    data['name_ar'] = this.nameAr;
+    data['name_en'] = this.nameEn;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
