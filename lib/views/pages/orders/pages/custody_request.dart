@@ -11,6 +11,7 @@ import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/custoday.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -266,7 +267,11 @@ class CustodyRequestPage extends StatelessWidget {
               child: const Center(
                 child: SendingLoadingWidget(),
               ))
-              : SizedBox()
+              : const SizedBox(),
+          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
+            ////
+            controller.errorsList.clear();
+          }): const SizedBox()
         ],
       )),
     );

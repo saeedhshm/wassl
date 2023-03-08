@@ -15,6 +15,7 @@ import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/finger_print.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -385,7 +386,11 @@ class CorrectingFingerprintRequest extends StatelessWidget {
           child: const Center(
             child: SendingLoadingWidget(),
           ),
-        ):const SizedBox()
+        ):const SizedBox(),
+        controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
+          ////
+          controller.errorsList.clear();
+        }): const SizedBox()
       ],
     ));
   }

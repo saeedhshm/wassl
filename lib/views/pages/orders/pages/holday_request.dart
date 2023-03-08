@@ -17,6 +17,7 @@ import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -110,7 +111,7 @@ class HolidayRequestPage extends StatelessWidget {
                                 children: [
                                   Expanded(child: InkWell(
                                     onTap: () async {
-                                      var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2100));
+                                      var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
                                       controller.startDate = selectedDate ?? controller.startDate;
                                       if(controller.startDate != null){
                                         startDateCtrl.text = '${controller.startDate?.year}-${controller.startDate?.month}-${controller.startDate?.day} ';
@@ -130,7 +131,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   Expanded(child: InkWell(
                                     onTap: () async {
                                       if(controller.startDate != null){
-                                        var selectedDate = await showDatePicker(context: context, initialDate: controller.startDate ?? DateTime.now(), firstDate: controller.startDate ?? DateTime.now(), lastDate: DateTime(2100));
+                                        var selectedDate = await showDatePicker(context: context, initialDate: controller.startDate ?? DateTime.now(), firstDate: controller.startDate ?? DateTime(2000), lastDate: DateTime(2100));
                                         controller.endDate = selectedDate ?? controller.endDate;
                                         if(controller.endDate != null){
                                           endDateCtrl.text = '${controller.endDate?.year}-${controller.endDate?.month}-${controller.endDate?.day} ';
@@ -304,10 +305,14 @@ class HolidayRequestPage extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             color: Colors.black.withOpacity(0.3),
-            child: Center(
+            child: const Center(
               child: SendingLoadingWidget(),
             ),
-          ):SizedBox()
+          ):SizedBox(),
+          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
+           ////
+           controller.errorsList.clear();
+         }): const SizedBox()
         ],
       )),
     );

@@ -22,8 +22,8 @@ class TestHomePage extends StatefulWidget {
 }
 
 class _TestHomePageState extends State<TestHomePage> {
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  Map<String, dynamic> _deviceData = <String, dynamic>{};
+
+
   final CalendarController calendarController =  Get.put(CalendarController());
   final HomeController controller = Get.put(HomeController());
 
@@ -31,7 +31,7 @@ class _TestHomePageState extends State<TestHomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    initPlatformState();
+
   }
 
 
@@ -82,71 +82,7 @@ class _TestHomePageState extends State<TestHomePage> {
     );
   }
 
-  Future<void> initPlatformState() async {
-    var deviceData = <String, dynamic>{};
 
-    try {
-     
-        if (Platform.isAndroid) {
-          deviceData =
-              _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
-        } 
-    } on PlatformException {
-      deviceData = <String, dynamic>{
-        'Error:': 'Failed to get platform version.'
-      };
-    }
 
-    if (!mounted) return;
 
-    setState(() {
-      _deviceData = deviceData;
-    });
-  }
-
-  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
-    
-    controller.appController.listOfErrors.add('version.release: ${build.version.release},');
-    controller.appController.listOfErrors.add('brand: ${build.brand},');
-    controller.appController.listOfErrors.add('brand: ${build.model},');
-    controller.appController.listOfErrors.add('version.baseOS: ${build.version.baseOS},');
-
-    return <String, dynamic>{
-      'version.securityPatch': build.version.securityPatch,
-      'version.sdkInt': build.version.sdkInt,
-
-      'version.previewSdkInt': build.version.previewSdkInt,
-      'version.incremental': build.version.incremental,
-      'version.codename': build.version.codename,
-      'version.baseOS': build.version.baseOS,
-      'board': build.board,
-      'bootloader': build.bootloader,
-      'brand': build.brand,
-      'device': build.device,
-      'display': build.display,
-      'fingerprint': build.fingerprint,
-      'hardware': build.hardware,
-      'host': build.host,
-      'id': build.id,
-      'manufacturer': build.manufacturer,
-      'model': build.model,
-      'product': build.product,
-      'supported32BitAbis': build.supported32BitAbis,
-      'supported64BitAbis': build.supported64BitAbis,
-      'supportedAbis': build.supportedAbis,
-      'tags': build.tags,
-      'type': build.type,
-      'isPhysicalDevice': build.isPhysicalDevice,
-      'systemFeatures': build.systemFeatures,
-      'displaySizeInches':
-      ((build.displayMetrics.sizeInches * 10).roundToDouble() / 10),
-      'displayWidthPixels': build.displayMetrics.widthPx,
-      'displayWidthInches': build.displayMetrics.widthInches,
-      'displayHeightPixels': build.displayMetrics.heightPx,
-      'displayHeightInches': build.displayMetrics.heightInches,
-      'displayXDpi': build.displayMetrics.xDpi,
-      'displayYDpi': build.displayMetrics.yDpi,
-      'serialNumber': build.serialNumber,
-    };
-  }
 }

@@ -17,6 +17,7 @@ class OverTimeController extends GetxController{
   var endTime = ''.obs;
   String reason = '';
   String? filePath;
+  var errorsList = <String>[].obs;
 
   Future addNewRequest() async{
 
@@ -44,10 +45,15 @@ class OverTimeController extends GetxController{
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addOvertimeApi, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException(errorMessage: 'response.statusCode ${response.statusCode}');
     }
 
@@ -79,10 +85,15 @@ class OverTimeController extends GetxController{
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateOvertimeApi}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException(errorMessage: 'response.statusCode ${response.statusCode}');
     }
 
@@ -93,9 +104,13 @@ class OverTimeController extends GetxController{
 
     println('${AppUrls.cancelOvertimeApi}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelOvertimeApi}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      // errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${response.body}');
       throw NoDataAvailableException();
     }
   }

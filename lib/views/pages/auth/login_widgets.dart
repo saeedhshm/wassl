@@ -126,6 +126,8 @@ class _RestWidgetsState extends State<RestWidgets>  {
              }on UserNotFoundException catch(e){
 
                SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
+             } catch(e){
+               SnackBars.showErrorSnackBar('error'.tr, e.toString());
              }
              //
            }),),

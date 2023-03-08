@@ -24,6 +24,8 @@ class HolidayController extends GetxController{
   var loading = false.obs;
   String? holidayReason;
 
+  var errorsList = <String>[].obs;
+
 
 
 
@@ -57,9 +59,17 @@ class HolidayController extends GetxController{
     };
 
     println(body);
+
+    // throw NoDataAvailableException();
+    // return;
     println(appController.appHeader);
-  var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addHolidayRequest, body: body,header: appController.appHeader,fileName: filePath);
+  var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addHolidayRequest}', body: body,header: appController.appHeader,fileName: filePath);
   if(response.statusCode != 200){
+    errorsList.addAll(appController.listOfErrors);
+    errorsList.add('body: $body');
+    errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+    errorsList.add('response.statusCode: ${response.statusCode}');
+    errorsList.add('response.body: ${await response.stream.bytesToString()}');
     throw NoDataAvailableException();
   }
   }
@@ -92,6 +102,11 @@ class HolidayController extends GetxController{
     println(appController.appHeader);
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateHolidayRequest}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${await response.stream.bytesToString()}');
       throw NoDataAvailableException();
     }
   }
@@ -104,6 +119,11 @@ class HolidayController extends GetxController{
     println(response.statusCode);
     println(response.body);
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      // errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${await response.body}');
       throw NoDataAvailableException();
     }
   }
@@ -127,6 +147,7 @@ class HolidayController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     getHolidaysTypes();
+
   }
 
 

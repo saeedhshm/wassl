@@ -19,6 +19,7 @@ class CalendarController extends GetxController{
   late DateTime dateTime;
 
   var noInternetAvailable = ''.obs;
+  var noDataAttendanceAvailable = ''.obs;
 
  Future<void> _checkForMonthAttendance() async {
     var headers = {
@@ -78,6 +79,8 @@ setSelectedDate(DateTime dateTime){
     }on NoInternetException catch(e){
       println(e);
       noInternetAvailable.value = e.errorMessage;
+    }on NoDataAvailableException catch(e){
+      noDataAttendanceAvailable.value = 'noDataAttendanceAvailable';
     }
     finally{
       loading.value = false;

@@ -22,6 +22,8 @@ class FingerPrintController extends GetxController{
   var correctionTime = ''.obs;
   var loading = false.obs;
 
+  var errorsList = <String>[].obs;
+
   Future sendRequest() async {
     println(filePath);
     if(correctionDate == null){
@@ -49,10 +51,15 @@ class FingerPrintController extends GetxController{
     println(appController.appHeader);
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addFingerPrintCorrection, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw NoDataAvailableException();
     }
 
@@ -84,8 +91,14 @@ class FingerPrintController extends GetxController{
     println(body);
     println('${AppUrls.updateFingerPrintCorrection}/$orderId');
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateFingerPrintCorrection}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(await response.stream.bytesToString());
+
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw NoDataAvailableException();
     }
   }
@@ -95,9 +108,13 @@ class FingerPrintController extends GetxController{
 
     println('${AppUrls.cancelHolidayRequest}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelFingerPrintCorrection}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      // errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${response.body}');
       throw NoDataAvailableException();
     }
   }

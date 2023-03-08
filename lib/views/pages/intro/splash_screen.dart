@@ -51,8 +51,11 @@ class _SplashScreenState extends State<SplashScreen> {
     } on UserNotFoundException catch (e) {
       println(e.errorMessage);
       Get.offAll(() => LoginPage(), duration: Duration.zero);
+    } catch (e){
+      println(e.toString());
+      Get.offAll(() => LoginPage(), duration: Duration.zero);
     }
-  });
+      });
 
   }
 

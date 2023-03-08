@@ -27,6 +27,7 @@ class LoanOrderController extends GetxController{
   DateTime? loanStartingDate;
   String? installmentMonthlyAmount;
   String? monthlyInstallmentMethod;
+  var errorsList = <String>[].obs;
 
  Future addNewLoad() async {
 
@@ -71,10 +72,15 @@ class LoanOrderController extends GetxController{
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addLoan, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException();
     }
 
@@ -124,10 +130,15 @@ class LoanOrderController extends GetxController{
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLoan}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException();
     }
 
@@ -142,6 +153,11 @@ class LoanOrderController extends GetxController{
     println(response.statusCode);
     println(response.body);
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      // errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${response.body}');
       throw NoDataAvailableException();
     }
   }

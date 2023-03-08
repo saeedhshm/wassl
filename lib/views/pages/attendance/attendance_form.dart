@@ -20,7 +20,7 @@ class AttendancePage extends StatelessWidget {
       // backgroundColor: Colors.blue,
       body: Obx(()=>controller.loading.value ? const Center(
         child: SendingLoadingWidget(),
-      ) :controller.noInternetAvailable.value != ''? Center(
+      ) :controller.noInternetAvailable.value != '' ? Center(
         child: InkWell(
           onTap: (){
             controller.retrieveAttendanceData();
@@ -34,7 +34,7 @@ class AttendancePage extends StatelessWidget {
             ],
           ),
         ),
-      ) : Column(
+      ) : controller.noDataAttendanceAvailable.value == '' ? Column(
         children: [
           MainAppbarWidget("attendance_records",),
           Expanded(child:Column(
@@ -145,6 +145,8 @@ class AttendancePage extends StatelessWidget {
             ],
           )),
         ],
+      ) : Center(
+        child: Text(controller.noDataAttendanceAvailable.value.tr),
       )),
     );
   }

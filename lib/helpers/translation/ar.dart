@@ -248,6 +248,7 @@ Map<String,String>  arabicStrings = {
   'OvertimeData':'طلب عمل إضافي',
   'cannot_update_order':'لايمكن التعديل على هذا الطلب',
   'request_updated':'تم تحديث الطلب بنجاح',
-  'request_canceled':'تم إلغاء الطلب بنجاح'
+  'request_canceled':'تم إلغاء الطلب بنجاح',
+  'noDataAttendanceAvailable':'لايوجد سجلات حضور بعد',
 
 } ;

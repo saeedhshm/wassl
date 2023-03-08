@@ -24,6 +24,7 @@ class LetterRequestController extends GetxController{
   String? directedToEn;
   var orderTypes = OrderTypesRetriever().obs;
   OrderType? selectedType;
+  var errorsList = <String>[].obs;
 
 
   Future addNewLetter()async{
@@ -59,6 +60,12 @@ class LetterRequestController extends GetxController{
     println(await response.stream.bytesToString());
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException();
     }
 
@@ -97,6 +104,12 @@ class LetterRequestController extends GetxController{
     println(await response.stream.bytesToString());
     loading.value = false;
     if(response.statusCode != 200){
+      var responsebody = await response.stream.bytesToString();
+      errorsList.addAll(appController.listOfErrors);
+      errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: $responsebody');
       throw CustomException();
     }
 
@@ -110,6 +123,11 @@ class LetterRequestController extends GetxController{
     println(response.statusCode);
     println(response.body);
     if(response.statusCode != 200){
+      errorsList.addAll(appController.listOfErrors);
+      // errorsList.add('body: $body');
+      errorsList.add('url: ${AppUrls.addHolidayRequest}d');
+      errorsList.add('response.statusCode: ${response.statusCode}');
+      errorsList.add('response.body: ${response.body}');
       throw NoDataAvailableException();
     }
   }

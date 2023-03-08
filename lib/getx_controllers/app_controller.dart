@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,6 +22,9 @@ class AppController extends GetxController{
   var loading = false.obs;
 
   // var loaginSuccessed = false.obs;
+
+  // Map<String, dynamic> _deviceData = <String, dynamic>{};
+  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
   var listOfErrors = <String>[].obs;
 
@@ -153,7 +159,7 @@ class AppController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     checkVersion();
-
+    initPlatformState();
   }
 
   void checkVersion() async {
@@ -241,10 +247,94 @@ class AppController extends GetxController{
     return permission;
   }
 
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
+  Future<void> initPlatformState() async {
+    var deviceData = <String, dynamic>{};
+
+    try {
+
+      if (Platform.isAndroid) {
+        deviceData =
+            _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
+      }else if(Platform.isIOS){
+        deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+        deviceData.forEach((key, value) {
+          listOfErrors.add('$key: $value');
+        });
+      }
+    } on PlatformException {
+      deviceData = <String, dynamic>{
+        'Error:': 'Failed to get platform version.'
+      };
+    }
+
+    // if (!mounted) return;
+
+
+
+
+  }
+
+  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
+
+    listOfErrors.add('version.release: ${build.version.release},');
+    listOfErrors.add('brand: ${build.brand}');
+    listOfErrors.add('model: ${build.model}');
+    listOfErrors.add('version.baseOS: ${build.version.baseOS}');
+
+    return <String, dynamic>{
+      'version.securityPatch': build.version.securityPatch,
+      'version.sdkInt': build.version.sdkInt,
+
+      'version.previewSdkInt': build.version.previewSdkInt,
+      'version.incremental': build.version.incremental,
+      'version.codename': build.version.codename,
+      'version.baseOS': build.version.baseOS,
+      'board': build.board,
+      'bootloader': build.bootloader,
+      'brand': build.brand,
+      'device': build.device,
+      'display': build.display,
+      'fingerprint': build.fingerprint,
+      'hardware': build.hardware,
+      'host': build.host,
+      'id': build.id,
+      'manufacturer': build.manufacturer,
+      'model': build.model,
+      'product': build.product,
+      'supported32BitAbis': build.supported32BitAbis,
+      'supported64BitAbis': build.supported64BitAbis,
+      'supportedAbis': build.supportedAbis,
+      'tags': build.tags,
+      'type': build.type,
+      'isPhysicalDevice': build.isPhysicalDevice,
+      'systemFeatures': build.systemFeatures,
+      'displaySizeInches':
+      ((build.displayMetrics.sizeInches * 10).roundToDouble() / 10),
+      'displayWidthPixels': build.displayMetrics.widthPx,
+      'displayWidthInches': build.displayMetrics.widthInches,
+      'displayHeightPixels': build.displayMetrics.heightPx,
+      'displayHeightInches': build.displayMetrics.heightInches,
+      'displayXDpi': build.displayMetrics.xDpi,
+      'displayYDpi': build.displayMetrics.yDpi,
+      'serialNumber': build.serialNumber,
+    };
+  }
+
+  Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
+    return <String, dynamic>{
+      'name': data.name,
+      'systemName': data.systemName,
+      'systemVersion': data.systemVersion,
+      'model': data.model,
+      // 'localizedModel': data.localizedModel,
+      // 'identifierForVendor': data.identifierForVendor,
+      // 'isPhysicalDevice': data.isPhysicalDevice,
+      // 'utsname.sysname:': data.utsname.sysname,
+      // 'utsname.nodename:': data.utsname.nodename,
+      // 'utsname.release:': data.utsname.release,
+      // 'utsname.version:': data.utsname.version,
+      // 'utsname.machine:': data.utsname.machine,
+    };
   }
 
 }

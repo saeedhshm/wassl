@@ -12,6 +12,7 @@ import '../../../../models/orders/visa_order.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -400,7 +401,11 @@ class VisaRequestPage extends StatelessWidget {
               child: const Center(
                 child: SendingLoadingWidget(),
               ))
-              : SizedBox()
+              : const SizedBox(),
+          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
+            ////
+            controller.errorsList.clear();
+          }): const SizedBox()
         ],
       )),
     );
