@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
+import 'package:wassl/views/pages/orders/order_details/order_details.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
@@ -74,7 +76,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                 color: AppColors.darkGreyTextColor
             ),),
           ):  OrdersListWidget()),
-          SizedBox(height: 100,)
+          const SizedBox(height: 100,)
         ],
       )),
     );
@@ -91,13 +93,13 @@ class OrdersListWidget extends StatelessWidget {
     return Container(
       color: AppColors.mainBackgroundColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.only(left: 16,right: 16,bottom: 10),
         child: ListView.separated(
           itemCount: controller.previousRequests.value.orders.length,
           itemBuilder: (_,index){
             return  OrderWidget(controller.previousRequests.value.orders[index]);
           }, separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: 20,);
+            return const SizedBox(height: 0,);
         },
         ),
       ),
@@ -116,159 +118,14 @@ class OrderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        if(order.statusID == 1){
-          switch(order.orderType){
-            case 'AskPermissionsData':
-              Get.to(()=> AskPermissionPage(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'CustodyDate':
-              Get.to(()=> CustodyRequestPage(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'FinancialExpensesDate':
-              Get.to(()=> FinanceSpendedRequest(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'FingerprintCorrectionsData':
-              Get.to(()=> CorrectingFingerprintRequest(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'HolidaysData':
-              Get.to(()=> HolidayRequestPage(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'LetterDate':
-              Get.to(()=> LetterRequestPage(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'LoansData':
-              Get.to(()=> NewLoanOrder(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'OvertimeData':
-              Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-            case 'OrderVisaData':
-              Get.to(()=> VisaRequestPage(order: order,onClose: (){
-                final PreviousRequestsController controller = Get.find();
-                Future.delayed(Duration.zero,()async{
-                  try{
-                    await controller.getAllOrders();
-                  }on NoDataAvailableException catch (e){
-                    println('============ getall orders =========');
-                    println(e);
-                    println('============ getall orders =========getall orders =========');
-                  }finally{
-                    controller.appController.loading.value = false;
-                  }
-                });
-              },));
-              break;
-
-          }
-        }else{
-          SnackBars.showErrorSnackBar('error'.tr, 'cannot_update_order'.tr);
-        }
+        Get.put(OrderDetailsController(order));
+        Get.to(()=> OrderDetailsPage());
       },
-        child: PreviousRequestsItemWidget(order: order)) ;
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: PreviousRequestsItemWidget(order: order),
+      ),
+    ) ;
   }
 
   retrieveAllOrders() async{

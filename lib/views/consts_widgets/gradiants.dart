@@ -12,6 +12,17 @@ LinearGradient get greenGradiantAppBar{
 
 }
 
+
+LinearGradient get greenGradiantAppBarSecond{
+  return const LinearGradient(
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+    colors: AppColors.gradiantGreenSecond,
+  );
+
+
+}
+
 LinearGradient get redGradiantCancel{
   return const LinearGradient(
     begin: Alignment.centerRight,

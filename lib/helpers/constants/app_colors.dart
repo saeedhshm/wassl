@@ -16,6 +16,11 @@ class AppColors{
     Color(0xff00a7a3),
   ];
 
+  static const gradiantGreenSecond = [
+    Color(0xff2AB880),
+    Color(0xff00A6A3),
+  ];
+
   static const gradiantRed = [
     Color(0xffFF6240),
     Color(0xffE73B32),

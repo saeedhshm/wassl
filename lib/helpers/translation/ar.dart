@@ -251,4 +251,17 @@ Map<String,String>  arabicStrings = {
   'request_canceled':'تم إلغاء الطلب بنجاح',
   'noDataAttendanceAvailable':'لايوجد سجلات حضور بعد',
 
+  'order_details':'تفاصيل الطلب',
+  'confirm_chain':'سلسلة الموافقات',
+
+  'comments':'تعليقات',
+  'add_comment':'إضافة تعليق',
+  'sent':'مرسلة',
+  'confirmt':'مؤكدة',
+  '':'',
+  '':'',
+  '':'',
+  '':'',
+  '':'',
+
 } ;
