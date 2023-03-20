@@ -7,6 +7,7 @@ class LoansData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
+  @override
   OrderType? type;
   dynamic amount;
   String? month;
@@ -45,7 +46,7 @@ class LoansData implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'LoansData';
+  String get orderName => 'LoansData';
 
   @override
   // TODO: implement orderDate

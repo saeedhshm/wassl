@@ -40,7 +40,7 @@ class HolidayRequestPage extends StatelessWidget {
        var holidayOrder = order as HolidaysData;
        startDateCtrl.text = holidayOrder.holidayStart ?? '';
        endDateCtrl.text = holidayOrder.holidayEnd ?? '';
-       controller.selectedType = holidayOrder.myOrderType;
+       controller.selectedType = holidayOrder.type;
        reasonCtrl.text = holidayOrder.reason;
        fileCtrl.text = holidayOrder.file.split('/').last;
        var startDateArr = holidayOrder.holidayStart?.split('-');

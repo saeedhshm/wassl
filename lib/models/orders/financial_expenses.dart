@@ -1,13 +1,14 @@
 
 import 'AllOrders.dart';
 import 'order_status.dart';
+import 'order_type.dart';
 
 class FinancialExpensesDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
   String? name;
-  dynamic? amount;
+  dynamic amount;
   String? date;
   dynamic description;
   dynamic _reason;
@@ -16,6 +17,8 @@ class FinancialExpensesDate implements Order{
   dynamic _file;
   String? createdAt;
   String? updatedAt;
+  @override
+  OrderType? type;
 
   FinancialExpensesDate();
 
@@ -40,7 +43,7 @@ class FinancialExpensesDate implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'FinancialExpensesDate';
+  String get orderName => 'FinancialExpensesDate';
 
   @override
   // TODO: implement orderDate

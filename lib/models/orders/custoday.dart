@@ -9,6 +9,7 @@ class CustodyDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
+  @override
   OrderType? type;
   String? _reason;
   @override
@@ -36,7 +37,7 @@ class CustodyDate implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'CustodyDate';
+  String get orderName => 'CustodyDate';
 
   @override
   // TODO: implement orderDate

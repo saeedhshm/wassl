@@ -9,6 +9,7 @@ import 'holiday.dart';
 import 'letter.dart';
 import 'loan_order.dart';
 import 'order_status.dart';
+import 'order_type.dart';
 import 'over_time.dart';
 
 class AllOrders {
@@ -108,7 +109,7 @@ class AllOrders {
 
 }
 abstract class Order{
-  String get orderType;
+  String get orderName;
   String get orderDate;
   String get orderStatus;
   String get reason;
@@ -116,6 +117,8 @@ abstract class Order{
   int get statusID;
   int get orderID;
   Status? status;
+
+  OrderType? type;
 }
 
 

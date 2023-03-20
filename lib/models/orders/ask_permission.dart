@@ -6,6 +6,7 @@ class AskPermissionsData implements Order {
   int? id;
   int? employeeId;
   int? displayOrdersTo;
+  @override
   OrderType? type;
   String? date;
   OrderType? reasonType;
@@ -40,7 +41,7 @@ class AskPermissionsData implements Order {
 
   @override
   // TODO: implement orderType
-  String get orderType => 'AskPermissionsData';
+  String get orderName => 'AskPermissionsData';
 
   @override
   // TODO: implement orderDate

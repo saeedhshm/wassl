@@ -47,17 +47,17 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 Expanded(child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(order.orderType.tr,style: const TextStyle(
+                    Text(order.orderName.tr,style: const TextStyle(
                         color: AppColors.darkGreyTextColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 18
                     ),),
-                    order.orderType == 'LetterDate' ?  Text('directed_to'.tr + ' : ' +((order as LetterDate).directedToAr ?? ''),style: const TextStyle(
+                    order.orderName == 'LetterDate' ?  Text('directed_to'.tr + ' : ' +((order as LetterDate).directedToAr ?? ''),style: const TextStyle(
                         color: AppColors.darkGreyTextColor,
                         fontWeight: FontWeight.normal,
                         fontSize: 15
                     ),) : const SizedBox(),
-                    order.orderType == 'LoansData' ?  Text('installment_method'.tr + ' : ' +((order as LoansData).monthlyInstallment ?? ''),style: const TextStyle(
+                    order.orderName == 'LoansData' ?  Text('installment_method'.tr + ' : ' +((order as LoansData).monthlyInstallment ?? ''),style: const TextStyle(
                         color: AppColors.darkGreyTextColor,
                         fontWeight: FontWeight.normal,
                         fontSize: 15
@@ -73,7 +73,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
               ],
             ),
 
-            order.orderType == 'OrderVisaData' ?  Row(
+            order.orderName == 'OrderVisaData' ?  Row(
               children: [
                 Text('visa_type'.tr + ' : ' +((order as OrderVisaData).visaType ),style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
@@ -96,13 +96,13 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                   height: 25,
                   child: SvgWidget('assets/images/pref_calendar_icon.svg'),
                 ),
-                Text((order.orderType == 'OrderVisaData' ? '${'required_before'.tr} : ' : '') + order.orderDate,style: const TextStyle(
+                Text((order.orderName == 'OrderVisaData' ? '${'required_before'.tr} : ' : '') + order.orderDate,style: const TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontSize: 16
                 ),)
               ],
             ),
-            (order.orderType == 'OrderVisaData' &&(order as OrderVisaData).hasTicket) ? Row(
+            (order.orderName == 'OrderVisaData' &&(order as OrderVisaData).hasTicket) ? Row(
               children: [
                 const SizedBox(
                   width: 25,
@@ -147,7 +147,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10,),
-            order.orderType == 'HolidaysData' ? Row(
+            order.orderName == 'HolidaysData' ? Row(
               children: [
                 Text('start'.tr + ' : '+ ((order as HolidaysData).holidayStart ?? ''),style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
@@ -163,7 +163,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
               ],
             ) : const SizedBox(),
 
-            order.orderType == 'HolidaysData' ? Row(
+            order.orderName == 'HolidaysData' ? Row(
               children: [
                 // Expanded(
                 //   child: Container(
@@ -220,7 +220,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'FingerprintCorrectionsData' ? Row(
+            order.orderName == 'FingerprintCorrectionsData' ? Row(
               children: [
                 // Expanded(
                 //   child: Container(
@@ -245,7 +245,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).workingType?.name ?? ''),
+                        child: Text('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).type?.name ?? ''),
                           style: const TextStyle(
                               color: AppColors.darkGreyTextColor
                           ),),
@@ -277,7 +277,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'FinancialExpensesDate' ? Row(
+            order.orderName == 'FinancialExpensesDate' ? Row(
               children: [
                 // Expanded(
                 //   child: Container(
@@ -334,7 +334,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'LoansData' ? Row(
+            order.orderName == 'LoansData' ? Row(
               children: [
                 Expanded(
                   child: Text('type'.tr + ' : ',style: const TextStyle(
@@ -359,7 +359,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'LoansData' ? Row(
+            order.orderName == 'LoansData' ? Row(
               children: [
                 Expanded(
                   child: Container(
@@ -416,7 +416,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'LetterDate' ? Row(
+            order.orderName == 'LetterDate' ? Row(
               children: [
                 // Expanded(
                 //   child: Container(
@@ -473,7 +473,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 // ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'AskPermissionsData' ? Row(
+            order.orderName == 'AskPermissionsData' ? Row(
               children: [
                 Expanded(
                   child: Text('type'.tr + ' : ',style: const TextStyle(
@@ -498,7 +498,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
-            order.orderType == 'AskPermissionsData' ? Row(
+            order.orderName == 'AskPermissionsData' ? Row(
               children: [
                 Expanded(
                   child: Container(
@@ -556,7 +556,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
               ],
             ) : const SizedBox(),
 
-            order.orderType == 'OvertimeData' ? Row(
+            order.orderName == 'OvertimeData' ? Row(
               children: [
                 // Expanded(
                 //   child: Container(
@@ -619,7 +619,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 order.statusID == 1 ? InkWell(
                     onTap: (){
                       if(order.statusID == 1){
-                        switch(order.orderType){
+                        switch(order.orderName){
                           case 'AskPermissionsData':
                             Get.to(()=> AskPermissionPage(order: order,onClose: (){
                               final PreviousRequestsController controller = Get.find();

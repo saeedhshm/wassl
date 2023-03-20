@@ -32,7 +32,7 @@ class VisaRequestPage extends StatelessWidget {
        goDateCtrl.text = request.goDate ?? '';
        backDateCtrl.text = request.backDate ?? '';
 
-       controller.selectedType = request.orderVisaType;
+       controller.selectedType = request.type;
        controller.selectedTime = request.orderVisaTime;
        controller.selectedTicketType = request.orderVisaTicketType;
        controller.reason = request.reason;

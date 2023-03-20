@@ -1,5 +1,6 @@
 import 'AllOrders.dart';
 import 'order_status.dart';
+import 'order_type.dart';
 
 class OvertimeData implements Order{
   int? id;
@@ -14,6 +15,8 @@ class OvertimeData implements Order{
   String? _file;
   String? createdAt;
   String? updatedAt;
+  @override
+  OrderType? type;
 
   OvertimeData(
       {this.id,
@@ -48,7 +51,7 @@ class OvertimeData implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'OvertimeData';
+  String get orderName => 'OvertimeData';
   @override
   // TODO: implement orderDate
   String get orderDate {

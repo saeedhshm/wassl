@@ -32,7 +32,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
        dateCtrl.text = fingerPrint.date ?? '';
        fileCtrl.text = fingerPrint.file.split('/').last;
        reasonCtrl.text = fingerPrint.reason;
-       controller.attendanceStatus = fingerPrint.workingType;
+       controller.attendanceStatus = fingerPrint.type;
        controller.correctionTime.value = fingerPrint.time ?? '';
        var endDateArr = fingerPrint.date?.split('-');
        controller.reason = fingerPrint.reason;

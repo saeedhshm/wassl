@@ -11,7 +11,8 @@ class OrderVisaData  implements Order{
   int? employeeId;
   int? displayOrdersTo;
 
-  OrderType? orderVisaType;
+  @override
+  OrderType? type;
   OrderType? orderVisaTime;
   OrderType? orderVisaTicketType;
 
@@ -33,7 +34,7 @@ class OrderVisaData  implements Order{
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    orderVisaType = json['type'] != null ? OrderType.fromJson(json['type']) : null;
+    type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     orderVisaTime =
     json['visa_time'] != null ? OrderType.fromJson(json['visa_time']) : null;
     requiredBefore = json['required_before'];
@@ -51,7 +52,7 @@ class OrderVisaData  implements Order{
     updatedAt = json['updated_at'];
   }
 
-  String get visaType => orderVisaType?.name ?? '';
+  String get visaType => type?.name ?? '';
   String get ticketType => orderVisaTicketType?.name != null ? 'ticket_type'.tr + ': '+'${orderVisaTicketType?.name}' : 'without_ticket'.tr;
   String get visaTime => orderVisaTime?.name ?? '';
 
@@ -63,7 +64,7 @@ class OrderVisaData  implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'OrderVisaData';
+  String get orderName => 'OrderVisaData';
   @override
   // TODO: implement orderDate
   String get orderDate {

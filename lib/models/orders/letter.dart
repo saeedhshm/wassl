@@ -7,6 +7,7 @@ class LetterDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
+  @override
   OrderType? type;
   String? directedToEn;
   String? directedToAr;
@@ -42,7 +43,7 @@ class LetterDate implements Order{
 
   @override
   // TODO: implement orderType
-  String get orderType => 'LetterDate';
+  String get orderName => 'LetterDate';
   @override
   // TODO: implement orderDate
   String get orderDate {

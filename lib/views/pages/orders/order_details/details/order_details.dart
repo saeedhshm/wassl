@@ -15,7 +15,7 @@ class OderDetailFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    println('======>>>> order: ${controller.order.orderID}, ${controller.order.orderType}, ${controller.order.orderStatus}');
+    println('======>>>> order: ${controller.order.orderID}, ${controller.order.orderName}, ${controller.order.orderStatus}');
     return Scaffold(
 //first icon-- assets/images/profile/5.png
       body: Column(
@@ -48,13 +48,13 @@ class OderDetailFragment extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.orderType.tr,style: TextStyle(
+                              child: Text(controller.order.orderName.tr,style: TextStyle(
                                 color: AppColors.mainGreenColor,
                                 fontSize: 12
                               ),),
                             ),
                           ),
-                          SizedBox(width: 16,),
+                          SizedBox(width: controller.order.type?.name != null ? 16 : 0,),
                           (controller.order is HolidaysData) ?   Container(
                             decoration: BoxDecoration(
                                 border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
@@ -62,20 +62,20 @@ class OderDetailFragment extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text((controller.order as HolidaysData).holidayType ,style: TextStyle(
+                              child: Text(controller.order.type?.name ?? '' ,style: TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontSize: 12
                               ),),
                             ),
                           )
-                          : (controller.order is FingerprintCorrectionsData) ?  Container(
+                          : controller.order.type?.name != null ?  Container(
                             decoration: BoxDecoration(
                                 border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
                                 borderRadius: BorderRadius.circular(50)
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text((controller.order as FingerprintCorrectionsData).workingType?.name ?? '' ,style: TextStyle(
+                              child: Text(controller.order.type?.name ?? '' ,style: TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontSize: 12
                               ),),

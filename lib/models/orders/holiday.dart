@@ -12,7 +12,8 @@ class HolidaysData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  OrderType? _holidayType;
+  @override
+  OrderType? type;
   String? holidayStart;
   String? holidayEnd;
   String? ticket;
@@ -41,7 +42,7 @@ class HolidaysData implements Order{
     holidayStart = json['holiday_start'];
     // final validMap =
     // jsonDecode(jsonEncode(json['type'])) as Map<String, dynamic>;
-    _holidayType = json['type'] != null ? OrderType.fromJson(json['type']) : null;
+    type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     holidayEnd = json['holiday_end'];
     ticket = json['ticket'];
     _ticketType = json['ticket_type'] != null ? OrderType.fromJson(json['ticket_type']) : null ;
@@ -73,16 +74,16 @@ class HolidaysData implements Order{
     return difference;
   }
 
-  OrderType? get myOrderType => _holidayType;
+  // OrderType? get myOrderType => _holidayType;
 
   @override
   String get file => _file ?? '';
 
   @override
   // TODO: implement orderType
-  String get orderType => 'HolidaysData';
+  String get orderName => 'HolidaysData';
 
-  String get holidayType => '${_holidayType?.name}';
+  String get holidayType => '${type?.name}';
 
   @override
   // TODO: implement orderDate
