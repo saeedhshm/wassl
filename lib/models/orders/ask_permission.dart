@@ -10,6 +10,7 @@ class AskPermissionsData implements Order {
   String? date;
   OrderType? reasonType;
   String? _reason;
+  @override
   Status? status;
   String? _file;
   String? createdAt;

@@ -25,7 +25,7 @@ class OrderDetailsPage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16.0,right: 16,bottom: 16,top: 50),
               child: Row(
                 children: [
-                  Text(controller.order.orderType.tr,style: TextStyle(
+                  Text(controller.order.orderType.tr,style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold

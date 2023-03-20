@@ -11,6 +11,7 @@ class FinancialExpensesDate implements Order{
   String? date;
   dynamic description;
   dynamic _reason;
+  @override
   Status? status;
   dynamic _file;
   String? createdAt;

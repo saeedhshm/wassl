@@ -13,6 +13,7 @@ class LoansData implements Order{
   String? monthlyInstallment;
   dynamic installmentAmount;
   String? _reason;
+  @override
   Status? status;
   dynamic _file;
   String? createdAt;

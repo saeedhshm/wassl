@@ -24,7 +24,8 @@ class HolidaysData implements Order{
   OrderType? _visaTime;
   String? visaRequireBefore;
   String? _reason;
-  dynamic status;
+  @override
+  Status? status;
   dynamic _file;
   String? createdAt;
   String? updatedAt;

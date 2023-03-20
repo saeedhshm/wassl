@@ -25,4 +25,9 @@ class AppColors{
     Color(0xffFF6240),
     Color(0xffE73B32),
   ];
+
+  static const gradiantGray = [
+    Color(0xff9CADC7),
+    Color(0xff7285A3),
+  ];
 }

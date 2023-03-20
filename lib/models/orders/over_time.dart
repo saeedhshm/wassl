@@ -9,6 +9,7 @@ class OvertimeData implements Order{
   String? endTime;
   String? date;
   String? _reason;
+  @override
   Status? status;
   String? _file;
   String? createdAt;

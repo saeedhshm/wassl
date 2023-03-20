@@ -11,7 +11,8 @@ class LetterDate implements Order{
   String? directedToEn;
   String? directedToAr;
   String? _reason;
-  dynamic status;
+  @override
+  Status? status;
   dynamic _file;
   String? createdAt;
   String? updatedAt;

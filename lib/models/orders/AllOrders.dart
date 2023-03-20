@@ -8,6 +8,7 @@ import 'finger_print.dart';
 import 'holiday.dart';
 import 'letter.dart';
 import 'loan_order.dart';
+import 'order_status.dart';
 import 'over_time.dart';
 
 class AllOrders {
@@ -114,6 +115,7 @@ abstract class Order{
   String get file;
   int get statusID;
   int get orderID;
+  Status? status;
 }
 
 

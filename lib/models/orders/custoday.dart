@@ -11,6 +11,7 @@ class CustodyDate implements Order{
   int? displayOrdersTo;
   OrderType? type;
   String? _reason;
+  @override
   Status? status;
   dynamic _file;
   String? createdAt;

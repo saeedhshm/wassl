@@ -10,8 +10,11 @@ import '../../helpers/exceptions/no_internet.dart';
 import '../app_controller.dart';
 
 class PreviousRequestsController extends GetxController{
+
   var previousRequests = AllOrders().obs;
   final AppController appController = Get.find();
+
+  var myOrdersSelected = true.obs;
 
   Future getAllOrders() async {
     var headers = {

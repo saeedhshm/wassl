@@ -11,6 +11,7 @@ class FingerprintCorrectionsData implements Order{
   OrderType? workingType;
   String? time;
   dynamic _reason;
+  @override
   Status? status;
   dynamic _file;
   String? createdAt;

@@ -7,6 +7,7 @@ import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/order_details/order_details.dart';
+import 'package:wassl/views/pages/orders/previous_orders/team_orders.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
@@ -69,13 +70,53 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
             'previous_requests'.tr,
 
           ),
-          Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
+          Row(
+            children: [
+              Expanded(child: InkWell(
+                onTap: (){
+                  controller.myOrdersSelected.value = true;
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(color:controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.borderTextFieldColor,width: 1))
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('my_orders'.tr,style: TextStyle(
+                          color: controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.darkGreyTextColor
+                      ),),
+                    ),
+                  ),
+                ),
+              )),
+              Expanded(child: InkWell(
+                onTap: (){
+                  controller.myOrdersSelected.value = false;
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(color: !controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.borderTextFieldColor,width: 1))
+                  ),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('team_orders'.tr,style: TextStyle(
+                          color: !controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.darkGreyTextColor
+                      ),),
+                    ),
+                  ),
+                ),
+              ))
+            ],
+          ),
+         controller.myOrdersSelected.value ?  Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
             child: Text('no_previous_requests'.tr,style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
                 color: AppColors.darkGreyTextColor
             ),),
-          ):  OrdersListWidget()),
+          ):  OrdersListWidget()) : Expanded(child: TeamOrderPage()),
           const SizedBox(height: 100,)
         ],
       )),
@@ -92,16 +133,14 @@ class OrdersListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.mainBackgroundColor,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 16,right: 16,bottom: 10),
-        child: ListView.separated(
-          itemCount: controller.previousRequests.value.orders.length,
-          itemBuilder: (_,index){
-            return  OrderWidget(controller.previousRequests.value.orders[index]);
-          }, separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 0,);
-        },
-        ),
+      child: ListView.separated(
+        padding:  const EdgeInsets.only(left: 16,right: 16,bottom: 10,top: 16),
+        itemCount: controller.previousRequests.value.orders.length,
+        itemBuilder: (_,index){
+          return  OrderWidget(controller.previousRequests.value.orders[index]);
+        }, separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(height: 0,);
+      },
       ),
     );
   }

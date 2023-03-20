@@ -21,6 +21,7 @@ class OrderVisaData  implements Order{
   String? goDate;
   String? backDate;
   String? _reason;
+  @override
   Status? status;
   String? _file;
   String? createdAt;
