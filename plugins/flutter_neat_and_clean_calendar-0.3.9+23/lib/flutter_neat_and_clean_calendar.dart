@@ -593,6 +593,7 @@ class _CalendarState extends State<Calendar> {
   Widget get eventList {
     // If eventListBuilder is provided, use it to build the list of events to show.
     // Otherwise use the default list of events.
+    return SizedBox();
     if (widget.eventListBuilder == null) {
       return Expanded(
         child: _selectedEvents != null && _selectedEvents!.isNotEmpty

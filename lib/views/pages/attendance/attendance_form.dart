@@ -39,12 +39,9 @@ class AttendancePage extends StatelessWidget {
           MainAppbarWidget("attendance_records",),
           Expanded(child:Column(
             children: [
-              Expanded(
-                flex:5,
-                  child: CalendarWidget()),
-              Expanded(
-                flex: 3,
-                  child: Obx(()=>Padding(
+              CalendarWidget(),
+              SizedBox(height: 16,),
+              Obx(()=>Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
@@ -141,7 +138,7 @@ class AttendancePage extends StatelessWidget {
 
                   ],
                 ),
-              )))
+              ))
             ],
           )),
         ],
