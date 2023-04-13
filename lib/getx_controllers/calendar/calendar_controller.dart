@@ -35,6 +35,9 @@ class CalendarController extends GetxController{
 
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
+    // println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
+    // println(response.body);
+    // println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }

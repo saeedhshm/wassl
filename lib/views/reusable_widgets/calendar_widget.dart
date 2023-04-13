@@ -47,16 +47,48 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         // datePickerType: DatePickerType.date,
         hideBottomBar: true,
         todayButtonText: 'today'.tr,
-        onDateSelected: (dateTime){
-          // _currentDate = dateTime;
-          println(dateTime.toString());
+        onDateSelected: (dt){
+          DateTime dateTime = dt;
+          if(dt.hour == 23){
+            var newDate = DateTime(dt.year,dt.month,dt.day + 1);
+            dateTime = newDate;
+
+          }else{
+            dateTime = dt;
+          }
+          _currentDay = dateTime;
+
           controller.setSelectedDate(dateTime);
           setState(() {
 
           });
         },
-        dayBuilder: (context,dateTime){
+        dayBuilder: (context,dt){
+          DateTime dateTime = dt;
+          if(dt.hour == 23){
+            var newDate = DateTime(dt.year,dt.month,dt.day + 1);
+            dateTime = newDate;
 
+          }else{
+            dateTime = dt;
+          }
+          if(compareTowDays(dateTime, _currentDay)){
+            return Center(
+
+              child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.mainGreenColor,width: 2),
+                      color: AppColors.mainGreenColor,
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    color: Colors.white
+                  ),))),
+            );
+          }
           if(compareTowDays(dateTime, DateTime.now())){
             return Center(
 
@@ -111,13 +143,13 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             return Center(
 
               child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.red.withOpacity(1),width: 2),
                       borderRadius: BorderRadius.circular(100)
                   ),
-                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                  child: Center(child: Text(dateTime.day.toString(),style: const TextStyle(
                       fontWeight: FontWeight.bold
                   ),))),
             );
@@ -128,13 +160,14 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             return Center(
 
               child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
                   width: double.infinity,
-                  // decoration: BoxDecoration(
-                  //     border: Border.all(color: Colors.red,width: 0),
-                  //     borderRadius: BorderRadius.circular(100)
-                  // ),
-                  child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                  decoration: BoxDecoration(
+                    // color:Colors.amber,
+                      border: Border.all(color: Colors.white,width: 1),
+                      borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: Center(child: Text(dateTime.day.toString(),style: const TextStyle(
                       fontWeight: FontWeight.bold
                   ),))),
             );
@@ -147,7 +180,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         onMonthChanged: (dateTime){
 
 
-          _currentMonth = dateTime;
+
           if(controller.dateTime.month != dateTime.month) {
             controller.dateTime = dateTime;
             controller.retrieveAttendanceData();
@@ -157,23 +190,15 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           });
         },
 
-        dayOfWeekStyle: TextStyle(
+        dayOfWeekStyle: const TextStyle(
             color: Colors.black, fontWeight: FontWeight.w800, fontSize: 11),
 
       ),
     );
   }
 
-  var colors = [
-    Colors.red,
-    Colors.green,
-    Colors.amber,
-    Colors.blue,
-    Colors.brown
-  ];
 
-
-  DateTime _currentMonth = DateTime.now();
+  DateTime _currentDay = DateTime.now();
 
   bool compareTowDays(DateTime firstDate, DateTime secondDate){
     return firstDate.day == secondDate.day && firstDate.month == secondDate.month && firstDate.year == secondDate.year;
@@ -181,6 +206,15 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
 
 
-
+  List<DateTime> removeDuplicates(List<DateTime> items) {
+    List<DateTime> uniqueItems = []; // uniqueList
+    var uniqueIDs = items
+        .map((e) => e.day)
+        .toSet(); //list if UniqueID to remove duplicates
+    uniqueIDs.forEach((e) {
+      uniqueItems.add(items.firstWhere((i) => i.day == e));
+    }); // populate uniqueItems with equivalent original Batch items
+    return uniqueItems;//send back the unique items list
+  }
 
 }

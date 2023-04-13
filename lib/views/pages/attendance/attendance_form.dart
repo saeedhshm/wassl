@@ -40,7 +40,7 @@ class AttendancePage extends StatelessWidget {
           Expanded(child:Column(
             children: [
               CalendarWidget(),
-              SizedBox(height: 16,),
+              const SizedBox(height: 16,),
               Obx(()=>Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(

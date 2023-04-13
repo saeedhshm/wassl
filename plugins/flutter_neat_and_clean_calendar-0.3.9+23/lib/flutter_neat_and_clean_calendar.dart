@@ -1005,8 +1005,20 @@ class _CalendarState extends State<Calendar> {
     // Adding an extra day necessary (if week starts on Monday).
     // Otherwise the week with days in next month would always end on Saturdays.
     var lastToDisplay = last
-        .add(new Duration(days: daysAfter + (widget.startOnMonday ? 1 : 0)));
-    return Utils.daysInRange(firstToDisplay, lastToDisplay).toList();
+        .add(Duration(days: daysAfter + (widget.startOnMonday ? 1 : 0)));
+
+    List<DateTime> listOfDays = [];
+    Utils.daysInRange(firstToDisplay, lastToDisplay).toList().forEach((element) {
+      if(element.hour == 23){
+        var newDate = DateTime(element.year,element.month,element.day + 1);
+
+        listOfDays.add(newDate);
+
+      }else{
+        listOfDays.add(element);
+      }
+    });
+    return listOfDays;
   }
 }
 
