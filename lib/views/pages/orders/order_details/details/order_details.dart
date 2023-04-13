@@ -48,7 +48,7 @@ class OderDetailFragment extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.orderName.tr,style: TextStyle(
+                              child: Text(controller.order.orderName.tr,style: const TextStyle(
                                 color: AppColors.mainGreenColor,
                                 fontSize: 12
                               ),),
@@ -75,7 +75,7 @@ class OderDetailFragment extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.type?.name ?? '' ,style: TextStyle(
+                              child: Text(controller.order.type?.name ?? '' ,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontSize: 12
                               ),),

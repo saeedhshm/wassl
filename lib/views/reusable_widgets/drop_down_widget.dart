@@ -93,11 +93,11 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               isExpanded: true,
               hint: Text(
                 widget.hintText,
-                style: TextStyle(fontSize: 14),
+                style: const TextStyle(fontSize: 14),
               ),
-              icon: SizedBox(
+              icon: const SizedBox(
                 width: 25,
-                  child: Image.asset('assets/images/arrow.png')),
+                  child: Icon(Icons.keyboard_arrow_down_rounded,color: AppColors.lightGreyTextColor,)),
               iconSize: 20,
               buttonHeight: 45,
               buttonPadding: const EdgeInsets.only(left: 8, right: 0),
