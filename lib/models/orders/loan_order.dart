@@ -19,7 +19,14 @@ class LoansData implements Order{
   dynamic _file;
   String? createdAt;
   String? updatedAt;
+  @override
+  int? activeResponsibleId;
 
+  @override
+  List<Confirmation>? confirmation;
+
+  @override
+  var hrComment;
   LoansData();
 
   LoansData.fromJson(Map<String, dynamic> json) {
@@ -36,6 +43,14 @@ class LoansData implements Order{
     _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    hrComment = json['hr_comment'];
+    activeResponsibleId = json['active_responsible_id'];
+    if (json['confirmation'] != null) {
+      confirmation = <Confirmation>[];
+      json['confirmation'].forEach((v) {
+        confirmation!.add(Confirmation.fromJson(v));
+      });
+    }
   }
 
 

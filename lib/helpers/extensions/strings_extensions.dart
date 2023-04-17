@@ -19,6 +19,35 @@ extension FormatedDateTimeExtension on String {
     return myTime;
   }
 
+  String get timeFromTZone{
+    var myTime = '----';
+    var splittedArray = split('T');
+    var timeList = splittedArray[1].split(':');
+    int hours = int.tryParse(timeList[0]) ?? 0;
+    int minutes = int.tryParse(timeList[1]) ?? 0;
+    var pm_am = hours > 12 ? 'pm'.tr : 'am'.tr;
+    hours = hours > 12 ? hours - 12 : hours;
+    myTime = hours == 0
+        ? '12'
+        : hours < 10
+        ? '0$hours'
+        : '$hours';
+    myTime += minutes < 10 ? ':0$minutes' : ':$minutes';
+    myTime = '$myTime $pm_am';
+    return myTime;
+  }
+
+  String get dateFromTZone{
+    var myDate = '';
+
+    var splittedArray = split('T');
+    var dateList = splittedArray[0].split('-');
+    // println(timeList);
+    // '5/10/2022'
+    myDate = '${dateList[2]}/${dateList[1]}/${dateList[0]}';
+    return myDate;
+  }
+
   String formattedTimeFromDateTime() {
     var myTime = '----';
     var splitedDate = split(' ');

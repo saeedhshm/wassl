@@ -15,7 +15,6 @@ class OderDetailFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    println('======>>>> order: ${controller.order.orderID}, ${controller.order.orderName}, ${controller.order.orderStatus}');
     return Scaffold(
 //first icon-- assets/images/profile/5.png
       body: Column(
@@ -62,7 +61,7 @@ class OderDetailFragment extends StatelessWidget {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.type?.name ?? '' ,style: TextStyle(
+                              child: Text(controller.order.type?.name ?? '' ,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontSize: 12
                               ),),
@@ -113,7 +112,7 @@ class OderDetailFragment extends StatelessWidget {
                             decoration: BoxDecoration(
                                 // border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
                                 borderRadius: BorderRadius.circular(50),
-                              gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantCancel : greenGradiantAppBarSecond
+                              gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 || controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -231,7 +230,8 @@ class OderDetailFragment extends StatelessWidget {
 
             ),
           ),
-         controller.order.statusID == 1 ? Padding(
+          // controller.order.statusID == 1
+          controller.order.statusID == 10 ? Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [

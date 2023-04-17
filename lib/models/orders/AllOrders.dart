@@ -118,7 +118,91 @@ abstract class Order{
   int get orderID;
   Status? status;
 
+  dynamic hrComment;
+  int? activeResponsibleId;
+  List<Confirmation>? confirmation;
+
   OrderType? type;
+}
+
+
+class Confirmation {
+  int? id;
+  int? employeeId;
+  int? orderId;
+  String? responsibleEmployeeId;
+  int? sortOrder;
+  int? status;
+  String? createdAt;
+  String? updatedAt;
+  String? orderType;
+  ResponsibleEmployee? responsibleEmployee;
+
+  Confirmation(
+      {this.id,
+        this.employeeId,
+        this.orderId,
+        this.responsibleEmployeeId,
+        this.sortOrder,
+        this.status,
+        this.createdAt,
+        this.updatedAt,
+        this.orderType,
+        this.responsibleEmployee});
+
+  Confirmation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    employeeId = json['employee_id'];
+    orderId = json['order_id'];
+    responsibleEmployeeId = json['responsible_employee_id'];
+    sortOrder = json['sort_order'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    orderType = json['order_type'];
+    responsibleEmployee = json['responsible_employee'] != null
+        ? new ResponsibleEmployee.fromJson(json['responsible_employee'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['employee_id'] = this.employeeId;
+    data['order_id'] = this.orderId;
+    data['responsible_employee_id'] = this.responsibleEmployeeId;
+    data['sort_order'] = this.sortOrder;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['order_type'] = this.orderType;
+    if (this.responsibleEmployee != null) {
+      data['responsible_employee'] = this.responsibleEmployee!.toJson();
+    }
+    return data;
+  }
+}
+
+class ResponsibleEmployee {
+  int? id;
+  String? fullName;
+  String? fullNameEn;
+
+  ResponsibleEmployee({this.id, this.fullName, this.fullNameEn});
+
+  ResponsibleEmployee.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullName = json['full_name'];
+    fullNameEn = json['full_name_en'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['full_name'] = this.fullName;
+    data['full_name_en'] = this.fullNameEn;
+    return data;
+  }
 }
 
 
