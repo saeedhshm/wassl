@@ -31,6 +31,10 @@
       <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_linux-2.1.2" />
       <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-5.2.5" />
       <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_plus-8.1.0" />
+      <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth-2.1.6" />
+      <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth_android-1.0.28" />
+      <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth_windows-1.0.8" />
+      <root url="file://$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/local_auth_ios-1.1.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

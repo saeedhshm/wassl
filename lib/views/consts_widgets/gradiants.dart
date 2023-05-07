@@ -30,6 +30,13 @@ LinearGradient get redGradiantCancel{
     colors: AppColors.gradiantRed,
   );}
 
+LinearGradient get redGradiantRejected{
+  return const LinearGradient(
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+    colors: AppColors.gradiantDarkRed,
+  );}
+
 LinearGradient get grayGradiantAwait{
   return const LinearGradient(
     begin: Alignment.centerRight,

@@ -16,6 +16,8 @@ import '../../../../models/orders/letter.dart';
 import '../../../../models/orders/loan_order.dart';
 import '../../../../models/orders/over_time.dart';
 import '../../../../models/orders/visa_order.dart';
+import '../../../consts_widgets/gradiants.dart';
+import '../../../reusable_widgets/gradiant_text.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../pages/ask_permission.dart';
 import '../pages/correcting_fingerprint.dart';
@@ -67,9 +69,9 @@ class PreviousRequestsItemWidget extends StatelessWidget {
 
                   ],
                 )),
-                Text(order.orderStatus.tr,style: TextStyle(
-                  color: order.orderStatus == 'not_confirmed' ? Colors.red : AppColors.mainGreenColor
-                ),)
+                GradientText(order.orderStatus.tr,style: TextStyle(  ),
+                    gradient:order.statusID == 1 ? grayGradiantAwait : order.statusID == 4 ? redGradiantRejected : order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
+                )
               ],
             ),
 

@@ -1,7 +1,9 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 
@@ -12,12 +14,38 @@ import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/circular_widget.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 
-class AttendanceWidget extends StatelessWidget {
-  final HomeController controller = Get.find();
-
-  Map<String, dynamic> _deviceData = <String, dynamic>{};
+class AttendanceWidget extends StatefulWidget {
 
   AttendanceWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AttendanceWidget> createState() => _AttendanceWidgetState();
+}
+
+class _AttendanceWidgetState extends State<AttendanceWidget> {
+
+
+
+  final HomeController controller = Get.find();
+
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+          ? _SupportState.supported
+          : _SupportState.unsupported),
+    );
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +54,9 @@ class AttendanceWidget extends StatelessWidget {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Obx(() => IgnorePointer(
-                ignoring: controller.attendanceStatus.value == 3 ||
-                    controller.sendingAttendance.value,
-                // ignoring: false,
+                // ignoring: controller.attendanceStatus.value == 3 ||
+                //     controller.sendingAttendance.value,
+                ignoring: false,
                 child: InkWell(
                   onTap: () async {
                     controller.sendingAttendance.value = true;
@@ -63,23 +91,9 @@ class AttendanceWidget extends StatelessWidget {
                           ),
                           confirm: InkWell(
                             onTap: () async {
-                              Get.back();
-                              try {
-                                var attendanceDone =
-                                    await controller.registerAttendance();
-                                SnackBars.showConfirmedSnackBar(
-                                    'success'.tr, attendanceDone);
-                              } on NoInternetException catch (e) {
-                                SnackBars.showErrorSnackBar(
-                                    'error'.tr, e.errorMessage);
-                              } catch (exception) {
-                                var errorMessage =
-                                    'something_wrong_try_again'.tr;
-                                SnackBars.showErrorSnackBar(
-                                    'error'.tr, exception.toString());
-                              } finally {
-                                controller.sendingAttendance.value = false;
-                              }
+                              // await attend();
+                              _authenticateWithBiometrics();
+                              // _checkBiometrics();
                             },
                             child: Container(
                                 decoration: BoxDecoration(
@@ -234,4 +248,147 @@ class AttendanceWidget extends StatelessWidget {
       ],
     );
   }
+
+  Future<void> attend() async {
+    Get.back();
+    try {
+      var attendanceDone =
+          await controller.registerAttendance();
+      SnackBars.showConfirmedSnackBar(
+          'success'.tr, attendanceDone);
+    } on NoInternetException catch (e) {
+      SnackBars.showErrorSnackBar(
+          'error'.tr, e.errorMessage);
+    } catch (exception) {
+      var errorMessage =
+          'something_wrong_try_again'.tr;
+      SnackBars.showErrorSnackBar(
+          'error'.tr, exception.toString());
+    } finally {
+      controller.sendingAttendance.value = false;
+    }
+  }
+
+  Future<void> _checkBiometrics() async {
+    late bool canCheckBiometrics;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+      println('can use Biometrics $canCheckBiometrics');
+    } on PlatformException catch (e) {
+      canCheckBiometrics = false;
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _canCheckBiometrics = canCheckBiometrics;
+    });
+  }
+
+  Future<void> _getAvailableBiometrics() async {
+    late List<BiometricType> availableBiometrics;
+    try {
+      availableBiometrics = await auth.getAvailableBiometrics();
+    } on PlatformException catch (e) {
+      availableBiometrics = <BiometricType>[];
+      print(e);
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _availableBiometrics = availableBiometrics;
+    });
+  }
+
+  Future<void> _authenticate() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    setState(
+            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  }
+
+  Future<void> _authenticateWithBiometrics() async {
+    bool authenticated = false;
+    Get.back();
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason:
+        'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Authenticating';
+      });
+      println('can auth $authenticated');
+      if(authenticated){
+        await attend();
+      }else{
+        SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
+      }
+      // await attend();
+    } on PlatformException catch (e) {
+      SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+
+    final String message = authenticated ? 'Authorized' : 'Not Authorized';
+    setState(() {
+      _authorized = message;
+    });
+  }
+
+  Future<void> _cancelAuthentication() async {
+    await auth.stopAuthentication();
+    setState(() => _isAuthenticating = false);
+  }
+}
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }

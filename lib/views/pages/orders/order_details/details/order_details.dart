@@ -112,7 +112,7 @@ class OderDetailFragment extends StatelessWidget {
                             decoration: BoxDecoration(
                                 // border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
                                 borderRadius: BorderRadius.circular(50),
-                              gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 || controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
+                              gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantRejected : controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -134,7 +134,7 @@ class OderDetailFragment extends StatelessWidget {
                       color: AppColors.borderTextFieldColor,
                     ),
                   ),
-                  SizedBox(height: 50,),
+                  const SizedBox(height: 50,),
                   (controller.order is HolidaysData) ?   Column(
                     children: [
                       Padding(
@@ -155,8 +155,8 @@ class OderDetailFragment extends StatelessWidget {
                                 width: 25,
                                 child: Image.asset('assets/images/order_details/calendar.png'),
                               ),
-                              SizedBox(width: 16,),
-                              Text('holiday_time'.tr,style: TextStyle(
+                              const SizedBox(width: 16,),
+                              Text('holiday_time'.tr,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold
                               ),),
@@ -169,7 +169,7 @@ class OderDetailFragment extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text(((controller.order as HolidaysData).differenceInDays),style: TextStyle(
+                                  child: Text(((controller.order as HolidaysData).differenceInDays),style: const TextStyle(
                                       color: AppColors.darkGreyTextColor,
                                       fontSize: 12
                                   ),),

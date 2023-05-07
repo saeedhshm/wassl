@@ -135,10 +135,12 @@ class HolidayRequestPage extends StatelessWidget {
                                         controller.endDate = selectedDate ?? controller.endDate;
                                         if(controller.endDate != null){
                                           endDateCtrl.text = '${controller.endDate?.year}-${controller.endDate?.month}-${controller.endDate?.day} ';
+                                          controller.setDifferenceInDays();
                                         }else{
                                           endDateCtrl.text = '';
                                         }
                                       }else{
+                                        controller.differenceInDays.value = '';
                                         SnackBars.showErrorSnackBar('error'.tr, 'select_start_date_first'.tr);
                                       }
                                     },
@@ -152,7 +154,15 @@ class HolidayRequestPage extends StatelessWidget {
                                   ),)
                                 ],
                               ),
-                              const SizedBox(height: 15,),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(controller.differenceInDays.value.tr),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10,),
 
 
 
@@ -248,7 +258,7 @@ class HolidayRequestPage extends StatelessWidget {
                                               padding: const EdgeInsets.all(10.0),
                                               child: Center(
                                                 child: Text(
-                                                  'update'.tr,
+                                                  'update_order'.tr,
                                                   style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 17
@@ -274,7 +284,7 @@ class HolidayRequestPage extends StatelessWidget {
                                               padding: const EdgeInsets.all(10.0),
                                               child: Center(
                                                 child: Text(
-                                                  'cancel'.tr,
+                                                  'cancel_order'.tr,
                                                   style: const TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 17

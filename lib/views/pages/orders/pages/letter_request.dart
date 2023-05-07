@@ -229,7 +229,7 @@ class LetterRequestPage extends StatelessWidget {
                                                       10.0),
                                                   child: Center(
                                                     child: Text(
-                                                      'update'.tr,
+                                                      'update_order'.tr,
                                                       style: const TextStyle(
                                                           color: Colors
                                                               .white,
@@ -266,7 +266,7 @@ class LetterRequestPage extends StatelessWidget {
                                                       10.0),
                                                   child: Center(
                                                     child: Text(
-                                                      'cancel'.tr,
+                                                      'cancel_order'.tr,
                                                       style: const TextStyle(
                                                           color: Colors
                                                               .white,

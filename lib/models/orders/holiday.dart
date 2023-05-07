@@ -86,7 +86,7 @@ class HolidaysData implements Order{
 
 
     final days = (endDay.difference(startDay).inDays + 1);
-    difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : (days.toString() + ' ' + 'days'.tr);
+    difference =  days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : days > 10 ? days.toString() + ' ' + 'day'.tr : (days.toString() + ' ' + 'days'.tr);
     return difference;
   }
 

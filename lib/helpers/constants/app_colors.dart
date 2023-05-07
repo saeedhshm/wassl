@@ -26,6 +26,11 @@ class AppColors{
     Color(0xffE73B32),
   ];
 
+  static const gradiantDarkRed = [
+    Color(0xffe07a56),
+    Color(0xff96140d),
+  ];
+
   static const gradiantGray = [
     Color(0xff9CADC7),
     Color(0xff7285A3),

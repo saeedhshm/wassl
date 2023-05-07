@@ -26,7 +26,7 @@ class HolidayController extends GetxController{
 
   var errorsList = <String>[].obs;
 
-
+ var differenceInDays = ''.obs;
 
 
 
@@ -151,4 +151,19 @@ class HolidayController extends GetxController{
   }
 
 
+  setDifferenceInDays(){
+
+      String difference = '';
+      // var startDayARR = (startDate.toString() ?? '').split('-');
+      // var endDayARR = (endDate.toString() ?? '').split('-');
+      //
+      // final startDay = DateTime(int.parse(startDayARR[0]),int.parse(startDayARR[1]),int.parse(startDayARR[2]));
+      // final endDay = DateTime(int.parse(endDayARR[0]),int.parse(endDayARR[1]),int.parse(endDayARR[2]));
+
+
+      final days = (endDate!.difference(startDate!).inDays + 1);
+      difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : days > 10 ? days.toString() + ' ' + 'day'.tr : (days.toString() + ' ' + 'days'.tr);
+      differenceInDays.value = 'holiday_time'.tr +': ' +difference;
+
+  }
 }

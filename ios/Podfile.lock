@@ -42,6 +42,8 @@ PODS:
     - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
+  - local_auth_ios (0.0.1):
+    - Flutter
   - package_info_plus (0.4.5):
     - Flutter
   - SDWebImage (5.14.2):
@@ -60,6 +62,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_app_version_checker (from `.symlinks/plugins/flutter_app_version_checker/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
@@ -84,6 +87,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_app_version_checker/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
+  local_auth_ios:
+    :path: ".symlinks/plugins/local_auth_ios/ios"
   package_info_plus:
     :path: ".symlinks/plugins/package_info_plus/ios"
   shared_preferences_ios:
@@ -100,6 +105,7 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_app_version_checker: 2beb5e211990c45ebfc17b81aa4d08ebd7edb757
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
+  local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   SDWebImage: b9a731e1d6307f44ca703b3976d18c24ca561e84
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
