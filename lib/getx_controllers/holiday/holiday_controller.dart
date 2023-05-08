@@ -163,7 +163,7 @@ class HolidayController extends GetxController{
 
       final days = (endDate!.difference(startDate!).inDays + 1);
       difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : days > 10 ? days.toString() + ' ' + 'day'.tr : (days.toString() + ' ' + 'days'.tr);
-      differenceInDays.value = 'holiday_time'.tr +': ' +difference;
+      differenceInDays.value = difference;
 
   }
 }

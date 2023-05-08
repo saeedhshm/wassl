@@ -35,10 +35,17 @@ class PreviousRequestsController extends GetxController{
 
   }
 
-  // @override
-  // void onInit() async{
-  //   // TODO: implement onInit
-  //   super.onInit();
-  //  await getAllOrders();
-  // }
+  Future retrieveAllOrders() async{
+    Future.delayed(Duration.zero,()async{
+      try{
+        await getAllOrders();
+      }on NoDataAvailableException catch (e){
+
+        println(e);
+
+      }finally{
+        appController.loading.value = false;
+      }
+    });
+  }
 }

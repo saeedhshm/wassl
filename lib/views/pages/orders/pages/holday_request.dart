@@ -11,6 +11,8 @@ import 'package:wassl/models/orders/holiday.dart';
 // import 'package:wassl/models/orders/holday/holiday_type.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
@@ -47,10 +49,12 @@ class HolidayRequestPage extends StatelessWidget {
        var endDateArr = holidayOrder.holidayEnd?.split('-');
        controller.startDate = DateTime(int.tryParse(startDateArr?[0] ?? '') ?? 0,int.tryParse(startDateArr?[1] ?? '') ?? 0,int.tryParse(startDateArr?[2] ?? '') ?? 0,);
        controller.endDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
+
        controller.holidayReason = holidayOrder.reason;
        controller.filePath = holidayOrder.file == '' ? null : holidayOrder.file;
        println(controller.startDate);
        println(controller.endDate);
+       controller.setDifferenceInDays();
      }
    }
 
@@ -154,14 +158,49 @@ class HolidayRequestPage extends StatelessWidget {
                                   ),)
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              controller.differenceInDays.value.isNotEmpty ? Padding(
+                                padding: const EdgeInsets.all(16.0),
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(controller.differenceInDays.value.tr),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
+                                          borderRadius: BorderRadius.circular(50)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 2),
+                                        child: Row(
+                                          children: [
+
+                                            SizedBox(
+                                              width: 20,
+                                              child: Image.asset('assets/images/order_details/calendar.png'),
+                                            ),
+                                            const SizedBox(width: 8,),
+                                            Text('holiday_time'.tr,style: const TextStyle(
+                                                color: AppColors.darkGreyTextColor,
+                                                // fontWeight: FontWeight.bold
+                                            ),),
+                                            SizedBox(width: 16,),
+                                            SizedBox(
+                                              width: 25,
+                                              child: Image.asset('assets/images/order_details/arrow.png'),
+                                            ),
+                                            SizedBox(width: 16,),
+                                            Text(controller.differenceInDays.value,style: const TextStyle(
+                                                color: AppColors.darkGreyTextColor,
+                                                // fontSize: 12
+                                            ),),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
+                              ) : SizedBox(),
                               const SizedBox(height: 10,),
 
 
@@ -223,84 +262,9 @@ class HolidayRequestPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 15,),
-                              order == null ? SizedBox(
-                                child: InkWell(
-                                  onTap: _sendData,
-                                  child: Container(
-                                    width: double.infinity,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Center(
-                                        child: Text(
-                                          'send'.tr,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 17
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      gradient: greenGradiantAppBar,),
-                                  ),
-                                ),
-                              ) :  SizedBox(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: InkWell(
-                                          onTap: _updateHoliday,
-                                          child: Container(
-
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'update_order'.tr,
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 17
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              gradient: greenGradiantAppBar,),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 15,),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child:  InkWell(
-                                          onTap: _cancelHolidayRequst,
-                                          child: Container(
-
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'cancel_order'.tr,
-                                                  style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 17
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              gradient: redGradiantCancel,),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                              order == null ? SendButtonWidget(_sendData()) :  CancelUpdateWidget(
+                                onUpdateRequest: _updateHoliday,
+                                onCancelRequest: _cancelHolidayRequst,
                               ),
                               const SizedBox(height: 25,),
                             ],

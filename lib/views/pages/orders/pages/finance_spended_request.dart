@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -21,34 +23,37 @@ import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class FinanceSpendedRequest extends StatelessWidget {
-
   final Function? onClose;
   final Order? order;
 
-   FinanceSpendedRequest({Key? key,this.onClose, this.order}) : super(key: key){
-     if(order != null) {
+  FinanceSpendedRequest({Key? key, this.onClose, this.order})
+      : super(key: key) {
+    if (order != null) {
+      var custodyDate = order as FinancialExpensesDate;
+      controller.reason = custodyDate.reason;
+      controller.title = custodyDate.name;
+      titleCtrl.text = custodyDate.name ?? '';
+      amountCtrl.text = '${custodyDate.amount}';
+      controller.amount = '${custodyDate.amount}';
+      descriptionCtrl.text = '${custodyDate.description}';
+      controller.description = '${custodyDate.description}';
+      reasonCtrl.text = custodyDate.reason;
+      fileCtrl.text = custodyDate.file.split('/').last;
+      var endDateArr = custodyDate.date?.split('-');
+      dateCtrl.text = custodyDate.date ?? '';
+      controller.date = DateTime(
+        int.tryParse(endDateArr?[0] ?? '') ?? 0,
+        int.tryParse(endDateArr?[1] ?? '') ?? 0,
+        int.tryParse(endDateArr?[2] ?? '') ?? 0,
+      );
+    }
+  }
 
-       var custodyDate = order as FinancialExpensesDate;
-       controller.reason = custodyDate.reason;
-       controller.title = custodyDate.name;
-       titleCtrl.text = custodyDate.name ?? '';
-       amountCtrl.text = '${custodyDate.amount}';
-       controller.amount =  '${custodyDate.amount}';
-       descriptionCtrl.text = '${custodyDate.description}';
-       controller.description = '${custodyDate.description}';
-       reasonCtrl.text = custodyDate.reason;
-       fileCtrl.text = custodyDate.file.split('/').last;
-       var endDateArr = custodyDate.date?.split('-');
-       dateCtrl.text = custodyDate.date ?? '';
-       controller.date = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
+  final FinanceSpendedRequestController controller =
+      Get.put(FinanceSpendedRequestController());
 
-     }
-   }
-
-   final FinanceSpendedRequestController controller = Get.put(FinanceSpendedRequestController());
-
-   final dateCtrl = TextEditingController();
-   final fileCtrl = TextEditingController();
+  final dateCtrl = TextEditingController();
+  final fileCtrl = TextEditingController();
   final titleCtrl = TextEditingController();
   final amountCtrl = TextEditingController();
   final descriptionCtrl = TextEditingController();
@@ -57,18 +62,18 @@ class FinanceSpendedRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(()=>Stack(
-        children: [
-          Column(
+      body: Obx(() => Stack(
             children: [
-              MainAppbarWidget(
-                'order_Financialـcompensation',
-                onBack: () {
-                  Get.back();
-                },
-              ),
-              Expanded(
-                  child: SingleChildScrollView(
+              Column(
+                children: [
+                  MainAppbarWidget(
+                    'order_Financialـcompensation',
+                    onBack: () {
+                      Get.back();
+                    },
+                  ),
+                  Expanded(
+                      child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Container(
@@ -78,12 +83,11 @@ class FinanceSpendedRequest extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: SizedBox(
-                                  width:double.infinity,
+                                  width: double.infinity,
                                   child: LocalizedText(
                                     'elements'.tr,
                                     textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
@@ -99,8 +103,9 @@ class FinanceSpendedRequest extends StatelessWidget {
                               //       SvgWidget('assets/images/loan_type.svg')),
                               // ),
                               TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget('assets/images/loan_type.svg'),
-                                onChange: (value){
+                                prefixIcon: const SvgWidget(
+                                    'assets/images/loan_type.svg'),
+                                onChange: (value) {
                                   controller.title = value;
                                 },
                                 hintText: 'title'.tr,
@@ -113,106 +118,126 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 //     ),),
                                 //   ),
                                 // ),
-
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget('assets/images/money_on_hand.svg'),
+                                prefixIcon: const SvgWidget(
+                                    'assets/images/money_on_hand.svg'),
                                 hintText: 'value'.tr,
                                 controller: amountCtrl,
-                                onChange: (value){
+                                onChange: (value) {
                                   controller.amount = value;
                                 },
                                 suffixIcon: const SizedBox(
                                   width: 25,
                                   child: Center(
-                                    child: Text('ر.س',style: TextStyle(
-                                        color: Colors.grey
-                                    ),),
+                                    child: Text(
+                                      'ر.س',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
                                   ),
                                 ),
-
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               InkWell(
                                 onTap: () async {
-                                  var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-                                  controller.date = selectedDate ?? controller.date;
-                                  if(controller.date != null){
-                                    dateCtrl.text = '${controller.date?.year}-${controller.date?.month}-${controller.date?.day} ';
-                                  }else{
+                                  var selectedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2100));
+                                  controller.date =
+                                      selectedDate ?? controller.date;
+                                  if (controller.date != null) {
+                                    dateCtrl.text =
+                                        '${controller.date?.year}-${controller.date?.month}-${controller.date?.day} ';
+                                  } else {
                                     dateCtrl.text = '';
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
+                                  prefixIcon: const SvgWidget(
+                                      'assets/images/pref_calendar_icon.svg'),
                                   hintText: 'date'.tr,
                                   controller: dateCtrl,
                                   enabled: false,
                                 ),
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset('assets/images/conversation.png'),
+                                  child: Image.asset(
+                                      'assets/images/conversation.png'),
                                 ),
                                 hintText: 'description'.tr,
                                 controller: descriptionCtrl,
-                                onChange: (value){
+                                onChange: (value) {
                                   controller.description = value;
                                 },
                                 // height: 130,
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
 
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: SizedBox(
-                                  width:double.infinity,
+                                  width: double.infinity,
                                   child: LocalizedText(
                                     'clear_reason'.tr,
                                     textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset('assets/images/conversation.png'),
+                                  child: Image.asset(
+                                      'assets/images/conversation.png'),
                                 ),
                                 maxLines: 5,
                                 controller: reasonCtrl,
                                 hintText: 'reason'.tr,
                                 height: 130,
-                                onChange: (value){
+                                onChange: (value) {
                                   controller.reason = value;
                                 },
                               ),
-                              const SizedBox(height: 15,),
+                              const SizedBox(
+                                height: 15,
+                              ),
                               InkWell(
                                 onTap: () async {
-                                  FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                  FilePickerResult? result =
+                                      await FilePicker.platform.pickFiles(
                                     type: FileType.custom,
                                     allowedExtensions: ['pdf'],
                                   );
 
                                   if (result != null) {
-                                    String filePath = result.files.single.path ?? '';
+                                    String filePath =
+                                        result.files.single.path ?? '';
 
-                                    if(filePath.isNotEmpty){
+                                    if (filePath.isNotEmpty) {
                                       controller.filePath = filePath;
                                       fileCtrl.text = filePath.split('/').last;
                                       // File file = File(filePath);
                                     }
-
                                   } else {
                                     // User canceled the picker
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
                                   prefixIcon: SizedBox(
-                                    child: Image.asset('assets/images/attach.png'),
+                                    child:
+                                        Image.asset('assets/images/attach.png'),
                                   ),
                                   hintText: 'attach_file'.tr,
                                   controller: fileCtrl,
@@ -220,175 +245,85 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 ),
                               ),
 
-                              const SizedBox(height: 15,),
-                              const SizedBox(height: 15,),
-                              const SizedBox(height: 15,),
-                order == null
-                    ? InkWell(
-                  onTap: _addNewRequest,
-                  child: Container(
-                    width: double.infinity,
-                    child: Padding(
-                      padding:
-                      const EdgeInsets.all(
-                          10.0),
-                      child: Center(
-                        child: Text(
-                          'send'.tr,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 17),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius:
-                      BorderRadius.circular(
-                          8),
-                      gradient:
-                      greenGradiantAppBar,
-                    ),
-                  ),
-                )
-                    : SizedBox(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          child: InkWell(
-                            onTap: _updateRequest,
-                            child: Container(
-                              child: Padding(
-                                padding:
-                                const EdgeInsets
-                                    .all(
-                                    10.0),
-                                child: Center(
-                                  child: Text(
-                                    'update_order'.tr,
-                                    style: const TextStyle(
-                                        color: Colors
-                                            .white,
-                                        fontSize:
-                                        17),
-                                  ),
-                                ),
+                              const SizedBox(
+                                height: 15,
                               ),
-                              decoration:
-                              BoxDecoration(
-                                borderRadius:
-                                BorderRadius
-                                    .circular(
-                                    8),
-                                gradient:
-                                greenGradiantAppBar,
+                              const SizedBox(
+                                height: 15,
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          child: InkWell(
-                            onTap: _cancelRequest,
-                            child: Container(
-                              child: Padding(
-                                padding:
-                                const EdgeInsets
-                                    .all(
-                                    10.0),
-                                child: Center(
-                                  child: Text(
-                                    'cancel_order'.tr,
-                                    style: const TextStyle(
-                                        color: Colors
-                                            .white,
-                                        fontSize:
-                                        17),
-                                  ),
-                                ),
+                              const SizedBox(
+                                height: 15,
                               ),
-                              decoration:
-                              BoxDecoration(
-                                borderRadius:
-                                BorderRadius
-                                    .circular(
-                                    8),
-                                gradient:
-                                redGradiantCancel,
+                              order == null
+                                  ? SendButtonWidget(_addNewRequest)
+                                  : CancelUpdateWidget(
+                                onUpdateRequest: _updateRequest,
+                                onCancelRequest: _cancelRequest,
                               ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                              const SizedBox(height: 25,),
+                              const SizedBox(
+                                height: 25,
+                              ),
                             ],
                           ),
                         )
                       ],
                     ),
                   ))
+                ],
+              ),
+              controller.loading.value
+                  ? Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black.withOpacity(0.3),
+                      child: const Center(
+                        child: SendingLoadingWidget(),
+                      ))
+                  : SizedBox(),
+              controller.errorsList.isNotEmpty
+                  ? ErrorMessageWidget(
+                      errorList: controller.errorsList,
+                      onTap: () {
+                        ////
+                        controller.errorsList.clear();
+                      })
+                  : const SizedBox()
             ],
-          ),
-          controller.loading.value
-              ? Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: Colors.black.withOpacity(0.3),
-              child: const Center(
-                child: SendingLoadingWidget(),
-              ))
-              : SizedBox(),
-          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
-            ////
-            controller.errorsList.clear();
-          }): const SizedBox()
-        ],
-      )),
+          )),
     );
   }
 
-  _addNewRequest()async{
-    try{
+  _addNewRequest() async {
+    try {
       await controller.addNewRequest();
       SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
-      Future.delayed(const Duration(milliseconds: 4600),(){
+      Future.delayed(const Duration(milliseconds: 4600), () {
         Get.back();
       });
-    }on NoInternetException catch(e){
+    } on NoInternetException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
-
-    }on CustomException catch(e){
+    } on CustomException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
-
-    }finally{
+    } finally {
       controller.loading.value = false;
     }
   }
 
-  _updateRequest()async{
-    try{
+  _updateRequest() async {
+    try {
       await controller.updateRequest('${order?.orderID}');
       SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
-      Future.delayed(const Duration(milliseconds: 4600),(){
+      Future.delayed(const Duration(milliseconds: 4600), () {
         if (onClose != null) {
           onClose!();
         }
         Get.back();
       });
-    }on NoInternetException catch(e){
+    } on NoInternetException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
-
-    }on CustomException catch(e){
+    } on CustomException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
-
-    }finally{
+    } finally {
       controller.loading.value = false;
     }
   }

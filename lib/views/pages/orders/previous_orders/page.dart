@@ -9,20 +9,13 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/order_details/order_details.dart';
 import 'package:wassl/views/pages/orders/previous_orders/team_orders.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
+import 'package:wassl/views/pages/orders/previous_orders/widgets/previous_orders.dart';
+import 'package:wassl/views/pages/orders/previous_orders/widgets/tabs.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/snack_bars.dart';
-import '../pages/ask_permission.dart';
-import '../pages/correcting_fingerprint.dart';
-import '../pages/custody_request.dart';
-import '../pages/extra_work.dart';
-import '../pages/finance_spended_request.dart';
-import '../pages/holday_request.dart';
-import '../pages/letter_request.dart';
-import '../pages/loan_order.dart';
-import '../pages/visa_request.dart';
+
 
 class PreviousRequestsPage extends StatefulWidget {
 
@@ -40,25 +33,13 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
   final PreviousRequestsController controller = Get.put(PreviousRequestsController());
 
 
-   retrieveAllOrders() async{
-     Future.delayed(Duration.zero,()async{
-       try{
-         await controller.getAllOrders();
-       }on NoDataAvailableException catch (e){
-         println('============ getall orders =========');
-         println(e);
-         println('============ getall orders =========getall orders =========');
-       }finally{
-         controller.appController.loading.value = false;
-       }
-     });
-   }
+
 
    @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    retrieveAllOrders();
+    controller.retrieveAllOrders();
   }
 
   @override
@@ -70,53 +51,14 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
             'previous_requests'.tr,
 
           ),
-          Row(
-            children: [
-              Expanded(child: InkWell(
-                onTap: (){
-                  controller.myOrdersSelected.value = true;
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(color:controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.borderTextFieldColor,width: 1))
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('my_orders'.tr,style: TextStyle(
-                          color: controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.darkGreyTextColor
-                      ),),
-                    ),
-                  ),
-                ),
-              )),
-              Expanded(child: InkWell(
-                onTap: (){
-                  controller.myOrdersSelected.value = false;
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(color: !controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.borderTextFieldColor,width: 1))
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('team_orders'.tr,style: TextStyle(
-                          color: !controller.myOrdersSelected.value ? AppColors.mainGreenColor : AppColors.darkGreyTextColor
-                      ),),
-                    ),
-                  ),
-                ),
-              ))
-            ],
-          ),
+          TabsWidget(),
          controller.myOrdersSelected.value ?  Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
             child: Text('no_previous_requests'.tr,style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
                 color: AppColors.darkGreyTextColor
             ),),
-          ):  OrdersListWidget()) : Expanded(child: TeamOrderPage()),
+          ):  PreviousOrdersWidget()) : Expanded(child: TeamOrderPage()),
           const SizedBox(height: 100,)
         ],
       )),
@@ -124,61 +66,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
   }
 }
 
-class OrdersListWidget extends StatelessWidget {
-   OrdersListWidget({
-    Key? key,
-  }) : super(key: key);
-   final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.mainBackgroundColor,
-      child: ListView.separated(
-        padding:  const EdgeInsets.only(left: 16,right: 16,bottom: 10,top: 16),
-        itemCount: controller.previousRequests.value.orders.length,
-        itemBuilder: (_,index){
-          return  OrderWidget(controller.previousRequests.value.orders[index]);
-        }, separatorBuilder: (BuildContext context, int index) {
-          return const SizedBox(height: 0,);
-      },
-      ),
-    );
-  }
-}
 
-class OrderWidget extends StatelessWidget {
 
-  final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
-  
-  final Order order;
-   OrderWidget(this.order,{Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        Get.put(OrderDetailsController(order));
-        Get.to(()=> OrderDetailsPage());
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
-        child: PreviousRequestsItemWidget(order: order),
-      ),
-    ) ;
-  }
-
-  retrieveAllOrders() async{
-    Future.delayed(Duration.zero,()async{
-      try{
-        await controller.getAllOrders();
-      }on NoDataAvailableException catch (e){
-        println('============ getall orders =========');
-        println(e);
-        println('============ getall orders =========getall orders =========');
-      }finally{
-        controller.appController.loading.value = false;
-      }
-    });
-  }
-}
 

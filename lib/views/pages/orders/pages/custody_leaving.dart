@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -85,24 +86,7 @@ class CustodyLeavingOrder extends StatelessWidget {
 
                           ),
                           const SizedBox(height: 15,),
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Center(
-                                child: Text(
-                                  'send'.tr,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17
-                                  ),
-                                ),
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              gradient: greenGradiantAppBar,),
-                          ),
+                          SendButtonWidget(_addNewRequest),
                           const SizedBox(height: 25,),
                         ],
                       ),
@@ -114,4 +98,6 @@ class CustodyLeavingOrder extends StatelessWidget {
       ),
     );
   }
+
+  _addNewRequest(){}
 }

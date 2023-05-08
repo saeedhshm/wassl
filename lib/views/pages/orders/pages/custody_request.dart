@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/custoday_controller.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
+import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 
 import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
@@ -147,108 +149,10 @@ class CustodyRequestPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 15,),
                               order == null
-                                  ? InkWell(
-                                onTap: _addNewRequest,
-                                child: Container(
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        10.0),
-                                    child: Center(
-                                      child: Text(
-                                        'send'.tr,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17),
-                                      ),
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                    BorderRadius.circular(
-                                        8),
-                                    gradient:
-                                    greenGradiantAppBar,
-                                  ),
-                                ),
-                              )
-                                  : SizedBox(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: InkWell(
-                                          onTap: _updateRequest,
-                                          child: Container(
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(
-                                                  10.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'update_order'.tr,
-                                                  style: const TextStyle(
-                                                      color: Colors
-                                                          .white,
-                                                      fontSize:
-                                                      17),
-                                                ),
-                                              ),
-                                            ),
-                                            decoration:
-                                            BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  8),
-                                              gradient:
-                                              greenGradiantAppBar,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: InkWell(
-                                          onTap: _cancelRequest,
-                                          child: Container(
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(
-                                                  10.0),
-                                              child: Center(
-                                                child: Text(
-                                                  'cancel_order'.tr,
-                                                  style: const TextStyle(
-                                                      color: Colors
-                                                          .white,
-                                                      fontSize:
-                                                      17),
-                                                ),
-                                              ),
-                                            ),
-                                            decoration:
-                                            BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  8),
-                                              gradient:
-                                              redGradiantCancel,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ? SendButtonWidget(_addNewRequest)
+                                  : CancelUpdateWidget(
+                                onUpdateRequest: _updateRequest,
+                                onCancelRequest: _cancelRequest,
                               ),
                               const SizedBox(height: 25,),
                             ],
