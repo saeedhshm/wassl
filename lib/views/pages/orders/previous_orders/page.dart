@@ -52,13 +52,8 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
 
           ),
           TabsWidget(),
-         controller.myOrdersSelected.value ?  Expanded(child:controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
-            child: Text('no_previous_requests'.tr,style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.darkGreyTextColor
-            ),),
-          ):  PreviousOrdersWidget()) : Expanded(child: TeamOrderPage()),
+         controller.myOrdersSelected.value ?
+         Expanded(child: PreviousOrdersWidget()) : Expanded(child: TeamOrderPage()),
           const SizedBox(height: 100,)
         ],
       )),

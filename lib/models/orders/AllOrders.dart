@@ -117,6 +117,7 @@ abstract class Order{
   int get statusID;
   int get orderID;
   Status? status;
+  ResponsibleEmployee? nameEmployee;
 
   dynamic hrComment;
   int? activeResponsibleId;

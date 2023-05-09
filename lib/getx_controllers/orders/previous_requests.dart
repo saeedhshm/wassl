@@ -12,6 +12,8 @@ import '../app_controller.dart';
 class PreviousRequestsController extends GetxController{
 
   var previousRequests = AllOrders().obs;
+  var previousTeamRequests = AllOrders().obs;
+
   final AppController appController = Get.find();
 
   var myOrdersSelected = true.obs;
@@ -35,10 +37,30 @@ class PreviousRequestsController extends GetxController{
 
   }
 
+  Future getTeamOrders() async {
+    var headers = {
+      'Authorization':
+      'bearer ${appController.loginModel.value.token?.accessToken}',
+      // "x-localization": 'lang_code'.tr,
+    };
+
+    appController.loading.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.getTeamOrders,header: headers);
+    // appController.loading.value = false;
+
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+    var json = jsonDecode(response.body);
+    previousTeamRequests.value = AllOrders.fromJson(json);
+
+  }
+
   Future retrieveAllOrders() async{
     Future.delayed(Duration.zero,()async{
       try{
         await getAllOrders();
+        await getTeamOrders();
       }on NoDataAvailableException catch (e){
 
         println(e);

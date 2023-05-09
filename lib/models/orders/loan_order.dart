@@ -21,7 +21,8 @@ class LoansData implements Order{
   String? updatedAt;
   @override
   int? activeResponsibleId;
-
+  @override
+  ResponsibleEmployee? nameEmployee;
   @override
   List<Confirmation>? confirmation;
 
@@ -85,4 +86,6 @@ class LoansData implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+
 }

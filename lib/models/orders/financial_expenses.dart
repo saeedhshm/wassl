@@ -21,7 +21,8 @@ class FinancialExpensesDate implements Order{
   OrderType? type;
   @override
   int? activeResponsibleId;
-
+  @override
+  ResponsibleEmployee? nameEmployee;
   @override
   List<Confirmation>? confirmation;
 

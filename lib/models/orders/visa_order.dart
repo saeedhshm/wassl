@@ -29,7 +29,8 @@ class OrderVisaData  implements Order{
   String? updatedAt;
   @override
   int? activeResponsibleId;
-
+  @override
+  ResponsibleEmployee? nameEmployee;
   @override
   List<Confirmation>? confirmation;
 
