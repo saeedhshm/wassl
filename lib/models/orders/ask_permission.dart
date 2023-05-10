@@ -50,6 +50,9 @@ class AskPermissionsData implements Order {
         confirmation!.add(Confirmation.fromJson(v));
       });
     }
+    nameEmployee = json['name'] != null
+        ? ResponsibleEmployee.fromJson(json['name'])
+        : null;
   }
 
   @override

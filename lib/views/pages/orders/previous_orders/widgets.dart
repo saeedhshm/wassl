@@ -75,6 +75,21 @@ class PreviousRequestsItemWidget extends StatelessWidget {
               ],
             ),
 
+            order.nameEmployee != null ? Row(
+              children: [
+                Text('emp_name'.tr + ' : ' ,style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13
+                ),),
+                SizedBox(),
+                Text(order.nameEmployee?.fullName ?? '' ,style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 13
+                ),),
+              ],
+            ) : SizedBox(),
             order.orderName == 'OrderVisaData' ?  Row(
               children: [
                 Text('visa_type'.tr + ' : ' +((order as OrderVisaData).visaType ),style: const TextStyle(

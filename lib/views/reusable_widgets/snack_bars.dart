@@ -18,4 +18,9 @@ class SnackBars{
       
     );
   }
+  static void back(){
+    Future.delayed(const Duration(milliseconds: 4610),(){
+      Get.back();
+    });
+  }
 }

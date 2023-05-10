@@ -32,6 +32,7 @@ class AppUrls {
   static const String getAllOrders = '$_ordersApi/get';
   //{{domain}}/orders/get-team-orders
   static const String getTeamOrders = '$_ordersApi/get-team-orders';
+  static const String setTeamOrderSatus = '$_ordersApi/set-team-order-status';
 
   //attendance
   static const String monthlyAttendance = '$_attendanceApi/month';

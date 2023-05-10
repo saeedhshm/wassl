@@ -9,6 +9,7 @@ import 'details/order_details.dart';
 
 class OrderDetailsPage extends StatelessWidget {
 
+
    OrderDetailsPage({Key? key}) : super(key: key);
    final OrderDetailsController controller = Get.find();
 

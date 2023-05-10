@@ -14,6 +14,7 @@ class Status {
     statusEn = json['status_en'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+
   }
 
   Map<String, dynamic> toJson() {

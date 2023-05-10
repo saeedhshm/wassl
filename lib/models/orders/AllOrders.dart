@@ -118,6 +118,7 @@ abstract class Order{
   int get orderID;
   Status? status;
   ResponsibleEmployee? nameEmployee;
+  // bool teamOrder = false;
 
   dynamic hrComment;
   int? activeResponsibleId;

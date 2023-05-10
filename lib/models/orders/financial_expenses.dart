@@ -45,6 +45,9 @@ class FinancialExpensesDate implements Order{
     updatedAt = json['updated_at'];
     hrComment = json['hr_comment'];
     activeResponsibleId = json['active_responsible_id'];
+    nameEmployee = json['name'] != null
+        ? ResponsibleEmployee.fromJson(json['name'])
+        : null;
     if (json['confirmation'] != null) {
       confirmation = <Confirmation>[];
       json['confirmation'].forEach((v) {

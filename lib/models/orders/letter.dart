@@ -40,7 +40,9 @@ class LetterDate implements Order{
     _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-
+    nameEmployee = json['name'] != null
+        ? ResponsibleEmployee.fromJson(json['name'])
+        : null;
     hrComment = json['hr_comment'];
     activeResponsibleId = json['active_responsible_id'];
     if (json['confirmation'] != null) {

@@ -39,6 +39,9 @@ class CustodyDate implements Order{
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     hrComment = json['hr_comment'];
+    nameEmployee = json['name'] != null
+        ? ResponsibleEmployee.fromJson(json['name'])
+        : null;
     activeResponsibleId = json['active_responsible_id'];
     if (json['confirmation'] != null) {
       confirmation = <Confirmation>[];
