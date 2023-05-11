@@ -49,8 +49,22 @@ class OrderDetailsController extends GetxController{
   }
 
   bool get isTeamOrder{
-    return true;
+    // return true;
     return (appController.loginModel.value.user?.id ?? 0) == (order.activeResponsibleId ?? 0) ;
+  }
+
+  List<Confirmation> get confirmation{
+    List<Confirmation> confirmations = [];
+    if(order.confirmation != null) {
+      for (Confirmation c in order.confirmation!) {
+        confirmations.add(c);
+        if(c.status == 3){
+          break;
+        }
+      }
+    }
+
+    return confirmations;
   }
 
 

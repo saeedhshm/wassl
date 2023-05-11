@@ -21,7 +21,8 @@ class ConfirmationWidget extends StatelessWidget {
           border: Border.all(color: AppColors.borderTextFieldColor,width: 0.5)
       ),
       child: Column(
-        children: controller.order.confirmation!.map((e) => ChainItemWidget(
+        children: controller.confirmation!.map((e) => ChainItemWidget(
+          confirmStatus: e.status ?? 1,
           hieghtBetweenWidgets: heightBetweenWidgets,
           name: e.responsibleEmployee?.fullName ?? '',
           job: '12007 - مطور وجهات',

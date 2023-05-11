@@ -262,7 +262,7 @@ class HolidayRequestPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 15,),
-                              order == null ? SendButtonWidget(_sendData()) :  CancelUpdateWidget(
+                              order == null ? SendButtonWidget(_sendData) :  CancelUpdateWidget(
                                 onUpdateRequest: _updateHoliday,
                                 onCancelRequest: _cancelHolidayRequst,
                               ),

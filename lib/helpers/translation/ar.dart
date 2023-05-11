@@ -260,10 +260,12 @@ Map<String,String>  arabicStrings = {
   'comments':'تعليقات',
   'add_comment':'إضافة تعليق',
   'sent':'مرسلة',
-  'confirmt':'مؤكدة',
   'holiday_time':'مدة الأجازة',
+  'confirmt':'مؤكدة',
+
   'approved':'موافقة',
   'disapproved':'رفض',
+  'await_status':'في الإنتظار',
 
   'my_orders':'طلباتي',
   'team_orders':'طلبات الفريق',

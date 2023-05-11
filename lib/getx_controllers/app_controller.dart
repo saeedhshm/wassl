@@ -38,7 +38,7 @@ class AppController extends GetxController{
 
   Position? position;
 
-  var deployingForApple = true;
+  var deployingForApple = false;
 
   final _checker = AppVersionChecker();
 

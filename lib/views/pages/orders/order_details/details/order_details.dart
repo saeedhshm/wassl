@@ -4,6 +4,7 @@ import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/models/orders/finger_print.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
 
 import '../../../../../helpers/constants/print_ln.dart';
 import '../../../../../models/orders/holiday.dart';
@@ -277,63 +278,7 @@ class OderDetailFragment extends StatelessWidget {
                 ),
               ),
               // controller.order.statusID == 1
-             controller.isTeamOrder ? SafeArea(
-               child: Padding(
-                 padding: const EdgeInsets.all(16.0),
-                 child: Row(
-                   children: [
-                     Expanded(
-                       child: InkWell(
-                         onTap: () async {
-                          await controller.setTeamOrderStatusRequest('2');
-                          // Future.delayed(const Duration(milliseconds: 4610),(){
-                          //   Get.back();
-                          // });
-                         },
-                         child: Container(
-                           decoration: BoxDecoration(
-                               gradient: greenGradiantAppBarSecond,
-                               borderRadius: BorderRadius.circular(15)
-                           ),
-                           child: Center(
-                             child: Padding(
-                               padding: const EdgeInsets.all(10.0),
-                               child: Text('approved'.tr,style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold
-                               ),),
-                             ),
-                           ),
-                         ),
-                       ),
-                     ),
-                     SizedBox(width: 20,),
-                     Expanded(
-                       child: InkWell(
-                         onTap: (){
-                           controller.setTeamOrderStatusRequest('3');
-                         },
-                         child: Container(
-                           decoration: BoxDecoration(
-                               gradient: redGradiantCancel,
-                               borderRadius: BorderRadius.circular(15)
-                           ),
-                           child: Center(
-                             child: Padding(
-                               padding: const EdgeInsets.all(10.0),
-                               child: Text('disapproved'.tr,style: TextStyle(
-                                   color: Colors.white,
-                                   fontWeight: FontWeight.bold
-                               ),),
-                             ),
-                           ),
-                         ),
-                       ),
-                     )
-                   ],
-                 ),
-               ),
-             ) : SizedBox()
+              ApproveDisapproveWidget()
             ],
           ),
           Obx(() => SizedBox(

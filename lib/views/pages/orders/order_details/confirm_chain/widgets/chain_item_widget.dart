@@ -9,6 +9,7 @@ class ChainItemWidget extends StatelessWidget {
 
   final String image;
   final String name,job,date,time;
+  final int confirmStatus;
 
   const ChainItemWidget({
     Key? key,
@@ -17,7 +18,7 @@ class ChainItemWidget extends StatelessWidget {
     required this.job,
     required this.date,
     required this.time,
-    // required this.name,
+    required this.confirmStatus,
     required this.hieghtBetweenWidgets,
   }) : super(key: key);
 
@@ -46,12 +47,12 @@ class ChainItemWidget extends StatelessWidget {
               // ),),
               Container(
                 decoration: BoxDecoration(
-                  gradient: greenGradiantAppBarSecond,
+                  gradient:confirmStatus == 1 ? grayGradiantAwait : confirmStatus == 2 ? greenGradiantAppBarSecond : redGradiantRejected ,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 0.5,horizontal: 10),
-                  child: Text('confirmt'.tr,style: const TextStyle(
+                  child: Text(confirmStatus == 1 ? 'await_status'.tr : confirmStatus == 2 ? 'confirmt'.tr : 'disapproved'.tr,style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13
                   ),),

@@ -59,7 +59,7 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: 10,),
                 DarkTextWidget(appController.loginModel.value.user?.fullName ?? '',fontSize: 20,),
                 const SizedBox(height: 0,),
-                DarkTextWidget('مصمم جرافيكس',fontSize: 15,),
+                DarkTextWidget(appController.loginModel.value.user?.job?.name ?? '',fontSize: 15,),
                 const SizedBox(height: 20,),
                 appController.deployingForApple ? const SizedBox() :  const SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
                   ,)),

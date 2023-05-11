@@ -1,4 +1,6 @@
 
+import 'package:wassl/helpers/constants/print_ln.dart';
+
 import 'AllOrders.dart';
 import 'order_status.dart';
 import 'order_type.dart';
@@ -45,9 +47,12 @@ class FinancialExpensesDate implements Order{
     updatedAt = json['updated_at'];
     hrComment = json['hr_comment'];
     activeResponsibleId = json['active_responsible_id'];
-    nameEmployee = json['name'] != null
-        ? ResponsibleEmployee.fromJson(json['name'])
-        : null;
+    println('=-=-=--=--=>>> json[name] ${json['name']}');
+    if(json['name'].toString().isEmpty){
+      nameEmployee = json['name'] != null
+          ? ResponsibleEmployee.fromJson(json['name'])
+          : null;
+    }
     if (json['confirmation'] != null) {
       confirmation = <Confirmation>[];
       json['confirmation'].forEach((v) {
