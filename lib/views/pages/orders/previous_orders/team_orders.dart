@@ -19,7 +19,7 @@ class TeamOrderPage extends StatelessWidget {
       height: Get.height,
       color: AppColors.mainBackgroundColor,
       child: controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousTeamRequests.value.orders.isEmpty ? Center(
-        child: Text('No Team Orders Yet'.tr,style: TextStyle(
+        child: Text('No Team Orders Yet'.tr,style: const TextStyle(
             color: AppColors.darkGreyTextColor,
             fontWeight: FontWeight.bold
         ),),

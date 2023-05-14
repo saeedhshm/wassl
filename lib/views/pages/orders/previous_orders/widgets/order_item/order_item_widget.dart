@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
+import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/widgets/name.dart';
+import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/widgets/order_type_name.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
-import '../../../../getx_controllers/orders/previous_requests.dart';
-import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/print_ln.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
-import '../../../../models/orders/AllOrders.dart';
-import '../../../../models/orders/ask_permission.dart';
-import '../../../../models/orders/financial_expenses.dart';
-import '../../../../models/orders/finger_print.dart';
-import '../../../../models/orders/holiday.dart';
-import '../../../../models/orders/letter.dart';
-import '../../../../models/orders/loan_order.dart';
-import '../../../../models/orders/over_time.dart';
-import '../../../../models/orders/visa_order.dart';
-import '../../../consts_widgets/gradiants.dart';
-import '../../../reusable_widgets/gradiant_text.dart';
-import '../../../reusable_widgets/snack_bars.dart';
-import '../pages/ask_permission.dart';
-import '../pages/correcting_fingerprint.dart';
-import '../pages/custody_request.dart';
-import '../pages/extra_work.dart';
-import '../pages/finance_spended_request.dart';
-import '../pages/holday_request.dart';
-import '../pages/letter_request.dart';
-import '../pages/loan_order.dart';
-import '../pages/visa_request.dart';
+import '../../../../../../getx_controllers/orders/previous_requests.dart';
+import '../../../../../../helpers/constants/app_colors.dart';
+import '../../../../../../helpers/constants/print_ln.dart';
+import '../../../../../../helpers/exceptions/no_internet.dart';
+import '../../../../../../models/orders/AllOrders.dart';
+import '../../../../../../models/orders/ask_permission.dart';
+import '../../../../../../models/orders/financial_expenses.dart';
+import '../../../../../../models/orders/finger_print.dart';
+import '../../../../../../models/orders/holiday.dart';
+import '../../../../../../models/orders/letter.dart';
+import '../../../../../../models/orders/loan_order.dart';
+import '../../../../../../models/orders/over_time.dart';
+import '../../../../../../models/orders/visa_order.dart';
+import '../../../../../consts_widgets/gradiants.dart';
+import '../../../../../reusable_widgets/gradiant_text.dart';
+import '../../../../../reusable_widgets/snack_bars.dart';
+import '../../../pages/ask_permission.dart';
+import '../../../pages/correcting_fingerprint.dart';
+import '../../../pages/custody_request.dart';
+import '../../../pages/extra_work.dart';
+import '../../../pages/finance_spended_request.dart';
+import '../../../pages/holday_request.dart';
+import '../../../pages/letter_request.dart';
+import '../../../pages/loan_order.dart';
+import '../../../pages/visa_request.dart';
 
-class PreviousRequestsItemWidget extends StatelessWidget {
+class OrderItemWidget extends StatelessWidget {
 
   final Order order;
 
-  const PreviousRequestsItemWidget({Key? key,required this.order}) : super(key: key);
+  const OrderItemWidget({Key? key,required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,53 +45,12 @@ class PreviousRequestsItemWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 16),
         child: Column(
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(order.orderName.tr,style: const TextStyle(
-                        color: AppColors.darkGreyTextColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18
-                    ),),
-                    order.orderName == 'LetterDate' ?  Text('directed_to'.tr + ' : ' +((order as LetterDate).directedToAr ?? ''),style: const TextStyle(
-                        color: AppColors.darkGreyTextColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15
-                    ),) : const SizedBox(),
-                    order.orderName == 'LoansData' ?  Text('installment_method'.tr + ' : ' +((order as LoansData).monthlyInstallment ?? ''),style: const TextStyle(
-                        color: AppColors.darkGreyTextColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 15
-                    ),) : const SizedBox(),
+            //Order type name
+            OrderTypeName(order),
+            //employee name
+            EmpNameWidget(nameEmployee:order.nameEmployee?.fullName ,),
 
-                    // Spacer(),
-
-                  ],
-                )),
-                GradientText(order.orderStatus.tr,style: TextStyle(  ),
-                    gradient:order.statusID == 1 ? grayGradiantAwait : order.statusID == 4 ? redGradiantRejected : order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
-                )
-              ],
-            ),
-
-            order.nameEmployee != null ? Row(
-              children: [
-                Text('emp_name'.tr + ' : ' ,style: const TextStyle(
-                    color: AppColors.darkGreyTextColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 13
-                ),),
-                SizedBox(),
-                Text(order.nameEmployee?.fullName ?? '' ,style: const TextStyle(
-                    color: AppColors.darkGreyTextColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 13
-                ),),
-              ],
-            ) : SizedBox(),
+            //Visa type
             order.orderName == 'OrderVisaData' ?  Row(
               children: [
                 Text('visa_type'.tr + ' : ' +((order as OrderVisaData).visaType ),style: const TextStyle(
@@ -119,7 +80,7 @@ class PreviousRequestsItemWidget extends StatelessWidget {
                 ),)
               ],
             ),
-            (order.orderName == 'OrderVisaData' &&(order as OrderVisaData).hasTicket) ? Row(
+            (order.orderName == 'OrderVisaData' && (order as OrderVisaData).hasTicket) ? Row(
               children: [
                 const SizedBox(
                   width: 25,
@@ -633,160 +594,9 @@ class PreviousRequestsItemWidget extends StatelessWidget {
             Row(
               children: [
                 Spacer(),
-                order.statusID == 1 ? InkWell(
-                    onTap: (){
-                      if(order.statusID == 1){
-                        switch(order.orderName){
-                          case 'AskPermissionsData':
-                            Get.to(()=> AskPermissionPage(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'CustodyDate':
-                            Get.to(()=> CustodyRequestPage(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'FinancialExpensesDate':
-                            Get.to(()=> FinanceSpendedRequest(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'FingerprintCorrectionsData':
-                            Get.to(()=> CorrectingFingerprintRequest(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'HolidaysData':
-                            Get.to(()=> HolidayRequestPage(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'LetterDate':
-                            Get.to(()=> LetterRequestPage(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'LoansData':
-                            Get.to(()=> NewLoanOrder(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'OvertimeData':
-                            Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-                          case 'OrderVisaData':
-                            Get.to(()=> VisaRequestPage(order: order,onClose: (){
-                              final PreviousRequestsController controller = Get.find();
-                              Future.delayed(Duration.zero,()async{
-                                try{
-                                  await controller.getAllOrders();
-                                }on NoDataAvailableException catch (e){
-                                  println('============ getall orders =========');
-                                  println(e);
-                                  println('============ getall orders =========getall orders =========');
-                                }finally{
-                                  controller.appController.loading.value = false;
-                                }
-                              });
-                            },));
-                            break;
-
-                        }
-                      }else{
-                        SnackBars.showErrorSnackBar('error'.tr, 'cannot_update_order'.tr);
-                      }
-                    },child: Icon(Icons.mode_edit_outline_sharp,color: AppColors.mainGreenColor,size: 18,)) : SizedBox(),
+                (order.statusID == 1) && (order.nameEmployee == null)  ? InkWell(
+                    onTap: updateOrder,
+                    child: Icon(Icons.mode_edit_outline_sharp,color: AppColors.mainGreenColor,size: 18,)) : SizedBox(),
               ],
             )
 
@@ -805,5 +615,155 @@ class PreviousRequestsItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void updateOrder(){
+    switch(order.orderName){
+      case 'AskPermissionsData':
+        Get.to(()=> AskPermissionPage(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'CustodyDate':
+        Get.to(()=> CustodyRequestPage(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'FinancialExpensesDate':
+        Get.to(()=> FinanceSpendedRequest(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'FingerprintCorrectionsData':
+        Get.to(()=> CorrectingFingerprintRequest(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'HolidaysData':
+        Get.to(()=> HolidayRequestPage(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'LetterDate':
+        Get.to(()=> LetterRequestPage(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'LoansData':
+        Get.to(()=> NewLoanOrder(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'OvertimeData':
+        Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+      case 'OrderVisaData':
+        Get.to(()=> VisaRequestPage(order: order,onClose: (){
+          final PreviousRequestsController controller = Get.find();
+          Future.delayed(Duration.zero,()async{
+            try{
+              await controller.getAllOrders();
+            }on NoDataAvailableException catch (e){
+              println('============ getall orders =========');
+              println(e);
+              println('============ getall orders =========getall orders =========');
+            }finally{
+              controller.appController.loading.value = false;
+            }
+          });
+        },));
+        break;
+
+    }
   }
 }

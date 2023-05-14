@@ -8,7 +8,7 @@ import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/order_details/order_details.dart';
 import 'package:wassl/views/pages/orders/previous_orders/team_orders.dart';
-import 'package:wassl/views/pages/orders/previous_orders/widgets.dart';
+import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/order_item_widget.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/previous_orders.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/tabs.dart';
 

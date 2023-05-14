@@ -7,7 +7,7 @@ import '../../../../../helpers/constants/print_ln.dart';
 import '../../../../../helpers/exceptions/no_internet.dart';
 import '../../../../../models/orders/AllOrders.dart';
 import '../../order_details/order_details.dart';
-import '../widgets.dart';
+import 'order_item/order_item_widget.dart';
 
 class OrderWidget extends StatelessWidget {
 
@@ -25,7 +25,7 @@ class OrderWidget extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16.0),
-        child: PreviousRequestsItemWidget(order: order),
+        child: OrderItemWidget(order: order),
       ),
     ) ;
   }
