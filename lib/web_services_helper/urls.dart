@@ -124,5 +124,11 @@ class AppUrls {
   static const String updateOvertimeApi = '$_overtimeApi/update';
   // {{domain}}/overtime/cancel/2
   static const String cancelOvertimeApi = '$_overtimeApi/cancel';
+
+  //https://waslhr.com/api/v1/documents
+  static const String documentsApi = '$_apiVrsion/documents';
+  //https://waslhr.com/api/v1/covenant
+  static const String covenantApi = '$_apiVrsion/covenant';
+
 }
 

@@ -39,6 +39,8 @@ class OrderItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Padding(
@@ -618,6 +620,18 @@ class OrderItemWidget extends StatelessWidget {
   }
 
   void updateOrder(){
+
+    if(order.confirmation != null){
+      for(Confirmation c in order.confirmation!){
+        var status =  c.status ?? 0;
+        if(status == 2){
+          SnackBars.showErrorSnackBar('under_approve'.tr, 'this_order_approved_from_one'.tr);
+          return;
+        }
+
+      }
+    }
+
     switch(order.orderName){
       case 'AskPermissionsData':
         Get.to(()=> AskPermissionPage(order: order,onClose: (){

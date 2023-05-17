@@ -337,4 +337,15 @@ class AppController extends GetxController{
     };
   }
 
+  bool get isHolidayDay {
+
+   var weekEnds = (loginModel.value.user?.schedule?.info?.weekEndDays ?? '').split(',').map((e) => int.tryParse(e) ?? 0).toList();//(loginModel.value.user?.schedule?.info?.weekEndDays ?? '').split(',');
+    var today = DateTime.now().weekday;
+    for(int i in weekEnds){
+      if(today == i) return true;
+    }
+   println(today);
+    return false;
+  }
+
 }

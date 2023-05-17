@@ -6,6 +6,7 @@ import '../../../getx_controllers/app_controller.dart';
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
+import '../documents/page.dart';
 import '../settings/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -88,15 +89,20 @@ class UserProfilePage extends StatelessWidget {
                   title: "money_info",
                   icon: "assets/images/profile/3.png",
                 ),
-                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
-                  title: "docs",
-                  icon: "assets/images/profile/4.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>DocsPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "docs",
+                    icon: "assets/images/profile/4.png",
+                  ),
                 ),
                 appController.deployingForApple ? const SizedBox() :   ListProfileItemWidget(
                   title: "contracts",
                   icon: "assets/images/profile/5.png",
                 ),
-                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                ListProfileItemWidget(
                   title: "Custodys",
                   icon: "assets/images/profile/6.png",
                 ),

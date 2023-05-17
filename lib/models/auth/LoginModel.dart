@@ -33,6 +33,8 @@ class LoginModel {
   String get timeOut {
     return (user?.schedule?.info?.timeOut ?? '').formattedTime();
   }
+
+
 }
 
 class Token {

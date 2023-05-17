@@ -1,0 +1,81 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../getx_controllers/home/home_controller.dart';
+import '../../../../helpers/constants/app_colors.dart';
+import '../../../reusable_widgets/circular_widget.dart';
+
+class AttendanceInfoWidget extends StatelessWidget {
+  AttendanceInfoWidget({Key? key}) : super(key: key);
+  final HomeController controller = Get.find();
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(
+          width: 16,
+        ),
+        Container(
+          child: CircularWidget(
+              size: 50,
+              borderWidth: 0,
+              padding: 0,
+              borderColor: Colors.transparent,
+              child: Image.asset(
+                  'assets/images/profile/1.png')),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                offset: const Offset(0, 1),
+                blurRadius: 1,
+                spreadRadius: 0,
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                controller.attendanceStatusValue,
+                style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              // SizedBox(height: 10,),
+              Text(
+                controller.currentTime,
+                style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(
+              top: 20, left: 20, right: 20),
+          child: SizedBox(
+            width: 50,
+            child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                child: Image.asset(
+                    'assets/images/attend_print_ic.png')),
+          ),
+        )
+      ],
+    );
+  }
+}
