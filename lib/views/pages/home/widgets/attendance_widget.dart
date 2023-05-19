@@ -58,6 +58,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
+          // !appController.isHolidayDay ?
           child:  !appController.isHolidayDay ? Obx(() =>IgnorePointer(
             ignoring: controller.attendanceStatus.value == 3 ||
                 controller.sendingAttendance.value,
@@ -99,8 +100,17 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
                       confirm: InkWell(
                         onTap: () async {
                           // await attend();
-                          _authenticateWithBiometrics();
-                          // _checkBiometrics();
+                         var availableBiometrics = await _getAvailableBiometrics();
+                         var canUseBiometric = await _checkBiometrics();
+                         if(canUseBiometric){
+                           if(availableBiometrics.isEmpty){
+                             await attend();
+                           }else{
+                             _authenticateWithBiometrics();
+                           }
+                         }else{
+                           await attend();
+                         }
                         },
                         child: Container(
                             decoration: BoxDecoration(
@@ -219,8 +229,8 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
     }
   }
 
-  Future<void> _checkBiometrics() async {
-    late bool canCheckBiometrics;
+  Future<bool> _checkBiometrics() async {
+    bool canCheckBiometrics = false;
     try {
       canCheckBiometrics = await auth.canCheckBiometrics;
       println('can use Biometrics $canCheckBiometrics');
@@ -229,16 +239,17 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       print(e);
     }
     if (!mounted) {
-      return;
+      return canCheckBiometrics;
     }
 
     setState(() {
       _canCheckBiometrics = canCheckBiometrics;
     });
+    return canCheckBiometrics;
   }
 
-  Future<void> _getAvailableBiometrics() async {
-    late List<BiometricType> availableBiometrics;
+  Future<List<BiometricType>> _getAvailableBiometrics() async {
+     List<BiometricType> availableBiometrics = [];
     try {
       availableBiometrics = await auth.getAvailableBiometrics();
     } on PlatformException catch (e) {
@@ -246,12 +257,12 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       print(e);
     }
     if (!mounted) {
-      return;
+      return availableBiometrics;
     }
 
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
+    println(availableBiometrics);
+
+     return availableBiometrics;
   }
 
   Future<void> _authenticate() async {
@@ -310,12 +321,13 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       if(authenticated){
         await attend();
       }else{
+        println('=-==-=-= cant authenticated');
         SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
       }
       // await attend();
     } on PlatformException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
-      print(e);
+      println('=-==-=-= $e');
       setState(() {
         _isAuthenticating = false;
         _authorized = 'Error - ${e.message}';
