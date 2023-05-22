@@ -1,7 +1,9 @@
 
 
-const String _appDomain = 'https://waslhr.com';
-const String _apiVrsion = '$_appDomain/api/v1';
+const String appDomain = 'https://waslhr.com';
+const String _apiVrsion = '$appDomain/api/v1';
+
+//https://waslhr.com/public/file/HNfw2wuXW6E3Z5yHL0dQjiHm9E7a50HdNJvfIB9Z.png
 class AppUrls {
 
   static const String _authApi = '$_apiVrsion/auth';

@@ -6,6 +6,7 @@ import '../../../getx_controllers/app_controller.dart';
 import '../../reusable_widgets/circular_widget.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
+import '../covenant/page.dart';
 import '../documents/page.dart';
 import '../settings/settings_page.dart';
 
@@ -102,9 +103,14 @@ class UserProfilePage extends StatelessWidget {
                   title: "contracts",
                   icon: "assets/images/profile/5.png",
                 ),
-                ListProfileItemWidget(
-                  title: "Custodys",
-                  icon: "assets/images/profile/6.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>CovenantPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "Custodys",
+                    icon: "assets/images/profile/6.png",
+                  ),
                 ),
 
 
