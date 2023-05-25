@@ -60,6 +60,7 @@ class ChainItemWidget extends StatelessWidget {
               )
             ],
           )),
+
           Column(
             children: [
               Text(date,style: const TextStyle(
