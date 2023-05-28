@@ -1,0 +1,76 @@
+class Holidays {
+  bool? success;
+  HolidayBalance? data;
+  String? message;
+
+  Holidays({this.success, this.data, this.message});
+
+  Holidays.fromJson(Map<String, dynamic> json) {
+    success = json['success'];
+    data = json['data'] != null ? HolidayBalance.fromJson(json['data']) : null;
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    data['message'] = message;
+    return data;
+  }
+}
+
+class HolidayBalance {
+  int? id;
+  int? employeeId;
+  dynamic openingVacationsCount;
+  dynamic usedVacationsCount;
+  dynamic availableVacationsCount;
+  dynamic discountVacationsCount;
+  dynamic sickVacationsCount;
+  dynamic unpaidVacationsCount;
+  dynamic createdAt;
+  dynamic updatedAt;
+
+  HolidayBalance(
+      {this.id,
+        this.employeeId,
+        this.openingVacationsCount,
+        this.usedVacationsCount,
+        this.availableVacationsCount,
+        this.discountVacationsCount,
+        this.sickVacationsCount,
+        this.unpaidVacationsCount,
+        this.createdAt,
+        this.updatedAt});
+
+  HolidayBalance.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    employeeId = json['employee_id'];
+    openingVacationsCount = json['opening_vacations_count'];
+    usedVacationsCount = json['used_vacations_count'];
+    availableVacationsCount = json['available_vacations_count'];
+    discountVacationsCount = json['discount_vacations_count'];
+    sickVacationsCount = json['sick_vacations_count'];
+    unpaidVacationsCount = json['unpaid_vacations_count'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['employee_id'] = this.employeeId;
+    data['opening_vacations_count'] = this.openingVacationsCount;
+    data['used_vacations_count'] = this.usedVacationsCount;
+    data['available_vacations_count'] = this.availableVacationsCount;
+    data['discount_vacations_count'] = this.discountVacationsCount;
+    data['sick_vacations_count'] = this.sickVacationsCount;
+    data['unpaid_vacations_count'] = this.unpaidVacationsCount;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}

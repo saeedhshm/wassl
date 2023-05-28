@@ -132,5 +132,7 @@ class AppUrls {
   //https://waslhr.com/api/v1/covenant
   static const String covenantApi = '$_apiVrsion/covenant';
 
+  // {{domain}}/vacations
+  static const String vacationsApi = '$_apiVrsion/vacations';
 }
 

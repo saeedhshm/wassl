@@ -9,6 +9,7 @@ import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
+import '../../models/auth/holidays.dart';
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
 import 'package:timezone/standalone.dart' as tz;
@@ -19,6 +20,9 @@ class HomeController extends GetxController{
   final AppController appController = Get.find();
 
   var sendingAttendance = false.obs;
+
+  var gettingHolidays = false.obs;
+  var holidaysBalance = Holidays().obs;
   var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
  final CalendarController calendarController = Get.find();
@@ -100,6 +104,27 @@ class HomeController extends GetxController{
 
      attendanceStatus.value = attendanceChecker.attendanceStatus ?? 0;
    }
+
+  }
+
+  getHolidaysData() async {
+    var url = AppUrls.vacationsApi;
+    var headers = {
+      'Authorization':
+      'bearer ${appController.loginModel.value.token?.accessToken}',
+      // "x-localization": 'lang_code'.tr,
+    };
+    gettingHolidays.value = true;
+    var response = await AppApiHandler.getData(url: url, header: headers);
+    gettingHolidays.value = false;
+    println(' ================ response.body');
+    println(response.body);
+    println(' ================ response.body');
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      holidaysBalance.value = Holidays.fromJson(json);
+
+    }
 
   }
 

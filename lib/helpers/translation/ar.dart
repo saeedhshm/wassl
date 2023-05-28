@@ -288,7 +288,7 @@ Map<String,String>  arabicStrings = {
   'coven_name':'اسم العهدة',
   'coven_type':'نوع العهدة',
   'received_date':'تاريخ الاستلام',
-  '':'',
+  'yearly_vacations_balance':'رصيد الأجازات السنوية',
   '':'',
   '':'',
   '':'',
