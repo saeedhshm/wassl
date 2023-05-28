@@ -12,7 +12,7 @@ class HolidaysWidget extends StatelessWidget {
    HolidaysWidget({
     Key? key,
   }) : super(key: key){
-     homeController.getHolidaysData();
+     homeController.appController.getHolidaysData();
    }
 
   @override
@@ -33,9 +33,9 @@ class HolidaysWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w500
             ),),
-            Obx(() => homeController.gettingHolidays.value ? SendingLoadingWidget() : Row(
+            Obx(() => homeController.appController.gettingHolidays.value ? SendingLoadingWidget() : Row(
               children: [
-                 Text('${homeController.holidaysBalance.value.data?.availableVacationsCount}',style: const TextStyle(
+                 Text('${homeController.appController.holidaysBalance.value.data?.availableVacationsCount}',style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w600
@@ -45,7 +45,7 @@ class HolidaysWidget extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w600
                 ),),
-                 Text('${homeController.holidaysBalance.value.data?.openingVacationsCount}',style: const TextStyle(
+                 Text('${homeController.appController.holidaysBalance.value.data?.openingVacationsCount}',style: const TextStyle(
                     color: AppColors.lightGreyTextColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w600

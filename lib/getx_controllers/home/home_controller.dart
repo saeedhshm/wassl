@@ -21,8 +21,7 @@ class HomeController extends GetxController{
 
   var sendingAttendance = false.obs;
 
-  var gettingHolidays = false.obs;
-  var holidaysBalance = Holidays().obs;
+
   var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
  final CalendarController calendarController = Get.find();
@@ -107,26 +106,7 @@ class HomeController extends GetxController{
 
   }
 
-  getHolidaysData() async {
-    var url = AppUrls.vacationsApi;
-    var headers = {
-      'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
-    gettingHolidays.value = true;
-    var response = await AppApiHandler.getData(url: url, header: headers);
-    gettingHolidays.value = false;
-    println(' ================ response.body');
-    println(response.body);
-    println(' ================ response.body');
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      holidaysBalance.value = Holidays.fromJson(json);
 
-    }
-
-  }
 
   /// page variables
   String get attendanceStatusValue{

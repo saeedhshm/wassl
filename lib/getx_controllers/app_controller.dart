@@ -15,15 +15,16 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 import 'package:geolocator/geolocator.dart';
 import '../helpers/constants/string_constants.dart';
+import '../models/auth/holidays.dart';
 
 
 class AppController extends GetxController{
 
   var loading = false.obs;
 
-  // var loaginSuccessed = false.obs;
+  var gettingHolidays = false.obs;
+  var holidaysBalance = Holidays().obs;
 
-  // Map<String, dynamic> _deviceData = <String, dynamic>{};
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
   var listOfErrors = <String>[].obs;
@@ -41,6 +42,27 @@ class AppController extends GetxController{
   var deployingForApple = false;
 
   final _checker = AppVersionChecker();
+
+  getHolidaysData() async {
+    var url = AppUrls.vacationsApi;
+    var headers = {
+      'Authorization':
+      'bearer ${loginModel.value.token?.accessToken}',
+      // "x-localization": 'lang_code'.tr,
+    };
+    gettingHolidays.value = true;
+    var response = await AppApiHandler.getData(url: url, header: headers);
+    gettingHolidays.value = false;
+    println(' ================ response.body');
+    println(response.body);
+    println(' ================ response.body');
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      holidaysBalance.value = Holidays.fromJson(json);
+
+    }
+
+  }
 
 
   Future<void> login({required String email,required String password}) async {

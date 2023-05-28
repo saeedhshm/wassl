@@ -1,4 +1,5 @@
 
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
 import 'ask_permission.dart';
@@ -17,88 +18,48 @@ class AllOrders {
   List<Order> orders = [];
 
   bool? success;
-  List<LoansData> loansData = [];
-  List<LetterDate> letterDate = [];
-  List<FinancialExpensesDate> financialExpensesDate = [];
-  List<CustodyDate> custodyDate = [];
-  List<HolidaysData> holidaysData = [];
-  List<AskPermissionsData> askPermissionsData = [];
-  List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
-  List<OrderVisaData> orderVisaData = [];
-  List<OvertimeData> overtimeData = [];
+  // List<LoansData> loansData = [];
+  // List<LetterDate> letterDate = [];
+  // List<FinancialExpensesDate> financialExpensesDate = [];
+  // List<CustodyDate> custodyDate = [];
+  // List<HolidaysData> holidaysData = [];
+  // List<AskPermissionsData> askPermissionsData = [];
+  // List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
+  // List<OrderVisaData> orderVisaData = [];
+  // List<OvertimeData> overtimeData = [];
   String? message;
 
   AllOrders();
 
   AllOrders.fromJson(Map<String, dynamic> json) {
     success = json['success'];
-    if (json['LoansData'] != null) {
 
-      json['LoansData'].forEach((v) {
-        loansData.add( LoansData.fromJson(v));
-      });
-    }
-    if (json['LetterDate'] != null) {
+    if (json['orders'] != null) {
 
-      json['LetterDate'].forEach((v) {
-        letterDate.add( LetterDate.fromJson(v));
-      });
-    }
-    if (json['FinancialExpensesDate'] != null) {
+      json['orders'].forEach((v) {
 
-      json['FinancialExpensesDate'].forEach((v) {
-        financialExpensesDate.add( FinancialExpensesDate.fromJson(v));
-      });
-    }
-    if (json['CustodyDate'] != null) {
-
-      json['CustodyDate'].forEach((v) {
-        custodyDate.add( CustodyDate.fromJson(v));
-      });
-    }
-    if (json['HolidaysData'] != null) {
-
-      json['HolidaysData'].forEach((v) {
-        holidaysData.add( HolidaysData.fromJson(v));
+        if(v['order_type'] == 'permission'){
+          orders.add( AskPermissionsData.fromJson(v));
+        }else if(v['order_type'] == 'holiday'){
+          orders.add( HolidaysData.fromJson(v));
+        }else if(v['order_type'] == 'fingerprint'){
+          orders.add( FingerprintCorrectionsData.fromJson(v));
+        }else if(v['order_type'] == 'loan'){
+          orders.add( LoansData.fromJson(v));
+        }else if(v['order_type'] == 'letter'){
+          orders.add( LetterDate.fromJson(v));
+        }else if(v['order_type'] == 'custody'){
+          orders.add( CustodyDate.fromJson(v));
+        }else if(v['order_type'] == 'visa'){
+          orders.add(OrderVisaData.fromJson(v));
+        }else if(v['order_type'] == 'overtime'){
+          orders.add( OvertimeData.fromJson(v));
+        }else if(v['order_type'] == 'financial'){
+          orders.add( FinancialExpensesDate.fromJson(v));
+        }
       });
     }
 
-    if (json['AskPermissionsData'] != null) {
-
-      json['AskPermissionsData'].forEach((v) {
-        askPermissionsData.add( AskPermissionsData.fromJson(v));
-      });
-    }
-    if (json['FingerprintCorrectionsData'] != null) {
-
-      json['FingerprintCorrectionsData'].forEach((v) {
-        fingerprintCorrectionsData
-            .add( FingerprintCorrectionsData.fromJson(v));
-      });
-    }
-    if (json['OrderVisaData'] != null) {
-      orderVisaData = <OrderVisaData>[];
-      json['OrderVisaData'].forEach((v) {
-        orderVisaData.add(OrderVisaData.fromJson(v));
-      });
-    }
-
-    if (json['OvertimeData'] != null) {
-
-      json['OvertimeData'].forEach((v) {
-        overtimeData.add( OvertimeData.fromJson(v));
-      });
-    }
-
-    orders.addAll(holidaysData);
-    orders.addAll(askPermissionsData);
-    orders.addAll(fingerprintCorrectionsData);
-    orders.addAll(custodyDate);
-    orders.addAll(financialExpensesDate);
-    orders.addAll(letterDate);
-    orders.addAll(loansData);
-    orders.addAll(orderVisaData);
-    orders.addAll(overtimeData);
 
     message = json['message'];
   }
