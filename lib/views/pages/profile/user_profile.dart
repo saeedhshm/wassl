@@ -63,11 +63,11 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: 0,),
                 DarkTextWidget(appController.loginModel.value.user?.job?.name ?? '',fontSize: 15,),
                 const SizedBox(height: 20,),
-                appController.deployingForApple ? const SizedBox() :  const SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
+                const SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
                   ,)),
-                appController.deployingForApple ? const SizedBox() :  const SizedBox(height: 10,),
-                appController.deployingForApple ? const SizedBox() : ListProfileItemWidget(
-                  title: "رصيد الاجازات ٥ ايام متاحة الاستخدام",
+                const SizedBox(height: 10,),
+                ListProfileItemWidget(
+                  title: "رصيد الاجازات ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ايام متاحة الاستخدام",
                   icon: "assets/images/profile/vacation.png",
                 ),
                 const SizedBox(height: 20,),

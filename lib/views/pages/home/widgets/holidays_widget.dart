@@ -18,7 +18,7 @@ class HolidaysWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16)
@@ -33,9 +33,9 @@ class HolidaysWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w500
             ),),
-            Obx(() => homeController.appController.gettingHolidays.value ? SendingLoadingWidget() : Row(
+            Obx(() => homeController.appController.gettingHolidays.value ? const SendingLoadingWidget() : Row(
               children: [
-                 Text('${homeController.appController.holidaysBalance.value.data?.availableVacationsCount}',style: const TextStyle(
+                 Text('${homeController.appController.holidaysBalance.value.data?.availableVacationsCount ?? 0}',style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w600
