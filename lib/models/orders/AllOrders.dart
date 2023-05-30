@@ -34,27 +34,28 @@ class AllOrders {
   AllOrders.fromJson(Map<String, dynamic> json) {
     success = json['success'];
 
+    var orderType = 'type_of_order';
     if (json['orders'] != null) {
 
       json['orders'].forEach((v) {
-
-        if(v['order_type'] == 'permission'){
+        println('=-===-===-=-=-=- order_type: ${v[orderType]}');
+        if(v[orderType] == 'permission'){
           orders.add( AskPermissionsData.fromJson(v));
-        }else if(v['order_type'] == 'holiday'){
+        }else if(v[orderType] == 'holiday'){
           orders.add( HolidaysData.fromJson(v));
-        }else if(v['order_type'] == 'fingerprint'){
+        }else if(v[orderType] == 'fingerprint'){
           orders.add( FingerprintCorrectionsData.fromJson(v));
-        }else if(v['order_type'] == 'loan'){
+        }else if(v[orderType] == 'loan'){
           orders.add( LoansData.fromJson(v));
-        }else if(v['order_type'] == 'letter'){
+        }else if(v[orderType] == 'letter'){
           orders.add( LetterDate.fromJson(v));
-        }else if(v['order_type'] == 'custody'){
+        }else if(v[orderType] == 'custody'){
           orders.add( CustodyDate.fromJson(v));
-        }else if(v['order_type'] == 'visa'){
+        }else if(v[orderType] == 'visa'){
           orders.add(OrderVisaData.fromJson(v));
-        }else if(v['order_type'] == 'overtime'){
+        }else if(v[orderType] == 'overtime'){
           orders.add( OvertimeData.fromJson(v));
-        }else if(v['order_type'] == 'financial'){
+        }else if(v[orderType] == 'financial'){
           orders.add( FinancialExpensesDate.fromJson(v));
         }
       });

@@ -53,9 +53,7 @@ class AppController extends GetxController{
     gettingHolidays.value = true;
     var response = await AppApiHandler.getData(url: url, header: headers);
     gettingHolidays.value = false;
-    println(' ================ response.body');
-    println(response.body);
-    println(' ================ response.body');
+
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
       holidaysBalance.value = Holidays.fromJson(json);
