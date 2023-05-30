@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/profile/info.dart';
+import 'package:wassl/views/pages/profile/team_members.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
 import '../../../getx_controllers/app_controller.dart';
 import '../../reusable_widgets/circular_widget.dart';
@@ -80,6 +81,16 @@ class UserProfilePage extends StatelessWidget {
                   child: ListProfileItemWidget(
                     title: "profile_info",
                     icon: "assets/images/profile/1.png",
+                  ),
+                ),
+                // const SizedBox(height: 10,),
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>TeamMembersPage());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "team_member",
+                    icon: "assets/images/profile/team.png",
                   ),
                 ),
                 appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
