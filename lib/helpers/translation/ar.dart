@@ -302,7 +302,7 @@ Map<String,String>  arabicStrings = {
   'members':'الأعضاء',
   'attend':'الحضور',
   'leaving':'الانصراف',
-  '':'',
+  'missed_leave':'سجل ناقص',
   '':'',
   '':'',
   '':'',

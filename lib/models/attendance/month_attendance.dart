@@ -91,7 +91,7 @@ class TotalAttendances {
 
 class MonthDay {
   String? day;
-  String? status;
+  String? _status;
   AttendanceDay? attendanceDay;
   // var selected = false;
 
@@ -112,11 +112,11 @@ class MonthDay {
 
   }
 
-  MonthDay({this.day, this.status, this.attendanceDay});
+  MonthDay({this.day, this.attendanceDay});
 
   MonthDay.fromJson(Map<String, dynamic> json) {
     day = json['day'];
-    status = json['status'];
+    _status = json['status'];
     attendanceDay = json['attendance'] != null
         ? AttendanceDay.fromJson(json['attendance'])
         : null;
@@ -125,10 +125,20 @@ class MonthDay {
     // // selected = attendanceDay.
   }
 
+  String get status{
+    var st = _status ?? '';
+    if(st == 'attend'){
+      if(attendanceDay?.leaveTime == null){
+        st = 'missed_leave';
+      }
+    }
+
+    return st;
+  }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['day'] = this.day;
-    data['status'] = this.status;
+    data['status'] = _status;
     if (this.attendanceDay != null) {
       data['attendance'] = this.attendanceDay!.toJson();
     }

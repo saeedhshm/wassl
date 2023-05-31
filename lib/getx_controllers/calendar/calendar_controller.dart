@@ -35,9 +35,9 @@ class CalendarController extends GetxController{
 
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
-    // println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
-    // println(response.body);
-    // println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
+    println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
+    println(response.body);
+    println('=-=-=-=-=-=-=>>  calendar body  <<=-=-=-=-=-=-=');
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }
@@ -59,6 +59,7 @@ setSelectedDate(DateTime dateTime){
   for(MonthDay day in attendanceOfMonth.value.attendancesOfMonth){
 
     if(DateTime.tryParse(day.day ?? '') == DateTime(dateTime.year,dateTime.month,dateTime.day)){
+      println(selectedDay.value.toJson());
       selectedDay.value = day;
     }
   }

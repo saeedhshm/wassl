@@ -105,9 +105,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
-
-
-          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'holiday') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
+          if(checkDayAs('holiday', dateTime)){
             return Center(
 
               child: Container(
@@ -123,7 +121,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
-          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'absent') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
+          else if(checkDayAs('absent', dateTime)){
             return Center(
 
               child: Container(
@@ -139,7 +137,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
-          if((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == 'weekEnd') && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1) % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month ){
+          else if(checkDayAs('weekEnd', dateTime)){
             return Center(
 
               child: Container(
@@ -155,8 +153,34 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             );
           }
 
+          else if(checkMissedDay( dateTime)){
+            return Center(
 
-          if(dateTime.month == controller.dateTime.month  ){
+              child: Stack(
+                children: [
+                  Container(
+                      margin: EdgeInsets.symmetric(horizontal: 8,vertical: 5),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blueAccent.withOpacity(0.5),width: 2),
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: Center(child: Text(dateTime.day.toString(),style: TextStyle(
+                          fontWeight: FontWeight.bold
+                      ),))),
+                  Positioned(
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.question_mark_outlined,color: Colors.red,size: 15,),
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
+
+         else if(dateTime.month == controller.dateTime.month  ){
             return Center(
 
               child: Container(
@@ -172,6 +196,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                   ),))),
             );
           }
+
           return null;
         },
 
@@ -197,6 +222,19 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     );
   }
 
+  bool checkDayAs(String type,DateTime dateTime){
+     return ((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1)
+         % controller.attendanceOfMonth.value.attendancesOfMonth.length].status == type)
+         && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1)
+             % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month );
+  }
+
+  bool checkMissedDay(DateTime dateTime){
+    return ((controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1)
+        % controller.attendanceOfMonth.value.attendancesOfMonth.length].attendanceDay?.leaveTime == null)
+        && DateTime.tryParse(controller.attendanceOfMonth.value.attendancesOfMonth[(dateTime.day-1)
+            % controller.attendanceOfMonth.value.attendancesOfMonth.length].day ?? '')?.month == dateTime.month );
+  }
 
   DateTime _currentDay = DateTime.now();
 

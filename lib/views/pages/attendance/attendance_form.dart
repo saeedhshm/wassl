@@ -5,7 +5,9 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/reusable_widgets/calendar_widget.dart';
 
+import '../../../helpers/constants/print_ln.dart';
 import '../../reusable_widgets/main_appbar.dart';
+import '../orders/pages/correcting_fingerprint.dart';
 
 class AttendancePage extends StatelessWidget {
    AttendancePage({Key? key}) : super(key: key);
@@ -123,13 +125,21 @@ class AttendancePage extends StatelessWidget {
                               color: Colors.grey.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(100)
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              children: [
-                                Text('leaving'.tr),
-                                Text(controller.selectedDay.value.leaveTime)
-                              ],
+                          child: InkWell(
+                            onTap: (){
+                              if(controller.selectedDay.value.attendanceDay?.leaveTime == null){
+                                Get.to(()=> CorrectingFingerprintRequest());
+                              }
+
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                children: [
+                                  Text('leaving'.tr),
+                                  Text(controller.selectedDay.value.leaveTime)
+                                ],
+                              ),
                             ),
                           ),)),
                       ],
