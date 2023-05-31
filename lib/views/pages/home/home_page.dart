@@ -24,23 +24,49 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    // Expanded(
+    //   child: Stack(
+    //     children: [
+    //       CorrectingWidget(),
+    //       AttendanceWidget(),
+    //     ],
+    //   ),
+    // )
+
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
-      child: Column(
+      child: Stack(
         children: [
-          HomeBarWidget(),
-          const SizedBox(height: 20,),
-          ShiftInfoWidget(),
-          const SizedBox(height: 20,),
-          Expanded(
-            child: Stack(
-              children: [
-                CorrectingWidget(),
-                AttendanceWidget(),
-              ],
-            ),
-          )
+          Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            color: AppColors.mainBackgroundColor,
+            margin: EdgeInsets.only(top: Get.height * 0.6),
+          ),
+          Column(
+            children: [
+              HomeBarWidget(),
+             Expanded(
+               child: SingleChildScrollView(
+                 child: Column(
+                   children: [
+                     const SizedBox(height: 20,),
+                     ShiftInfoWidget(),
+                     const SizedBox(height: 20,),
+                     Stack(
+                       children: [
+                         CorrectingWidget(),
+                         AttendanceWidget(),
+                       ],
+                     )
+                   ],
+                 ),
+               ),
+             )
+
+            ],
+          ),
         ],
       ),
       decoration: BoxDecoration(

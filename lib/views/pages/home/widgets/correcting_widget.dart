@@ -21,21 +21,17 @@ class CorrectingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 40),
-      width: double.infinity,
-      height: double.maxFinite,
-      child:SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  [
-            const SizedBox(height: 40,),
-            HolidaysWidget(),
-            Procedures(),
-            AbsentsWidget(),
-            NextEvents(),
-            AdsWidget(),
-            const SizedBox(height: 90,)
-          ],
-        ),
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:  [
+          const SizedBox(height: 40,),
+          HolidaysWidget(),
+          Procedures(),
+          AbsentsWidget(),
+          NextEvents(),
+          AdsWidget(),
+          const SizedBox(height: 90,)
+        ],
       ),
       decoration: const BoxDecoration(
           color: AppColors.mainBackgroundColor,
