@@ -12,8 +12,6 @@ class Documents {
 
       json['documents'].forEach((v) {
         documents.add(Document.fromJson(v));
-        // documents.add(Document.fromJson(v));
-        // documents.add(Document.fromJson(v));
       });
     }
   }

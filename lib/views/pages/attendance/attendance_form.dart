@@ -92,7 +92,7 @@ class AttendancePage extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
-                            child: Text('${controller.selectedDay.value.status}'.tr,
+                            child: Text(controller.selectedDay.value.status.tr,
                               style: const TextStyle(
                                   color: AppColors.mainGreenColor
                               ),
@@ -101,7 +101,7 @@ class AttendancePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     controller.selectedDay.value.attendanceDay != null ?
                     Row(
                       children: [

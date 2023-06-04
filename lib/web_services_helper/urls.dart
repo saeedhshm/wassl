@@ -134,5 +134,11 @@ class AppUrls {
 
   // {{domain}}/vacations
   static const String vacationsApi = '$_apiVrsion/vacations';
+
+  // {{domain}}/team_attendance
+  static const String teamAttendanceApi = '$_apiVrsion/team_attendance';
+
+  // {{domain}}/SalaryDetails/14
+  static const String salaryDetailsApi = '$_apiVrsion/SalaryDetails';
 }
 

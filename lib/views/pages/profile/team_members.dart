@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
+import '../../../getx_controllers/attendance/member_attendance_controller.dart';
 import '../../../helpers/constants/app_colors.dart';
+import '../../../models/attendance/member_attendace.dart';
 import '../../reusable_widgets/main_appbar.dart';
 
 class TeamMembersPage extends StatelessWidget {
-  const TeamMembersPage({Key? key}) : super(key: key);
+
+
+  final controller = Get.find<MembersAttendanceController>();
+
+   TeamMembersPage({Key? key}) : super(key: key){
+     controller.getTeamAttendance();
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +27,7 @@ class TeamMembersPage extends StatelessWidget {
               Get.back();
             },
           ),
-          SizedBox(height: 40,),
+          const SizedBox(height: 40,),
           Expanded(
             child: Stack(
               children: [
@@ -36,13 +45,13 @@ class TeamMembersPage extends StatelessWidget {
                           ),
                           child: Column(
                             children: [
-                              SizedBox(height: 50,),
-                              Text('أحمد محمد',style: TextStyle(
+                              const SizedBox(height: 50,),
+                              Text('${controller.appController.loginModel.value.user?.fullName}',style: const TextStyle(
                                 color: AppColors.darkGreyTextColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17
                               ),),
-                              Text('team_chief'.tr,style: TextStyle(
+                              Text('team_chief'.tr,style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   // fontSize: 12
                               ),),
@@ -51,17 +60,17 @@ class TeamMembersPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    Expanded(child: Text('members'.tr,style: TextStyle(
+                                    Expanded(child: Text('members'.tr,style: const TextStyle(
                                       color: AppColors.darkGreyTextColor,
                                         fontWeight: FontWeight.bold
                                       // fontSize: 12
-                                    ),),flex: 2,),
-                                    Expanded(child: Text('attend'.tr,style: TextStyle(
+                                    ),),flex: 7,),
+                                    Expanded(flex: 3,child: Text('attend'.tr,style: const TextStyle(
                                       color: AppColors.darkGreyTextColor,
                                         fontWeight: FontWeight.bold
                                       // fontSize: 12
                                     ),),),
-                                    Expanded(child: Text('leaving'.tr,style: TextStyle(
+                                    Expanded(flex: 3,child: Text('leaving'.tr,style: const TextStyle(
                                       color: AppColors.darkGreyTextColor,
                                         fontWeight: FontWeight.bold
                                       // fontSize: 12
@@ -71,76 +80,27 @@ class TeamMembersPage extends StatelessWidget {
                               ),
                               // SizedBox(height: 20,),
                               Expanded(
-                                child: ListView.separated(
-                                  padding: EdgeInsets.zero,
+                                child: Obx(()=>controller.loading.value ?
+                                const Center(
+                                  child: SendingLoadingWidget(),
+                                )
+                                    :ListView.separated(
+                                    padding: EdgeInsets.zero,
                                     itemBuilder: (_,index){
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius: BorderRadius.circular(100),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.grey.withOpacity(0.5),
-                                                      spreadRadius: 1,
-                                                      blurRadius: 1,
-                                                      offset: Offset(0,0), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Image.asset('assets/images/profile/1.png',width: 40,)),
-                                            SizedBox(width: 16,),
-                                            Expanded(
-
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text('أحمد محمد',style: TextStyle(
-                                                    color: AppColors.darkGreyTextColor,
-                                                    fontWeight: FontWeight.bold
-                                                  ),),
-
-                                                  Text('مطور واجهات'.tr,style: TextStyle(
-                                                      color: AppColors.lightGreyTextColor,
-                                                      fontSize: 12
-                                                  ),),
-                                                ],
-                                              ),
-                                              flex: 4,
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Text('10:30 ${'am'.tr}',style: TextStyle(
-                                                  color: AppColors.darkGreyTextColor,
-                                                  fontWeight: FontWeight.bold
-                                                  // fontSize: 12
-                                              ),),
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Text('10:30 ${'am'.tr}',style: TextStyle(
-                                                  color: AppColors.darkGreyTextColor,
-                                                  fontWeight: FontWeight.bold
-                                                  // fontSize: 12
-                                              ),),
-                                            ),
-                                          ],
-                                        ),
+                                      return MemberItemWidget(
+                                        member: controller.teamAttendance.value.teamAttendance[index],
                                       );
                                     },
                                     separatorBuilder: (_,index){
                                       return Container(
                                         width: double.infinity,
                                         height: 1,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             color: AppColors.mainBackgroundColor
                                         ),
                                       );
                                     },
-                                    itemCount: 10),
+                                    itemCount: controller.teamAttendance.value.teamAttendance.length)),
                               )
                             ],
                           ),
@@ -163,7 +123,7 @@ class TeamMembersPage extends StatelessWidget {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 1,
                               blurRadius: 1,
-                              offset: Offset(0,0), // changes position of shadow
+                              offset: const Offset(0,0), // changes position of shadow
                             ),
                           ],
                         ),
@@ -173,6 +133,76 @@ class TeamMembersPage extends StatelessWidget {
               ],
             ),
           )
+        ],
+      ),
+    );
+  }
+}
+
+class MemberItemWidget extends StatelessWidget {
+
+  final MemberAttendance member;
+  const MemberItemWidget({
+    Key? key,
+    required this.member,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
+      child: Row(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: const Offset(0,0), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Image.asset('assets/images/profile/1.png',width: 40,)),
+          const SizedBox(width: 16,),
+          Expanded(
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(member.fullName,style: const TextStyle(
+                  color: AppColors.darkGreyTextColor,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 13
+                ),),
+
+                // Text('مطور واجهات'.tr,style: TextStyle(
+                //     color: AppColors.lightGreyTextColor,
+                //     fontSize: 12
+                // ),),
+              ],
+            ),
+            flex: 5,
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(member.attendanceTime,style: const TextStyle(
+                color: AppColors.darkGreyTextColor,
+                fontWeight: FontWeight.bold
+                // fontSize: 12
+            ),),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(member.leaveTime,style: const TextStyle(
+                color: AppColors.darkGreyTextColor,
+                fontWeight: FontWeight.bold
+                // fontSize: 12
+            ),),
+          ),
         ],
       ),
     );

@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../getx_controllers/app_controller.dart';
+import '../../../reusable_widgets/circular_widget.dart';
+import '../../../reusable_widgets/dark_text_widget.dart';
+import '../../settings/settings_page.dart';
+
+class HeaderWidget extends StatelessWidget {
+   HeaderWidget({
+    Key? key,
+  }) : super(key: key);
+
+  final AppController appController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Stack(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularWidget(
+                  size: 100,
+                  child: Image.asset('assets/images/profile/1.png'),
+                ),
+              ],
+            ),
+            Positioned(
+              left: 0,
+              child: InkWell(
+                onTap: (){
+                  Get.to(()=>SettingsPage());
+                },
+                child: SizedBox(
+                    width: 45,
+                    child: Image.asset('assets/images/profile/setting.png')),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10,),
+        DarkTextWidget(appController.loginModel.value.user?.fullName ?? '',fontSize: 20,),
+        const SizedBox(height: 0,),
+        DarkTextWidget(appController.loginModel.value.user?.job?.name ?? '',fontSize: 15,),
+        const SizedBox(height: 20,),
+      ],
+    );
+  }
+}
