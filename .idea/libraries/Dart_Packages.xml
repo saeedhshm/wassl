@@ -12,8 +12,8 @@
         <entry key="archive">
           <value>
             <list>
-              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.5/lib" />
               <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.0/lib" />
+              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.5/lib" />
             </list>
           </value>
         </entry>
@@ -125,8 +125,8 @@
         <entry key="file">
           <value>
             <list>
-              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.4/lib" />
               <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2/lib" />
+              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.4/lib" />
             </list>
           </value>
         </entry>
@@ -168,8 +168,8 @@
         <entry key="flutter_lints">
           <value>
             <list>
-              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib" />
               <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/lib" />
+              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4/lib" />
             </list>
           </value>
         </entry>
@@ -302,8 +302,8 @@
         <entry key="lints">
           <value>
             <list>
-              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/lib" />
               <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.1/lib" />
+              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/lib" />
             </list>
           </value>
         </entry>
@@ -464,8 +464,8 @@
         <entry key="petitparser">
           <value>
             <list>
-              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0/lib" />
               <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.1.0/lib" />
+              <option value="$USER_HOME$/development/3_3_7/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0/lib" />
             </list>
           </value>
         </entry>

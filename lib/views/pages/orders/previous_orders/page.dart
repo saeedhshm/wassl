@@ -19,8 +19,8 @@ import '../../../reusable_widgets/main_appbar.dart';
 
 class PreviousRequestsPage extends StatefulWidget {
 
-
-   PreviousRequestsPage({Key? key}) : super(key: key){
+  final bool fromHomePage;
+   PreviousRequestsPage({Key? key,this.fromHomePage = false}) : super(key: key){
      // retrieveAllOrders();
    }
 
@@ -29,6 +29,7 @@ class PreviousRequestsPage extends StatefulWidget {
 }
 
 class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
+
 
   final PreviousRequestsController controller = Get.put(PreviousRequestsController());
 
@@ -49,12 +50,14 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
         children: [
           MainAppbarWidget(
             'previous_requests'.tr,
-
+            onBack:widget.fromHomePage ? (){
+              Get.back();
+            } : null,
           ),
-          TabsWidget(),
+          controller.previousTeamRequests.value.orders.isNotEmpty ? TabsWidget() : const SizedBox(),
          controller.myOrdersSelected.value ?
          Expanded(child: PreviousOrdersWidget()) : Expanded(child: TeamOrderPage()),
-          const SizedBox(height: 100,)
+          SizedBox(height: widget.fromHomePage ? 0 : 100,)
         ],
       )),
     );

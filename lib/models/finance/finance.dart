@@ -1,25 +1,26 @@
+import 'package:get/get.dart';
+
 class Finance {
   Employee? employee;
-  List<dynamic>? allowances;
-  int? totalAllowanceAmount;
-  int? salaryAfter;
+  List<Allowance> allowances = <Allowance>[];
+  dynamic totalAllowanceAmount;
+  dynamic salaryAfter;
 
   Finance(
       {this.employee,
-        this.allowances,
         this.totalAllowanceAmount,
         this.salaryAfter});
 
   Finance.fromJson(Map<String, dynamic> json) {
     employee = json['employee'] != null
-        ? new Employee.fromJson(json['employee'])
+        ? Employee.fromJson(json['employee'])
         : null;
-    // if (json['allowances'] != null) {
-    //   allowances = <Null>[];
-    //   json['allowances'].forEach((v) {
-    //     allowances!.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['allowances'] != null) {
+     
+      json['allowances'].forEach((v) {
+        allowances.add(Allowance.fromJson(v));
+      });
+    }
     totalAllowanceAmount = json['totalAllownceAmount'];
     salaryAfter = json['salaryAfter'];
   }
@@ -43,5 +44,50 @@ class Employee {
     fullName = json['full_name'];
     fullNameEn = json['full_name_en'];
   }
+
+}
+class Allowance {
+  int? id;
+  String? amount;
+  int? allowancesTypeId;
+  AllowanceType? allowanceType;
+
+  Allowance(
+      {this.id, this.amount, this.allowancesTypeId, this.allowanceType});
+
+  Allowance.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    amount = json['amount'];
+    allowancesTypeId = json['allowances_type_id'];
+    allowanceType = json['allowances_type'] != null
+        ? AllowanceType.fromJson(json['allowances_type'])
+        : null;
+  }
+
+
+}
+
+class AllowanceType {
+  int? id;
+  String? _nameAr;
+  String? _nameEn;
+  String? createdAt;
+  String? updatedAt;
+
+  AllowanceType(
+      {this.id, this.createdAt, this.updatedAt});
+
+  AllowanceType.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    _nameAr = json['name_ar'];
+    _nameEn = json['name_en'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  String get name{
+    return (Get.locale?.languageCode ?? '') == 'ar' ?  _nameAr ?? '' : _nameEn ?? '';
+  }
+
 
 }

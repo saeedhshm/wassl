@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../helpers/exceptions/no_internet.dart';
+import '../../models/finance/finance.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
@@ -11,6 +12,7 @@ import '../app_controller.dart';
 class FinanceInfoController extends GetxController{
   final AppController appController = Get.find();
   var loading = false.obs;
+  var finance = Finance();
 
   Future<void> _getTeamAttendance() async {
     var headers = {
@@ -25,14 +27,15 @@ class FinanceInfoController extends GetxController{
     final url = '${AppUrls.salaryDetailsApi}/${appController.loginModel.value.user?.id}';
 println(url);
     final response = await AppApiHandler.getData(url: url,header: headers,);
-    loading.value = false;
+
 
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-
+      finance = Finance.fromJson(json);
+      loading.value = false;
 println(json);
 
     }

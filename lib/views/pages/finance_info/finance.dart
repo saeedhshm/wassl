@@ -1,91 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/finance/finance_controller.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
 import '../../../helpers/constants/app_colors.dart';
+import '../../reusable_widgets/dark_text_widget.dart';
+import '../../reusable_widgets/light_text_widget.dart';
 import '../../reusable_widgets/main_appbar.dart';
 
 class FinanceInfoPage extends StatelessWidget {
 
   final controller = Get.put(FinanceInfoController());
+  var items = [];
 
-
-  FinanceInfoPage({Key? key}) : super(key: key);
+  FinanceInfoPage({Key? key}) : super(key: key){
+    items = [
+      // ValuesOfInfoPage(title: 'job_code'.tr, value: appController.loginModel.value.user?.code ?? ''),
+      // ValuesOfInfoPage(title: 'full_name'.tr, value: appController.loginModel.value.user?.fullName ?? ''),
+      // // ValuesOfInfoPage(title: 'الاسم الأخير', value: 'هاشم'),
+      // ValuesOfInfoPage(title: 'email'.tr, value: appController.loginModel.value.user?.email ?? ''),
+      // ValuesOfInfoPage(title: 'date_of_birth'.tr, value: appController.loginModel.value.user?.dateOfBirth ?? ''),
+      // ValuesOfInfoPage(title: 'mobile_number'.tr, value: appController.loginModel.value.user?.number ?? ''),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).viewPadding.top;
     return Scaffold(
       body: Column(
         children: [
-          MainAppbarWidget(
-            "money_info",
-            onBack: () {
-              Get.back();
-            },
-          ),
-          const SizedBox(height: 40,),
-          Expanded(
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(height: 40,),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 50,),
-                              Text('${controller.appController.loginModel.value.user?.fullName}',style: const TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17
-                              ),),
-                              Text('${controller.appController.loginModel.value.user?.job?.name}',style: const TextStyle(
-                                color: AppColors.lightGreyTextColor,
-                                // fontSize: 12
-                              ),),
-                              const SizedBox(height: 20,),
+          MainAppbarWidget("personal",onBack: (){
+            Get.back();
+          },),
+          Expanded(child:Obx(()=>controller.loading.value ? const Center(
+            child: SendingLoadingWidget(),
+          ) :  SingleChildScrollView(
+            child: Padding(
+              padding:  const EdgeInsets.only(
+                  top: 16,
+                  left: 16,
+                  right: 16
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // SizedBox(height: ,),
 
-                            ],
-                          ),
-                        ),
-                      ),
+                  const SizedBox(height: 16,),
+                  DarkTextWidget("money_info",fontSize: 24,),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 5,),
+                      const LightTextWidget('base_salary',fontSize: 17,),
+                      const SizedBox(height: 3,),
+                      DarkTextWidget(controller.finance.employee?.salary ?? '',fontSize: 17,),
+                      const SizedBox(height: 5,),
+                      const Divider()
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 5,),
+                      const LightTextWidget('insurance_pension',fontSize: 17,),
+                      const SizedBox(height: 3,),
+                      DarkTextWidget('---',fontSize: 17,),
+                      const SizedBox(height: 5,),
+                      const Divider()
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 5,),
+                      const LightTextWidget('total_salary',fontSize: 17,),
+                      const SizedBox(height: 3,),
+                      DarkTextWidget('${controller.finance.salaryAfter}',fontSize: 17,),
+                      const SizedBox(height: 5,),
+                      const Divider()
+                    ],
+                  ),
+                  const SizedBox(height: 16,),
+                  DarkTextWidget("frequent_allowances",fontSize: 24,),
+                  for(int i=0;i<controller.finance.allowances.length; i++)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 5,),
+                        LightTextWidget('${controller.finance.allowances[i].allowanceType?.name}',fontSize: 17,),
+                        const SizedBox(height: 3,),
+                        DarkTextWidget('${controller.finance.allowances[i].amount}',fontSize: 17,),
+                        const SizedBox(height: 5,),
+                        const Divider()
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        width:80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(100),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(0,0), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Image.asset('assets/images/profile/1.png')),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
-          )
+          )))
         ],
       ),
     );
   }
+}
+class ValuesOfInfoPage{
+  String? title;
+  String? value;
+  ValuesOfInfoPage({this.title,this.value});
 }

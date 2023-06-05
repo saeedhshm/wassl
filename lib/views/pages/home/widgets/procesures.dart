@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/pages/finance_info/salaries.dart';
+import 'package:wassl/views/pages/orders/previous_orders/page.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../reusable_widgets/svg_widget.dart';
+import '../../documents/page.dart';
 
 class Procedures extends StatelessWidget {
   Procedures({Key? key}) : super(key: key);
@@ -47,23 +50,38 @@ class Procedures extends StatelessWidget {
             children: [
 
               Expanded(
-                child: ItemWidget(
-                  icon:  Image.asset('assets/images/edit.png'),
-                  title: 'my_orders'.tr,
+                child: InkWell(
+                  onTap: (){
+                    Get.to(PreviousRequestsPage(fromHomePage: true,));
+                  },
+                  child: ItemWidget(
+                    icon:  Image.asset('assets/images/edit.png'),
+                    title: 'my_orders'.tr,
+                  ),
                 ),
               ),
               const SizedBox(width: 5,),
               Expanded(
-                child: ItemWidget(
-                  icon:  SvgWidget('assets/images/money_on_hand.svg'),
-                  title: 'salaries'.tr,
+                child: InkWell(
+                  onTap: (){
+                    Get.to(AllSalariesPage());
+                  },
+                  child: ItemWidget(
+                    icon:  SvgWidget('assets/images/money_on_hand.svg'),
+                    title: 'salaries'.tr,
+                  ),
                 ),
               ),
               const SizedBox(width: 5,),
               Expanded(
-                child: ItemWidget(
-                  icon:  SvgWidget('assets/images/letter.svg'),
-                  title: 'papers'.tr,
+                child: InkWell(
+                  onTap: (){
+                    Get.to(DocsPage());
+                  },
+                  child: ItemWidget(
+                    icon:  SvgWidget('assets/images/letter.svg'),
+                    title: 'papers'.tr,
+                  ),
                 ),
               ),
 

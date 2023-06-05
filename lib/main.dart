@@ -16,7 +16,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
   AppController appController = Get.put(AppController());
-  appController.deployingForApple = true;
+  appController.deployingForApple = false;
   runApp( MyApp());
 }
 
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         // GlobalMaterialLocalizations.delegate,
         MonthYearPickerLocalizations.delegate,
       ],
-      debugShowCheckedModeBanner: !appController.deployingForApple,
+      debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
         primarySwatch: Colors.green,
