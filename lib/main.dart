@@ -16,7 +16,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
   AppController appController = Get.put(AppController());
-  appController.deployingForApple = false;
+  appController.deployingForApple = true;
   runApp( MyApp());
 }
 

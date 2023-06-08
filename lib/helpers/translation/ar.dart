@@ -309,6 +309,7 @@ Map<String,String>  arabicStrings = {
   'total_salary':'اجمالي الراتب',
   'frequent_allowances':'البدلات المتكررة',
   'traveling_allowance':'بدل سفر',
+  'home_allowance':'بدل سكن',
   'moving_allowance':'بدل انتقال',
 
   'SR':'ر.س',
@@ -317,7 +318,7 @@ Map<String,String>  arabicStrings = {
   'total_cuts':'إجمالي الخصومات',
   'hosting_allowance':'بدل سكن',
   'delay_discount':'خصم تأخير',
-  '':'',
+  'net_salary':'صافي الراتب',
   '':'',
   '':'',
   '':'',
