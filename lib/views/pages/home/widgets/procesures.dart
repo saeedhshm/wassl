@@ -64,7 +64,7 @@ class Procedures extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: (){
-                    Get.to(AllSalariesPage());
+                    Get.to(()=>AllSalariesPage());
                   },
                   child: ItemWidget(
                     icon:  SvgWidget('assets/images/money_on_hand.svg'),

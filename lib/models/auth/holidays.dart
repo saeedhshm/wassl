@@ -1,3 +1,5 @@
+import '../../helpers/constants/print_ln.dart';
+
 class Holidays {
   bool? success;
   HolidayBalance? data;
@@ -11,15 +13,7 @@ class Holidays {
     message = json['message'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    data['message'] = message;
-    return data;
-  }
+
 }
 
 class HolidayBalance {
@@ -47,6 +41,9 @@ class HolidayBalance {
         this.updatedAt});
 
   HolidayBalance.fromJson(Map<String, dynamic> json) {
+    println('=-=-=-===-=- holidays');
+    println(json);
+    println('=-=-=-===-=- holidays');
     id = json['id'];
     employeeId = json['employee_id'];
     openingVacationsCount = json['opening_vacations_count'];
@@ -59,18 +56,5 @@ class HolidayBalance {
     updatedAt = json['updated_at'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['employee_id'] = this.employeeId;
-    data['opening_vacations_count'] = this.openingVacationsCount;
-    data['used_vacations_count'] = this.usedVacationsCount;
-    data['available_vacations_count'] = this.availableVacationsCount;
-    data['discount_vacations_count'] = this.discountVacationsCount;
-    data['sick_vacations_count'] = this.sickVacationsCount;
-    data['unpaid_vacations_count'] = this.unpaidVacationsCount;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
+
 }

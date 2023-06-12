@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/finance/all_salaries.dart';
+import 'package:wassl/models/finance/salaries.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/finance_info/salary_details.dart';
 
 import '../../../helpers/constants/app_colors.dart';
@@ -22,7 +24,9 @@ class AllSalariesPage extends StatelessWidget {
           MainAppbarWidget("salaries",onBack: (){
             Get.back();
           },),
-          Expanded(child: Container(
+          Expanded(child: Obx(()=> controller.loading.value ? Center(
+            child: SendingLoadingWidget(),
+          ) : Container(
             color: AppColors.lightBackgroundColor,
             width: double.maxFinite,
             child: Padding(
@@ -34,14 +38,15 @@ class AllSalariesPage extends StatelessWidget {
                     child: Column(
                       children: [
                         DarkTextWidget('base_salary',fontSize: 17,),
-                        LightTextWidget('10000 ' + 'SR'.tr,fontSize: 15,),
+                        LightTextWidget('${controller.allSalaries.employee?.salary} ' + 'SR'.tr,fontSize: 15,),
                       ],
                     ),
                   ),),
-              const SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   Expanded(child: ListView.separated(
                       padding:  const EdgeInsets.symmetric(horizontal: 5),
                       itemBuilder: (_,index){
+                        SalaryOfMonth salary = controller.allSalaries.salaries[index];
                         return InkWell(
                           onTap: (){
                             Get.to(SalaryDetailsPage());
@@ -52,12 +57,12 @@ class AllSalariesPage extends StatelessWidget {
                               children: [
                                 Column(
                                   children: [
-                                    Text('يناير'.tr, style: const TextStyle(
+                                    Text(salary.year.tr, style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                         color: AppColors.darkGreyTextColor
                                     ),),
-                                    Text('2023'.tr, style: const TextStyle(
+                                    Text(salary.month.tr, style: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 14,
                                         color: AppColors.darkGreyTextColor
@@ -66,10 +71,10 @@ class AllSalariesPage extends StatelessWidget {
                                 ),
 
                                 const Spacer(),
-                                Text('11500 '+'SR'.tr, style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: AppColors.darkGreyTextColor
+                                Text('${salary.salaryAfter} '+'SR'.tr, style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: AppColors.darkGreyTextColor
                                 ),)
                               ],
                             ),
@@ -79,11 +84,11 @@ class AllSalariesPage extends StatelessWidget {
                       separatorBuilder: (_,index){
                         return const SizedBox(height: 16,);
                       },
-                      itemCount: 10))
+                      itemCount: controller.allSalaries.salaries.length))
                 ],
               ),
             ),
-          ))
+          )))
 
         ],
       ),

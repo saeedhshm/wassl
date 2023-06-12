@@ -140,5 +140,8 @@ class AppUrls {
 
   // {{domain}}/SalaryDetails/14
   static const String salaryDetailsApi = '$_apiVrsion/SalaryDetails';
+
+  // {{domain}}/SalaryMonth/14
+  static const String salaryMonthsApi = '$_apiVrsion/SalaryMonth';
 }
 

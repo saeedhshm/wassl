@@ -28,7 +28,7 @@ class HomeController extends GetxController{
   var dt = DateTime.now().obs;
 
   // page :- apis retriever
- Future<String> registerAttendance() async {
+ Future<String> registerAttendance({String? bearer}) async {
 
 
 
@@ -40,7 +40,7 @@ class HomeController extends GetxController{
     };
     var headers = {
       'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
+      'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
       // "x-localization": 'lang_code'.tr,
     };
 

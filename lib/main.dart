@@ -5,6 +5,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/pages/intro/test_home_page.dart';
 import 'helpers/constants/print_ln.dart';
 import 'helpers/translation/local_strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -40,10 +41,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
-
-
-
     return GetMaterialApp(
       title: 'Flutter Demo',
       translations: LocalString(),
@@ -60,6 +57,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'AraHamah',
       ),
       home:   SplashScreen(),
+      // home:TestHomePage()
     );
   }
 

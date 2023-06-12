@@ -39,44 +39,52 @@ class _TestHomePageState extends State<TestHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(()=>SafeArea(
-        child: Column(
-          children: [
-            Expanded(child:controller.appController.loading.value ? Center(
-              child: SendingLoadingWidget(),
-            ) : SingleChildScrollView(
-              child: Column(
-                children: controller.appController.listOfErrors.value.map((e) => Text(e)).toList(),
-              ),
-            )),
-            InkWell(
-              onTap: () async {
-                controller.appController.loading.value = true;
-                controller.appController.listOfErrors.add('entering attendance button');
-                try{
-                  LocationPermission permission =
-                      await controller.appController.determinePosition();
-                  controller.appController.listOfErrors.add('permission == LocationPermission.whileInUse');
-                }on LocationDeniedException{
-                  controller.appController.listOfErrors.add('again: LocationDeniedException');
-                } catch (e) {
-                  controller.appController.listOfErrors.add('exception: ${e.toString()}');
-                }
-                var respo = await controller.registerAttendance();
-                controller.appController.listOfErrors.add(respo);
-                controller.appController.loading.value = false;
-              },
-              child: Container(
-                width: double.infinity,
-                color: Colors.lightBlue,
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Center(
-                    child: Text('reg_attend'.tr),
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Column(
+            children: [
+              Expanded(child:controller.appController.loading.value ? const Center(
+                child: SendingLoadingWidget(),
+              ) : SingleChildScrollView(
+                child: Column(
+                  children: controller.appController.listOfErrors.value.map((e) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(e),
+                  )).toList(),
+                ),
+              )),
+              InkWell(
+                onTap: () async {
+                  controller.appController.loading.value = true;
+                  controller.appController.listOfErrors.add('entering attendance button');
+                  try{
+                    LocationPermission permission =
+                        await controller.appController.determinePosition();
+                    controller.appController.listOfErrors.add('permission == LocationPermission.whileInUse');
+                  }on LocationDeniedException{
+                    controller.appController.listOfErrors.add('again: LocationDeniedException');
+                  } catch (e) {
+                    controller.appController.listOfErrors.add('exception: ${e.toString()}');
+                  }
+                  var bearer = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3dhc2xoci5jb20vYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE2ODY0NTkxMjIsImV4cCI6MTcyMjQ1OTEyMiwibmJmIjoxNjg2NDU5MTIyLCJqdGkiOiJuTkNiakNvRWVSaUIwc0hoIiwic3ViIjoiMjEiLCJwcnYiOiJjMDgzZmI4MjU5YWRmYWE1YTg0OTI1NjMzNTM3ZWU5Y2JiMGE4NmUxIn0.BZV_QvaqZup5gr8BRXtHU55pLrJ7zS8vNPN_4njJlBQ';
+                  var respo = await controller.registerAttendance(bearer: bearer);
+                  controller.appController.listOfErrors.add(respo);
+                  controller.appController.listOfErrors.add(' حساب التجربة');
+                  controller.appController.loading.value = false;
+                },
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.lightBlue,
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(
+                      child: Text('reg_attend'.tr),
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       )),
     );

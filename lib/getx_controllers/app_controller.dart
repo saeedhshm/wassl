@@ -249,7 +249,7 @@ class AppController extends GetxController{
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-      listOfErrors.add('permission == LocationPermission.deniedForever');
+      listOfErrors.add('permission = LocationPermission.deniedForever');
       throw LocationDisabledException();
       // return permission;
     }
