@@ -9,7 +9,12 @@ import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 
-class FinanceInfoController extends GetxController{
+class FinanceInfoController extends GetxController {
+
+  String? month; String? year;
+
+  FinanceInfoController({this.month,this.year});
+
   final AppController appController = Get.find();
   var loading = false.obs;
   var finance = Finance();
@@ -17,27 +22,31 @@ class FinanceInfoController extends GetxController{
   Future<void> _getTeamAttendance() async {
     var headers = {
       'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
+          'bearer ${appController.loginModel.value.token?.accessToken}',
       // "x-localization": 'lang_code'.tr,
     };
 
-
     loading.value = true;
 
-    final url = '${AppUrls.salaryDetailsApi}/${appController.loginModel.value.user?.id}';
-println(url);
-    final response = await AppApiHandler.getData(url: url,header: headers,);
+    var url =
+        '${AppUrls.salaryDetailsApi}/${appController.loginModel.value.user?.id}';
+    if(month != null && year != null){
+      url += '?year=$year&month=$month';
+    }
+    println(url);
+    final response = await AppApiHandler.getData(
+      url: url,
+      header: headers,
+    );
 
-
-    if(response.statusCode != 200){
+    if (response.statusCode != 200) {
       throw NoDataAvailableException();
     }
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       finance = Finance.fromJson(json);
       loading.value = false;
-println(json);
-
+      println(json);
     }
   }
 

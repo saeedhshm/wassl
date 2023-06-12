@@ -68,13 +68,13 @@ class SalaryOfMonth {
   }
 
   String get month{
-    var m = _month?.split('-').first ?? '';
+    var m = _month?.split('-').last ?? '';
 
     return m;
   }
 
   String get year{
-    var y = _month?.split('-').last ?? '';;
+    var y = _month?.split('-').first ?? '';;
 
     return y;
   }

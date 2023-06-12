@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../../../getx_controllers/finance/all_salaries.dart';
+import '../../../getx_controllers/finance/finance_controller.dart';
 import '../../consts_widgets/gradiants.dart';
 import '../../reusable_widgets/localized_text.dart';
 
@@ -11,11 +12,12 @@ class SalaryDetailsPage extends StatelessWidget {
    SalaryDetailsPage({Key? key}) : super(key: key);
 
   final AllSalariesController controller = Get.put(AllSalariesController());
+  final FinanceInfoController financeInfoController = Get.find<FinanceInfoController>();
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(child: Scaffold(
       body: Container(
         width: Get.width,
         height: Get.height,
@@ -36,26 +38,25 @@ class SalaryDetailsPage extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: (){
-
+                        Get.delete<FinanceInfoController>();
                         Get.back();
 
                       },
-                      child: Container(
-                          child: Image.asset(
-                            'assets/images/back_arrow.png',
-                            width: 50,
-                          )),
+                      child: Image.asset(
+                        'assets/images/back_arrow.png',
+                        width: 50,
+                      ),
                     ) ,
                   ],
                 ),
               ),
             ),
-            Text('11,500',style: TextStyle(
+            Text('${financeInfoController.finance.salaryAfter} ${'SR'.tr}',style: const TextStyle(
                 color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold
             ),),
-            Text('net_salary'.tr,style: TextStyle(
+            Text('net_salary'.tr,style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.normal
@@ -77,8 +78,8 @@ class SalaryDetailsPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        SizedBox(height: 60,),
-                        Text('يناير 2023',style: TextStyle(
+                        const SizedBox(height: 60,),
+                        const Text('يناير 2023',style: TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14
@@ -87,23 +88,56 @@ class SalaryDetailsPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
                             children: [
-                              Text('base_salary'.tr,style: TextStyle(
+                              Text('base_salary'.tr,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Spacer(),
-                              Text('10000',style: TextStyle(
+                              const Spacer(),
+                              Text('${financeInfoController.finance.employee?.salary}',style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Text('+',style: TextStyle(
+                              const Text('+',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
+                              Container(
+                                width: 10,
+                                height: 10,
+                                decoration: BoxDecoration(
+                                  color: AppColors.mainGreenColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                         for(int i=0; i<financeInfoController.finance.allowances.length;i++)
+                         Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
+                          child: Row(
+                            children: [
+                              Text(financeInfoController.finance.allowances[i].allowanceType?.name ??'',style: const TextStyle(
+                                  color: AppColors.darkGreyTextColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14
+                              ),),
+                              const Spacer(),
+                              Text('${financeInfoController.finance.allowances[i].amount}',style: const TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14
+                              ),),
+                              const Text('+',style: TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14
+                              ),),
+                              const SizedBox(width: 10,),
                               Container(
                                 width: 10,
                                 height: 10,
@@ -119,55 +153,23 @@ class SalaryDetailsPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
                             children: [
-                              Text('home_allowance'.tr,style: TextStyle(
+                              Text('moving_allowance'.tr,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Spacer(),
-                              Text('2000',style: TextStyle(
+                              const Spacer(),
+                              const Text('500',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Text('+',style: TextStyle(
+                              const Text('-',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              SizedBox(width: 10,),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  color: AppColors.mainGreenColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
-                          child: Row(
-                            children: [
-                              Text('moving_allowance'.tr,style: TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              Spacer(),
-                              Text('500',style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              Text('-',style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
                               Container(
                                 width: 10,
                                 height: 10,
@@ -183,23 +185,23 @@ class SalaryDetailsPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
                             children: [
-                              Text('delay_discount'.tr,style: TextStyle(
+                              Text('delay_discount'.tr,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Spacer(),
-                              Text('10000',style: TextStyle(
+                              const Spacer(),
+                              const Text('10000',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              Text('-',style: TextStyle(
+                              const Text('-',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
-                              SizedBox(width: 10,),
+                              const SizedBox(width: 10,),
                               Container(
                                 width: 10,
                                 height: 10,
@@ -222,12 +224,12 @@ class SalaryDetailsPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('1000 '+'SR'.tr,style: TextStyle(
+                      Text('1000 '+'SR'.tr,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 25
                       ),),
-                      Text('total_cuts'.tr,style: TextStyle(
+                      Text('total_cuts'.tr,style: const TextStyle(
                           color: AppColors.lightGreyTextColor,
                           fontWeight: FontWeight.normal,
                           fontSize: 15
@@ -253,6 +255,9 @@ class SalaryDetailsPage extends StatelessWidget {
         ),
       ),
 
-    );
+    ), onWillPop: ()async{
+      Get.delete<FinanceInfoController>();
+      return true;
+    });
   }
 }

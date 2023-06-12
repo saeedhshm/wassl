@@ -5,6 +5,7 @@ import 'package:wassl/models/finance/salaries.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/finance_info/salary_details.dart';
 
+import '../../../getx_controllers/finance/finance_controller.dart';
 import '../../../helpers/constants/app_colors.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/light_text_widget.dart';
@@ -24,7 +25,7 @@ class AllSalariesPage extends StatelessWidget {
           MainAppbarWidget("salaries",onBack: (){
             Get.back();
           },),
-          Expanded(child: Obx(()=> controller.loading.value ? Center(
+          Expanded(child: Obx(()=> controller.loading.value ? const Center(
             child: SendingLoadingWidget(),
           ) : Container(
             color: AppColors.lightBackgroundColor,
@@ -49,6 +50,10 @@ class AllSalariesPage extends StatelessWidget {
                         SalaryOfMonth salary = controller.allSalaries.salaries[index];
                         return InkWell(
                           onTap: (){
+                            final controller = Get.put(FinanceInfoController(
+                              month: salary.month,
+                              year: salary.year
+                            ));
                             Get.to(SalaryDetailsPage());
                           },
                           child: ShadowedWidget(child: Padding(
@@ -57,12 +62,12 @@ class AllSalariesPage extends StatelessWidget {
                               children: [
                                 Column(
                                   children: [
-                                    Text(salary.year.tr, style: const TextStyle(
+                                    Text(salary.month.tr, style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
                                         color: AppColors.darkGreyTextColor
                                     ),),
-                                    Text(salary.month.tr, style: const TextStyle(
+                                    Text(salary.year.tr, style: const TextStyle(
                                         fontWeight: FontWeight.normal,
                                         fontSize: 14,
                                         color: AppColors.darkGreyTextColor
