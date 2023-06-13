@@ -50,11 +50,8 @@ class AllSalariesPage extends StatelessWidget {
                         SalaryOfMonth salary = controller.allSalaries.salaries[index];
                         return InkWell(
                           onTap: (){
-                            final controller = Get.put(FinanceInfoController(
-                              month: salary.month,
-                              year: salary.year
-                            ));
-                            Get.to(SalaryDetailsPage());
+
+                            Get.to(SalaryDetailsPage(salary:salary, basesalary: '${controller.allSalaries.employee?.salary} ',));
                           },
                           child: ShadowedWidget(child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),

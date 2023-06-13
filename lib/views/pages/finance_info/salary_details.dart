@@ -4,15 +4,17 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../../../getx_controllers/finance/all_salaries.dart';
 import '../../../getx_controllers/finance/finance_controller.dart';
+import '../../../models/finance/salaries.dart';
 import '../../consts_widgets/gradiants.dart';
 import '../../reusable_widgets/localized_text.dart';
 
 class SalaryDetailsPage extends StatelessWidget {
 
-   SalaryDetailsPage({Key? key}) : super(key: key);
+   SalaryDetailsPage({Key? key,required this.basesalary, required this.salary,}) : super(key: key);
 
-  final AllSalariesController controller = Get.put(AllSalariesController());
-  final FinanceInfoController financeInfoController = Get.find<FinanceInfoController>();
+   final SalaryOfMonth salary;
+   final String basesalary;
+
 
 
   @override
@@ -51,7 +53,7 @@ class SalaryDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Text('${financeInfoController.finance.salaryAfter} ${'SR'.tr}',style: const TextStyle(
+            Text('${salary.salaryAfter} ${'SR'.tr}',style: const TextStyle(
                 color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold
@@ -94,7 +96,7 @@ class SalaryDetailsPage extends StatelessWidget {
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              Text('${financeInfoController.finance.employee?.salary}',style: const TextStyle(
+                              Text(basesalary,style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
@@ -116,18 +118,18 @@ class SalaryDetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                         for(int i=0; i<financeInfoController.finance.allowances.length;i++)
+                         for(int i=0; i<salary.allowances.length;i++)
                          Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
                             children: [
-                              Text(financeInfoController.finance.allowances[i].allowanceType?.name ??'',style: const TextStyle(
+                              Text(salary.allowances[i].allowancesType?.name ??'',style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              Text('${financeInfoController.finance.allowances[i].amount}',style: const TextStyle(
+                              Text('${salary.allowances[i].amount}',style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
@@ -149,11 +151,12 @@ class SalaryDetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
+                        for(int i=0; i<salary.discounts.length;i++)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
                             children: [
-                              Text('moving_allowance'.tr,style: const TextStyle(
+                              Text('${salary.discounts[i].employeeSalaryDiscountType?.name}'.tr,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
@@ -181,38 +184,7 @@ class SalaryDetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
-                          child: Row(
-                            children: [
-                              Text('delay_discount'.tr,style: const TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              const Spacer(),
-                              const Text('10000',style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              const Text('-',style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14
-                              ),),
-                              const SizedBox(width: 10,),
-                              Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  color: AppColors.gradiantRed.first,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+
                       ],
                     ),
                   ),
