@@ -17,9 +17,8 @@ class AttendancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return Scaffold(
-      // backgroundColor: Colors.blue,
+      backgroundColor: AppColors.mainBackgroundColor,
       body: Obx(()=>controller.loading.value ? const Center(
         child: SendingLoadingWidget(),
       ) :controller.noInternetAvailable.value != '' ? Center(

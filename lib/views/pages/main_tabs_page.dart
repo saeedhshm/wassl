@@ -10,7 +10,7 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 import '../../getx_controllers/app_controller.dart';
 import '../../getx_controllers/calendar/calendar_controller.dart';
 import '../../getx_controllers/orders/previous_requests.dart';
-import 'attendance/attendance_form.dart';
+import 'calendar/attendance_form.dart';
 import 'home/home_page.dart';
 import 'orders/pages/loan_order.dart';
 import 'orders/previous_orders/page.dart';

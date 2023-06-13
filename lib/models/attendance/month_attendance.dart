@@ -1,3 +1,4 @@
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 class MonthAttendance {
@@ -12,6 +13,7 @@ class MonthAttendance {
         this.schedule});
 
   MonthAttendance.fromJson(Map<String, dynamic> json) {
+    println(json);
     totalAttendances = json['totalAttendances'] != null
         ? TotalAttendances.fromJson(json['totalAttendances'])
         : null;

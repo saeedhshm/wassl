@@ -1,0 +1,376 @@
+import 'package:flutter/material.dart';
+
+import '../../../getx_controllers/calendar/calendar_controller.dart';
+import '../../../helpers/constants/app_colors.dart';
+import '../../../helpers/constants/date_time.dart';
+import '../../reusable_widgets/dot_widget.dart';
+
+dayBuilder(
+    {required BuildContext context,
+    required DateTime dt,
+    required CalendarController controller,
+    required DateTime currentDay}) {
+  DateTime dateTime = dt;
+
+  ///to get current day
+  ///
+
+
+  if (dt.hour == 23) {
+    var newDate = DateTime(dt.year, dt.month, dt.day + 1);
+    dateTime = newDate;
+  }
+  else {
+    dateTime = dt;
+  }
+
+if(DateTime.tryParse(controller
+    .attendanceOfMonth
+    .value
+    .attendancesOfMonth[(dateTime.day - 1) %
+    controller.attendanceOfMonth.value.attendancesOfMonth
+        .length]
+    .day ??
+    '')
+    ?.month !=
+    dateTime.month){
+  return null;
+    }
+  /// return selected day in current month
+  if (compareTowDays(dateTime, currentDay)) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+            width: 33,
+            height: 33,
+            decoration: BoxDecoration(
+                // border: Border.all(color: Colors.white, width: 0),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    spreadRadius: 0,
+                    blurRadius: 7,
+                    offset: Offset(0, 0), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(100)),
+
+            child: Center(
+                child: Text(
+              dateTime.day.toString(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black87),
+            ))),
+      ],
+    );
+  }
+
+  /// to return today's day
+  if (compareTowDays(dateTime, DateTime.now())) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              // border: Border.all(color: Colors.redAccent, width: 2),
+                color: Colors.white,
+
+                borderRadius: BorderRadius.circular(100)),
+
+            child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dateTime.day.toString(),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black87),
+                    ),
+                    DotWidget(
+                      color: AppColors.mainGreenColor,
+                      size: 5,
+                    )
+                  ],
+                ))),
+      ],
+    );
+  }
+
+  /// week end days
+  if (checkDayAs('weekEnd', dateTime, controller)) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              // border: Border.all(color: Colors.redAccent, width: 2),
+                color: Colors.white,
+
+                borderRadius: BorderRadius.circular(100)),
+
+            child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dateTime.day.toString(),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black87),
+                    ),
+                    DotWidget(
+                      color: AppColors.gradiantRed.first,
+                      size: 5,
+                    )
+                  ],
+                ))),
+      ],
+    );
+  }
+
+  // future days
+  if (dateTime.month > DateTime.now().month || (dateTime.month == DateTime.now().month && dateTime.day > DateTime.now().day) ) {
+    return Center(
+      child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            // color:Colors.amber,
+              border: Border.all(color: Colors.white, width: 1),
+              borderRadius: BorderRadius.circular(100)),
+          child: Center(
+              child: Text(
+                dateTime.day.toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ))),
+    );
+  }
+
+  // holiday days
+  if (checkDayAs('holiday', dateTime, controller)) {
+    var prev = !checkDayAs('holiday', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
+    var next = !checkDayAs('holiday', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
+
+    return Container(
+        margin: EdgeInsets.only(
+            left: prev ? 4.0 : 0.0,
+            right: next ? 4.0 : 0.0,
+            top: 4,
+            bottom: 4
+        ),
+        //   width: 33,
+        //   height: 33,
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.white, width: 0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(prev ? 100.0 : 0.0),
+            bottomLeft: Radius.circular(prev ? 100.0 : 0.0),
+
+            topRight: Radius.circular(next ? 100.0 : 0.0),
+            bottomRight: Radius.circular(next ? 100.0 : 0.0),
+          ),
+          color: AppColors.mainGreenColor,),
+
+        child: Center(
+            child: Text(
+              dateTime.day.toString(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            )));
+  }
+
+  /// absent days
+  else if (checkDayAs('absent', dateTime, controller)) {
+    var prev = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
+    var next = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
+
+    return Container(
+
+        // margin:  EdgeInsets.symmetric(horizontal: prev ? 4.0 : 0.0, vertical: 4),
+      margin: EdgeInsets.only(
+        left: prev ? 4.0 : 0.0,
+        right: next ? 4.0 : 0.0,
+        top: 4,
+        bottom: 4
+      ),
+
+        //   width: 33,
+      //   height: 33,
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.white, width: 0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(prev ? 100.0 : 0.0),
+            bottomLeft: Radius.circular(prev ? 100.0 : 0.0),
+
+            topRight: Radius.circular(next ? 100.0 : 0.0),
+            bottomRight: Radius.circular(next ? 100.0 : 0.0),
+          ),
+            color: AppColors.orangeColorInCalend,),
+
+        child: Center(
+            child: Text(
+              dateTime.day.toString(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            )));
+  }
+
+
+
+  // missed days - lost fingerprints
+  else if (checkMissedDay(dateTime, controller)) {
+    return Stack(
+      // crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Positioned(
+          top:0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+          child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+              width: 35,
+              height: 35,
+              decoration: BoxDecoration(
+                // border: Border.all(color: Colors.redAccent, width: 2),
+                  color: Colors.white,
+
+                  borderRadius: BorderRadius.circular(100)),
+
+              child: Center(
+                  child: Text(
+                    dateTime.day.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black87),
+                  ))),
+        ),
+        Positioned(
+            top:20,
+            bottom: 0,
+            right: 0,
+            left: 0,child: Icon(Icons.question_mark,color: AppColors.redMissedDayColor,size: 15,))
+      ],
+    );
+  }
+
+  // other days
+  else if (dateTime.month == controller.dateTime.month) {
+    return Center(
+      child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          width: double.infinity,
+          decoration: BoxDecoration(
+// color:Colors.amber,
+              border: Border.all(color: Colors.white, width: 1),
+              borderRadius: BorderRadius.circular(100)),
+          child: Center(
+              child: Text(
+            dateTime.day.toString(),
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ))),
+    );
+  }
+
+
+
+
+}
+
+
+
+bool checkDayAs(String type, DateTime dateTime, CalendarController controller) {
+  return ((controller
+              .attendanceOfMonth
+              .value
+              .attendancesOfMonth[(dateTime.day - 1) %
+                  controller.attendanceOfMonth.value.attendancesOfMonth.length]
+              .status ==
+          type) &&
+      DateTime.tryParse(controller
+                      .attendanceOfMonth
+                      .value
+                      .attendancesOfMonth[(dateTime.day - 1) %
+                          controller.attendanceOfMonth.value.attendancesOfMonth
+                              .length]
+                      .day ??
+                  '')
+              ?.month ==
+          dateTime.month);
+}
+
+bool checkMissedDay(DateTime dateTime, CalendarController controller) {
+  return ((controller
+              .attendanceOfMonth
+              .value
+              .attendancesOfMonth[(dateTime.day - 1) %
+                  controller.attendanceOfMonth.value.attendancesOfMonth.length]
+              .attendanceDay
+              ?.leaveTime ==
+          null) &&
+      DateTime.tryParse(controller
+                      .attendanceOfMonth
+                      .value
+                      .attendancesOfMonth[(dateTime.day - 1) %
+                          controller.attendanceOfMonth.value.attendancesOfMonth
+                              .length]
+                      .day ??
+                  '')
+              ?.month ==
+          dateTime.month);
+}
+
+bool checkLateAttendance(DateTime dateTime, CalendarController controller) {
+  return ((controller
+      .attendanceOfMonth
+      .value
+      .attendancesOfMonth[(dateTime.day - 1) %
+      controller.attendanceOfMonth.value.attendancesOfMonth.length]
+      .attendanceDay
+      ?.leaveTime ==
+      null) &&
+      DateTime.tryParse(controller
+          .attendanceOfMonth
+          .value
+          .attendancesOfMonth[(dateTime.day - 1) %
+          controller.attendanceOfMonth.value.attendancesOfMonth
+              .length]
+          .day ??
+          '')
+          ?.month ==
+          dateTime.month);
+}
+
+bool checkEarlyLeave(DateTime dateTime, CalendarController controller) {
+  return ((controller
+      .attendanceOfMonth
+      .value
+      .attendancesOfMonth[(dateTime.day - 1) %
+      controller.attendanceOfMonth.value.attendancesOfMonth.length]
+      .attendanceDay
+      ?.leaveTime ==
+      null) &&
+      DateTime.tryParse(controller
+          .attendanceOfMonth
+          .value
+          .attendancesOfMonth[(dateTime.day - 1) %
+          controller.attendanceOfMonth.value.attendancesOfMonth
+              .length]
+          .day ??
+          '')
+          ?.month ==
+          dateTime.month);
+}

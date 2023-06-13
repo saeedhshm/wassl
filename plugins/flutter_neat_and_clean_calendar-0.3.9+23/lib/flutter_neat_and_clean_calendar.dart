@@ -115,7 +115,7 @@ class Calendar extends StatefulWidget {
   final bool isExpanded;
   final List<String> weekDays;
   final String? locale;
-  final bool startOnMonday;
+  // final bool startOnMonday;
   final bool hideBottomBar;
   final TextStyle? dayOfWeekStyle;
   final TextStyle? bottomBarTextStyle;
@@ -157,7 +157,7 @@ class Calendar extends StatefulWidget {
     this.isExpanded = false,
     this.weekDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     this.locale = 'en_US',
-    this.startOnMonday = false,
+    // this.startOnMonday = false,
     this.dayOfWeekStyle,
     this.bottomBarTextStyle,
     this.bottomBarArrowColor,
@@ -972,12 +972,12 @@ class _CalendarState extends State<Calendar> {
   _firstDayOfWeek(DateTime date) {
     var day = DateTime.utc(
         _selectedDate.year, _selectedDate.month, _selectedDate.day, 12);
-    if (widget.startOnMonday == true) {
-      day = day.subtract(Duration(days: day.weekday - 1));
-    } else {
+    // if (widget.startOnMonday == true) {
+    //   day = day.subtract(Duration(days: day.weekday - 1));
+    // } else {
       // if the selected day is a Sunday, then it is already the first day of week
       day = day.weekday == 7 ? day : day.subtract(Duration(days: day.weekday));
-    }
+    // }
     return day;
   }
 
@@ -992,7 +992,7 @@ class _CalendarState extends State<Calendar> {
     var first = Utils.firstDayOfMonth(month);
     var daysBefore = first.weekday;
     var firstToDisplay = first.subtract(
-        new Duration(days: daysBefore - (widget.startOnMonday ? 1 : 0)));
+        Duration(days: daysBefore ));
     var last = Utils.lastDayOfMonth(month);
 
     var daysAfter = 7 - last.weekday;
@@ -1005,18 +1005,18 @@ class _CalendarState extends State<Calendar> {
     // Adding an extra day necessary (if week starts on Monday).
     // Otherwise the week with days in next month would always end on Saturdays.
     var lastToDisplay = last
-        .add(Duration(days: daysAfter + (widget.startOnMonday ? 1 : 0)));
+        .add(Duration(days: daysAfter ));
 
     List<DateTime> listOfDays = [];
     Utils.daysInRange(firstToDisplay, lastToDisplay).toList().forEach((element) {
-      if(element.hour == 23){
-        var newDate = DateTime(element.year,element.month,element.day + 1);
+      // if(element.hour == 23){
+        var newDate = DateTime(element.year,element.month,element.day - 1);
 
         listOfDays.add(newDate);
-
-      }else{
-        listOfDays.add(element);
-      }
+      //
+      // }else{
+      //   listOfDays.add(element);
+      // }
     });
     return listOfDays;
   }

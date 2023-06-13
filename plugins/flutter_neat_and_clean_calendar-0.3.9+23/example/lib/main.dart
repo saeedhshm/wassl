@@ -80,7 +80,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     return Scaffold(
       body: SafeArea(
         child: Calendar(
-          startOnMonday: true,
+          // startOnMonday: true,
           weekDays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
           eventsList: _eventList,
           isExpandable: true,
