@@ -1,0 +1,244 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../getx_controllers/calendar/calendar_controller.dart';
+import '../../../../helpers/constants/app_colors.dart';
+import '../../orders/pages/correcting_fingerprint.dart';
+
+class MonthlyAttendanceInfoWidget extends StatelessWidget {
+
+  MonthlyAttendanceInfoWidget({Key? key}) : super(key: key);
+  final CalendarController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(()=>Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(child: Container(
+                // height: Get.width / 3,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
+                  child: Column(
+                    children: [
+                      Text('1',style: TextStyle(
+                        color: AppColors.orangeColorInCalend,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),),
+                      Text('absent'.tr,style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 15
+                      ),)
+                    ],
+                  ),
+                ),
+
+              )),
+              const SizedBox(width: 8,),
+              Expanded(child: Container(
+                // height: Get.width / 3,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
+                  child: Column(
+                    children: [
+                      Text('1',style: TextStyle(
+                          color: AppColors.purpleLateColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),),
+                      Text('delay'.tr,style: TextStyle(
+                          color: AppColors.lightGreyTextColor,
+                          fontSize: 15
+                      ),)
+                    ],
+                  ),
+                ),
+
+              )),
+              const SizedBox(width: 8,),
+              Expanded(child: Container(
+                // height: Get.width / 3,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
+                  child: Column(
+                    children: [
+                      Text('1',style: TextStyle(
+                          color: AppColors.yellowEarlyExitColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),),
+                      Text('early_leave'.tr,style: TextStyle(
+                          color: AppColors.lightGreyTextColor,
+                          fontSize: 15
+                      ),)
+                    ],
+                  ),
+                ),
+
+              )),
+              const SizedBox(width: 8,),
+              Expanded(child: Container(
+                // height: Get.width / 3,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
+                  child: Column(
+                    children: [
+                      Text('1',style: TextStyle(
+                          color: AppColors.redMissedDayColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),),
+                      Text('missed_leave'.tr,style: TextStyle(
+                          color: AppColors.lightGreyTextColor,
+                          fontSize: 15
+                      ),)
+                    ],
+                  ),
+                ),
+
+              )),
+            ],
+          ),
+          const SizedBox(height: 16,),
+          Stack(
+            children: [
+
+
+              Container(
+
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                    children: [
+                      Text('working_time'.tr,style: TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontSize: 17
+                      ),),
+
+                      Text(controller.selectedDay.value.day ?? '',style: TextStyle(
+                          color: AppColors.darkGreyTextColor,
+                          fontSize: 15
+                      ),),
+                      SizedBox(height: 5,),
+                      Row(
+                        children: [
+                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn,style: TextStyle(
+                              color: AppColors.darkGreyTextColor,
+                              fontSize: 18
+                          ),))),
+                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut,style: TextStyle(
+                              color: AppColors.darkGreyTextColor,
+                              fontSize: 18
+                          ),))),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                margin: const EdgeInsets.only(top: 20),
+              ),
+              Container(
+                margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.black54,
+                        blurRadius: 6.0,
+                        offset: Offset(0.0, 3.0),
+                        spreadRadius: 0.0
+                    )
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
+                  child: Text(controller.selectedDay.value.status.tr,
+                    style: const TextStyle(
+                        color: AppColors.mainGreenColor
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16,),
+          controller.selectedDay.value.attendanceDay != null ?
+          Row(
+            children: [
+              Expanded(child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                    children: [
+                      Text('attend'.tr,style: TextStyle(
+                          color: AppColors.darkGreyTextColor,
+                          fontSize: 15
+                      ),),
+                      Text(controller.selectedDay.value.attendanceTime,style: TextStyle(
+                          color: AppColors.darkGreyTextColor,
+                          fontSize: 18
+                      ),)
+                    ],
+                  ),
+                ),)),
+              SizedBox(width: 10,),
+              Expanded(child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100)
+                ),
+                child: InkWell(
+                  onTap: (){
+                    if(controller.selectedDay.value.attendanceDay?.leaveTime == null){
+                      Get.to(()=> CorrectingFingerprintRequest());
+                    }
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        Text('leaving'.tr),
+                        Text(controller.selectedDay.value.leaveTime)
+                      ],
+                    ),
+                  ),
+                ),)),
+            ],
+          ) :
+          const SizedBox(),
+
+        ],
+      ),
+    ));
+  }
+}

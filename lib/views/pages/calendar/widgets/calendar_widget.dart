@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/views/pages/calendar/day_builder.dart';
+import 'package:wassl/views/pages/calendar/widgets/day_builder.dart';
 
-import '../../helpers/constants/app_colors.dart';
+import '../../../../helpers/constants/app_colors.dart';
 
 class CalendarWidget extends StatefulWidget {
 

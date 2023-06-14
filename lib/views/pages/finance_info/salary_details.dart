@@ -10,16 +10,16 @@ import '../../reusable_widgets/localized_text.dart';
 
 class SalaryDetailsPage extends StatelessWidget {
 
-   SalaryDetailsPage({Key? key,required this.basesalary, required this.salary,}) : super(key: key);
+   SalaryDetailsPage({Key? key,required this.baseSalary, required this.salary,}) : super(key: key);
 
    final SalaryOfMonth salary;
-   final String basesalary;
+   final String baseSalary;
 
 
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Scaffold(
+    return Scaffold(
       body: Container(
         width: Get.width,
         height: Get.height,
@@ -40,7 +40,7 @@ class SalaryDetailsPage extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: (){
-                        Get.delete<FinanceInfoController>();
+
                         Get.back();
 
                       },
@@ -80,8 +80,8 @@ class SalaryDetailsPage extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const SizedBox(height: 60,),
-                        const Text('يناير 2023',style: TextStyle(
+                        const SizedBox(height: 75,),
+                        Text('${salary.month.tr} ${salary.year.tr}',style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14
@@ -96,7 +96,7 @@ class SalaryDetailsPage extends StatelessWidget {
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              Text(basesalary,style: const TextStyle(
+                              Text(baseSalary,style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
@@ -227,9 +227,6 @@ class SalaryDetailsPage extends StatelessWidget {
         ),
       ),
 
-    ), onWillPop: ()async{
-      Get.delete<FinanceInfoController>();
-      return true;
-    });
+    );
   }
 }

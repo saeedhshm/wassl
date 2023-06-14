@@ -51,7 +51,7 @@ class AllSalariesPage extends StatelessWidget {
                         return InkWell(
                           onTap: (){
 
-                            Get.to(SalaryDetailsPage(salary:salary, basesalary: '${controller.allSalaries.employee?.salary} ',));
+                            Get.to(SalaryDetailsPage(salary:salary, baseSalary: '${controller.allSalaries.employee?.salary} ',));
                           },
                           child: ShadowedWidget(child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 20),
