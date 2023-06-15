@@ -28,12 +28,12 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: Column(
                     children: [
-                      Text('1',style: TextStyle(
+                      const Text('1',style: TextStyle(
                         color: AppColors.orangeColorInCalend,
                         fontSize: 18,
                         fontWeight: FontWeight.bold
                       ),),
-                      Text('absent'.tr,style: TextStyle(
+                      Text('absent'.tr,style: const TextStyle(
                         color: AppColors.lightGreyTextColor,
                         fontSize: 15
                       ),)
@@ -143,7 +143,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                           color: AppColors.darkGreyTextColor,
                           fontSize: 15
                       ),),
-                      SizedBox(height: 5,),
+                      // SizedBox(height: 5,),
                       Row(
                         children: [
                           Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn,style: TextStyle(
@@ -192,7 +192,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
             children: [
               Expanded(child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(100)
                 ),
                 child: Padding(
@@ -213,7 +213,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
               SizedBox(width: 10,),
               Expanded(child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(100)
                 ),
                 child: InkWell(
@@ -227,8 +227,14 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: Column(
                       children: [
-                        Text('leaving'.tr),
-                        Text(controller.selectedDay.value.leaveTime)
+                        Text('leaving'.tr,style: TextStyle(
+                            color: AppColors.darkGreyTextColor,
+                            fontSize: 15
+                        ),),
+                        Text(controller.selectedDay.value.leaveTime,style: TextStyle(
+                            color: AppColors.darkGreyTextColor,
+                            fontSize: 18
+                        ),)
                       ],
                     ),
                   ),

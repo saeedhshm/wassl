@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../../getx_controllers/calendar/calendar_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/date_time.dart';
+import '../../../../helpers/constants/print_ln.dart';
 import '../../../reusable_widgets/dot_widget.dart';
+
+Set<int> weekDays = {};
+List<int> weekEnds = [];
 
 dayBuilder(
     {required BuildContext context,
@@ -24,7 +28,54 @@ dayBuilder(
     dateTime = dt;
   }
 
-if(DateTime.tryParse(controller
+  var weekDay = dateTime.weekday;
+  var dd = controller
+      .attendanceOfMonth
+      .value
+      .attendancesOfMonth[(dateTime.day - 1) %
+      controller.attendanceOfMonth.value.attendancesOfMonth.length]
+      .status == 'weekEnd' && dateTime.weekday > 4 ? dateTime.weekday : -1;
+
+
+
+  weekDays.add(dd);
+  println('=-=-=->>>>>> dateTime.weekday $weekDays');
+  /// week end days
+  for(var i in weekDays){
+    if(dateTime.weekday == i){
+
+      return Container(
+          margin: EdgeInsets.only(
+              left: 10.0,
+              right:  10.0,
+              top: 0,
+              bottom: 0
+          ),
+          //   width: 33,
+          //   height: 33,
+          decoration: BoxDecoration(
+            // border: Border.all(color: Colors.white, width: 0),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(0.0),
+              bottomLeft: Radius.circular(0.0 ),
+
+              topRight: Radius.circular(0.0),
+              bottomRight: Radius.circular(0.0 ),
+            ),
+            color: AppColors.borderTextFieldColor,),
+
+          child: Center(
+              child: Text(
+                dateTime.day.toString(),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white),
+              )));
+    }
+  }
+
+
+  // Other months days
+  if(DateTime.tryParse(controller
     .attendanceOfMonth
     .value
     .attendancesOfMonth[(dateTime.day - 1) %
@@ -36,6 +87,7 @@ if(DateTime.tryParse(controller
     dateTime.month){
   return null;
     }
+
   /// return selected day in current month
   if (compareTowDays(dateTime, currentDay)) {
     return Row(
@@ -95,10 +147,15 @@ if(DateTime.tryParse(controller
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black87),
                     ),
-                    DotWidget(
-                      color: AppColors.mainGreenColor,
-                      size: 5,
-                    )
+                    Container(
+                      height: 2,
+                      width: 20,
+                      decoration: BoxDecoration(
+                        color: AppColors.mainGreenColor,
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                    ),
+
                   ],
                 ))),
       ],
@@ -107,38 +164,32 @@ if(DateTime.tryParse(controller
 
   /// week end days
   if (checkDayAs('weekEnd', dateTime, controller)) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(
-              // border: Border.all(color: Colors.redAccent, width: 2),
-                color: Colors.white,
+    return Container(
+        margin: EdgeInsets.only(
+            left: 10.0,
+            right:  10.0,
+            top: 0,
+            bottom: 0
+        ),
+        //   width: 33,
+        //   height: 33,
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.white, width: 0),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(0.0),
+            bottomLeft: Radius.circular(0.0 ),
 
-                borderRadius: BorderRadius.circular(100)),
+            topRight: Radius.circular(0.0),
+            bottomRight: Radius.circular(0.0 ),
+          ),
+          color: AppColors.borderTextFieldColor,),
 
-            child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateTime.day.toString(),
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black87),
-                    ),
-                    DotWidget(
-                      color: AppColors.gradiantRed.first,
-                      size: 5,
-                    )
-                  ],
-                ))),
-      ],
-    );
+        child: Center(
+            child: Text(
+              dateTime.day.toString(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            )));
   }
 
   // future days
@@ -232,37 +283,36 @@ if(DateTime.tryParse(controller
 
   // missed days - lost fingerprints
   else if (checkMissedDay(dateTime, controller)) {
-    return Stack(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      // mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Positioned(
-          top:0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-              width: 35,
-              height: 35,
-              decoration: BoxDecoration(
-                // border: Border.all(color: Colors.redAccent, width: 2),
-                  color: Colors.white,
+        Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              // border: Border.all(color: Colors.redAccent, width: 2),
+                color: Colors.white,
 
-                  borderRadius: BorderRadius.circular(100)),
+                borderRadius: BorderRadius.circular(100)),
 
-              child: Center(
-                  child: Text(
-                    dateTime.day.toString(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black87),
-                  ))),
-        ),
-        Positioned(
-            top:20,
-            bottom: 0,
-            right: 0,
-            left: 0,child: Icon(Icons.question_mark,color: AppColors.redMissedDayColor,size: 15,))
+            child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      dateTime.day.toString(),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black87),
+                    ),
+                    const DotWidget(
+                      color: AppColors.redMissedDayColor,
+                      size: 5,
+                    )
+                  ],
+                ))),
       ],
     );
   }
