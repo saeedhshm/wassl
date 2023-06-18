@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/views/pages/finance_info/detials_widgets/net_salary_widget.dart';
 
 import '../../../getx_controllers/finance/all_salaries.dart';
 import '../../../getx_controllers/finance/finance_controller.dart';
@@ -53,16 +54,9 @@ class SalaryDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            Text('${salary.salaryAfter} ${'SR'.tr}',style: const TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold
-            ),),
-            Text('net_salary'.tr,style: const TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.normal
-            ),),
+            NetSalaryWidget(
+              netSalary: '${salary.salaryAfter} ${'SR'.tr}',
+            ),
             Expanded(child: Stack(
               children: [
                 Container(
@@ -72,6 +66,8 @@ class SalaryDetailsPage extends StatelessWidget {
                   color: Colors.white,
 
                 ),
+
+                //
                 Container(
                   margin: EdgeInsets.only(top: (Get.height * 0.1 + 40) / 2),
                   width: double.maxFinite,
@@ -81,11 +77,15 @@ class SalaryDetailsPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 75,),
+
+                        // Month and Year
                         Text('${salary.month.tr} ${salary.year.tr}',style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14
                         ),),
+
+                        // Base salary
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
                           child: Row(
@@ -118,6 +118,8 @@ class SalaryDetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
+
+                         // Allowances
                          for(int i=0; i<salary.allowances.length;i++)
                          Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
@@ -151,6 +153,8 @@ class SalaryDetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
+
+                        // discounts
                         for(int i=0; i<salary.discounts.length;i++)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 30),
@@ -162,7 +166,7 @@ class SalaryDetailsPage extends StatelessWidget {
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              const Text('500',style: TextStyle(
+                              Text('${salary.discounts[i].amount}',style: TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14
@@ -189,6 +193,8 @@ class SalaryDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Total discounts
                 Container(
                   width: double.maxFinite,
                   height: Get.height * 0.1,
@@ -196,7 +202,7 @@ class SalaryDetailsPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('1000 '+'SR'.tr,style: const TextStyle(
+                      Text('${salary.totalDiscountAmount} '+'SR'.tr,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 25
@@ -230,3 +236,4 @@ class SalaryDetailsPage extends StatelessWidget {
     );
   }
 }
+

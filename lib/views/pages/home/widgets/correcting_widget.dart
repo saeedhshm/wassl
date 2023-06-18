@@ -24,8 +24,8 @@ class CorrectingWidget extends StatelessWidget {
       child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:  [
-          const SizedBox(height: 40,),
-          HolidaysWidget(),
+          const SizedBox(height: 90,),
+
           Procedures(),
           AbsentsWidget(),
           NextEvents(),
@@ -36,8 +36,8 @@ class CorrectingWidget extends StatelessWidget {
       decoration: const BoxDecoration(
           color: AppColors.mainBackgroundColor,
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30)
+              topLeft: Radius.circular(0),
+              topRight: Radius.circular(0)
           )
       ),
     );

@@ -10,6 +10,7 @@ class AttendanceInfoWidget extends StatelessWidget {
   final HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         const SizedBox(
@@ -17,7 +18,7 @@ class AttendanceInfoWidget extends StatelessWidget {
         ),
         Container(
           child: CircularWidget(
-              size: 50,
+              size: 40,
               borderWidth: 0,
               padding: 0,
               borderColor: Colors.transparent,
@@ -47,16 +48,16 @@ class AttendanceInfoWidget extends StatelessWidget {
                 controller.attendanceStatusValue,
                 style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
               ),
               // SizedBox(height: 10,),
               Text(
                 controller.currentTime,
                 style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -65,11 +66,11 @@ class AttendanceInfoWidget extends StatelessWidget {
           padding: const EdgeInsets.only(
               top: 20, left: 20, right: 20),
           child: SizedBox(
-            width: 50,
+            width: 35,
             child: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
                 ),
                 child: Image.asset(
                     'assets/images/attend_print_ic.png')),

@@ -45,13 +45,17 @@ class HolidaysWidget extends StatelessWidget {
                     fontSize: 20,
                     fontWeight: FontWeight.w600
                 ),),
-                 Text('${homeController.appController.holidaysBalance.value.data?.openingVacationsCount}',style: const TextStyle(
-                    color: AppColors.lightGreyTextColor,
+                 Text('${homeController.appController.holidaysBalance.value.data?.openingVacationsCount}',style:  TextStyle(
+                    color: AppColors.borderTextFieldColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w600
                 ),),
                 const Spacer(),
-                Text('day'.tr),
+                Text('day'.tr,style: const TextStyle(
+                    color: AppColors.darkGreyTextColor,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500
+                ),),
               ],
             ))
           ],

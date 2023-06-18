@@ -31,36 +31,14 @@ class AdsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8)
-            ),
-            child: Stack(
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
               children: [
-                Positioned(
-                    bottom:0,
-                    left: 0,
-                    child: Image.asset('assets/images/prosedures/adds.png',width: 50,)),
-                Column(
-                  children: [
-                    ItemWidget(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 1,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: AppColors.mainBackgroundColor
-                        ),
-                      ),
-                    ),
-                    ItemWidget(),
-
-
-                  ],
-                ),
-
+                ItemWidget(),
+                ItemWidget(),
+                ItemWidget(),
+                ItemWidget(),
               ],
             ),
           )
@@ -80,31 +58,67 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(adTitle,style: TextStyle(
-              color: AppColors.darkGreyTextColor,
-              fontWeight: FontWeight.bold
-
-          ),),
-          Row(
-            children: [
-              Text('25 مارس 2023',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
-
+    return Row(
+      children: [
+        Container(
+          width: Get.width * 0.5,
+          margin: EdgeInsets.all(1.5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 0.5,
+                blurRadius: 0.5,
+                offset: const Offset(0,1), // changes position of shadow
+              ),
             ],
           ),
-          Text(adBody,style: TextStyle(
-              color: AppColors.lightGreyTextColor,
-              fontSize: 12
-          ),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
-        ],
-      ),
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.maxFinite,
+                height: Get.width * 0.2,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  child: Image.asset('assets/images/placeholders/car.png',fit: BoxFit.cover,),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(adTitle,style: TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.bold,
+                      fontSize: 12
+                    ),),
+                    Row(
+                      children: [
+                        Text('25 مارس 2023',style: TextStyle(
+                            color: AppColors.lightGreyTextColor,
+                            fontSize: 9
+                        ),),
+
+                      ],
+                    ),
+                    Text(adBody,style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 10
+                    ),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(width: 10,)
+      ],
     );
   }
 }

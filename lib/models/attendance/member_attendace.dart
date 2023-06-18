@@ -14,7 +14,10 @@ class TeamAttendance{
 
       teamAttendance.add(MemberAttendance.fromJson(v));
     }
+
   }
+
+
 }
 
 class MemberAttendance {
@@ -68,9 +71,9 @@ class MemberAttendance {
 
   String get fullName{
     var name = employee?.fullName ?? '';
-    println(name);
+
     List<String> myStringList = name.split(' '); //Splitting the string where it finds an empty space;
-    println(myStringList);
+
     var n = '';
 
     if(myStringList.length < 4){
@@ -91,17 +94,23 @@ class MemberAttendance {
 
 class Attendance {
   String? message;
-  int? attendanceStatus;
+  int? _attendanceStatus;
   AttendanceInfo? attendance;
 
-  Attendance({this.message, this.attendanceStatus, this.attendance});
+  Attendance({this.message, this.attendance});
 
   Attendance.fromJson(Map<String, dynamic> json) {
+    println('=-==->>> first MemberAttendance ${json['attendance_status']}');
     message = json['message'];
-    attendanceStatus = json['attendance_status'];
+    _attendanceStatus = json['attendance_status'];
     attendance = json['attendance'] != null
         ? AttendanceInfo.fromJson(json['attendance'])
         : null;
+  }
+
+  String get attendanceStatus{
+    int status = (_attendanceStatus ?? 0) ;
+    return  status == 0 ? 'holiday' : status == 1 ? 'no_attendance_assign' : status == 2 ? 'attendance_assign' : 'attendance_and_leave_assign';
   }
 
 }
@@ -141,6 +150,7 @@ class AttendanceInfo {
     attendanceOverTime = json['attendance_over_time'];
     attendanceLateTime = json['attendance_late_time'];
     attendanceStatus = json['attendance_status'];
+    println('=-==->>> second AttendanceInfo ${json['attendance_status']}');
     leaveTime = json['leave_time'];
     leaveOverTime = json['leave_over_time'];
     leaveEarlyTime = json['leave_early_time'];
@@ -157,8 +167,8 @@ class Employee {
   int? id;
   String? email;
   String? code;
-  String? fullName;
-  String? fullNameEn;
+  String? _fullName;
+  String? _fullNameEn;
 
   Employee({this.id, this.email, this.code, });
 
@@ -166,9 +176,14 @@ class Employee {
     id = json['id'];
     email = json['email'];
     code = json['code'];
-    fullName = json['full_name'];
-    fullNameEn = json['full_name_en'];
+    _fullName = json['full_name'];
+    _fullNameEn = json['full_name_en'];
+    println('=-==->>> first full_name ${json['full_name']}');
+
   }
 
+  String get fullName{
+    return (Get.locale?.languageCode ?? '') == 'ar' ?  _fullName ?? '' : _fullNameEn ?? '';
+  }
 
 }

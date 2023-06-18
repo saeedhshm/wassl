@@ -11,7 +11,7 @@ import '../app_controller.dart';
 
 class MembersAttendanceController extends GetxController{
   final AppController appController = Get.find();
-  var teamAttendance = TeamAttendance().obs;
+  var _teamAttendance = TeamAttendance().obs;
   var loading = false.obs;
 
   Future<void> getTeamAttendance() async {
@@ -23,7 +23,7 @@ class MembersAttendanceController extends GetxController{
 
 
     loading.value = true;
-    teamAttendance.value.teamAttendance.clear();
+    _teamAttendance.value.teamAttendance.clear();
     const url = AppUrls.teamAttendanceApi;
 
     final response = await AppApiHandler.getData(url: url,header: headers,);
@@ -34,7 +34,7 @@ class MembersAttendanceController extends GetxController{
     }
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-      teamAttendance.value = TeamAttendance.fromJson(json);
+      _teamAttendance.value = TeamAttendance.fromJson(json);
 
 
     }
@@ -48,7 +48,14 @@ class MembersAttendanceController extends GetxController{
   }
 
   bool get hasTeamMembers{
-    return teamAttendance.value.teamAttendance.isNotEmpty;
+    return _teamAttendance.value.teamAttendance.isNotEmpty;
   }
 
+  List<MemberAttendance> get teamAttendance {
+    return List.from(_teamAttendance.value.teamAttendance);
+}
+
+  List<MemberAttendance> get teamAbsence {
+    return _teamAttendance.value.teamAttendance.where((MemberAttendance element) => (element.attendance?.attendanceStatus ?? '') == 'holiday' || (element.attendance?.attendanceStatus ?? '') == 'no_attendance_assign').toList() ;
+  }
 }

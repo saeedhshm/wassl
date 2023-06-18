@@ -55,31 +55,31 @@ class Procedures extends StatelessWidget {
                     Get.to(PreviousRequestsPage(fromHomePage: true,));
                   },
                   child: ItemWidget(
-                    icon:  Image.asset('assets/images/edit.png'),
+                    icon: 'assets/images/prosedures/orders.png',
                     title: 'my_orders'.tr,
                   ),
                 ),
               ),
-              const SizedBox(width: 5,),
+              const SizedBox(width: 16,),
               Expanded(
                 child: InkWell(
                   onTap: (){
                     Get.to(()=>AllSalariesPage());
                   },
                   child: ItemWidget(
-                    icon:  SvgWidget('assets/images/money_on_hand.svg'),
+                    icon:  'assets/images/prosedures/salaries.png',
                     title: 'salaries'.tr,
                   ),
                 ),
               ),
-              const SizedBox(width: 5,),
+              const SizedBox(width: 16,),
               Expanded(
                 child: InkWell(
                   onTap: (){
                     Get.to(DocsPage());
                   },
                   child: ItemWidget(
-                    icon:  SvgWidget('assets/images/letter.svg'),
+                    icon:  'assets/images/prosedures/docs.png',
                     title: 'papers'.tr,
                   ),
                 ),
@@ -97,7 +97,7 @@ class Procedures extends StatelessWidget {
 }
 
 class ItemWidget extends StatelessWidget {
-  final Widget icon;
+  final String icon;
   final String title;
   const ItemWidget({
     Key? key,
@@ -111,21 +111,22 @@ class ItemWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 0.5,
+            blurRadius: 0.5,
+            offset: const Offset(0,1), // changes position of shadow
+          ),
+        ],
       ),
       child: Column(
         children: [
-          Container(
-            width: 45,
-            height: 45,
-            child:  Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:
-                 icon,
-            ),
-            decoration: BoxDecoration(
-                color: AppColors.mainBackgroundColor,
-                borderRadius: BorderRadius.circular(15)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child:
+            Image.asset(icon,width: 20,),
           ),
           const SizedBox(
             height: 5,

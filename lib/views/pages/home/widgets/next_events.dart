@@ -31,48 +31,18 @@ class NextEvents extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8)
-            ),
-            child: Stack(
+          SingleChildScrollView(
+            child: Row(
               children: [
-                Positioned(
-                    bottom:0,
-                    left: 0,
-                    child: Image.asset('assets/images/prosedures/events.png',width: 50,)),
-                Column(
-                  children: [
-                    ItemWidget(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 1,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: AppColors.mainBackgroundColor
-                        ),
-                      ),
-                    ),
-                    ItemWidget(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 1,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: AppColors.mainBackgroundColor
-                        ),
-                      ),
-                    ),
-                    ItemWidget(),
+                ItemWidget(),
 
-                  ],
-                ),
+                ItemWidget(),
+
+                ItemWidget(),
 
               ],
             ),
+            scrollDirection: Axis.horizontal,
           )
         ],
       ),
@@ -87,51 +57,76 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('chiefs_meeting'.tr,style: TextStyle(
-            color: AppColors.darkGreyTextColor,
-            fontWeight: FontWeight.bold
-
-          ),),
-          Row(
-            children: [
-              Text('25 مارس 2023',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
-              SizedBox(width: 5,),
-              Image.asset('assets/images/back_arrow.png',color: AppColors.darkGreyTextColor,width: 20,),
-              SizedBox(width: 5,),
-              Text('28 مارس 2023',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
+    return Row(
+      children: [
+        Container(
+          width: Get.width * 0.5,
+          margin: EdgeInsets.all(1.5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 0.5,
+                blurRadius: 0.5,
+                offset: const Offset(0,1), // changes position of shadow
+              ),
             ],
           ),
-          Row(
-            children: [
-              Text('8 ${'am'.tr}',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
-              SizedBox(width: 5,),
-              Text(':',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
-              SizedBox(width: 5,),
-              Text('10 ${'am'.tr}',style: TextStyle(
-                  color: AppColors.lightGreyTextColor,
-                  fontSize: 12
-              ),),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset('assets/images/prosedures/cal.png',width: 20,),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    const Text('25 مارس 2023',style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 9
+                    ),),
+                    SizedBox(width: 5,),
+                    Image.asset('assets/images/back_arrow.png',color: AppColors.darkGreyTextColor,width: 20,),
+                    const SizedBox(width: 5,),
+                    const Text('28 مارس 2023',style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 9
+                    ),),
+                  ],
+                ),
+                const SizedBox(height: 5,),
+                Text('chiefs_meeting'.tr,style: const TextStyle(
+                  color: AppColors.darkGreyTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13
+                ),),
+                const SizedBox(height: 5,),
+                Row(
+                  children: [
+                    Text('8 ${'am'.tr}',style: const TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 9
+                    ),),
+                    const SizedBox(width: 5,),
+                    const Text(':',style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 9
+                    ),),
+                    const SizedBox(width: 5,),
+                    Text('10 ${'am'.tr}',style: const TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 9
+                    ),),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
+        ),
+        SizedBox(width: 10,)
+      ],
     );
   }
 }

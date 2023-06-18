@@ -88,7 +88,7 @@ class TeamMembersPage extends StatelessWidget {
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (_,index){
                                       return MemberItemWidget(
-                                        member: controller.teamAttendance.value.teamAttendance[index],
+                                        member: controller.teamAttendance[index],
                                       );
                                     },
                                     separatorBuilder: (_,index){
@@ -100,7 +100,7 @@ class TeamMembersPage extends StatelessWidget {
                                         ),
                                       );
                                     },
-                                    itemCount: controller.teamAttendance.value.teamAttendance.length)),
+                                    itemCount: controller.teamAttendance.length)),
                               )
                             ],
                           ),
