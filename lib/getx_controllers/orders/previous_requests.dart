@@ -27,7 +27,7 @@ class PreviousRequestsController extends GetxController{
 
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: AppUrls.getAllOrders,header: headers);
-    // appController.loading.value = false;
+    appController.loading.value = false;
 
     if(response.statusCode != 200){
       throw NoDataAvailableException();
@@ -46,7 +46,7 @@ class PreviousRequestsController extends GetxController{
 
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: AppUrls.getTeamOrders,header: headers);
-    // appController.loading.value = false;
+    appController.loading.value = false;
 
     if(response.statusCode != 200){
       throw NoDataAvailableException();

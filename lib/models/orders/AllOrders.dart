@@ -38,7 +38,7 @@ class AllOrders {
     if (json['orders'] != null) {
 
       json['orders'].forEach((v) {
-        println('=-===-===-=-=-=- order_type: ${v[orderType]}');
+
         if(v[orderType] == 'permission'){
           orders.add( AskPermissionsData.fromJson(v));
         }else if(v[orderType] == 'holiday'){

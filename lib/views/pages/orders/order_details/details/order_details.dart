@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/models/orders/finger_print.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
-
-import '../../../../../helpers/constants/print_ln.dart';
 import '../../../../../models/orders/holiday.dart';
 import '../../../../consts_widgets/loading_widgets.dart';
 
@@ -17,6 +14,8 @@ class OderDetailFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
 //first icon-- assets/images/profile/5.png
       body: Stack(

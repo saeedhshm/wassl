@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
+import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../consts_widgets/gradiants.dart';
 import 'confirm_chain/chain.dart';
 import 'details/order_details.dart';
@@ -15,6 +16,8 @@ class OrderDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return WillPopScope(child: Scaffold(
       body: Obx(()=>Column(
         children: [
@@ -35,7 +38,11 @@ class OrderDetailsPage extends StatelessWidget {
                   InkWell(onTap:(){
                     Get.delete<OrderDetailsController>();
                     Get.back();
-                  },child: Icon(Icons.arrow_forward,color: Colors.white,)),
+                  },child: Image.asset(
+                    'assets/images/back_arrow.png',
+                    width: 50,
+                    color: Colors.white,
+                  ),),
                 ],
               ),
             ),
@@ -89,6 +96,7 @@ class OrderDetailsPage extends StatelessWidget {
         ],
       )),
     ), onWillPop: ()async{
+
       Get.delete<OrderDetailsController>();
       Get.back();
       return true;

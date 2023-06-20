@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/orders/previous_requests.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
@@ -36,16 +37,19 @@ class OrderDetailsController extends GetxController{
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
     appController.loading.value = false;
     // order.status?.id = 1;
+    println(response.statusCode);
+    println(response.body);
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
       SnackBars.showConfirmedSnackBar('success'.tr, message);
       SnackBars.back();
+      final PreviousRequestsController prevController = Get.find();
+      prevController.getAllOrders();
+      prevController.getTeamOrders();
       Get.delete<OrderDetailsController>();
     }else{
       SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
     }
-    println(response.body);
-    println(response.statusCode);
   }
 
   bool get isTeamOrder{

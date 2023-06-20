@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../getx_controllers/orders/order_details.dart';
+import '../../../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../../consts_widgets/gradiants.dart';
 
 class ApproveDisapproveWidget extends StatelessWidget {
 
   final OrderDetailsController controller = Get.find();
+
 
   ApproveDisapproveWidget({Key? key}) : super(key: key);
 
@@ -22,6 +24,7 @@ class ApproveDisapproveWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: () async {
                     await controller.setTeamOrderStatusRequest('2');
+
                     // Future.delayed(const Duration(milliseconds: 4610),(){
                     //   Get.back();
                     // });
@@ -48,6 +51,8 @@ class ApproveDisapproveWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: (){
                     controller.setTeamOrderStatusRequest('3');
+                    // prevController.getAllOrders();
+                    // prevController.getTeamOrders();
                   },
                   child: Container(
                     decoration: BoxDecoration(

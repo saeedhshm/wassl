@@ -53,12 +53,11 @@ class VacationItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('${e.holidayStart}'),
-                  Container(
-                      child: Image.asset(
-                        'assets/images/back_arrow.png',
-                        width: 35,
-                        color: AppColors.darkGreyTextColor,
-                      )),
+                  Image.asset(
+                    'assets/images/back_arrow.png',
+                    width: 35,
+                    color: AppColors.darkGreyTextColor,
+                  ),
                   Text('${e.holidayEnd}'),
                 ],
               ),

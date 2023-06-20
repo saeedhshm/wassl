@@ -21,8 +21,6 @@ class ConfirmChainFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    println('======>>>> order: ${controller.order.orderID}, ${controller.order.orderName},confirmation: ${controller.order.confirmation?.length}');
-
     return Scaffold(
 
       body: Container(
