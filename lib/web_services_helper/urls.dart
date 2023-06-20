@@ -41,6 +41,8 @@ class AppUrls {
 
   //{{domain}}/get_holiday_types
   static const String getHolidayTypes = '$_apiVrsion/get_holiday_types';
+  //{{domain}}/vacations
+  static const String getVacations = '$_apiVrsion/vacations';
 
   ///holiday/add
   static const String addHolidayRequest = '$_holidayApi/add';

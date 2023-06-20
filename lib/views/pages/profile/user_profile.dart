@@ -12,6 +12,7 @@ import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../covenant/page.dart';
 import '../documents/page.dart';
 import '../finance_info/finance.dart';
+import '../holidays/holiday_details.dart';
 import '../settings/settings_page.dart';
 
 class UserProfilePage extends StatelessWidget {
@@ -46,9 +47,14 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: 10,),
 
                 // vacations information
-                ListProfileItemWidget(
-                  title: "رصيد الاجازات ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ايام متاحة الاستخدام",
-                  icon: "assets/images/profile/vacation.png",
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>HolidaysDetails());
+                  },
+                  child: ListProfileItemWidget(
+                    title: "رصيد الاجازات ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ايام متاحة الاستخدام",
+                    icon: "assets/images/profile/vacation.png",
+                  ),
                 ),
 
                 const SizedBox(height: 20,),
