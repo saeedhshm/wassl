@@ -1,26 +1,19 @@
-  {
-        "id": 63,
-        "employee_id": 14,
-        "responsible_employee_id": "7",
-        "attendance": {
-            "message": "no attendance assign",
-            "attendance_status": 1,
-            "attendance": null
-        },
-        "employee": {
-            "id": 14,
-            "email": "hanaa.hoossien@gmail.com",
-            "code": "12005",
-            "full_name": "هناء حسين علي محمد",
-            "full_name_en": "Hana Hussein Ali Mohammed",
-            "job_id": 14,
-            "job": {
-                "id": 14,
-                "company_id": 1,
-                "name_ar": "Ui Developer",
-                "name_en": "Ui Developer",
-                "created_at": "2023-01-06T04:31:48.000000Z",
-                "updated_at": "2023-01-06T04:31:48.000000Z"
-            }
-        }
-    },
+String replaceFarsiNumber(String input) {
+  const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const farsi = ['۰', '۱', '۲', '۳', '٤', '٥', '٦', '۷', '۸', '۹'];
+
+  for (int i = 0; i < english.length; i++) {
+    input = input.replaceAll(english[i], farsi[i]);
+  }
+
+  return input;
+}
+
+
+ borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(prev ? 100.0 : 0.0),
+                      bottomLeft: Radius.circular(prev ? 100.0 : 0.0),
+
+                      topRight: Radius.circular(next ? 100.0 : 0.0),
+                      bottomRight: Radius.circular(next ? 100.0 : 0.0),
+                    ),

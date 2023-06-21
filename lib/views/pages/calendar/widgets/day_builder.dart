@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 import '../../../../getx_controllers/calendar/calendar_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
@@ -39,13 +41,15 @@ dayBuilder(
 
 
   weekDays.add(dd);
-  println('=-=-=->>>>>> dateTime.weekday $weekDays');
+
+  var day = dateTime.day.toString().replaceToArabicNumbers;
+  println('=-=-=->>>>>> dateTime.weekday $day');
   /// week end days
   for(var i in weekDays){
     if(dateTime.weekday == i){
 
       return Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
               left: 10.0,
               right:  10.0,
               top: 0,
@@ -84,9 +88,22 @@ dayBuilder(
     .day ??
     '')
     ?.month !=
-    dateTime.month){
-  return null;
-    }
+    dateTime.month) {
+    return Center(
+      child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            // color:Colors.amber,
+              border: Border.all(color: Colors.white, width: 1),
+              borderRadius: BorderRadius.circular(100)),
+          child: Center(
+              child: Text(
+                day.replaceToArabicNumbers,
+                style: const TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),
+              ))),
+    );
+  }
 
   /// return selected day in current month
   if (compareTowDays(dateTime, currentDay)) {
@@ -113,7 +130,7 @@ dayBuilder(
 
             child: Center(
                 child: Text(
-              dateTime.day.toString(),
+              day,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black87),
             ))),
@@ -143,7 +160,7 @@ dayBuilder(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      dateTime.day.toString(),
+                      day,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black87),
                     ),
@@ -186,14 +203,15 @@ dayBuilder(
 
         child: Center(
             child: Text(
-              dateTime.day.toString(),
+              day,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.white),
             )));
   }
 
   // future days
-  if (dateTime.month > DateTime.now().month || (dateTime.month == DateTime.now().month && dateTime.day > DateTime.now().day) ) {
+  if (dateTime.month > DateTime.now().month || (dateTime.month == DateTime.now().month && dateTime.day > DateTime.now().day) )
+  {
     return Center(
       child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -204,7 +222,7 @@ dayBuilder(
               borderRadius: BorderRadius.circular(100)),
           child: Center(
               child: Text(
-                dateTime.day.toString(),
+                day,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ))),
     );
@@ -237,7 +255,7 @@ dayBuilder(
 
         child: Center(
             child: Text(
-              dateTime.day.toString(),
+              day,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.white),
             )));
@@ -273,7 +291,7 @@ dayBuilder(
 
         child: Center(
             child: Text(
-              dateTime.day.toString(),
+              day,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.white),
             )));
@@ -303,7 +321,7 @@ dayBuilder(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      dateTime.day.toString(),
+                      day,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black87),
                     ),
@@ -329,14 +347,11 @@ dayBuilder(
               borderRadius: BorderRadius.circular(100)),
           child: Center(
               child: Text(
-            dateTime.day.toString(),
+            day,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ))),
     );
   }
-
-
-
 
 }
 
@@ -424,3 +439,5 @@ bool checkEarlyLeave(DateTime dateTime, CalendarController controller) {
           ?.month ==
           dateTime.month);
 }
+
+

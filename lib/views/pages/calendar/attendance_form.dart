@@ -21,29 +21,136 @@ class AttendancePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.mainBackgroundColor,
-      body: Obx(()=>controller.loading.value ? const Center(
-        child: SendingLoadingWidget(),
-      ) :controller.noInternetAvailable.value != '' ? Center(
-        child: InkWell(
-          onTap: (){
-            controller.retrieveAttendanceData();
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(controller.noInternetAvailable.value),
-              Text('tap_to_refresh'.tr),
-              const Icon(Icons.refresh,size: 40,color: Colors.blue,),
-            ],
-          ),
-        ),
-      ) : controller.noDataAttendanceAvailable.value == '' ? Column(
+      body: Obx(()=>controller.noDataAttendanceAvailable.value == '' ? Column(
         children: [
           MainAppbarWidget("attendance_records",),
-          Expanded(child:Column(
+          Expanded(child:controller.loading.value ? const Center(
+            child: SendingLoadingWidget(),
+          ) :controller.noInternetAvailable.value != '' ? Center(
+            child: InkWell(
+              onTap: (){
+                controller.retrieveAttendanceData();
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(controller.noInternetAvailable.value),
+                  Text('tap_to_refresh'.tr),
+                  const Icon(Icons.refresh,size: 40,color: Colors.blue,),
+                ],
+              ),
+            ),
+          ) : Column(
             children: [
-              CalendarWidget(),
-              const SizedBox(height: 16,),
+              Column(
+                children: [
+                  CalendarWidget(),
+                  const SizedBox(height: 16,),
+                  Row(
+                    children: [
+                      Expanded(child: Container(
+                        // height: Get.width / 3,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Column(
+                            children: [
+                              const Text('1',style: TextStyle(
+                                  color: AppColors.orangeColorInCalend,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text('absent'.tr,style: const TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontSize: 15
+                              ),)
+                            ],
+                          ),
+                        ),
+
+                      )),
+                      const SizedBox(width: 8,),
+                      Expanded(child: Container(
+                        // height: Get.width / 3,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Column(
+                            children: [
+                              Text('1',style: TextStyle(
+                                  color: AppColors.purpleLateColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text('delay'.tr,style: TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontSize: 15
+                              ),)
+                            ],
+                          ),
+                        ),
+
+                      )),
+                      const SizedBox(width: 8,),
+                      Expanded(child: Container(
+                        // height: Get.width / 3,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Column(
+                            children: [
+                              Text('1',style: TextStyle(
+                                  color: AppColors.yellowEarlyExitColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text('early_leave'.tr,style: TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontSize: 15
+                              ),)
+                            ],
+                          ),
+                        ),
+
+                      )),
+                      const SizedBox(width: 8,),
+                      Expanded(child: Container(
+                        // height: Get.width / 3,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(16)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25.0),
+                          child: Column(
+                            children: [
+                              Text('1',style: TextStyle(
+                                  color: AppColors.redMissedDayColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                              ),),
+                              Text('missed_leave'.tr,style: TextStyle(
+                                  color: AppColors.lightGreyTextColor,
+                                  fontSize: 15
+                              ),)
+                            ],
+                          ),
+                        ),
+
+                      )),
+                    ],
+                  ),
+                ],
+              ),
               MonthlyAttendanceInfoWidget()
             ],
           )),
