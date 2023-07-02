@@ -90,6 +90,7 @@ flutter:
     - assets/images/order_details/
     - assets/images/prosedures/
     - assets/images/holidays/
+    - assets/images/ad_details/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Wasl',
       translations: LocalString(),
       locale: const Locale("ar",""),
       localizationsDelegates: const [

@@ -357,9 +357,9 @@ Map<String,String>  arabicStrings = {
   'Thu':'خميس',
   'Fri':'جمعة',
 
-  '':'',
-  '':'',
-  '':'',
+  'details':'التفاصيل',
+  'place':'المكان',
+  'about_event':'عن الحدث',
   '':'',
   '':'',
   '':'',

@@ -10,6 +10,7 @@ import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../models/auth/holidays.dart';
+import '../../models/events/events.dart';
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
 import 'package:timezone/standalone.dart' as tz;
@@ -26,7 +27,7 @@ class HomeController extends GetxController{
   late AttendanceChecker attendanceChecker;
  final CalendarController calendarController = Get.find();
   var dt = DateTime.now().obs;
-
+  var events = IncomingEvents().obs;
   // page :- apis retriever
  Future<String> registerAttendance({String? bearer}) async {
 
