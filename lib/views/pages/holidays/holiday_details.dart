@@ -54,95 +54,116 @@ class HolidaysDetails extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(child: Obx(()=>SingleChildScrollView(
-            
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // vacations info
-                Container(
-                  // height: Get.width,
-                  decoration: BoxDecoration(
-                    gradient: greenGradiantAppBar,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+          Expanded(child: Stack(
+            children: [
+          Container(
+          // height: Get.width,
+            width: Get.width ,
+            height: Get.width / 2.2,
+          decoration: BoxDecoration(
+          gradient: greenGradiantAppBar,
+          ),
+          ),
+              Obx(()=>SingleChildScrollView(
 
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            HolidayInfoItemWidget(
-                              icon: 'assets/images/holidays/1.png',
-                              title: 'available_vacations'.tr,
-                              count: '${controller.vacations.value.data?.availableVacationsCount}',
-                            ),
-                            HolidayInfoItemWidget(
-                              icon: 'assets/images/holidays/2.png',
-                              title: 'taken_vacations'.tr,
-                              count: '${controller.vacations.value.data?.usedVacationsCount}',
-                            ),
-                            HolidayInfoItemWidget(
-                              icon: 'assets/images/holidays/3.png',
-                              title: 'base_vacations'.tr,
-                              count: '${controller.vacations.value.data?.openingVacationsCount}',
-                            ),
-                            SizedBox(width: 16,)
-                          ],
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // vacations info
+                    Container(
+                      // height: Get.width,
+                      decoration: BoxDecoration(
+                        gradient: greenGradiantAppBar,
                       ),
-                      SizedBox(height: 20,)
-                    ],
-                  ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/1.png',
+                                  title: 'available_vacations'.tr,
+                                  count: '${controller.vacations.value.data?.availableVacationsCount}',
+                                ),
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/2.png',
+                                  title: 'taken_vacations'.tr,
+                                  count: '${controller.vacations.value.data?.usedVacationsCount}',
+                                ),
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/3.png',
+                                  title: 'base_vacations'.tr,
+                                  count: '${controller.vacations.value.data?.openingVacationsCount}',
+                                ),
+                                SizedBox(width: 16,)
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 20,)
+                        ],
+                      ),
+                    ),
+                    //incoming_vacations header
+                  Container(
+                    width: Get.width ,
+                    color: AppColors.mainBackgroundColor,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          color: AppColors.mainBackgroundColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text('incoming_vacations'.tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor
+                            ),),
+                          ),
+                        ),
+                        const SeparatorWidget(),
+                        //incoming vacations widget
+                        (controller.vacations.value.data?.nextVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.nextVacations ?? [],) :
+                        Container(
+                          width: double.maxFinite,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(child: Text('no_incoming_vacations'.tr)),
+                          ),
+                        ),
+                        const SeparatorWidget(),
+                        //previous_vacations header
+                        Container(
+                          color: AppColors.mainBackgroundColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text('previous_vacations'.tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor
+                            ),),
+                          ),
+                        ),
+                        const SeparatorWidget(),
+                        //previous_vacations widget
+                        (controller.vacations.value.data?.previousVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.previousVacations ?? [],)
+                            :Container(
+                          width: double.maxFinite,
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(child: Text('no_previous_vacations'.tr)),
+                          ),
+                        ),
+                        const SeparatorWidget(),
+                      ],
+                    ),
+                  )
+                  ],
                 ),
-                //incoming_vacations header
-                Container(
-                  color: AppColors.mainBackgroundColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('incoming_vacations'.tr,style: const TextStyle(
-                        color: AppColors.darkGreyTextColor
-                    ),),
-                  ),
-                ),
-                const SeparatorWidget(),
-                //incoming vacations widget
-                (controller.vacations.value.data?.nextVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.nextVacations ?? [],) :
-                Container(
-                  width: double.maxFinite,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Center(child: Text('no_incoming_vacations'.tr)),
-                  ),
-                ),
-                const SeparatorWidget(),
-                //previous_vacations header
-                Container(
-                  color: AppColors.mainBackgroundColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text('previous_vacations'.tr,style: const TextStyle(
-                        color: AppColors.darkGreyTextColor
-                    ),),
-                  ),
-                ),
-                const SeparatorWidget(),
-                //previous_vacations widget
-                (controller.vacations.value.data?.previousVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.previousVacations ?? [],)
-                    :Container(
-                  width: double.maxFinite,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Center(child: Text('no_previous_vacations'.tr)),
-                  ),
-                ),
-                const SeparatorWidget(),
-              ],
-            ),
-          )))
+              ))
+            ],
+          ))
 
         ],
       ),

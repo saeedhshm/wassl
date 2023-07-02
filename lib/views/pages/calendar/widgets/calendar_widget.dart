@@ -38,7 +38,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           // startOnMonday: false,
           // weekDays: const ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
           // eventsList: _eventList,
-          weekDays:  ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+          weekDays:  const ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
           // weekDays:  ['Sat'.tr, 'Sun'.tr, 'Mon'.tr, 'Tue'.tr, 'Wed'.tr, 'Thu'.tr, 'Fri'.tr],
           isExpandable: false,
 
@@ -330,8 +330,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
             /// absent days
             else if (checkDayAs('absent', dateTime, controller)) {
-              var prev = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
-              var next = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
+              var prev = checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
+              var next = checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
 
               return Container(
 

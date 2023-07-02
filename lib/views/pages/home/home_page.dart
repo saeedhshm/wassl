@@ -8,6 +8,7 @@ import 'package:wassl/views/pages/home/widgets/attendance_widget.dart';
 import 'package:wassl/views/pages/home/widgets/correcting_widget.dart';
 import 'package:wassl/views/pages/home/widgets/shift_info_widget.dart';
 
+import '../holidays/holiday_details.dart';
 import 'widgets/holidays_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -44,7 +45,11 @@ class HomePage extends StatelessWidget {
                      Stack(
                        children: [
                          CorrectingWidget(),
-                         HolidaysWidget(),
+                         InkWell(
+                           onTap: (){
+                             Get.to(()=>HolidaysDetails());
+                           },
+                             child: HolidaysWidget()),
                        ],
                      )
                    ],
