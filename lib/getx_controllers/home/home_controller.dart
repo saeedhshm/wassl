@@ -6,6 +6,7 @@ import 'package:wassl/getx_controllers/app_controller.dart';
 
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
+import 'package:wassl/models/ads/ads.dart';
 import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
@@ -25,9 +26,10 @@ class HomeController extends GetxController{
 
   var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
- final CalendarController calendarController = Get.find();
+  final CalendarController calendarController = Get.find();
   var dt = DateTime.now().obs;
   var events = IncomingEvents().obs;
+  var ads = AppAds().obs;
   // page :- apis retriever
  Future<String> registerAttendance({String? bearer}) async {
 

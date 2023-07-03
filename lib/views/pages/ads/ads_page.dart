@@ -1,0 +1,105 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/app_colors.dart';
+
+import '../../../models/ads/Ad.dart';
+
+class AdDetailsPage extends StatelessWidget {
+
+  final AdItem adItem;
+  const AdDetailsPage(this.adItem,{super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              Image.asset(
+                '${adItem.image}',
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height / 3,
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: AppBar(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+
+                ),
+              ),
+            ],
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${adItem.title}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.mainGreenColor
+                  ),
+                ),
+                SizedBox(height: 16),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Image.asset(
+                          'assets/images/ad_details/cal.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Text(
+                      '${adItem.dateTime}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.darkGreyTextColor
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '${adItem.details}',
+                  style: TextStyle(
+                    fontSize: 14,
+                      color: AppColors.darkGreyTextColor
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
