@@ -9,13 +9,15 @@ import 'package:wassl/views/pages/intro/test_home_page.dart';
 import 'helpers/constants/print_ln.dart';
 import 'helpers/translation/local_strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-
-void main() {
+void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
+  await initializeDateFormatting();
   AppController appController = Get.put(AppController());
   appController.deployingForApple = true;
   runApp( MyApp());
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Wasl',
       translations: LocalString(),
-      locale: const Locale("ar",""),
+      locale: const Locale("ar","SA"),
       localizationsDelegates: const [
 
         // GlobalMaterialLocalizations.delegate,

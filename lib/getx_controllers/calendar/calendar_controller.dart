@@ -17,6 +17,7 @@ class CalendarController extends GetxController{
   var attendanceOfMonth = MonthAttendance().obs;
   var selectedDay = MonthDay().obs;
   late DateTime dateTime;
+  var foCusedDate = DateTime.now().obs;
 
   var noInternetAvailable = ''.obs;
   var noDataAttendanceAvailable = ''.obs;
@@ -46,7 +47,7 @@ class CalendarController extends GetxController{
       attendanceOfMonth.value = MonthAttendance.fromJson(json);
 
         setSelectedDate(DateTime.now());
-
+        update();
 
 
     }

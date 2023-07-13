@@ -5,6 +5,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/calendar/widgets/attendance_info.dart';
 import 'package:wassl/views/pages/calendar/widgets/calendar_widget.dart';
+import 'package:wassl/views/pages/calendar/widgets/table_calendar_widget.dart';
 import 'package:wassl/views/pages/home/widgets/attendance_info_widget.dart';
 
 import '../../../helpers/constants/print_ln.dart';
@@ -40,11 +41,12 @@ class AttendancePage extends StatelessWidget {
                 ],
               ),
             ),
-          ) : Column(
+          ) : SingleChildScrollView(child: Column(
             children: [
               Column(
                 children: [
-                  CalendarWidget(),
+                  // CalendarWidget(),
+                  TableCalendarWidget(),
                   const SizedBox(height: 16,),
                   Row(
                     children: [
@@ -151,9 +153,10 @@ class AttendancePage extends StatelessWidget {
                   ),
                 ],
               ),
-              MonthlyAttendanceInfoWidget()
+              MonthlyAttendanceInfoWidget(),
+              SizedBox(height: 100,)
             ],
-          )),
+          ),)),
         ],
       ) : Center(
         child: Text(controller.noDataAttendanceAvailable.value.tr),
