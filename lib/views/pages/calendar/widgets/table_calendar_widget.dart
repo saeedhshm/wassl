@@ -38,7 +38,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(DateTime.now().year, 12, 31),
         focusedDay:controller.foCusedDate.value,
-        startingDayOfWeek: StartingDayOfWeek.saturday,
+        startingDayOfWeek: StartingDayOfWeek.sunday,
         holidayPredicate: (day) {
           return day.weekday == DateTime.friday ||
               day.weekday == DateTime.saturday;

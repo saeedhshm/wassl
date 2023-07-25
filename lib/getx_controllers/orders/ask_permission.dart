@@ -125,15 +125,16 @@ class AskPermissionController extends GetxController{
   getPermissionsTypes() async {
 
     loadingTypes.value = true;
+
     var response = await AppApiHandler.getData(url: AppUrls.getPermissionsTypes,header: appController.appHeader);
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
+
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingTypes.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 
   @override
