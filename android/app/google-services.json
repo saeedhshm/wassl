@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "440717167050",
+    "project_id": "wasl-fbe44",
+    "storage_bucket": "wasl-fbe44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440717167050:android:5e073ca816170e4133e733",
+        "android_client_info": {
+          "package_name": "com.trafficksa.saeed.waasl.wassl"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440717167050-m648o5fk8g2rjnp9t9re3j0r4vbg1lk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trafficksa.saeed.waasl.wassl",
+            "certificate_hash": "ba8ed4af6275736b0866adafab675257a4f68d21"
+          }
+        },
+        {
+          "client_id": "440717167050-hq8cs94cv4dqqve496ck3k9i26djlqql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfqwU9vJJh1BG5PpRsgGEMgnvbpMtYSOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440717167050-hq8cs94cv4dqqve496ck3k9i26djlqql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

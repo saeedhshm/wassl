@@ -1,8 +1,14 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:month_year_picker/month_year_picker.dart';
+import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
+import 'package:wassl/test_page.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/intro/test_home_page.dart';
@@ -12,16 +18,29 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+
+
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseApi().initNotifications();
+
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
+
+
+
+
+
   await initializeDateFormatting();
   AppController appController = Get.put(AppController());
   appController.deployingForApple = true;
   runApp( MyApp());
 }
+
+
+
 
 class MyApp extends StatelessWidget {
    MyApp({Key? key}) : super(key: key){
@@ -59,50 +78,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'AraHamah',
       ),
       home:   SplashScreen(),
-      // home:TestHomePage()
+      // home:TestCodesPage()
     );
   }
 
-   // Future<Map<String, dynamic>> _readAndroidBuildData() async {
-   //
-   //   var build = await deviceInfoPlugin.androidInfo;
-   //
-   //   return <String, dynamic>{
-   //     'version.securityPatch': build.version.securityPatch,
-   //     'version.sdkInt': build.version.sdkInt,
-   //     'version.release': build.version.release,
-   //     'version.previewSdkInt': build.version.previewSdkInt,
-   //     'version.incremental': build.version.incremental,
-   //     'version.codename': build.version.codename,
-   //     'version.baseOS': build.version.baseOS,
-   //     'board': build.board,
-   //     'bootloader': build.bootloader,
-   //     'brand': build.brand,
-   //     'device': build.device,
-   //     'display': build.display,
-   //     'fingerprint': build.fingerprint,
-   //     'hardware': build.hardware,
-   //     'host': build.host,
-   //     'id': build.id,
-   //     'manufacturer': build.manufacturer,
-   //     'model': build.model,
-   //     'product': build.product,
-   //     'supported32BitAbis': build.supported32BitAbis,
-   //     'supported64BitAbis': build.supported64BitAbis,
-   //     'supportedAbis': build.supportedAbis,
-   //     'tags': build.tags,
-   //     'type': build.type,
-   //     'isPhysicalDevice': build.isPhysicalDevice,
-   //     'systemFeatures': build.systemFeatures,
-   //     'displaySizeInches':
-   //     ((build.displayMetrics.sizeInches * 10).roundToDouble() / 10),
-   //     'displayWidthPixels': build.displayMetrics.widthPx,
-   //     'displayWidthInches': build.displayMetrics.widthInches,
-   //     'displayHeightPixels': build.displayMetrics.heightPx,
-   //     'displayHeightInches': build.displayMetrics.heightInches,
-   //     'displayXDpi': build.displayMetrics.xDpi,
-   //     'displayYDpi': build.displayMetrics.yDpi,
-   //     'serialNumber': build.serialNumber,
-   //   };
-   // }
+
 }

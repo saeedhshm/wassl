@@ -265,6 +265,7 @@ Map<String,String>  arabicStrings = {
   'approved':'موافقة',
   'disapproved':'رفض',
   'await_status':'في الإنتظار',
+  'pending':'معلق',
 
   'my_orders':'طلباتي',
   'team_orders':'طلبات الفريق',
@@ -360,8 +361,8 @@ Map<String,String>  arabicStrings = {
   'details':'التفاصيل',
   'place':'المكان',
   'about_event':'عن الحدث',
-  '':'',
-  '':'',
+
+  'all_orders':'كل الطلبات',
   '':'',
   '':'',
   '':'',

@@ -36,18 +36,18 @@ dependencies:
   dropdown_button2:
     path: ../wassl/plugins/dropdown_button2-1.9.1
   flutter_svg:
-    path: ../wassl/plugins/flutter_svg-1.1.6
   get:
-    path: ../wassl/plugins/get-4.6.5
-  flutter_neat_and_clean_calendar:
-    path: ../wassl/plugins/flutter_neat_and_clean_calendar-0.3.9+23
+#  flutter_neat_and_clean_calendar:
+#    path: ../wassl/plugins/flutter_neat_and_clean_calendar-0.3.9+23
   http: ^0.13.4
+  flutter_app_badger:
   shared_preferences:
-    path: ../wassl/plugins/shared_preferences-2.0.15
   geolocator: ^9.0.2
   app_settings: ^4.2.0
   internet_connection_checker: ^1.0.0+1
   flutter_app_version_checker: ^0.3.2
+  flutter_local_notifications:
+#  rxdart:
   url_launcher: ^6.1.8
   file_picker: ^5.2.5
   month_year_picker:
@@ -55,8 +55,12 @@ dependencies:
   device_info_plus: ^8.1.0
   local_auth: ^2.1.6
   table_calendar: ^3.0.8
+  firebase_messaging: ^13.0.1
+  firebase_core: ^1.22.0
+#  overlay_support: ^2.1.0
 
-
+#dependency_overrides:
+#  firebase_core_platform_interface: 4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +97,7 @@ flutter:
     - assets/images/prosedures/
     - assets/images/holidays/
     - assets/images/ad_details/
+    - assets/images/filters/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

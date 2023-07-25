@@ -14,6 +14,8 @@ import 'package:wassl/views/pages/orders/previous_orders/widgets/tabs.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../reusable_widgets/app_bars/app_bar_with_icon.dart';
+import '../../../reusable_widgets/custom_radio_button/custom_radio_button.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
 
@@ -34,8 +36,6 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
   final PreviousRequestsController controller = Get.put(PreviousRequestsController());
 
 
-
-
    @override
   void initState() {
     // TODO: implement initState
@@ -46,13 +46,137 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   elevation: 0,
+      // ),
       body: Obx(()=>Column(
         children: [
-          MainAppbarWidget(
+
+          AppbarWithTrailingIconsWidget(
             'previous_requests'.tr,
-            onBack:widget.fromHomePage ? (){
-              Get.back();
-            } : null,
+            childern: [
+              InkWell(
+                onTap: (){
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0),
+                      ),
+                    ),
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 500,
+                        // color: Colors.black,
+                        child: Column(
+                          children: [
+                            Container(
+                              // color: Colors.white,
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    children: [
+                                      SizedBox(height: 25,),
+                                      Container(
+                                        height: 25,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20.0),
+                                            topRight: Radius.circular(20.0),
+                                          ),
+                                        ),
+
+                                      ),
+                                    ],
+                                  ),
+                                  Positioned(
+                                      top: 0,
+                                      left: 26,
+                                      child: InkWell(
+                                        onTap:(){
+                                          Get.back();
+                                        },
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Container(
+                                                child: Image.asset(
+                                                  'assets/images/filters/2.png',
+                                                  width: 10,
+                                                )),
+                                          ),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(50)
+                                          ),
+
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                color: Colors.white,
+                                child: ListView.builder
+                                  (
+                                  itemCount: controller.menuItems.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Obx(() => ListTile(
+                                      contentPadding: EdgeInsets.symmetric(horizontal: 36),
+                                      onTap: (){
+
+                                        controller.groupValue = controller.menuItems[index];
+                                      },
+                                      trailing: CustomRadioButton<ListItem>(
+
+                                        value: controller.menuItems[index],
+                                        groupValue: controller.groupValue,
+                                        onChanged: (ListItem? value) {
+                                          controller.groupValue = value!;
+
+                                        },
+                                      ),
+                                      title: Text('${controller.menuItems[index].name}'.tr,style: const TextStyle(
+                                        color: AppColors.darkGreyTextColor,
+                                        fontWeight: FontWeight.bold
+                                      ),),
+                                    ));
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                    child: Image.asset(
+                      'assets/images/filters/1.png',
+                      width: 22,
+                    )),
+              ),
+              SizedBox(width: 16,),
+              widget.fromHomePage ? InkWell(
+                onTap: (){
+                  Get.back();
+                },
+                child: Container(
+                    child: Image.asset(
+                      'assets/images/back_arrow.png',
+                      width: 40,
+                    )),
+              ) : SizedBox(),
+            ],
+
           ),
           controller.previousTeamRequests.value.orders.isNotEmpty ? TabsWidget() : const SizedBox(),
          controller.myOrdersSelected.value ?
@@ -68,3 +192,35 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
 
 
 
+class ListItemWidget extends StatelessWidget {
+
+  final ListItem item;
+  ListItem? groupValue;
+
+  ListItemWidget(this.item,{super.key,this.groupValue});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return ListTile(
+
+      trailing: Radio<ListItem>(
+        value: item,
+        groupValue: groupValue, // TODO: Add logic for radio button selection
+        onChanged: (ListItem? value) {
+          // TODO: Handle radio button selection
+          groupValue = value;
+        },
+      ),
+      title: Text(item.name.tr),
+    );
+  }
+}
+
+class ListItem{
+  String name;
+  int status;
+  bool isSelected;
+
+  ListItem(this.name, this.status,this.isSelected);
+}
