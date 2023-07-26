@@ -12,14 +12,12 @@ class FirebaseApi{
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
 
-    println('Token: $fCMToken');
-    
+
     initPushNotifications();
     initLocalNotifications();
   }
 
   Future<void> handleBackGroundmessage(RemoteMessage message) async{
-    println('Title: ${message.notification?.title}');
 
   }
 

@@ -82,8 +82,6 @@ class CustodyRequestPage extends StatelessWidget {
                                 selectedValue: controller.selectedType?.name,
                                 onSelectedIndex: (int i) {
                                   controller.selectedType = controller.orderTypes.value.data![i];
-                                  println('${controller.selectedType?.id}');
-                                  println('${controller.selectedType?.name}');
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

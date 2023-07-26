@@ -233,7 +233,6 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
     bool canCheckBiometrics = false;
     try {
       canCheckBiometrics = await auth.canCheckBiometrics;
-      println('can use Biometrics $canCheckBiometrics');
     } on PlatformException catch (e) {
       canCheckBiometrics = false;
       print(e);
@@ -260,7 +259,6 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       return availableBiometrics;
     }
 
-    println(availableBiometrics);
 
      return availableBiometrics;
   }
@@ -317,17 +315,14 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
         _isAuthenticating = false;
         _authorized = 'Authenticating';
       });
-      println('can auth $authenticated');
       if(authenticated){
         await attend();
       }else{
-        println('=-==-=-= cant authenticated');
         SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
       }
       // await attend();
     } on PlatformException catch (e) {
       SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
-      println('=-==-=-= $e');
       setState(() {
         _isAuthenticating = false;
         _authorized = 'Error - ${e.message}';

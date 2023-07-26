@@ -32,10 +32,6 @@ class LoanOrderController extends GetxController{
  Future addNewLoad() async {
 
 
-   // [8:24 am, 15/02/2023] محمد مبارك السودان: 1 = سكني
-   // [8:24 am, 15/02/2023] محمد مبارك السودان: 2 = شخصي
-   // [8:24 am, 15/02/2023] محمد مبارك السودان: 3 = عاجل
-   // [8:25 am, 15/02/2023] محمد مبارك السودان: 4 = مصاريف سفر
 
    if(selectedType == null){
      throw CustomException(errorMessage:'loanType_exception');
@@ -67,8 +63,6 @@ class LoanOrderController extends GetxController{
     };
     // loading.value = true;
 
-    println(body);
-    println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addLoan, body: body,header: appController.appHeader,fileName: filePath);
@@ -125,8 +119,6 @@ class LoanOrderController extends GetxController{
     };
     // loading.value = true;
 
-    println(body);
-    println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLoan}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
@@ -148,10 +140,8 @@ class LoanOrderController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelOvertimeApi}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelLoan}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');
@@ -172,8 +162,7 @@ class LoanOrderController extends GetxController{
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingLoansTypes.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 
   @override

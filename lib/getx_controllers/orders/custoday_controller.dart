@@ -36,16 +36,11 @@ class CustodyRequestController extends GetxController{
       'type': '${selectedType?.id}',
       'reason': '$reason'
     };
-    println(body.runtimeType);
 
-
-    println(body);
-    // println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addCustody, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -73,16 +68,11 @@ class CustodyRequestController extends GetxController{
       'type': '${selectedType?.id}',
       'reason': '$reason'
     };
-    println(body.runtimeType);
 
-
-    println(body);
-    // println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateCustody}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -99,10 +89,8 @@ class CustodyRequestController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelHolidayRequest}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelCustody}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');
@@ -123,8 +111,7 @@ class CustodyRequestController extends GetxController{
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingTypes.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 
   @override

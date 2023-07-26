@@ -32,13 +32,10 @@ class OrderDetailsController extends GetxController{
       'bearer ${appController.loginModel.value.token?.accessToken}',
       "x-localization": 'lang_code'.tr,
     };
-    println(body);
-    println(AppUrls.setTeamOrderSatus);
+
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
     appController.loading.value = false;
-    // order.status?.id = 1;
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
       SnackBars.showConfirmedSnackBar('success'.tr, message);

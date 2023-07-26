@@ -100,7 +100,7 @@ class Attendance {
   Attendance({this.message, this.attendance});
 
   Attendance.fromJson(Map<String, dynamic> json) {
-    println('=-==->>> first MemberAttendance ${json['attendance_status']}');
+
     message = json['message'];
     _attendanceStatus = json['attendance_status'];
     attendance = json['attendance'] != null
@@ -150,7 +150,7 @@ class AttendanceInfo {
     attendanceOverTime = json['attendance_over_time'];
     attendanceLateTime = json['attendance_late_time'];
     attendanceStatus = json['attendance_status'];
-    println('=-==->>> second AttendanceInfo ${json['attendance_status']}');
+
     leaveTime = json['leave_time'];
     leaveOverTime = json['leave_over_time'];
     leaveEarlyTime = json['leave_early_time'];
@@ -178,7 +178,6 @@ class Employee {
     code = json['code'];
     _fullName = json['full_name'];
     _fullNameEn = json['full_name_en'];
-    println('=-==->>> first full_name ${json['full_name']}');
 
   }
 

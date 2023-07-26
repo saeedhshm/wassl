@@ -24,7 +24,6 @@ class HolidayDetailsController extends GetxController{
       vacations.value = Vacations.fromJson(json);
     }
     loading.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 }

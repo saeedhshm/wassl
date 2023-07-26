@@ -323,7 +323,6 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
   _updateRequest() async{
     try{
-      println('update holiday request ${order?.orderID}');
       await controller.updateRequest('${order?.orderID}');
       SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
       Future.delayed(const Duration(milliseconds: 4600),(){

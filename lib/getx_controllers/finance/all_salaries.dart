@@ -27,7 +27,6 @@ class AllSalariesController extends GetxController{
     loading.value = true;
 
     final url = '${AppUrls.salaryMonthsApi}/${appController.loginModel.value.user?.id}';
-    println(url);
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
 
@@ -38,7 +37,6 @@ class AllSalariesController extends GetxController{
       var json = jsonDecode(response.body);
       allSalaries = Salaries.fromJson(json);
       loading.value = false;
-      println(json);
 
     }
   }

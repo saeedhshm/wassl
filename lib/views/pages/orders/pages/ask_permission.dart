@@ -98,10 +98,7 @@ class AskPermissionPage extends StatelessWidget {
                                           onSelectedIndex: (int i) {
                                             controller.selectedType = controller
                                                 .orderTypes.value.data![i];
-                                            println(
-                                                '${controller.selectedType?.id}');
-                                            println(
-                                                '${controller.selectedType?.name}');
+
                                           },
                                           prefixIcon: const SizedBox(
                                               width: 5,
@@ -151,7 +148,6 @@ class AskPermissionPage extends StatelessWidget {
                                           onSelectedIndex: (int i) {
                                             controller.reasonType = controller
                                                 .reasonTypes[i];
-                                            println('${controller.reasonType}');
                                           },
                                           prefixIcon: const SizedBox(
                                               width: 5,
@@ -290,7 +286,6 @@ class AskPermissionPage extends StatelessWidget {
   _updateRequest() async {
     controller.loading.value = true;
     try {
-      println('update holiday request ${order?.orderID}');
       await controller.updateRequest('${order?.orderID}');
       SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
       Future.delayed(Duration(milliseconds: 4600), () {

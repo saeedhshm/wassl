@@ -151,7 +151,7 @@ class AppController extends GetxController{
    loading.value = true;
    final response = await AppApiHandler.getData(url: AppUrls.logout,header: headers,);
 
-   println(response.body);
+
    loading.value = false;
    if(response.statusCode == 200){
      final prefs = await SharedPreferences.getInstance();
@@ -184,11 +184,11 @@ class AppController extends GetxController{
 
   void checkVersion() async {
     var value = await _checker.checkUpdate();
-    println('return true if update is available ${value.canUpdate}'); //return true if update is available
-    println('return current app version ${value.currentVersion}'); //return current app version
-    println('return the new app version ${value.newVersion}'); //return the new app version
-    println('return the app url ${value.appURL}'); //return the app url
-    println('return error message if found else it will return null ${value.errorMessage}'); //return error message if found else it will return null
+    // println('return true if update is available ${value.canUpdate}'); //return true if update is available
+    // println('return current app version ${value.currentVersion}'); //return current app version
+    // println('return the new app version ${value.newVersion}'); //return the new app version
+    // println('return the app url ${value.appURL}'); //return the app url
+    // println('return error message if found else it will return null ${value.errorMessage}'); //return error message if found else it will return null
 
 
     canUpdate = value.canUpdate;
@@ -364,7 +364,7 @@ class AppController extends GetxController{
     for(int i in weekEnds){
       if(today == i) return true;
     }
-   println(today);
+
     return false;
   }
 

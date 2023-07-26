@@ -33,7 +33,6 @@ class FinanceInfoController extends GetxController {
     if(month != null && year != null){
       url += '?year=$year&month=$month';
     }
-    println(url);
     final response = await AppApiHandler.getData(
       url: url,
       header: headers,
@@ -46,7 +45,6 @@ class FinanceInfoController extends GetxController {
       var json = jsonDecode(response.body);
       finance = Finance.fromJson(json);
       loading.value = false;
-      println(json);
     }
   }
 

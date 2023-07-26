@@ -52,8 +52,6 @@ class HolidayRequestPage extends StatelessWidget {
 
        controller.holidayReason = holidayOrder.reason;
        controller.filePath = holidayOrder.file == '' ? null : holidayOrder.file;
-       println(controller.startDate);
-       println(controller.endDate);
        controller.setDifferenceInDays();
      }
    }
@@ -302,13 +300,10 @@ class HolidayRequestPage extends StatelessWidget {
         Get.back();
       });
     }on StartDateException {
-      println('StartDateException ==== ');
       SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
     }on ChooseTypeException {
-      println('HolidayTypeException ==== ');
       SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
     }on EndDateException{
-      println('EndDateException ==== ');
       SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
     }on EnterReasonException{
       SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
@@ -329,7 +324,6 @@ class HolidayRequestPage extends StatelessWidget {
      // return;
 
      try{
-       println('update holiday request ${order?.orderID}');
        await controller.updateRequest('${order?.orderID}');
        SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
        Future.delayed(const Duration(milliseconds: 4600),(){
@@ -339,13 +333,10 @@ class HolidayRequestPage extends StatelessWidget {
          Get.back();
        });
      }on StartDateException {
-       println('StartDateException ==== ');
        SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
      }on ChooseTypeException {
-       println('HolidayTypeException ==== ');
        SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
      }on EndDateException{
-       println('EndDateException ==== ');
        SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
      }on EnterReasonException{
        SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);

@@ -48,16 +48,11 @@ class LetterRequestController extends GetxController{
       'directed_to_ar': '$directedToAr',
       'reason': '$reason'
     };
-    println(body);
 
-
-    println(body);
-    println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addLetter, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -92,16 +87,12 @@ class LetterRequestController extends GetxController{
       'directed_to_ar': '$directedToAr',
       'reason': '$reason'
     };
-    println(body);
 
 
-    println(body);
-    println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLetter}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -118,10 +109,8 @@ class LetterRequestController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelHolidayRequest}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelLetter}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');
@@ -142,8 +131,7 @@ class LetterRequestController extends GetxController{
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingLetterTypes.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 
 

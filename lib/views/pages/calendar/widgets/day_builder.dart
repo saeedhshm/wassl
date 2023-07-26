@@ -43,7 +43,7 @@ dayBuilder(
   weekDays.add(dd);
 
   var day = dateTime.day.toString().replaceToArabicNumbers;
-  println('=-=-=->>>>>> dateTime.weekday $day');
+
   /// week end days
   for(var i in weekDays){
     if(dateTime.weekday == i){

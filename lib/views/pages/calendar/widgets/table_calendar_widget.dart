@@ -53,9 +53,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         ),
         calendarBuilders: CalendarBuilders(
           todayBuilder: (context, day, newDay) {
-            println('day is ${day.day}');
-            println('new day is ${newDay.day}');
-            println('focusedday is ${controller.foCusedDate.value}');
+
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +100,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           },
 
           weekNumberBuilder: (context,day){
-            println('weekNumberBuilder $day');
+
             return Text('$day');
           },
 

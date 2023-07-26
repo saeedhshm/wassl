@@ -26,7 +26,6 @@ class CovenantsController extends GetxController{
     var response = await AppApiHandler.getData(url: AppUrls.covenantApi,header: headers);
     appController.loading.value = false;
 
-    println(response.body);
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }

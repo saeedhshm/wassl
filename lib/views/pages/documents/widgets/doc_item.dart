@@ -100,7 +100,7 @@ class DocItemWidget extends StatelessWidget {
                         onTap: (){
                           String url = '$appDomain/documents/display/${doc.id}';
                           // String url = '${appDomain}/${doc.file}';
-                          println(url);
+
                           _launchUrl(url);
                         },
                         child: const Icon(Icons.download,color: AppColors.mainGreenColor,)),

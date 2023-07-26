@@ -25,7 +25,6 @@ class FingerPrintController extends GetxController{
   var errorsList = <String>[].obs;
 
   Future sendRequest() async {
-    println(filePath);
     if(correctionDate == null){
       throw StartDateException();
     }
@@ -47,8 +46,7 @@ class FingerPrintController extends GetxController{
       'reason':'$reason'
     };
 
-    println(body);
-    println(appController.appHeader);
+
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addFingerPrintCorrection, body: body,header: appController.appHeader,fileName: filePath);
 
@@ -88,8 +86,7 @@ class FingerPrintController extends GetxController{
     };
 
 
-    println(body);
-    println('${AppUrls.updateFingerPrintCorrection}/$orderId');
+
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateFingerPrintCorrection}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
 
     if(response.statusCode != 200){
@@ -106,7 +103,6 @@ class FingerPrintController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelHolidayRequest}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelFingerPrintCorrection}/$orderId',header: appController.appHeader, );
 
     if(response.statusCode != 200){
@@ -121,7 +117,7 @@ class FingerPrintController extends GetxController{
 
   String get timeOfDay{
     var time = '-----';
-    println(correctionTime.value);
+
     if(correctionTime.value.isNotEmpty){
       var timeList = correctionTime.split(':');
       int hours = int.tryParse(timeList[0]) ?? 0;

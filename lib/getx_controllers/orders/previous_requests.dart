@@ -41,7 +41,7 @@ class PreviousRequestsController extends GetxController{
     if(_groupValue.value.status != 0){
       url = '${url}?status=${_groupValue.value.status}';
     }
-    println(url);
+
     // return;
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: url,header: headers);
@@ -86,7 +86,7 @@ class PreviousRequestsController extends GetxController{
         await getTeamOrders();
       }on NoDataAvailableException catch (e){
 
-        println(e);
+
 
       }finally{
         appController.loading.value = false;

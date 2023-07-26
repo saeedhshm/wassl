@@ -107,10 +107,7 @@ class VisaRequestPage extends StatelessWidget {
                                       onSelectedIndex: (int i) {
                                         controller.selectedType =
                                             controller.visaTypes.value.data?[i];
-                                        println(
-                                            '${controller.selectedType?.id}');
-                                        println(
-                                            '${controller.selectedType?.name}');
+
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -132,10 +129,7 @@ class VisaRequestPage extends StatelessWidget {
                                       onSelectedIndex: (int i) {
                                         controller.selectedTime =
                                             controller.visaTimes.value.data?[i];
-                                        println(
-                                            '${controller.selectedTime?.id}');
-                                        println(
-                                            '${controller.selectedTime?.name}');
+
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -270,10 +264,7 @@ class VisaRequestPage extends StatelessWidget {
                                                           .selectedTicketType =
                                                       controller.ticketTypes
                                                           .value.data?[i];
-                                                  println(
-                                                      '${controller.selectedTicketType?.id}');
-                                                  println(
-                                                      '${controller.selectedTicketType?.name}');
+
                                                 },
                                                 prefixIcon: const SizedBox(
                                                     width: 5,

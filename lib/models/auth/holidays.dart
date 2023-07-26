@@ -41,9 +41,7 @@ class HolidayBalance {
         this.updatedAt});
 
   HolidayBalance.fromJson(Map<String, dynamic> json) {
-    println('=-=-=-===-=- holidays');
-    println(json);
-    println('=-=-=-===-=- holidays');
+
     id = json['id'];
     employeeId = json['employee_id'];
     openingVacationsCount = json['opening_vacations_count'];

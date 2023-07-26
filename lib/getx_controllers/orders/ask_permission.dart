@@ -46,11 +46,7 @@ class AskPermissionController extends GetxController{
       'reason_type': '${reasonType?.id}',
       'reason': '$reason'
     };
-    println(body.runtimeType);
 
-
-    println(body);
-    // println(appController.appHeader);
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addPermission}', body: body,header: appController.appHeader,fileName: filePath);
@@ -90,8 +86,6 @@ class AskPermissionController extends GetxController{
     };
 
 
-    println(body);
-    println(appController.appHeader);
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updatePermission}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
@@ -107,10 +101,8 @@ class AskPermissionController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelPermission}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelPermission}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');

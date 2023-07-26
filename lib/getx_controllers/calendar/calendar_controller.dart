@@ -34,7 +34,6 @@ class CalendarController extends GetxController{
     attendanceOfMonth.value.attendancesOfMonth.clear();
     final url = '${AppUrls.monthlyAttendance}?month=${dateTime.month}&year=${dateTime.year}';
 
-    println(url);
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
 
@@ -80,7 +79,6 @@ setSelectedDate(DateTime dateTime){
       await _checkForMonthAttendance();
       noInternetAvailable.value = '';
     }on NoInternetException catch(e){
-      println(e);
       noInternetAvailable.value = e.errorMessage;
     }on NoDataAvailableException catch(e){
       noDataAttendanceAvailable.value = 'noDataAttendanceAvailable';

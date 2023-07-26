@@ -26,7 +26,6 @@ class DocsController extends GetxController{
     var response = await AppApiHandler.getData(url: AppUrls.documentsApi,header: headers);
     appController.loading.value = false;
 
-    println(response.body);
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }

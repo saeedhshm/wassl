@@ -78,9 +78,7 @@ class AppApiHandler {
       request.headers.addAll(header);
     }
 
-    println('=-0=0=-0=-0=-0==-n adding body');
-    println(body);
-    println('=-0=0=-0=-0=-0==-n adding body');
+
     request.fields.addAll(body);
 
     if(fileName != null ){
@@ -90,7 +88,6 @@ class AppApiHandler {
       }
     }
     var response = await request.send();
-    println('=-=-=-=-===m response.statusCode ${response.statusCode}');
     return response;
 
   }

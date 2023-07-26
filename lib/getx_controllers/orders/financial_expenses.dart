@@ -54,8 +54,7 @@ class FinanceSpendedRequestController extends GetxController{
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addFinancialExpenses, body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -97,11 +96,9 @@ class FinanceSpendedRequestController extends GetxController{
       'description': '$description',
       'reason': '$reason'
     };
-    println('${AppUrls.updateFinancialExpenses}/$orderId');
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateFinancialExpenses}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(response.statusCode);
-    println(await response.stream.bytesToString());
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -119,8 +116,7 @@ class FinanceSpendedRequestController extends GetxController{
 
 
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelFinancialExpenses}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');

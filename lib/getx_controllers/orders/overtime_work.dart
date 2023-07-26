@@ -41,7 +41,7 @@ class OverTimeController extends GetxController{
       'reason': reason
     };
 
-    println(AppUrls.addOvertimeApi);
+
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addOvertimeApi, body: body,header: appController.appHeader,fileName: filePath);
@@ -81,7 +81,7 @@ class OverTimeController extends GetxController{
       'reason': reason
     };
 
-    println('${AppUrls.updateOvertimeApi}/$orderId');
+
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateOvertimeApi}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
@@ -101,8 +101,6 @@ class OverTimeController extends GetxController{
 
   Future cancelRequest(String orderId) async{
 
-
-    println('${AppUrls.cancelOvertimeApi}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelOvertimeApi}/$orderId',header: appController.appHeader, );
 
     if(response.statusCode != 200){

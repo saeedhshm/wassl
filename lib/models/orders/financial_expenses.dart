@@ -47,7 +47,6 @@ class FinancialExpensesDate implements Order{
     updatedAt = json['updated_at'];
     hrComment = json['hr_comment'];
     activeResponsibleId = json['active_responsible_id'];
-    println('=-=-=--=--=>>> json[name] ${json['name']}');
     if(json['name'].toString().isEmpty){
       nameEmployee = json['name'] != null
           ? ResponsibleEmployee.fromJson(json['name'])

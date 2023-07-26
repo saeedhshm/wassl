@@ -35,9 +35,7 @@ class OrderWidget extends StatelessWidget {
       try{
         await controller.getAllOrders();
       }on NoDataAvailableException catch (e){
-        println('============ getall orders =========');
-        println(e);
-        println('============ getall orders =========getall orders =========');
+
       }finally{
         controller.appController.loading.value = false;
       }

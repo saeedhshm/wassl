@@ -175,10 +175,9 @@ class VisaRequestController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelOvertimeApi}/$orderId');
+
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelVisa}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');
@@ -194,24 +193,21 @@ class VisaRequestController extends GetxController{
 
     loadingTypes.value = true;
     var response1 = await AppApiHandler.getData(url: AppUrls.getVisaTypes,header: appController.appHeader);
-    println(response1.statusCode);
-    println(response1.body);
+
     if(response1.statusCode == 200){
       var json = jsonDecode(response1.body);
       visaTypes.value = OrderTypesRetriever.fromJson(json);
     }
 
     var response2 = await AppApiHandler.getData(url: AppUrls.getVisaTime,header: appController.appHeader);
-     println(response2.statusCode);
-     println(response2.body);
+
     if(response2.statusCode == 200){
       var json = jsonDecode(response2.body);
       visaTimes.value = OrderTypesRetriever.fromJson(json);
     }
 
     var response3 = await AppApiHandler.getData(url: AppUrls.getTicketTypes,header: appController.appHeader);
-    println(response3.statusCode);
-    println(response3.body);
+
     if(response3.statusCode == 200){
       var json = jsonDecode(response3.body);
       ticketTypes.value = OrderTypesRetriever.fromJson(json);

@@ -58,11 +58,7 @@ class HolidayController extends GetxController{
       'reason':'$holidayReason'
     };
 
-    println(body);
 
-    // throw NoDataAvailableException();
-    // return;
-    println(appController.appHeader);
   var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addHolidayRequest}', body: body,header: appController.appHeader,fileName: filePath);
   if(response.statusCode != 200){
     errorsList.addAll(appController.listOfErrors);
@@ -98,8 +94,6 @@ class HolidayController extends GetxController{
       'reason':'$holidayReason'
     };
 
-    println(body);
-    println(appController.appHeader);
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateHolidayRequest}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
@@ -114,10 +108,8 @@ class HolidayController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    println('${AppUrls.cancelHolidayRequest}/$orderId');
     var response = await  AppApiHandler.putData(url: '${AppUrls.cancelHolidayRequest}/$orderId',header: appController.appHeader, );
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       // errorsList.add('body: $body');
@@ -138,8 +130,7 @@ class HolidayController extends GetxController{
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
     loadingHolidayTypes.value = false;
-    println(response.statusCode);
-    println(response.body);
+
   }
 
   @override

@@ -13,7 +13,7 @@ class MonthAttendance {
         this.schedule});
 
   MonthAttendance.fromJson(Map<String, dynamic> json) {
-    println(json);
+
     totalAttendances = json['totalAttendances'] != null
         ? TotalAttendances.fromJson(json['totalAttendances'])
         : null;
