@@ -26,6 +26,7 @@ class OrderDetailsController extends GetxController{
     };
 
     appController.loading.value = true;
+
     var headers = {
 
       'Authorization':
@@ -34,18 +35,29 @@ class OrderDetailsController extends GetxController{
     };
 
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
-    appController.loading.value = false;
+
 
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
-      SnackBars.showConfirmedSnackBar('success'.tr, message);
-      SnackBars.back();
       final PreviousRequestsController prevController = Get.find();
-      prevController.getAllOrders();
-      prevController.getTeamOrders();
+      await prevController.getAllOrders();
+      await prevController.getTeamOrders();
+      Get.back();
+      Future.delayed(Duration.zero,(){
+        SnackBars.showConfirmedSnackBar('success'.tr, message);
+      });
+      // SnackBars.back();
+
+
       Get.delete<OrderDetailsController>();
+      appController.loading.value = false;
     }else{
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+      Get.back();
+      Future.delayed(Duration.zero,(){
+        SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+      });
+
+      appController.loading.value = false;
     }
   }
 

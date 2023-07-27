@@ -182,9 +182,10 @@ class CustodyRequestPage extends StatelessWidget {
   _addNewRequest()async{
     try{
       await controller.addNewPermission();
-      SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
-      Future.delayed(Duration(milliseconds: 4600),(){
-        Get.back();
+      Get.back();
+      Future.delayed(Duration(milliseconds: 0),(){
+
+        SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
       });
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
@@ -200,13 +201,11 @@ class CustodyRequestPage extends StatelessWidget {
   _updateRequest()async{
     try{
       await controller.updateRequest('${order?.orderID}');
-      SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
-      Future.delayed(Duration(milliseconds: 4600),(){
-        if (onClose != null) {
-          onClose!();
-        }
-        Get.back();
+      Get.back();
+      Future.delayed(Duration.zero,(){
+        SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
       });
+
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage.tr);
 

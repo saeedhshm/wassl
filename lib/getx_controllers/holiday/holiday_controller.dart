@@ -60,6 +60,8 @@ class HolidayController extends GetxController{
 
 
   var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addHolidayRequest}', body: body,header: appController.appHeader,fileName: filePath);
+
+
   if(response.statusCode != 200){
     errorsList.addAll(appController.listOfErrors);
     errorsList.add('body: $body');

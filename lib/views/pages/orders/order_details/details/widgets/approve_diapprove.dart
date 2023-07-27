@@ -25,9 +25,6 @@ class ApproveDisapproveWidget extends StatelessWidget {
                   onTap: () async {
                     await controller.setTeamOrderStatusRequest('2');
 
-                    // Future.delayed(const Duration(milliseconds: 4610),(){
-                    //   Get.back();
-                    // });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -51,8 +48,6 @@ class ApproveDisapproveWidget extends StatelessWidget {
                 child: InkWell(
                   onTap: (){
                     controller.setTeamOrderStatusRequest('3');
-                    // prevController.getAllOrders();
-                    // prevController.getTeamOrders();
                   },
                   child: Container(
                     decoration: BoxDecoration(
