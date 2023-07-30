@@ -24,6 +24,7 @@ class AppUrls {
   static const String login = '$_authApi/login';
   static const String logout = '$_authApi/logout';
   static const String changePassword = '$_authApi/save_my_password';
+  static const String updateToken = '$_authApi/update_token';
 
   //https://waslhr.com/api/v1/assign
   static const String attendance = '$_assignApi/attendance';

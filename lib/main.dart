@@ -24,17 +24,15 @@ void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseApi().initNotifications();
+
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
-
-
-
-
+  AppController appController = Get.put(AppController());
 
   await initializeDateFormatting();
-  AppController appController = Get.put(AppController());
+  await FirebaseApi().initNotifications();
+
   appController.deployingForApple = true;
   runApp( MyApp());
 }

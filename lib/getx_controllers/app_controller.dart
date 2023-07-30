@@ -32,6 +32,8 @@ class AppController extends GetxController{
   var canUpdate = false;
   var appURL = '';
 
+  String? fCMToken;
+
   var countryCode = ''.obs;
 
   var loginModel = LoginModel().obs;
@@ -84,6 +86,13 @@ class AppController extends GetxController{
         Map<String,dynamic> json = jsonDecode(response.body);
 
         loginModel.value.fromJson(json);
+        final fcmResponse = await AppApiHandler.postData(url: AppUrls.updateToken,header: appHeader ,body: {
+          'token':fCMToken,
+        });
+        println('appheaders $appHeader');
+        println('fcmToken $fCMToken');
+        println('fcm.statusCode ${fcmResponse.statusCode}');
+        println('fcm.body ${fcmResponse.body}');
 
       }else{
         throw UserNotFoundException();
@@ -97,7 +106,7 @@ class AppController extends GetxController{
     return {
   'Authorization':
   'bearer ${loginModel.value.token?.accessToken}',
-  // "x-localization": 'lang_code'.tr,
+  "x-localization": 'lang_code'.tr,
   };
 }
 
