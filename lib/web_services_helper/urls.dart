@@ -134,17 +134,17 @@ class AppUrls {
   static const String documentsApi = '$_apiVrsion/documents';
   //https://waslhr.com/api/v1/covenant
   static const String covenantApi = '$_apiVrsion/covenant';
-
   // {{domain}}/vacations
   static const String vacationsApi = '$_apiVrsion/vacations';
-
   // {{domain}}/team_attendance
   static const String teamAttendanceApi = '$_apiVrsion/team_attendance';
-
   // {{domain}}/SalaryDetails/14
   static const String salaryDetailsApi = '$_apiVrsion/SalaryDetails';
-
   // {{domain}}/SalaryMonth/14
   static const String salaryMonthsApi = '$_apiVrsion/SalaryMonth';
+  //{{domain}}/ads
+  static const String adsApi = '$_apiVrsion/ads';
+  //{{domain}}/meetings
+  static const String meetingsApi = '$_apiVrsion/meetings';
 }
 
