@@ -5,6 +5,8 @@ import 'package:wassl/views/pages/ads/ads_page.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
+import '../../../consts_widgets/loading_widgets.dart';
+import '../../../reusable_widgets/load_image.dart';
 
 class AdsWidget extends StatelessWidget {
 
@@ -13,7 +15,7 @@ class AdsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Obx(() => Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,15 +36,25 @@ class AdsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          SingleChildScrollView(
+          controller.appAdsLoading.value ?
+          const Center(
+            child: SendingLoadingWidget(),
+          )
+              :controller.ads.value.ads.isNotEmpty ? SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: controller.ads.value.ads.map((e) => ItemWidget(e),).toList(),
             ),
           )
+              : Center(
+            child: Text('no_new_ads'.tr, style: const TextStyle(
+                color: AppColors.darkGreyTextColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w500)),
+          ),
         ],
       ),
-    );
+    ));
   }
 }
 
@@ -84,7 +96,7 @@ class ItemWidget extends StatelessWidget {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    child: Image.asset('${adItem.image}',fit: BoxFit.cover,),
+                    child: LoadedImageWidget('${adItem.image}',fit: BoxFit.cover,),
                   ),
                 ),
                 Padding(

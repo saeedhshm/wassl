@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/models/events/event.dart';
+import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/incomming_events/incoming_events.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
@@ -13,9 +14,14 @@ class NextEvents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Obx(() => Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
+      child: controller.nextEventsLoading.value ?
+      const Center(
+        child: SendingLoadingWidget(),
+      )
+          :
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -34,15 +40,22 @@ class NextEvents extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          SingleChildScrollView(
+          controller.events.value.events.isNotEmpty ? SingleChildScrollView(
             child: Row(
               children: controller.events.value.events.map((e) => ItemWidget(e)).toList(),
             ),
             scrollDirection: Axis.horizontal,
           )
+              : Center(
+            child: Text('no_incoming_events'.tr, style: const TextStyle(
+                color: AppColors.darkGreyTextColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w500)),
+          ),
         ],
-      ),
-    );
+      )
+
+    ));
   }
 }
 

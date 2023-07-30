@@ -10,7 +10,6 @@ import 'package:wassl/models/ads/ads.dart';
 import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
-import '../../models/auth/holidays.dart';
 import '../../models/events/events.dart';
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
@@ -27,9 +26,14 @@ class HomeController extends GetxController{
   var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
   final CalendarController calendarController = Get.find();
+
   var dt = DateTime.now().obs;
+
   var events = IncomingEvents().obs;
+  var nextEventsLoading = false.obs;
+
   var ads = AppAds().obs;
+  var appAdsLoading = false.obs;
   // page :- apis retriever
  Future<String> registerAttendance({String? bearer}) async {
 
@@ -109,6 +113,32 @@ class HomeController extends GetxController{
 
   }
 
+  Future getIncomingEvents() async {
+
+   nextEventsLoading.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.meetingsApi, header: appController.appHeader);
+
+
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      events.value = IncomingEvents.fromJson(json);
+    }
+    nextEventsLoading.value = false;
+  }
+
+  Future getAppAds() async {
+
+    appAdsLoading.value = true;
+    var response = await AppApiHandler.getData(url: AppUrls.adsApi, header: appController.appHeader);
+
+
+
+    if(response.statusCode == 200){
+      var json = jsonDecode(response.body);
+      ads.value = AppAds.fromJson(json);
+    }
+    appAdsLoading.value = false;
+  }
 
 
   /// page variables
@@ -141,6 +171,8 @@ class HomeController extends GetxController{
   }
 
 
+
+
   //controller lifecycle
   @override
   void onInit() {
@@ -156,6 +188,12 @@ class HomeController extends GetxController{
       dt.value = tz.TZDateTime.from(DateTime.now(), detroit);
     });
    appController.determinePosition();
+   appController.getHolidaysData();
+   getIncomingEvents();
+    getAppAds();
+
   }
+
+
 
 }

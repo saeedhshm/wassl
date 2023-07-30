@@ -39,7 +39,8 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     DarkTextWidget('settings'.tr,fontSize: 18,fontWeight: FontWeight.bold,),
                     SizedBox(height: 8,),
-                    appController.deployingForApple ? const SizedBox() : InkWell(
+                    appController.deployingForApple ? const SizedBox() :
+                    InkWell(
                       onTap: (){
                         Get.to(()=>NotifsPage());
                       },

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class LoadingImageWidget extends StatelessWidget {
+class LoadedImageWidget extends StatelessWidget {
 
   final String imageName;
+  final BoxFit fit;
 
-  const LoadingImageWidget({Key? key,required this.imageName}) : super(key: key);
+  LoadedImageWidget(this.imageName,{Key? key, this.fit = BoxFit.cover}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(imageName);
+    if(imageName.contains('http')){
+      return Image.network(imageName,fit: fit,);
+    }
+    return Image.asset(imageName,fit: fit,);
   }
 }

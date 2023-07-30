@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../../../models/ads/Ad.dart';
+import '../../reusable_widgets/load_image.dart';
 
 class AdDetailsPage extends StatelessWidget {
 
@@ -16,10 +17,21 @@ class AdDetailsPage extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.asset(
-                '${adItem.image}',
-                fit: BoxFit.cover,
+              SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
+                width: double.infinity,
+                child: LoadedImageWidget(
+                  '${adItem.image}',
+                  fit: BoxFit.cover,
+
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 3,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2)
+                ),
               ),
               Positioned(
                 top: 0,

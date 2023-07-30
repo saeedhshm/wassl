@@ -363,9 +363,9 @@ Map<String,String>  arabicStrings = {
   'about_event':'عن الحدث',
 
   'all_orders':'كل الطلبات',
-  '':'',
-  '':'',
-  '':'',
+  'no_incoming_events':'لا يوجد احداث قادمة',
+  'not_specified':'غير محدد',
+  'no_new_ads':'لا توجد إعلانات',
   '':'',
   '':'',
   '':'',

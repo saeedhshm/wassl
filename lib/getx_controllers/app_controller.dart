@@ -89,10 +89,7 @@ class AppController extends GetxController{
         final fcmResponse = await AppApiHandler.postData(url: AppUrls.updateToken,header: appHeader ,body: {
           'token':fCMToken,
         });
-        println('appheaders $appHeader');
-        println('fcmToken $fCMToken');
-        println('fcm.statusCode ${fcmResponse.statusCode}');
-        println('fcm.body ${fcmResponse.body}');
+
 
       }else{
         throw UserNotFoundException();

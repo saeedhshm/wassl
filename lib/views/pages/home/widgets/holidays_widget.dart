@@ -12,11 +12,12 @@ class HolidaysWidget extends StatelessWidget {
    HolidaysWidget({
     Key? key,
   }) : super(key: key){
-     homeController.appController.getHolidaysData();
+
    }
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: const EdgeInsets.all(20.0),
       decoration: BoxDecoration(
