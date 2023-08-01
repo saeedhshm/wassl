@@ -32,17 +32,21 @@ class Employee {
   int? id;
   String? code;
   String? salary;
-  String? fullName;
-  String? fullNameEn;
+  String? _fullName;
+  String? _fullNameEn;
 
-  Employee({this.id, this.code, this.salary, this.fullName, this.fullNameEn});
+  Employee({this.id, this.code, this.salary,});
 
   Employee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     code = json['code'];
     salary = json['salary'];
-    fullName = json['full_name'];
-    fullNameEn = json['full_name_en'];
+    _fullName = json['full_name'];
+    _fullNameEn = json['full_name_en'];
+  }
+
+  String get fullName{
+    return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
   }
 
 }
@@ -86,7 +90,7 @@ class AllowanceType {
   }
 
   String get name{
-    return (Get.locale?.languageCode ?? '') == 'ar' ?  _nameAr ?? '' : _nameEn ?? '';
+    return ('lang_code'.tr == 'ar' ?  _nameAr : _nameEn) ?? '';
   }
 
 

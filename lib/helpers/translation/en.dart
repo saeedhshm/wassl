@@ -21,7 +21,7 @@ Map<String,String>  englishString = {
   "finance":"Finance",
   'attendance_records':'Attendance records',
   'today':'Today',
-  'working_time':'Times of work',
+  'working_time':'Shift time',
 
   'attending':'Attendance',
   'order_laon':'Loan Request',
@@ -131,7 +131,7 @@ Map<String,String>  englishString = {
   'holiday':'Holiday',
   'absent':'Absence',
   'weekEnd':'Weekend',
-  'shift_done':'Shift time ',
+  'shift_done':'Shift time done',
   'cancel':'Cancel',
   'cancel_order':'Cancel request',
   'sure_to_attend?':'Do you want to register attendance?',
@@ -301,7 +301,7 @@ Map<String,String>  englishString = {
   'team_name':'Team Name',
   'team_chief':'Team manager',
   'members':'Members',
-  'attend':'the audience',
+  'attend':'Attendance',
   'leaving':'Leave',
   'missed_leave':'Imperfect record',
 
@@ -368,8 +368,8 @@ Map<String,String>  englishString = {
   'no_new_ads':'There\'s no ads',
 
 
-  '':'',
-  '':'',
+  'days_available_to_use':'available days',
+  'vacations_balance':'Vacations balance',
   '':'',
   '':'',
   '':'',

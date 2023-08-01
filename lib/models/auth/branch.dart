@@ -1,4 +1,6 @@
 
+import 'package:get/get.dart';
+
 class Branch {
   int? id;
   int? companyId;
@@ -36,6 +38,6 @@ class Branch {
   }
 
   String get name{
-    return _nameAr ?? '';
+    return ('lang_code'.tr == 'ar' ? _nameAr : _nameEn) ?? '';
   }
 }

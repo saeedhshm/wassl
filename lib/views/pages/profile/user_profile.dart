@@ -52,7 +52,7 @@ class UserProfilePage extends StatelessWidget {
                     Get.to(()=>HolidaysDetails());
                   },
                   child: ListProfileItemWidget(
-                    title: "رصيد الاجازات ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ايام متاحة الاستخدام",
+                    title: "${'vacations_balance'.tr} ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ${'days_available_to_use'.tr}",
                     icon: "assets/images/profile/vacation.png",
                   ),
                 ),

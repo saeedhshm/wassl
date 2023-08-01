@@ -39,7 +39,7 @@ class Employee {
 
 
   String get name{
-    return (Get.locale?.languageCode ?? '') == 'ar' ?  _nameAr ?? '' : _nameEn ?? '';
+    return ('lang_code'.tr == 'ar' ?  _nameAr : _nameEn) ?? '';
   }
 }
 

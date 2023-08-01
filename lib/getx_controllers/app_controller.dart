@@ -188,8 +188,7 @@ class AppController extends GetxController{
     super.onInit();
     await getLanguage();
     checkVersion();
-    initPlatformState();
-    println('language ================= $langs');
+    // initPlatformState();
   }
 
   void checkVersion() async {
@@ -386,8 +385,10 @@ class AppController extends GetxController{
   }
 
   getLanguage() async {
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
-   langs = preferences.getStringList('language') ?? ['ar', 'SA'];
+    final langCode = '${Get.deviceLocale?.languageCode}' == 'ar' ? 'ar' : 'en';
+   langs = preferences.getStringList('language') ?? [langCode, '${Get.deviceLocale?.countryCode}'];
   }
 
 }

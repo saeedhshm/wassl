@@ -1,3 +1,5 @@
+import 'package:wassl/helpers/constants/print_ln.dart';
+
 class Vacations {
   bool? success;
   VacationDetails? data;
@@ -100,6 +102,7 @@ class Type {
   Type({id, name});
 
   Type.fromJson(Map<String, dynamic> json) {
+
     id = json['id'];
     name = json['name'];
   }

@@ -182,7 +182,7 @@ class Employee {
   }
 
   String get fullName{
-    return (Get.locale?.languageCode ?? '') == 'ar' ?  _fullName ?? '' : _fullNameEn ?? '';
+    return ('lang_code'.tr == 'ar' ?  _fullName : _fullNameEn) ?? '';
   }
 
 }

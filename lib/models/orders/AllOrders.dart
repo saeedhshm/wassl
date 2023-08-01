@@ -1,4 +1,5 @@
 
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
@@ -149,23 +150,27 @@ class Confirmation {
 
 class ResponsibleEmployee {
   int? id;
-  String? fullName;
-  String? fullNameEn;
+  String? _fullName;
+  String? _fullNameEn;
 
-  ResponsibleEmployee({this.id, this.fullName, this.fullNameEn});
+  ResponsibleEmployee({this.id,});
 
   ResponsibleEmployee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['full_name'];
-    fullNameEn = json['full_name_en'];
+    _fullName = json['full_name'];
+    _fullNameEn = json['full_name_en'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['full_name'] = this.fullName;
-    data['full_name_en'] = this.fullNameEn;
+    data['full_name'] = this._fullName;
+    data['full_name_en'] = this._fullNameEn;
     return data;
+  }
+
+  String get fullName{
+    return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
   }
 }
 

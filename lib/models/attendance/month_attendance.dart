@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
@@ -309,8 +310,8 @@ class Attendance {
 class Schedule {
   int? id;
   int? companyId;
-  String? nameAr;
-  String? nameEn;
+  String? _nameAr;
+  String? _nameEn;
   String? slug;
   String? timeIn;
   String? timeOut;
@@ -321,8 +322,6 @@ class Schedule {
   Schedule(
       {this.id,
         this.companyId,
-        this.nameAr,
-        this.nameEn,
         this.slug,
         this.timeIn,
         this.timeOut,
@@ -333,8 +332,8 @@ class Schedule {
   Schedule.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     companyId = json['company_id'];
-    nameAr = json['name_ar'];
-    nameEn = json['name_en'];
+    _nameAr = json['name_ar'];
+    _nameEn = json['name_en'];
     slug = json['slug'];
     timeIn = json['time_in'];
     timeOut = json['time_out'];
@@ -347,8 +346,8 @@ class Schedule {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = this.id;
     data['company_id'] = this.companyId;
-    data['name_ar'] = this.nameAr;
-    data['name_en'] = this.nameEn;
+    data['name_ar'] = this._nameAr;
+    data['name_en'] = this._nameEn;
     data['slug'] = this.slug;
     data['time_in'] = this.timeIn;
     data['time_out'] = this.timeOut;
@@ -358,6 +357,9 @@ class Schedule {
       data['pivot'] = this.pivot!.toJson();
     }
     return data;
+  }
+  String get name {
+    return ('lang_code'.tr == 'ar' ? _nameAr : _nameEn) ?? '';
   }
 }
 

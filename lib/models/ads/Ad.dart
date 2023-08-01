@@ -6,6 +6,7 @@
 
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
+import '../../helpers/constants/print_ln.dart';
 import '../../web_services_helper/urls.dart';
 
 class AdItem {
@@ -30,7 +31,7 @@ class AdItem {
   String? get details => _description;
 
   String get image {
-    var img = "$appDomain/storage/advertisements/UYFgCpsHeN7xUpR40MeXE6XW0To5JcYtC0lNjxfW.jpg";
+    var img = "$appDomain/$_image";
 
     return img;
   }
@@ -49,6 +50,7 @@ class AdItem {
 
 
   AdItem.fromJson(Map<String, dynamic> json) {
+
     _id = json['id'];
     _title = json['title'];
     _description = json['description'];

@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
+
 class User {
   int? id;
   int? jobId;
@@ -15,7 +18,7 @@ class User {
   dynamic qualification;
   dynamic emergencyNumber;
   dynamic panNumber;
-  String? fullNameEn;
+  String? _fullNameEn;
   dynamic currentAddress;
   dynamic permanentAddress;
   dynamic formalities;
@@ -55,7 +58,7 @@ class User {
         this.qualification,
         this.emergencyNumber,
         this.panNumber,
-        this.fullNameEn,
+
         this.currentAddress,
         this.permanentAddress,
         this.formalities,
@@ -95,7 +98,7 @@ class User {
     qualification = json['qualification'];
     emergencyNumber = json['emergency_number'];
     panNumber = json['pan_number'];
-    fullNameEn = json['full_name_en'];
+    _fullNameEn = json['full_name_en'];
     currentAddress = json['current_address'];
     permanentAddress = json['permanent_address'];
     formalities = json['formalities'];
@@ -141,7 +144,7 @@ class User {
     data['qualification'] = this.qualification;
     data['emergency_number'] = this.emergencyNumber;
     data['pan_number'] = this.panNumber;
-    data['full_name_en'] = this.fullNameEn;
+    data['full_name_en'] = this._fullNameEn;
     data['current_address'] = this.currentAddress;
     data['permanent_address'] = this.permanentAddress;
     data['formalities'] = this.formalities;
@@ -174,7 +177,7 @@ class User {
   }
 
   String get fullName{
-    return _fullName ?? '';
+    return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
   }
 
 }
@@ -264,6 +267,8 @@ class Branch {
   //       this.updatedAt});
 
   Branch.fromJson(Map<String, dynamic> json) {
+
+    println('=-=-==-=->>>>>>>>\n $json');
     id = json['id'];
     companyId = json['company_id'];
     _nameAr = json['name_ar'];
@@ -284,6 +289,6 @@ class Branch {
   }
   
   String get name{
-    return _nameAr ?? '';
+    return ('lang_code'.tr == 'ar' ? _nameAr  : _nameEn) ?? '';
   }
 }
