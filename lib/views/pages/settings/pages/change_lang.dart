@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 
+import '../../../../getx_controllers/app_controller.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
 class ChangeLangPage extends StatelessWidget {
-  const ChangeLangPage({Key? key}) : super(key: key);
+
+   ChangeLangPage({Key? key}) : super(key: key);
+
+  final AppController appController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,28 +38,14 @@ class ChangeLangPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Text('arabic'.tr),
-                            const Spacer(),
-                            const Icon(Icons.check)
-                          ],
-                        ),
-                      ),
-                      Container(width: double.infinity,height: 0.5,color: Colors.grey,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Text('english'.tr),
-                            const Spacer(),
-                            // const Icon(Icons.check)
-                          ],
-                        ),
-                      ),
-                      Container(width: double.infinity,height: 0.5,color: Colors.grey,),
+                      LanguageItemWidget(title: 'arabic'.tr,
+                        onChange: (){
+                          appController.setLanguage('ar', 'SA');
+                        },isSelected: 'lang_code'.tr == 'ar',),
+                      LanguageItemWidget(title: 'english'.tr,
+                        onChange: (){
+                          appController.setLanguage('en', 'US');
+                        },isSelected: 'lang_code'.tr == 'en',),
                     ],
                   ),
                 )
@@ -66,3 +57,35 @@ class ChangeLangPage extends StatelessWidget {
     );
   }
 }
+
+class LanguageItemWidget extends StatelessWidget {
+
+  final String title;
+  final Function ()onChange;
+  final AppController appController = Get.find();
+  final bool isSelected;
+  LanguageItemWidget({super.key,required this.title,required this.onChange,required this.isSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onChange,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(title),
+                const Spacer(),
+               isSelected ? const Icon(Icons.check) : SizedBox()
+              ],
+            ),
+          ),
+          Container(width: double.infinity,height: 0.5,color: Colors.grey,),
+        ],
+      ),
+    );
+  }
+}
+

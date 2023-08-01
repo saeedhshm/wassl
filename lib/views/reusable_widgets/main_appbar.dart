@@ -38,7 +38,7 @@ class MainAppbarWidget extends StatelessWidget {
                 },
                 child: Container(
                     child: Image.asset(
-                      'assets/images/back_arrow.png',
+                     'assets/images/back_arrow_${'lang_code'.tr}.png',
                       width: 50,
                     )),
               ) : SizedBox(),

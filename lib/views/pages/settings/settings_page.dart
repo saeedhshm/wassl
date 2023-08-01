@@ -38,7 +38,7 @@ class SettingsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     DarkTextWidget('settings'.tr,fontSize: 18,fontWeight: FontWeight.bold,),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     appController.deployingForApple ? const SizedBox() :
                     InkWell(
                       onTap: (){
@@ -70,7 +70,7 @@ class SettingsPage extends StatelessWidget {
                     // appController.deployingForApple ? const SizedBox() :
                     InkWell(
                       onTap: (){
-                        Get.to(()=>const ChangeLangPage());
+                        Get.to(()=> ChangeLangPage());
                       },
                       child: ListProfileItemWidget(
                         title: "change_lang".tr,

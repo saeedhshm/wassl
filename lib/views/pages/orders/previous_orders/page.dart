@@ -171,7 +171,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                 },
                 child: Container(
                     child: Image.asset(
-                      'assets/images/back_arrow.png',
+                      'assets/images/back_arrow_${'lang_code'.tr}.png',
                       width: 40,
                     )),
               ) : SizedBox(),

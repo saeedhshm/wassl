@@ -102,7 +102,7 @@ class ItemWidget extends StatelessWidget {
                           fontSize: 9
                       ),),
                       SizedBox(width: 5,),
-                      Image.asset('assets/images/back_arrow.png',color: AppColors.darkGreyTextColor,width: 20,),
+                      Image.asset('assets/images/back_arrow_${'lang_code'.tr}.png',color: AppColors.darkGreyTextColor,width: 20,),
                       const SizedBox(width: 5,),
                        Text('${event.endDate}',style: TextStyle(
                           color: AppColors.lightGreyTextColor,

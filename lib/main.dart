@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Wasl',
       translations: LocalString(),
-      locale: const Locale("ar","SA"),
+      locale:  Locale(appController.langs[0],appController.langs[1]),
       localizationsDelegates: const [
 
         // GlobalMaterialLocalizations.delegate,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/dark_text_widget.dart';
 
@@ -33,7 +34,7 @@ class ListProfileItemWidget extends StatelessWidget {
                 SizedBox(width: spaceInBetween,),
                 DarkTextWidget(title,fontSize: fontSize,fontWeight: fontWeight,),
                 Spacer(),
-                Image.asset('assets/images/list_arrow_item.png',width: 35,)
+                Image.asset('assets/images/list_arrow_item_${'lang_code'.tr}.png',width: 35,)
 
               ],
             ),

@@ -68,7 +68,7 @@ class IncomingEventsPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold
                               ),),
                               SizedBox(width: 5,),
-                              Image.asset('assets/images/back_arrow.png',color: AppColors.darkGreyTextColor,width: 30,),
+                              Image.asset('assets/images/back_arrow_${'lang_code'.tr}.png',color: AppColors.darkGreyTextColor,width: 30,),
                               const SizedBox(width: 5,),
                               Text('${event.endDate}',style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,

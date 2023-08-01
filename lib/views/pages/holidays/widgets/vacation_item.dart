@@ -54,7 +54,7 @@ class VacationItemWidget extends StatelessWidget {
                 children: [
                   Text('${e.holidayStart}'),
                   Image.asset(
-                    'assets/images/back_arrow.png',
+                    'assets/images/back_arrow_${'lang_code'.tr}.png',
                     width: 35,
                     color: AppColors.darkGreyTextColor,
                   ),

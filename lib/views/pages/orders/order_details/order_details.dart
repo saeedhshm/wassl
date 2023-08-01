@@ -42,7 +42,7 @@ class OrderDetailsPage extends StatelessWidget {
                         Get.delete<OrderDetailsController>();
                         Get.back();
                       },child: Image.asset(
-                        'assets/images/back_arrow.png',
+                        'assets/images/back_arrow_${'lang_code'.tr}.png',
                         width: 50,
                         color: Colors.white,
                       ),),

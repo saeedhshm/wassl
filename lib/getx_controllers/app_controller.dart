@@ -6,6 +6,7 @@ import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
@@ -31,6 +32,7 @@ class AppController extends GetxController{
 
   var canUpdate = false;
   var appURL = '';
+  late List<String> langs;
 
   String? fCMToken;
 
@@ -181,11 +183,13 @@ class AppController extends GetxController{
 
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    await getLanguage();
     checkVersion();
     initPlatformState();
+    println('language ================= $langs');
   }
 
   void checkVersion() async {
@@ -372,6 +376,18 @@ class AppController extends GetxController{
     }
 
     return false;
+  }
+
+  setLanguage(String langCode, String countryCode) async {
+
+    Get.updateLocale( Locale(langCode,countryCode)) ;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setStringList('language', [langCode,countryCode]);
+  }
+
+  getLanguage() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+   langs = preferences.getStringList('language') ?? ['ar', 'SA'];
   }
 
 }

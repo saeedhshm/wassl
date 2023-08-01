@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/calendar/widgets/day_builder.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
@@ -39,7 +40,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           return day.weekday == DateTime.friday ||
               day.weekday == DateTime.saturday;
         },
-        locale: 'ar_SA',
+        locale: '${Get.locale?.languageCode}_${Get.locale?.countryCode}',
         daysOfWeekHeight: 30,
         rowHeight: 42,
         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
@@ -315,6 +316,11 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         // rangeStartDay: DateTime(2023,7,10),
         // rangeEndDay: DateTime(2023,7,13),
         onDaySelected: (selectedDay,second){
+
+          println('${Get.locale?.languageCode}_${Get.locale?.countryCode}');
+          println('ar_SA');
+
+          return;
           if (!isSameDay(_selectedDay, selectedDay)) {
             setState(() {
               _selectedDay = selectedDay;
