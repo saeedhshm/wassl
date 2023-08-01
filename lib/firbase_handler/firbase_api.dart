@@ -7,6 +7,9 @@ import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:get/get.dart';
 
 class FirebaseApi{
+
+  static const notifIcon = '@drawable/ic_stat_wasl_ic';
+
   final _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async{
@@ -15,19 +18,14 @@ class FirebaseApi{
     final fCMToken = await _firebaseMessaging.getToken();
     final AppController appController = Get.find();
     appController.fCMToken = fCMToken;
-
+    println('Token: $fCMToken');
     initPushNotifications();
     initLocalNotifications();
   }
 
-  Future<void> handleBackGroundmessage(RemoteMessage message) async{
 
-  }
 
-  void handleMessage(RemoteMessage? message){
-    if(message == null) return;
 
-  }
 
   Future initPushNotifications() async{
 
@@ -39,7 +37,7 @@ class FirebaseApi{
 
     FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-    FirebaseMessaging.onBackgroundMessage(handleBackGroundmessage);
+    FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
       if(notification == null) return;
@@ -51,7 +49,7 @@ class FirebaseApi{
               _androidChannel.id,
               _androidChannel.name,
               channelDescription: _androidChannel.description,
-              icon: '@drawable/launcher_icon'
+              icon: notifIcon
             )
           ),
         payload: jsonEncode(message.toMap())
@@ -63,18 +61,12 @@ class FirebaseApi{
 
   Future initLocalNotifications() async{
     const iOS = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings('@drawable/launcher_icon');
+    const android = AndroidInitializationSettings(notifIcon);
     const settings = InitializationSettings(android: android,iOS: iOS);
 
     await _localNotifications.initialize(settings,
-      onDidReceiveNotificationResponse: (payload){
-      final message = RemoteMessage.fromMap(jsonDecode(payload.payload ?? ''));
-      handleMessage(message);
-      },
-      onDidReceiveBackgroundNotificationResponse:  (payload){
-        final message = RemoteMessage.fromMap(jsonDecode(payload.payload ?? ''));
-        handleMessage(message);
-      },
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse:  onDidReceiveNotificationResponse,
     );
 
     final platform = _localNotifications.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
@@ -92,3 +84,16 @@ class FirebaseApi{
   final _localNotifications = FlutterLocalNotificationsPlugin();
 }
 
+void handleMessage(RemoteMessage? message){
+  if(message == null) return;
+
+}
+
+Future<void> handleBackgroundMessage(RemoteMessage message) async{
+
+}
+
+onDidReceiveNotificationResponse(payload){
+final message = RemoteMessage.fromMap(jsonDecode(payload.payload ?? ''));
+handleMessage(message);
+}

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/calendar/widgets/day_builder.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/date_time.dart';
 import '../../../reusable_widgets/dot_widget.dart';
 
 class TableCalendarWidget extends StatefulWidget {
@@ -47,7 +43,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         daysOfWeekHeight: 30,
         rowHeight: 42,
         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-        calendarStyle: CalendarStyle(
+        calendarStyle: const CalendarStyle(
           outsideDaysVisible: true,
           // outsideTextStyle: TextStyle(color: Colors.red)
         ),
@@ -230,7 +226,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           },
           holidayBuilder: (context, day, newDay) {
             return Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                     left: 10.0,
                     right:  10.0,
                     top: 0,
@@ -240,7 +236,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 //   height: 33,
                 decoration: BoxDecoration(
                   // border: Border.all(color: Colors.white, width: 0),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(0.0),
                     bottomLeft: Radius.circular(0.0 ),
 
@@ -296,12 +292,10 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           },
 
         ),
-        availableCalendarFormats: {CalendarFormat.month: 'Month'},
+        availableCalendarFormats: const {CalendarFormat.month: 'Month'},
         currentDay: DateTime(2023,7,6),
         onRangeSelected: (first,second,third){
-          print('first $first');
-          print('second $second');
-          print('third $third');
+
         },
         onPageChanged:(dateTime){
           controller.foCusedDate.value = dateTime;

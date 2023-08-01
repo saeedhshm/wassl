@@ -12,6 +12,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(()=>Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -32,23 +33,23 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: Column(
                     children: [
-                      Text('working_time'.tr,style: TextStyle(
+                      Text('working_time'.tr,style: const TextStyle(
                         color: AppColors.darkGreyTextColor,
                         fontSize: 17
                       ),),
 
-                      Text(controller.selectedDay.value.day ?? '',style: TextStyle(
+                      Text(controller.selectedDay.value.day ?? '',style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontSize: 15
                       ),),
                       // SizedBox(height: 5,),
                       Row(
                         children: [
-                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn,style: TextStyle(
+                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn,style: const TextStyle(
                               color: AppColors.darkGreyTextColor,
                               fontSize: 18
                           ),))),
-                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut,style: TextStyle(
+                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut,style: const TextStyle(
                               color: AppColors.darkGreyTextColor,
                               fontSize: 18
                           ),))),
@@ -97,18 +98,18 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: Column(
                     children: [
-                      Text('attend'.tr,style: TextStyle(
+                      Text('attend'.tr,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontSize: 15
                       ),),
-                      Text(controller.selectedDay.value.attendanceTime,style: TextStyle(
+                      Text(controller.selectedDay.value.attendanceTime,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontSize: 18
                       ),)
                     ],
                   ),
                 ),)),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               Expanded(child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -125,11 +126,11 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: Column(
                       children: [
-                        Text('leaving'.tr,style: TextStyle(
+                        Text('leaving'.tr,style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontSize: 15
                         ),),
-                        Text(controller.selectedDay.value.leaveTime,style: TextStyle(
+                        Text(controller.selectedDay.value.leaveTime,style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontSize: 18
                         ),)

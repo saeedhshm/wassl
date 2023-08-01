@@ -117,6 +117,7 @@ class MonthDay {
   MonthDay({this.day, this.attendanceDay});
 
   MonthDay.fromJson(Map<String, dynamic> json) {
+    // println(json['day'] + ' ' + json['status']);
     day = json['day'];
     _status = json['status'];
     attendanceDay = json['attendance'] != null
@@ -179,6 +180,7 @@ class AttendanceDay {
         this.updatedAt});
 
   AttendanceDay.fromJson(Map<String, dynamic> json) {
+
     id = json['id'];
     userId = json['user_id'];
     attendanceTime = json['attendance_time'];

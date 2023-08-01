@@ -43,7 +43,7 @@ Map<String,String>  arabicStrings = {
   'reg_attend':'تسجيل الحضور',
   'reg_leaving':'تسجيل الانصراف',
   'attendance_done_successfully':'تم تسجيل حضورك بنجاح',
-  'leaving_done_successfully':'تم تسجيل خروجك بنجاح',
+  'leaving_done_successfully':'تم تسجيل انصرافك بنجاح',
   'wrong_username_password':'البريد الالكتروني او كلمة المرور غير صالحين',
   'correcting_request':'',
   'leaving_request':'طلب استئذان',
@@ -343,7 +343,7 @@ Map<String,String>  arabicStrings = {
   'no_absence_today':'لا يوجد متغيبين عن العمل اليوم',
 
   'available_vacations':'المتاح حاليا',
-  'taken_vacations':'الأجازات المأخوذة',
+  'taken_vacations':'الأجازات المستخدمة',
   'base_vacations':'الرصيد الأساسي',
 
   'incoming_vacations':'الأجازات القادمة',

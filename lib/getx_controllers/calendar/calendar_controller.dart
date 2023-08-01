@@ -34,6 +34,8 @@ class CalendarController extends GetxController{
     attendanceOfMonth.value.attendancesOfMonth.clear();
     final url = '${AppUrls.monthlyAttendance}?month=${dateTime.month}&year=${dateTime.year}';
 
+    println(url);
+
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
 
@@ -43,6 +45,7 @@ class CalendarController extends GetxController{
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
 
+      // println(json);
       attendanceOfMonth.value = MonthAttendance.fromJson(json);
 
         setSelectedDate(DateTime.now());

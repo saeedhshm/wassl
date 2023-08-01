@@ -67,7 +67,8 @@ class SettingsPage extends StatelessWidget {
                         icon: "assets/images/settingicons/13.png",
                       ),
                     ),
-                    appController.deployingForApple ? const SizedBox() :  InkWell(
+                    // appController.deployingForApple ? const SizedBox() :
+                    InkWell(
                       onTap: (){
                         Get.to(()=>const ChangeLangPage());
                       },
