@@ -66,7 +66,7 @@ class UserProfilePage extends StatelessWidget {
                   onTap: (){
                     Get.to(()=>InfoPage());
                   },
-                  child: ListProfileItemWidget(
+                  child: const ListProfileItemWidget(
                     title: "profile_info",
                     icon: "assets/images/profile/1.png",
                   ),
@@ -76,14 +76,14 @@ class UserProfilePage extends StatelessWidget {
                   onTap: (){
                     Get.to(()=>TeamMembersPage());
                   },
-                  child: ListProfileItemWidget(
+                  child: const ListProfileItemWidget(
                     title: "team_member",
                     icon: "assets/images/profile/team.png",
                   ),
                 ) : SizedBox(),
 
                 //working information
-                appController.deployingForApple ? const SizedBox() :  ListProfileItemWidget(
+                appController.deployingForApple ? const SizedBox() :  const ListProfileItemWidget(
                   title: "work_info",
                   icon: "assets/images/profile/2.png",
                 ),
@@ -93,7 +93,7 @@ class UserProfilePage extends StatelessWidget {
                   onTap: (){
                     Get.to(()=>FinanceInfoPage());
                   },
-                  child: ListProfileItemWidget(
+                  child: const ListProfileItemWidget(
                     title: "money_info",
                     icon: "assets/images/profile/3.png",
                   ),
@@ -104,14 +104,14 @@ class UserProfilePage extends StatelessWidget {
                   onTap: (){
                     Get.to(()=>DocsPage());
                   },
-                  child: ListProfileItemWidget(
+                  child: const ListProfileItemWidget(
                     title: "docs",
                     icon: "assets/images/profile/4.png",
                   ),
                 ),
 
                 //contracts information
-                appController.deployingForApple ? const SizedBox() :   ListProfileItemWidget(
+                appController.deployingForApple ? const SizedBox() :   const ListProfileItemWidget(
                   title: "contracts",
                   icon: "assets/images/profile/5.png",
                 ),
@@ -121,7 +121,7 @@ class UserProfilePage extends StatelessWidget {
                   onTap: (){
                     Get.to(()=>CovenantPage());
                   },
-                  child: ListProfileItemWidget(
+                  child: const ListProfileItemWidget(
                     title: "Custodys",
                     icon: "assets/images/profile/6.png",
                   ),

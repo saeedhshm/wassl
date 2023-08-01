@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/dark_text_widget.dart';
 
+import 'load_image.dart';
+
 class ListProfileItemWidget extends StatelessWidget {
 
   final String icon;
@@ -10,7 +12,7 @@ class ListProfileItemWidget extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final double iconSize;
-   ListProfileItemWidget({Key? key,this.iconSize = 30,required this.title,required this.icon,this.spaceInBetween = 8,this.fontSize = 15,this.fontWeight = FontWeight.w500}) : super(key: key);
+   const ListProfileItemWidget({Key? key,this.iconSize = 30,required this.title,required this.icon,this.spaceInBetween = 8,this.fontSize = 15,this.fontWeight = FontWeight.w500}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class ListProfileItemWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
+
                 Image.asset(icon,width: iconSize,color: AppColors.darkGreyTextColor,),
                 SizedBox(width: spaceInBetween,),
                 DarkTextWidget(title,fontSize: fontSize,fontWeight: fontWeight,),
