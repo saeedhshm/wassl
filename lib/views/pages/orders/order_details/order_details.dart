@@ -99,7 +99,7 @@ class OrderDetailsPage extends StatelessWidget {
             ],
           ),
           Obx(() => SizedBox(
-            child: controller.appController.loading.value ? WaitingRequestLoadingWidget( ):SizedBox(),
+            child: controller.appController.loading.value ? const WaitingRequestLoadingWidget( ):const SizedBox(),
           )),
         ],
       )),

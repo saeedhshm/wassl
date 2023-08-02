@@ -33,13 +33,13 @@ class Procedures extends StatelessWidget {
                       fontWeight: FontWeight.normal),
                 ),
                 const Spacer(),
-                Text(
-                  'more'.tr,
-                  style: const TextStyle(
-                      color: AppColors.lightGreyTextColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal),
-                ),
+                // Text(
+                //   'more'.tr,
+                //   style: const TextStyle(
+                //       color: AppColors.lightGreyTextColor,
+                //       fontSize: 14,
+                //       fontWeight: FontWeight.normal),
+                // ),
               ],
             ),
           ),
@@ -108,6 +108,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: Get.width / 4.5,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -122,6 +123,7 @@ class ItemWidget extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),

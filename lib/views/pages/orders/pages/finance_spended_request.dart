@@ -130,12 +130,12 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 onChange: (value) {
                                   controller.amount = value;
                                 },
-                                suffixIcon: const SizedBox(
+                                suffixIcon:  SizedBox(
                                   width: 25,
                                   child: Center(
                                     child: Text(
-                                      'ر.س',
-                                      style: TextStyle(color: Colors.grey),
+                                      'SAR'.tr,
+                                      style: TextStyle(color: Colors.grey,fontSize: 12),
                                     ),
                                   ),
                                 ),

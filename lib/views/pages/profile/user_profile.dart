@@ -6,14 +6,12 @@ import 'package:wassl/views/pages/profile/widgets/header_widget.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
 import '../../../getx_controllers/app_controller.dart';
 import '../../../getx_controllers/attendance/member_attendance_controller.dart';
-import '../../reusable_widgets/circular_widget.dart';
-import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../covenant/page.dart';
 import '../documents/page.dart';
 import '../finance_info/finance.dart';
 import '../holidays/holiday_details.dart';
-import '../settings/settings_page.dart';
+
 
 class UserProfilePage extends StatelessWidget {
 

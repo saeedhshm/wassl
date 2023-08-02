@@ -27,7 +27,7 @@ class ConfirmChainFragment extends StatelessWidget {
         width: double.maxFinite,
         height: double.maxFinite,
         child:controller.order.confirmation?.length == 0 ? Center(
-          child: Text('no_chain_confirmation'.tr,style: TextStyle(
+          child: Text('no_chain_confirmation'.tr,style: const TextStyle(
               color: AppColors.darkGreyTextColor,
               fontWeight: FontWeight.bold
           ),),

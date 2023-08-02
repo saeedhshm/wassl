@@ -12,6 +12,7 @@ class ShiftInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(() => Column(
       children: [
         Text(controller.appController.loginModel.value.user!.branch?.name ?? '',style: const TextStyle(

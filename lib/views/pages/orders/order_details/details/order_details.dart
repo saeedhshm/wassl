@@ -35,8 +35,8 @@ class OderDetailFragment extends StatelessWidget {
                             width: 25,
                             child: Image.asset('assets/images/profile/1.png'),
                           ),
-                          SizedBox(width: 16,),
-                          Text('emp_name'.tr,style: TextStyle(
+                          const SizedBox(width: 16,),
+                          Text('emp_name'.tr,style: const TextStyle(
                               color: AppColors.darkGreyTextColor,
                               fontWeight: FontWeight.bold
                           ),),
@@ -78,8 +78,8 @@ class OderDetailFragment extends StatelessWidget {
                             width: 25,
                             child: Image.asset('assets/images/order_details/Untitled.png'),
                           ),
-                          SizedBox(width: 16,),
-                          Text('order_type'.tr,style: TextStyle(
+                          const SizedBox(width: 16,),
+                          Text('order_type'.tr,style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontWeight: FontWeight.bold
                           ),),
@@ -159,7 +159,7 @@ class OderDetailFragment extends StatelessWidget {
                               gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantRejected : controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              padding:  EdgeInsets.symmetric(horizontal: 16.0,vertical:'lang_code'.tr == 'ar' ? 2 : 6),
                               child: Text((controller.order.status?.statusAr ?? '').tr,style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12

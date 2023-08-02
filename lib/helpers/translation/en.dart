@@ -303,7 +303,7 @@ Map<String,String>  englishString = {
   'members':'Members',
   'attend':'Attendance',
   'leaving':'Leave',
-  'missed_leave':'Imperfect record',
+  'missed_leave':'Missing record',
 
   'base_salary':'Basic salary',
   'insurance_pension':'Social insurance pension',

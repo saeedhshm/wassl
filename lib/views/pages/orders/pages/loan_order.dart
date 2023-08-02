@@ -125,13 +125,13 @@ class NewLoanOrder extends StatelessWidget {
                                       onChange: (value) {
                                         controller.amount = value;
                                       },
-                                      suffixIcon: const SizedBox(
+                                      suffixIcon:  SizedBox(
                                         width: 25,
                                         child: Center(
                                           child: Text(
-                                            'ر.س',
+                                            'SAR'.tr,
                                             style:
-                                                TextStyle(color: Colors.grey),
+                                                TextStyle(color: Colors.grey,fontSize: 12),
                                           ),
                                         ),
                                       ),
@@ -179,13 +179,13 @@ class NewLoanOrder extends StatelessWidget {
                                         controller.installmentMonthlyAmount =
                                             value;
                                       },
-                                      suffixIcon: const SizedBox(
+                                      suffixIcon:  SizedBox(
                                         width: 25,
                                         child: Center(
                                           child: Text(
-                                            'ر.س',
+                                            'SAR'.tr,
                                             style:
-                                                TextStyle(color: Colors.grey),
+                                                TextStyle(color: Colors.grey,fontSize: 12),
                                           ),
                                         ),
                                       ),

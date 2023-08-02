@@ -5,6 +5,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/calendar/widgets/attendance_info.dart';
 import 'package:wassl/views/pages/calendar/widgets/calendar_widget.dart';
+import 'package:wassl/views/pages/calendar/widgets/month_report.dart';
 import 'package:wassl/views/pages/calendar/widgets/table_calendar_widget.dart';
 import 'package:wassl/views/pages/home/widgets/attendance_info_widget.dart';
 
@@ -48,109 +49,7 @@ class AttendancePage extends StatelessWidget {
                   // CalendarWidget(),
                   TableCalendarWidget(),
                   const SizedBox(height: 16,),
-                  Row(
-                    children: [
-                      Expanded(child: Container(
-                        // height: Get.width / 3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Column(
-                            children: [
-                              const Text('1',style: TextStyle(
-                                  color: AppColors.orangeColorInCalend,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Text('absent'.tr,style: const TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontSize: 15
-                              ),)
-                            ],
-                          ),
-                        ),
-
-                      )),
-                      const SizedBox(width: 8,),
-                      Expanded(child: Container(
-                        // height: Get.width / 3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Column(
-                            children: [
-                              Text('1',style: TextStyle(
-                                  color: AppColors.purpleLateColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Text('delay'.tr,style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontSize: 15
-                              ),)
-                            ],
-                          ),
-                        ),
-
-                      )),
-                      const SizedBox(width: 8,),
-                      Expanded(child: Container(
-                        // height: Get.width / 3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Column(
-                            children: [
-                              Text('1',style: TextStyle(
-                                  color: AppColors.yellowEarlyExitColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Text('early_leave'.tr,style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontSize: 15
-                              ),)
-                            ],
-                          ),
-                        ),
-
-                      )),
-                      const SizedBox(width: 8,),
-                      Expanded(child: Container(
-                        // height: Get.width / 3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16)
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 25.0),
-                          child: Column(
-                            children: [
-                              Text('1',style: TextStyle(
-                                  color: AppColors.redMissedDayColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Text('missed_leave'.tr,style: TextStyle(
-                                  color: AppColors.lightGreyTextColor,
-                                  fontSize: 15
-                              ),)
-                            ],
-                          ),
-                        ),
-
-                      )),
-                    ],
-                  ),
+                  MonthReportWidget(),
                 ],
               ),
               MonthlyAttendanceInfoWidget(),
@@ -164,3 +63,5 @@ class AttendancePage extends StatelessWidget {
     );
   }
 }
+
+

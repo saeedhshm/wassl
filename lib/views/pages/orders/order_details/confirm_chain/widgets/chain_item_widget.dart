@@ -51,7 +51,7 @@ class ChainItemWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 0.5,horizontal: 10),
+                  padding:  EdgeInsets.symmetric(vertical:'lang_code'.tr == 'ar' ? 2 : 5,horizontal: 10),
                   child: Text(confirmStatus == 1 ? 'await_status'.tr : confirmStatus == 2 ? 'confirmt'.tr : 'disapproved'.tr,style: const TextStyle(
                       color: Colors.white,
                       fontSize: 13

@@ -317,10 +317,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         // rangeEndDay: DateTime(2023,7,13),
         onDaySelected: (selectedDay,second){
 
-          println('${Get.locale?.languageCode}_${Get.locale?.countryCode}');
-          println('ar_SA');
 
-          return;
           if (!isSameDay(_selectedDay, selectedDay)) {
             setState(() {
               _selectedDay = selectedDay;
