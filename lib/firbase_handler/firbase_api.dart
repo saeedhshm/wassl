@@ -18,7 +18,7 @@ class FirebaseApi{
     final fCMToken = await _firebaseMessaging.getToken();
     final AppController appController = Get.find();
     appController.fCMToken = fCMToken;
-    println('Token: $fCMToken');
+
     initPushNotifications();
     initLocalNotifications();
   }

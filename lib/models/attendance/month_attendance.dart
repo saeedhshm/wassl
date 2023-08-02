@@ -4,6 +4,8 @@ import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 class MonthAttendance {
   TotalAttendances? totalAttendances;
+  int? _countWorkDaysAbsent;
+  int? _countWorkDaysAttend;
   List<MonthDay> attendancesOfMonth = [];
   TodayAttendance? todayAttendance;
   Schedule? schedule;
@@ -14,6 +16,9 @@ class MonthAttendance {
         this.schedule});
 
   MonthAttendance.fromJson(Map<String, dynamic> json) {
+
+    _countWorkDaysAbsent = json['countWorkDaysAbsent'];
+    _countWorkDaysAttend = json['countWorkDaysAttend'];
 
     totalAttendances = json['totalAttendances'] != null
         ? TotalAttendances.fromJson(json['totalAttendances'])
@@ -48,6 +53,53 @@ class MonthAttendance {
       data['schedule'] = this.schedule!.toJson();
     }
     return data;
+  }
+
+
+
+  int get missedRecoreds {
+    int sum = 0;
+
+    for(var item in attendancesOfMonth){
+
+      if(item.attendanceDay != null){
+        if(item.attendanceDay?.leaveTime == null) {
+          sum++;
+        }
+      }
+    }
+
+    return sum;
+  }
+
+  int get countWorkDaysAbsent{
+    return _countWorkDaysAbsent ?? 0;
+  }
+
+  int get earlyLeav{
+    int sum = 0;
+    for(var item in attendancesOfMonth){
+
+      if(item.attendanceDay != null){
+        if(item.attendanceDay?.leaveEarlyTime != null) {
+          sum++;
+        }
+      }
+    }
+    return sum;
+  }
+
+  int get lateAttendance{
+    int sum = 0;
+    for(var item in attendancesOfMonth){
+
+      if(item.attendanceDay != null){
+        if(item.attendanceDay?.attendanceLateTime != null) {
+          sum++;
+        }
+      }
+    }
+    return sum;
   }
 }
 

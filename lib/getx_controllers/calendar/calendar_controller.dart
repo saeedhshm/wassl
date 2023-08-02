@@ -34,8 +34,6 @@ class CalendarController extends GetxController{
     attendanceOfMonth.value.attendancesOfMonth.clear();
     final url = '${AppUrls.monthlyAttendance}?month=${dateTime.month}&year=${dateTime.year}';
 
-    println(url);
-
     final response = await AppApiHandler.getData(url: url,header: headers,);
 
 

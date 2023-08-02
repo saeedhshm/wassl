@@ -268,7 +268,6 @@ class Branch {
 
   Branch.fromJson(Map<String, dynamic> json) {
 
-    println('=-=-==-=->>>>>>>>\n $json');
     id = json['id'];
     companyId = json['company_id'];
     _nameAr = json['name_ar'];

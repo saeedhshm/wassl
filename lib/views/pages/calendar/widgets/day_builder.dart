@@ -358,18 +358,7 @@ dayBuilder(
 
 
 bool checkDayAs(String type, DateTime dateTime, CalendarController controller) {
-  println('${controller
-      .attendanceOfMonth
-      .value
-      .attendancesOfMonth[(dateTime.day - 1) %
-      controller.attendanceOfMonth.value.attendancesOfMonth
-          .length]
-      .day}: ${controller
-      .attendanceOfMonth
-      .value
-      .attendancesOfMonth[(dateTime.day - 1) %
-      controller.attendanceOfMonth.value.attendancesOfMonth.length]
-      .status}');
+
   return ((controller
               .attendanceOfMonth
               .value
