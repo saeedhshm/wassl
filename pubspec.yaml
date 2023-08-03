@@ -3,10 +3,10 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-# Flutter (Channel stable, 3.3.7, on macOS 12.6.4 21G526 darwin-x64, locale en-US)
-# • Flutter version 3.3.7 on channel stable at /Users/mac/development/3_3_7/flutter
-#              • Dart version 2.18.4
-#              • DevTools version 2.15.0
+#  [!] Flutter (Channel stable, 3.7.9, on macOS 12.6.4 21G526 darwin-x64, locale en-US)
+#  • Flutter version 3.7.9 on channel stable at /Users/mac/development/3_7_9/flutter
+#              • Dart version 2.19.6
+#              • DevTools version 2.20.1
 
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
@@ -18,7 +18,7 @@ version: 1.1.11+45
 
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.19.6 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
