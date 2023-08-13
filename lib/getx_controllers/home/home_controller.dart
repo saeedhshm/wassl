@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 
@@ -104,11 +104,32 @@ class HomeController extends GetxController{
    var response = await AppApiHandler.getData(url: url, header: headers);
    sendingAttendance.value = false;
 
+
+
    if(response.statusCode == 200){
      var json = jsonDecode(response.body);
      attendanceChecker = AttendanceChecker.fromJson(json);
 
-     attendanceStatus.value = attendanceChecker.attendanceStatus ?? 0;
+     var stringTimeOut = appController.loginModel.value.user?.schedule?.info?.timeOut ?? '';
+
+     var allowTimeOut = appController.loginModel.value.user?.schedule?.allowTimeOut ?? '';
+
+     var timeOut = exactTime(stringTimeOut);
+     var allowedTimeOut = exactTime(allowTimeOut);
+
+
+
+
+     var as = attendanceChecker.attendanceStatus ?? 0;
+
+     attendanceStatus.value = as;
+     if(as == 1 ){
+
+       if(DateTime.now().isAfter(timeOut) && DateTime.now().isBefore(allowedTimeOut)){
+         attendanceStatus.value = 2;
+       }
+     }
+
    }
 
   }
@@ -144,7 +165,13 @@ class HomeController extends GetxController{
   /// page variables
   String get attendanceStatusValue{
 
-    return attendanceStatus.value == 2 ? 'reg_leaving'.tr : attendanceStatus.value == 1 ?  'reg_attend'.tr : 'shift_done'.tr;
+
+
+
+   // println('===============allowTimeOut $allowTimeOut');
+   // println('===============allowTimeOut ${attendanceStatus.value}');
+
+    return attendanceStatus.value == 0 ?  'today_holiday'.tr :attendanceStatus.value == 1 ?  'reg_attend'.tr : attendanceStatus.value == 2 ? 'reg_leaving'.tr : 'shift_done'.tr;
   }
 
   String get currentTime{
@@ -196,4 +223,12 @@ class HomeController extends GetxController{
 
 
 
+}
+
+DateTime exactTime(String time){
+  DateFormat format = DateFormat("hh:mm:ss");
+
+  var exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(time).hour,format.parse(time).minute);//DateTime.parse('${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day} 00:40:00.000');
+
+  return exactTime;
 }

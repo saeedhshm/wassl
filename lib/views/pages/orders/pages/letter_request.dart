@@ -2,8 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/letter_request.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
@@ -36,7 +34,7 @@ class LetterRequestPage extends StatelessWidget {
 
       directedToArCtrl.text = request.directedToAr ?? '';
       directedToEnCtrl.text = request.directedToEn ?? '';
-      reasonCtrl.text = request.reason ?? '';
+      reasonCtrl.text = request.reason;
     }
   }
 

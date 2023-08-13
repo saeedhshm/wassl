@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/mac/development/3_3_7/flutter"
+export "FLUTTER_ROOT=/Users/mac/development/3_7_9/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/mac/Desktop/wassal/app/wassl/wassl/plugins/flutter_app_version_checker-0.3.2/example"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"

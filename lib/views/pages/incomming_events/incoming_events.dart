@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../helpers/constants/app_colors.dart';
 import '../../../models/events/event.dart';
-import '../../consts_widgets/gradiants.dart';
-import '../../reusable_widgets/localized_text.dart';
 import '../../reusable_widgets/main_appbar.dart';
 
 class IncomingEventsPage extends StatelessWidget {
@@ -63,7 +61,7 @@ class IncomingEventsPage extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Text(event.startDate ?? '',style: const TextStyle(
+                              Text(event.startDate ,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold
                               ),),

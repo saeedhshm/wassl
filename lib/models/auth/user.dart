@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
+
 
 class User {
   int? id;
@@ -19,8 +19,8 @@ class User {
   dynamic emergencyNumber;
   dynamic panNumber;
   String? _fullNameEn;
-  dynamic currentAddress;
-  dynamic permanentAddress;
+  String? currentAddress;
+  String? permanentAddress;
   dynamic formalities;
   dynamic offerAcceptance;
   dynamic probationPeriod;
@@ -36,8 +36,13 @@ class User {
   int? fullFinal;
   String? createdAt;
   String? updatedAt;
+
+  String? nationalityNumber;
   String? email;
   String? typeId;
+  int? isActive;
+  int? stop;
+  String? fcmToken;
   Schedule? schedule;
   Branch? branch;
   Branch? job;
@@ -50,6 +55,7 @@ class User {
         this.nationalityId,
         this.photo,
         this.code,
+
         this.status,
         this.gender,
         this.dateOfBirth,
@@ -76,10 +82,17 @@ class User {
         this.fullFinal,
         this.createdAt,
         this.updatedAt,
+        this.nationalityNumber,
         this.email,
         this.typeId,
+        this.isActive,
+        this.stop,
+        this.fcmToken,
         this.schedule,
-        this.branch});
+        this.branch,
+        this.job});
+
+
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -116,18 +129,22 @@ class User {
     fullFinal = json['full_final'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    nationalityNumber = json['nationality_number'];
     email = json['email'];
     typeId = json['type_id'];
+    isActive = json['is_active'];
+    stop = json['stop'];
+    fcmToken = json['fcm_token'];
     schedule = json['schedule'] != null
-        ? new Schedule.fromJson(json['schedule'])
+        ?  Schedule.fromJson(json['schedule'])
         : null;
     branch =
-    json['branch'] != null ? Branch.fromJson(json['branch']) : null;
-    job = json['job'] != null ? Branch.fromJson(json['job']) : null;
+    json['branch'] != null ?  Branch.fromJson(json['branch']) : null;
+    job = json['job'] != null ?  Branch.fromJson(json['job']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['job_id'] = this.jobId;
     data['company_id'] = this.companyId;
@@ -162,8 +179,12 @@ class User {
     data['full_final'] = this.fullFinal;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['nationality_number'] = this.nationalityNumber;
     data['email'] = this.email;
     data['type_id'] = this.typeId;
+    data['is_active'] = this.isActive;
+    data['stop'] = this.stop;
+    data['fcm_token'] = this.fcmToken;
     if (this.schedule != null) {
       data['schedule'] = this.schedule!.toJson();
     }
@@ -186,28 +207,49 @@ class Schedule {
   int? id;
   int? employeeId;
   int? scheduleId;
+  int? minuteTimeOut;
+  int? minuteTimeIn;
+  String? allowTimeOut;
+  String? allowTimeIn;
   Info? info;
 
-  Schedule({this.id, this.employeeId, this.scheduleId, this.info});
+  Schedule(
+      {this.id,
+        this.employeeId,
+        this.scheduleId,
+        this.minuteTimeOut,
+        this.minuteTimeIn,
+        this.allowTimeOut,
+        this.allowTimeIn,
+        this.info});
 
   Schedule.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
     scheduleId = json['schedule_id'];
-    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    minuteTimeOut = json['minute_time_out'];
+    minuteTimeIn = json['minute_time_in'];
+    allowTimeOut = json['allow_time_out'] ?? '00:40:00';
+    allowTimeIn = json['allow_time_in'];
+    info = json['info'] != null ?  Info.fromJson(json['info']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['employee_id'] = this.employeeId;
     data['schedule_id'] = this.scheduleId;
+    data['minute_time_out'] = this.minuteTimeOut;
+    data['minute_time_in'] = this.minuteTimeIn;
+    data['allow_time_out'] = this.allowTimeOut;
+    data['allow_time_in'] = this.allowTimeIn;
     if (this.info != null) {
       data['info'] = this.info!.toJson();
     }
     return data;
   }
 }
+
 
 class Info {
   int? id;
@@ -238,7 +280,7 @@ class Info {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['company_id'] = this.companyId;
     data['type'] = this.type;
@@ -277,7 +319,7 @@ class Branch {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =  Map<String, dynamic>();
     data['id'] = this.id;
     data['company_id'] = this.companyId;
     data['name_ar'] = this._nameAr;

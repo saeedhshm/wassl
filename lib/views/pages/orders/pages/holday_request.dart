@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +124,7 @@ class HolidayRequestPage extends StatelessWidget {
                                     ),
 
                                   ),),
-                                  SizedBox(width: 16,),
+                                  const SizedBox(width: 16,),
                                   Expanded(child: InkWell(
                                     onTap: () async {
                                       if(controller.startDate != null){
@@ -291,7 +291,7 @@ class HolidayRequestPage extends StatelessWidget {
       await controller.sendHolidayRequest();
       SnackBars.showConfirmedSnackBar('success'.tr, 'holiday_request_added'.tr);
 
-      Future.delayed(Duration(milliseconds: 4600),(){
+      Future.delayed(const Duration(milliseconds: 4600),(){
         Get.back();
       });
     }on StartDateException {

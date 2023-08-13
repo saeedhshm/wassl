@@ -97,7 +97,7 @@ class ItemWidget extends StatelessWidget {
                   const SizedBox(height: 5,),
                   Row(
                     children: [
-                      Text(event.startDate ?? '',style: const TextStyle(
+                      Text(event.startDate ,style: const TextStyle(
                           color: AppColors.lightGreyTextColor,
                           fontSize: 9
                       ),),

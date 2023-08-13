@@ -19,15 +19,7 @@ class AllOrders {
   List<Order> orders = [];
 
   bool? success;
-  // List<LoansData> loansData = [];
-  // List<LetterDate> letterDate = [];
-  // List<FinancialExpensesDate> financialExpensesDate = [];
-  // List<CustodyDate> custodyDate = [];
-  // List<HolidaysData> holidaysData = [];
-  // List<AskPermissionsData> askPermissionsData = [];
-  // List<FingerprintCorrectionsData> fingerprintCorrectionsData = [];
-  // List<OrderVisaData> orderVisaData = [];
-  // List<OvertimeData> overtimeData = [];
+
   String? message;
 
   AllOrders();
@@ -66,9 +58,7 @@ class AllOrders {
     message = json['message'];
   }
 
-//   bool get isEmpty{
-//     return loansData.isEmpty && letterDate.isEmpty && financialExpensesDate.isEmpty && custodyDate.isEmpty && holidaysData.isEmpty && fingerprintCorrectionsData.isEmpty && askPermissionsData.isEmpty;
-// }
+
 
 }
 abstract class Order{
