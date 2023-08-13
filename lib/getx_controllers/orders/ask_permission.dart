@@ -121,6 +121,9 @@ class AskPermissionController extends GetxController{
     var response = await AppApiHandler.getData(url: AppUrls.getPermissionsTypes,header: appController.appHeader);
 
     if(response.statusCode == 200){
+      println('-0-0-0-0-0-0-0-0-00');
+      println(response.statusCode);
+      println(response.body);
       var json = jsonDecode(response.body);
 
       orderTypes.value = OrderTypesRetriever.fromJson(json);
@@ -136,9 +139,9 @@ class AskPermissionController extends GetxController{
     getPermissionsTypes();
   }
   var reasonTypes = [
-    OrderType(id: 1,name: 'personal_permission'.tr,),
-    OrderType(id: 2,name: 'illness_permission'.tr,),
-    OrderType(id: 3,name: 'emergency_permission'.tr,),
+    OrderType(id: 1,)..name = 'personal_permission'.tr,
+    OrderType(id: 2,)..name = 'illness_permission'.tr,
+    OrderType(id: 3,)..name = 'emergency_permission'.tr,
   ];
 
 }

@@ -126,6 +126,11 @@ class LetterRequestController extends GetxController{
     loadingLetterTypes.value = true;
     var response = await AppApiHandler.getData(url: AppUrls.getLetterTypes,header: appController.appHeader);
 
+    println('=-=-==-=-====-==-=-=-=-=-response');
+    println(AppUrls.getLetterTypes);
+    println(response.statusCode);
+    println(response.body);
+
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
       orderTypes.value = OrderTypesRetriever.fromJson(json);

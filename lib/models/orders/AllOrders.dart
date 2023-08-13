@@ -21,6 +21,7 @@ class AllOrders {
   bool? success;
 
   String? message;
+  String? url;
 
   AllOrders();
 

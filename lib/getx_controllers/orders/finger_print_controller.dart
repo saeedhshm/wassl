@@ -135,8 +135,8 @@ class FingerPrintController extends GetxController{
 
 
   var attendTypes = [
-    OrderType(id: 1,name: 'attending'.tr),
-    OrderType(id: 2,name: 'leaving'.tr),
+    OrderType(id: 1,)..name = 'attending'.tr,
+    OrderType(id: 2,)..name = 'leaving'.tr,
   ];
 
 }

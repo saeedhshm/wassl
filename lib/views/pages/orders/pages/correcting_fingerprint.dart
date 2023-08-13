@@ -112,7 +112,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                                 items:  ['attending'.tr,'leaving'.tr],
                                 onSelectedIndex: (int i) {
                                   // controller.holidayType = holidayTypes[i];
-                                  controller.attendanceStatus = OrderType(id: i+1,name: ['attending'.tr,'leaving'.tr][i]);
+                                  controller.attendanceStatus = OrderType(id: i+1,)..name = ['attending'.tr,'leaving'.tr][i];
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

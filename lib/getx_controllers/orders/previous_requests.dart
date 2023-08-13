@@ -31,11 +31,7 @@ class PreviousRequestsController extends GetxController{
   var myOrdersSelected = true.obs;
 
   Future getAllOrders() async {
-    var headers = {
-      'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
+
 
     var url = AppUrls.getAllOrders;
     if(_groupValue.value.status != 0){
@@ -44,7 +40,7 @@ class PreviousRequestsController extends GetxController{
 
     // return;
     appController.loading.value = true;
-    var response = await AppApiHandler.getData(url: url,header: headers);
+    var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
     appController.loading.value = false;
 
     if(response.statusCode != 200){
@@ -56,11 +52,7 @@ class PreviousRequestsController extends GetxController{
   }
 
   Future getTeamOrders() async {
-    var headers = {
-      'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
+
 
     var url = AppUrls.getTeamOrders;
     if(_groupValueOfTeamOrders.value.status != 0){
@@ -68,7 +60,7 @@ class PreviousRequestsController extends GetxController{
     }
 
     appController.loading.value = true;
-    var response = await AppApiHandler.getData(url: url,header: headers);
+    var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
     appController.loading.value = false;
 
     if(response.statusCode != 200){
