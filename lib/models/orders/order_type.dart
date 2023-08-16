@@ -1,32 +1,9 @@
 import 'package:get/get.dart';
-// class OrderType {
-//   int? id;
-//   String? name;
-//   String? createdAt;
-//   String? updatedAt;
-//
-//   OrderType({this.id, this.name, this.createdAt, this.updatedAt});
-//
-//   OrderType.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     name = json['name'];
-//     createdAt = json['created_at'];
-//     updatedAt = json['updated_at'];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = new Map<String, dynamic>();
-//     data['id'] = this.id;
-//     data['name'] = this.name;
-//     data['created_at'] = this.createdAt;
-//     data['updated_at'] = this.updatedAt;
-//     return data;
-//   }
-// }
+
+import '../../views/reusable_widgets/drop_down_widget.dart';
 
 
-
-class OrderType {
+class OrderType extends DropItem{
   int? id;
   String? _nameAr;
   String? _nameEn;
@@ -51,6 +28,7 @@ class OrderType {
 
   OrderType.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+
     _nameAr = json['name_ar'];
     _nameEn = json['name_en'];
     top = json['top'];
@@ -59,10 +37,14 @@ class OrderType {
     companyId = json['company_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    name = json['name'];
+    if(json['name'] != null) {
+      name = json['name'];
+    }
+
   }
 
- String get name{
+ @override
+  String get name{
     return ('lang_code'.tr == 'ar' ? _nameAr : _nameEn) ?? '';
  }
 

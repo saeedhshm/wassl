@@ -30,7 +30,7 @@ class TeamOrderPage extends StatelessWidget {
             padding:  const EdgeInsets.only(left: 16,right: 16,bottom: 10,top: 16),
             itemCount: controller.previousTeamRequests.value.orders.length,
             itemBuilder: (_,index){
-              return  OrderWidget(controller.previousTeamRequests.value.orders[index]);
+              return OrderWidget(controller.previousTeamRequests.value.orders[index]);
             }, separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(height: 0,);
           },

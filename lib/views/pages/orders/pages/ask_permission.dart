@@ -11,6 +11,7 @@ import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/ask_permission.dart';
+import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
@@ -22,6 +23,7 @@ import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class AskPermissionPage extends StatelessWidget {
+
   AskPermissionPage({Key? key, this.onClose, this.order}) : super(key: key){
     if(order != null){
       var permission = order as AskPermissionsData;
@@ -90,15 +92,13 @@ class AskPermissionPage extends StatelessWidget {
                                         ),
                                         DropDownWidget(
                                           hintText: 'permission_type'.tr,
-                                          selectedValue: controller.selectedType?.name,
+                                          selectedValue: controller.selectedType,
                                           items: controller
                                               .orderTypes.value.data!
-                                              .map((e) => e.name ?? '')
+                                              .map((e) => e)
                                               .toList(),
-                                          onSelectedIndex: (int i) {
-                                            controller.selectedType = controller
-                                                .orderTypes.value.data![i];
-
+                                          onSelectedIndex: (value) {
+                                            controller.selectedType = value as OrderType?;
                                           },
                                           prefixIcon: const SizedBox(
                                               width: 5,
@@ -141,13 +141,12 @@ class AskPermissionPage extends StatelessWidget {
                                         ),
                                         DropDownWidget(
                                           hintText: 'reason_type'.tr,
-                                            selectedValue: controller.reasonType?.name,
+                                            selectedValue: controller.reasonType,
                                           items:controller
                                               .reasonTypes
-                                              .map((e) => e.name ?? '').toList() ,
-                                          onSelectedIndex: (int i) {
-                                            controller.reasonType = controller
-                                                .reasonTypes[i];
+                                              .map((e) => e).toList() ,
+                                          onSelectedIndex: (value) {
+                                            controller.reasonType = value as OrderType?;
                                           },
                                           prefixIcon: const SizedBox(
                                               width: 5,

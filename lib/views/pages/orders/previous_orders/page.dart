@@ -16,6 +16,7 @@ import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/app_bars/app_bar_with_icon.dart';
 import '../../../reusable_widgets/custom_radio_button/custom_radio_button.dart';
+import '../../../reusable_widgets/icons/back_arrow.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
 
@@ -54,7 +55,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
 
           AppbarWithTrailingIconsWidget(
             'previous_requests'.tr,
-            childern: [
+            children: [
               InkWell(
                 onTap: (){
                   showModalBottomSheet(
@@ -169,12 +170,8 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                 onTap: (){
                   Get.back();
                 },
-                child: Container(
-                    child: Image.asset(
-                      'assets/images/back_arrow_${'lang_code'.tr}.png',
-                      width: 40,
-                    )),
-              ) : SizedBox(),
+                child: const BackArrowIcon(width: 40,),
+              ) : const SizedBox(),
             ],
 
           ),

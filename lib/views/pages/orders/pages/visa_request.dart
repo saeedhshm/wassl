@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/visa_request.dart';
+import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 
@@ -99,15 +100,13 @@ class VisaRequestPage extends StatelessWidget {
                                     DropDownWidget(
                                       hintText: 'visa_type'.tr,
                                       selectedValue:
-                                          controller.selectedType?.name,
+                                          controller.selectedType,
                                       items: controller.visaTypes.value.data
-                                              ?.map((e) => e.name ?? '')
+                                              ?.map((e) => e)
                                               .toList() ??
                                           [],
-                                      onSelectedIndex: (int i) {
-                                        controller.selectedType =
-                                            controller.visaTypes.value.data?[i];
-
+                                      onSelectedIndex: (value) {
+                                        controller.selectedType = value as OrderType?;
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -121,14 +120,13 @@ class VisaRequestPage extends StatelessWidget {
                                     DropDownWidget(
                                       hintText: 'visa_time'.tr,
                                       selectedValue:
-                                          controller.selectedTime?.name,
+                                          controller.selectedTime,
                                       items: controller.visaTimes.value.data
-                                              ?.map((e) => e.name ?? '')
+                                              ?.map((e) => e)
                                               .toList() ??
                                           [],
-                                      onSelectedIndex: (int i) {
-                                        controller.selectedTime =
-                                            controller.visaTimes.value.data?[i];
+                                      onSelectedIndex: (value) {
+                                        controller.selectedTime = value as OrderType;
 
                                       },
                                       prefixIcon: const SizedBox(
@@ -252,18 +250,17 @@ class VisaRequestPage extends StatelessWidget {
                                               DropDownWidget(
                                                 hintText: 'ticket_type'.tr,
                                                 selectedValue: controller
-                                                    .selectedTicketType?.name,
+                                                    .selectedTicketType,
                                                 items: controller
                                                         .ticketTypes.value.data
                                                         ?.map(
-                                                            (e) => e.name ?? '')
+                                                            (e) => e)
                                                         .toList() ??
                                                     [],
-                                                onSelectedIndex: (int i) {
+                                                onSelectedIndex: (value) {
                                                   controller
                                                           .selectedTicketType =
-                                                      controller.ticketTypes
-                                                          .value.data?[i];
+                                                      value as OrderType;
 
                                                 },
                                                 prefixIcon: const SizedBox(

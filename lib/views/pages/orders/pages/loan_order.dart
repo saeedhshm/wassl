@@ -15,6 +15,7 @@ import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/loan_order.dart';
+import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
@@ -99,13 +100,12 @@ class NewLoanOrder extends StatelessWidget {
                                     DropDownWidget(
                                       hintText: 'loan_type'.tr,
                                       selectedValue:
-                                          controller.selectedType?.name,
+                                          controller.selectedType,
                                       items: controller.orderTypes.value.data!
-                                          .map((e) => e.name ?? '')
+                                          .map((e) => e)
                                           .toList(),
-                                      onSelectedIndex: (int i) {
-                                        controller.selectedType = controller
-                                            .orderTypes.value.data![i];
+                                      onSelectedIndex: (value) {
+                                        controller.selectedType = value as OrderType?;
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,

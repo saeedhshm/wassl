@@ -25,7 +25,7 @@ class HomeController extends GetxController{
 
   var attendanceStatus = 1.obs;
   late AttendanceChecker attendanceChecker;
-  final CalendarController calendarController = Get.find();
+  final CalendarViewModel calendarController = Get.find();
 
   var dt = DateTime.now().obs;
 

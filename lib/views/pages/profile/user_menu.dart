@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/pages/profile/info.dart';
+import 'package:wassl/getx_controllers/profile/user_menu_view_model.dart';
+import 'package:wassl/views/pages/profile/profile_info.dart';
 import 'package:wassl/views/pages/profile/team_members.dart';
 import 'package:wassl/views/pages/profile/widgets/header_widget.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
@@ -16,7 +17,7 @@ import '../holidays/holiday_details.dart';
 class UserProfilePage extends StatelessWidget {
 
    UserProfilePage({Key? key}) : super(key: key);
-   final AppController appController = Get.find();
+   final UserMenuViewModel menuViewModel = Get.put(UserMenuViewModel());
    final membersAttendanceController = Get.put(MembersAttendanceController());
 
   @override
@@ -50,7 +51,7 @@ class UserProfilePage extends StatelessWidget {
                     Get.to(()=>HolidaysDetails());
                   },
                   child: ListProfileItemWidget(
-                    title: "${'vacations_balance'.tr} ${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()} ${'days_available_to_use'.tr}",
+                    title: "${'vacations_balance'.tr} ${menuViewModel.availableVacationsCount} ${'days_available_to_use'.tr}",
                     icon: "assets/images/profile/vacation.png",
                   ),
                 ),
@@ -81,7 +82,7 @@ class UserProfilePage extends StatelessWidget {
                 ) : SizedBox(),
 
                 //working information
-                appController.deployingForApple ? const SizedBox() :  const ListProfileItemWidget(
+                menuViewModel.hideSections ? const SizedBox() :  const ListProfileItemWidget(
                   title: "work_info",
                   icon: "assets/images/profile/2.png",
                 ),
@@ -109,7 +110,7 @@ class UserProfilePage extends StatelessWidget {
                 ),
 
                 //contracts information
-                appController.deployingForApple ? const SizedBox() :   const ListProfileItemWidget(
+                menuViewModel.hideSections ? const SizedBox() :   const ListProfileItemWidget(
                   title: "contracts",
                   icon: "assets/images/profile/5.png",
                 ),

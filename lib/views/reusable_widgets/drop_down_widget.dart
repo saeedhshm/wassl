@@ -4,14 +4,17 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../../helpers/constants/print_ln.dart';
 
+abstract class DropItem{
+  String get name;
+}
 class DropDownWidget extends StatefulWidget {
   // String selectedValue;
   final Widget? prefixIcon;
   final String hintText;
   final String? errorMessage;
-  final List<String> items;
-  final Function(int) onSelectedIndex;
-  String? selectedValue;
+  final List<DropItem> items;
+  final Function(DropItem?) onSelectedIndex;
+  DropItem? selectedValue;
 
 
 
@@ -30,10 +33,13 @@ class DropDownWidget extends StatefulWidget {
 }
 
 class _DropDownWidgetState extends State<DropDownWidget> {
+
+
   @override
   Widget build(BuildContext context) {
     var errors = widget.errorMessage != null && widget.errorMessage!.isNotEmpty;
-    // println('--===--- selectedValue is ${widget.selectedValue}');
+
+    // return SizedBox();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
@@ -105,10 +111,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                 borderRadius: BorderRadius.circular(15),
               ),
               items: widget.items
-                  .map((item) => DropdownMenuItem<String>(
+                  .map((item) => DropdownMenuItem<DropItem>(
                         value: item,
                         child: Text(
-                          item,
+                          item.name,
                           style: const TextStyle(
                             fontSize: 14,
                           ),
@@ -118,11 +124,11 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               onChanged: (value) {
                 //Do something when changing the item if you want.
 
-                widget.onSelectedIndex(widget.items.indexOf(value.toString()));
+                widget.onSelectedIndex(value);
                 setState(() {});
               },
               onSaved: (value) {
-                widget.selectedValue = value.toString();
+                widget.selectedValue = value;
               },
             ),
           ),

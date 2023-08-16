@@ -4,6 +4,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
+import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -46,8 +47,8 @@ class EmploymentRequest extends StatelessWidget {
                           // DropDownMenu(textHint: 'loan_type'.tr,)
                           DropDownWidget(
                             hintText: 'job_title'.tr,
-                            items: const ['done', 'not done'],
-                            onSelectedIndex: (int i) {},
+                            items:  [OrderType(id: 1)..name = 'done', OrderType(id: 2)..name = 'not done'],
+                            onSelectedIndex: (value) {},
                             prefixIcon: const SizedBox(
                                 width: 5,
                                 height: 35,

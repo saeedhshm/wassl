@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/getx_controllers/holiday/holiday_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/holidays/widgets/holiday_info_item.dart';
 import 'package:wassl/views/pages/holidays/widgets/separator.dart';
 import 'package:wassl/views/pages/holidays/widgets/vacation_item.dart';
 
-import '../../../models/holidays/vacations.dart';
+import '../../../getx_controllers/vacations/vacations_details_view_model.dart';
 import '../../consts_widgets/gradiants.dart';
+import '../../reusable_widgets/icons/back_arrow.dart';
 import '../../reusable_widgets/localized_text.dart';
 
 class HolidaysDetails extends StatelessWidget {
 
   HolidaysDetails({Key? key}) : super(key: key){
-    controller.getHolidaysTypes();
+    viewModel.getHolidaysTypes();
   }
-  final HolidayDetailsController controller = Get.put(HolidayDetailsController());
+  final HolidayDetailsViewModel viewModel = Get.put(HolidayDetailsViewModel());
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +36,14 @@ class HolidaysDetails extends StatelessWidget {
                       'anual_vacations'.tr,
                       textStyle: const TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                       onTap: (){
 
                         Get.back();
 
                       },
-                      child: Container(
-                          child: Image.asset(
-                            'assets/images/back_arrow_${'lang_code'.tr}.png',
-                            width: 50,
-                          )),
+                      child: const BackArrowIcon(),
                     )
                   ],
                 ),
@@ -87,17 +83,17 @@ class HolidaysDetails extends StatelessWidget {
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/1.png',
                                   title: 'available_vacations'.tr,
-                                  count: '${controller.vacations.value.data?.availableVacationsCount}',
+                                  count: viewModel.availableVacationsCount,
                                 ),
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/2.png',
                                   title: 'taken_vacations'.tr,
-                                  count: '${controller.vacations.value.data?.usedVacationsCount}',
+                                  count: viewModel.usedVacationsCount,
                                 ),
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/3.png',
                                   title: 'base_vacations'.tr,
-                                  count: '${controller.vacations.value.data?.openingVacationsCount}',
+                                  count: viewModel.totalVacationBalance,
                                 ),
                                 SizedBox(width: 16,)
                               ],
@@ -125,7 +121,7 @@ class HolidaysDetails extends StatelessWidget {
                         ),
                         const SeparatorWidget(),
                         //incoming vacations widget
-                        (controller.vacations.value.data?.nextVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.nextVacations ?? [],) :
+                        (viewModel.incomingVacations).isNotEmpty ? VacationsWidget(vacationViewModels: viewModel.incomingVacations) :
                         Container(
                           width: double.maxFinite,
                           color: Colors.white,
@@ -147,7 +143,7 @@ class HolidaysDetails extends StatelessWidget {
                         ),
                         const SeparatorWidget(),
                         //previous_vacations widget
-                        (controller.vacations.value.data?.previousVacations ?? []).isNotEmpty ? VacationItemWidget(vacations: controller.vacations.value.data?.previousVacations ?? [],)
+                        (viewModel.previousVacations).isNotEmpty ? VacationsWidget(vacationViewModels: viewModel.previousVacations)
                             :Container(
                           width: double.maxFinite,
                           color: Colors.white,

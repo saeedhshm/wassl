@@ -12,8 +12,13 @@ import '../app_controller.dart';
 
 class PreviousRequestsController extends GetxController{
 
-  var previousRequests = AllOrders().obs;
-  var previousTeamRequests = AllOrders().obs;
+ late final previousRequests = AllOrders(appController).obs;
+ late final  previousTeamRequests = AllOrders(appController).obs;
+  int myOrdersPage = 1;
+  int teamOrdersPage = 1;
+
+ List myOrders = <Order>[].obs;
+ List teamOrders = <Order>[].obs;
 
   List menuItems = [
     ListItem('all_orders', 0,true),
@@ -23,8 +28,8 @@ class PreviousRequestsController extends GetxController{
     ListItem('pending', 4,false),
   ];
 
-  var _groupValue = ListItem('all_orders', 0,false).obs;
-  var _groupValueOfTeamOrders = ListItem('all_orders', 0,false).obs;
+  final _groupValue = ListItem('all_orders', 0,false).obs;
+  final _groupValueOfTeamOrders = ListItem('all_orders', 0,false).obs;
 
   final AppController appController = Get.find();
 
@@ -33,9 +38,9 @@ class PreviousRequestsController extends GetxController{
   Future getAllOrders() async {
 
 
-    var url = AppUrls.getAllOrders;
+    var url = '${AppUrls.getAllOrders}?page=$myOrdersPage';
     if(_groupValue.value.status != 0){
-      url = '${url}?status=${_groupValue.value.status}';
+      url = '$url&status=${_groupValue.value.status}';
     }
 
     // return;
@@ -43,6 +48,8 @@ class PreviousRequestsController extends GetxController{
     var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
     appController.loading.value = false;
 
+
+    println('=-=-=-=-==-=- ${response.statusCode}');
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }
@@ -54,10 +61,12 @@ class PreviousRequestsController extends GetxController{
   Future getTeamOrders() async {
 
 
-    var url = AppUrls.getTeamOrders;
+    var url = '${AppUrls.getTeamOrders}?page=$teamOrdersPage';
     if(_groupValueOfTeamOrders.value.status != 0){
-      url = '${url}?status=${_groupValueOfTeamOrders.value.status}';
+      url = '$url&status=${_groupValueOfTeamOrders.value.status}';
     }
+
+
 
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
@@ -75,11 +84,19 @@ class PreviousRequestsController extends GetxController{
     Future.delayed(Duration.zero,()async{
       try{
         await getAllOrders();
+        var myOrdersUrl = '${AppUrls.getAllOrders}?page=$myOrdersPage';
+        if(_groupValue.value.status != 0){
+          myOrdersUrl = '$myOrdersUrl&status=${_groupValue.value.status}';
+        }
+
+
+        appController.loading.value = true;
+        previousRequests.value.url = myOrdersUrl;
+        myOrders = await previousRequests.value.getAllOrders();
+        appController.loading.value = true;
         await getTeamOrders();
       }on NoDataAvailableException catch (e){
-
-
-
+        //this is the catch block
       }finally{
         appController.loading.value = false;
       }

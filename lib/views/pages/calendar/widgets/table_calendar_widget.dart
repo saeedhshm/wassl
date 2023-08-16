@@ -18,8 +18,8 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarWidgetState extends State<TableCalendarWidget> {
 
-  final CalendarController controller = Get.find();
-  var textDirection = TextDirection.rtl;
+  final CalendarViewModel controller = Get.find();
+  
   DateTime? _selectedDay;
 
 

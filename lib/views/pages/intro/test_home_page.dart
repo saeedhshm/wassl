@@ -24,7 +24,7 @@ class TestHomePage extends StatefulWidget {
 class _TestHomePageState extends State<TestHomePage> {
 
 
-  final CalendarController calendarController =  Get.put(CalendarController());
+  final CalendarViewModel calendarController =  Get.put(CalendarViewModel());
   final HomeController controller = Get.put(HomeController());
 
   @override

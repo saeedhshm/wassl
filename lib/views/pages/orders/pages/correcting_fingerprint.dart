@@ -108,11 +108,11 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
                               DropDownWidget(
                                 hintText: 'shift'.tr,
-                                selectedValue: controller.attendanceStatus?.name ,
-                                items:  ['attending'.tr,'leaving'.tr],
-                                onSelectedIndex: (int i) {
+                                selectedValue: controller.attendanceStatus ,
+                                items:  [OrderType(id: 1)..name = 'attending'.tr,OrderType(id: 2)..name = 'leaving'.tr],
+                                onSelectedIndex: (value) {
                                   // controller.holidayType = holidayTypes[i];
-                                  controller.attendanceStatus = OrderType(id: i+1,)..name = ['attending'.tr,'leaving'.tr][i];
+                                  controller.attendanceStatus = value as OrderType;
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

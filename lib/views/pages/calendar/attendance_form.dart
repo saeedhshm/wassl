@@ -4,19 +4,15 @@ import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/calendar/widgets/attendance_info.dart';
-import 'package:wassl/views/pages/calendar/widgets/calendar_widget.dart';
 import 'package:wassl/views/pages/calendar/widgets/month_report.dart';
 import 'package:wassl/views/pages/calendar/widgets/table_calendar_widget.dart';
-import 'package:wassl/views/pages/home/widgets/attendance_info_widget.dart';
-
-import '../../../helpers/constants/print_ln.dart';
 import '../../reusable_widgets/main_appbar.dart';
-import '../orders/pages/correcting_fingerprint.dart';
+
 
 class AttendancePage extends StatelessWidget {
    AttendancePage({Key? key}) : super(key: key);
 
-   final CalendarController controller = Get.find();
+   final CalendarViewModel controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

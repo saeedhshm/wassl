@@ -4,6 +4,7 @@ import 'package:wassl/views/reusable_widgets/localized_text.dart';
 
 import '../../helpers/constants/app_colors.dart';
 import '../consts_widgets/gradiants.dart';
+import 'icons/back_arrow.dart';
 
 class MainAppbarWidget extends StatelessWidget {
   final String title;
@@ -36,11 +37,7 @@ class MainAppbarWidget extends StatelessWidget {
                     Get.back();
                   }
                 },
-                child: Container(
-                    child: Image.asset(
-                     'assets/images/back_arrow_${'lang_code'.tr}.png',
-                      width: 50,
-                    )),
+                child: BackArrowIcon(),
               ) : SizedBox(),
             ],
           ),

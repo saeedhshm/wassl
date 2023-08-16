@@ -7,14 +7,16 @@ import '../../../getx_controllers/finance/all_salaries.dart';
 import '../../../getx_controllers/finance/finance_controller.dart';
 import '../../../models/finance/salaries.dart';
 import '../../consts_widgets/gradiants.dart';
+import '../../reusable_widgets/icons/back_arrow.dart';
 import '../../reusable_widgets/localized_text.dart';
 
 class SalaryDetailsPage extends StatelessWidget {
 
-   SalaryDetailsPage({Key? key,required this.baseSalary, required this.salary,}) : super(key: key);
+  final AllSalariesViewModel _viewModel = Get.find();
+  SalaryDetailsPage({Key? key, required this.salary,}) : super(key: key);
 
    final SalaryOfMonth salary;
-   final String baseSalary;
+
 
 
 
@@ -45,10 +47,7 @@ class SalaryDetailsPage extends StatelessWidget {
                         Get.back();
 
                       },
-                      child: Image.asset(
-                        'assets/images/back_arrow_${'lang_code'.tr}.png',
-                        width: 50,
-                      ),
+                      child: const BackArrowIcon(),
                     ) ,
                   ],
                 ),
@@ -96,7 +95,7 @@ class SalaryDetailsPage extends StatelessWidget {
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              Text(baseSalary,style: const TextStyle(
+                              Text(_viewModel.baseSalary,style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14

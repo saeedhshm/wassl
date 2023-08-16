@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../helpers/constants/app_colors.dart';
 import '../../../models/events/event.dart';
+import '../../reusable_widgets/icons/back_arrow.dart';
 import '../../reusable_widgets/main_appbar.dart';
 
 class IncomingEventsPage extends StatelessWidget {
@@ -66,7 +67,7 @@ class IncomingEventsPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold
                               ),),
                               SizedBox(width: 5,),
-                              Image.asset('assets/images/back_arrow_${'lang_code'.tr}.png',color: AppColors.darkGreyTextColor,width: 30,),
+                      const BackArrowIcon(color: AppColors.darkGreyTextColor,width: 30,),
                               const SizedBox(width: 5,),
                               Text('${event.endDate}',style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/pages/profile/info.dart';
-import 'package:wassl/views/pages/profile/user_profile.dart';
+import 'package:wassl/views/pages/profile/profile_info.dart';
+import 'package:wassl/views/pages/profile/user_menu.dart';
 import 'package:wassl/views/reusable_widgets/custom_checkbox.dart';
 import 'package:wassl/views/reusable_widgets/main_button.dart';
 import '../../../helpers/constants/string_constants.dart';

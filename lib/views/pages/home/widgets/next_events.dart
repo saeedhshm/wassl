@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/models/events/event.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/incomming_events/incoming_events.dart';
+import 'package:wassl/views/reusable_widgets/icons/back_arrow.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
@@ -102,7 +103,7 @@ class ItemWidget extends StatelessWidget {
                           fontSize: 9
                       ),),
                       SizedBox(width: 5,),
-                      Image.asset('assets/images/back_arrow_${'lang_code'.tr}.png',color: AppColors.darkGreyTextColor,width: 20,),
+                      BackArrowIcon(color: AppColors.darkGreyTextColor,width: 20),
                       const SizedBox(width: 5,),
                        Text('${event.endDate}',style: TextStyle(
                           color: AppColors.lightGreyTextColor,

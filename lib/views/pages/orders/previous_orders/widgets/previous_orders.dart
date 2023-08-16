@@ -15,7 +15,7 @@ class PreviousOrdersWidget extends StatelessWidget {
   final PreviousRequestsController controller = Get.find<PreviousRequestsController>();
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.appController.loading.value ? const SendingLoadingWidget() : controller.previousRequests.value.orders.isEmpty ? Center(
+    return Obx(() => controller.appController.loading.value ? const SendingLoadingWidget() : controller.myOrders.isEmpty ? Center(
       child: Text('no_previous_requests'.tr,style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,
@@ -26,9 +26,10 @@ class PreviousOrdersWidget extends StatelessWidget {
       child: RefreshIndicator(onRefresh: controller.retrieveAllOrders,
         child: ListView.separated(
           padding:  const EdgeInsets.only(left: 16,right: 16,bottom: 10,top: 16),
-          itemCount: controller.previousRequests.value.orders.length,
+          itemCount: controller.myOrders.length,
           itemBuilder: (_,index){
-            return  OrderWidget(controller.previousRequests.value.orders[index]);
+
+            return  OrderWidget(controller.myOrders[index]);
           }, separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(height: 0,);
         },

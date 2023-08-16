@@ -3,7 +3,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/getx_controllers/holiday/holiday_controller.dart';
+import 'package:wassl/getx_controllers/holiday/holiday_request_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/models/orders/holiday.dart';
@@ -13,6 +13,7 @@ import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
+import '../../../../models/orders/order_type.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/localized_text.dart';
@@ -22,7 +23,7 @@ import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class HolidayRequestPage extends StatelessWidget {
 
-  final controller = Get.put(HolidayController());
+  final controller = Get.put(HolidayRequestController());
   final startDateCtrl = TextEditingController();
   final endDateCtrl = TextEditingController();
   final reasonCtrl = TextEditingController();
@@ -91,10 +92,10 @@ class HolidayRequestPage extends StatelessWidget {
                               // DropDownMenu(textHint: 'loan_type'.tr,)
                               DropDownWidget(
                                 hintText: 'holiday_type'.tr,
-                                selectedValue: controller.selectedType?.name,
-                                items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
-                                onSelectedIndex: (int i) {
-                                  controller.selectedType = controller.orderTypes.value.data![i];
+                                selectedValue: controller.selectedType,
+                                items:  controller.orderTypes.value.data!.map((e) => e).toList(),
+                                onSelectedIndex: (value) {
+                                  controller.selectedType = value as OrderType?;
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

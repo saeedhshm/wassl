@@ -14,7 +14,7 @@ List<int> weekEnds = [];
 dayBuilder(
     {required BuildContext context,
     required DateTime dt,
-    required CalendarController controller,
+    required CalendarViewModel controller,
     required DateTime currentDay}) {
   DateTime dateTime = dt;
 
@@ -357,7 +357,7 @@ dayBuilder(
 
 
 
-bool checkDayAs(String type, DateTime dateTime, CalendarController controller) {
+bool checkDayAs(String type, DateTime dateTime, CalendarViewModel controller) {
 
   return ((controller
               .attendanceOfMonth
@@ -378,7 +378,7 @@ bool checkDayAs(String type, DateTime dateTime, CalendarController controller) {
           dateTime.month);
 }
 
-bool checkMissedDay(DateTime dateTime, CalendarController controller) {
+bool checkMissedDay(DateTime dateTime, CalendarViewModel controller) {
   return ((controller
               .attendanceOfMonth
               .value
@@ -399,7 +399,7 @@ bool checkMissedDay(DateTime dateTime, CalendarController controller) {
           dateTime.month);
 }
 
-bool checkLateAttendance(DateTime dateTime, CalendarController controller) {
+bool checkLateAttendance(DateTime dateTime, CalendarViewModel controller) {
   return ((controller
       .attendanceOfMonth
       .value
@@ -420,7 +420,7 @@ bool checkLateAttendance(DateTime dateTime, CalendarController controller) {
           dateTime.month);
 }
 
-bool checkEarlyLeave(DateTime dateTime, CalendarController controller) {
+bool checkEarlyLeave(DateTime dateTime, CalendarViewModel controller) {
   return ((controller
       .attendanceOfMonth
       .value

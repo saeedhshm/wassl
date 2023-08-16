@@ -6,6 +6,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
+import '../../../reusable_widgets/icons/back_arrow.dart';
 import 'confirm_chain/chain.dart';
 import 'details/order_details.dart';
 
@@ -41,11 +42,7 @@ class OrderDetailsPage extends StatelessWidget {
                       InkWell(onTap:(){
                         Get.delete<OrderDetailsController>();
                         Get.back();
-                      },child: Image.asset(
-                        'assets/images/back_arrow_${'lang_code'.tr}.png',
-                        width: 50,
-                        color: Colors.white,
-                      ),),
+                      },child: const BackArrowIcon(),),
                     ],
                   ),
                 ),

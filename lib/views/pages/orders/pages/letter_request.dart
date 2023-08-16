@@ -2,6 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/letter_request.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
@@ -27,7 +29,7 @@ class LetterRequestPage extends StatelessWidget {
     if (order != null) {
       var request = order as LetterDate;
       controller.reason = request.reason;
-      controller.selectedType = request.type;
+      // controller.selectedType = request.type;
       controller.directedToAr = request.directedToAr;
       controller.directedToEn = request.directedToEn;
       controller.reason = request.reason;
@@ -35,6 +37,8 @@ class LetterRequestPage extends StatelessWidget {
       directedToArCtrl.text = request.directedToAr ?? '';
       directedToEnCtrl.text = request.directedToEn ?? '';
       reasonCtrl.text = request.reason;
+
+
     }
   }
 
@@ -47,6 +51,18 @@ class LetterRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    if(order != null){
+      if(controller
+          .orderTypes.value.data != null ){
+        for(var type in controller
+            .orderTypes.value.data!){
+          if(type.id == order?.type?.id){
+            controller.selectedType = type;
+          }
+        }
+      }
+    }
     return Scaffold(
       body: Obx(() => controller.loadingLetterTypes.value
           ? const Center(
@@ -93,15 +109,13 @@ class LetterRequestPage extends StatelessWidget {
                                           DropDownWidget(
                                             hintText: 'letter_type'.tr,
                                             selectedValue:
-                                                controller.selectedType?.name,
+                                                controller.selectedType,
                                             items: controller
                                                 .orderTypes.value.data!
-                                                .map((e) => e.name ?? '')
+                                                .map((e) => e)
                                                 .toList(),
-                                            onSelectedIndex: (int i) {
-                                              controller.selectedType =
-                                                  controller.orderTypes.value
-                                                      .data![i];
+                                            onSelectedIndex: (value) {
+                                              controller.selectedType = value as OrderType?;
                                             },
                                             prefixIcon: const SizedBox(
                                                 width: 5,
@@ -110,13 +124,7 @@ class LetterRequestPage extends StatelessWidget {
                                                     'assets/images/letter.svg')),
                                           ),
 
-                                          // const SizedBox(height: 15,),
-                                          // TextFormFieldWithIcons(
-                                          //   prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
-                                          //   hintText: 'date'.tr,
-                                          //
-                                          //
-                                          // ),
+
                                           const SizedBox(
                                             height: 15,
                                           ),

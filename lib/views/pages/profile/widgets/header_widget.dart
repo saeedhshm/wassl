@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../getx_controllers/app_controller.dart';
+import '../../../../getx_controllers/profile/user_menu_view_model.dart';
 import '../../../reusable_widgets/circular_widget.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';
+import '../../../reusable_widgets/load_image.dart';
 import '../../settings/settings_page.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -11,7 +13,8 @@ class HeaderWidget extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final AppController appController = Get.find();
+
+   final UserMenuViewModel menuViewModel = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class HeaderWidget extends StatelessWidget {
               children: [
                 CircularWidget(
                   size: 100,
-                  child: Image.asset('assets/images/profile/1.png'),
+                  child: LoadedImageWidget(menuViewModel.userImage),
                 ),
               ],
             ),
@@ -43,9 +46,9 @@ class HeaderWidget extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10,),
-        DarkTextWidget(appController.loginModel.value.user?.fullName ?? '',fontSize: 20,),
+        DarkTextWidget(menuViewModel.fullName,fontSize: 20,),
         const SizedBox(height: 0,),
-        DarkTextWidget(appController.loginModel.value.user?.job?.name ?? '',fontSize: 15,),
+        DarkTextWidget(menuViewModel.jobName,fontSize: 15,),
         const SizedBox(height: 20,),
       ],
     );

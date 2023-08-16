@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/requests_page.dart';
-import 'package:wassl/views/pages/profile/user_profile.dart';
+import 'package:wassl/views/pages/profile/user_menu.dart';
 import 'package:wassl/views/pages/updating_page.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
@@ -26,7 +26,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
 
   int _index = 4;
 
-  final CalendarController calendarController =  Get.put(CalendarController());
+  final CalendarViewModel calendarController =  Get.put(CalendarViewModel());
 
   final AppController appController = Get.find();
 

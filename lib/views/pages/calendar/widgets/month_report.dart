@@ -6,7 +6,7 @@ import '../../../../helpers/constants/app_colors.dart';
 
 class MonthReportWidget extends StatelessWidget {
 
-  final CalendarController controller = Get.find();
+  final CalendarViewModel controller = Get.find();
 
   MonthReportWidget({
     Key? key,
@@ -17,22 +17,22 @@ class MonthReportWidget extends StatelessWidget {
     return Row(
       children: [
         ItemWidget(
-          numberCount: controller.attendanceOfMonth.value.countWorkDaysAbsent,
+          numberCount: controller.countWorkDaysAbsent,
           numberColor: AppColors.orangeColorInCalend,
           type: 'absent'.tr,
         ),
         ItemWidget(
-          numberCount: controller.attendanceOfMonth.value.lateAttendance,
+          numberCount: controller.lateAttendanceCount,
           numberColor: AppColors.purpleLateColor,
           type: 'delay'.tr,
         ),
         ItemWidget(
-          numberCount: controller.attendanceOfMonth.value.earlyLeav,
+          numberCount: controller.earlyLeaveCount,
           numberColor: AppColors.yellowEarlyExitColor,
           type: 'early_leave'.tr,
         ),
         ItemWidget(
-          numberCount: controller.attendanceOfMonth.value.missedRecoreds,
+          numberCount: controller.missedRecordsCount,
           numberColor: AppColors.redMissedDayColor,
           type: 'missed_leave'.tr,
         ),
@@ -43,7 +43,7 @@ class MonthReportWidget extends StatelessWidget {
 
 class ItemWidget extends StatelessWidget {
 
-  final int numberCount;
+  final String numberCount;
   final String type;
   final Color numberColor;
   const ItemWidget({

@@ -10,12 +10,10 @@ class MonthAttendance {
   TodayAttendance? todayAttendance;
   Schedule? schedule;
 
-  MonthAttendance(
-      {this.totalAttendances,
-        this.todayAttendance,
-        this.schedule});
+  MonthAttendance();
 
   MonthAttendance.fromJson(Map<String, dynamic> json) {
+
 
     _countWorkDaysAbsent = json['countWorkDaysAbsent'];
     _countWorkDaysAttend = json['countWorkDaysAttend'];
@@ -37,27 +35,9 @@ class MonthAttendance {
         : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.totalAttendances != null) {
-      data['totalAttendances'] = this.totalAttendances!.toJson();
-    }
-    if (this.attendancesOfMonth != null) {
-      data['attendancesOfMonth'] =
-          this.attendancesOfMonth.map((v) => v.toJson()).toList();
-    }
-    if (this.todayAttendance != null) {
-      data['todayAttendance'] = this.todayAttendance!.toJson();
-    }
-    if (this.schedule != null) {
-      data['schedule'] = this.schedule!.toJson();
-    }
-    return data;
-  }
 
 
-
-  int get missedRecoreds {
+  int get missedRecords {
     int sum = 0;
 
     for(var item in attendancesOfMonth){
@@ -76,7 +56,7 @@ class MonthAttendance {
     return _countWorkDaysAbsent ?? 0;
   }
 
-  int get earlyLeav{
+  int get earlyLeaveCount{
     int sum = 0;
     for(var item in attendancesOfMonth){
 
@@ -171,6 +151,7 @@ class MonthDay {
 
   MonthDay.fromJson(Map<String, dynamic> json) {
     // println(json['day'] + ' ' + json['status']);
+    println(json['day']);
     day = json['day'];
     _status = json['status'];
     attendanceDay = json['attendance'] != null

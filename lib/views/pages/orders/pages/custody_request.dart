@@ -11,6 +11,7 @@ import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/custoday.dart';
+import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
@@ -78,10 +79,10 @@ class CustodyRequestPage extends StatelessWidget {
                               // DropDownMenu(textHint: 'loan_type'.tr,)
                               DropDownWidget(
                                 hintText: 'custody_type'.tr,
-                                items:  controller.orderTypes.value.data!.map((e) => e.name ?? '').toList(),
-                                selectedValue: controller.selectedType?.name,
-                                onSelectedIndex: (int i) {
-                                  controller.selectedType = controller.orderTypes.value.data![i];
+                                items:  controller.orderTypes.value.data!.map((e) => e).toList(),
+                                selectedValue: controller.selectedType,
+                                onSelectedIndex: (value) {
+                                  controller.selectedType = value as OrderType?;
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,

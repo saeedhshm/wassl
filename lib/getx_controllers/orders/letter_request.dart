@@ -29,6 +29,9 @@ class LetterRequestController extends GetxController{
 
   Future addNewLetter()async{
 
+
+
+
     if(selectedType == null) {
       throw CustomException(errorMessage: 'letter_type_exception');
     }
@@ -53,9 +56,15 @@ class LetterRequestController extends GetxController{
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addLetter, body: body,header: appController.appHeader,fileName: filePath);
 
+    println('=-=-==-=-=- add letter ==-=-=-==-');
+    println(AppUrls.addLetter);
+    println(body);
+    println(response.statusCode);
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
+      println(responsebody);
       errorsList.addAll(appController.listOfErrors);
       errorsList.add('body: $body');
       errorsList.add('url: ${AppUrls.addHolidayRequest}');
@@ -63,7 +72,7 @@ class LetterRequestController extends GetxController{
       errorsList.add('response.body: $responsebody');
       throw CustomException();
     }
-
+    println('=-=-==-=-=- add letter ==-=-=-==-');
   }
 
   Future updateRequest(String orderId)async{
@@ -126,15 +135,12 @@ class LetterRequestController extends GetxController{
     loadingLetterTypes.value = true;
     var response = await AppApiHandler.getData(url: AppUrls.getLetterTypes,header: appController.appHeader);
 
-    println('=-=-==-=-====-==-=-=-=-=-response');
-    println(AppUrls.getLetterTypes);
-    println(response.statusCode);
-    println(response.body);
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
       orderTypes.value = OrderTypesRetriever.fromJson(json);
     }
+    println('***${response.body}');
     loadingLetterTypes.value = false;
 
   }

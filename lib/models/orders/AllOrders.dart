@@ -1,8 +1,13 @@
 
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
+import '../../getx_controllers/app_controller.dart';
+import '../../helpers/exceptions/no_internet.dart';
+import '../../web_services_helper/api.dart';
 import 'ask_permission.dart';
 import 'custoday.dart';
 import 'financial_expenses.dart';
@@ -17,13 +22,13 @@ import 'over_time.dart';
 class AllOrders {
 
   List<Order> orders = [];
-
   bool? success;
-
   String? message;
+
+  AppController? appController;
   String? url;
 
-  AllOrders();
+  AllOrders(this.appController);
 
   AllOrders.fromJson(Map<String, dynamic> json) {
     success = json['success'];
@@ -59,7 +64,22 @@ class AllOrders {
     message = json['message'];
   }
 
+  Future<List<Order>> getAllOrders() async {
 
+
+    var response = await AppApiHandler.getData(url: url!,header: appController!.appHeader);
+
+
+
+    if(response.statusCode != 200){
+      throw NoDataAvailableException();
+    }
+    var json = jsonDecode(response.body);
+    var value = AllOrders.fromJson(json);
+
+    return value.orders;
+
+  }
 
 }
 abstract class Order{

@@ -8,7 +8,7 @@ import '../../orders/pages/correcting_fingerprint.dart';
 class MonthlyAttendanceInfoWidget extends StatelessWidget {
 
   MonthlyAttendanceInfoWidget({Key? key}) : super(key: key);
-  final CalendarController controller = Get.find();
+  final CalendarViewModel controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +39,18 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                         fontSize: 17
                       ),),
 
-                      Text(controller.selectedDay.value.day ?? '',style: const TextStyle(
+                      Text(controller.currentSelectedDate,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontSize: 15
                       ),),
                       // SizedBox(height: 5,),
                       Row(
                         children: [
-                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeIn,style: const TextStyle(
+                          Expanded(child: Center(child: Text(controller.workShiftStartingTime,style: const TextStyle(
                               color: AppColors.darkGreyTextColor,
                               fontSize: 18
                           ),))),
-                          Expanded(child: Center(child: Text(controller.appController.loginModel.value.timeOut,style: const TextStyle(
+                          Expanded(child: Center(child: Text(controller.workShiftEndingTime,style: const TextStyle(
                               color: AppColors.darkGreyTextColor,
                               fontSize: 18
                           ),))),
@@ -77,7 +77,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
-                  child: Text(controller.selectedDay.value.status.tr,
+                  child: Text(controller.selectedDateStatus,
                     style: const TextStyle(
                         color: AppColors.mainGreenColor
                     ),
@@ -103,7 +103,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                           color: AppColors.darkGreyTextColor,
                           fontSize: 15
                       ),),
-                      Text(controller.selectedDay.value.attendanceTime,style: const TextStyle(
+                      Text(controller.selectedDateAttendanceTime,style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontSize: 18
                       ),)
@@ -118,7 +118,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: (){
-                    if(controller.selectedDay.value.attendanceDay?.leaveTime == null){
+                    if(controller.noLeavingRegistered){
                       Get.to(()=> CorrectingFingerprintRequest());
                     }
 
@@ -131,7 +131,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                             color: AppColors.darkGreyTextColor,
                             fontSize: 15
                         ),),
-                        Text(controller.selectedDay.value.leaveTime,style: const TextStyle(
+                        Text(controller.selectedDateLeaveTime,style: const TextStyle(
                             color: AppColors.darkGreyTextColor,
                             fontSize: 18
                         ),)

@@ -40,7 +40,6 @@ class OrderItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Padding(
@@ -145,23 +144,7 @@ class OrderItemWidget extends StatelessWidget {
 
             order.orderName == 'HolidaysData' ? Row(
               children: [
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text('whole_day'.tr,
-                //         style: TextStyle(
-                //           color: AppColors.darkGreyTextColor
-                //         ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -202,23 +185,7 @@ class OrderItemWidget extends StatelessWidget {
             ) : const SizedBox(),
             order.orderName == 'FingerprintCorrectionsData' ? Row(
               children: [
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text('whole_day'.tr,
-                //         style: TextStyle(
-                //           color: AppColors.darkGreyTextColor
-                //         ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -259,23 +226,7 @@ class OrderItemWidget extends StatelessWidget {
             ) : const SizedBox(),
             order.orderName == 'FinancialExpensesDate' ? Row(
               children: [
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text('whole_day'.tr,
-                //         style: TextStyle(
-                //           color: AppColors.darkGreyTextColor
-                //         ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -398,23 +349,7 @@ class OrderItemWidget extends StatelessWidget {
             ) : const SizedBox(),
             order.orderName == 'LetterDate' ? Row(
               children: [
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text('whole_day'.tr,
-                //         style: TextStyle(
-                //           color: AppColors.darkGreyTextColor
-                //         ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -434,23 +369,7 @@ class OrderItemWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 20,),
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text(((order as LoansData).installmentAmount.toString() + ' ' + 'SAR'.tr),
-                //           style: const TextStyle(
-                //               color: AppColors.darkGreyTextColor
-                //           ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
               ],
             ) : const SizedBox(),
             order.orderName == 'AskPermissionsData' ? Row(
@@ -462,13 +381,7 @@ class OrderItemWidget extends StatelessWidget {
                       fontSize: 15
                   ),),
                 ),
-                // Expanded(
-                //   child: Text('loan'.tr + ' : ',style: const TextStyle(
-                //       color: AppColors.darkGreyTextColor,
-                //       fontWeight: FontWeight.normal,
-                //       fontSize: 15
-                //   ),),
-                // ),
+
                 Expanded(
                   child: Text('reason_type'.tr + ' : ',style: const TextStyle(
                       color: AppColors.darkGreyTextColor,
@@ -498,24 +411,7 @@ class OrderItemWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 20,),
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text((order as LoansData).amount.toString()  + ' ' + 'SAR'.tr,
-                //           style: const TextStyle(
-                //               color: AppColors.darkGreyTextColor
-                //           ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(width: 20,),
+
                 Expanded(
                   child: Container(
                     child: Center(
@@ -538,23 +434,7 @@ class OrderItemWidget extends StatelessWidget {
 
             order.orderName == 'OvertimeData' ? Row(
               children: [
-                // Expanded(
-                //   child: Container(
-                //     child: Center(
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: Text('whole_day'.tr,
-                //         style: TextStyle(
-                //           color: AppColors.darkGreyTextColor
-                //         ),),
-                //       ),
-                //     ),
-                //     decoration: BoxDecoration(
-                //       color: AppColors.mainBackgroundColor,
-                //       borderRadius: BorderRadius.circular(50),
-                //     ),
-                //   ),
-                // ),
+
                 const SizedBox(width: 20,),
                 Expanded(
                   child: Container(
@@ -634,132 +514,48 @@ class OrderItemWidget extends StatelessWidget {
 
     switch(order.orderName){
       case 'AskPermissionsData':
-        Get.to(()=> AskPermissionPage(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> AskPermissionPage(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
       case 'CustodyDate':
-        Get.to(()=> CustodyRequestPage(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> CustodyRequestPage(order: order,onClose:getAllOrdersAfterUpdate,));
         break;
       case 'FinancialExpensesDate':
-        Get.to(()=> FinanceSpendedRequest(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> FinanceSpendedRequest(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
       case 'FingerprintCorrectionsData':
-        Get.to(()=> CorrectingFingerprintRequest(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> CorrectingFingerprintRequest(order: order,onClose:getAllOrdersAfterUpdate,));
         break;
       case 'HolidaysData':
-        Get.to(()=> HolidayRequestPage(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> HolidayRequestPage(order: order,onClose:getAllOrdersAfterUpdate,));
         break;
       case 'LetterDate':
-        Get.to(()=> LetterRequestPage(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> LetterRequestPage(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
       case 'LoansData':
-        Get.to(()=> NewLoanOrder(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> NewLoanOrder(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
       case 'OvertimeData':
-        Get.to(()=> ExtraWorkRequest(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> ExtraWorkRequest(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
       case 'OrderVisaData':
-        Get.to(()=> VisaRequestPage(order: order,onClose: (){
-          final PreviousRequestsController controller = Get.find();
-          Future.delayed(Duration.zero,()async{
-            try{
-              await controller.getAllOrders();
-            }on NoDataAvailableException catch (e){
-
-            }finally{
-              controller.appController.loading.value = false;
-            }
-          });
-        },));
+        Get.to(()=> VisaRequestPage(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
 
     }
+  }
+
+  getAllOrdersAfterUpdate(){
+
+    final PreviousRequestsController controller = Get.find();
+    Future.delayed(Duration.zero,()async{
+      try{
+        await controller.getAllOrders();
+      }on NoDataAvailableException catch (e){
+
+      }finally{
+        controller.appController.loading.value = false;
+      }
+    });
+
   }
 }

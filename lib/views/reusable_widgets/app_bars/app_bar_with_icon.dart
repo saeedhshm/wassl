@@ -7,8 +7,8 @@ import '../../consts_widgets/gradiants.dart';
 
 class AppbarWithTrailingIconsWidget extends StatelessWidget {
   final String title;
-  final List<Widget> childern;
-  const AppbarWithTrailingIconsWidget(this.title, {Key? key, required this.childern}) : super(key: key);
+  final List<Widget> children;
+  const AppbarWithTrailingIconsWidget(this.title, {Key? key, required this.children}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class AppbarWithTrailingIconsWidget extends StatelessWidget {
             children: [
               LocalizedText(
                 title,
-                textStyle: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
+                textStyle: const TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
               ),
-              Spacer(),
-              Row(children: childern,)
+              const Spacer(),
+              Row(children: children,)
             ],
           ),
         ),

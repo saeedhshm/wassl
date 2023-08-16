@@ -1,19 +1,23 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:wassl/getx_controllers/finance/salary_month_view_model.dart';
 import 'package:wassl/models/finance/salaries.dart';
 
+import '../../controllers/salaries_controller.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/no_internet.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 
-class AllSalariesController extends GetxController{
+class AllSalariesViewModel extends GetxController{
   final AppController appController = Get.find();
   var loading = false.obs;
 
-  var allSalaries = Salaries();
+  Salaries? _allSalaries;
+
+  List<SalaryOfMonthViewModel> _salariesViewModelList = [];
 
 
   Future<void> _getAllSalaries() async {
@@ -27,18 +31,11 @@ class AllSalariesController extends GetxController{
     loading.value = true;
 
     final url = '${AppUrls.salaryMonthsApi}/${appController.loginModel.value.user?.id}';
-    final response = await AppApiHandler.getData(url: url,header: headers,);
 
+    _allSalaries = await SalariesController().getAllSalaries(url, headers);
+    _salariesViewModelList = _allSalaries?.salaries.map((e) => SalaryOfMonthViewModel(e)).toList() ?? [];
 
-    if(response.statusCode != 200){
-      throw NoDataAvailableException();
-    }
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      allSalaries = Salaries.fromJson(json);
-      loading.value = false;
-
-    }
+    loading.value = false;
   }
 
   @override
@@ -46,5 +43,13 @@ class AllSalariesController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     _getAllSalaries();
+  }
+
+  String get baseSalary{
+    return '${_allSalaries?.employee?.salary} ' + 'SR'.tr;
+  }
+
+  List<SalaryOfMonthViewModel> get salaries{
+    return _salariesViewModelList;
   }
 }
