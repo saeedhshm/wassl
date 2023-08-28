@@ -24,13 +24,14 @@ class MembersAttendanceController extends GetxController{
 
     loading.value = true;
     _teamAttendance.value.teamAttendance.clear();
-    const url = AppUrls.teamAttendanceApi;
+    var url = AppUrls.teamAttendanceApi;
 
     final response = await AppApiHandler.getData(url: url,header: headers,);
     loading.value = false;
 
+
     if(response.statusCode != 200){
-      throw NoDataAvailableException();
+      // throw NoDataAvailableException();
     }
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
@@ -56,6 +57,7 @@ class MembersAttendanceController extends GetxController{
 }
 
   List<MemberAttendance> get teamAbsence {
-    return _teamAttendance.value.teamAttendance.where((MemberAttendance element) => (element.attendance?.attendanceStatus ?? '') == 'holiday' || (element.attendance?.attendanceStatus ?? '') == 'no_attendance_assign').toList() ;
+
+    return _teamAttendance.value.teamAttendance.where((MemberAttendance element) => element.memberIsAbsent ).toList() ;
   }
 }

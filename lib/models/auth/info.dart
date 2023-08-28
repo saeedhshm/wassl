@@ -26,15 +26,5 @@ class Info {
     timeOut = json['time_out'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_id'] = this.companyId;
-    data['type'] = this.type;
-    data['slug'] = this.slug;
-    data['week_end_days'] = this.weekEndDays;
-    data['time_in'] = this.timeIn;
-    data['time_out'] = this.timeOut;
-    return data;
-  }
 }
+

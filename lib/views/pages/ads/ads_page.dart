@@ -20,11 +20,11 @@ class AdDetailsPage extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 3,
                 width: double.infinity,
-                child: LoadedImageWidget(
+                child: ImageController(
                   '${adItem.image}',
                   fit: BoxFit.cover,
 
-                ),
+                ).loadImage(),
               ),
               Container(
                 height: MediaQuery.of(context).size.height / 3,

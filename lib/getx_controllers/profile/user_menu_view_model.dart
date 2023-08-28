@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../app_controller.dart';
 
@@ -10,7 +11,7 @@ class UserMenuViewModel extends GetxController{
 }
 
 String get availableVacationsCount{
-    return '${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0).toInt()}';
+    return '${(appController.holidaysBalance.value.data?.availableVacationsCount ?? 0.0)}';
 }
 
 String get fullName{

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/models/orders/tabreer.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
 import '../../getx_controllers/app_controller.dart';
@@ -34,6 +35,7 @@ class AllOrders {
     success = json['success'];
 
     var orderType = 'type_of_order';
+
     if (json['orders'] != null) {
 
       json['orders'].forEach((v) {
@@ -56,6 +58,8 @@ class AllOrders {
           orders.add( OvertimeData.fromJson(v));
         }else if(v[orderType] == 'financial'){
           orders.add( FinancialExpensesDate.fromJson(v));
+        }else if(v[orderType] == 'tabrir'){
+          orders.add( ApologyData.fromJson(v));
         }
       });
     }
@@ -67,8 +71,8 @@ class AllOrders {
   Future<List<Order>> getAllOrders() async {
 
 
-    var response = await AppApiHandler.getData(url: url!,header: appController!.appHeader);
 
+    var response = await AppApiHandler.getData(url: url!,header: appController!.appHeader);
 
 
     if(response.statusCode != 200){

@@ -14,17 +14,7 @@ class LoginModel {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    if (this.token != null) {
-      data['token'] = this.token!.toJson();
-    }
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
-    }
-    return data;
-  }
+
 
   String get timeIn {
     return (user?.schedule?.info?.timeIn ?? '').formattedTime();
@@ -50,13 +40,6 @@ class Token {
     expiresIn = json['expires_in'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['access_token'] = this.accessToken;
-    data['token_type'] = this.tokenType;
-    data['expires_in'] = this.expiresIn;
-    return data;
-  }
 }
 
 

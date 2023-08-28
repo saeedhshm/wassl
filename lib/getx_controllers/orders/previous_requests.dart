@@ -35,26 +35,24 @@ class PreviousRequestsController extends GetxController{
 
   var myOrdersSelected = true.obs;
 
-  Future getAllOrders() async {
+  Future getMyOrders() async {
 
 
     var url = '${AppUrls.getAllOrders}?page=$myOrdersPage';
-    if(_groupValue.value.status != 0){
-      url = '$url&status=${_groupValue.value.status}';
-    }
+
+      url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
+
 
     // return;
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
     appController.loading.value = false;
-
-
-    println('=-=-=-=-==-=- ${response.statusCode}');
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }
       var json = jsonDecode(response.body);
       previousRequests.value = AllOrders.fromJson(json);
+      myOrders = previousRequests.value.orders;
 
   }
 
@@ -62,9 +60,10 @@ class PreviousRequestsController extends GetxController{
 
 
     var url = '${AppUrls.getTeamOrders}?page=$teamOrdersPage';
-    if(_groupValueOfTeamOrders.value.status != 0){
-      url = '$url&status=${_groupValueOfTeamOrders.value.status}';
-    }
+    // if(_groupValueOfTeamOrders.value.status != 0){
+    //   url = '$url&status=${_groupValueOfTeamOrders.value.status}';
+    // }
+    url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
 
 
 
@@ -77,21 +76,23 @@ class PreviousRequestsController extends GetxController{
     }
     var json = jsonDecode(response.body);
     previousTeamRequests.value = AllOrders.fromJson(json);
+    teamOrders = previousTeamRequests.value.orders;
 
   }
 
   Future retrieveAllOrders() async{
     Future.delayed(Duration.zero,()async{
       try{
-        await getAllOrders();
+        await getMyOrders();
         var myOrdersUrl = '${AppUrls.getAllOrders}?page=$myOrdersPage';
-        if(_groupValue.value.status != 0){
-          myOrdersUrl = '$myOrdersUrl&status=${_groupValue.value.status}';
-        }
+        myOrdersUrl = '$myOrdersUrl&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
+
+
 
 
         appController.loading.value = true;
         previousRequests.value.url = myOrdersUrl;
+        previousRequests.value.appController = appController;
         myOrders = await previousRequests.value.getAllOrders();
         appController.loading.value = true;
         await getTeamOrders();
@@ -110,7 +111,7 @@ class PreviousRequestsController extends GetxController{
   void set groupValue(ListItem value){
     if(myOrdersSelected.value) {
       _groupValue.value = value;
-      getAllOrders();
+      getMyOrders();
     } else {
       _groupValueOfTeamOrders.value = value;
       getTeamOrders();

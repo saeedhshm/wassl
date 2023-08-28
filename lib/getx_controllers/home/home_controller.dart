@@ -1,30 +1,27 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
+import 'package:wassl/helpers/extensions/date_time.dart';
 import 'package:wassl/models/ads/ads.dart';
-import 'package:wassl/models/auth/attendance_checker.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
+import '../../models/auth/attendance_check.dart';
 import '../../models/events/events.dart';
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
 import 'package:timezone/standalone.dart' as tz;
 
-
-class HomeController extends GetxController{
-
+class HomeController extends GetxController {
   final AppController appController = Get.find();
 
   var sendingAttendance = false.obs;
 
-
   var attendanceStatus = 1.obs;
-  late AttendanceChecker attendanceChecker;
+  List<AttendanceCheck> checkList = [];
+  var currentShift = AttendanceCheck().obs;
+
   final CalendarViewModel calendarController = Get.find();
 
   var dt = DateTime.now().obs;
@@ -35,48 +32,37 @@ class HomeController extends GetxController{
   var ads = AppAds().obs;
   var appAdsLoading = false.obs;
   // page :- apis retriever
- Future<String> registerAttendance({String? bearer}) async {
-
-
-
-
+  Future<String> registerAttendance({String? bearer}) async {
     sendingAttendance.value = true;
     var body = {
-      'longitude':'${appController.position?.longitude}',
-      'latitude':'${appController.position?.latitude}'
+      'longitude': '${appController.position?.longitude}',
+      'latitude': '${appController.position?.latitude}',
+      'schedule_id': '${currentShift.value.schedule?.scheduleId}'
     };
+
+
     var headers = {
       'Authorization':
-      'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
+          'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
       // "x-localization": 'lang_code'.tr,
     };
 
     var url = '';
-    if(attendanceStatus.value == 2){
+    if (attendanceStatus.value == 2) {
       url = AppUrls.leaving;
-    }else {
+    } else {
       url = AppUrls.attendance;
-
     }
-    var listOfErrors = <String>[];
-    listOfErrors.clear();
-    listOfErrors.addAll(appController.listOfErrors);
 
-    appController.listOfErrors.clear();
-    appController.listOfErrors.addAll(listOfErrors);
-    appController.listOfErrors.add('url: $url');
-    appController.listOfErrors.add('body: $body');
-
-    final response = await AppApiHandler.postData(url: url, body: body,header: headers);
+    final response =
+        await AppApiHandler.postData(url: url, body: body, header: headers);
 
     sendingAttendance.value = false;
-    appController.listOfErrors.add('response.statusCode  ${response.statusCode }');
-    appController.listOfErrors.add('response.body  ${response.body }');
 
-    if(response.statusCode == 200){
-
+    if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
-      if(json['success'] == true) {
+
+      if (json['success'] == true) {
         attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
         calendarController.retrieveAttendanceData();
         if (attendanceStatus.value == 2) {
@@ -84,63 +70,67 @@ class HomeController extends GetxController{
         } else {
           return 'leaving_done_successfully'.tr;
         }
-      }else{
+      } else {
         Future.error(json['message']);
       }
-
     }
-    return Future.error('${response.body}\n${appController.position?.longitude},${appController.position?.latitude}');
+    return Future.error(
+        '${response.body}\n${appController.position?.longitude},${appController.position?.latitude}');
   }
 
-
   checkForAttendance() async {
-   var url = AppUrls.attendanceCheck;
-   var headers = {
-     'Authorization':
-     'bearer ${appController.loginModel.value.token?.accessToken}',
-     // "x-localization": 'lang_code'.tr,
-   };
-   sendingAttendance.value = true;
-   var response = await AppApiHandler.getData(url: url, header: headers);
-   sendingAttendance.value = false;
+    var url = AppUrls.attendanceCheck;
+    var headers = {
+      'Authorization':
+          'bearer ${appController.loginModel.value.token?.accessToken}',
+      // "x-localization": 'lang_code'.tr,
+    };
 
 
 
-   if(response.statusCode == 200){
-     var json = jsonDecode(response.body);
-     attendanceChecker = AttendanceChecker.fromJson(json);
-
-     var stringTimeOut = appController.loginModel.value.user?.schedule?.info?.timeOut ?? '';
-
-     var allowTimeOut = appController.loginModel.value.user?.schedule?.allowTimeOut ?? '';
-
-     var timeOut = exactTime(stringTimeOut);
-     var allowedTimeOut = exactTime(allowTimeOut);
+    sendingAttendance.value = true;
+    var response = await AppApiHandler.getData(url: url, header: headers);
+    sendingAttendance.value = false;
 
 
+    if (response.statusCode == 200) {
+
+      try{
+        var json = jsonDecode(response.body) as List;
+        checkList = json.map((e) => AttendanceCheck.fromJson(e)).toList();
+      }catch (e){
+        var json = jsonDecode(response.body);
+        checkList.add(AttendanceCheck.fromJson(json));
+      }
 
 
-     var as = attendanceChecker.attendanceStatus ?? 0;
+      currentShift.value = checkList.first;
 
-     attendanceStatus.value = as;
-     if(as == 1 ){
-
-       if(DateTime.now().isAfter(timeOut) && DateTime.now().isBefore(allowedTimeOut)){
-         attendanceStatus.value = 2;
-       }
-     }
-
-   }
-
+      if (checkList.length > 1) {
+        if (DateTime.now().isAfter(currentShift.value.empAllowTimeOut)) {
+          currentShift.value = checkList.last;
+        }
+      }
+      attendanceStatus.value = currentShift.value.attendanceStatus ?? 0;
+      if (currentShift.value.attendance != null) {
+        if (attendanceStatus.value == 1) {
+          if (DateTime.now().isAfter(currentShift.value.empTimeIn) &&
+              DateTime.now().isBefore(currentShift.value.empAllowTimeOut)) {
+            attendanceStatus.value = 2;
+          } else {
+            attendanceStatus.value = 1;
+          }
+        }
+      }
+    }
   }
 
   Future getIncomingEvents() async {
+    nextEventsLoading.value = true;
+    var response = await AppApiHandler.getData(
+        url: AppUrls.meetingsApi, header: appController.appHeader);
 
-   nextEventsLoading.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.meetingsApi, header: appController.appHeader);
-
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       events.value = IncomingEvents.fromJson(json);
     }
@@ -148,87 +138,72 @@ class HomeController extends GetxController{
   }
 
   Future getAppAds() async {
-
     appAdsLoading.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.adsApi, header: appController.appHeader);
+    var response = await AppApiHandler.getData(
+        url: AppUrls.adsApi, header: appController.appHeader);
 
-
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       ads.value = AppAds.fromJson(json);
     }
     appAdsLoading.value = false;
   }
 
-
   /// page variables
-  String get attendanceStatusValue{
-
-
-
-
-   // println('===============allowTimeOut $allowTimeOut');
-   // println('===============allowTimeOut ${attendanceStatus.value}');
-
-    return attendanceStatus.value == 0 ?  'today_holiday'.tr :attendanceStatus.value == 1 ?  'reg_attend'.tr : attendanceStatus.value == 2 ? 'reg_leaving'.tr : 'shift_done'.tr;
+  String get attendanceStatusValue {
+    return attendanceStatus.value == 0
+        ? 'today_holiday'.tr
+        : attendanceStatus.value == 1
+            ? 'reg_attend'.tr
+            : attendanceStatus.value == 2
+                ? 'reg_leaving'.tr
+                : 'shift_done'.tr;
   }
 
-  String get currentTime{
-   return '${dt.value}'.formattedTimeFromDateTime();
-    return '${hours}:${minutes} ${am_pm}';
+  String get currentTime {
+    return dt.value.timeIn12Hours;
   }
 
+  String get currentShiftTimeIn {
+    if(appDomain.contains('wasl.trafficksa')){
+      return currentShift.value.schedule?.timeIn ?? '';
 
-  String get hours {
-    if(dt.value.hour == 0) return '12';
+    }
+    return appController.loginModel.value.timeIn;
+  }
 
-    if(dt.value.hour > 12) return '${dt.value.hour - 12}';
-    return '0${dt.value.hour}';
+  String get currentShiftTimeOut {
+    if(appDomain.contains('wasl.trafficksa')){
+      return currentShift.value.schedule?.timeOut ?? '';
+
+    }
+    return appController.loginModel.value.timeOut;
+
   }
-  String get minutes {
-    return '${dt.value.minute}';
-  }
-  String get am_pm{
-    return dt.value.hour > 11 ? 'pm'.tr :'am'.tr;
+
+  String get branchName {
+    return appController.loginModel.value.user!.branch?.name ?? '';
   }
 
   bool get isLocationDisabled {
-   return appController.position == null;
+    return appController.position == null;
   }
-
-
-
 
   //controller lifecycle
   @override
   void onInit() {
-    // TODO: implement onInit
+
     super.onInit();
-    // tz.timeZoneDatabase.locations.forEach((key, value) {
-    //   println('key $key, location: ${value.name}');
-    // });
+
     final detroit = tz.getLocation('Asia/Riyadh');
-    // dt.value = tz.TZDateTime.from(dt.value, detroit);
+
     checkForAttendance();
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       dt.value = tz.TZDateTime.from(DateTime.now(), detroit);
     });
-   appController.determinePosition();
-   appController.getHolidaysData();
-   getIncomingEvents();
+    appController.determinePosition();
+    appController.getHolidaysData();
+    getIncomingEvents();
     getAppAds();
-
   }
-
-
-
-}
-
-DateTime exactTime(String time){
-  DateFormat format = DateFormat("hh:mm:ss");
-
-  var exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(time).hour,format.parse(time).minute);//DateTime.parse('${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day} 00:40:00.000');
-
-  return exactTime;
 }

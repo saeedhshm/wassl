@@ -17,7 +17,7 @@ class AdsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
+      child:controller.ads.value.ads.isNotEmpty ?  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -36,24 +36,14 @@ class AdsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          controller.appAdsLoading.value ?
-          const Center(
-            child: SendingLoadingWidget(),
-          )
-              :controller.ads.value.ads.isNotEmpty ? SingleChildScrollView(
+          SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: controller.ads.value.ads.map((e) => ItemWidget(e),).toList(),
             ),
           )
-              : Center(
-            child: Text('no_new_ads'.tr, style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
-                fontSize: 13,
-                fontWeight: FontWeight.w500)),
-          ),
         ],
-      ),
+      ) : const SizedBox(),
     ));
   }
 }
@@ -73,7 +63,7 @@ class ItemWidget extends StatelessWidget {
           onTap: ()=>Get.to(()=>AdDetailsPage(adItem)),
           child: Container(
             width: Get.width * 0.5,
-            margin: EdgeInsets.all(1.5),
+            margin: const EdgeInsets.all(1.5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
@@ -92,11 +82,11 @@ class ItemWidget extends StatelessWidget {
                   width: double.maxFinite,
                   height: Get.width * 0.2,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    child: LoadedImageWidget('${adItem.image}',fit: BoxFit.cover,),
+                    child: ImageController(adItem.image,fit: BoxFit.cover,).loadImage(),
                   ),
                 ),
                 Padding(
@@ -104,21 +94,21 @@ class ItemWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${adItem.title}',style: TextStyle(
+                      Text('${adItem.title}',style: const TextStyle(
                           color: AppColors.darkGreyTextColor,
                           fontWeight: FontWeight.bold,
                         fontSize: 12
                       ),),
                       Row(
                         children: [
-                          Text('${adItem.dateTime}',style: TextStyle(
+                          Text('${adItem.dateTime}',style: const TextStyle(
                               color: AppColors.lightGreyTextColor,
                               fontSize: 9
                           ),),
 
                         ],
                       ),
-                      Text('${adItem.details}',style: TextStyle(
+                      Text('${adItem.details}',style: const TextStyle(
                           color: AppColors.lightGreyTextColor,
                           fontSize: 10
                       ),maxLines: 2,overflow: TextOverflow.ellipsis,softWrap: false,),

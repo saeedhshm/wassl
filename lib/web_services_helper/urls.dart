@@ -1,6 +1,8 @@
 
 
 const String appDomain = 'https://waslhr.com';
+// const String appDomain = 'https://wasl.trafficksa.com';
+//
 const String _apiVrsion = '$appDomain/api/v1';
 
 //https://waslhr.com/public/file/HNfw2wuXW6E3Z5yHL0dQjiHm9E7a50HdNJvfIB9Z.png
@@ -29,7 +31,22 @@ class AppUrls {
   //https://waslhr.com/api/v1/assign
   static const String attendance = '$_assignApi/attendance';
   static const String leaving = '$_assignApi/leave';
-  static const String attendanceCheck = '$_assignApi/check';
+
+  static const String monthlyAttendance = '$_attendanceApi/month';
+
+  static String get attendanceCheck{
+    if(appDomain.contains('wasl.trafficksa')){
+      return '$_assignApi/check_v2';
+    }
+    return '$_assignApi/check';
+  }
+
+  static String get teamAttendanceApi{
+    if(appDomain.contains('wasl.trafficksa')){
+      return '$_apiVrsion/team_attendance_v2';
+    }
+    return '$_apiVrsion/team_attendance';
+  }
 
   ///orders/get
   static const String getAllOrders = '$_ordersApi/get';
@@ -37,8 +54,7 @@ class AppUrls {
   static const String getTeamOrders = '$_ordersApi/get-team-orders';
   static const String setTeamOrderSatus = '$_ordersApi/set-team-order-status';
 
-  //attendance
-  static const String monthlyAttendance = '$_attendanceApi/month';
+
 
   //{{domain}}/get_holiday_types
   static const String getHolidayTypes = '$_apiVrsion/get_holiday_types';
@@ -136,8 +152,7 @@ class AppUrls {
   static const String covenantApi = '$_apiVrsion/covenant';
   // {{domain}}/vacations
   static const String vacationsApi = '$_apiVrsion/vacations';
-  // {{domain}}/team_attendance
-  static const String teamAttendanceApi = '$_apiVrsion/team_attendance';
+
   // {{domain}}/SalaryDetails/14
   static const String salaryDetailsApi = '$_apiVrsion/SalaryDetails';
   // {{domain}}/SalaryMonth/14
@@ -146,5 +161,24 @@ class AppUrls {
   static const String adsApi = '$_apiVrsion/ads';
   //{{domain}}/meetings
   static const String meetingsApi = '$_apiVrsion/meetings';
+
+  //tabreer
+  // {{domain}}/get_tabrir_types
+static String get tabreerTypesApi{
+  return '$_apiVrsion/get_tabrir_types';
+}
+  //{{domain}}/tabrir/add
+  static String get addTabreerApi{
+    return '$_apiVrsion/tabrir/add';
+  }
+  //{{domain}}/tabrir/edit/23
+  //{{domain}}/tabrir/update/22
+  static String get updateTabreerApi{
+    return '$_apiVrsion/tabrir/update';
+  }
+  //{{domain}}/tabrir/cancel/10
+  static String get cancelTabreerApi{
+    return '$_apiVrsion/tabrir/cancel';
+  }
 }
 

@@ -28,7 +28,7 @@ class HeaderWidget extends StatelessWidget {
               children: [
                 CircularWidget(
                   size: 100,
-                  child: LoadedImageWidget(menuViewModel.userImage),
+                  child: ImageController(menuViewModel.userImage).loadImage(),
                 ),
               ],
             ),

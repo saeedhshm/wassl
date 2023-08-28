@@ -15,7 +15,7 @@ class ShiftInfoWidget extends StatelessWidget {
 
     return Obx(() => Column(
       children: [
-        Text(controller.appController.loginModel.value.user!.branch?.name ?? '',style: const TextStyle(
+        Text(controller.branchName,style: const TextStyle(
             color: Colors.white,
             fontSize: 17,
             fontWeight: FontWeight.w600
@@ -27,7 +27,7 @@ class ShiftInfoWidget extends StatelessWidget {
             fontWeight: FontWeight.w500
         ),),
         const SizedBox(height: 10,),
-        Text('${controller.appController.loginModel.value.timeIn} - ${controller.appController.loginModel.value.timeOut}',style: const TextStyle(
+        Text('${controller.currentShiftTimeIn} - ${controller.currentShiftTimeOut}',style: const TextStyle(
             color: Colors.white,
             fontSize: 17,
             fontWeight: FontWeight.w500

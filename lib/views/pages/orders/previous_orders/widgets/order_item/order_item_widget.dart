@@ -549,7 +549,7 @@ class OrderItemWidget extends StatelessWidget {
     final PreviousRequestsController controller = Get.find();
     Future.delayed(Duration.zero,()async{
       try{
-        await controller.getAllOrders();
+        await controller.getMyOrders();
       }on NoDataAvailableException catch (e){
 
       }finally{

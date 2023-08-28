@@ -12,6 +12,7 @@ import 'package:wassl/views/pages/orders/pages/finance_spended_request.dart';
 import 'package:wassl/views/pages/orders/pages/holday_request.dart';
 import 'package:wassl/views/pages/orders/pages/letter_request.dart';
 import 'package:wassl/views/pages/orders/pages/loan_order.dart';
+import 'package:wassl/views/pages/orders/pages/tabreer_request.dart';
 import 'package:wassl/views/pages/orders/pages/visa_request.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
@@ -193,12 +194,25 @@ class RequestsPage extends StatelessWidget {
                              color: Colors.grey.withOpacity(0.1)
                          ),
                        ),
-
                        InkWell(
                          onTap: (){
                            Get.to(()=> LetterRequestPage());
                          },
                          child:ItemWidget(icon: 'assets/images/letter.svg',title: 'letter'.tr,),
+
+                       ),
+                       Container(
+                         width: double.infinity,
+                         height: 0.5,
+                         decoration: BoxDecoration(
+                             color: Colors.grey.withOpacity(0.1)
+                         ),
+                       ),
+                       InkWell(
+                         onTap: (){
+                           Get.to(()=> ApologyRequestPage());
+                         },
+                         child:ItemWidget(icon: 'assets/images/letter.svg',title: 'apology'.tr,),
 
                        ),
                        Container(

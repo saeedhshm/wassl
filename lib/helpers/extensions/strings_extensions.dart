@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../constants/print_ln.dart';
 
 extension NumberParsing on String {
@@ -26,13 +26,31 @@ extension NumberParsing on String {
 }
 
 extension FormatedDateTimeExtension on String {
+
+  ///this function take time in this
+  ///format 16:00:00 in 24 hours
+  ///will return String time in 12 hours
   String formattedTime() {
-    var myTime = '----';
-    var timeSpieces = this.split(':');
-    if (timeSpieces.length > 1) {
-      myTime = _formattedTime(timeSpieces);
+
+    String? myTime;
+
+    try{
+      DateFormat dateFormatOf24Hours = DateFormat("HH:mm:ss");
+      var timeIn24 = dateFormatOf24Hours.parse(this);
+      myTime = getTimeFormatOf12hours(of: timeIn24);
+    }catch(e){
+     println(e,'time exception');
     }
-    return myTime;
+
+    return myTime ?? '---';
+  }
+
+  DateTime get exactDateTimeFromGivenHours{
+    DateFormat format = DateFormat("HH:mm:ss");
+
+    var exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(this).hour,format.parse(this).minute);//DateTime.parse('${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day} 00:40:00.000');
+
+    return exactTime;
   }
 
   String get timeFromTZone{
@@ -64,16 +82,6 @@ extension FormatedDateTimeExtension on String {
     return myDate;
   }
 
-  String formattedTimeFromDateTime() {
-    var myTime = '----';
-    var splitedDate = split(' ');
-    var timeSpieces = splitedDate[1].split(':');
-
-    if (timeSpieces.length > 1) {
-      myTime = _formattedTime(timeSpieces);
-    }
-    return myTime;
-  }
 
   String get timeFromTimeSelection {
     var time = '-----';
@@ -103,6 +111,7 @@ extension FormatedDateTimeExtension on String {
     }
     return h;
   }
+
   int get minuteOfTimeSelection{
     int m = 0;
     if (isNotEmpty) {
@@ -111,16 +120,29 @@ extension FormatedDateTimeExtension on String {
     }
     return m;
   }
+
 }
 
-String _formattedTime(List<String> timeSpieces) {
-  int hours = int.tryParse(timeSpieces[0]) ?? 0;
-  int minuts = int.tryParse(timeSpieces[1]) ?? 0;
-  String status = '';
-  if (hours > 12) {
-    hours = hours - 12;
-    return '${hours == 0 ? 12 : hours < 10 ? '0$hours' : hours}:${minuts == 0 ? '00' : minuts < 10 ? '0$minuts' : minuts} ${'pm'.tr}';
-  } else {
-    return '${hours == 0 ? 12 : hours < 10 ? '0$hours' : hours}:${minuts == 0 ? '00' : minuts} ${'am'.tr}';
+
+
+
+
+String? getTimeFormatOf12hours({required DateTime of}){
+  String? result;
+
+  try{
+
+
+    var dateFormatOf12Hours = DateFormat("hh:mm a");
+    var resultIn12 = dateFormatOf12Hours.format(of);
+    var timePieces = resultIn12.split(' ');
+    if (timePieces.length > 1) {
+      result = '${timePieces.first} ${timePieces.last.tr}';
+    }
+  }catch (e){
+    println(e,'‼️');
   }
+
+
+  return result;
 }

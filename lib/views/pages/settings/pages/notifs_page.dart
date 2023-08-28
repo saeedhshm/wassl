@@ -100,7 +100,7 @@ class NotifsPage extends StatelessWidget {
                               height: 85,
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
-                                  child: LoadedImageWidget( model.image)),
+                                  child: ImageController( model.image).loadImage()),
                             ),
                             const SizedBox(width: 10,),
                             Expanded(

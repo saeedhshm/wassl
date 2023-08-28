@@ -40,7 +40,7 @@ class OrderDetailsController extends GetxController{
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
       final PreviousRequestsController prevController = Get.find();
-      await prevController.getAllOrders();
+      await prevController.getMyOrders();
       await prevController.getTeamOrders();
       Get.back();
       Future.delayed(Duration.zero,(){

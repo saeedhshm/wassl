@@ -151,7 +151,7 @@ class MonthDay {
 
   MonthDay.fromJson(Map<String, dynamic> json) {
     // println(json['day'] + ' ' + json['status']);
-    println(json['day']);
+
     day = json['day'];
     _status = json['status'];
     attendanceDay = json['attendance'] != null

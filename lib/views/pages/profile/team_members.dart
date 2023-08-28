@@ -88,7 +88,7 @@ class TeamMembersPage extends StatelessWidget {
                                     padding: EdgeInsets.zero,
                                     itemBuilder: (_,index){
                                       return MemberItemWidget(
-                                        member: controller.teamAttendance[index],
+                                        memberAttendance: controller.teamAttendance[index],
                                       );
                                     },
                                     separatorBuilder: (_,index){
@@ -141,10 +141,10 @@ class TeamMembersPage extends StatelessWidget {
 
 class MemberItemWidget extends StatelessWidget {
 
-  final MemberAttendance member;
+  final MemberAttendance memberAttendance;
   const MemberItemWidget({
     Key? key,
-    required this.member,
+    required this.memberAttendance,
   }) : super(key: key);
 
   @override
@@ -173,36 +173,44 @@ class MemberItemWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(member.fullName,style: const TextStyle(
+                Text(memberAttendance.fullName,style: const TextStyle(
                   color: AppColors.darkGreyTextColor,
                   fontWeight: FontWeight.w800,
                   fontSize: 13
                 ),),
 
-                // Text('مطور واجهات'.tr,style: TextStyle(
-                //     color: AppColors.lightGreyTextColor,
-                //     fontSize: 12
-                // ),),
+                Text(memberAttendance.jobName,style: TextStyle(
+                    color: AppColors.lightGreyTextColor,
+                    fontSize: 12
+                ),),
               ],
             ),
-            flex: 5,
+            flex: 4,
           ),
           Expanded(
-            flex: 3,
-            child: Text(member.attendanceTime,style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
-                fontWeight: FontWeight.bold
-                // fontSize: 12
-            ),),
-          ),
-          Expanded(
-            flex: 3,
-            child: Text(member.leaveTime,style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
-                fontWeight: FontWeight.bold
-                // fontSize: 12
-            ),),
-          ),
+              flex: 5,
+              child: Column(
+            children: memberAttendance.attendance.map((e) => Row(
+              children: [
+                Expanded(
+
+                  child: Text(e.attendanceTime,style: const TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.bold
+                    // fontSize: 12
+                  ),),
+                ),
+                Expanded(
+
+                  child: Text(e.leaveTime,style: const TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.bold
+                    // fontSize: 12
+                  ),),
+                ),
+              ],
+            ),).toList(),
+          ))
         ],
       ),
     );

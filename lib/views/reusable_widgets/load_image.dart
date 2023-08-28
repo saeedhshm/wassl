@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
 
-class LoadedImageWidget extends StatelessWidget {
+class ImageController {
 
   final String imageName;
   final BoxFit fit;
   final Color? color;
 
-  const LoadedImageWidget(this.imageName,{Key? key, this.fit = BoxFit.cover,this.color}) : super(key: key);
+  const ImageController(this.imageName,{Key? key, this.fit = BoxFit.cover,this.color}) ;
 
-  @override
-  Widget build(BuildContext context) {
+  // @override
+  // Widget build(BuildContext context) {
+  //
+  //   return
+  // }
+
+  Widget loadImage(){
     if(imageName.contains('http')){
-      return Image.network(imageName,fit: fit,);
+      return _loadImageFromNetwork();
     }
+
+    return _loadImageFromAssets();
+  }
+
+  Widget _loadImageFromAssets(){
     return Image.asset(imageName,fit: fit,color: color,);
   }
+
+  Widget _loadImageFromNetwork(){
+    return Image.network(imageName,fit: fit,errorBuilder: (context,exception,stack){
+      // println('image exception $exception');
+      return const Icon(Icons.image_not_supported_rounded);
+    },);
+  }
+
 }

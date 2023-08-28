@@ -11,17 +11,17 @@ import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 import 'order_types_controller.dart';
 
-class LetterRequestController extends GetxController{
+class ApologyRequestController extends GetxController{
 
   var loading = false.obs;
   var loadingLetterTypes = false.obs;
   final AppController appController = Get.find();
 
+  DateTime? date;
   String? reason;
   String? filePath;
   int? type;
-  String? directedToAr;
-  String? directedToEn;
+
   var orderTypes = OrderTypesRetriever().obs;
   OrderType? selectedType;
   var errorsList = <String>[].obs;
@@ -35,11 +35,9 @@ class LetterRequestController extends GetxController{
     if(selectedType == null) {
       throw CustomException(errorMessage: 'letter_type_exception');
     }
-    if(directedToAr == null || directedToAr == ''){
-      throw CustomException(errorMessage: 'directed_to_ar_exception');
-    }
-    if(directedToEn == null || directedToEn == ''){
-      throw CustomException(errorMessage: 'directed_to_en_exception');
+
+    if(date == null){
+      throw CustomException(errorMessage: 'inter_date_exception');
     }
     if(reason == null || reason == ''){
       throw CustomException(errorMessage:'reason_exception');
@@ -47,14 +45,14 @@ class LetterRequestController extends GetxController{
 
     var body = {
       'type': '${selectedType?.id}',
-      'directed_to_en': '$directedToEn',
-      'directed_to_ar': '$directedToAr',
+      'date': '${date?.year}-${date?.month}-${date?.day}',
       'reason': '$reason'
     };
 
 
     loading.value = true;
-    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addLetter, body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addTabreerApi, body: body,header: appController.appHeader,fileName: filePath);
+
 
 
     loading.value = false;
@@ -76,11 +74,8 @@ class LetterRequestController extends GetxController{
     if(selectedType == null) {
       throw CustomException(errorMessage: 'letter_type_exception');
     }
-    if(directedToAr == null || directedToAr == ''){
-      throw CustomException(errorMessage: 'directed_to_ar_exception');
-    }
-    if(directedToEn == null || directedToEn == ''){
-      throw CustomException(errorMessage: 'directed_to_en_exception');
+    if(date == null){
+      throw CustomException(errorMessage: 'inter_date_exception');
     }
     if(reason == null || reason == ''){
       throw CustomException(errorMessage:'reason_exception');
@@ -88,15 +83,14 @@ class LetterRequestController extends GetxController{
 
     var body = {
       'type': '${selectedType?.id}',
-      'directed_to_en': '$directedToEn',
-      'directed_to_ar': '$directedToAr',
+      'date': '${date?.year}-${date?.month}-${date?.day}',
       'reason': '$reason'
     };
 
 
 
     loading.value = true;
-    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateLetter}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updateTabreerApi}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
 
     loading.value = false;
     if(response.statusCode != 200){
@@ -114,7 +108,7 @@ class LetterRequestController extends GetxController{
   Future cancelRequest(String orderId) async{
 
 
-    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelLetter}/$orderId',header: appController.appHeader, );
+    var response = await  AppApiHandler.putData(url: '${AppUrls.cancelTabreerApi}/$orderId',header: appController.appHeader, );
 
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
@@ -129,8 +123,7 @@ class LetterRequestController extends GetxController{
   getLetterTypes() async {
 
     loadingLetterTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.getLetterTypes,header: appController.appHeader);
-
+    var response = await AppApiHandler.getData(url: AppUrls.tabreerTypesApi,header: appController.appHeader);
 
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);

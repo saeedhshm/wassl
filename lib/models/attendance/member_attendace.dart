@@ -16,60 +16,40 @@ class TeamAttendance{
     }
 
   }
-
-
-
-
 }
 
 class MemberAttendance {
   int? id;
   int? employeeId;
   String? responsibleEmployeeId;
-  Attendance? attendance;
+  List<Attendance> attendance = [];
   Employee? employee;
 
-  MemberAttendance(
-      {this.id,
-        this.employeeId,
-        this.responsibleEmployeeId,
-        this.attendance,
-        this.employee});
+  MemberAttendance();
 
   MemberAttendance.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
     responsibleEmployeeId = json['responsible_employee_id'];
-    attendance = json['attendance'] != null
-        ? Attendance.fromJson(json['attendance'])
-        : null;
+    if (json['attendance'] != null) {
+      attendance = <Attendance>[];
+      json['attendance'].forEach((v) {
+        attendance.add(Attendance.fromJson(v));
+      });
+    }
     employee = json['employee'] != null
-        ? Employee.fromJson(json['employee'])
+        ? new Employee.fromJson(json['employee'])
         : null;
   }
 
-  String get attendanceTime{
-    var time = 'missed'.tr;
-    var attTime = attendance?.attendance?.attendanceTime ?? '';
 
-    if(attTime.length > 1) {
-      time = attTime.split(' ')[1];
+  bool get memberIsAbsent{
+    if(attendance.length > 1){
+      return (attendance.first.attendance == null && attendance.last.attendance == null);
     }
-
-    return time.formattedTime();
-
+    return attendance.first.attendance == null;
   }
 
-  String get leaveTime{
-    var time = 'missed'.tr;
-    var attTime = attendance?.attendance?.leaveTime ?? '';
-
-    if(attTime.length > 1) {
-      time = attTime.split(' ')[1];
-    }
-
-    return time.formattedTime();
-  }
 
   String get fullName{
     var name = employee?.fullName ?? '';
@@ -92,21 +72,31 @@ class MemberAttendance {
 
     return n;
   }
+
+  String get jobName{
+    return employee?.job?.fullName ?? '';
+  }
+
 }
 
 class Attendance {
   String? message;
   int? _attendanceStatus;
   AttendanceInfo? attendance;
+  dynamic vacation;
+  Schedule? schedule;
 
-  Attendance({this.message, this.attendance});
+  Attendance();
 
   Attendance.fromJson(Map<String, dynamic> json) {
-
     message = json['message'];
     _attendanceStatus = json['attendance_status'];
     attendance = json['attendance'] != null
         ? AttendanceInfo.fromJson(json['attendance'])
+        : null;
+    vacation = json['vacation'];
+    schedule = json['schedule'] != null
+        ? Schedule.fromJson(json['schedule'])
         : null;
   }
 
@@ -115,12 +105,38 @@ class Attendance {
     return  status == 0 ? 'holiday' : status == 1 ? 'no_attendance_assign' : status == 2 ? 'attendance_assign' : 'attendance_and_leave_assign';
   }
 
+
+  String get attendanceTime{
+    var time = 'missed'.tr;
+    var attTime = attendance?.attendanceTime ?? '';
+
+    if(attTime.length > 1) {
+      time = attTime.split(' ')[1];
+    }
+
+    return time.formattedTime();
+
+  }
+
+  String get leaveTime{
+    var time = 'missed'.tr;
+
+    var attTime = attendance?.leaveTime ?? '';
+
+
+    if(attTime.length > 1) {
+      time = attTime.split(' ')[1];
+    }
+
+    return time.formattedTime();
+  }
+
 }
 
 class AttendanceInfo {
   int? id;
   int? userId;
-  dynamic attendanceTime;
+  String? attendanceTime;
   dynamic attendanceOverTime;
   String? attendanceLateTime;
   int? attendanceStatus;
@@ -135,9 +151,11 @@ class AttendanceInfo {
   AttendanceInfo(
       {this.id,
         this.userId,
+        this.attendanceTime,
         this.attendanceOverTime,
         this.attendanceLateTime,
         this.attendanceStatus,
+        this.leaveTime,
         this.leaveOverTime,
         this.leaveEarlyTime,
         this.leaveStatus,
@@ -152,7 +170,6 @@ class AttendanceInfo {
     attendanceOverTime = json['attendance_over_time'];
     attendanceLateTime = json['attendance_late_time'];
     attendanceStatus = json['attendance_status'];
-
     leaveTime = json['leave_time'];
     leaveOverTime = json['leave_over_time'];
     leaveEarlyTime = json['leave_early_time'];
@@ -165,14 +182,79 @@ class AttendanceInfo {
 
 }
 
+class Schedule {
+  int? id;
+  int? employeeId;
+  int? scheduleId;
+  int? minuteTimeOut;
+  int? minuteTimeIn;
+  String? allowTimeOut;
+  String? allowTimeIn;
+  Info? info;
+
+  Schedule(
+      {this.id,
+        this.employeeId,
+        this.scheduleId,
+        this.minuteTimeOut,
+        this.minuteTimeIn,
+        this.allowTimeOut,
+        this.allowTimeIn,
+        this.info});
+
+  Schedule.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    employeeId = json['employee_id'];
+    scheduleId = json['schedule_id'];
+    minuteTimeOut = json['minute_time_out'];
+    minuteTimeIn = json['minute_time_in'];
+    allowTimeOut = json['allow_time_out'];
+    allowTimeIn = json['allow_time_in'];
+    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+  }
+
+}
+
+class Info {
+  int? id;
+  int? companyId;
+  int? type;
+  String? slug;
+  String? weekEndDays;
+  String? timeIn;
+  String? timeOut;
+
+  Info(
+      {this.id,
+        this.companyId,
+        this.type,
+        this.slug,
+        this.weekEndDays,
+        this.timeIn,
+        this.timeOut});
+
+  Info.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    companyId = json['company_id'];
+    type = json['type'];
+    slug = json['slug'];
+    weekEndDays = json['week_end_days'];
+    timeIn = json['time_in'];
+    timeOut = json['time_out'];
+  }
+
+}
+
 class Employee {
   int? id;
   String? email;
   String? code;
   String? _fullName;
   String? _fullNameEn;
+  int? jobId;
+  Job? job;
 
-  Employee({this.id, this.email, this.code, });
+  Employee();
 
   Employee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -180,11 +262,37 @@ class Employee {
     code = json['code'];
     _fullName = json['full_name'];
     _fullNameEn = json['full_name_en'];
-
+    jobId = json['job_id'];
+    job = json['job'] != null ? new Job.fromJson(json['job']) : null;
   }
 
   String get fullName{
     return ('lang_code'.tr == 'ar' ?  _fullName : _fullNameEn) ?? '';
+  }
+
+}
+
+class Job {
+  int? id;
+  int? companyId;
+  String? _nameAr;
+  String? _nameEn;
+  String? createdAt;
+  String? updatedAt;
+
+  Job();
+
+  Job.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    companyId = json['company_id'];
+    _nameAr = json['name_ar'];
+    _nameEn = json['name_en'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  String get fullName{
+    return ('lang_code'.tr == 'ar' ?  _nameAr : _nameEn) ?? '';
   }
 
 }

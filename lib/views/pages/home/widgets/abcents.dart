@@ -16,12 +16,7 @@ class AbsentsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Obx(()=>controller.loading.value ? const Center(
-        child: Padding(
-          padding: EdgeInsets.all(18.0),
-          child: SendingLoadingWidget(),
-        ),
-      ) : Column(
+      child: Obx(()=>controller.teamAbsence.isNotEmpty ? Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal:8.0),
@@ -39,7 +34,7 @@ class AbsentsWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          Obx(() =>controller.teamAbsence.isNotEmpty ? Column(
+          Obx(() =>Column(
             children: [
               for(int i=0;i<controller.teamAbsence.length;i++)
                 Column(
@@ -48,7 +43,7 @@ class AbsentsWidget extends StatelessWidget {
                       name: controller.teamAbsence[i].employee?.fullName ?? '',
                       startDate: '25 مارس 2023',
                       endDate: '28 مارس 2023',
-                      attendanceStatus: controller.teamAbsence[i].attendance?.attendanceStatus ?? '',
+                      attendanceStatus: controller.teamAbsence[i].attendance?.first.attendanceStatus ?? '',
                     ),
 
                   ],
@@ -57,12 +52,9 @@ class AbsentsWidget extends StatelessWidget {
 
 
             ],
-          ):Text('no_absence_today'.tr, style: const TextStyle(
-              color: AppColors.darkGreyTextColor,
-              fontSize: 13,
-              fontWeight: FontWeight.w500)))
+          ))
         ],
-      )),
+      ):const SizedBox()),
     );
   }
 }

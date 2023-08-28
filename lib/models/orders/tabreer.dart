@@ -1,20 +1,21 @@
-
 import 'AllOrders.dart';
 import 'order_status.dart';
 import 'order_type.dart';
 
-class LetterDate implements Order{
+class ApologyData implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
 
-  String? directedToEn;
-  String? directedToAr;
-  String? _reason;
+  String? date;
 
   dynamic _file;
   String? createdAt;
   String? updatedAt;
+  String? _reason;
+  String? typeOfOrder;
+
+
 
   @override
   int? activeResponsibleId;
@@ -29,25 +30,23 @@ class LetterDate implements Order{
   @override
   var hrComment;
 
-  LetterDate();
+  ApologyData();
 
-  LetterDate.fromJson(Map<String, dynamic> json) {
+  ApologyData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
-    directedToEn = json['directed_to_en'];
-    directedToAr = json['directed_to_ar'];
+    date = json['date'];
     _reason = json['reason'];
-    status = json['status'] != null ? Status.fromJson(json['status']) : null;
+    status =
+    json['status'] != null ?  Status.fromJson(json['status']) : null;
     _file = json['file'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    nameEmployee = json['name'] != null
-        ? ResponsibleEmployee.fromJson(json['name'])
-        : null;
     hrComment = json['hr_comment'];
     activeResponsibleId = json['active_responsible_id'];
+    typeOfOrder = json['type_of_order'];
     if (json['confirmation'] != null) {
       confirmation = <Confirmation>[];
       json['confirmation'].forEach((v) {
@@ -56,16 +55,14 @@ class LetterDate implements Order{
     }
   }
 
-
-
-  String get letterType => type?.name ?? '';
+  String get apologyType => type?.name ?? '';
 
   @override
   String get file => _file ?? '';
 
   @override
   // TODO: implement orderType
-  String get orderName => 'LetterDate';
+  String get orderName => 'ApologyData';
   @override
   // TODO: implement orderDate
   String get orderDate {
@@ -89,3 +86,4 @@ class LetterDate implements Order{
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
 }
+

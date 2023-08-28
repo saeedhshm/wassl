@@ -370,8 +370,10 @@ Map<String,String>  englishString = {
 
   'days_available_to_use':'available days',
   'vacations_balance':'Vacations balance',
-  '':'',
-  '':'',
+  'apology':'Apology',
+  'AM':'am',
+  'PM':'pm',
+  'ApologyData':'Apology',
   '':'',
   '':'',
   '':'',

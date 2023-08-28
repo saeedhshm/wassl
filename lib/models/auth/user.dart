@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wassl/models/auth/schedule.dart';
 
 
 class User {
@@ -43,6 +44,7 @@ class User {
   int? isActive;
   int? stop;
   String? fcmToken;
+  List<Schedule>?  allSchedules = <Schedule>[];
   Schedule? schedule;
   Branch? branch;
   Branch? job;
@@ -88,6 +90,7 @@ class User {
         this.isActive,
         this.stop,
         this.fcmToken,
+        this.allSchedules,
         this.schedule,
         this.branch,
         this.job});
@@ -135,6 +138,11 @@ class User {
     isActive = json['is_active'];
     stop = json['stop'];
     fcmToken = json['fcm_token'];
+    if (json['all_schedules'] != null) {
+      json['all_schedules'].forEach((v) {
+        allSchedules!.add(Schedule.fromJson(v));
+      });
+    }
     schedule = json['schedule'] != null
         ?  Schedule.fromJson(json['schedule'])
         : null;
@@ -143,59 +151,6 @@ class User {
     job = json['job'] != null ?  Branch.fromJson(json['job']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['job_id'] = this.jobId;
-    data['company_id'] = this.companyId;
-    data['branch_id'] = this.branchId;
-    data['nationality_id'] = this.nationalityId;
-    data['photo'] = this.photo;
-    data['code'] = this.code;
-    data['full_name'] = this._fullName;
-    data['status'] = this.status;
-    data['gender'] = this.gender;
-    data['date_of_birth'] = this.dateOfBirth;
-    data['date_of_joining'] = this.dateOfJoining;
-    data['number'] = this.number;
-    data['qualification'] = this.qualification;
-    data['emergency_number'] = this.emergencyNumber;
-    data['pan_number'] = this.panNumber;
-    data['full_name_en'] = this._fullNameEn;
-    data['current_address'] = this.currentAddress;
-    data['permanent_address'] = this.permanentAddress;
-    data['formalities'] = this.formalities;
-    data['offer_acceptance'] = this.offerAcceptance;
-    data['probation_period'] = this.probationPeriod;
-    data['date_of_confirmation'] = this.dateOfConfirmation;
-    data['department_id'] = this.departmentId;
-    data['salary'] = this.salary;
-    data['account_number'] = this.accountNumber;
-    data['bank_name'] = this.bankName;
-    data['un_number'] = this.unNumber;
-    data['date_of_resignation'] = this.dateOfResignation;
-    data['notice_period'] = this.noticePeriod;
-    data['last_working_day'] = this.lastWorkingDay;
-    data['full_final'] = this.fullFinal;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['nationality_number'] = this.nationalityNumber;
-    data['email'] = this.email;
-    data['type_id'] = this.typeId;
-    data['is_active'] = this.isActive;
-    data['stop'] = this.stop;
-    data['fcm_token'] = this.fcmToken;
-    if (this.schedule != null) {
-      data['schedule'] = this.schedule!.toJson();
-    }
-    if (this.branch != null) {
-      data['branch'] = this.branch!.toJson();
-    }
-    if (this.job != null) {
-      data['job'] = this.job!.toJson();
-    }
-    return data;
-  }
 
   String get fullName{
     return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
@@ -203,94 +158,8 @@ class User {
 
 }
 
-class Schedule {
-  int? id;
-  int? employeeId;
-  int? scheduleId;
-  int? minuteTimeOut;
-  int? minuteTimeIn;
-  String? allowTimeOut;
-  String? allowTimeIn;
-  Info? info;
-
-  Schedule(
-      {this.id,
-        this.employeeId,
-        this.scheduleId,
-        this.minuteTimeOut,
-        this.minuteTimeIn,
-        this.allowTimeOut,
-        this.allowTimeIn,
-        this.info});
-
-  Schedule.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    employeeId = json['employee_id'];
-    scheduleId = json['schedule_id'];
-    minuteTimeOut = json['minute_time_out'];
-    minuteTimeIn = json['minute_time_in'];
-    allowTimeOut = json['allow_time_out'] ?? '00:40:00';
-    allowTimeIn = json['allow_time_in'];
-    info = json['info'] != null ?  Info.fromJson(json['info']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['employee_id'] = this.employeeId;
-    data['schedule_id'] = this.scheduleId;
-    data['minute_time_out'] = this.minuteTimeOut;
-    data['minute_time_in'] = this.minuteTimeIn;
-    data['allow_time_out'] = this.allowTimeOut;
-    data['allow_time_in'] = this.allowTimeIn;
-    if (this.info != null) {
-      data['info'] = this.info!.toJson();
-    }
-    return data;
-  }
-}
 
 
-class Info {
-  int? id;
-  int? companyId;
-  int? type;
-  String? slug;
-  String? weekEndDays;
-  String? timeIn;
-  String? timeOut;
-
-  Info(
-      {this.id,
-        this.companyId,
-        this.type,
-        this.slug,
-        this.weekEndDays,
-        this.timeIn,
-        this.timeOut});
-
-  Info.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    companyId = json['company_id'];
-    type = json['type'];
-    slug = json['slug'];
-    weekEndDays = json['week_end_days'];
-    timeIn = json['time_in'];
-    timeOut = json['time_out'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_id'] = this.companyId;
-    data['type'] = this.type;
-    data['slug'] = this.slug;
-    data['week_end_days'] = this.weekEndDays;
-    data['time_in'] = this.timeIn;
-    data['time_out'] = this.timeOut;
-    return data;
-  }
-}
 
 class Branch {
   int? id;
@@ -318,16 +187,6 @@ class Branch {
     updatedAt = json['updated_at'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_id'] = this.companyId;
-    data['name_ar'] = this._nameAr;
-    data['name_en'] = this._nameEn;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    return data;
-  }
   
   String get name{
     return ('lang_code'.tr == 'ar' ? _nameAr  : _nameEn) ?? '';

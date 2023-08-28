@@ -17,12 +17,8 @@ class NextEvents extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Padding(
       padding: const EdgeInsets.all(16.0),
-      child: controller.nextEventsLoading.value ?
-      const Center(
-        child: SendingLoadingWidget(),
-      )
-          :
-      Column(
+      child:
+      controller.events.value.events.isNotEmpty ?  Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -41,20 +37,15 @@ class NextEvents extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8,),
-          controller.events.value.events.isNotEmpty ? SingleChildScrollView(
+          SingleChildScrollView(
             child: Row(
               children: controller.events.value.events.map((e) => ItemWidget(e)).toList(),
             ),
             scrollDirection: Axis.horizontal,
           )
-              : Center(
-            child: Text('no_incoming_events'.tr, style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
-                fontSize: 13,
-                fontWeight: FontWeight.w500)),
-          ),
+
         ],
-      )
+      ):const SizedBox()
 
     ));
   }
@@ -76,7 +67,7 @@ class ItemWidget extends StatelessWidget {
           onTap: ()=>Get.to(()=>IncomingEventsPage(event)),
           child: Container(
             width: Get.width * 0.5,
-            margin: EdgeInsets.all(1.5),
+            margin: const EdgeInsets.all(1.5),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
