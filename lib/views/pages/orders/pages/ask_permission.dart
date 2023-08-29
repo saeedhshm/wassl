@@ -35,6 +35,10 @@ class AskPermissionPage extends StatelessWidget {
       controller.reason = permission.reason;
       var endDateArr = permission.date?.split('-');
       dateCtrl.text = permission.date ?? '';
+      println('=-=-=-=-=-=-==-=');
+      println(permission.timeIn);
+      println(permission.timeOut);
+      println('=-=-=-=-=-=-==-=');
       controller.permissionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
 
     }

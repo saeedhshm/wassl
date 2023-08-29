@@ -91,7 +91,9 @@ class AskPermissionController extends GetxController{
       'type': '${selectedType?.id}',
       'date': '${permissionDate?.year}-${permissionDate?.month}-${permissionDate?.day}',
       'reason_type': '${reasonType?.id}',
-      'reason': '$reason'
+      'reason': '$reason',
+      "time_in": _timeIn.value,
+      "time_out": _timeOut.value,
     };
 
 

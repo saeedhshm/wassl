@@ -6,23 +6,25 @@ class AskPermissionsData implements Order {
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  @override
-  OrderType? type;
+  dynamic timeIn;
+  dynamic timeOut;
   String? date;
   OrderType? reasonType;
   String? _reason;
-  @override
-  Status? status;
   String? _file;
   String? createdAt;
   String? updatedAt;
+
+  @override
+  OrderType? type;
+  @override
+  Status? status;
   @override
   int? activeResponsibleId;
   @override
   ResponsibleEmployee? nameEmployee;
   @override
   List<Confirmation>? confirmation;
-
   @override
   var hrComment;
 
@@ -33,6 +35,8 @@ class AskPermissionsData implements Order {
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     date = json['date'];
+    timeIn = json['time_in'];
+    timeOut = json['time_out'];
     reasonType = json['reason_type'] != null
         ? OrderType.fromJson(json['reason_type'])
         : null;
