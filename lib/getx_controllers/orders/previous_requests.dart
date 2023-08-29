@@ -60,10 +60,10 @@ class PreviousRequestsController extends GetxController{
 
 
     var url = '${AppUrls.getTeamOrders}?page=$teamOrdersPage';
-    // if(_groupValueOfTeamOrders.value.status != 0){
-    //   url = '$url&status=${_groupValueOfTeamOrders.value.status}';
-    // }
-    url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
+    if(_groupValueOfTeamOrders.value.status != 0){
+      url = '$url&status=${_groupValueOfTeamOrders.value.status}';
+    }
+    // url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
 
 
 

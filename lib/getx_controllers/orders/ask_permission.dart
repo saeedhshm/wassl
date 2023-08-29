@@ -98,6 +98,11 @@ class AskPermissionController extends GetxController{
 
 
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updatePermission}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
+    println(body,'💗');
+    println('${AppUrls.updatePermission}/$orderId','💗');
+    println(response.statusCode,'💗');
+    var resp = await response.stream.bytesToString();
+    println(resp,'💗');
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       errorsList.add('body: $body');
@@ -131,6 +136,9 @@ class AskPermissionController extends GetxController{
 
     var response = await AppApiHandler.getData(url: AppUrls.getPermissionsTypes,header: appController.appHeader);
 
+    println(AppUrls.getPermissionsTypes);
+    println(response.statusCode);
+    println(response.body);
     if(response.statusCode == 200){
 
       var json = jsonDecode(response.body);
@@ -182,6 +190,14 @@ class AskPermissionController extends GetxController{
        _timeIn.value = timeIn24.toString().split(' ')[1].split('.')[0];
 
      }
+  }
+
+  set timeInString(String value){
+    _timeIn.value = value;
+  }
+
+  set timeOutString(String value){
+    _timeOut.value = value;
   }
 
   set timeOut(selectedTime){
