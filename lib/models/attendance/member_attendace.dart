@@ -114,7 +114,7 @@ class Attendance {
       time = attTime.split(' ')[1];
     }
 
-    return time.formattedTime();
+    return time.formattedTime() ?? '---';
 
   }
 
@@ -128,7 +128,7 @@ class Attendance {
       time = attTime.split(' ')[1];
     }
 
-    return time.formattedTime();
+    return time.formattedTime() ?? '---';
   }
 
 }

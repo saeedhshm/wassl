@@ -30,7 +30,7 @@ extension FormatedDateTimeExtension on String {
   ///this function take time in this
   ///format 16:00:00 in 24 hours
   ///will return String time in 12 hours
-  String formattedTime() {
+  String? formattedTime() {
 
     String? myTime;
 
@@ -42,7 +42,7 @@ extension FormatedDateTimeExtension on String {
      println(e,'time exception');
     }
 
-    return myTime ?? '---';
+    return myTime;
   }
 
   DateTime get exactDateTimeFromGivenHours{

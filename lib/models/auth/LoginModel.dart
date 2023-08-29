@@ -17,11 +17,11 @@ class LoginModel {
 
 
   String get timeIn {
-    return (user?.schedule?.info?.timeIn ?? '').formattedTime();
+    return (user?.schedule?.info?.timeIn ?? '').formattedTime() ?? '---';
   }
 
   String get timeOut {
-    return (user?.schedule?.info?.timeOut ?? '').formattedTime();
+    return (user?.schedule?.info?.timeOut ?? '').formattedTime() ?? '---';
   }
 
 

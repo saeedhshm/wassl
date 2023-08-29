@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/orders/order_type.dart';
-
+import 'package:intl/intl.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -22,6 +24,9 @@ class AskPermissionController extends GetxController{
   var loading = false.obs;
   DateTime? permissionDate;
   OrderType? reasonType;
+  // var correctionTime = ''.obs;
+  final _timeIn = ''.obs;
+  final _timeOut = ''.obs;
 
   var errorsList = <String>[].obs;
 
@@ -44,13 +49,17 @@ class AskPermissionController extends GetxController{
       'type': '${selectedType?.id}',
       'date': '${permissionDate?.year}-${permissionDate?.month}-${permissionDate?.day}',
       'reason_type': '${reasonType?.id}',
-      'reason': '$reason'
+      'reason': '$reason',
+      "time_in": _timeIn.value,
+      "time_out": _timeOut.value,
     };
 
 
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addPermission}', body: body,header: appController.appHeader,fileName: filePath);
 
+    println(body);
+    println(response.statusCode);
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -142,5 +151,45 @@ class AskPermissionController extends GetxController{
     OrderType(id: 3,)..name = 'emergency_permission'.tr,
   ];
 
+  String get timeIn{
+    var time = '--:-- --';
+
+    if(_timeIn.value.isNotEmpty){
+
+      time = _timeIn.value.formattedTime() ?? '--:-- --';
+    }
+
+    return time ;
+  }
+
+  String get timeOut{
+    var time = '--:-- --';
+
+    if(_timeOut.value.isNotEmpty){
+      time = _timeOut.value.formattedTime() ?? '--:-- --';
+    }
+
+    return time ;
+  }
+
+   set timeIn(selectedTime){
+
+     if(selectedTime != null){
+       DateFormat dateFormatOf24Hours = DateFormat("H:m");
+       var timeIn24 = dateFormatOf24Hours.parse('${selectedTime.hour}:${selectedTime.minute}');
+       _timeIn.value = timeIn24.toString().split(' ')[1].split('.')[0];
+
+     }
+  }
+
+  set timeOut(selectedTime){
+
+    if(selectedTime != null){
+      DateFormat dateFormatOf24Hours = DateFormat("H:m");
+      var timeIn24 = dateFormatOf24Hours.parse('${selectedTime.hour}:${selectedTime.minute}');
+      _timeOut.value = timeIn24.toString().split(' ')[1].split('.')[0];
+
+    }
+  }
 }
 

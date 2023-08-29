@@ -52,11 +52,11 @@ class Schedule {
   }
 
   String get timeIn {
-    return (info?.timeIn ?? '').formattedTime();
+    return (info?.timeIn ?? '').formattedTime() ?? '---';
   }
 
   String get timeOut {
-    return (info?.timeOut ?? '').formattedTime();
+    return (info?.timeOut ?? '').formattedTime() ?? '---';
   }
 
 
