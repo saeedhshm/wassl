@@ -5,6 +5,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -18,6 +19,7 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -160,8 +162,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: const SvgWidget(
-                                      'assets/images/pref_calendar_icon.svg'),
+                                  prefixIcon: const PrefCalendarIcon(),
                                   hintText: 'date'.tr,
                                   controller: dateCtrl,
                                   enabled: false,
@@ -172,9 +173,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                               ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset(
-                                      'assets/images/conversation.png'),
-                                ),
+                                  child: ChatConversationIcon()),
                                 hintText: 'description'.tr,
                                 controller: descriptionCtrl,
                                 onChange: (value) {
@@ -199,8 +198,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                               ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset(
-                                      'assets/images/conversation.png'),
+                                  child: ChatConversationIcon(),
                                 ),
                                 maxLines: 5,
                                 controller: reasonCtrl,

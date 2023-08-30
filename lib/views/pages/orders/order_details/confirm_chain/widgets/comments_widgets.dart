@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 
 import '../../../../../consts_widgets/gradiants.dart';
 import '../../../../../reusable_widgets/circular_widget.dart';
@@ -27,8 +28,7 @@ class CommentsWidget extends StatelessWidget {
             Expanded(
               child: TextFormFieldWithIcons(
                 prefixIcon: SizedBox(
-                  child: Image.asset(
-                      'assets/images/conversation.png'),
+                  child: ChatConversationIcon(),
                 ),
                 maxLines: 1,
                 hintText: 'add_comment'.tr,

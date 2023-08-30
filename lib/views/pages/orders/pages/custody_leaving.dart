@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -71,7 +72,7 @@ class CustodyLeavingOrder extends StatelessWidget {
                           ),
                           TextFormFieldWithIcons(
                             prefixIcon: SizedBox(
-                              child: Image.asset('assets/images/conversation.png'),
+                              child: ChatConversationIcon(),
                             ),
                             maxLines: 5,
                             hintText: 'the_reason'.tr,

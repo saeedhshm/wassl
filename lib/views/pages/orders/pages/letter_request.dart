@@ -7,6 +7,7 @@ import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
@@ -163,8 +164,7 @@ class LetterRequestPage extends StatelessWidget {
                                           ),
                                           TextFormFieldWithIcons(
                                             prefixIcon: SizedBox(
-                                              child: Image.asset(
-                                                  'assets/images/conversation.png'),
+                                              child: ChatConversationIcon(),
                                             ),
                                             maxLines: 5,
                                             hintText: 'the_reason'.tr,

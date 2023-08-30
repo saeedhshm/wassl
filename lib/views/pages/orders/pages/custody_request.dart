@@ -5,6 +5,7 @@ import 'package:wassl/getx_controllers/orders/custoday_controller.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 
 import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
@@ -105,7 +106,7 @@ class CustodyRequestPage extends StatelessWidget {
                               ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset('assets/images/conversation.png'),
+                                  child: ChatConversationIcon(),
                                 ),
                                 maxLines: 5,
                                 hintText: 'the_reason'.tr,

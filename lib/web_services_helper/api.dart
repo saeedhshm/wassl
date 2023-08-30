@@ -80,8 +80,9 @@ class AppApiHandler {
 
 
     request.fields.addAll(body);
-
+    println(fileName,'fileName');
     if(fileName != null ){
+
       if(!fileName.contains('public/file/')) {
         request.files.add(await http.MultipartFile.fromPath(
             'file', fileName));

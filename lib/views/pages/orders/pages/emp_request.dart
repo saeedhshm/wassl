@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
+import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
@@ -63,7 +65,7 @@ class EmploymentRequest extends StatelessWidget {
                           ),
                           const SizedBox(height: 15,),
                           TextFormFieldWithIcons(
-                            prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
+                            prefixIcon: const PrefCalendarIcon(),
                             hintText: 'join_date'.tr,
 
 
@@ -84,8 +86,8 @@ class EmploymentRequest extends StatelessWidget {
                             ),
                           ),
                           TextFormFieldWithIcons(
-                            prefixIcon: SizedBox(
-                              child: Image.asset('assets/images/conversation.png'),
+                            prefixIcon: const SizedBox(
+                              child: ChatConversationIcon(),
                             ),
                             maxLines: 5,
                             hintText: 'the_reason'.tr,

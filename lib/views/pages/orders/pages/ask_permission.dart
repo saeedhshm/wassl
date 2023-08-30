@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/ask_permission.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/print_ln.dart';
@@ -17,6 +18,7 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -59,7 +61,7 @@ class AskPermissionPage extends StatelessWidget {
           if(permission.timeOut != null){
             controller.timeOutString = permission.timeOut;
           }
-          println('=-=-=-=-=-=-==-=');
+
           controller.permissionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
 
           for(OrderType v in (controller.orderTypes.value.data ?? [])){
@@ -153,8 +155,7 @@ class AskPermissionPage extends StatelessWidget {
                                 }
                               },
                               child: TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget(
-                                    'assets/images/pref_calendar_icon.svg'),
+                                prefixIcon: const PrefCalendarIcon(),
                                 hintText: 'date'.tr,
                                 enabled: false,
                                 controller: dateCtrl,
@@ -181,27 +182,27 @@ class AskPermissionPage extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           const SizedBox(
-                                              width:35,
+                                              width:25,
                                               child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
-                                          const SizedBox(width: 8,),
+                                          const SizedBox(width: 5,),
 
-                                          Text('time_in'.tr),
+                                          Text('time_in'.tr,style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
 
                                           Spacer(),
                                           Obx(() => LocalizedText(
                                             controller.timeIn,
                                             textStyle: const TextStyle(
-                                                fontWeight: FontWeight.bold
+                                                fontWeight: FontWeight.normal
                                             ),
                                           )),
-                                          const SizedBox(width: 25,)
+
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 15,
+                                  width: 15,
                                 ),
 
                                 // time out var
@@ -216,19 +217,20 @@ class AskPermissionPage extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           const SizedBox(
-                                              width:35,
+                                              width:25,
                                               child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
-                                          const SizedBox(width: 8,),
-                                          Text('time_out'.tr),
+                                          const SizedBox(width: 5,),
+                                          Text('time_out'.tr,
+                                            style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
 
                                           Spacer(),
                                           Obx(() => LocalizedText(
                                             controller.timeOut,
                                             textStyle: const TextStyle(
-                                                fontWeight: FontWeight.bold
+                                                fontWeight: FontWeight.normal
                                             ),
                                           )),
-                                          const SizedBox(width: 25,)
+
                                         ],
                                       ),
                                     ),
@@ -271,9 +273,8 @@ class AskPermissionPage extends StatelessWidget {
                               ),
                             ),
                             TextFormFieldWithIcons(
-                              prefixIcon: SizedBox(
-                                child: Image.asset(
-                                    'assets/images/conversation.png'),
+                              prefixIcon: const SizedBox(
+                                child: ChatConversationIcon(),
                               ),
                               maxLines: 5,
                               hintText: 'the_reason'.tr,

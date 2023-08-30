@@ -8,6 +8,7 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../getx_controllers/settings/notifs_controllers.dart';
 import '../../../consts_widgets/gradiants.dart';
+import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 
 class NotifsPage extends StatelessWidget {
@@ -116,7 +117,7 @@ class NotifsPage extends StatelessWidget {
                                       const SizedBox(
                                         width:25,
                                         height: 25,
-                                        child: SvgWidget('assets/images/pref_calendar_icon.svg'),
+                                        child: PrefCalendarIcon(),
                                       ),
                                       Text(model.notifDate,style: const TextStyle(
                                           color: AppColors.darkGreyTextColor,

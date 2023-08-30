@@ -27,7 +27,7 @@ class ApologyRequestController extends GetxController{
   var errorsList = <String>[].obs;
 
 
-  Future addNewLetter()async{
+  Future addNewRequest()async{
 
 
 
@@ -134,7 +134,12 @@ class ApologyRequestController extends GetxController{
 
   }
 
+setDate(String date){
+    var splitDate = date.split('-');
 
+    this.date = DateTime(int.tryParse(splitDate[0]) ?? 0,int.tryParse(splitDate[1]) ?? 0,int.tryParse(splitDate[2]) ?? 0,);
+    println(this.date);
+}
 
   @override
   void onInit() {

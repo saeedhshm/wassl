@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/emp_name.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/holiday_duration.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/order_time_widget.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/order_type_widget.dart';
+import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/doc_icon.dart';
+import 'package:wassl/web_services_helper/urls.dart';
 import '../../../../../models/orders/holiday.dart';
 import '../../../../consts_widgets/loading_widgets.dart';
+import '../../../../reusable_widgets/icons/chat_icon.dart';
+import '../../../../reusable_widgets/icons/status_icon.dart';
 
 class OderDetailFragment extends StatelessWidget {
 
@@ -16,6 +27,7 @@ class OderDetailFragment extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
+    println('$appDomain/${controller.order.file.replaceAll('public', 'storage')}','☎️');
     return Scaffold(
 //first icon-- assets/images/profile/5.png
       body: Column(
@@ -25,126 +37,28 @@ class OderDetailFragment extends StatelessWidget {
               color: AppColors.mainBackgroundColor,
               child: Column(
                 children: [
-                  controller.order.nameEmployee != null ? Container(
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 25,
-                            child: Image.asset('assets/images/profile/1.png'),
-                          ),
-                          const SizedBox(width: 16,),
-                          Text('emp_name'.tr,style: const TextStyle(
-                              color: AppColors.darkGreyTextColor,
-                              fontWeight: FontWeight.bold
-                          ),),
-                          Spacer(),
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
-                                borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.nameEmployee?.fullName ?? '',style: const TextStyle(
-                                  color: AppColors.mainGreenColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12
-                              ),),
-                            ),
-                          ),
 
-                        ],
-                      ),
-                    ),
-                  ) : const SizedBox(),
-                  controller.order.nameEmployee != null ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Container(
-                      width: double.maxFinite,
-                      height: 1,
-                      color: AppColors.borderTextFieldColor,
-                    ),
-                  ) : const SizedBox(),
+                  EmployeeDetailsWidget(),
+
+
+
+
+
+                  OrderTypeWidget(),
+
+
+                  const SeparatorWidget(),
+
+                  // status
                   Container(
                     color: Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 25,
-                            child: Image.asset('assets/images/order_details/Untitled.png'),
-                          ),
-                          const SizedBox(width: 16,),
-                          Text('order_type'.tr,style: const TextStyle(
-                            color: AppColors.darkGreyTextColor,
-                            fontWeight: FontWeight.bold
-                          ),),
-                          Spacer(),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
-                              borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.orderName.tr,style: const TextStyle(
-                                color: AppColors.mainGreenColor,
-                                fontSize: 12
-                              ),),
-                            ),
-                          ),
-                          SizedBox(width: controller.order.type?.name != null ? 16 : 0,),
-                          (controller.order is HolidaysData) ?   Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
-                                borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.type?.name ?? '' ,style: const TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontSize: 12
-                              ),),
-                            ),
-                          )
-                          : controller.order.type?.name != null ?  Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
-                                borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(controller.order.type?.name ?? '' ,style: const TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontSize: 12
-                              ),),
-                            ),
-                          ) : SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Container(
-                      width: double.maxFinite,
-                      height: 1,
-                      color: AppColors.borderTextFieldColor,
-                    ),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 25,
-                            child: Image.asset('assets/images/order_details/status.png'),
+                            child:StatusOnHandIcon(),
                           ),
                           const SizedBox(width: 16,),
                           Text('status'.tr,style: const TextStyle(
@@ -154,9 +68,9 @@ class OderDetailFragment extends StatelessWidget {
                           const Spacer(),
                           Container(
                             decoration: BoxDecoration(
-                                // border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
+                              // border: Border.all(color: AppColors.mainGreenColor,width: 0.5),
                                 borderRadius: BorderRadius.circular(50),
-                              gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantRejected : controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
+                                gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantRejected : controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
                             ),
                             child: Padding(
                               padding:  EdgeInsets.symmetric(horizontal: 16.0,vertical:'lang_code'.tr == 'ar' ? 2 : 6),
@@ -170,105 +84,104 @@ class OderDetailFragment extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Container(
-                      width: double.maxFinite,
-                      height: 1,
-                      color: AppColors.borderTextFieldColor,
+                  const SeparatorWidget(),
+
+
+                  // order date
+                  Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 25,
+                            height: 25,
+                            child:PrefCalendarIcon(),
+                          ),
+                          const SizedBox(width: 16,),
+                          Text('date'.tr,style: const TextStyle(
+                              color: AppColors.darkGreyTextColor,
+                              fontWeight: FontWeight.bold
+                          ),),
+                          const Spacer(),
+                          Container(
+                            decoration: BoxDecoration(
+                              // border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
+                                borderRadius: BorderRadius.circular(50),
+                                // gradient:controller.order.statusID == 1 ? grayGradiantAwait : controller.order.statusID == 4 ? redGradiantRejected : controller.order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
+                            ),
+                            child: Text((controller.order.orderDate).tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 15
+                            ),),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 50,),
-                  (controller.order is HolidaysData) ?   Column(
+                  const SeparatorWidget(),
+
+                  OrderTimeWidget(controller.order),
+
+                  //
+
+
+                  //separator
+                  const SeparatorWidget(),
+
+                  // reason
+                  Container(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           SizedBox(
+                            width: 25,
+                            child: ChatConversationIcon(),
+                          ),
+                          const SizedBox(width: 16,),
+                          Text('reason'.tr,style: const TextStyle(
+                              color: AppColors.darkGreyTextColor,
+                              fontWeight: FontWeight.bold
+                          ),),
+                          const Text(' : '),
+                          Expanded(
+
+                            child: Text((controller.order.reason ?? '').tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 16
+                            ),),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SeparatorWidget(),
+
+                  SizedBox(height: (controller.order is HolidaysData) ? 50 : 10,),
+
+                  HolidayDurationWidget(),
+
+                  controller.order.file.isNotEmpty ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          height: 1,
-                          color: AppColors.borderTextFieldColor,
-                        ),
-                      ),
-                      Container(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 25,
-                                child: Image.asset('assets/images/order_details/calendar.png'),
-                              ),
-                              const SizedBox(width: 16,),
-                              Text('holiday_time'.tr,style: const TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Spacer(),
+                      OutlinedButton(onPressed: (){
+                        launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                      }, child: Row(
 
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
-                                    borderRadius: BorderRadius.circular(50)
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text(((controller.order as HolidaysData).differenceInDays),style: const TextStyle(
-                                      color: AppColors.darkGreyTextColor,
-                                      fontSize: 12
-                                  ),),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          height: 1,
-                          color: AppColors.borderTextFieldColor,
-                        ),
-                      ),
-                      Container(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            children: [
-                              Spacer(),
-                              Text(((controller.order as HolidaysData).holidayStart ?? ''),style: TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              SizedBox(width: 16,),
-                              SizedBox(
-                                width: 25,
-                                child: Image.asset('assets/images/order_details/arrow.png'),
-                              ),
-                              SizedBox(width: 16,),
-                              Text(((controller.order as HolidaysData).holidayEnd ?? ''),style: TextStyle(
-                                  color: AppColors.darkGreyTextColor,
-                                  fontWeight: FontWeight.bold
-                              ),),
-                              Spacer(),
-
-
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Container(
-                          width: double.maxFinite,
-                          height: 1,
-                          color: AppColors.borderTextFieldColor,
-                        ),
-                      ),
+                        children: [
+                          const Icon(Icons.download),
+                          const SizedBox(width: 15,),
+                          Text('download_file'.tr)
+                        ],
+                      )),
                     ],
-                  ) : SizedBox(),
+                  ) :SizedBox()
                 ],
               ),
 
@@ -277,6 +190,22 @@ class OderDetailFragment extends StatelessWidget {
           // controller.order.statusID == 1
           ApproveDisapproveWidget()
         ],
+      ),
+    );
+  }
+}
+
+class SeparatorWidget extends StatelessWidget {
+  const SeparatorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        width: double.maxFinite,
+        height: 1,
+        color: AppColors.borderTextFieldColor,
       ),
     );
   }

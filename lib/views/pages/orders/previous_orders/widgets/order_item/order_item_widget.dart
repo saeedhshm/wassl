@@ -17,9 +17,11 @@ import '../../../../../../models/orders/holiday.dart';
 import '../../../../../../models/orders/letter.dart';
 import '../../../../../../models/orders/loan_order.dart';
 import '../../../../../../models/orders/over_time.dart';
+import '../../../../../../models/orders/tabreer.dart';
 import '../../../../../../models/orders/visa_order.dart';
 import '../../../../../consts_widgets/gradiants.dart';
 import '../../../../../reusable_widgets/gradiant_text.dart';
+import '../../../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../../../reusable_widgets/snack_bars.dart';
 import '../../../pages/ask_permission.dart';
 import '../../../pages/correcting_fingerprint.dart';
@@ -29,6 +31,7 @@ import '../../../pages/finance_spended_request.dart';
 import '../../../pages/holday_request.dart';
 import '../../../pages/letter_request.dart';
 import '../../../pages/loan_order.dart';
+import '../../../pages/tabreer_request.dart';
 import '../../../pages/visa_request.dart';
 
 class OrderItemWidget extends StatelessWidget {
@@ -73,7 +76,7 @@ class OrderItemWidget extends StatelessWidget {
                 const SizedBox(
                   width: 25,
                   height: 25,
-                  child: SvgWidget('assets/images/pref_calendar_icon.svg'),
+                  child: PrefCalendarIcon(),
                 ),
                 Text((order.orderName == 'OrderVisaData' ? '${'required_before'.tr} : ' : '') + order.orderDate,style: const TextStyle(
                   color: AppColors.darkGreyTextColor,
@@ -473,6 +476,32 @@ class OrderItemWidget extends StatelessWidget {
                 ),
               ],
             ) : const SizedBox(),
+
+            order.orderName == 'ApologyData' ? Row(
+              children: [
+
+                const SizedBox(width: 20,),
+                Expanded(
+                  child: Container(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text((order as ApologyData).type?.name ?? '' ,
+                          style: const TextStyle(
+                              color: AppColors.darkGreyTextColor
+                          ),),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBackgroundColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 20,),
+
+              ],
+            ) : const SizedBox(),
             Row(
               children: [
                 Spacer(),
@@ -539,6 +568,9 @@ class OrderItemWidget extends StatelessWidget {
         break;
       case 'OrderVisaData':
         Get.to(()=> VisaRequestPage(order: order,onClose: getAllOrdersAfterUpdate,));
+        break;
+      case 'ApologyData':
+        Get.to(()=> ApologyRequestPage(order: order,onClose: getAllOrdersAfterUpdate,));
         break;
 
     }

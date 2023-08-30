@@ -5,7 +5,7 @@ const String appDomain = 'https://waslhr.com';
 //
 const String _apiVrsion = '$appDomain/api/v1';
 
-//https://waslhr.com/public/file/HNfw2wuXW6E3Z5yHL0dQjiHm9E7a50HdNJvfIB9Z.png
+// https://waslhr.com/public/file/uOpBCDJRcQjVW1DJ7PbZqmRMvmywL4EcMIQRtJzb.pdf
 class AppUrls {
 
   static const String _authApi = '$_apiVrsion/auth';

@@ -18,6 +18,8 @@ import '../../../../models/orders/finger_print.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/calendar_icon.dart';
+import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -96,7 +98,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                               }
                             },
                             child: TextFormFieldWithIcons(
-                              prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
+                              prefixIcon: const PrefCalendarIcon(),
                               hintText: 'date'.tr,
                               enabled: false,
                               controller: dateCtrl,
@@ -186,8 +188,8 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                               controller.reason = value;
                             },
                             controller: reasonCtrl,
-                            prefixIcon: SizedBox(
-                              child: Image.asset('assets/images/conversation.png'),
+                            prefixIcon: const SizedBox(
+                              child: ChatConversationIcon(),
                             ),
                             maxLines: 5,
                             hintText: 'the_reason'.tr,

@@ -10,12 +10,14 @@ import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/order_type.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -118,7 +120,7 @@ class HolidayRequestPage extends StatelessWidget {
                                       }
                                     },
                                     child:TextFormFieldWithIcons(
-                                      prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
+                                      prefixIcon: const PrefCalendarIcon(),
                                       hintText: 'start'.tr,
                                       enabled: false,
                                       controller: startDateCtrl,
@@ -143,7 +145,7 @@ class HolidayRequestPage extends StatelessWidget {
                                       }
                                     },
                                     child: TextFormFieldWithIcons(
-                                      prefixIcon: const SvgWidget('assets/images/pref_calendar_icon.svg'),
+                                      prefixIcon: const PrefCalendarIcon(),
                                       hintText: 'end'.tr,
                                       enabled: false,
                                       controller: endDateCtrl,
@@ -213,7 +215,7 @@ class HolidayRequestPage extends StatelessWidget {
                               ),
                               TextFormFieldWithIcons(
                                 prefixIcon: SizedBox(
-                                  child: Image.asset('assets/images/conversation.png'),
+                                  child: ChatConversationIcon(),
                                 ),
                                 maxLines: 5,
                                 hintText: 'the_reason'.tr,

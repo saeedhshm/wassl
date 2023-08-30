@@ -5,6 +5,7 @@ import 'package:wassl/getx_controllers/orders/visa_request.dart';
 import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/print_ln.dart';
@@ -16,6 +17,7 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -155,8 +157,7 @@ class VisaRequestPage extends StatelessWidget {
                                         }
                                       },
                                       child: TextFormFieldWithIcons(
-                                        prefixIcon: const SvgWidget(
-                                            'assets/images/pref_calendar_icon.svg'),
+                                        prefixIcon: const PrefCalendarIcon(),
                                         hintText: 'date_before'.tr,
                                         enabled: false,
                                         controller: dateBeforeCtrl,
@@ -295,8 +296,7 @@ class VisaRequestPage extends StatelessWidget {
                                                   }
                                                 },
                                                 child: TextFormFieldWithIcons(
-                                                  prefixIcon: const SvgWidget(
-                                                      'assets/images/pref_calendar_icon.svg'),
+                                                  prefixIcon: const PrefCalendarIcon(),
                                                   hintText: 'go_date'.tr,
                                                   enabled: false,
                                                   controller: goDateCtrl,
@@ -338,8 +338,7 @@ class VisaRequestPage extends StatelessWidget {
                                                       },
                                                       child:
                                                           TextFormFieldWithIcons(
-                                                        prefixIcon: const SvgWidget(
-                                                            'assets/images/pref_calendar_icon.svg'),
+                                                        prefixIcon: const PrefCalendarIcon(),
                                                         hintText:
                                                             'back_date'.tr,
                                                         enabled: false,
@@ -353,9 +352,8 @@ class VisaRequestPage extends StatelessWidget {
                                             ],
                                           ),
                                     TextFormFieldWithIcons(
-                                      prefixIcon: SizedBox(
-                                        child: Image.asset(
-                                            'assets/images/conversation.png'),
+                                      prefixIcon: const SizedBox(
+                                        child: ChatConversationIcon(),
                                       ),
                                       maxLines: 5,
                                       hintText: 'the_reason'.tr,

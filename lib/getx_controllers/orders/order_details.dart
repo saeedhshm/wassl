@@ -15,6 +15,7 @@ class OrderDetailsController extends GetxController{
   final AppController appController = Get.find();
 
   final Order order;
+
   OrderDetailsController(this.order);
 
   Future setTeamOrderStatusRequest(String orderStatus) async {

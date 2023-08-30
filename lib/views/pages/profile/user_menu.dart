@@ -11,6 +11,7 @@ import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../covenant/page.dart';
 import '../documents/page.dart';
 import '../finance_info/finance.dart';
+import '../finance_info/salaries.dart';
 import '../holidays/holiday_details.dart';
 
 
@@ -95,6 +96,17 @@ class UserProfilePage extends StatelessWidget {
                   child: const ListProfileItemWidget(
                     title: "money_info",
                     icon: "assets/images/profile/3.png",
+                  ),
+                ),
+
+                //salaries information
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>AllSalariesPage());
+                  },
+                  child: const ListProfileItemWidget(
+                    title: "salaries",
+                    icon: "assets/images/prosedures/salaries.png",
                   ),
                 ),
 

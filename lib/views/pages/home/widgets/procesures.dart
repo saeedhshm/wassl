@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/finance_info/salaries.dart';
 import 'package:wassl/views/pages/orders/previous_orders/page.dart';
+import 'package:wassl/views/reusable_widgets/icons/doc_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/mony_on_hand.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
+import '../../../reusable_widgets/icons/edit_pen_paper.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../documents/page.dart';
 
@@ -55,7 +58,7 @@ class Procedures extends StatelessWidget {
                     Get.to(PreviousRequestsPage(fromHomePage: true,));
                   },
                   child: ItemWidget(
-                    icon: 'assets/images/prosedures/orders.png',
+                    icon: EditBenOnPaperIcon(),
                     title: 'my_orders'.tr,
                   ),
                 ),
@@ -67,7 +70,7 @@ class Procedures extends StatelessWidget {
                     Get.to(()=>AllSalariesPage());
                   },
                   child: ItemWidget(
-                    icon:  'assets/images/prosedures/salaries.png',
+                    icon:  const SalaryMoneyOnHandIcon(),
                     title: 'salaries'.tr,
                   ),
                 ),
@@ -79,7 +82,7 @@ class Procedures extends StatelessWidget {
                     Get.to(DocsPage());
                   },
                   child: ItemWidget(
-                    icon:  'assets/images/prosedures/docs.png',
+                    icon:  const DocIcon(),
                     title: 'papers'.tr,
                   ),
                 ),
@@ -97,7 +100,7 @@ class Procedures extends StatelessWidget {
 }
 
 class ItemWidget extends StatelessWidget {
-  final String icon;
+  final Widget icon;
   final String title;
   const ItemWidget({
     Key? key,
@@ -127,8 +130,7 @@ class ItemWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child:
-            Image.asset(icon,width: 20,),
+            child:SizedBox(width: 20,child: icon),
           ),
           const SizedBox(
             height: 5,
