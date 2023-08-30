@@ -77,7 +77,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 4 ? 'active' : ''}4.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/4.svg",color: _tabIconColor(4),),
                                 ),
                               )),
                           Expanded(
@@ -90,7 +90,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 3 ? 'active' : ''}3.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/3.svg",color: _tabIconColor(3)),
                                 ),
                               )),
                           const Spacer(),
@@ -104,7 +104,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/${_index == 2 ? 'active' : ''}2.svg"),
+                                  child: SvgWidget("assets/images/bottom_nav/2.svg",color: _tabIconColor(2),),
                                 ),
                               )),
                           Expanded(
@@ -116,8 +116,8 @@ class _MainTabsPageState extends State<MainTabsPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: SvgWidget(
-                                    "assets/images/bottom_nav/${_index == 1 ? 'active' : ''}1.svg",
-
+                                    "assets/images/bottom_nav/1.svg",
+                                      color: _tabIconColor(1)
                                   ),
                                 ),
                               )),
@@ -155,5 +155,9 @@ class _MainTabsPageState extends State<MainTabsPage> {
         ],
       ),
     );
+  }
+
+  Color _tabIconColor(int index){
+    return _index == index ? AppColors.orangeColorInCalend : AppColors.mainGreenColor.withOpacity(0.5);
   }
 }

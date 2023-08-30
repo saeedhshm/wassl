@@ -17,7 +17,7 @@ class IncomingEventsPage extends StatelessWidget {
       body: Column(
         children: [
           MainAppbarWidget(
-            '${event.title}',
+            event.title,
             onBack: () {
               Get.back();
             },
@@ -53,10 +53,10 @@ class IncomingEventsPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Image.asset('assets/images/ad_details/cal.png'),
+                          child: Image.asset('assets/images/ad_details/cal.png',color: AppColors.mainOrangeColor,),
                         ),
                       ),
-                      SizedBox(width: 16,),
+                      const SizedBox(width: 16,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -66,10 +66,10 @@ class IncomingEventsPage extends StatelessWidget {
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold
                               ),),
-                              SizedBox(width: 5,),
+                              const SizedBox(width: 5,),
                       const BackArrowIcon(color: AppColors.darkGreyTextColor,width: 30,),
                               const SizedBox(width: 5,),
-                              Text('${event.endDate}',style: const TextStyle(
+                              Text(event.endDate,style: const TextStyle(
                                   color: AppColors.darkGreyTextColor,
                                   fontWeight: FontWeight.bold
                               ),),
@@ -117,7 +117,7 @@ class IncomingEventsPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Image.asset('assets/images/ad_details/icon.png'),
+                          child: Image.asset('assets/images/ad_details/icon.png',color: AppColors.mainOrangeColor,),
                         ),
                       ),
                       SizedBox(width: 16,),

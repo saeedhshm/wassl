@@ -79,7 +79,7 @@ class HolidaysDetails extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                SizedBox(width: 16,),
+                                const SizedBox(width: 16,),
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/1.png',
                                   title: 'available_vacations'.tr,

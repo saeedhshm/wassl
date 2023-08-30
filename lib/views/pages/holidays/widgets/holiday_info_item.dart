@@ -18,22 +18,22 @@ class HolidayInfoItemWidget extends StatelessWidget {
     return Container(
       width: Get.width / 2.5,
       height: Get.width / 2.2,
-      margin: EdgeInsets.only(right: 16),
+      margin: const EdgeInsets.only(right: 16),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(icon,width: 45,),
-            Spacer(),
-            Text(title,style: TextStyle(
+            Image.asset(icon,width: 45,color: AppColors.mainOrangeColor.withOpacity(0.7),),
+            const Spacer(),
+            Text(title,style: const TextStyle(
               color: AppColors.darkGreyTextColor,
               fontSize: 18,
               fontWeight: FontWeight.w500
             ),),
-            SizedBox(height: 16,),
-            Text(count,style: TextStyle(
-                color: AppColors.borderTextFieldColor,
+            const SizedBox(height: 16,),
+            Text(count,style: const TextStyle(
+                color: AppColors.lightGreyTextColor,
                 fontSize: 18,
                 fontWeight: FontWeight.w600
             ),),

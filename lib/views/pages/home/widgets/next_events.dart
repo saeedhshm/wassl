@@ -85,7 +85,7 @@ class ItemWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/images/prosedures/cal.png',width: 20,),
+                  Image.asset('assets/images/prosedures/cal.png',width: 20,color: AppColors.mainOrangeColor,),
                   const SizedBox(height: 5,),
                   Row(
                     children: [

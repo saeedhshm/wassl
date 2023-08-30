@@ -51,14 +51,25 @@ class Procedures extends StatelessWidget {
           ),
           Row(
             children: [
-
+              Expanded(
+                child: InkWell(
+                  onTap: (){
+                    Get.to(DocsPage());
+                  },
+                  child: ItemWidget(
+                    icon:  const DocIcon(),
+                    title: 'papers'.tr,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16,),
               Expanded(
                 child: InkWell(
                   onTap: (){
                     Get.to(PreviousRequestsPage(fromHomePage: true,));
                   },
                   child: ItemWidget(
-                    icon: EditBenOnPaperIcon(),
+                    icon: const EditBenOnPaperIcon(),
                     title: 'my_orders'.tr,
                   ),
                 ),
@@ -75,18 +86,8 @@ class Procedures extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 16,),
-              Expanded(
-                child: InkWell(
-                  onTap: (){
-                    Get.to(DocsPage());
-                  },
-                  child: ItemWidget(
-                    icon:  const DocIcon(),
-                    title: 'papers'.tr,
-                  ),
-                ),
-              ),
+
+
 
 
             ],

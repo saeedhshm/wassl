@@ -61,7 +61,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                   showModalBottomSheet(
                     context: context,
                     backgroundColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
@@ -79,11 +79,11 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                                 children: [
                                   Column(
                                     children: [
-                                      SizedBox(height: 25,),
+                                      const SizedBox(height: 25,),
                                       Container(
                                         height: 25,
                                         width: double.infinity,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.white,
                                           borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(20.0),
@@ -130,7 +130,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                                   itemCount: controller.menuItems.length,
                                   itemBuilder: (BuildContext context, int index) {
                                     return Obx(() => ListTile(
-                                      contentPadding: EdgeInsets.symmetric(horizontal: 36),
+                                      contentPadding: const EdgeInsets.symmetric(horizontal: 36),
                                       onTap: (){
 
                                         controller.groupValue = controller.menuItems[index];

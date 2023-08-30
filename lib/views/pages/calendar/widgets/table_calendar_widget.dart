@@ -43,6 +43,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         locale: '${Get.locale?.languageCode}_${Get.locale?.countryCode}',
         daysOfWeekHeight: 30,
         rowHeight: 42,
+
         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
         calendarStyle: const CalendarStyle(
           outsideDaysVisible: true,

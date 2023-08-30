@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AppColors{
+
+
+
+  static  MaterialColor? materialOrangeColor = MaterialColor(const  Color(0xffF4875B).value,  {
+    50: Color(0xffF4875B),
+    100: Color(0xffF4875B),
+    200: Color(0xffF4875B),
+    300: Color(0xffF4875B),
+    400: Color(0xffF4875B),
+    500: Color(0xffF4875B),
+    600: Color(0xffF4875B),
+    700: Color(0xffF4875B),
+    800: Color(0xffF4875B),
+    900: Color(0xffF4875B),
+  });
+
   static const mainBackgroundColor =  Color(0xfffafafa);
   static const lightBackgroundColor =  Color(0xffeff0eb);
   static const mainBlueColor =  Color(0xff0062c4);

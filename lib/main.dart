@@ -8,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
+import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/test_page.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: AppColors.materialOrangeColor,
         fontFamily: 'AraHamah',
       ),
       home:   SplashScreen(),
