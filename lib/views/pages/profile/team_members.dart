@@ -4,7 +4,7 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
 import '../../../getx_controllers/attendance/member_attendance_controller.dart';
 import '../../../helpers/constants/app_colors.dart';
-import '../../../models/attendance/member_attendace.dart';
+import '../../../models/attendance/member_attendace_v2.dart';
 import '../../reusable_widgets/main_appbar.dart';
 
 class TeamMembersPage extends StatelessWidget {

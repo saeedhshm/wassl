@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../helpers/exceptions/no_internet.dart';
-import '../../models/attendance/member_attendace.dart';
+import '../../models/attendance/member_attendace_v2.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 
 class MembersAttendanceController extends GetxController{
   final AppController appController = Get.find();
-  var _teamAttendance = TeamAttendance().obs;
+  var _teamAttendance = TeamAttendanceV2().obs;
   var loading = false.obs;
 
   Future<void> getTeamAttendance() async {
@@ -29,13 +29,15 @@ class MembersAttendanceController extends GetxController{
     final response = await AppApiHandler.getData(url: url,header: headers,);
     loading.value = false;
 
-
+    println(url);
+    println(response.statusCode);
+    println(response.body);
     if(response.statusCode != 200){
       // throw NoDataAvailableException();
     }
     if(response.statusCode == 200){
       var json = jsonDecode(response.body);
-      _teamAttendance.value = TeamAttendance.fromJson(json);
+      _teamAttendance.value = TeamAttendanceV2.fromJson(json);
 
 
     }
