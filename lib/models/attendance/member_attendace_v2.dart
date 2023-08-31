@@ -4,11 +4,11 @@ import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 import '../../helpers/constants/print_ln.dart';
 
-class TeamAttendance{
+class TeamAttendanceV2{
   var teamAttendance = <MemberAttendance>[];
-  TeamAttendance();
+  TeamAttendanceV2();
 
-  TeamAttendance.fromJson(List json) {
+  TeamAttendanceV2.fromJson(List json) {
 
     for (var v in json) {
 
@@ -31,14 +31,23 @@ class MemberAttendance {
     id = json['id'];
     employeeId = json['employee_id'];
     responsibleEmployeeId = json['responsible_employee_id'];
+    println(json['attendance'] );
     if (json['attendance'] != null) {
       attendance = <Attendance>[];
-      json['attendance'].forEach((v) {
-        attendance.add(Attendance.fromJson(v));
-      });
+      if(json['attendance'] is List){
+        json['attendance'].forEach((v) {
+          attendance.add(Attendance.fromJson(v));
+        });
+      }else{
+        var atten = json['attendance'] != null
+            ? Attendance.fromJson(json['attendance'])
+            : null;
+        attendance.add(atten!);
+      }
+
     }
     employee = json['employee'] != null
-        ? new Employee.fromJson(json['employee'])
+        ? Employee.fromJson(json['employee'])
         : null;
   }
 
