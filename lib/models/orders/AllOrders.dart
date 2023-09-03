@@ -94,6 +94,7 @@ abstract class Order{
   String get file;
   int get statusID;
   int get orderID;
+  String? pdfUrl;
   Status? status;
   ResponsibleEmployee? nameEmployee;
   // bool teamOrder = false;

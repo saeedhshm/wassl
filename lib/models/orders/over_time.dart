@@ -39,6 +39,7 @@ class OvertimeData implements Order{
 
   OvertimeData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     startTime = json['start_time'];
@@ -91,5 +92,8 @@ class OvertimeData implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 
 }

@@ -30,6 +30,7 @@ class FingerprintCorrectionsData implements Order{
 
   FingerprintCorrectionsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     date = json['date'];
@@ -86,4 +87,7 @@ class FingerprintCorrectionsData implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 }

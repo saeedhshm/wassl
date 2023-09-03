@@ -284,7 +284,7 @@ Map<String,String>  arabicStrings = {
   'today_holiday':'اليوم أجازة',
   'doc_name':'اسم المستند',
   'eviction_date':'تاريخ الإخلاء',
-  'download_file':'تنزيل الملف',
+  'download_file':'تنزيل ملف الموظف',
   'created_at':'تاريخ الإنشاء',
 
   'coven_name':'اسم العهدة',
@@ -379,7 +379,7 @@ Map<String,String>  arabicStrings = {
   'time_in':'بداية الاستئذان',
   'time_out':'نهاية الاستئذان',
 
-
+  'download_app_file':'تنزيل الملف المرفق',
   'time_in_exception':'يرجى اختيار وقت بداية الاستئذان',
   'time_out_exception':'يرجى اختيار وقت نهاية الاستئذان',
   '':'',

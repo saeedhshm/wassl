@@ -282,7 +282,8 @@ Map<String,String>  englishString = {
   'today_holiday':'Today is a holiday',
   'doc_name':'document name',
   'eviction_date':'date of eviction',
-  'download_file':'Download the file',
+  'download_file':'Download Employee File',
+  'download_app_file':'Download attached file',
   'created_at':'Created at',
 
   'coven_name':'Custody name',

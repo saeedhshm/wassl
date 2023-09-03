@@ -34,6 +34,7 @@ class AskPermissionsData implements Order {
   AskPermissionsData.fromJson(Map<String, dynamic> json) {
 
 
+    pdfUrl = json['pdf_url'];
     id = json['id'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
@@ -93,6 +94,9 @@ class AskPermissionsData implements Order {
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 
 
 

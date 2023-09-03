@@ -44,13 +44,14 @@ class HolidaysData implements Order{
   HolidaysData.fromJson(Map<String, dynamic> json) {
 
     id = json['id'];
+    pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
 
     holidayStart = json['holiday_start'];
     // final validMap =
     // jsonDecode(jsonEncode(json['type'])) as Map<String, dynamic>;
-    println(json['type'],'🎩');
+
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     holidayEnd = json['holiday_end'];
     ticket = json['ticket'];
@@ -121,4 +122,7 @@ class HolidaysData implements Order{
 
   @override
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 }

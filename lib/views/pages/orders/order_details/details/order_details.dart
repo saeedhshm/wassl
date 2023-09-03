@@ -6,10 +6,12 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/directed_to.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/emp_name.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/holiday_duration.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/order_time_widget.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/order_type_widget.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/reason_widget.dart';
 import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/doc_icon.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -125,40 +127,11 @@ class OderDetailFragment extends StatelessWidget {
 
                   //
 
-
-                  //separator
-                  const SeparatorWidget(),
+                  DirectedToWidget(controller.order),
 
                   // reason
-                  Container(
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                           SizedBox(
-                            width: 25,
-                            child: ChatConversationIcon(),
-                          ),
-                          const SizedBox(width: 16,),
-                          Text('reason'.tr,style: const TextStyle(
-                              color: AppColors.darkGreyTextColor,
-                              fontWeight: FontWeight.bold
-                          ),),
-                          const Text(' : '),
-                          Expanded(
-
-                            child: Text((controller.order.reason ?? '').tr,style: const TextStyle(
-                                color: AppColors.darkGreyTextColor,
-                                fontSize: 16
-                            ),),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const SeparatorWidget(),
+                  ReasonWidget(controller.order),
                   const SeparatorWidget(),
 
                   SizedBox(height: (controller.order is HolidaysData) ? 50 : 10,),
@@ -180,7 +153,23 @@ class OderDetailFragment extends StatelessWidget {
                         ],
                       )),
                     ],
-                  ) :SizedBox()
+                  ) :const SizedBox(),
+                  controller.order.pdfUrl != null ? Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      OutlinedButton(onPressed: (){
+                        launchUrlString('${controller.order.pdfUrl}');
+                      }, child: Row(
+
+                        children: [
+                          const Icon(Icons.download),
+                          const SizedBox(width: 15,),
+                          Text('download_app_file'.tr)
+                        ],
+                      )),
+                    ],
+                  ) :const SizedBox()
                 ],
               ),
 

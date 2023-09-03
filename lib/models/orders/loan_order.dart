@@ -32,6 +32,7 @@ class LoansData implements Order{
 
   LoansData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
@@ -89,6 +90,9 @@ class LoansData implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 
 
 }

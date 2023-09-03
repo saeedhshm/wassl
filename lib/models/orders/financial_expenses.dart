@@ -34,6 +34,7 @@ class FinancialExpensesDate implements Order{
 
   FinancialExpensesDate.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
     name = json['name'];
@@ -89,4 +90,7 @@ class FinancialExpensesDate implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 }

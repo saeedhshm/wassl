@@ -1,4 +1,6 @@
 
+import 'package:wassl/helpers/constants/print_ln.dart';
+
 import 'AllOrders.dart';
 import 'order_status.dart';
 import 'order_type.dart';
@@ -11,7 +13,7 @@ class LetterDate implements Order{
   String? directedToEn;
   String? directedToAr;
   String? _reason;
-  String? pdfUrl;
+
   dynamic _file;
   String? createdAt;
   String? updatedAt;
@@ -89,4 +91,7 @@ class LetterDate implements Order{
   @override
   // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
+
+  @override
+  String? pdfUrl;
 }
