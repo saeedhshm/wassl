@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../../controllers/types_controllers.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -129,15 +130,13 @@ class LetterRequestController extends GetxController{
   getLetterTypes() async {
 
     loadingLetterTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.getLetterTypes,header: appController.appHeader);
 
+    orderTypes.value = await TypesController().getTypes(AppUrls.getLetterTypes, appController.appHeader) ?? OrderTypesRetriever();
 
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      orderTypes.value = OrderTypesRetriever.fromJson(json);
-    }
 
     loadingLetterTypes.value = false;
+
+
 
   }
 

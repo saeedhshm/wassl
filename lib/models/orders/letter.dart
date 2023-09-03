@@ -11,7 +11,7 @@ class LetterDate implements Order{
   String? directedToEn;
   String? directedToAr;
   String? _reason;
-
+  String? pdfUrl;
   dynamic _file;
   String? createdAt;
   String? updatedAt;
@@ -34,6 +34,7 @@ class LetterDate implements Order{
   LetterDate.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     employeeId = json['employee_id'];
+    pdfUrl = json['pdf_url'];
     displayOrdersTo = json['display_orders_to'];
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     directedToEn = json['directed_to_en'];

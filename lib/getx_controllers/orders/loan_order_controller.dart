@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../../controllers/types_controllers.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -155,12 +156,11 @@ class LoanOrderController extends GetxController{
   getLoansTypes() async {
 
     loadingLoansTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.getLoansTypes,header: appController.appHeader);
 
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      orderTypes.value = OrderTypesRetriever.fromJson(json);
-    }
+
+    orderTypes.value = await TypesController().getTypes(AppUrls.getLoansTypes, appController.appHeader) ?? OrderTypesRetriever();
+
+
     loadingLoansTypes.value = false;
 
   }

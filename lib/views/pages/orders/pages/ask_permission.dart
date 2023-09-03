@@ -34,6 +34,8 @@ class AskPermissionPage extends StatelessWidget {
   final dateCtrl = TextEditingController();
   final fileCtrl = TextEditingController();
   final reasonCtrl = TextEditingController();
+  final startTimeCtrl = TextEditingController();
+  final endTimeCtrl = TextEditingController();
 
   final Function? onClose;
 
@@ -57,9 +59,11 @@ class AskPermissionPage extends StatelessWidget {
 
           if(permission.timeIn != null){
             controller.timeInString = permission.timeIn;
+            startTimeCtrl.text = controller.timeIn;
           }
           if(permission.timeOut != null){
             controller.timeOutString = permission.timeOut;
+            endTimeCtrl.text = controller.timeOut;
           }
 
           controller.permissionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
@@ -165,78 +169,45 @@ class AskPermissionPage extends StatelessWidget {
                               height: 15,
                             ),
 
+                            InkWell(
+                              onTap: () async {
+                                var selectedTime = await showTimePicker(context: context, initialTime: const TimeOfDay(hour: 7, minute: 0), );
 
-                            Row(
-                              children: [
-                                //var time in var
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      var selectedTime = await showTimePicker(context: context, initialTime: const TimeOfDay(hour: 7, minute: 0), );
+                                controller.timeIn = selectedTime;
+                                startTimeCtrl.text = controller.timeIn;
 
-                                      controller.timeIn = selectedTime;
-
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(
-                                              width:25,
-                                              child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
-                                          const SizedBox(width: 5,),
-
-                                          Text('time_in'.tr,style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
-
-                                          Spacer(),
-                                          Obx(() => LocalizedText(
-                                            controller.timeIn,
-                                            textStyle: const TextStyle(
-                                                fontWeight: FontWeight.normal
-                                            ),
-                                          )),
-
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-
-                                // time out var
-                                Expanded(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      var selectedTime = await showTimePicker(context: context, initialTime: const TimeOfDay(hour: 7, minute: 0), );
-                                      controller.timeOut= selectedTime;
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(
-                                              width:25,
-                                              child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
-                                          const SizedBox(width: 5,),
-                                          Text('time_out'.tr,
-                                            style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
-
-                                          Spacer(),
-                                          Obx(() => LocalizedText(
-                                            controller.timeOut,
-                                            textStyle: const TextStyle(
-                                                fontWeight: FontWeight.normal
-                                            ),
-                                          )),
-
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                              },
+                              child: TextFormFieldWithIcons(
+                                prefixIcon: const SvgWidget(
+                                    'assets/images/extra_work.svg'),
+                                hintText: 'time_in'.tr,
+                                controller: startTimeCtrl,
+                                enabled: false,
+                                // height: 130,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                if (controller.timeIn.isEmpty) {
+                                  SnackBars.showErrorSnackBar(
+                                      'error'.tr, 'start_time_empty'.tr);
+                                } else {
+                                  var selectedTime = await showTimePicker(context: context, initialTime: const TimeOfDay(hour: 7, minute: 0), );
+                                  controller.timeOut = selectedTime;
+                                  endTimeCtrl.text = controller.timeOut;
+                                }
+                              },
+                              child: TextFormFieldWithIcons(
+                                prefixIcon: const SvgWidget(
+                                    'assets/images/extra_work.svg'),
+                                hintText: 'time_out'.tr,
+                                controller: endTimeCtrl,
+                                enabled: false,
+                                // height: 130,
+                              ),
                             ),
                             const SizedBox(
                               height: 15,

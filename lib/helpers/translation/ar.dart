@@ -374,11 +374,14 @@ Map<String,String>  arabicStrings = {
   'apology_type':'نوع التبرير',
   'apology_details':'تفاصيل التبرير',
   'order_apology':'طلب تبرير',
+
   'ApologyData':'تبرير',
   'time_in':'بداية الاستئذان',
   'time_out':'نهاية الاستئذان',
-  '':'',
-  '':'',
+
+
+  'time_in_exception':'يرجى اختيار وقت بداية الاستئذان',
+  'time_out_exception':'يرجى اختيار وقت نهاية الاستئذان',
   '':'',
   '':'',
   '':'',

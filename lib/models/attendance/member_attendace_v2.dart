@@ -31,7 +31,7 @@ class MemberAttendance {
     id = json['id'];
     employeeId = json['employee_id'];
     responsibleEmployeeId = json['responsible_employee_id'];
-    println(json['attendance'] );
+
     if (json['attendance'] != null) {
       attendance = <Attendance>[];
       if(json['attendance'] is List){

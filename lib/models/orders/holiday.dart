@@ -50,6 +50,7 @@ class HolidaysData implements Order{
     holidayStart = json['holiday_start'];
     // final validMap =
     // jsonDecode(jsonEncode(json['type'])) as Map<String, dynamic>;
+    println(json['type'],'🎩');
     type = json['type'] != null ? OrderType.fromJson(json['type']) : null;
     holidayEnd = json['holiday_end'];
     ticket = json['ticket'];
@@ -100,30 +101,24 @@ class HolidaysData implements Order{
   String get file => _file ?? '';
 
   @override
-  // TODO: implement orderType
   String get orderName => 'HolidaysData';
 
   String get holidayType => '${type?.name}';
 
   @override
-  // TODO: implement orderDate
   String get orderDate {
     return (createdAt ?? '').split('T')[0];
   }
 
   @override
-  // TODO: implement orderStatus
   String get orderStatus => status == null  ? 'not_confirmed' : '${status?.statusAr}';
 
   @override
-  // TODO: implement reason
   String get reason => (_reason == null || _reason == '') ? 'unspecified' : (_reason ?? '');
 
   @override
-  // TODO: implement orderStatus
   int get statusID => status == null  ? 1 : status?.id ?? 1;
 
   @override
-  // TODO: implement orderStatus
   int get orderID =>  id ?? -1;
 }

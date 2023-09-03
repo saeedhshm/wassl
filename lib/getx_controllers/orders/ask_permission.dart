@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/controllers/types_controllers.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/orders/order_type.dart';
 import 'package:intl/intl.dart';
@@ -38,12 +39,19 @@ class AskPermissionController extends GetxController{
     if(permissionDate == null){
       throw CustomException(errorMessage: 'inter_date_exception');
     }
+    if(timeIn.isEmpty){
+      throw CustomException(errorMessage: 'time_in_exception');
+    }
+    if(timeOut.isEmpty){
+      throw CustomException(errorMessage: 'time_out_exception');
+    }
     if(reasonType == null){
       throw CustomException(errorMessage: 'reasonType_exception');
     }
     if(reason == null || reason == ''){
       throw CustomException(errorMessage:'reason_exception');
     }
+
 
     var body = {
       'type': '${selectedType?.id}',
@@ -58,8 +66,7 @@ class AskPermissionController extends GetxController{
     loading.value = true;
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addPermission}', body: body,header: appController.appHeader,fileName: filePath);
 
-    println(body);
-    println(response.statusCode);
+
     loading.value = false;
     if(response.statusCode != 200){
       var responsebody = await response.stream.bytesToString();
@@ -98,11 +105,9 @@ class AskPermissionController extends GetxController{
 
 
     var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.updatePermission}/$orderId', body: body,header: appController.appHeader,fileName: filePath);
-    println(body,'💗');
-    println('${AppUrls.updatePermission}/$orderId','💗');
-    println(response.statusCode,'💗');
+
     var resp = await response.stream.bytesToString();
-    println(resp,'💗');
+
     if(response.statusCode != 200){
       errorsList.addAll(appController.listOfErrors);
       errorsList.add('body: $body');
@@ -134,17 +139,9 @@ class AskPermissionController extends GetxController{
 
     loadingTypes.value = true;
 
-    var response = await AppApiHandler.getData(url: AppUrls.getPermissionsTypes,header: appController.appHeader);
+    orderTypes.value = await TypesController().getTypes(AppUrls.getPermissionsTypes, appController.appHeader) ?? OrderTypesRetriever();
 
-    println(AppUrls.getPermissionsTypes);
-    println(response.statusCode);
-    println(response.body);
-    if(response.statusCode == 200){
 
-      var json = jsonDecode(response.body);
-
-      orderTypes.value = OrderTypesRetriever.fromJson(json);
-    }
     loadingTypes.value = false;
 
   }
@@ -155,6 +152,7 @@ class AskPermissionController extends GetxController{
     super.onInit();
     getPermissionsTypes();
   }
+
   var reasonTypes = [
     OrderType(id: 1,)..name = 'personal_permission'.tr,
     OrderType(id: 2,)..name = 'illness_permission'.tr,
@@ -162,21 +160,21 @@ class AskPermissionController extends GetxController{
   ];
 
   String get timeIn{
-    var time = '--:-- --';
+    var time = '';
 
     if(_timeIn.value.isNotEmpty){
 
-      time = _timeIn.value.formattedTime() ?? '--:-- --';
+      time = _timeIn.value.formattedTime() ?? '';
     }
 
     return time ;
   }
 
   String get timeOut{
-    var time = '--:-- --';
+    var time = '';
 
     if(_timeOut.value.isNotEmpty){
-      time = _timeOut.value.formattedTime() ?? '--:-- --';
+      time = _timeOut.value.formattedTime() ?? '';
     }
 
     return time ;
@@ -192,14 +190,6 @@ class AskPermissionController extends GetxController{
      }
   }
 
-  set timeInString(String value){
-    _timeIn.value = value;
-  }
-
-  set timeOutString(String value){
-    _timeOut.value = value;
-  }
-
   set timeOut(selectedTime){
 
     if(selectedTime != null){
@@ -209,5 +199,14 @@ class AskPermissionController extends GetxController{
 
     }
   }
+
+  set timeInString(String value){
+    _timeIn.value = value;
+  }
+
+  set timeOutString(String value){
+    _timeOut.value = value;
+  }
+
 }
 

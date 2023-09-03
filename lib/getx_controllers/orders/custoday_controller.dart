@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../../controllers/types_controllers.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -103,13 +104,12 @@ class CustodyRequestController extends GetxController{
 
   getTypes() async {
 
-    loadingTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.getCustodyTypes,header: appController.appHeader);
 
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      orderTypes.value = OrderTypesRetriever.fromJson(json);
-    }
+    loadingTypes.value = true;
+
+    orderTypes.value = await TypesController().getTypes(AppUrls.getCustodyTypes, appController.appHeader) ?? OrderTypesRetriever();
+
+
     loadingTypes.value = false;
 
   }

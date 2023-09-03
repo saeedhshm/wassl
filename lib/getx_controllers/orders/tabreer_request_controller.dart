@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../../controllers/types_controllers.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -123,12 +124,9 @@ class ApologyRequestController extends GetxController{
   getLetterTypes() async {
 
     loadingLetterTypes.value = true;
-    var response = await AppApiHandler.getData(url: AppUrls.tabreerTypesApi,header: appController.appHeader);
 
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      orderTypes.value = OrderTypesRetriever.fromJson(json);
-    }
+    orderTypes.value = await TypesController().getTypes(AppUrls.tabreerTypesApi, appController.appHeader) ?? OrderTypesRetriever();
+
 
     loadingLetterTypes.value = false;
 
@@ -138,7 +136,7 @@ setDate(String date){
     var splitDate = date.split('-');
 
     this.date = DateTime(int.tryParse(splitDate[0]) ?? 0,int.tryParse(splitDate[1]) ?? 0,int.tryParse(splitDate[2]) ?? 0,);
-    println(this.date);
+
 }
 
   @override

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
+import '../../controllers/types_controllers.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
@@ -192,26 +193,15 @@ class VisaRequestController extends GetxController{
 
 
     loadingTypes.value = true;
-    var response1 = await AppApiHandler.getData(url: AppUrls.getVisaTypes,header: appController.appHeader);
 
-    if(response1.statusCode == 200){
-      var json = jsonDecode(response1.body);
-      visaTypes.value = OrderTypesRetriever.fromJson(json);
-    }
 
-    var response2 = await AppApiHandler.getData(url: AppUrls.getVisaTime,header: appController.appHeader);
 
-    if(response2.statusCode == 200){
-      var json = jsonDecode(response2.body);
-      visaTimes.value = OrderTypesRetriever.fromJson(json);
-    }
+    visaTypes.value = await TypesController().getTypes(AppUrls.getVisaTypes, appController.appHeader) ?? OrderTypesRetriever();
 
-    var response3 = await AppApiHandler.getData(url: AppUrls.getTicketTypes,header: appController.appHeader);
+    visaTimes.value = await TypesController().getTypes(AppUrls.getVisaTime, appController.appHeader) ?? OrderTypesRetriever();
 
-    if(response3.statusCode == 200){
-      var json = jsonDecode(response3.body);
-      ticketTypes.value = OrderTypesRetriever.fromJson(json);
-    }
+    ticketTypes.value = await TypesController().getTypes(AppUrls.getTicketTypes, appController.appHeader) ?? OrderTypesRetriever();
+
 
     loadingTypes.value = false;
 

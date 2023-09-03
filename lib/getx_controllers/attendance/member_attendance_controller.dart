@@ -29,9 +29,7 @@ class MembersAttendanceController extends GetxController{
     final response = await AppApiHandler.getData(url: url,header: headers,);
     loading.value = false;
 
-    println(url);
-    println(response.statusCode);
-    println(response.body);
+
     if(response.statusCode != 200){
       // throw NoDataAvailableException();
     }

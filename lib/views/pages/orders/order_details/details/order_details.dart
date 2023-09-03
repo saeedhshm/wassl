@@ -27,7 +27,6 @@ class OderDetailFragment extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    println('$appDomain/${controller.order.file.replaceAll('public', 'storage')}','☎️');
     return Scaffold(
 //first icon-- assets/images/profile/5.png
       body: Column(
