@@ -1,11 +1,12 @@
 import 'package:get/get.dart';
 
+import '../../helpers/constants/print_ln.dart';
 import '../../views/reusable_widgets/drop_down_widget.dart';
 
 
 class OrderType extends DropItem{
   int? id;
-  String? _nameAr;
+  String? nameAr;
   String? _nameEn;
   String? top;
   String? content;
@@ -29,7 +30,7 @@ class OrderType extends DropItem{
   OrderType.fromJson(Map<String, dynamic> json) {
     id = json['id'];
 
-    _nameAr = json['name_ar'];
+    nameAr = json['name_ar'];
     _nameEn = json['name_en'];
     top = json['top'];
     content = json['content'];
@@ -45,11 +46,12 @@ class OrderType extends DropItem{
 
  @override
   String get name{
-    return ('lang_code'.tr == 'ar' ? _nameAr : _nameEn) ?? '';
+
+    return ('lang_code'.tr == 'ar' ? nameAr : _nameEn) ?? '';
  }
 
  void set name(value){
    _nameEn = value;
-   _nameAr = value;
+   nameAr = value;
  }
 }

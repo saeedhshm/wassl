@@ -27,7 +27,40 @@ import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class AskPermissionPage extends StatelessWidget {
 
-  AskPermissionPage({Key? key, this.onClose, this.order}) : super(key: key);
+  AskPermissionPage({Key? key, this.onClose, this.order}) : super(key: key){
+    if(order != null){
+      var permission = order as AskPermissionsData;
+      fileCtrl.text = permission.file.split('/').last;
+      reasonCtrl.text = permission.reason;
+      controller.reason = permission.reason;
+      var endDateArr = permission.date?.split('-');
+      dateCtrl.text = permission.date ?? '';
+
+
+      if(permission.timeIn != null){
+        controller.timeInString = permission.timeIn;
+        startTimeCtrl.text = controller.timeIn;
+      }
+      if(permission.timeOut != null){
+        controller.timeOutString = permission.timeOut;
+        endTimeCtrl.text = controller.timeOut;
+      }
+
+      controller.permissionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
+      controller.selectedType = permission.type;
+      controller.reasonType = permission.reasonType;
+      // for(OrderType v in (controller.orderTypes.value.data ?? [])){
+      //   if(v.id == permission.type?.id){
+      //     controller.selectedType = v;
+      //   }
+      // }
+      // for(OrderType v in (controller.reasonTypes )){
+      //   if(v.name == permission.reasonType?.name){
+      //     controller.reasonType = v;
+      //   }
+      // }
+    }
+  }
 
   final AskPermissionController controller = Get.put(AskPermissionController());
 
@@ -48,37 +81,7 @@ class AskPermissionPage extends StatelessWidget {
 
     return Scaffold(
       body: Obx(() {
-        if(order != null){
-          var permission = order as AskPermissionsData;
-          fileCtrl.text = permission.file.split('/').last;
-          reasonCtrl.text = permission.reason;
-          controller.reason = permission.reason;
-          var endDateArr = permission.date?.split('-');
-          dateCtrl.text = permission.date ?? '';
 
-
-          if(permission.timeIn != null){
-            controller.timeInString = permission.timeIn;
-            startTimeCtrl.text = controller.timeIn;
-          }
-          if(permission.timeOut != null){
-            controller.timeOutString = permission.timeOut;
-            endTimeCtrl.text = controller.timeOut;
-          }
-
-          controller.permissionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
-
-          for(OrderType v in (controller.orderTypes.value.data ?? [])){
-            if(v.id == permission.type?.id){
-              controller.selectedType = v;
-            }
-          }
-          for(OrderType v in (controller.reasonTypes )){
-            if(v.name == permission.reasonType?.name){
-              controller.reasonType = v;
-            }
-          }
-        }
         return Stack(
           children: [
             Column(
@@ -220,7 +223,7 @@ class AskPermissionPage extends StatelessWidget {
                                   .reasonTypes
                                   .map((e) => e).toList() ,
                               onSelectedIndex: (value) {
-                                controller.reasonType = value as OrderType?;
+                                controller.reasonType = value ;
                               },
                               prefixIcon: const SizedBox(
                                   width: 5,

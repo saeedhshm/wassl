@@ -9,6 +9,8 @@ import 'package:wassl/models/orders/visa_order.dart';
 import '../../getx_controllers/app_controller.dart';
 import '../../helpers/exceptions/no_internet.dart';
 import '../../web_services_helper/api.dart';
+import '../countries/city.dart';
+import '../countries/country.dart';
 import 'ask_permission.dart';
 import 'custoday.dart';
 import 'financial_expenses.dart';
@@ -117,6 +119,11 @@ class Confirmation {
   String? createdAt;
   String? updatedAt;
   String? orderType;
+  int? businessTripId;
+  int? daysCount;
+  int? costPerDay;
+  int? totalCost;
+  BusinessTrip? businessTrip;
   ResponsibleEmployee? responsibleEmployee;
 
   Confirmation(
@@ -141,27 +148,20 @@ class Confirmation {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     orderType = json['order_type'];
+
+    businessTripId = json['business_trip_id'];
+    daysCount = json['days_count'];
+    costPerDay = json['cost_per_day'];
+    totalCost = json['total_cost'];
+    businessTrip = json['business_trip'] != null
+        ? BusinessTrip.fromJson(json['business_trip'])
+        : null;
+
     responsibleEmployee = json['responsible_employee'] != null
-        ? new ResponsibleEmployee.fromJson(json['responsible_employee'])
+        ? ResponsibleEmployee.fromJson(json['responsible_employee'])
         : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['employee_id'] = this.employeeId;
-    data['order_id'] = this.orderId;
-    data['responsible_employee_id'] = this.responsibleEmployeeId;
-    data['sort_order'] = this.sortOrder;
-    data['status'] = this.status;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['order_type'] = this.orderType;
-    if (this.responsibleEmployee != null) {
-      data['responsible_employee'] = this.responsibleEmployee!.toJson();
-    }
-    return data;
-  }
 }
 
 class ResponsibleEmployee {
@@ -188,6 +188,44 @@ class ResponsibleEmployee {
   String get fullName{
     return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
   }
+}
+
+class BusinessTrip {
+  int? id;
+  int? companyId;
+  int? countryId;
+  int? regionId;
+  int? costPerDay;
+  String? createdAt;
+  String? updatedAt;
+  Country? country;
+  City? region;
+
+  BusinessTrip(
+      {this.id,
+        this.companyId,
+        this.countryId,
+        this.regionId,
+        this.costPerDay,
+        this.createdAt,
+        this.updatedAt,
+        this.country,
+        this.region});
+
+  BusinessTrip.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    companyId = json['company_id'];
+    countryId = json['country_id'];
+    regionId = json['region_id'];
+    costPerDay = json['cost_per_day'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    country =
+    json['country'] != null ? Country.fromJson(json['country']) : null;
+    region =
+    json['region'] != null ? City.fromJson(json['region']) : null;
+  }
+
 }
 
 

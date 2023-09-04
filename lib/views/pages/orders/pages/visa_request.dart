@@ -99,7 +99,7 @@ class VisaRequestPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   children: [
-                                    DropDownWidget(
+                                    DropDownWidget<OrderType>(
                                       hintText: 'visa_type'.tr,
                                       selectedValue:
                                           controller.selectedType,
@@ -119,7 +119,7 @@ class VisaRequestPage extends StatelessWidget {
                                     SizedBox(
                                       height: 8,
                                     ),
-                                    DropDownWidget(
+                                    DropDownWidget<OrderType>(
                                       hintText: 'visa_time'.tr,
                                       selectedValue:
                                           controller.selectedTime,
@@ -248,7 +248,7 @@ class VisaRequestPage extends StatelessWidget {
                                               SizedBox(
                                                 height: 8,
                                               ),
-                                              DropDownWidget(
+                                              DropDownWidget<OrderType>(
                                                 hintText: 'ticket_type'.tr,
                                                 selectedValue: controller
                                                     .selectedTicketType,

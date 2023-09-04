@@ -6,15 +6,21 @@ import '../../helpers/constants/print_ln.dart';
 
 abstract class DropItem{
   String get name;
+  @override
+  int get hashCode => name.hashCode;
+  @override
+  bool operator ==(o) => o is DropItem && name == o.name ;
 }
-class DropDownWidget extends StatefulWidget {
+
+class DropDownWidget<T extends DropItem> extends StatefulWidget {
   // String selectedValue;
   final Widget? prefixIcon;
   final String hintText;
   final String? errorMessage;
-  final List<DropItem> items;
-  final Function(DropItem?) onSelectedIndex;
-  DropItem? selectedValue;
+  final List<T> items;
+  final double iconPadding;
+  final Function(T?) onSelectedIndex;
+  T? selectedValue;
 
 
 
@@ -25,14 +31,15 @@ class DropDownWidget extends StatefulWidget {
       this.selectedValue,
       required this.onSelectedIndex,
       this.errorMessage,
+        this.iconPadding = 8,
       this.prefixIcon})
       : super(key: key) {}
 
   @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
+  State<DropDownWidget> createState() => _DropDownWidgetState<T>();
 }
 
-class _DropDownWidgetState extends State<DropDownWidget> {
+class _DropDownWidgetState<T extends DropItem> extends State<DropDownWidget<T>> {
 
 
   @override
@@ -54,7 +61,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                 fillColor: Colors.white,
 
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding:  EdgeInsets.all(widget.iconPadding),
                   child: widget.prefixIcon,
                 ),
                 // prefixIconConstraints: BoxConstraints(maxWidth: 400),
@@ -111,7 +118,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                 borderRadius: BorderRadius.circular(15),
               ),
               items: widget.items
-                  .map((item) => DropdownMenuItem<DropItem>(
+                  .map((item) => DropdownMenuItem<T>(
                         value: item,
                         child: Text(
                           item.name,

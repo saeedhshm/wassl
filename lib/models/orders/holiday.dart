@@ -36,9 +36,9 @@ class HolidaysData implements Order{
   ResponsibleEmployee? nameEmployee;
   @override
   List<Confirmation>? confirmation;
-
   @override
   var hrComment;
+
  HolidaysData();
 
   HolidaysData.fromJson(Map<String, dynamic> json) {

@@ -1,4 +1,8 @@
-class Country {
+import 'package:get/get.dart';
+
+import '../../views/reusable_widgets/drop_down_widget.dart';
+
+class Country  extends DropItem{
   int? id;
   String? code;
   String? nameEn;
@@ -15,6 +19,16 @@ class Country {
     nameAr = json['name_ar'];
     nationalityEn = json['nationality_en'];
     nationalityAr = json['nationality_ar'];
+  }
+
+  @override
+  // TODO: implement name
+  String get name {
+    return ('lang_code'.tr == 'ar' ? nameAr : nameEn) ?? '';
+  }
+
+  String get nationality {
+    return ('lang_code'.tr == 'ar' ? nationalityAr : nationalityEn) ?? '';
   }
 
 }

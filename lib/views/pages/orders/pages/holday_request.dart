@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/holiday/holiday_request_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/helpers/exceptions/custom_exception.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/models/countries/country.dart';
 import 'package:wassl/models/orders/holiday.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
@@ -13,11 +16,13 @@ import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
+import '../../../../models/countries/city.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/order_type.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
+import '../../../reusable_widgets/icons/location_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -36,11 +41,25 @@ class HolidayRequestPage extends StatelessWidget {
   final Order? order;
 
    HolidayRequestPage({Key? key,this.onClose,this.order}) : super(key: key){
+     setUpOrderData();
+   }
+
+   setUpOrderData() async{
      if(order != null){
        var holidayOrder = order as HolidaysData;
        startDateCtrl.text = holidayOrder.holidayStart ?? '';
        endDateCtrl.text = holidayOrder.holidayEnd ?? '';
        controller.selectedType = holidayOrder.type;
+       println(controller.selectedType?.id,'🐕');
+       println(holidayOrder.type?.id,'🦧');
+       if(controller.selectedType!.name.contains('عمل')){
+         await controller.getAllCountries();
+         controller.selectedCountry = holidayOrder.confirmation?.first.businessTrip?.country;
+         await controller.getAllCities('${controller.selectedCountry?.id}');
+         controller.selectedCity = holidayOrder.confirmation?.first.businessTrip?.region;
+         controller.loadingCountries.value = true;
+         controller.loadingCities.value = true;
+       }
        reasonCtrl.text = holidayOrder.reason;
        fileCtrl.text = holidayOrder.file.split('/').last;
        var startDateArr = holidayOrder.holidayStart?.split('-');
@@ -51,240 +70,290 @@ class HolidayRequestPage extends StatelessWidget {
        controller.holidayReason = holidayOrder.reason;
        controller.filePath = holidayOrder.file == '' ? null : holidayOrder.file;
        controller.setDifferenceInDays();
+
      }
    }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(()=>Stack(
-        children: [
-          Column(
-            children: [
-              MainAppbarWidget(
-                'order_holiday',
-                onBack: () {
-                  Get.back();
-                },
-              ),
-              Expanded(
-                  child:controller.loadingHolidayTypes.value ?
-                  const Center(
-                    child: SendingLoadingWidget(),
-                  ) : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width:double.infinity,
-                                  child: LocalizedText(
-                                    'holiday_details'.tr,
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
+      body: Obx((){
+        return Stack(
+          children: [
+            Column(
+              children: [
+                MainAppbarWidget(
+                  'order_holiday',
+                  onBack: () {
+                    Get.back();
+                  },
+                ),
+                Expanded(
+                    child:controller.loadingHolidayTypes.value ?
+                    const Center(
+                      child: SendingLoadingWidget(),
+                    ) : SingleChildScrollView(
+                      child: Container(
+                        margin: const EdgeInsets.all(8),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width:double.infinity,
+                                child: LocalizedText(
+                                  'holiday_details'.tr,
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold
                                   ),
                                 ),
                               ),
-                              // DropDownMenu(textHint: 'loan_type'.tr,)
-                              DropDownWidget(
-                                hintText: 'holiday_type'.tr,
-                                selectedValue: controller.selectedType,
-                                items:  controller.orderTypes.value.data!.map((e) => e).toList(),
-                                onSelectedIndex: (value) {
-                                  controller.selectedType = value as OrderType?;
-                                },
-                                prefixIcon: const SizedBox(
-                                    width: 5,
-                                    height: 35,
-                                    child:
-                                    SvgWidget('assets/images/holidays.svg')),
-                              ),
-                              const SizedBox(height: 15,),
+                            ),
+                            // DropDownMenu(textHint: 'loan_type'.tr,)
+                            DropDownWidget<OrderType>(
+                              hintText: 'holiday_type'.tr,
+                              selectedValue: controller.selectedType,
+                              items:  controller.orderTypes.value.data!.map((e) => e).toList(),
+                              onSelectedIndex: (value) async {
+                                controller.selectedType = value;
+                                println(controller.selectedType?.name);
+                                if(controller.selectedType?.name == 'رحلة عمل'){
+                                  await controller.getAllCountries();
+                                  controller.loadingCountries.value = true;
+                                }else{
+                                  controller.loadingCountries.value = false;
+                                  controller.loadingCities.value = false;
+                                  controller.selectedCountry = null;
+                                }
 
-                              Row(
+                              },
+                              prefixIcon: const SizedBox(
+                                  width: 5,
+                                  height: 35,
+                                  child:
+                                  SvgWidget('assets/images/holidays.svg')),
+                            ),
+
+                            controller.loadingCountries.value ? Column(
+                              children: [
+                                const SizedBox(height: 15,),
+
+                                DropDownWidget(
+                                  hintText: 'select_country'.tr,
+                                  selectedValue: controller.selectedCountry,
+                                  items:  controller.countries.map((e) => e).toList(),
+                                  onSelectedIndex: (value) async {
+                                    controller.selectedCountry = value as Country?;
+                                    await controller.getAllCities('${controller.selectedCountry?.id}');
+                                    controller.loadingCities.value = true;
+                                  },
+                                  iconPadding: 16,
+                                  prefixIcon: const SizedBox(
+                                    // width: 5,
+                                    // height: 5,
+                                      child:
+                                      LocationIcon(color: AppColors.lightGreyTextColor,)),
+                                ) ,
+                                const SizedBox(height: 15,),
+
+                                controller.loadingCities.value ?
+                                DropDownWidget(
+                                  hintText: 'select_city'.tr,
+                                  selectedValue: controller.selectedCity,
+                                  items:  controller.cities.map((e) => e).toList(),
+                                  onSelectedIndex: (value) {
+                                    controller.selectedCity = value as City?;
+                                    println(controller.selectedCity?.name,'controller.selectedType?.name');
+                                  },
+                                  iconPadding: 16,
+                                  prefixIcon: const SizedBox(
+                                      // width: 5,
+                                      // height: 5,
+                                      child:
+                                      LocationIcon(color: AppColors.lightGreyTextColor,)),
+                                ) : const SizedBox(),
+                              ],
+                            ): const SizedBox(),
+                            const SizedBox(height: 15,),
+                            Row(
+                              children: [
+                                Expanded(child: InkWell(
+                                  onTap: () async {
+                                    var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
+                                    controller.startDate = selectedDate ?? controller.startDate;
+                                    if(controller.startDate != null){
+                                      startDateCtrl.text = '${controller.startDate?.year}-${controller.startDate?.month}-${controller.startDate?.day} ';
+                                    }else{
+                                      startDateCtrl.text = '';
+                                    }
+                                  },
+                                  child:TextFormFieldWithIcons(
+                                    prefixIcon: const PrefCalendarIcon(),
+                                    hintText: 'start'.tr,
+                                    enabled: false,
+                                    controller: startDateCtrl,
+                                  ),
+
+                                ),),
+                                const SizedBox(width: 16,),
+                                Expanded(child: InkWell(
+                                  onTap: () async {
+                                    if(controller.startDate != null){
+                                      var selectedDate = await showDatePicker(context: context, initialDate: controller.startDate ?? DateTime.now(), firstDate: controller.startDate ?? DateTime(2000), lastDate: DateTime(2100));
+                                      controller.endDate = selectedDate ?? controller.endDate;
+                                      if(controller.endDate != null){
+                                        endDateCtrl.text = '${controller.endDate?.year}-${controller.endDate?.month}-${controller.endDate?.day} ';
+                                        controller.setDifferenceInDays();
+                                      }else{
+                                        endDateCtrl.text = '';
+                                      }
+                                    }else{
+                                      controller.differenceInDays.value = '';
+                                      SnackBars.showErrorSnackBar('error'.tr, 'select_start_date_first'.tr);
+                                    }
+                                  },
+                                  child: TextFormFieldWithIcons(
+                                    prefixIcon: const PrefCalendarIcon(),
+                                    hintText: 'end'.tr,
+                                    enabled: false,
+                                    controller: endDateCtrl,
+
+                                  ),
+                                ),)
+                              ],
+                            ),
+                            controller.differenceInDays.value.isNotEmpty ? Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Expanded(child: InkWell(
-                                    onTap: () async {
-                                      var selectedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2100));
-                                      controller.startDate = selectedDate ?? controller.startDate;
-                                      if(controller.startDate != null){
-                                        startDateCtrl.text = '${controller.startDate?.year}-${controller.startDate?.month}-${controller.startDate?.day} ';
-                                      }else{
-                                        startDateCtrl.text = '';
-                                      }
-                                    },
-                                    child:TextFormFieldWithIcons(
-                                      prefixIcon: const PrefCalendarIcon(),
-                                      hintText: 'start'.tr,
-                                      enabled: false,
-                                      controller: startDateCtrl,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
+                                        borderRadius: BorderRadius.circular(50)
                                     ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 2),
+                                      child: Row(
+                                        children: [
 
-                                  ),),
-                                  const SizedBox(width: 16,),
-                                  Expanded(child: InkWell(
-                                    onTap: () async {
-                                      if(controller.startDate != null){
-                                        var selectedDate = await showDatePicker(context: context, initialDate: controller.startDate ?? DateTime.now(), firstDate: controller.startDate ?? DateTime(2000), lastDate: DateTime(2100));
-                                        controller.endDate = selectedDate ?? controller.endDate;
-                                        if(controller.endDate != null){
-                                          endDateCtrl.text = '${controller.endDate?.year}-${controller.endDate?.month}-${controller.endDate?.day} ';
-                                          controller.setDifferenceInDays();
-                                        }else{
-                                          endDateCtrl.text = '';
-                                        }
-                                      }else{
-                                        controller.differenceInDays.value = '';
-                                        SnackBars.showErrorSnackBar('error'.tr, 'select_start_date_first'.tr);
-                                      }
-                                    },
-                                    child: TextFormFieldWithIcons(
-                                      prefixIcon: const PrefCalendarIcon(),
-                                      hintText: 'end'.tr,
-                                      enabled: false,
-                                      controller: endDateCtrl,
+                                          SizedBox(
+                                            width: 20,
+                                            child: Image.asset('assets/images/order_details/calendar.png'),
+                                          ),
+                                          const SizedBox(width: 8,),
+                                          Text('holiday_time'.tr,style: const TextStyle(
+                                            color: AppColors.darkGreyTextColor,
+                                            // fontWeight: FontWeight.bold
+                                          ),),
+                                          SizedBox(width: 16,),
+                                          SizedBox(
+                                            width: 25,
+                                            child: Image.asset('assets/images/order_details/arrow.png'),
+                                          ),
+                                          SizedBox(width: 16,),
+                                          Text(controller.differenceInDays.value,style: const TextStyle(
+                                            color: AppColors.darkGreyTextColor,
+                                            // fontSize: 12
+                                          ),),
 
+                                        ],
+                                      ),
                                     ),
-                                  ),)
+                                  ),
                                 ],
                               ),
-                              controller.differenceInDays.value.isNotEmpty ? Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(color: AppColors.darkGreyTextColor,width: 0.5),
-                                          borderRadius: BorderRadius.circular(50)
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 2),
-                                        child: Row(
-                                          children: [
-
-                                            SizedBox(
-                                              width: 20,
-                                              child: Image.asset('assets/images/order_details/calendar.png'),
-                                            ),
-                                            const SizedBox(width: 8,),
-                                            Text('holiday_time'.tr,style: const TextStyle(
-                                                color: AppColors.darkGreyTextColor,
-                                                // fontWeight: FontWeight.bold
-                                            ),),
-                                            SizedBox(width: 16,),
-                                            SizedBox(
-                                              width: 25,
-                                              child: Image.asset('assets/images/order_details/arrow.png'),
-                                            ),
-                                            SizedBox(width: 16,),
-                                            Text(controller.differenceInDays.value,style: const TextStyle(
-                                                color: AppColors.darkGreyTextColor,
-                                                // fontSize: 12
-                                            ),),
-
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ) : SizedBox(),
-                              const SizedBox(height: 10,),
+                            ) : SizedBox(),
+                            const SizedBox(height: 10,),
+                            // DropDownMenu(textHint: 'loan_type'.tr,)
 
 
 
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width:double.infinity,
-                                  child: LocalizedText(
-                                    'clear_reason'.tr,
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
+
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width:double.infinity,
+                                child: LocalizedText(
+                                  'clear_reason'.tr,
+                                  textStyle: const TextStyle(
+                                      fontWeight: FontWeight.bold
                                   ),
                                 ),
                               ),
-                              TextFormFieldWithIcons(
-                                prefixIcon: SizedBox(
-                                  child: ChatConversationIcon(),
-                                ),
-                                maxLines: 5,
-                                hintText: 'the_reason'.tr,
-                                height: 130,
-                                controller: reasonCtrl,
-                                onChange: (value){
-                                  controller.holidayReason = value;
-                                },
+                            ),
+                            TextFormFieldWithIcons(
+                              prefixIcon: SizedBox(
+                                child: ChatConversationIcon(),
                               ),
-                              const SizedBox(height: 15,),
-                              InkWell(
-                                onTap: () async {
-                                  FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['pdf'],
-                                  );
+                              maxLines: 5,
+                              hintText: 'the_reason'.tr,
+                              height: 130,
+                              controller: reasonCtrl,
+                              onChange: (value){
+                                controller.holidayReason = value;
+                              },
+                            ),
+                            const SizedBox(height: 15,),
+                            InkWell(
+                              onTap: () async {
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['pdf'],
+                                );
 
-                                  if (result != null) {
-                                    String filePath = result.files.single.path ?? '';
+                                if (result != null) {
+                                  String filePath = result.files.single.path ?? '';
 
-                                    if(filePath.isNotEmpty){
-                                      controller.filePath = filePath;
-                                      fileCtrl.text = filePath.split('/').last;
-                                      // File file = File(filePath);
-                                    }
-
-                                  } else {
-                                    // User canceled the picker
+                                  if(filePath.isNotEmpty){
+                                    controller.filePath = filePath;
+                                    fileCtrl.text = filePath.split('/').last;
+                                    // File file = File(filePath);
                                   }
-                                },
-                                child: TextFormFieldWithIcons(
-                                  controller: fileCtrl,
-                                  enabled: false,
-                                  prefixIcon: SizedBox(
-                                    child: Image.asset('assets/images/attach.png'),
-                                  ),
-                                  hintText: 'attach_file'.tr,
 
-
+                                } else {
+                                  // User canceled the picker
+                                }
+                              },
+                              child: TextFormFieldWithIcons(
+                                controller: fileCtrl,
+                                enabled: false,
+                                prefixIcon: SizedBox(
+                                  child: Image.asset('assets/images/attach.png'),
                                 ),
+                                hintText: 'attach_file'.tr,
+
+
                               ),
-                              const SizedBox(height: 15,),
-                              order == null ? SendButtonWidget(_sendData) :  CancelUpdateWidget(
-                                onUpdateRequest: _updateHoliday,
-                                onCancelRequest: _cancelHolidayRequst,
-                              ),
-                              const SizedBox(height: 25,),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ))
-            ],
-          ),
-          controller.loading.value ? Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.black.withOpacity(0.3),
-            child: const Center(
-              child: SendingLoadingWidget(),
+                            ),
+                            const SizedBox(height: 15,),
+                            order == null ? SendButtonWidget(_sendData) :  CancelUpdateWidget(
+                              onUpdateRequest: _updateHoliday,
+                              onCancelRequest: _cancelHolidayRequst,
+                            ),
+                            const SizedBox(height: 25,),
+                          ],
+                        ),
+                      ),
+                    ))
+              ],
             ),
-          ):SizedBox(),
-          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
-           ////
-           controller.errorsList.clear();
-         }): const SizedBox()
-        ],
-      )),
+            controller.loading.value ? Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Colors.black.withOpacity(0.3),
+              child: const Center(
+                child: SendingLoadingWidget(),
+              ),
+            ):SizedBox(),
+            controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
+              ////
+              controller.errorsList.clear();
+            }): const SizedBox()
+          ],
+        );
+      }),
     );
   }
 
@@ -309,6 +378,8 @@ class HolidayRequestPage extends StatelessWidget {
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
     }on NoDataAvailableException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+    }on CustomException catch(e){
+      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
     }finally{
       controller.loading.value = false;
     }

@@ -383,6 +383,9 @@ Map<String,String>  englishString = {
   'order_apology':'Apology request',
   'time_in_exception':'Choose start permission time',
   'time_out_exception':'Choose end permission time',
+  'select_country':'Country',
+  'select_city':'City',
 
-
+  'country':'Country',
+  'city':'City',
 }  ;

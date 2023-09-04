@@ -3,24 +3,24 @@
 const String appDomain = 'https://waslhr.com';
 // const String appDomain = 'https://wasl.trafficksa.com';
 //
-const String _apiVrsion = '$appDomain/api/v1';
+const String apiVrsion = '$appDomain/api/v1';
 
 // https://waslhr.com/public/file/uOpBCDJRcQjVW1DJ7PbZqmRMvmywL4EcMIQRtJzb.pdf
 class AppUrls {
 
-  static const String _authApi = '$_apiVrsion/auth';
-  static const String _assignApi = '$_apiVrsion/assign';
-  static const String _attendanceApi = '$_apiVrsion/attendance';
-  static const String _ordersApi = '$_apiVrsion/orders';
-  static const String _holidayApi = '$_apiVrsion/holiday';
-  static const String _fingerprintCorrectionApi = '$_apiVrsion/fingerprint_correction';
-  static const String _loanApi = '$_apiVrsion/loan';
-  static const String _letterApi = '$_apiVrsion/letter';
-  static const String _askPermissionApi = '$_apiVrsion/ask_permission';
-  static const String _financialExpensesApi = '$_apiVrsion/financial_expenses';
-  static const String _custodyApi = '$_apiVrsion/custody';
-  static const String _visaApi = '$_apiVrsion/visa';
-  static const String _overtimeApi = '$_apiVrsion/overtime';
+  static const String _authApi = '$apiVrsion/auth';
+  static const String _assignApi = '$apiVrsion/assign';
+  static const String _attendanceApi = '$apiVrsion/attendance';
+  static const String _ordersApi = '$apiVrsion/orders';
+  static const String _holidayApi = '$apiVrsion/holiday';
+  static const String _fingerprintCorrectionApi = '$apiVrsion/fingerprint_correction';
+  static const String _loanApi = '$apiVrsion/loan';
+  static const String _letterApi = '$apiVrsion/letter';
+  static const String _askPermissionApi = '$apiVrsion/ask_permission';
+  static const String _financialExpensesApi = '$apiVrsion/financial_expenses';
+  static const String _custodyApi = '$apiVrsion/custody';
+  static const String _visaApi = '$apiVrsion/visa';
+  static const String _overtimeApi = '$apiVrsion/overtime';
 
   //https://waslhr.com/api/v1/auth
   static const String login = '$_authApi/login';
@@ -43,9 +43,9 @@ class AppUrls {
 
   static String get teamAttendanceApi{
     if(appDomain.contains('wasl.trafficksa')){
-      return '$_apiVrsion/team_attendance_v2';
+      return '$apiVrsion/team_attendance_v2';
     }
-    return '$_apiVrsion/team_attendance';
+    return '$apiVrsion/team_attendance';
   }
 
   ///orders/get
@@ -57,9 +57,9 @@ class AppUrls {
 
 
   //{{domain}}/get_holiday_types
-  static const String getHolidayTypes = '$_apiVrsion/get_holiday_types';
+  static const String getHolidayTypes = '$apiVrsion/get_holiday_types';
   //{{domain}}/vacations
-  static const String getVacations = '$_apiVrsion/vacations';
+  static const String getVacations = '$apiVrsion/vacations';
 
   ///holiday/add
   static const String addHolidayRequest = '$_holidayApi/add';
@@ -79,7 +79,7 @@ class AppUrls {
 
 
   //{{domain}}/get_loan_types
-  static const String getLoansTypes = '$_apiVrsion/get_loan_types';
+  static const String getLoansTypes = '$apiVrsion/get_loan_types';
   //loan/add
   static const String addLoan = '$_loanApi/add';
   //{{domain}}/loan/update/7
@@ -89,7 +89,7 @@ class AppUrls {
 
 
   //{{domain}}/get_letter_types
-  static const String getLetterTypes = '$_apiVrsion/get_letter_types';
+  static const String getLetterTypes = '$apiVrsion/get_letter_types';
   //{{domain}}/letter/add
   static const String addLetter = '$_letterApi/add';
   // {{domain}}/letter/update/5
@@ -98,7 +98,7 @@ class AppUrls {
   static const String cancelLetter = '$_letterApi/cancel';
 
   //{{domain}}/get_ask_permission_types
-  static const String getPermissionsTypes = '$_apiVrsion/get_ask_permission_types';
+  static const String getPermissionsTypes = '$apiVrsion/get_ask_permission_types';
   //{{domain}}/ask_permission/add
   static const String addPermission = '$_askPermissionApi/add';
   // {{domain}}/ask_permission/cancel/9
@@ -116,7 +116,7 @@ class AppUrls {
   static const String cancelFinancialExpenses = '$_financialExpensesApi/cancel';
 
   //{{domain}}/get_custody_types
-  static const String getCustodyTypes = '$_apiVrsion/get_custody_types';
+  static const String getCustodyTypes = '$apiVrsion/get_custody_types';
   //{{domain}}/custody/add
   static const String addCustody = '$_custodyApi/add';
   //{{domain}}/custody/cancel/3
@@ -125,11 +125,11 @@ class AppUrls {
   static const String updateCustody = '$_custodyApi/update';
 
   //{{domain}}/get_ticket_types
-  static const String getTicketTypes = '$_apiVrsion/get_ticket_types';
+  static const String getTicketTypes = '$apiVrsion/get_ticket_types';
   //{{domain}}/get_visa_time
-  static const String getVisaTime = '$_apiVrsion/get_visa_time';
+  static const String getVisaTime = '$apiVrsion/get_visa_time';
 //{{domain}}/get_visa_types
-  static const String getVisaTypes = '$_apiVrsion/get_visa_types';
+  static const String getVisaTypes = '$apiVrsion/get_visa_types';
   //{{domain}}/visa/add
   static const String addVisa = '$_visaApi/add';
   //{{domain}}/visa/update/3
@@ -147,38 +147,38 @@ class AppUrls {
   static const String cancelOvertimeApi = '$_overtimeApi/cancel';
 
   //https://waslhr.com/api/v1/documents
-  static const String documentsApi = '$_apiVrsion/documents';
+  static const String documentsApi = '$apiVrsion/documents';
   //https://waslhr.com/api/v1/covenant
-  static const String covenantApi = '$_apiVrsion/covenant';
+  static const String covenantApi = '$apiVrsion/covenant';
   // {{domain}}/vacations
-  static const String vacationsApi = '$_apiVrsion/vacations';
+  static const String vacationsApi = '$apiVrsion/vacations';
 
   // {{domain}}/SalaryDetails/14
-  static const String salaryDetailsApi = '$_apiVrsion/SalaryDetails';
+  static const String salaryDetailsApi = '$apiVrsion/SalaryDetails';
   // {{domain}}/SalaryMonth/14
-  static const String salaryMonthsApi = '$_apiVrsion/SalaryMonth';
+  static const String salaryMonthsApi = '$apiVrsion/SalaryMonth';
   //{{domain}}/ads
-  static const String adsApi = '$_apiVrsion/ads';
+  static const String adsApi = '$apiVrsion/ads';
   //{{domain}}/meetings
-  static const String meetingsApi = '$_apiVrsion/meetings';
+  static const String meetingsApi = '$apiVrsion/meetings';
 
   //tabreer
   // {{domain}}/get_tabrir_types
 static String get tabreerTypesApi{
-  return '$_apiVrsion/get_tabrir_types';
+  return '$apiVrsion/get_tabrir_types';
 }
   //{{domain}}/tabrir/add
   static String get addTabreerApi{
-    return '$_apiVrsion/tabrir/add';
+    return '$apiVrsion/tabrir/add';
   }
   //{{domain}}/tabrir/edit/23
   //{{domain}}/tabrir/update/22
   static String get updateTabreerApi{
-    return '$_apiVrsion/tabrir/update';
+    return '$apiVrsion/tabrir/update';
   }
   //{{domain}}/tabrir/cancel/10
   static String get cancelTabreerApi{
-    return '$_apiVrsion/tabrir/cancel';
+    return '$apiVrsion/tabrir/cancel';
   }
 }
 

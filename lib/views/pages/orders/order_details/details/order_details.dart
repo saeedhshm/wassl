@@ -6,6 +6,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
+import 'package:wassl/views/pages/orders/order_details/details/widgets/country_region_widget.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/directed_to.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/emp_name.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/holiday_duration.dart';
@@ -129,8 +130,9 @@ class OderDetailFragment extends StatelessWidget {
 
                   DirectedToWidget(controller.order),
 
+                  CountryRegionWidget(controller.order),
                   // reason
-                  const SeparatorWidget(),
+
                   ReasonWidget(controller.order),
                   const SeparatorWidget(),
 
