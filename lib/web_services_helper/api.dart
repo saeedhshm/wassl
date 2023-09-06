@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
@@ -44,6 +46,16 @@ class AppApiHandler {
     return response;
   }
 
+  //
+  static Future<Uint8List> downloadMyFile({required String url,
+    required dynamic body,
+    Map<String, String>? header}) async {
+
+    var uri = Uri.parse(url);
+    final response = await http.readBytes(uri,headers: header);
+
+    return response;
+  }
 
   static Future<http.Response> putData(
       {required String url,

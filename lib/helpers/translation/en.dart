@@ -392,4 +392,5 @@ Map<String,String>  englishString = {
   'cost_per_day':'Cost per day',
   'write_comment':'Write a comment',
   'comment':'Comment',
+  'report':'Report',
 }  ;

@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
@@ -22,6 +25,7 @@ import '../../../../../models/orders/holiday.dart';
 import '../../../../consts_widgets/loading_widgets.dart';
 import '../../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../../reusable_widgets/icons/status_icon.dart';
+import '../../../../reusable_widgets/show_pdf_page.dart';
 
 class OderDetailFragment extends StatelessWidget {
 
@@ -77,8 +81,14 @@ class OderDetailFragment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        OutlinedButton(onPressed: (){
-                          launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                        OutlinedButton(onPressed: () async {
+                          // launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+
+                          controller.appController.loading.value = true;
+                          Uint8List pdfData = await  controller.downloadPdfFile('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                          controller.appController.loading.value = false;
+                          Get.to(()=> ShowPdfPage(pdfData));
+
                         }, child: Row(
 
                           children: [
@@ -93,9 +103,17 @@ class OderDetailFragment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        OutlinedButton(onPressed: (){
-                          launchUrlString('${controller.order.pdfUrl}');
-                        }, child: Row(
+                        OutlinedButton(onPressed: () async {
+                          // launchUrlString('${controller.order.pdfUrl}');
+                          controller.appController.loading.value = true;
+                          Uint8List pdfData = await  controller.downloadPdfFile('${controller.order.pdfUrl}');
+                          controller.appController.loading.value = false;
+                        Get.to(()=> ShowPdfPage(pdfData));
+
+                        }, child: controller.appController.loading.value ?
+                            const SendingLoadingWidget() :
+
+                        Row(
 
                           children: [
                             const Icon(Icons.download),

@@ -11,6 +11,7 @@
 
    <application
         android:label="wassl"
+       android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
