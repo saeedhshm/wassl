@@ -1,4 +1,5 @@
 
+import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 
 import 'AllOrders.dart';
@@ -9,7 +10,7 @@ class FinancialExpensesDate implements Order{
   int? id;
   int? employeeId;
   int? displayOrdersTo;
-  String? name;
+  Name? _name;
   dynamic amount;
   String? date;
   dynamic description;
@@ -34,11 +35,19 @@ class FinancialExpensesDate implements Order{
 
   FinancialExpensesDate.fromJson(Map<String, dynamic> json) {
 
+    println(json['name'],'💔');
     id = json['id'];
     pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];
     displayOrdersTo = json['display_orders_to'];
-    name = json['name'];
+    if(json['name'] != null){
+      if(json['name'] is Map<String, dynamic>){
+        _name = json['name'] != null ?  Name.fromJson(json['name']) : null;
+      }else{
+        _name = json['name'] != null ?  Name.withString(json['name']) : null;
+      }
+    }
+
     amount = json['amount'];
     date = json['date'];
     description = json['description'];
@@ -60,6 +69,10 @@ class FinancialExpensesDate implements Order{
         confirmation!.add(Confirmation.fromJson(v));
       });
     }
+  }
+
+  String get name{
+    return ('lang_code'.tr == 'ar' ? _name?.fullName : _name?.fullNameEn) ?? '';
   }
 
 
@@ -94,4 +107,25 @@ class FinancialExpensesDate implements Order{
 
   @override
   String? pdfUrl;
+}
+
+class Name {
+  int? id;
+  String? fullName;
+  String? fullNameEn;
+
+  Name.withString(String name){
+    fullNameEn = name;
+    fullName = name;
+  }
+
+  Name({this.id, this.fullName, this.fullNameEn});
+
+  Name.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    fullName = json['full_name'];
+    fullNameEn = json['full_name_en'];
+  }
+
+
 }

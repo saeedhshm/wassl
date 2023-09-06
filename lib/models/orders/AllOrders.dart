@@ -124,6 +124,7 @@ class Confirmation {
   int? costPerDay;
   int? totalCost;
   BusinessTrip? businessTrip;
+  String? hrComment;
   ResponsibleEmployee? responsibleEmployee;
 
   Confirmation(
@@ -156,7 +157,7 @@ class Confirmation {
     businessTrip = json['business_trip'] != null
         ? BusinessTrip.fromJson(json['business_trip'])
         : null;
-
+    hrComment = json['hr_comment'];
     responsibleEmployee = json['responsible_employee'] != null
         ? ResponsibleEmployee.fromJson(json['responsible_employee'])
         : null;

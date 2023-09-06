@@ -73,7 +73,7 @@ class LoanOrderController extends GetxController{
       var responsebody = await response.stream.bytesToString();
       errorsList.addAll(appController.listOfErrors);
       errorsList.add('body: $body');
-      errorsList.add('url: ${AppUrls.addHolidayRequest}');
+      errorsList.add('url: ${AppUrls.addLoan}');
       errorsList.add('response.statusCode: ${response.statusCode}');
       errorsList.add('response.body: $responsebody');
       throw CustomException();

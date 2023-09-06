@@ -43,7 +43,6 @@ class HolidaysData implements Order{
 
   HolidaysData.fromJson(Map<String, dynamic> json) {
 
-    println(json['hr_comment'],'HolidaysData hr_comment');
     id = json['id'];
     pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];

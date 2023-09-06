@@ -391,7 +391,7 @@ Map<String,String>  arabicStrings = {
   'total_cost':'اجمالي التكلفة',
   'cost_per_day':'التكلفة في اليوم',
   'write_comment':'اكتب تعليق',
-  '':'',
+  'comment':'التعليق',
   '':'',
   '':'',
   '':'',

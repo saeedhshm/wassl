@@ -14,23 +14,29 @@ class ConfirmationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: AppColors.borderTextFieldColor,width: 0.5)
-      ),
-      child: Column(
-        children: controller.confirmation.map((e) => ChainItemWidget(
-          confirmStatus: e.status ?? 1,
-          hieghtBetweenWidgets: heightBetweenWidgets,
-          name: e.responsibleEmployee?.fullName ?? '',
-          job: '12007 - مطور وجهات',
-          image: 'assets/images/profile/1.png',
-          date:(e.updatedAt ?? '').dateFromTZone ,
-          time: (e.updatedAt ?? '').timeFromTZone,
-        ),).toList(),
-      ),
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: AppColors.borderTextFieldColor,width: 0.5)
+          ),
+          child: Column(
+            children: controller.confirmation.map((e) => ChainItemWidget(
+              confirmStatus: e.status ?? 1,
+              hieghtBetweenWidgets: heightBetweenWidgets,
+              name: e.responsibleEmployee?.fullName ?? '',
+              job: '12007 - مطور وجهات',
+              image: 'assets/images/profile/1.png',
+              date:(e.updatedAt ?? '').dateFromTZone ,
+              time: (e.updatedAt ?? '').timeFromTZone,
+              hrComment: e.hrComment,
+            ),).toList(),
+          ),
+        ),
+
+      ],
     );
   }
 }

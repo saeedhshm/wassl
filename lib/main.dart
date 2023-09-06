@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
    AppController appController = Get.find();
+
    static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
    Map<String, dynamic> _deviceData = <String, dynamic>{};
 
@@ -61,6 +62,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    appController.testingUserName = 'mr.hussein.1416@gmail.com';
+    // appController.testingUserName = 'saeedhshm@gmail.com';
+    // appController.testingUserName = 'test@waslhr.com';
 
     return GetMaterialApp(
       title: 'Wasl',

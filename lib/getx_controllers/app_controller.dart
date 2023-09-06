@@ -26,6 +26,8 @@ class AppController extends GetxController{
   var gettingHolidays = false.obs;
   var holidaysBalance = Holidays().obs;
 
+  String testingUserName = '';
+
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
   var listOfErrors = <String>[].obs;

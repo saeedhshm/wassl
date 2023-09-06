@@ -14,25 +14,28 @@ class ErrorMessageWidget extends StatelessWidget {
       height: Get.height,
       color: Colors.red,
       child: SafeArea(
-        child: Column(
-          children: [
-            InkWell(
-                onTap: onTap,
-                child: const Icon(Icons.close)),
-            Expanded(child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:errorList.map((element) => Text(element,style: const TextStyle(
-                    color: Colors.white,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Column(
+            children: [
+              InkWell(
+                  onTap: onTap,
+                  child: const Icon(Icons.close)),
+              Expanded(child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:errorList.map((element) => Text(element,style: const TextStyle(
+                      color: Colors.white,
 
-                  ),)).toList(),
+                    ),)).toList(),
+                  ),
                 ),
-              ),
-            ))
-          ],
+              ))
+            ],
+          ),
         ),
       ),
     ) ;

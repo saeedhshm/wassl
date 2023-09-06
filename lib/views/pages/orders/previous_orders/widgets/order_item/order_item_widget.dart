@@ -172,7 +172,7 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: NewWidget((order as FinancialExpensesDate).name ?? ''),
+                  child: NewWidget((order as FinancialExpensesDate).name ),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
