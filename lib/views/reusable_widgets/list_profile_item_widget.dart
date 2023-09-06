@@ -30,11 +30,11 @@ class ListProfileItemWidget extends StatelessWidget {
             child: Row(
               children: [
 
-                Image.asset(icon,width: iconSize,color: AppColors.darkGreyTextColor,),
+                Image.asset(icon,width: iconSize,color: AppColors.orangeColorInCalend,),
                 SizedBox(width: spaceInBetween,),
                 DarkTextWidget(title,fontSize: fontSize,fontWeight: fontWeight,),
-                Spacer(),
-                Image.asset('assets/images/list_arrow_item_${'lang_code'.tr}.png',width: 35,)
+                const Spacer(),
+                Image.asset('assets/images/list_arrow_item_${'lang_code'.tr}.png',width: 35,color: AppColors.orangeColorInCalend,)
 
               ],
             ),

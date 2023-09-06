@@ -25,7 +25,7 @@ class AbsentsWidget extends StatelessWidget {
                 Text(
                   'absents_from_work'.tr,
                   style: const TextStyle(
-                      color: AppColors.darkGreyTextColor,
+                      color: AppColors.orangeColorInCalend,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
@@ -43,7 +43,7 @@ class AbsentsWidget extends StatelessWidget {
                       name: controller.teamAbsence[i].employee?.fullName ?? '',
                       startDate: '25 مارس 2023',
                       endDate: '28 مارس 2023',
-                      attendanceStatus: controller.teamAbsence[i].attendance?.first.attendanceStatus ?? '',
+                      attendanceStatus: controller.teamAbsence[i].attendance.first.attendanceStatus ,
                     ),
 
                   ],
@@ -106,7 +106,7 @@ class ItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-                child: Image.asset('assets/images/profile/1.png',width: 35,)),
+                child: Image.asset('assets/images/profile/1.png',width: 35,color: AppColors.orangeColorInCalend,)),
             SizedBox(width: 16,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -92,7 +92,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
             children: [
               Expanded(child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.orangeColorInCalend,
                     borderRadius: BorderRadius.circular(100)
                 ),
                 child: Padding(
@@ -100,11 +100,11 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Text('attend'.tr,style: const TextStyle(
-                          color: AppColors.darkGreyTextColor,
+                          color: Colors.white,
                           fontSize: 15
                       ),),
                       Text(controller.selectedDateAttendanceTime,style: const TextStyle(
-                          color: AppColors.darkGreyTextColor,
+                          color: Colors.white,
                           fontSize: 18
                       ),)
                     ],
@@ -113,7 +113,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
               const SizedBox(width: 10,),
               Expanded(child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.orangeColorInCalend,
                     borderRadius: BorderRadius.circular(100)
                 ),
                 child: InkWell(
@@ -128,11 +128,11 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         Text('leaving'.tr,style: const TextStyle(
-                            color: AppColors.darkGreyTextColor,
+                            color: Colors.white,
                             fontSize: 15
                         ),),
                         Text(controller.selectedDateLeaveTime,style: const TextStyle(
-                            color: AppColors.darkGreyTextColor,
+                            color: Colors.white,
                             fontSize: 18
                         ),)
                       ],

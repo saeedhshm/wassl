@@ -28,7 +28,7 @@ class NextEvents extends StatelessWidget {
                 Text(
                   'next_events'.tr,
                   style: const TextStyle(
-                      color: AppColors.darkGreyTextColor,
+                      color: AppColors.orangeColorInCalend,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),

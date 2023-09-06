@@ -27,9 +27,9 @@ class ImageController {
   }
 
   Widget _loadImageFromNetwork(){
-    return Image.network(imageName,fit: fit,errorBuilder: (context,exception,stack){
+    return Image.network(imageName,color: color,fit: fit,errorBuilder: (context,exception,stack){
       // println('image exception $exception');
-      return const Icon(Icons.image_not_supported_rounded);
+      return const Icon(Icons.image_not_supported_rounded,);
     },);
   }
 

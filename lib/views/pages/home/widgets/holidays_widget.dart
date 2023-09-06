@@ -30,7 +30,7 @@ class HolidaysWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('yearly_vacations_balance'.tr,style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
+                color: AppColors.orangeColorInCalend,
                 fontSize: 16,
                 fontWeight: FontWeight.w500
             ),),

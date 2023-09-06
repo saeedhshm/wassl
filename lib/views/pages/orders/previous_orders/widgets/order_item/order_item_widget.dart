@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/widgets/name.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/widgets/order_type_name.dart';
-import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../../../helpers/constants/app_colors.dart';
-import '../../../../../../helpers/constants/print_ln.dart';
 import '../../../../../../helpers/exceptions/no_internet.dart';
 import '../../../../../../models/orders/AllOrders.dart';
 import '../../../../../../models/orders/ask_permission.dart';
@@ -19,8 +17,6 @@ import '../../../../../../models/orders/loan_order.dart';
 import '../../../../../../models/orders/over_time.dart';
 import '../../../../../../models/orders/tabreer.dart';
 import '../../../../../../models/orders/visa_order.dart';
-import '../../../../../consts_widgets/gradiants.dart';
-import '../../../../../reusable_widgets/gradiant_text.dart';
 import '../../../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../../../reusable_widgets/snack_bars.dart';
 import '../../../pages/ask_permission.dart';
@@ -150,39 +146,11 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('${'holiday'.tr} ${(order as HolidaysData).holidayType}'.tr,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget('${'holiday'.tr} ${(order as HolidaysData).holidayType}'.tr),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(((order as HolidaysData).differenceInDays),
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget(((order as HolidaysData).differenceInDays)),
                 ),
               ],
             ) : const SizedBox(),
@@ -191,39 +159,11 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).type?.name ?? ''),
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget('request'.tr + ' : '+ ((order as FingerprintCorrectionsData).type?.name ?? '')),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('time'.tr + ' : '+ ((order as FingerprintCorrectionsData).time ?? '').timeFromTimeSelection,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget('time'.tr + ' : '+ ((order as FingerprintCorrectionsData).time ?? '').timeFromTimeSelection),
                 ),
               ],
             ) : const SizedBox(),
@@ -232,39 +172,11 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as FinancialExpensesDate).name ?? '',
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as FinancialExpensesDate).name ?? ''),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(((order as FinancialExpensesDate).amount.toString() + ' ' + 'SAR'.tr),
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget(((order as FinancialExpensesDate).amount.toString() + ' ' + 'SAR'.tr)),
                 ),
               ],
             ) : const SizedBox(),
@@ -296,57 +208,15 @@ class OrderItemWidget extends StatelessWidget {
             order.orderName == 'LoansData' ? Row(
               children: [
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as LoansData).loanType,
-                        style: const TextStyle(
-                          color: AppColors.darkGreyTextColor
-                        ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as LoansData).loanType),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as LoansData).amount.toString()  + ' ' + 'SAR'.tr,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as LoansData).amount.toString()  + ' ' + 'SAR'.tr),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(((order as LoansData).installmentAmount.toString() + ' ' + 'SAR'.tr),
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget(((order as LoansData).installmentAmount.toString() + ' ' + 'SAR'.tr)),
                 ),
               ],
             ) : const SizedBox(),
@@ -355,21 +225,7 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as LetterDate).letterType  + ' ' + 'SAR'.tr,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as LetterDate).letterType  + ' ' + 'SAR'.tr),
                 ),
                 const SizedBox(width: 20,),
 
@@ -397,40 +253,12 @@ class OrderItemWidget extends StatelessWidget {
             order.orderName == 'AskPermissionsData' ? Row(
               children: [
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as AskPermissionsData).type?.name ?? '',
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as AskPermissionsData).type?.name ?? ''),
                 ),
                 const SizedBox(width: 20,),
 
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as AskPermissionsData).reasonType?.name ?? '' ,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as AskPermissionsData).reasonType?.name ?? ''),
                 ),
               ],
             ) : const SizedBox(),
@@ -440,39 +268,11 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('starts'.tr + ((order as OvertimeData).startTime ?? '').timeFromTimeSelection.tr,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget('starts'.tr + ((order as OvertimeData).startTime ?? '').timeFromTimeSelection.tr),
                 ),
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('ends'.tr + ((order as OvertimeData).endTime ?? '').timeFromTimeSelection,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget('ends'.tr + ((order as OvertimeData).endTime ?? '').timeFromTimeSelection),
                 ),
               ],
             ) : const SizedBox(),
@@ -482,21 +282,7 @@ class OrderItemWidget extends StatelessWidget {
 
                 const SizedBox(width: 20,),
                 Expanded(
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text((order as ApologyData).type?.name ?? '' ,
-                          style: const TextStyle(
-                              color: AppColors.darkGreyTextColor
-                          ),),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.mainBackgroundColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
+                  child: NewWidget((order as ApologyData).type?.name ?? '' ),
                 ),
                 const SizedBox(width: 20,),
 
@@ -504,10 +290,10 @@ class OrderItemWidget extends StatelessWidget {
             ) : const SizedBox(),
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 (order.statusID == 1) && (order.nameEmployee == null)  ? InkWell(
                     onTap: updateOrder,
-                    child: Icon(Icons.mode_edit_outline_sharp,color: AppColors.mainGreenColor,size: 18,)) : SizedBox(),
+                    child: const Icon(Icons.mode_edit_outline_sharp,color: AppColors.mainGreenColor,size: 18,)) : const SizedBox(),
               ],
             )
 
@@ -589,5 +375,33 @@ class OrderItemWidget extends StatelessWidget {
       }
     });
 
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget(
+      this.title,{
+    super.key,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(title,
+            style: const TextStyle(
+                color: Colors.white
+            ),),
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.orangeColorInCalend,
+        borderRadius: BorderRadius.circular(50),
+      ),
+    );
   }
 }

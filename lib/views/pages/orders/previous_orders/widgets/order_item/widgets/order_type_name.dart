@@ -24,7 +24,7 @@ class OrderTypeName extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(order.orderName.tr,style: const TextStyle(
-                color: AppColors.darkGreyTextColor,
+                color: AppColors.orangeColorInCalend,
                 fontWeight: FontWeight.bold,
                 fontSize: 18
             ),),
@@ -43,7 +43,7 @@ class OrderTypeName extends StatelessWidget {
 
           ],
         )),
-        GradientText(order.orderStatus.tr,style: TextStyle(  ),
+        GradientText(order.orderStatus.tr,style: const TextStyle(  ),
             gradient:order.statusID == 1 ? grayGradiantAwait : order.statusID == 4 ? redGradiantRejected : order.statusID == 3 ? redGradiantCancel : greenGradiantAppBarSecond
         )
       ],

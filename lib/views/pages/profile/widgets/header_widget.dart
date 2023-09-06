@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../getx_controllers/app_controller.dart';
 import '../../../../getx_controllers/profile/user_menu_view_model.dart';
+import '../../../../helpers/constants/app_colors.dart';
 import '../../../reusable_widgets/circular_widget.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';
 import '../../../reusable_widgets/load_image.dart';
@@ -28,7 +29,7 @@ class HeaderWidget extends StatelessWidget {
               children: [
                 CircularWidget(
                   size: 100,
-                  child: ImageController(menuViewModel.userImage).loadImage(),
+                  child: ImageController(menuViewModel.userImage,color: AppColors.orangeColorInCalend).loadImage(),
                 ),
               ],
             ),
