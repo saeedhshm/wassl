@@ -33,6 +33,7 @@ class FinancialExpensesDate implements Order{
   FinancialExpensesDate();
 
   FinancialExpensesDate.fromJson(Map<String, dynamic> json) {
+
     id = json['id'];
     pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];

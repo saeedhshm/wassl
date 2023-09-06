@@ -388,4 +388,7 @@ Map<String,String>  englishString = {
 
   'country':'Country',
   'city':'City',
+  'total_cost':'Total Cost',
+  'cost_per_day':'Cost per day',
+  'write_comment':'Write a comment',
 }  ;

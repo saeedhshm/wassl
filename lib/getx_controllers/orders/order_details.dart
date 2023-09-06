@@ -18,13 +18,15 @@ class OrderDetailsController extends GetxController{
 
   OrderDetailsController(this.order);
 
-  Future setTeamOrderStatusRequest(String orderStatus) async {
+  Future setTeamOrderStatusRequest(String orderStatus,String comment) async {
 
     var body = {
       'order_type':order.confirmation?.first.orderType ?? '',
       'status':orderStatus,
-      'order_id':'${order.orderID}'
+      'order_id':'${order.orderID}',
+      'hr_comment' : comment
     };
+
 
     appController.loading.value = true;
 
@@ -34,6 +36,8 @@ class OrderDetailsController extends GetxController{
       'bearer ${appController.loginModel.value.token?.accessToken}',
       "x-localization": 'lang_code'.tr,
     };
+
+    println(body);
 
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
 

@@ -28,7 +28,7 @@ class AskPermissionsData implements Order {
   @override
   List<Confirmation>? confirmation;
   @override
-  var hrComment;
+  dynamic hrComment;
 
 
   AskPermissionsData.fromJson(Map<String, dynamic> json) {

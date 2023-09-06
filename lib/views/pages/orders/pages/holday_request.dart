@@ -23,6 +23,7 @@ import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/location_icon.dart';
+import '../../../reusable_widgets/icons/mony_on_hand.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -146,6 +147,7 @@ class HolidayRequestPage extends StatelessWidget {
                                     controller.selectedCountry = value as Country?;
                                     await controller.getAllCities('${controller.selectedCountry?.id}');
                                     controller.loadingCities.value = true;
+                                    controller.setDifferenceInDays();
                                   },
                                   iconPadding: 16,
                                   prefixIcon: const SizedBox(
@@ -163,6 +165,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   items:  controller.cities.map((e) => e).toList(),
                                   onSelectedIndex: (value) {
                                     controller.selectedCity = value as City?;
+                                    controller.setDifferenceInDays();
                                     println(controller.selectedCity?.name,'controller.selectedType?.name');
                                   },
                                   iconPadding: 16,
@@ -183,6 +186,7 @@ class HolidayRequestPage extends StatelessWidget {
                                     controller.startDate = selectedDate ?? controller.startDate;
                                     if(controller.startDate != null){
                                       startDateCtrl.text = '${controller.startDate?.year}-${controller.startDate?.month}-${controller.startDate?.day} ';
+                                      controller.setDifferenceInDays();
                                     }else{
                                       startDateCtrl.text = '';
                                     }
@@ -265,7 +269,63 @@ class HolidayRequestPage extends StatelessWidget {
                                 ],
                               ),
                             ) : SizedBox(),
-                            const SizedBox(height: 10,),
+
+                            controller.tripCost.value.trip != null ? Column(
+                              children: [
+                                const SizedBox(height: 15,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
+                                      child: SalaryMoneyOnHandIcon(color: AppColors.darkGreyTextColor,),
+                                    ),
+                                    const SizedBox(width: 16,),
+                                    Text('cost_per_day'.tr,style: const TextStyle(
+                                        color: AppColors.darkGreyTextColor,
+                                        fontWeight: FontWeight.bold
+                                    ),),
+                                    const Text(' : '),
+                                    Expanded(
+
+                                      child: Text('${controller.tripCost.value.trip?.costPerDay}  ${'SAR'.tr}',style: const TextStyle(
+                                          color: AppColors.darkGreyTextColor,
+                                          fontSize: 16
+                                      ),),
+                                    ),
+
+                                  ],
+                                ),
+                                const SizedBox(height: 15,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      width: 20,
+                                      child: SalaryMoneyOnHandIcon(color: AppColors.darkGreyTextColor,),
+                                    ),
+                                    const SizedBox(width: 16,),
+                                    Text('total_cost'.tr,style: const TextStyle(
+                                        color: AppColors.darkGreyTextColor,
+                                        fontWeight: FontWeight.bold
+                                    ),),
+                                    const Text(' : '),
+                                    Expanded(
+
+                                      child: Text('${controller.tripCost.value.totalCost}  ${'SAR'.tr}',style: const TextStyle(
+                                          color: AppColors.darkGreyTextColor,
+                                          fontSize: 16
+                                      ),),
+                                    ),
+
+                                  ],
+                                ),
+                              ],
+                            ) : const SizedBox(),
+
+                            const SizedBox(height: 15,),
                             // DropDownMenu(textHint: 'loan_type'.tr,)
 
 

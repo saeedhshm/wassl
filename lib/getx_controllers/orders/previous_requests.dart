@@ -64,13 +64,14 @@ class PreviousRequestsController extends GetxController{
       url = '$url&status=${_groupValueOfTeamOrders.value.status}';
     }
     // url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
-
-
-
+    println(_groupValue.value.status);
+    println(url,'team url');
     appController.loading.value = true;
     var response = await AppApiHandler.getData(url: url,header: appController.appHeader);
     appController.loading.value = false;
 
+    println(response.statusCode);
+    // println(response.body);
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }

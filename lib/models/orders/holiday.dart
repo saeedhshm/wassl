@@ -37,12 +37,13 @@ class HolidaysData implements Order{
   @override
   List<Confirmation>? confirmation;
   @override
-  var hrComment;
+  dynamic hrComment;
 
  HolidaysData();
 
   HolidaysData.fromJson(Map<String, dynamic> json) {
 
+    println(json['hr_comment'],'HolidaysData hr_comment');
     id = json['id'];
     pdfUrl = json['pdf_url'];
     employeeId = json['employee_id'];

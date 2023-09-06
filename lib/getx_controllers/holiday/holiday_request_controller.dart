@@ -10,6 +10,7 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../controllers/countries.dart';
+import '../../controllers/work_trip_controller.dart';
 import '../../helpers/constants/print_ln.dart';
 import '../../models/countries/city.dart';
 import '../../models/countries/country.dart';
@@ -38,6 +39,7 @@ class HolidayRequestController extends GetxController{
   var cities = <City>[].obs;
   City? selectedCity;
   var loadingCities = false.obs;
+  var tripCost = TripCost().obs;
 
 
 
@@ -195,13 +197,25 @@ class HolidayRequestController extends GetxController{
   }
 
 
-  setDifferenceInDays(){
+  setDifferenceInDays() async {
 
       String difference = '';
 
       final days = (endDate!.difference(startDate!).inDays + 1);
       difference = days == 1 ? 'day'.tr : days == 2 ? '2_days'.tr : days > 10 ? days.toString() + ' ' + 'day'.tr : (days.toString() + ' ' + 'days'.tr);
       differenceInDays.value = difference;
+
+      if(selectedCity != null && selectedCountry != null && endDate != null && startDate != null){
+        var tc = await WorkTripCostController().getAllCountries(
+            startDate: '${startDate?.year}-${startDate?.month}-${startDate?.day}',
+            endDate: '${endDate?.year}-${endDate?.month}-${endDate?.day}',
+            countryId: '${selectedCountry?.id}',
+            header: appController.appHeader,
+            cityId: '${selectedCity?.id}');
+        if(tc != null){
+          tripCost.value = tc;
+        }
+      }
 
   }
 

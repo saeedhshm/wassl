@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: AppColors.materialOrangeColor,
         fontFamily: 'AraHamah',
       ),
-      home:   SplashScreen(),
+      home: const SplashScreen()
       // home:TestCodesPage()
     );
   }

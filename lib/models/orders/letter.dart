@@ -34,6 +34,7 @@ class LetterDate implements Order{
   LetterDate();
 
   LetterDate.fromJson(Map<String, dynamic> json) {
+    // println(hrComment = json['hr_comment'],'LetterDate');
     id = json['id'];
     employeeId = json['employee_id'];
     pdfUrl = json['pdf_url'];
