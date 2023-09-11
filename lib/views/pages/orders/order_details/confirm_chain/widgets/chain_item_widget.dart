@@ -85,25 +85,23 @@ class ChainItemWidget extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: hieghtBetweenWidgets,),
-                    Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: AppColors.borderTextFieldColor,width: 0.5)
-                        ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 5),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Text('comment'.tr +' : '),
-                                Expanded(child: Text('${hrComment}')),
+                    hrComment != null ? Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: AppColors.borderTextFieldColor,width: 0.5)
+                      ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 5),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Text('comment'.tr +' : '),
+                              Expanded(child: Text(hrComment.toString())),
 
-                              ],
-                            ),
-                          )),
-                    ),
+                            ],
+                          ),
+                        )) : SizedBox(),
                   ],
                 ),
               ),

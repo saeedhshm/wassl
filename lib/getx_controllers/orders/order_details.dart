@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
+import 'package:open_file/open_file.dart';
 import 'package:wassl/getx_controllers/orders/previous_requests.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/views/reusable_widgets/snack_bars.dart';
 
+import '../../utils/file_utils.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
@@ -92,8 +94,10 @@ class OrderDetailsController extends GetxController{
   Future<Uint8List> downloadPdfFile(String pdfUrl) async{
     var response = await AppApiHandler.getData(url: pdfUrl,header: appController.appHeader);
     var listOfBytes =  response.bodyBytes;
-    // var filePath = await FileUtility.writeFileToDirectory(listOfBytes, pdfUrl.split('/').last);
+    var filePath = await FileUtility.writeFileToDirectory(listOfBytes, pdfUrl.split('/').last);
 
+    println(filePath,'🧣');
+    OpenFile.open(filePath);
    return listOfBytes;
   }
 

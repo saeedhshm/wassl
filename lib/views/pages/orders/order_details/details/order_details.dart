@@ -38,99 +38,103 @@ class OderDetailFragment extends StatelessWidget {
 
     return Scaffold(
 //first icon-- assets/images/profile/5.png
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Container(
-                color: AppColors.mainBackgroundColor,
-                child: Column(
-                  children: [
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  color: AppColors.mainBackgroundColor,
+                  child: Column(
+                    children: [
 
-                    EmployeeDetailsWidget(),
+                      EmployeeDetailsWidget(),
 
-                    OrderTypeWidget(),
+                      OrderTypeWidget(),
 
-                    const SeparatorWidget(),
+                      const SeparatorWidget(),
 
-                    // status
-                    StatusWidget(controller.order),
-                    const SeparatorWidget(),
+                      // status
+                      StatusWidget(controller.order),
+                      const SeparatorWidget(),
 
-                    // order date
-                    DateWidget(controller.order),
-                    const SeparatorWidget(),
+                      // order date
+                      DateWidget(controller.order),
+                      const SeparatorWidget(),
 
-                    OrderTimeWidget(controller.order),
+                      OrderTimeWidget(controller.order),
 
-                    //
+                      //
 
-                    DirectedToWidget(controller.order),
+                      DirectedToWidget(controller.order),
 
-                    CountryRegionWidget(controller.order),
-                    // reason
+                      CountryRegionWidget(controller.order),
+                      // reason
 
-                    ReasonWidget(controller.order),
-                    const SeparatorWidget(),
+                      ReasonWidget(controller.order),
+                      const SeparatorWidget(),
 
-                    SizedBox(height: (controller.order is HolidaysData) ? 50 : 10,),
+                      SizedBox(height: (controller.order is HolidaysData) ? 50 : 10,),
 
-                    HolidayDurationWidget(),
+                      HolidayDurationWidget(),
 
-                    controller.order.file.isNotEmpty ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        OutlinedButton(onPressed: () async {
-                          // launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                      controller.order.file.isNotEmpty ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OutlinedButton(onPressed: () async {
+                            // launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
 
-                          controller.appController.loading.value = true;
-                          Uint8List pdfData = await  controller.downloadPdfFile('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
-                          controller.appController.loading.value = false;
-                          Get.to(()=> ShowPdfPage(pdfData));
+                            controller.appController.loading.value = true;
+                            Uint8List pdfData = await  controller.downloadPdfFile('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                            controller.appController.loading.value = false;
+                            // Get.to(()=> ShowPdfPage(pdfData));
 
-                        }, child: Row(
+                          }, child: Row(
 
-                          children: [
-                            const Icon(Icons.download),
-                            const SizedBox(width: 15,),
-                            Text('download_file'.tr)
-                          ],
-                        )),
-                      ],
-                    ) :const SizedBox(),
-                    controller.order.pdfUrl != null ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        OutlinedButton(onPressed: () async {
-                          // launchUrlString('${controller.order.pdfUrl}');
-                          controller.appController.loading.value = true;
-                          Uint8List pdfData = await  controller.downloadPdfFile('${controller.order.pdfUrl}');
-                          controller.appController.loading.value = false;
-                        Get.to(()=> ShowPdfPage(pdfData));
+                            children: [
+                              const Icon(Icons.download),
+                              const SizedBox(width: 15,),
+                              Text('download_file'.tr)
+                            ],
+                          )),
+                        ],
+                      ) :const SizedBox(),
+                      controller.order.pdfUrl != null ? Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OutlinedButton(onPressed: () async {
+                            // launchUrlString('${controller.order.pdfUrl}');
+                            controller.appController.loading.value = true;
+                            Uint8List pdfData = await  controller.downloadPdfFile('${controller.order.pdfUrl}');
+                            controller.appController.loading.value = false;
+                          // Get.to(()=> ShowPdfPage(pdfData));
 
-                        }, child: controller.appController.loading.value ?
-                            const SendingLoadingWidget() :
+                          }, child: controller.appController.loading.value ?
+                              const SendingLoadingWidget() :
 
-                        Row(
+                          Row(
 
-                          children: [
-                            const Icon(Icons.download),
-                            const SizedBox(width: 15,),
-                            Text('download_app_file'.tr)
-                          ],
-                        )),
-                      ],
-                    ) :const SizedBox()
-                  ],
+                            children: [
+                              const Icon(Icons.download),
+                              const SizedBox(width: 15,),
+                              Text('download_app_file'.tr)
+                            ],
+                          )),
+                        ],
+                      ) :const SizedBox(),
+                      const SizedBox(height: 20,),
+                    ],
+                  ),
+
                 ),
-
               ),
             ),
-          ),
-          ApproveDisapproveWidget()
-        ],
+            ApproveDisapproveWidget()
+          ],
+        ),
       ),
     );
   }
