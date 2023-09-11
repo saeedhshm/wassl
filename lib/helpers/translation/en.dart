@@ -126,7 +126,7 @@ Map<String,String>  englishString = {
   'employees_numb':'Number of Employees',
   'welcome':'Welcome',
   'egypt':'Egypt',
-  'working_period':'Working shift',
+  'working_period':'@name Working shift',
   'attendance':'attendance',
   'holiday':'Holiday',
   'absent':'Absence',
@@ -393,4 +393,7 @@ Map<String,String>  englishString = {
   'write_comment':'Write a comment',
   'comment':'Comment',
   'report':'Report',
+  'first':'First',
+  'second':'Second',
+
 }  ;

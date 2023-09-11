@@ -45,11 +45,14 @@ extension FormatedDateTimeExtension on String {
     return myTime;
   }
 
-  DateTime get exactDateTimeFromGivenHours{
+  DateTime? get exactDateTimeFromGivenHours{
     DateFormat format = DateFormat("HH:mm:ss");
-
-    var exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(this).hour,format.parse(this).minute);//DateTime.parse('${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day} 00:40:00.000');
-
+    DateTime? exactTime;
+    try{
+      exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(this).hour,format.parse(this).minute);
+    }catch(e){
+      println(e.toString());
+    }
     return exactTime;
   }
 

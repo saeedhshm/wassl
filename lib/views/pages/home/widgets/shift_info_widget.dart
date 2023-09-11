@@ -13,6 +13,7 @@ class ShiftInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return Obx(() => Column(
       children: [
         Text(controller.branchName,style: const TextStyle(
@@ -21,11 +22,18 @@ class ShiftInfoWidget extends StatelessWidget {
             fontWeight: FontWeight.w600
         ),),
         const SizedBox(height: 10,),
-        Text('working_period'.tr,style: const TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-            fontWeight: FontWeight.w500
-        ),),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(controller.currentShiftTitle,style: const TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.w500
+            ),),
+
+          ],
+        ),
         const SizedBox(height: 10,),
         Text('${controller.currentShiftTimeIn} - ${controller.currentShiftTimeOut}',style: const TextStyle(
             color: Colors.white,

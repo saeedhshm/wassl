@@ -5,6 +5,7 @@ import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/models/orders/ask_permission.dart';
 
 import '../../../../../../helpers/constants/app_colors.dart';
+import '../../../../../reusable_widgets/icons/extra_work_icon.dart';
 import '../../../../../reusable_widgets/localized_text.dart';
 import '../../../../holidays/widgets/separator.dart';
 
@@ -31,12 +32,13 @@ class OrderTimeWidget extends StatelessWidget {
                       children: [
                         const SizedBox(
                             width:25,
-                            child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
+                            height: 25,
+                            child: ExtraWorkIcon()),
                         const SizedBox(width: 5,),
 
                         Text('time_in'.tr,style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
 
-                        Spacer(),
+                        const Spacer(),
                         LocalizedText(
                           '${(order as AskPermissionsData).timeIn}'.formattedTime() ?? '--:--',
                           textStyle: const TextStyle(
@@ -48,10 +50,18 @@ class OrderTimeWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 15,
-                ),
-
+              ],
+            ),
+          ),
+        ),
+        const SeparatorWidget(),
+        Container(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                //var time in var
                 // time out var
                 Expanded(
                   child: Padding(
@@ -60,7 +70,8 @@ class OrderTimeWidget extends StatelessWidget {
                       children: [
                         const SizedBox(
                             width:25,
-                            child: Icon(Icons.access_time,color: AppColors.lightGreyTextColor,)),
+                            height: 25,
+                            child: ExtraWorkIcon()),
                         const SizedBox(width: 5,),
                         Text('time_out'.tr,
                           style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),

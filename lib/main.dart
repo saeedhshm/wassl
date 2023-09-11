@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
 
     appController.testingUserName = 'mr.hussein.1416@gmail.com';
     // appController.testingUserName = 'saeedhshm@gmail.com';
-    // appController.testingUserName = 'test@waslhr.com';
+    appController.testingUserName = 'test2@waslhr.com';
 
     return GetMaterialApp(
       title: 'Wasl',

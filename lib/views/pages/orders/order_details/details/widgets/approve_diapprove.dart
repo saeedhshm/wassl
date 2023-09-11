@@ -10,7 +10,7 @@ import '../../../../../reusable_widgets/custom_text_form_field.dart';
 class ApproveDisapproveWidget extends StatelessWidget {
 
   final OrderDetailsController controller = Get.find();
-  final userNameCtrl = TextEditingController();
+  final commentCtrl = TextEditingController();
 
   ApproveDisapproveWidget({Key? key}) : super(key: key);
 
@@ -26,7 +26,7 @@ class ApproveDisapproveWidget extends StatelessWidget {
               child: CustomTextFormField(
                 hintText: 'write_comment'.tr,
                 labelText: null,
-                controller: userNameCtrl,
+                controller: commentCtrl,
               ),
             ),
             Padding(
@@ -38,8 +38,8 @@ class ApproveDisapproveWidget extends StatelessWidget {
                       onTap: () async {
 
                         // await controller.setTeamOrderStatusRequest('2');
-                        println(userNameCtrl.text);
-                        controller.setTeamOrderStatusRequest('2',userNameCtrl.text);
+                        println(commentCtrl.text);
+                        controller.setTeamOrderStatusRequest('2',commentCtrl.text);
 
                       },
                       child: Container(
@@ -63,8 +63,8 @@ class ApproveDisapproveWidget extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        println(userNameCtrl.text);
-                        controller.setTeamOrderStatusRequest('3',userNameCtrl.text);
+                        println(commentCtrl.text);
+                        controller.setTeamOrderStatusRequest('3',commentCtrl.text);
                       },
                       child: Container(
                         decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 
 import 'package:wassl/helpers/extensions/date_time.dart';
 import 'package:wassl/models/ads/ads.dart';
@@ -17,6 +18,7 @@ class HomeController extends GetxController {
   final AppController appController = Get.find();
 
   var sendingAttendance = false.obs;
+  var employeeHasTowShifts = false.obs;
 
   var attendanceStatus = 1.obs;
   List<AttendanceCheck> checkList = [];
@@ -97,18 +99,30 @@ class HomeController extends GetxController {
 
       try{
         var json = jsonDecode(response.body) as List;
+        println(json);
         checkList = json.map((e) => AttendanceCheck.fromJson(e)).toList();
       }catch (e){
         var json = jsonDecode(response.body);
         checkList.add(AttendanceCheck.fromJson(json));
       }
 
+      checkList.sort((a, b){
+        println(b.empTimeIn.compareTo(a.empTimeIn),'b.empTimeIn.compareTo(a.empTimeIn)');
+        return a.empTimeIn.compareTo(b.empTimeIn);
+      });
 
       currentShift.value = checkList.first;
+      currentShift.value.shiftIndex = 0;
 
       if (checkList.length > 1) {
+        employeeHasTowShifts.value = true;
+
+        println(currentShift.value.empAllowTimeOut,'currentShift.value.empAllowTimeOut');
         if (DateTime.now().isAfter(currentShift.value.empAllowTimeOut)) {
+
           currentShift.value = checkList.last;
+          currentShift.value.shiftIndex = 1;
+
         }
       }
       attendanceStatus.value = currentShift.value.attendanceStatus ?? 0;
@@ -165,24 +179,26 @@ class HomeController extends GetxController {
   }
 
   String get currentShiftTimeIn {
-    if(appDomain.contains('wasl.trafficksa')){
       return currentShift.value.schedule?.timeIn ?? '';
 
-    }
-    return appController.loginModel.value.timeIn;
   }
 
   String get currentShiftTimeOut {
-    if(appDomain.contains('wasl.trafficksa')){
-      return currentShift.value.schedule?.timeOut ?? '';
 
-    }
-    return appController.loginModel.value.timeOut;
+      return currentShift.value.schedule?.timeOut ?? '';
 
   }
 
   String get branchName {
     return appController.loginModel.value.user!.branch?.name ?? '';
+  }
+
+  String get currentShiftTitle{
+    println(checkList.length,'=-=-=-=-==-=>>>>>>');
+    if(employeeHasTowShifts.value) {
+      return 'working_period'.trParams({'name':currentShift.value.shiftIndex == 0 ? 'first'.tr : 'second'.tr});
+    }
+    return 'working_period'.trParams({'name':''});
   }
 
   bool get isLocationDisabled {

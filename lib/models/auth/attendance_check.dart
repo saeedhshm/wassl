@@ -8,6 +8,8 @@ class AttendanceCheck {
   Attendance? attendance;
   dynamic vacation;
   Schedule? schedule;
+  int? shiftIndex;
+
 
   AttendanceCheck();
 
@@ -131,19 +133,23 @@ class Attendance {
 
 extension SecheduleTimes on AttendanceCheck{
   DateTime get empTimeIn{
-    return (schedule?.info?.timeIn ?? '').exactDateTimeFromGivenHours;
+    return (schedule?.info?.timeIn ?? '').exactDateTimeFromGivenHours!;
   }
 
   DateTime get empTimeOut{
-    return (schedule?.info?.timeOut ?? '').exactDateTimeFromGivenHours;
+    return (schedule?.info?.timeOut ?? '').exactDateTimeFromGivenHours!;
   }
 
   DateTime get empAllowTimeIn{
-    return (schedule?.allowTimeIn ?? '').exactDateTimeFromGivenHours;
+
+    return (schedule?.allowTimeIn ?? '').exactDateTimeFromGivenHours!;
   }
 
   DateTime get empAllowTimeOut{
-    return (schedule?.allowTimeOut ?? '').exactDateTimeFromGivenHours;
+    if(schedule?.allowTimeOut != null) {
+      return (schedule?.allowTimeOut ?? '').exactDateTimeFromGivenHours!;
+    }
+    return empTimeOut.add(const Duration(minutes: 40));
   }
 }
 
