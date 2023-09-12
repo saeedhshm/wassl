@@ -18,131 +18,219 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         children: [
+          for(var i = 0; i< controller.shiftsSchedules.length; i++)
+            Column(
+              children: [
 
-          const SizedBox(height: 16,),
-          Stack(
-            children: [
+                const SizedBox(height: 16,),
+                Stack(
+                  children: [
 
 
-              Container(
+                    Container(
 
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    children: [
-                      Text('working_time'.tr,style: const TextStyle(
-                        color: AppColors.darkGreyTextColor,
-                        fontSize: 17
-                      ),),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            Text('working_time'.tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 17
+                            ),),
 
-                      Text(controller.currentSelectedDate,style: const TextStyle(
-                          color: AppColors.darkGreyTextColor,
-                          fontSize: 15
-                      ),),
-                      // SizedBox(height: 5,),
-                      Row(
-                        children: [
-                          Expanded(child: Center(child: Text(controller.workShiftStartingTime,style: const TextStyle(
-                              color: AppColors.darkGreyTextColor,
-                              fontSize: 18
-                          ),))),
-                          Expanded(child: Center(child: Text(controller.workShiftEndingTime,style: const TextStyle(
-                              color: AppColors.darkGreyTextColor,
-                              fontSize: 18
-                          ),))),
+                            Text(controller.currentSelectedDate,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 15
+                            ),),
+                            // SizedBox(height: 5,),
+                            Row(
+                              children: [
+                                Expanded(child: Center(child: Text(controller.shiftsSchedules[i].info?.timeInEx ?? '',style: const TextStyle(
+                                    color: AppColors.darkGreyTextColor,
+                                    fontSize: 18
+                                ),))),
+                                Expanded(child: Center(child: Text(controller.shiftsSchedules[i].info?.timeOutEx ?? '',style: const TextStyle(
+                                    color: AppColors.darkGreyTextColor,
+                                    fontSize: 18
+                                ),))),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      margin: const EdgeInsets.only(top: 20),
+                    ),
+                    i == 0 && controller.selectedDay.value.attendance.isNotEmpty ?
+                    Container(
+                      margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: const <BoxShadow>[
+                          BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 6.0,
+                              offset: Offset(0.0, 3.0),
+                              spreadRadius: 0.0
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                ),
-                margin: const EdgeInsets.only(top: 20),
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                  boxShadow: const <BoxShadow>[
-                    BoxShadow(
-                        color: Colors.black54,
-                        blurRadius: 6.0,
-                        offset: Offset(0.0, 3.0),
-                        spreadRadius: 0.0
-                    )
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
+                        child: Text(controller.selectedDay.value.attendance[i].status.tr,
+                          style: const TextStyle(
+                              color: AppColors.mainGreenColor
+                          ),
+                        ),
+                      ),
+                    ):const SizedBox(),
+                    i == 1 && controller.selectedDay.value.attendance.length == 2  ?
+                    Container(
+                      margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: const <BoxShadow>[
+                          BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 6.0,
+                              offset: Offset(0.0, 3.0),
+                              spreadRadius: 0.0
+                          )
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
+                        child: Text(controller.selectedDay.value.attendance[i].status.tr,
+                          style: const TextStyle(
+                              color: AppColors.mainGreenColor
+                          ),
+                        ),
+                      ),
+                    ):const SizedBox(),
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 16),
-                  child: Text(controller.selectedDateStatus,
-                    style: const TextStyle(
-                        color: AppColors.mainGreenColor
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16,),
-          controller.selectedDay.value.attendanceDay != null ?
-          Row(
-            children: [
-              Expanded(child: Container(
-                decoration: BoxDecoration(
-                    color: AppColors.orangeColorInCalend,
-                    borderRadius: BorderRadius.circular(100)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    children: [
-                      Text('attend'.tr,style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15
-                      ),),
-                      Text(controller.selectedDateAttendanceTime,style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18
-                      ),)
-                    ],
-                  ),
-                ),)),
-              const SizedBox(width: 10,),
-              Expanded(child: Container(
-                decoration: BoxDecoration(
-                    color: AppColors.orangeColorInCalend,
-                    borderRadius: BorderRadius.circular(100)
-                ),
-                child: InkWell(
-                  onTap: (){
-                    if(controller.noLeavingRegistered){
-                      Get.to(()=> CorrectingFingerprintRequest());
-                    }
+                const SizedBox(height: 16,),
+                i == 0 && controller.selectedDay.value.attendance.isNotEmpty ?
+                Row(
+                  children: [
+                    Expanded(child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.orangeColorInCalend,
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            Text('attend'.tr,style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15
+                            ),),
+                            Text(controller.selectedDay.value.attendance[0].attendanceTime,style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18
+                            ),)
+                          ],
+                        ),
+                      ),)),
+                    const SizedBox(width: 10,),
+                    Expanded(child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.orangeColorInCalend,
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: InkWell(
+                        onTap: (){
+                          if(controller.noLeavingRegistered){
+                            Get.to(()=> CorrectingFingerprintRequest());
+                          }
 
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        Text('leaving'.tr,style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15
-                        ),),
-                        Text(controller.selectedDateLeaveTime,style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18
-                        ),)
-                      ],
-                    ),
-                  ),
-                ),)),
-            ],
-          ) :
-          const SizedBox(),
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: [
+                              Text('leaving'.tr,style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15
+                              ),),
+                              Text(controller.selectedDay.value.attendance[0].leaveTime,style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18
+                              ),)
+                            ],
+                          ),
+                        ),
+                      ),)),
+                  ],
+                ) :
+                const SizedBox(),
 
+                i == 1 && controller.selectedDay.value.attendance.length == 2 ?
+                Row(
+                  children: [
+                    Expanded(child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.orangeColorInCalend,
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          children: [
+                            Text('attend'.tr,style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15
+                            ),),
+                            Text(controller.selectedDay.value.attendance[i].attendanceTime,style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18
+                            ),)
+                          ],
+                        ),
+                      ),)),
+                    const SizedBox(width: 10,),
+                    Expanded(child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.orangeColorInCalend,
+                          borderRadius: BorderRadius.circular(100)
+                      ),
+                      child: InkWell(
+                        onTap: (){
+                          if(controller.noLeavingRegistered){
+                            Get.to(()=> CorrectingFingerprintRequest());
+                          }
+
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Column(
+                            children: [
+                              Text('leaving'.tr,style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15
+                              ),),
+                              Text(controller.selectedDay.value.attendance[i].leaveTime,style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18
+                              ),)
+                            ],
+                          ),
+                        ),
+                      ),)),
+                  ],
+                ) :
+                const SizedBox(),
+                const SizedBox(height: 16,),
+
+
+              ],
+            ),
         ],
       ),
     ));

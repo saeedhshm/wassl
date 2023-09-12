@@ -51,8 +51,7 @@ class HolidayRequestPage extends StatelessWidget {
        startDateCtrl.text = holidayOrder.holidayStart ?? '';
        endDateCtrl.text = holidayOrder.holidayEnd ?? '';
        controller.selectedType = holidayOrder.type;
-       println(controller.selectedType?.id,'🐕');
-       println(holidayOrder.type?.id,'🦧');
+
        if(controller.selectedType!.name.contains('عمل')){
          await controller.getAllCountries();
          controller.selectedCountry = holidayOrder.confirmation?.first.businessTrip?.country;
@@ -117,7 +116,6 @@ class HolidayRequestPage extends StatelessWidget {
                               items:  controller.orderTypes.value.data!.map((e) => e).toList(),
                               onSelectedIndex: (value) async {
                                 controller.selectedType = value;
-                                println(controller.selectedType?.name);
                                 if(controller.selectedType?.name == 'رحلة عمل'){
                                   await controller.getAllCountries();
                                   controller.loadingCountries.value = true;
@@ -166,7 +164,6 @@ class HolidayRequestPage extends StatelessWidget {
                                   onSelectedIndex: (value) {
                                     controller.selectedCity = value as City?;
                                     controller.setDifferenceInDays();
-                                    println(controller.selectedCity?.name,'controller.selectedType?.name');
                                   },
                                   iconPadding: 16,
                                   prefixIcon: const SizedBox(

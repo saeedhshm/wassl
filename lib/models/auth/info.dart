@@ -1,3 +1,5 @@
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
+
 class Info {
   int? id;
   int? companyId;
@@ -7,14 +9,7 @@ class Info {
   String? timeIn;
   String? timeOut;
 
-  Info(
-      {this.id,
-        this.companyId,
-        this.type,
-        this.slug,
-        this.weekEndDays,
-        this.timeIn,
-        this.timeOut});
+  Info();
 
   Info.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -26,5 +21,19 @@ class Info {
     timeOut = json['time_out'];
   }
 
+  String get timeInEx{
+    // var time = '----';
+    // if(_timeIn != null){
+    //   time =  _timeIn?.split(' ')[1] ?? '----';
+    // }
+    return timeIn?.formattedTime() ?? '---';
+  }
+  String get timeOutEx{
+    // var time = '----';
+    // if(_timeOut != null){
+    //   time =  _timeOut?.split(' ')[1] ?? '----';
+    // }
+    return timeOut?.formattedTime() ?? '---';
+  }
 }
 

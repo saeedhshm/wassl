@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../models/date_time_parser.dart';
 import '../constants/print_ln.dart';
 
 extension NumberParsing on String {
@@ -30,6 +31,8 @@ extension FormatedDateTimeExtension on String {
   ///this function take time in this
   ///format 16:00:00 in 24 hours
   ///will return String time in 12 hours
+  ///^([0-9]{2}):([0-5][0-9]):([0-5][0-9])$
+  ///01:55:30
   String? formattedTime() {
 
     String? myTime;
@@ -45,6 +48,50 @@ extension FormatedDateTimeExtension on String {
     return myTime;
   }
 
+  DateTimeParser? get dateTimeParser{
+
+    String dateFormat = '';
+    String givenDate = this;
+
+    //2023-09-10T07:56:52.000000Z
+     if(RegExp(r"\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d",).hasMatch(this)){
+
+    givenDate = split('.')[0].replaceAll('T', ' ');
+    dateFormat = 'yyyy-MM-dd HH:mm:ss';
+
+    }
+
+    //2023-09-11 23:08:39
+    else if(RegExp(r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}",).hasMatch(this)){
+
+    dateFormat = 'yyyy-MM-dd HH:mm:ss';
+    }
+
+    ///01:55:30
+    else if(RegExp(r"^\d{2}:\d{2}:\d{2}",).hasMatch(this)){
+
+      dateFormat = 'HH:mm:ss';
+    }
+
+    // /2003-12-29
+    else if(RegExp(r"^\d\d\d\d-\d\d-\d\d",).hasMatch(this)){
+       dateFormat = 'yyyy-MM-dd';
+    }
+
+
+
+    // println(givenDate,this);
+    try{
+      DateFormat dateFormatOf24Hours = DateFormat(dateFormat);
+      var timeIn24 = dateFormatOf24Hours.parse(givenDate);
+      return DateTimeParser(timeIn24);
+    }catch(e){
+      println(e,dateFormat);
+    }
+
+    return null;
+  }
+
   DateTime? get exactDateTimeFromGivenHours{
     DateFormat format = DateFormat("HH:mm:ss");
     DateTime? exactTime;
@@ -57,6 +104,8 @@ extension FormatedDateTimeExtension on String {
   }
 
   String get timeFromTZone{
+
+
     var myTime = '----';
     var splittedArray = split('T');
     var timeList = splittedArray[1].split(':');
@@ -87,9 +136,12 @@ extension FormatedDateTimeExtension on String {
 
 
   String get timeFromTimeSelection {
+
+    println(this,'=>>>>timeFromTZone');
+
     var time = '-----';
     if (isNotEmpty) {
-      var timeList = this.split(':');
+      var timeList = split(':');
       int hours = int.tryParse(timeList[0]) ?? 0;
       int minutes = int.tryParse(timeList[1]) ?? 0;
       var pm_am = hours > 12 ? 'pm'.tr : 'am'.tr;
@@ -149,3 +201,5 @@ String? getTimeFormatOf12hours({required DateTime of}){
 
   return result;
 }
+
+

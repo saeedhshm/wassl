@@ -42,11 +42,11 @@ class OrderDetailsController extends GetxController{
       "x-localization": 'lang_code'.tr,
     };
 
-    println(body);
 
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
-    println(response.statusCode,'💔');
-    println(response.body,'💔');
+
+    println(response.statusCode);
+    println(response.body);
 
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
@@ -96,7 +96,7 @@ class OrderDetailsController extends GetxController{
     var listOfBytes =  response.bodyBytes;
     var filePath = await FileUtility.writeFileToDirectory(listOfBytes, pdfUrl.split('/').last);
 
-    println(filePath,'🧣');
+
     OpenFile.open(filePath);
    return listOfBytes;
   }

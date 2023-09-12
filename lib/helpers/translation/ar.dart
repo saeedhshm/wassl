@@ -397,9 +397,9 @@ Map<String,String>  arabicStrings = {
   'first':'الأولى',
   'second':'الثانية',
 
-  '':'',
-  '':'',
-  '':'',
+  'sickVacationsCount':'الاجازات المرضية',
+  'unpaidVacationsCount':'الاجازات الغير مدفوعة',
+  'discountVacationsCount':'الاجازات المخصومة',
   '':'',
   '':'',
   '':'',

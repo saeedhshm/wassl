@@ -99,7 +99,7 @@ class HomeController extends GetxController {
 
       try{
         var json = jsonDecode(response.body) as List;
-        println(json);
+
         checkList = json.map((e) => AttendanceCheck.fromJson(e)).toList();
       }catch (e){
         var json = jsonDecode(response.body);
@@ -107,7 +107,6 @@ class HomeController extends GetxController {
       }
 
       checkList.sort((a, b){
-        println(b.empTimeIn.compareTo(a.empTimeIn),'b.empTimeIn.compareTo(a.empTimeIn)');
         return a.empTimeIn.compareTo(b.empTimeIn);
       });
 
@@ -117,7 +116,6 @@ class HomeController extends GetxController {
       if (checkList.length > 1) {
         employeeHasTowShifts.value = true;
 
-        println(currentShift.value.empAllowTimeOut,'currentShift.value.empAllowTimeOut');
         if (DateTime.now().isAfter(currentShift.value.empAllowTimeOut)) {
 
           currentShift.value = checkList.last;
@@ -194,7 +192,6 @@ class HomeController extends GetxController {
   }
 
   String get currentShiftTitle{
-    println(checkList.length,'=-=-=-=-==-=>>>>>>');
     if(employeeHasTowShifts.value) {
       return 'working_period'.trParams({'name':currentShift.value.shiftIndex == 0 ? 'first'.tr : 'second'.tr});
     }

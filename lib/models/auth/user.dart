@@ -44,7 +44,7 @@ class User {
   int? isActive;
   int? stop;
   String? fcmToken;
-  List<Schedule>?  allSchedules = <Schedule>[];
+  List<Schedule>  _allSchedules = <Schedule>[];
   Schedule? schedule;
   Branch? branch;
   Branch? job;
@@ -90,7 +90,7 @@ class User {
         this.isActive,
         this.stop,
         this.fcmToken,
-        this.allSchedules,
+
         this.schedule,
         this.branch,
         this.job});
@@ -140,7 +140,7 @@ class User {
     fcmToken = json['fcm_token'];
     if (json['all_schedules'] != null) {
       json['all_schedules'].forEach((v) {
-        allSchedules!.add(Schedule.fromJson(v));
+        _allSchedules.add(Schedule.fromJson(v));
       });
     }
     schedule = json['schedule'] != null
@@ -154,6 +154,14 @@ class User {
 
   String get fullName{
     return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
+  }
+
+  List<Schedule> get allSchedules{
+    _allSchedules.sort((a, b){
+      return a.empTimeIn.compareTo(b.empTimeIn);
+    });
+
+    return _allSchedules;
   }
 
 }

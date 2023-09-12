@@ -32,7 +32,7 @@ class AppUrls {
   static const String attendance = '$_assignApi/attendance';
   static const String leaving = '$_assignApi/leave';
 
-  static const String monthlyAttendance = '$_attendanceApi/month';
+  static const String monthlyAttendance = '$_attendanceApi/month_v2';
 
   static String get attendanceCheck{
     // if(appDomain.contains('wasl.trafficksa')){
@@ -42,10 +42,9 @@ class AppUrls {
   }
 
   static String get teamAttendanceApi{
-    if(appDomain.contains('wasl.trafficksa')){
+
       return '$apiVrsion/team_attendance_v2';
-    }
-    return '$apiVrsion/team_attendance';
+
   }
 
   ///orders/get

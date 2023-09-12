@@ -35,15 +35,34 @@ class HolidayDetailsViewModel extends GetxController{
 
   }
 
+
+
+
+  // dynamic ;
+  // dynamic ;
+  // dynamic ;
+
   String get availableVacationsCount{
-    return '${_vacations.data?.availableVacationsCount}';
+    return '${_vacations.data?.availableVacationsCount ?? 0}';
   }
 
   String get usedVacationsCount{
-    return '${_vacations.data?.usedVacationsCount}';
+    return '${_vacations.data?.usedVacationsCount ?? 0}';
   }
 
   String get totalVacationBalance {
-    return '${_vacations.data?.openingVacationsCount}';
+    return '${_vacations.data?.openingVacationsCount ?? 0}';
+  }
+
+  String get sickVacationsCount {
+    return '${_vacations.data?.sickVacationsCount ?? 0}';
+  }
+
+  String get unpaidVacationsCount {
+    return '${_vacations.data?.unpaidVacationsCount ?? 0}';
+  }
+
+  String get discountVacationsCount {
+    return '${_vacations.data?.discountVacationsCount ?? 0}';
   }
 }

@@ -38,7 +38,6 @@ class ApproveDisapproveWidget extends StatelessWidget {
                       onTap: () async {
 
                         // await controller.setTeamOrderStatusRequest('2');
-                        println(commentCtrl.text);
                         controller.setTeamOrderStatusRequest('2',commentCtrl.text);
 
                       },
@@ -63,7 +62,6 @@ class ApproveDisapproveWidget extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        println(commentCtrl.text);
                         controller.setTeamOrderStatusRequest('3',commentCtrl.text);
                       },
                       child: Container(

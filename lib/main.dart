@@ -9,6 +9,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/test_page.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 
 void main() async{
+
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -61,6 +63,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
 
     appController.testingUserName = 'mr.hussein.1416@gmail.com';
     // appController.testingUserName = 'saeedhshm@gmail.com';

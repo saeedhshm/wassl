@@ -80,21 +80,45 @@ class HolidaysDetails extends StatelessWidget {
                             child: Row(
                               children: [
                                 const SizedBox(width: 16,),
+                                //availableVacationsCount
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/1.png',
                                   title: 'available_vacations'.tr,
                                   count: viewModel.availableVacationsCount,
                                 ),
+                                //usedVacationsCount
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/2.png',
                                   title: 'taken_vacations'.tr,
                                   count: viewModel.usedVacationsCount,
                                 ),
+                                //sickVacationsCount
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/2.png',
+                                  title: 'sickVacationsCount'.tr,
+                                  count: viewModel.sickVacationsCount,
+                                ),
+                                //unpaidVacationsCount
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/2.png',
+                                  title: 'unpaidVacationsCount'.tr,
+                                  count: viewModel.unpaidVacationsCount,
+                                ),
+                                //discountVacationsCount
+                                HolidayInfoItemWidget(
+                                  icon: 'assets/images/holidays/2.png',
+                                  title: 'discountVacationsCount'.tr,
+                                  count: viewModel.discountVacationsCount,
+                                ),
+
+                                //totalVacationBalance
                                 HolidayInfoItemWidget(
                                   icon: 'assets/images/holidays/3.png',
                                   title: 'base_vacations'.tr,
                                   count: viewModel.totalVacationBalance,
                                 ),
+
+
                                 SizedBox(width: 16,)
                               ],
                             ),

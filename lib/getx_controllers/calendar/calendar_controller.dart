@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wassl/controllers/calendar_controller.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
+import '../../helpers/constants/print_ln.dart';
 import '../../models/attendance/month_attendance.dart';
+import 'package:wassl/models/auth/schedule.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
@@ -14,7 +16,7 @@ class CalendarViewModel extends GetxController {
 
   var loading = false.obs;
   var attendanceOfMonth = MonthAttendance().obs;
-  var selectedDay = MonthDay().obs;
+  var selectedDay = AttendancesOfMonth().obs;
   late DateTime dateTime;
   var foCusedDate = DateTime.now().obs;
 
@@ -75,12 +77,16 @@ class CalendarViewModel extends GetxController {
     return attendanceOfMonth.value.missedRecords.toString();
   }
 
-  String get workShiftStartingTime {
-    return appController.loginModel.value.timeIn;
-  }
+  // String get workShiftStartingTime {
+  //   return appController.loginModel.value.timeIn;
+  // }
+  //
+  // String get workShiftEndingTime {
+  //   return appController.loginModel.value.timeOut;
+  // }
 
-  String get workShiftEndingTime {
-    return appController.loginModel.value.timeOut;
+  List<Schedule> get shiftsSchedules {
+    return appController.loginModel.value.user!.allSchedules;
   }
 
   String get currentSelectedDate {
@@ -91,25 +97,26 @@ class CalendarViewModel extends GetxController {
     return selectedDay.value.status.tr;
   }
 
-  String get selectedDateAttendanceTime {
-    return selectedDay.value.attendanceTime;
-  }
+  // String get selectedDateAttendanceTime {
+  //   return selectedDay.value.attendanceTime;
+  // }
 
-  String get selectedDateLeaveTime {
-    return selectedDay.value.leaveTime;
-  }
+  // String get selectedDateLeaveTime {
+  //   return selectedDay.value.attendance.;
+  // }
 
   bool get noLeavingRegistered {
-    return selectedDay.value.attendanceDay?.leaveTime == null;
+    return  false;//selectedDay.value.attendance?.leaveTime == null;
   }
 
 
 
   setSelectedDate(DateTime dateTime) {
-    for (MonthDay day in attendanceOfMonth.value.attendancesOfMonth) {
-      if (DateTime.tryParse(day.day ?? '') ==
+    for (AttendancesOfMonth dayInMonth in attendanceOfMonth.value.attendancesOfMonth) {
+      if (DateTime.tryParse(dayInMonth.day ?? '') ==
           DateTime(dateTime.year, dateTime.month, dateTime.day)) {
-        selectedDay.value = day;
+        selectedDay.value = dayInMonth;
+
       }
     }
   }

@@ -1,3 +1,5 @@
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
+
 import 'info.dart';
 
 class Schedule {
@@ -29,6 +31,14 @@ class Schedule {
     allowTimeOut = json['allow_time_out'] ?? '00:40:00';
     allowTimeIn = json['allow_time_in'];
     info = json['info'] != null ?  Info.fromJson(json['info']) : null;
+  }
+
+  DateTime get empTimeIn{
+    return (info?.timeIn ?? '').exactDateTimeFromGivenHours!;
+  }
+
+  DateTime get empTimeOut{
+    return (info?.timeOut ?? '').exactDateTimeFromGivenHours!;
   }
 
 }

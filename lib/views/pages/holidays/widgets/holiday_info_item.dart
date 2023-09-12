@@ -31,7 +31,7 @@ class HolidayInfoItemWidget extends StatelessWidget {
               fontSize: 18,
               fontWeight: FontWeight.w500
             ),),
-            const SizedBox(height: 16,),
+            const Spacer(),
             Text(count,style: const TextStyle(
                 color: AppColors.lightGreyTextColor,
                 fontSize: 18,

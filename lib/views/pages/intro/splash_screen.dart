@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 

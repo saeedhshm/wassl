@@ -1,444 +1,95 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 import '../../../../getx_controllers/calendar/calendar_controller.dart';
-import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/date_time.dart';
 import '../../../../helpers/constants/print_ln.dart';
-import '../../../reusable_widgets/dot_widget.dart';
 
 Set<int> weekDays = {};
 List<int> weekEnds = [];
 
-dayBuilder(
-    {required BuildContext context,
-    required DateTime dt,
-    required CalendarViewModel controller,
-    required DateTime currentDay}) {
-  DateTime dateTime = dt;
-
-  ///to get current day
-  ///
-
-
-  if (dt.hour == 23) {
-    var newDate = DateTime(dt.year, dt.month, dt.day + 1);
-    dateTime = newDate;
-  }
-  else {
-    dateTime = dt;
-  }
-
-  var weekDay = dateTime.weekday;
-  var dd = controller
-      .attendanceOfMonth
-      .value
-      .attendancesOfMonth[(dateTime.day - 1) %
-      controller.attendanceOfMonth.value.attendancesOfMonth.length]
-      .status == 'weekEnd' && dateTime.weekday > 4 ? dateTime.weekday : -1;
 
 
 
-  weekDays.add(dd);
 
-  var day = dateTime.day.toString().replaceToArabicNumbers;
-
-  /// week end days
-  for(var i in weekDays){
-    if(dateTime.weekday == i){
-
-      return Container(
-          margin: const EdgeInsets.only(
-              left: 10.0,
-              right:  10.0,
-              top: 0,
-              bottom: 0
-          ),
-          //   width: 33,
-          //   height: 33,
-          decoration: BoxDecoration(
-            // border: Border.all(color: Colors.white, width: 0),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(0.0),
-              bottomLeft: Radius.circular(0.0 ),
-
-              topRight: Radius.circular(0.0),
-              bottomRight: Radius.circular(0.0 ),
-            ),
-            color: AppColors.borderTextFieldColor,),
-
-          child: Center(
-              child: Text(
-                dateTime.day.toString(),
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white),
-              )));
-    }
-  }
-
-
-  // Other months days
-  if(DateTime.tryParse(controller
-    .attendanceOfMonth
-    .value
-    .attendancesOfMonth[(dateTime.day - 1) %
-    controller.attendanceOfMonth.value.attendancesOfMonth
-        .length]
-    .day ??
-    '')
-    ?.month !=
-    dateTime.month) {
-    return Center(
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            // color:Colors.amber,
-              border: Border.all(color: Colors.white, width: 1),
-              borderRadius: BorderRadius.circular(100)),
-          child: Center(
-              child: Text(
-                day.replaceToArabicNumbers,
-                style: const TextStyle(fontWeight: FontWeight.normal,color: Colors.grey),
-              ))),
-    );
-  }
-
-  /// return selected day in current month
-  if (compareTowDays(dateTime, currentDay)) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            width: 33,
-            height: 33,
-            decoration: BoxDecoration(
-                // border: Border.all(color: Colors.white, width: 0),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.4),
-                    spreadRadius: 0,
-                    blurRadius: 7,
-                    offset: Offset(0, 0), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(100)),
-
-            child: Center(
-                child: Text(
-              day,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.black87),
-            ))),
-      ],
-    );
-  }
-
-  /// to return today's day
-  if (compareTowDays(dateTime, DateTime.now())) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(
-              // border: Border.all(color: Colors.redAccent, width: 2),
-                color: Colors.white,
-
-                borderRadius: BorderRadius.circular(100)),
-
-            child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      day,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black87),
-                    ),
-                    Container(
-                      height: 2,
-                      width: 20,
-                      decoration: BoxDecoration(
-                        color: AppColors.mainGreenColor,
-                        borderRadius: BorderRadius.circular(10)
-                      ),
-                    ),
-
-                  ],
-                ))),
-      ],
-    );
-  }
-
-  /// week end days
-  if (checkDayAs('weekEnd', dateTime, controller)) {
-    return Container(
-        margin: EdgeInsets.only(
-            left: 10.0,
-            right:  10.0,
-            top: 0,
-            bottom: 0
-        ),
-        //   width: 33,
-        //   height: 33,
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.white, width: 0),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(0.0),
-            bottomLeft: Radius.circular(0.0 ),
-
-            topRight: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0 ),
-          ),
-          color: AppColors.borderTextFieldColor,),
-
-        child: Center(
-            child: Text(
-              day,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            )));
-  }
-
-  // future days
-  if (dateTime.month > DateTime.now().month || (dateTime.month == DateTime.now().month && dateTime.day > DateTime.now().day) )
-  {
-    return Center(
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            // color:Colors.amber,
-              border: Border.all(color: Colors.white, width: 1),
-              borderRadius: BorderRadius.circular(100)),
-          child: Center(
-              child: Text(
-                day,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ))),
-    );
-  }
-
-  // holiday days
-  if (checkDayAs('holiday', dateTime, controller)) {
-    var prev = !checkDayAs('holiday', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
-    var next = !checkDayAs('holiday', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
-
-    return Container(
-        margin: EdgeInsets.only(
-            left: prev ? 4.0 : 0.0,
-            right: next ? 4.0 : 0.0,
-            top: 4,
-            bottom: 4
-        ),
-        //   width: 33,
-        //   height: 33,
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.white, width: 0),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(prev ? 100.0 : 0.0),
-            bottomLeft: Radius.circular(prev ? 100.0 : 0.0),
-
-            topRight: Radius.circular(next ? 100.0 : 0.0),
-            bottomRight: Radius.circular(next ? 100.0 : 0.0),
-          ),
-          color: AppColors.mainGreenColor,),
-
-        child: Center(
-            child: Text(
-              day,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            )));
-  }
-
-  /// absent days
-  else if (checkDayAs('absent', dateTime, controller)) {
-    var prev = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day - 1), controller);
-    var next = !checkDayAs('absent', DateTime(dateTime.year,dateTime.month,dateTime.day + 1), controller) || (dateTime.day +1 == DateTime.now().day) ;
-
-    return Container(
-
-        // margin:  EdgeInsets.symmetric(horizontal: prev ? 4.0 : 0.0, vertical: 4),
-      margin: EdgeInsets.only(
-        left: prev ? 4.0 : 0.0,
-        right: next ? 4.0 : 0.0,
-        top: 4,
-        bottom: 4
-      ),
-
-        //   width: 33,
-      //   height: 33,
-        decoration: BoxDecoration(
-          // border: Border.all(color: Colors.white, width: 0),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(prev ? 100.0 : 0.0),
-            bottomLeft: Radius.circular(prev ? 100.0 : 0.0),
-
-            topRight: Radius.circular(next ? 100.0 : 0.0),
-            bottomRight: Radius.circular(next ? 100.0 : 0.0),
-          ),
-            color: AppColors.orangeColorInCalend,),
-
-        child: Center(
-            child: Text(
-              day,
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.white),
-            )));
-  }
-
-
-
-  // missed days - lost fingerprints
-  else if (checkMissedDay(dateTime, controller)) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(
-              // border: Border.all(color: Colors.redAccent, width: 2),
-                color: Colors.white,
-
-                borderRadius: BorderRadius.circular(100)),
-
-            child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      day,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black87),
-                    ),
-                    const DotWidget(
-                      color: AppColors.redMissedDayColor,
-                      size: 5,
-                    )
-                  ],
-                ))),
-      ],
-    );
-  }
-
-  // other days
-  else if (dateTime.month == controller.dateTime.month) {
-    return Center(
-      child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          width: double.infinity,
-          decoration: BoxDecoration(
-// color:Colors.amber,
-              border: Border.all(color: Colors.white, width: 1),
-              borderRadius: BorderRadius.circular(100)),
-          child: Center(
-              child: Text(
-            day,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ))),
-    );
-  }
-
-}
-
-
-
-bool checkDayAs(String type, DateTime dateTime, CalendarViewModel controller) {
-
-  return ((controller
-              .attendanceOfMonth
-              .value
-              .attendancesOfMonth[(dateTime.day - 1) %
-                  controller.attendanceOfMonth.value.attendancesOfMonth.length]
-              .status ==
-          type) &&
-      DateTime.tryParse(controller
-                      .attendanceOfMonth
-                      .value
-                      .attendancesOfMonth[(dateTime.day - 1) %
-                          controller.attendanceOfMonth.value.attendancesOfMonth
-                              .length]
-                      .day ??
-                  '')
-              ?.month ==
-          dateTime.month);
-}
-
-bool checkMissedDay(DateTime dateTime, CalendarViewModel controller) {
-  return ((controller
-              .attendanceOfMonth
-              .value
-              .attendancesOfMonth[(dateTime.day - 1) %
-                  controller.attendanceOfMonth.value.attendancesOfMonth.length]
-              .attendanceDay
-              ?.leaveTime ==
-          null) &&
-      DateTime.tryParse(controller
-                      .attendanceOfMonth
-                      .value
-                      .attendancesOfMonth[(dateTime.day - 1) %
-                          controller.attendanceOfMonth.value.attendancesOfMonth
-                              .length]
-                      .day ??
-                  '')
-              ?.month ==
-          dateTime.month);
-}
-
-bool checkLateAttendance(DateTime dateTime, CalendarViewModel controller) {
-  return ((controller
-      .attendanceOfMonth
-      .value
-      .attendancesOfMonth[(dateTime.day - 1) %
-      controller.attendanceOfMonth.value.attendancesOfMonth.length]
-      .attendanceDay
-      ?.leaveTime ==
-      null) &&
-      DateTime.tryParse(controller
-          .attendanceOfMonth
-          .value
-          .attendancesOfMonth[(dateTime.day - 1) %
-          controller.attendanceOfMonth.value.attendancesOfMonth
-              .length]
-          .day ??
-          '')
-          ?.month ==
-          dateTime.month);
-}
-
-bool checkEarlyLeave(DateTime dateTime, CalendarViewModel controller) {
-  return ((controller
-      .attendanceOfMonth
-      .value
-      .attendancesOfMonth[(dateTime.day - 1) %
-      controller.attendanceOfMonth.value.attendancesOfMonth.length]
-      .attendanceDay
-      ?.leaveTime ==
-      null) &&
-      DateTime.tryParse(controller
-          .attendanceOfMonth
-          .value
-          .attendancesOfMonth[(dateTime.day - 1) %
-          controller.attendanceOfMonth.value.attendancesOfMonth
-              .length]
-          .day ??
-          '')
-          ?.month ==
-          dateTime.month);
-}
+// bool checkDayAs(String type, DateTime dateTime, CalendarViewModel controller) {
+//
+//   println(dateTime);
+//
+//   return ((controller
+//               .attendanceOfMonth
+//               .value
+//               .attendancesOfMonth[(dateTime.day - 1) ]
+//               .status ==
+//           type) &&
+//       DateTime.tryParse(controller
+//                       .attendanceOfMonth
+//                       .value
+//                       .attendancesOfMonth[(dateTime.day - 1) ]
+//                       .day ??
+//                   '')
+//               ?.month ==
+//           dateTime.month);
+// }
+//
+// bool checkMissedDay(DateTime dateTime, CalendarViewModel controller) {
+//   return ((controller
+//               .attendanceOfMonth
+//               .value
+//               .attendancesOfMonth[(dateTime.day - 1) %
+//                   controller.attendanceOfMonth.value.attendancesOfMonth.length]
+//               .attendance
+//               .first.leaveTime ==
+//           null) &&
+//       DateTime.tryParse(controller
+//                       .attendanceOfMonth
+//                       .value
+//                       .attendancesOfMonth[(dateTime.day - 1) %
+//                           controller.attendanceOfMonth.value.attendancesOfMonth
+//                               .length]
+//                       .day ??
+//                   '')
+//               ?.month ==
+//           dateTime.month);
+// }
+//
+// bool checkLateAttendance(DateTime dateTime, CalendarViewModel controller) {
+//   return ((controller
+//       .attendanceOfMonth
+//       .value
+//       .attendancesOfMonth[(dateTime.day - 1) %
+//       controller.attendanceOfMonth.value.attendancesOfMonth.length]
+//       .attendance
+//       ?.first.leaveTime ==
+//       null) &&
+//       DateTime.tryParse(controller
+//           .attendanceOfMonth
+//           .value
+//           .attendancesOfMonth[(dateTime.day - 1) %
+//           controller.attendanceOfMonth.value.attendancesOfMonth
+//               .length]
+//           .day ??
+//           '')
+//           ?.month ==
+//           dateTime.month);
+// }
+//
+// bool checkEarlyLeave(DateTime dateTime, CalendarViewModel controller) {
+//   return ((controller
+//       .attendanceOfMonth
+//       .value
+//       .attendancesOfMonth[(dateTime.day - 1) %
+//       controller.attendanceOfMonth.value.attendancesOfMonth.length]
+//       .attendance
+//       ?.first.leaveTime ==
+//       null) &&
+//       DateTime.tryParse(controller
+//           .attendanceOfMonth
+//           .value
+//           .attendancesOfMonth[(dateTime.day - 1) %
+//           controller.attendanceOfMonth.value.attendancesOfMonth
+//               .length]
+//           .day ??
+//           '')
+//           ?.month ==
+//           dateTime.month);
+// }
 
 
