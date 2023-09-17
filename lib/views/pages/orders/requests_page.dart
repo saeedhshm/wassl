@@ -302,7 +302,7 @@ final String title;
            SizedBox(
             width:30,
             height: 30,
-            child: SvgWidget(icon,color: AppColors.mainOrangeColor,),
+            child: SvgWidget(icon,color: AppColors.iconsColor,),
           ),
            const SizedBox(width: 15,),
           Text(title,style:  const TextStyle(

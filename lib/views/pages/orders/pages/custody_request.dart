@@ -6,6 +6,7 @@ import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/person_in_lock.dart';
 
 import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
@@ -16,6 +17,7 @@ import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -88,8 +90,7 @@ class CustodyRequestPage extends StatelessWidget {
                                 prefixIcon: const SizedBox(
                                     width: 5,
                                     height: 35,
-                                    child:
-                                    SvgWidget('assets/images/custody.svg')),
+                                    child: PersonInLockIcon()),
                               ),
 
                               Padding(
@@ -105,7 +106,7 @@ class CustodyRequestPage extends StatelessWidget {
                                 ),
                               ),
                               TextFormFieldWithIcons(
-                                prefixIcon: SizedBox(
+                                prefixIcon: const SizedBox(
                                   child: ChatConversationIcon(),
                                 ),
                                 maxLines: 5,
@@ -138,9 +139,7 @@ class CustodyRequestPage extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: SizedBox(
-                                    child: Image.asset('assets/images/attach.png'),
-                                  ),
+                                  prefixIcon: const AttachmentIcon(),
                                   hintText: 'attach_file'.tr,
 
                                   enabled: false,

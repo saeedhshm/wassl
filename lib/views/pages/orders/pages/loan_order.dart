@@ -9,6 +9,7 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/mony_on_hand.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -20,7 +21,10 @@ import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
+import '../../../reusable_widgets/icons/dollar_on_hand.dart';
+import '../../../reusable_widgets/icons/money_on_hand.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -112,15 +116,14 @@ class NewLoanOrder extends StatelessWidget {
                                       prefixIcon: const SizedBox(
                                           width: 5,
                                           height: 35,
-                                          child: SvgWidget(
-                                              'assets/images/loan_type.svg')),
+                                          child: DollarOnHandIcon()),
                                     ),
                                     const SizedBox(
                                       height: 15,
                                     ),
                                     TextFormFieldWithIcons(
-                                      prefixIcon: const SvgWidget(
-                                          'assets/images/money_on_hand.svg'),
+                                      prefixIconWidth: 30,
+                                      prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'value'.tr,
                                       controller: amountCtrl,
                                       keyboardType: TextInputType.number,
@@ -171,8 +174,7 @@ class NewLoanOrder extends StatelessWidget {
                                       height: 15,
                                     ),
                                     TextFormFieldWithIcons(
-                                      prefixIcon: const SvgWidget(
-                                          'assets/images/money_on_hand.svg'),
+                                      prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'installmentMonthlyAmount'.tr,
                                       controller: monthlyAmountCtrl,
                                       keyboardType: TextInputType.number,
@@ -225,7 +227,7 @@ class NewLoanOrder extends StatelessWidget {
                                     ),
                                     TextFormFieldWithIcons(
                                       controller: reasonCtrl,
-                                      prefixIcon: SizedBox(
+                                      prefixIcon: const SizedBox(
                                         child: ChatConversationIcon(),
                                       ),
                                       maxLines: 5,
@@ -263,9 +265,8 @@ class NewLoanOrder extends StatelessWidget {
                                       child: TextFormFieldWithIcons(
                                         controller: fileCtrl,
                                         enabled: false,
-                                        prefixIcon: SizedBox(
-                                          child: Image.asset(
-                                              'assets/images/attach.png'),
+                                        prefixIcon: const SizedBox(
+                                          child: AttachmentIcon(),
                                         ),
                                         hintText: 'attach_file'.tr,
                                       ),

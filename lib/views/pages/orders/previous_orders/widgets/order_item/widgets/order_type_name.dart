@@ -24,7 +24,7 @@ class OrderTypeName extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(order.orderName.tr,style: const TextStyle(
-                color: AppColors.orangeColorInCalend,
+                color: AppColors.iconsColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 18
             ),),

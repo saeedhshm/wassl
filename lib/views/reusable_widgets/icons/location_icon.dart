@@ -4,7 +4,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 class LocationIcon extends StatelessWidget {
 
   final Color? color;
-  const LocationIcon({this.color = AppColors.mainOrangeColor,super.key});
+  const LocationIcon({this.color = AppColors.iconsColor,super.key});
 
   @override
   Widget build(BuildContext context) {

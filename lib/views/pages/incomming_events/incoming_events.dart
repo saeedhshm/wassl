@@ -53,7 +53,7 @@ class IncomingEventsPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Image.asset('assets/images/ad_details/cal.png',color: AppColors.mainOrangeColor,),
+                          child: Image.asset('assets/images/ad_details/cal.png',color: AppColors.iconsColor,),
                         ),
                       ),
                       const SizedBox(width: 16,),
@@ -117,7 +117,7 @@ class IncomingEventsPage extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Image.asset('assets/images/ad_details/icon.png',color: AppColors.mainOrangeColor,),
+                          child: Image.asset('assets/images/ad_details/icon.png',color: AppColors.iconsColor,),
                         ),
                       ),
                       SizedBox(width: 16,),

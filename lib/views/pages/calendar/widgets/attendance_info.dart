@@ -120,7 +120,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   children: [
                     Expanded(child: Container(
                       decoration: BoxDecoration(
-                          color: AppColors.orangeColorInCalend,
+                          color: AppColors.iconsColor,
                           borderRadius: BorderRadius.circular(100)
                       ),
                       child: Padding(
@@ -141,7 +141,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                     const SizedBox(width: 10,),
                     Expanded(child: Container(
                       decoration: BoxDecoration(
-                          color: AppColors.orangeColorInCalend,
+                          color: AppColors.iconsColor,
                           borderRadius: BorderRadius.circular(100)
                       ),
                       child: InkWell(
@@ -176,7 +176,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                   children: [
                     Expanded(child: Container(
                       decoration: BoxDecoration(
-                          color: AppColors.orangeColorInCalend,
+                          color: AppColors.iconsColor,
                           borderRadius: BorderRadius.circular(100)
                       ),
                       child: Padding(
@@ -197,7 +197,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                     const SizedBox(width: 10,),
                     Expanded(child: Container(
                       decoration: BoxDecoration(
-                          color: AppColors.orangeColorInCalend,
+                          color: AppColors.iconsColor,
                           borderRadius: BorderRadius.circular(100)
                       ),
                       child: InkWell(

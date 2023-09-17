@@ -28,7 +28,7 @@ class NextEvents extends StatelessWidget {
                 Text(
                   'next_events'.tr,
                   style: const TextStyle(
-                      color: AppColors.orangeColorInCalend,
+                      color: AppColors.iconsColor,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
@@ -85,7 +85,7 @@ class ItemWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset('assets/images/prosedures/cal.png',width: 20,color: AppColors.mainOrangeColor,),
+                  Image.asset('assets/images/prosedures/cal.png',width: 20,color: AppColors.iconsColor,),
                   const SizedBox(height: 5,),
                   Row(
                     children: [
@@ -93,10 +93,10 @@ class ItemWidget extends StatelessWidget {
                           color: AppColors.lightGreyTextColor,
                           fontSize: 9
                       ),),
-                      SizedBox(width: 5,),
-                      BackArrowIcon(color: AppColors.darkGreyTextColor,width: 20),
                       const SizedBox(width: 5,),
-                       Text('${event.endDate}',style: TextStyle(
+                      const BackArrowIcon(color: AppColors.darkGreyTextColor,width: 20),
+                      const SizedBox(width: 5,),
+                       Text(event.endDate,style: const TextStyle(
                           color: AppColors.lightGreyTextColor,
                           fontSize: 9
                       ),),

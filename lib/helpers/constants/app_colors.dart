@@ -4,7 +4,7 @@ class AppColors{
 
 
 
-  static  MaterialColor? materialOrangeColor = MaterialColor(const  Color(0xffF4875B).value,  {
+  static  MaterialColor? materialOrangeColor = MaterialColor(const  Color(0xffF4875B).value,  const {
     50: Color(0xffF4875B),
     100: Color(0xffF4875B),
     200: Color(0xffF4875B),
@@ -24,6 +24,10 @@ class AppColors{
   static const mainDeepGreyColor =  Color(0xff464646);
   static const mainOrangeColor =  Color(0xffec6b32);
   static const orangeColorInCalend =  Color(0xffF4875B);
+
+  static const iconsColor =  Color(0xffF4875B);
+  static const tabsColor =  Color(0xffF4875B);
+
   static var borderTextFieldColor = Colors.grey.withOpacity(0.4);
   static const lightGreyTextColor = Color(0xff7f8baf);
   static const darkGreyTextColor = Color(0xff5c6277);

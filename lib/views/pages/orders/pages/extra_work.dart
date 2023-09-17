@@ -5,6 +5,8 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/attach_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -138,8 +140,7 @@ class ExtraWorkRequest extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: const SvgWidget(
-                                      'assets/images/extra_work.svg'),
+                                  prefixIcon: const ExtraWorkIcon(),
                                   hintText: 'overtime_starts'.tr,
                                   controller: startTimeCtrl,
                                   enabled: false,
@@ -176,8 +177,7 @@ class ExtraWorkRequest extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: const SvgWidget(
-                                      'assets/images/extra_work.svg'),
+                                  prefixIcon: const ExtraWorkIcon(),
                                   hintText: 'overtime_ends'.tr,
                                   controller: endTimeCtrl,
                                   enabled: false,
@@ -236,10 +236,7 @@ class ExtraWorkRequest extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: SizedBox(
-                                    child:
-                                        Image.asset('assets/images/attach.png'),
-                                  ),
+                                  prefixIcon: const AttachmentIcon(),
                                   hintText: 'attach_file'.tr,
                                   enabled: false,
                                   controller: fileCtrl,

@@ -110,7 +110,7 @@ class _DropDownWidgetState<T extends DropItem> extends State<DropDownWidget<T>> 
               ),
               icon: const SizedBox(
                 width: 25,
-                  child: Icon(Icons.keyboard_arrow_down_rounded,color: AppColors.lightGreyTextColor,)),
+                  child: Icon(Icons.keyboard_arrow_down_rounded,color: AppColors.iconsColor,)),
               iconSize: 20,
               buttonHeight: 45,
               buttonPadding: const EdgeInsets.only(left: 8, right: 0),

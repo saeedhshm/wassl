@@ -25,7 +25,7 @@ class AbsentsWidget extends StatelessWidget {
                 Text(
                   'absents_from_work'.tr,
                   style: const TextStyle(
-                      color: AppColors.orangeColorInCalend,
+                      color: AppColors.iconsColor,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),
@@ -106,7 +106,7 @@ class ItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-                child: Image.asset('assets/images/profile/1.png',width: 35,color: AppColors.orangeColorInCalend,)),
+                child: Image.asset('assets/images/profile/1.png',width: 35,color: AppColors.iconsColor,)),
             SizedBox(width: 16,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -7,6 +7,7 @@ import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
+import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
@@ -18,8 +19,10 @@ import '../../../../models/orders/finger_print.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
+import '../../../reusable_widgets/icons/edit_icon.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -117,8 +120,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                             prefixIcon: const SizedBox(
                                 width: 5,
                                 height: 35,
-                                child:
-                                SvgWidget('assets/images/extra_work.svg')),
+                                child:ExtraWorkIcon()),
                           ),
 
                           // TextFormFieldWithIcons(
@@ -143,7 +145,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
                           InkWell(
                             onTap: () async {
-                              var selectedTime = await showTimePicker(context: context, initialTime: TimeOfDay(hour: 7, minute: 0), );
+                              var selectedTime = await showTimePicker(context: context, initialTime: const TimeOfDay(hour: 7, minute: 0), );
 
                               controller.correctionTime.value = selectedTime != null? '${selectedTime.hour}:${selectedTime.minute}' : controller.correctionTime.value;
 
@@ -152,10 +154,10 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Row(
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                       width:35,
-                                      child: Image.asset('assets/images/edit.png')),
-                                  SizedBox(width: 8,),
+                                      child: EditIcon()),
+                                  const SizedBox(width: 8,),
                                   Text('press_to_correct'.tr),
                                   Spacer(),
                                   // Spacer(),
@@ -165,7 +167,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                                         fontWeight: FontWeight.bold
                                     ),
                                   )),
-                                  SizedBox(width: 25,)
+                                  const SizedBox(width: 25,)
                                 ],
                               ),
                             ),
@@ -220,9 +222,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                             child: TextFormFieldWithIcons(
                               enabled: false,
                               controller: fileCtrl,
-                              prefixIcon: SizedBox(
-                                child: Image.asset('assets/images/attach.png'),
-                              ),
+                              prefixIcon: const AttachmentIcon(),
                               hintText: 'attach_file'.tr,
 
 

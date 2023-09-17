@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../helpers/constants/app_colors.dart';
 import '../svg_widget.dart';
 
-class PrefCalendarIcon extends StatelessWidget {
+class DollarOnHandIcon extends StatelessWidget {
 
   final Color? color;
-  const PrefCalendarIcon({super.key,this.color = AppColors.iconsColor});
+  const DollarOnHandIcon({super.key,this.color = AppColors.iconsColor});
 
   @override
   Widget build(BuildContext context) {
-    return  SvgWidget('assets/images/pref_calendar_icon.svg',color: color,);
+    return  SvgWidget('assets/images/loan_type.svg',color: color,);
   }
 }

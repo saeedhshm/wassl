@@ -6,6 +6,7 @@ import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/money_on_hand.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -19,7 +20,9 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
+import '../../../reusable_widgets/icons/dollar_on_hand.dart';
 import '../../../reusable_widgets/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -105,8 +108,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                               //       SvgWidget('assets/images/loan_type.svg')),
                               // ),
                               TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget(
-                                    'assets/images/loan_type.svg'),
+                                prefixIcon: const DollarOnHandIcon(),
                                 onChange: (value) {
                                   controller.title = value;
                                 },
@@ -125,8 +127,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 height: 15,
                               ),
                               TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget(
-                                    'assets/images/money_on_hand.svg'),
+                                prefixIcon: const MoneyOnHandIcon(),
                                 hintText: 'value'.tr,
                                 controller: amountCtrl,
                                 onChange: (value) {
@@ -137,7 +138,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                   child: Center(
                                     child: Text(
                                       'SAR'.tr,
-                                      style: TextStyle(color: Colors.grey,fontSize: 12),
+                                      style: const TextStyle(color: AppColors.iconsColor,fontSize: 12),
                                     ),
                                   ),
                                 ),
@@ -172,8 +173,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 height: 15,
                               ),
                               TextFormFieldWithIcons(
-                                prefixIcon: SizedBox(
-                                  child: ChatConversationIcon()),
+                                prefixIcon: const ChatConversationIcon(),
                                 hintText: 'description'.tr,
                                 controller: descriptionCtrl,
                                 onChange: (value) {
@@ -197,7 +197,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 ),
                               ),
                               TextFormFieldWithIcons(
-                                prefixIcon: SizedBox(
+                                prefixIcon: const SizedBox(
                                   child: ChatConversationIcon(),
                                 ),
                                 maxLines: 5,
@@ -233,10 +233,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                   }
                                 },
                                 child: TextFormFieldWithIcons(
-                                  prefixIcon: SizedBox(
-                                    child:
-                                        Image.asset('assets/images/attach.png'),
-                                  ),
+                                  prefixIcon: const AttachmentIcon(),
                                   hintText: 'attach_file'.tr,
                                   controller: fileCtrl,
                                   enabled: false,

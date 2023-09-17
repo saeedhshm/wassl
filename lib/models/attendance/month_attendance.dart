@@ -153,6 +153,7 @@ class AttendancesOfMonth {
 
   AttendancesOfMonth.fromJson(Map<String, dynamic> json) {
     holiday = json['holiday'];
+    println(json['vacation'],'json[\'vacation\']');
     vacation = json['vacation'] != null
         ? Vacation.fromJson(json['vacation'])
         : null;

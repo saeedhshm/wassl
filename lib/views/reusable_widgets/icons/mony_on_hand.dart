@@ -4,7 +4,7 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 class SalaryMoneyOnHandIcon extends StatelessWidget {
 
   final Color color;
-  const SalaryMoneyOnHandIcon({this.color = AppColors.mainOrangeColor,super.key});
+  const SalaryMoneyOnHandIcon({this.color = AppColors.iconsColor,super.key});
 
   @override
   Widget build(BuildContext context) {

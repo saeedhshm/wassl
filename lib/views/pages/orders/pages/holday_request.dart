@@ -21,9 +21,11 @@ import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/order_type.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/location_icon.dart';
 import '../../../reusable_widgets/icons/mony_on_hand.dart';
+import '../../../reusable_widgets/icons/umbrella_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/svg_widget.dart';
@@ -129,8 +131,7 @@ class HolidayRequestPage extends StatelessWidget {
                               prefixIcon: const SizedBox(
                                   width: 5,
                                   height: 35,
-                                  child:
-                                  SvgWidget('assets/images/holidays.svg')),
+                                  child:UmbrellaIcon()),
                             ),
 
                             controller.loadingCountries.value ? Column(
@@ -152,7 +153,7 @@ class HolidayRequestPage extends StatelessWidget {
                                     // width: 5,
                                     // height: 5,
                                       child:
-                                      LocationIcon(color: AppColors.lightGreyTextColor,)),
+                                      LocationIcon()),
                                 ) ,
                                 const SizedBox(height: 15,),
 
@@ -170,7 +171,7 @@ class HolidayRequestPage extends StatelessWidget {
                                       // width: 5,
                                       // height: 5,
                                       child:
-                                      LocationIcon(color: AppColors.lightGreyTextColor,)),
+                                      LocationIcon()),
                                 ) : const SizedBox(),
                               ],
                             ): const SizedBox(),
@@ -248,12 +249,12 @@ class HolidayRequestPage extends StatelessWidget {
                                             color: AppColors.darkGreyTextColor,
                                             // fontWeight: FontWeight.bold
                                           ),),
-                                          SizedBox(width: 16,),
+                                          const SizedBox(width: 16,),
                                           SizedBox(
                                             width: 25,
                                             child: Image.asset('assets/images/order_details/arrow.png'),
                                           ),
-                                          SizedBox(width: 16,),
+                                          const SizedBox(width: 16,),
                                           Text(controller.differenceInDays.value,style: const TextStyle(
                                             color: AppColors.darkGreyTextColor,
                                             // fontSize: 12
@@ -265,7 +266,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            ) : SizedBox(),
+                            ) : const SizedBox(),
 
                             controller.tripCost.value.trip != null ? Column(
                               children: [
@@ -276,7 +277,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   children: [
                                     const SizedBox(
                                       width: 20,
-                                      child: SalaryMoneyOnHandIcon(color: AppColors.darkGreyTextColor,),
+                                      child: SalaryMoneyOnHandIcon(),
                                     ),
                                     const SizedBox(width: 16,),
                                     Text('cost_per_day'.tr,style: const TextStyle(
@@ -301,7 +302,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   children: [
                                     const SizedBox(
                                       width: 20,
-                                      child: SalaryMoneyOnHandIcon(color: AppColors.darkGreyTextColor,),
+                                      child: SalaryMoneyOnHandIcon(),
                                     ),
                                     const SizedBox(width: 16,),
                                     Text('total_cost'.tr,style: const TextStyle(
@@ -341,7 +342,7 @@ class HolidayRequestPage extends StatelessWidget {
                               ),
                             ),
                             TextFormFieldWithIcons(
-                              prefixIcon: SizedBox(
+                              prefixIcon: const SizedBox(
                                 child: ChatConversationIcon(),
                               ),
                               maxLines: 5,
@@ -376,9 +377,7 @@ class HolidayRequestPage extends StatelessWidget {
                               child: TextFormFieldWithIcons(
                                 controller: fileCtrl,
                                 enabled: false,
-                                prefixIcon: SizedBox(
-                                  child: Image.asset('assets/images/attach.png'),
-                                ),
+                                prefixIcon: const AttachmentIcon(),
                                 hintText: 'attach_file'.tr,
 
 

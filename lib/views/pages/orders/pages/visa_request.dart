@@ -6,6 +6,7 @@ import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/print_ln.dart';
@@ -17,6 +18,7 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
@@ -113,10 +115,9 @@ class VisaRequestPage extends StatelessWidget {
                                       prefixIcon: const SizedBox(
                                           width: 5,
                                           height: 35,
-                                          child: SvgWidget(
-                                              'assets/images/extra_work.svg')),
+                                          child: ExtraWorkIcon()),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     DropDownWidget<OrderType>(
@@ -134,10 +135,9 @@ class VisaRequestPage extends StatelessWidget {
                                       prefixIcon: const SizedBox(
                                           width: 5,
                                           height: 35,
-                                          child: SvgWidget(
-                                              'assets/images/extra_work.svg')),
+                                          child: ExtraWorkIcon()),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     InkWell(
@@ -201,7 +201,7 @@ class VisaRequestPage extends StatelessWidget {
                                             ],
                                           ),
                                           !controller.haveTicket.value
-                                              ? SizedBox()
+                                              ? const SizedBox()
                                               : Container(
                                                   color: Colors.grey
                                                       .withOpacity(0.5),
@@ -209,7 +209,7 @@ class VisaRequestPage extends StatelessWidget {
                                                   height: 0.5,
                                                 ),
                                           !controller.haveTicket.value
-                                              ? SizedBox()
+                                              ? const SizedBox()
                                               : Row(
                                                   children: [
                                                     LocalizedText(
@@ -220,7 +220,7 @@ class VisaRequestPage extends StatelessWidget {
                                                                   FontWeight
                                                                       .bold),
                                                     ),
-                                                    Spacer(),
+                                                    const Spacer(),
                                                     Directionality(
                                                         textDirection:
                                                             TextDirection.ltr,
@@ -242,10 +242,10 @@ class VisaRequestPage extends StatelessWidget {
                                       ),
                                     ),
                                     !controller.haveTicket.value
-                                        ? SizedBox()
+                                        ? const SizedBox()
                                         : Column(
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               ),
                                               DropDownWidget<OrderType>(
@@ -267,10 +267,9 @@ class VisaRequestPage extends StatelessWidget {
                                                 prefixIcon: const SizedBox(
                                                     width: 5,
                                                     height: 35,
-                                                    child: SvgWidget(
-                                                        'assets/images/extra_work.svg')),
+                                                    child: ExtraWorkIcon()),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               ),
                                               InkWell(
@@ -302,11 +301,11 @@ class VisaRequestPage extends StatelessWidget {
                                                   controller: goDateCtrl,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 8,
                                               ),
                                               !controller.goAndBackTicket.value
-                                                  ? SizedBox()
+                                                  ? const SizedBox()
                                                   : InkWell(
                                                       onTap: () async {
                                                         var selectedDate =
@@ -389,10 +388,7 @@ class VisaRequestPage extends StatelessWidget {
                                         }
                                       },
                                       child: TextFormFieldWithIcons(
-                                        prefixIcon: SizedBox(
-                                          child: Image.asset(
-                                              'assets/images/attach.png'),
-                                        ),
+                                        prefixIcon:const AttachmentIcon(),
                                         hintText: 'attach_file'.tr,
                                         enabled: false,
                                         controller: fileCtrl,

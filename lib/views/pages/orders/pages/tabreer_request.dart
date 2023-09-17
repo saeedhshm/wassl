@@ -15,8 +15,10 @@ import '../../../../models/orders/tabreer.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
+import '../../../reusable_widgets/icons/letter_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -123,8 +125,7 @@ class ApologyRequestPage extends StatelessWidget {
                                   prefixIcon: const SizedBox(
                                       width: 5,
                                       height: 35,
-                                      child: SvgWidget(
-                                          'assets/images/letter.svg')),
+                                      child: LetterIcon()),
                                 ),
 
 
@@ -211,10 +212,7 @@ class ApologyRequestPage extends StatelessWidget {
                                     }
                                   },
                                   child: TextFormFieldWithIcons(
-                                    prefixIcon: SizedBox(
-                                      child: Image.asset(
-                                          'assets/images/attach.png'),
-                                    ),
+                                    prefixIcon: const AttachmentIcon(),
                                     hintText: 'attach_file'.tr,
                                     controller: fileCtrl,
                                     enabled: false,

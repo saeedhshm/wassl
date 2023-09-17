@@ -86,7 +86,10 @@ class Vacation {
 
   Vacation.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    type = json['type'] != null ? new Type.fromJson(json['type']) : null;
+    println(json['type'],'type');
+    if(json['type'] is Map<String, dynamic>) {
+      type = json['type'] != null ? Type.fromJson(json['type']) : null;
+    }
     holidayStart = json['holiday_start'];
     holidayEnd = json['holiday_end'];
     count = json['count'];

@@ -31,7 +31,7 @@ class Procedures extends StatelessWidget {
                 Text(
                   'my_procedures'.tr,
                   style: const TextStyle(
-                      color: AppColors.orangeColorInCalend,
+                      color: AppColors.iconsColor,
                       fontSize: 14,
                       fontWeight: FontWeight.bold),
                 ),

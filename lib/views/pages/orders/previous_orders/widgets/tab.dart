@@ -17,13 +17,13 @@ class TabWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color:tabSelected ? AppColors.mainOrangeColor : AppColors.borderTextFieldColor,width: 1))
+          border: Border(bottom: BorderSide(color:tabSelected ? AppColors.tabsColor : AppColors.borderTextFieldColor,width: 1))
       ),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(title,style: TextStyle(
-              color: tabSelected ? AppColors.mainOrangeColor : AppColors.darkGreyTextColor
+              color: tabSelected ? AppColors.tabsColor : AppColors.darkGreyTextColor
           ),),
         ),
       ),

@@ -18,7 +18,7 @@ class MonthReportWidget extends StatelessWidget {
       children: [
         ItemWidget(
           numberCount: controller.countWorkDaysAbsent,
-          numberColor: AppColors.orangeColorInCalend,
+          numberColor: AppColors.iconsColor,
           type: 'absent'.tr,
         ),
         ItemWidget(

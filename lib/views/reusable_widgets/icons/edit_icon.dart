@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../helpers/constants/app_colors.dart';
 
-class ChatConversationIcon extends StatelessWidget {
+class EditIcon extends StatelessWidget {
 
   final Color? color;
-  const ChatConversationIcon({super.key,this.color = AppColors.iconsColor});
+  const EditIcon({super.key,this.color = AppColors.iconsColor});
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-        'assets/images/conversation.png',color: color,);
+      'assets/images/edit.png',color: color,);
   }
 }

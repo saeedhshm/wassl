@@ -16,6 +16,8 @@ import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/letter.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
+import '../../../reusable_widgets/icons/letter_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/snack_bars.dart';
@@ -121,8 +123,7 @@ class LetterRequestPage extends StatelessWidget {
                                             prefixIcon: const SizedBox(
                                                 width: 5,
                                                 height: 35,
-                                                child: SvgWidget(
-                                                    'assets/images/letter.svg')),
+                                                child: LetterIcon()),
                                           ),
 
 
@@ -130,8 +131,7 @@ class LetterRequestPage extends StatelessWidget {
                                             height: 15,
                                           ),
                                           TextFormFieldWithIcons(
-                                            prefixIcon: const SvgWidget(
-                                                'assets/images/letter.svg'),
+                                            prefixIcon: const LetterIcon(),
                                             hintText: 'foreword_to_ar'.tr,
                                             controller: directedToArCtrl,
                                             onChange: (value) {
@@ -142,8 +142,7 @@ class LetterRequestPage extends StatelessWidget {
                                             height: 15,
                                           ),
                                           TextFormFieldWithIcons(
-                                            prefixIcon: const SvgWidget(
-                                                'assets/images/letter.svg'),
+                                            prefixIcon: const LetterIcon(),
                                             hintText: 'foreword_to_en'.tr,
                                             controller: directedToEnCtrl,
                                             onChange: (value) {
@@ -163,7 +162,7 @@ class LetterRequestPage extends StatelessWidget {
                                             ),
                                           ),
                                           TextFormFieldWithIcons(
-                                            prefixIcon: SizedBox(
+                                            prefixIcon: const SizedBox(
                                               child: ChatConversationIcon(),
                                             ),
                                             maxLines: 5,
@@ -203,9 +202,8 @@ class LetterRequestPage extends StatelessWidget {
                                               }
                                             },
                                             child: TextFormFieldWithIcons(
-                                              prefixIcon: SizedBox(
-                                                child: Image.asset(
-                                                    'assets/images/attach.png'),
+                                              prefixIcon: const SizedBox(
+                                                child: AttachmentIcon(),
                                               ),
                                               hintText: 'attach_file'.tr,
                                               controller: fileCtrl,

@@ -27,7 +27,7 @@ class AdsWidget extends StatelessWidget {
                 Text(
                   'the_ads'.tr,
                   style: const TextStyle(
-                      color: AppColors.orangeColorInCalend,
+                      color: AppColors.iconsColor,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
                 ),

@@ -20,8 +20,9 @@ class TextFormFieldWithIcons extends StatelessWidget {
   final Function (String)?onChange;
   final TextCapitalization textCapitalization;
   final double height;
+  final double prefixIconWidth;
 
-  TextFormFieldWithIcons({Key? key,this.enabled = true,this.height = 50,this.maxLines = 1,this.prefixIcon,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
+  const TextFormFieldWithIcons({Key? key,this.prefixIconWidth = 30,this.enabled = true,this.height = 50,this.maxLines = 1,this.prefixIcon,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class TextFormFieldWithIcons extends StatelessWidget {
       children: [
         Container(
           height: height,
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               prefixIcon != null ? Padding(
                 padding: const EdgeInsets.only(left: 8.0),
-                child: SizedBox(child: prefixIcon!,width: 35,),
-              ) : SizedBox(),
+                child: SizedBox(child: prefixIcon!,width: prefixIconWidth,height: prefixIconWidth,),
+              ) : const SizedBox(),
               Expanded(child: TextFormField(
                 controller: controller,
                 readOnly: readOnly,
@@ -55,7 +56,7 @@ class TextFormFieldWithIcons extends StatelessWidget {
                   border: InputBorder.none,
                   fillColor: Colors.white,
                   filled: true,
-                  contentPadding: EdgeInsets.only(
+                  contentPadding: const EdgeInsets.only(
                     bottom: 8,
                     right: 10,
                     left: 10
@@ -69,7 +70,7 @@ class TextFormFieldWithIcons extends StatelessWidget {
                 //        return value == '' ? '' : null;
                 // },
               )),
-              suffixIcon != null ? suffixIcon! : SizedBox()
+              suffixIcon != null ? suffixIcon! : const SizedBox()
             ],
           ),
           decoration: BoxDecoration(

@@ -399,7 +399,7 @@ class NewWidget extends StatelessWidget {
         ),
       ),
       decoration: BoxDecoration(
-        color: AppColors.orangeColorInCalend,
+        color: AppColors.iconsColor,
         borderRadius: BorderRadius.circular(50),
       ),
     );

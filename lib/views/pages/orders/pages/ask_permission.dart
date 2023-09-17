@@ -5,6 +5,7 @@ import 'package:wassl/getx_controllers/orders/ask_permission.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
+import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/print_ln.dart';
@@ -18,6 +19,7 @@ import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
+import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
@@ -134,8 +136,7 @@ class AskPermissionPage extends StatelessWidget {
                               prefixIcon: const SizedBox(
                                   width: 5,
                                   height: 35,
-                                  child: SvgWidget(
-                                      'assets/images/extra_work.svg')),
+                                  child: ExtraWorkIcon()),
                             ),
                             const SizedBox(
                               height: 15,
@@ -181,8 +182,7 @@ class AskPermissionPage extends StatelessWidget {
 
                               },
                               child: TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget(
-                                    'assets/images/extra_work.svg'),
+                                prefixIcon: const ExtraWorkIcon(),
                                 hintText: 'time_in'.tr,
                                 controller: startTimeCtrl,
                                 enabled: false,
@@ -204,8 +204,7 @@ class AskPermissionPage extends StatelessWidget {
                                 }
                               },
                               child: TextFormFieldWithIcons(
-                                prefixIcon: const SvgWidget(
-                                    'assets/images/extra_work.svg'),
+                                prefixIcon: const ExtraWorkIcon(),
                                 hintText: 'time_out'.tr,
                                 controller: endTimeCtrl,
                                 enabled: false,
@@ -228,8 +227,7 @@ class AskPermissionPage extends StatelessWidget {
                               prefixIcon: const SizedBox(
                                   width: 5,
                                   height: 35,
-                                  child: SvgWidget(
-                                      'assets/images/extra_work.svg')),
+                                  child:  ExtraWorkIcon()),
                             ),
                             const SizedBox(
                               height: 15,
@@ -286,9 +284,8 @@ class AskPermissionPage extends StatelessWidget {
                                 }
                               },
                               child: TextFormFieldWithIcons(
-                                prefixIcon: SizedBox(
-                                  child: Image.asset(
-                                      'assets/images/attach.png'),
+                                prefixIcon: const SizedBox(
+                                  child: AttachmentIcon(),
                                 ),
                                 hintText: 'attach_file'.tr,
                                 enabled: false,

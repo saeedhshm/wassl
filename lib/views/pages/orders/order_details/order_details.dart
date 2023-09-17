@@ -57,13 +57,13 @@ class OrderDetailsPage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(color:controller.orderDetailsTapSelected.value ? AppColors.orangeColorInCalend : AppColors.borderTextFieldColor,width: 1))
+                              border: Border(bottom: BorderSide(color:controller.orderDetailsTapSelected.value ? AppColors.tabsColor : AppColors.borderTextFieldColor,width: 1))
                           ),
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text('order_details'.tr,style: TextStyle(
-                                  color: controller.orderDetailsTapSelected.value ? AppColors.orangeColorInCalend : AppColors.darkGreyTextColor
+                                  color: controller.orderDetailsTapSelected.value ? AppColors.tabsColor : AppColors.darkGreyTextColor
                               ),),
                             ),
                           ),
@@ -75,13 +75,13 @@ class OrderDetailsPage extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              border: Border(bottom: BorderSide(color: !controller.orderDetailsTapSelected.value ? AppColors.orangeColorInCalend : AppColors.borderTextFieldColor,width: 1))
+                              border: Border(bottom: BorderSide(color: !controller.orderDetailsTapSelected.value ? AppColors.tabsColor : AppColors.borderTextFieldColor,width: 1))
                           ),
                           child: Center(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text('confirm_chain'.tr,style: TextStyle(
-                                  color: !controller.orderDetailsTapSelected.value ? AppColors.orangeColorInCalend : AppColors.darkGreyTextColor
+                                  color: !controller.orderDetailsTapSelected.value ? AppColors.tabsColor : AppColors.darkGreyTextColor
                               ),),
                             ),
                           ),

@@ -24,7 +24,7 @@ class AttendanceInfoWidget extends StatelessWidget {
               padding: 0,
               borderColor: Colors.transparent,
               child: Image.asset(
-                  'assets/images/profile/1.png',color: AppColors.orangeColorInCalend,)),
+                  'assets/images/profile/1.png',color: AppColors.iconsColor,)),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(50),

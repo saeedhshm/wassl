@@ -2,14 +2,17 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../svg_widget.dart';
 
 class ExtraWorkIcon extends StatelessWidget {
-const ExtraWorkIcon({super.key});
+
+  final Color? color;
+  const ExtraWorkIcon({super.key,this.color = AppColors.iconsColor});
 
 @override
 Widget build(BuildContext context) {
-return const SvgWidget('assets/images/extra_work.svg');
+return  SvgWidget('assets/images/extra_work.svg',color: color,);
 }
 }

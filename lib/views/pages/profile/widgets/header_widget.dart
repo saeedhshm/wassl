@@ -29,7 +29,7 @@ class HeaderWidget extends StatelessWidget {
               children: [
                 CircularWidget(
                   size: 100,
-                  child: ImageController(menuViewModel.userImage,color: AppColors.orangeColorInCalend).loadImage(),
+                  child: ImageController(menuViewModel.userImage,color: AppColors.iconsColor).loadImage(),
                 ),
               ],
             ),

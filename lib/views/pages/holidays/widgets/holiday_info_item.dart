@@ -24,7 +24,7 @@ class HolidayInfoItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(icon,width: 45,color: AppColors.mainOrangeColor.withOpacity(0.7),),
+            Image.asset(icon,width: 45,color: AppColors.iconsColor.withOpacity(0.7),),
             const Spacer(),
             Text(title,style: const TextStyle(
               color: AppColors.darkGreyTextColor,

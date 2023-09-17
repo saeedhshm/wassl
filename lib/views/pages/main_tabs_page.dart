@@ -158,6 +158,6 @@ class _MainTabsPageState extends State<MainTabsPage> {
   }
 
   Color _tabIconColor(int index){
-    return _index == index ? AppColors.orangeColorInCalend : AppColors.mainGreenColor.withOpacity(0.5);
+    return _index == index ? AppColors.iconsColor : AppColors.mainGreenColor.withOpacity(0.5);
   }
 }
