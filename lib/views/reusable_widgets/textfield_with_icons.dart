@@ -86,9 +86,9 @@ class TextFormFieldWithIcons extends StatelessWidget {
             ],
           ),
         ),
-        isValideField ? SizedBox() : Padding(
+        isValideField ? const SizedBox() : Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(errorMessage ?? '',style: TextStyle(
+          child: Text(errorMessage ?? '',style: const TextStyle(
               color: Colors.red,
               fontSize: 14
           ),),
