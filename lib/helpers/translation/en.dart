@@ -220,6 +220,7 @@ Map<String,String>  englishString = {
   'without_ticket':'without a ticket',
 
   'request_visa':'Visa request',
+  'exempt':"Exempt from fingerprint",
 
 
   'personal_permission':'Personal',

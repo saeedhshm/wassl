@@ -1,0 +1,2003 @@
+{
+  "totalAttendances": {
+    "total": "01:18:11",
+    "total_attendance_late_time": "01:19:05",
+    "total_attendance_over_time": "01:13:16",
+    "total_leave_early_time": null,
+    "total_leave_over_time": null,
+    "countWorkDays": 26,
+    "countWorkHour": 208
+  },
+  "countWorkDaysAbsent": 24,
+  "countWorkDaysAttend": 2,
+  "earlyLeaveDaysCount": 0,
+  "lateAttendDaysCount": 0,
+  "missingLeaveDaysCount": 0,
+  "attendancesOfMonth": [
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-01",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-02",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-03",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-04",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-05",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-06",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-07",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "weekEnd"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-08",
+      "attendance": [
+        {
+          "id": 5688,
+          "user_id": 57,
+          "attendance_time": "2023-10-08 13:14:05",
+          "attendance_over_time": null,
+          "attendance_late_time": "01:19:05",
+          "attendance_status": 1,
+          "leave_time": null,
+          "leave_over_time": null,
+          "leave_early_time": null,
+          "leave_status": null,
+          "schedule_id": 41,
+          "created_at": "2023-10-08T10:14:05.000000Z",
+          "updated_at": "2023-10-08T10:14:05.000000Z"
+        }
+      ],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "attendance assign",
+          "attendance_status": 2,
+          "attendance": {
+            "id": 5688,
+            "user_id": 57,
+            "attendance_time": "2023-10-08 13:14:05",
+            "attendance_over_time": null,
+            "attendance_late_time": "01:19:05",
+            "attendance_status": 1,
+            "leave_time": null,
+            "leave_over_time": null,
+            "leave_early_time": null,
+            "leave_status": null,
+            "schedule_id": 41,
+            "created_at": "2023-10-08T10:14:05.000000Z",
+            "updated_at": "2023-10-08T10:14:05.000000Z"
+          },
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "attend"
+    },
+    {
+      "holiday": null,
+      "vacation": {
+        "id": 280,
+        "employee_id": 57,
+        "display_orders_to": 5,
+        "type": "1",
+        "holiday_start": "2023-10-09",
+        "holiday_end": "2023-10-09",
+        "ticket": null,
+        "ticket_type": null,
+        "go_date": null,
+        "return_date": null,
+        "exit_and_return_visa": null,
+        "visa_type": null,
+        "visa_time": null,
+        "visa_require_before": null,
+        "reason": "test",
+        "status": 2,
+        "file": null,
+        "created_at": "2023-10-09T01:32:18.000000Z",
+        "updated_at": "2023-10-09T01:34:45.000000Z",
+        "hr_comment": null,
+        "active_responsible_id": null,
+        "type_of_order": "holiday",
+        "order_type": {
+          "id": 1,
+          "name": "سنوية",
+          "created_at": "2023-02-16T10:20:33.000000Z",
+          "updated_at": "2023-02-16T10:20:33.000000Z"
+        }
+      },
+      "day": "2023-10-09",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign this is vacation day",
+          "attendance_status": 0,
+          "attendance": null,
+          "vacation": {
+            "vacation": {
+              "id": 280,
+              "employee_id": 57,
+              "display_orders_to": 5,
+              "type": "1",
+              "holiday_start": "2023-10-09",
+              "holiday_end": "2023-10-09",
+              "ticket": null,
+              "ticket_type": null,
+              "go_date": null,
+              "return_date": null,
+              "exit_and_return_visa": null,
+              "visa_type": null,
+              "visa_time": null,
+              "visa_require_before": null,
+              "reason": "test",
+              "status": 2,
+              "file": null,
+              "created_at": "2023-10-09T01:32:18.000000Z",
+              "updated_at": "2023-10-09T01:34:45.000000Z",
+              "hr_comment": null,
+              "active_responsible_id": null,
+              "type_of_order": "holiday",
+              "order_type": {
+                "id": 1,
+                "name": "سنوية",
+                "created_at": "2023-02-16T10:20:33.000000Z",
+                "updated_at": "2023-02-16T10:20:33.000000Z"
+              }
+            },
+            "day": "2023-10-09",
+            "day_number": "09"
+          },
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign this is vacation day",
+          "attendance_status": 0,
+          "attendance": null,
+          "vacation": {
+            "vacation": {
+              "id": 280,
+              "employee_id": 57,
+              "display_orders_to": 5,
+              "type": "1",
+              "holiday_start": "2023-10-09",
+              "holiday_end": "2023-10-09",
+              "ticket": null,
+              "ticket_type": null,
+              "go_date": null,
+              "return_date": null,
+              "exit_and_return_visa": null,
+              "visa_type": null,
+              "visa_time": null,
+              "visa_require_before": null,
+              "reason": "test",
+              "status": 2,
+              "file": null,
+              "created_at": "2023-10-09T01:32:18.000000Z",
+              "updated_at": "2023-10-09T01:34:45.000000Z",
+              "hr_comment": null,
+              "active_responsible_id": null,
+              "type_of_order": "holiday",
+              "order_type": {
+                "id": 1,
+                "name": "سنوية",
+                "created_at": "2023-02-16T10:20:33.000000Z",
+                "updated_at": "2023-02-16T10:20:33.000000Z"
+              }
+            },
+            "day": "2023-10-09",
+            "day_number": "09"
+          },
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "holiday"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-10",
+      "attendance": [
+        {
+          "id": 5689,
+          "user_id": 57,
+          "attendance_time": "2023-10-10 10:41:44",
+          "attendance_over_time": "01:13:16",
+          "attendance_late_time": null,
+          "attendance_status": 2,
+          "leave_time": "2023-10-10 11:59:55",
+          "leave_over_time": null,
+          "leave_early_time": null,
+          "leave_status": 0,
+          "schedule_id": 40,
+          "created_at": "2023-10-10T07:41:44.000000Z",
+          "updated_at": "2023-10-10T08:59:55.000000Z"
+        }
+      ],
+      "schedules": [
+        {
+          "message": "attendance and leave assign",
+          "attendance_status": 3,
+          "attendance": {
+            "id": 5689,
+            "user_id": 57,
+            "attendance_time": "2023-10-10 10:41:44",
+            "attendance_over_time": "01:13:16",
+            "attendance_late_time": null,
+            "attendance_status": 2,
+            "leave_time": "2023-10-10 11:59:55",
+            "leave_over_time": null,
+            "leave_early_time": null,
+            "leave_status": 0,
+            "schedule_id": 40,
+            "created_at": "2023-10-10T07:41:44.000000Z",
+            "updated_at": "2023-10-10T08:59:55.000000Z"
+          },
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "attend"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-11",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-12",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-13",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-14",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "weekEnd"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-15",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-16",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-17",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-18",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-19",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-20",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-21",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "weekEnd"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-22",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-23",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-24",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-25",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-26",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-27",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-28",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "weekEnd"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-29",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-30",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    },
+    {
+      "holiday": null,
+      "vacation": null,
+      "day": "2023-10-31",
+      "attendance": [],
+      "schedules": [
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 59,
+            "employee_id": 57,
+            "schedule_id": 40,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 40,
+              "company_id": 1,
+              "type": 1,
+              "slug": "1-try-shift",
+              "week_end_days": "6",
+              "time_in": "11:55:00",
+              "time_out": "12:00:00"
+            }
+          }
+        },
+        {
+          "message": "no attendance assign",
+          "attendance_status": 1,
+          "attendance": null,
+          "vacation": null,
+          "schedule": {
+            "id": 60,
+            "employee_id": 57,
+            "schedule_id": 41,
+            "minute_time_out": 0,
+            "minute_time_in": 0,
+            "allow_time_out": null,
+            "allow_time_in": null,
+            "info": {
+              "id": 41,
+              "company_id": 1,
+              "type": 1,
+              "slug": "2-try-shift",
+              "week_end_days": "6",
+              "time_in": "12:01:00",
+              "time_out": "12:05:00"
+            }
+          }
+        }
+      ],
+      "status": "absent"
+    }
+  ],
+  "todayAttendance": [
+    {
+      "message": "no attendance assign",
+      "attendance_status": 1,
+      "attendance": null,
+      "vacation": null,
+      "schedule": {
+        "id": 59,
+        "employee_id": 57,
+        "schedule_id": 40,
+        "minute_time_out": 0,
+        "minute_time_in": 0,
+        "allow_time_out": null,
+        "allow_time_in": null,
+        "info": {
+          "id": 40,
+          "company_id": 1,
+          "type": 1,
+          "slug": "1-try-shift",
+          "week_end_days": "6",
+          "time_in": "11:55:00",
+          "time_out": "12:00:00"
+        }
+      }
+    },
+    {
+      "message": "no attendance assign",
+      "attendance_status": 1,
+      "attendance": null,
+      "vacation": null,
+      "schedule": {
+        "id": 60,
+        "employee_id": 57,
+        "schedule_id": 41,
+        "minute_time_out": 0,
+        "minute_time_in": 0,
+        "allow_time_out": null,
+        "allow_time_in": null,
+        "info": {
+          "id": 41,
+          "company_id": 1,
+          "type": 1,
+          "slug": "2-try-shift",
+          "week_end_days": "6",
+          "time_in": "12:01:00",
+          "time_out": "12:05:00"
+        }
+      }
+    }
+  ],
+  "schedule": {
+    "id": 40,
+    "company_id": 1,
+    "type": 1,
+    "slug": "1-try-shift",
+    "week_end_days": "6",
+    "time_in": "11:55:00",
+    "time_out": "12:00:00",
+    "pivot": {
+      "employee_id": 57,
+      "schedule_id": 40
+    }
+  }
+}

@@ -52,7 +52,12 @@ class Attendance {
     if(_leaveTime != null){
       time = _leaveTime?.split(' ')[1] ?? '.......';
     }
-    return time.formattedTime() ?? '---';
+    try{
+      return time.formattedTime() ?? '---';
+    }catch(e){
+      return  '---';
+    }
+
 
   }
 

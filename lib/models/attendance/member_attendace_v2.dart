@@ -2,8 +2,6 @@
 import 'package:get/get.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
-import '../../helpers/constants/print_ln.dart';
-
 class TeamAttendanceV2{
   var teamAttendance = <MemberAttendance>[];
   TeamAttendanceV2();

@@ -1,23 +1,15 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
-import 'package:wassl/test_page.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/pages/intro/test_home_page.dart';
-import 'helpers/constants/print_ln.dart';
 import 'helpers/translation/local_strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 
@@ -57,7 +49,7 @@ class MyApp extends StatelessWidget {
    AppController appController = Get.find();
 
    static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-   Map<String, dynamic> _deviceData = <String, dynamic>{};
+   final Map<String, dynamic> _deviceData = <String, dynamic>{};
 
 
 
@@ -66,7 +58,7 @@ class MyApp extends StatelessWidget {
 
 
 
-    appController.testingUserName = 'mr.hussein.1416@gmail.com';
+    // appController.testingUserName = 'mr.hussein.1416@gmail.com';
     // appController.testingUserName = 'saeedhshm@gmail.com';
     appController.testingUserName = 'test2@waslhr.com';
 

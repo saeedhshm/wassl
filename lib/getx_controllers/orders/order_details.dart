@@ -45,9 +45,6 @@ class OrderDetailsController extends GetxController{
 
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
 
-    println(response.statusCode);
-    println(response.body);
-
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
       final PreviousRequestsController prevController = Get.find();

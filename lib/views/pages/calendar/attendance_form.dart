@@ -43,13 +43,13 @@ class AttendancePage extends StatelessWidget {
               Column(
                 children: [
                   // CalendarWidget(),
-                  TableCalendarWidget(),
+                  const TableCalendarWidget(),
                   const SizedBox(height: 16,),
                   MonthReportWidget(),
                 ],
               ),
               MonthlyAttendanceInfoWidget(),
-              SizedBox(height: 100,)
+              const SizedBox(height: 100,)
             ],
           ),)),
         ],

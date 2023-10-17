@@ -36,20 +36,20 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         lastDay: DateTime.utc(DateTime.now().year, 12, 31),
         focusedDay:controller.foCusedDate.value,
         startingDayOfWeek: StartingDayOfWeek.sunday,
-        holidayPredicate: (day) {
-          return day.weekday == DateTime.friday ||
-              day.weekday == DateTime.saturday;
-        },
+
         locale: '${Get.locale?.languageCode}_${Get.locale?.countryCode}',
         daysOfWeekHeight: 30,
         rowHeight: 42,
-
+        // holidayPredicate: (datetime){
+        //
+        // },
         selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
         calendarStyle: const CalendarStyle(
           outsideDaysVisible: true,
           // outsideTextStyle: TextStyle(color: Colors.red)
         ),
         calendarBuilders: CalendarBuilders(
+
           todayBuilder: (context, day, newDay) {
 
             return Row(
@@ -61,7 +61,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                     width: 35,
                     height: 35,
                     decoration: BoxDecoration(
-                      // border: Border.all(color: Colors.redAccent, width: 2),
+                      border: Border.all(color: Colors.white, width: 2),
                         color: Colors.white,
 
                         borderRadius: BorderRadius.circular(100)),
@@ -74,16 +74,16 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             Text(
                               day.day.toString(),
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.black87),
+                                  fontWeight: FontWeight.normal, color: Colors.black87),
                             ),
-                            Container(
-                              height: 2,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                  color: AppColors.mainGreenColor,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-                            ),
+                            // Container(
+                            //   height: 2,
+                            //   width: 20,
+                            //   decoration: BoxDecoration(
+                            //       color: AppColors.mainGreenColor,
+                            //       borderRadius: BorderRadius.circular(10)
+                            //   ),
+                            // ),
 
                           ],
                         ))),
@@ -102,128 +102,219 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
             return Text('$day');
           },
 
-          defaultBuilder: (context, day, newDay) {
 
-            if(day.compareTo(DateTime.now() ) > 0) {
-              return Center(
-                child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 5),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      // color:Colors.amber,
-                        border: Border.all(color: Colors.white, width: 1),
-                        borderRadius: BorderRadius.circular(100)),
-                    child: Center(
-                        child: Text(
-                          day.day.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ))),
+          defaultBuilder: (context, day, newDay) {
+            final today = DateTime.now();
+            if(day.day == today.day && day.month == today.month && day.year == today.year){
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 0),
+                          color: Colors.white,
+
+                          borderRadius: BorderRadius.circular(100)),
+
+                      child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                day.day.toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, color: Colors.black87),
+                              ),
+                              Container(
+                                height: 2,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                    color: AppColors.mainGreenColor,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                              ),
+
+                            ],
+                          ))),
+                ],
               );
             }
 
-            // if (checkDayAs('absent', day, controller)) {
-            //   var prev = !checkDayAs('absent', DateTime(day.year,day.month,day.day - 1), controller);
-            //   var next = !checkDayAs('absent', DateTime(day.year,day.month,day.day + 1), controller) ;
             //
-            //   return Container(
-            //
-            //     // margin:  EdgeInsets.symmetric(horizontal: prev ? 4.0 : 0.0, vertical: 4),
-            //       margin: EdgeInsets.only(
-            //           left: (Get.locale?.languageCode == 'en' ? prev : next) ? 4.0 : 0.0,
-            //           right: (Get.locale?.languageCode == 'en' ? next : prev) ? 4.0 : 0.0,
-            //           top: 4,
-            //           bottom: 4
-            //       ),
-            //
-            //       //   width: 33,
-            //       height: 30,
-            //       decoration: BoxDecoration(
-            //         // border: Border.all(color: Colors.white, width: 0),
-            //         borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular( (Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
-            //           bottomLeft: Radius.circular((Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
-            //
-            //           topRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
-            //           bottomRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
-            //         ),
-            //         color: AppColors.orangeColorInCalend,),
-            //
-            //       child: Center(
-            //           child: Text(
-            //             day.day.toString(),
-            //             style: const TextStyle(
-            //                 fontWeight: FontWeight.bold, color: Colors.white),
-            //           )));
-            // }
-            //
-            // //// holiday days
-            // if (checkDayAs('holiday', day, controller)) {
-            //   var prev = !checkDayAs('holiday', DateTime(day.year,day.month,day.day - 1), controller);
-            //   var next = !checkDayAs('holiday', DateTime(day.year,day.month,day.day + 1), controller) ;
-            //
-            //   return Container(
-            //       margin: EdgeInsets.only(
-            //           left: (Get.locale?.languageCode == 'en' ? prev : next) ? 4.0 : 0.0,
-            //           right: (Get.locale?.languageCode == 'en' ? next : prev) ? 4.0 : 0.0,
-            //           top: 4,
-            //           bottom: 4
-            //       ),
-            //       //   width: 33,
-            //       height: 30,
-            //       decoration: BoxDecoration(
-            //         // border: Border.all(color: Colors.white, width: 0),
-            //         borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular( (Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
-            //           bottomLeft: Radius.circular((Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
-            //
-            //           topRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
-            //           bottomRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
-            //         ),
-            //         color: AppColors.mainGreenColor,),
-            //
-            //       child: Center(
-            //           child: Text(
-            //             day.day.toString(),
-            //             style: const TextStyle(
-            //                 fontWeight: FontWeight.bold, color: Colors.white),
-            //           )));
-            // }
-            //
-            // if (checkMissedDay(day, controller)) {
-            //   return Row(
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Container(
-            //           margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            //           width: 35,
-            //           height: 35,
-            //           decoration: BoxDecoration(
-            //             // border: Border.all(color: Colors.redAccent, width: 2),
-            //               color: Colors.white,
-            //
-            //               borderRadius: BorderRadius.circular(100)),
-            //
-            //           child: Center(
-            //               child: Column(
-            //                 crossAxisAlignment: CrossAxisAlignment.center,
-            //                 mainAxisAlignment: MainAxisAlignment.center,
-            //                 children: [
-            //                   Text(
-            //                     day.day.toString(),
-            //                     style: const TextStyle(
-            //                         fontWeight: FontWeight.bold, color: Colors.black87),
-            //                   ),
-            //                   const DotWidget(
-            //                     color: AppColors.redMissedDayColor,
-            //                     size: 5,
-            //                   )
-            //                 ],
-            //               ))),
-            //     ],
+            // if(day.compareTo(DateTime.now() ) > 0) {
+            //   return Center(
+            //     child: Container(
+            //         margin: const EdgeInsets.symmetric(
+            //             horizontal: 8, vertical: 5),
+            //         width: double.infinity,
+            //         decoration: BoxDecoration(
+            //           // color:Colors.amber,
+            //             border: Border.all(color: Colors.white, width: 1),
+            //             borderRadius: BorderRadius.circular(100)),
+            //         child: Center(
+            //             child: Text(
+            //               day.day.toString(),
+            //               style: const TextStyle(fontWeight: FontWeight.bold),
+            //             ))),
             //   );
             // }
+
+            if (checkDayAs('weekEnd', day, controller)){
+              return Container(
+                  margin: const EdgeInsets.only(
+                      left: 10.0,
+                      right:  10.0,
+                      top: 0,
+                      bottom: 0
+                  ),
+                  //   width: 33,
+                  //   height: 33,
+                  decoration: BoxDecoration(
+                    // border: Border.all(color: Colors.white, width: 0),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      bottomLeft: Radius.circular(0.0 ),
+
+                      topRight: Radius.circular(0.0),
+                      bottomRight: Radius.circular(0.0 ),
+                    ),
+                    color: AppColors.borderTextFieldColor,),
+
+                  child: Center(
+                      child: Text(
+                        day.day.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      )));
+            }
+
+            // //// absent days
+            if(day.compareTo(DateTime.now() ) < 0) {
+              if (checkDayAs('absent', day, controller)) {
+                var prev = day.day > 1 ? !checkDayAs(
+                    'absent', DateTime(day.year, day.month, day.day - 1),
+                    controller) : true;
+                var next = !checkDayAs(
+                    'absent', DateTime(day.year, day.month, day.day + 1),
+                    controller);
+
+                return Container(
+
+                  // margin:  EdgeInsets.symmetric(horizontal: prev ? 4.0 : 0.0, vertical: 4),
+                    margin: EdgeInsets.only(
+                        left: (Get.locale?.languageCode == 'en' ? prev : next)
+                            ? 4.0
+                            : 0.0,
+                        right: (Get.locale?.languageCode == 'en' ? next : prev)
+                            ? 4.0
+                            : 0.0,
+                        top: 4,
+                        bottom: 4
+                    ),
+
+                    //   width: 33,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      // border: Border.all(color: Colors.white, width: 0),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular((Get.locale?.languageCode ==
+                            'en' ? prev : next) ? 100.0 : 0.0),
+                        bottomLeft: Radius.circular((Get.locale?.languageCode ==
+                            'en' ? prev : next) ? 100.0 : 0.0),
+
+                        topRight: Radius.circular((Get.locale?.languageCode ==
+                            'en' ? next : prev) ? 100.0 : 0.0),
+                        bottomRight: Radius.circular((Get.locale
+                            ?.languageCode == 'en' ? next : prev)
+                            ? 100.0
+                            : 0.0),
+                      ),
+                      color: AppColors.orangeColorInCalend,),
+
+                    child: Center(
+                        child: Text(
+                          day.day.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        )));
+              }
+            }
+            //
+            // //// holiday days
+            if (checkDayAs('holiday', day, controller)) {
+              var prev = !checkDayAs('holiday', DateTime(day.year,day.month,day.day - 1), controller);
+              var next = !checkDayAs('holiday', DateTime(day.year,day.month,day.day + 1), controller) ;
+
+              return Container(
+                  margin: EdgeInsets.only(
+                      left: (Get.locale?.languageCode == 'en' ? prev : next) ? 4.0 : 0.0,
+                      right: (Get.locale?.languageCode == 'en' ? next : prev) ? 4.0 : 0.0,
+                      top: 4,
+                      bottom: 4
+                  ),
+                  //   width: 33,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    // border: Border.all(color: Colors.white, width: 0),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular( (Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
+                      bottomLeft: Radius.circular((Get.locale?.languageCode == 'en' ? prev : next) ? 100.0 : 0.0),
+
+                      topRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
+                      bottomRight: Radius.circular((Get.locale?.languageCode == 'en' ? next : prev) ? 100.0 : 0.0),
+                    ),
+                    color: AppColors.mainGreenColor,),
+
+                  child: Center(
+                      child: Text(
+                        day.day.toString(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      )));
+            }
+
+
+            //
+            if (checkMissedDay(day, controller)) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.redAccent, width: 2),
+                          color: Colors.white,
+
+                          borderRadius: BorderRadius.circular(100)),
+
+                      child: Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                day.day.toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, color: Colors.black87),
+                              ),
+                              const DotWidget(
+                                color: AppColors.redMissedDayColor,
+                                size: 5,
+                              )
+                            ],
+                          ))),
+                ],
+              );
+            }
 
           },
           holidayBuilder: (context, day, newDay) {
@@ -260,6 +351,8 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           },
 
           selectedBuilder: (context, day, newDay) {
+
+
 
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,

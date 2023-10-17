@@ -1,11 +1,8 @@
-import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:wassl/controllers/calendar_controller.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
-import '../../helpers/constants/print_ln.dart';
 import '../../models/attendance/month_attendance.dart';
-import 'package:wassl/models/auth/schedule.dart';
-import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 
@@ -85,8 +82,8 @@ class CalendarViewModel extends GetxController {
   //   return appController.loginModel.value.timeOut;
   // }
 
-  List<Schedule> get shiftsSchedules {
-    return appController.loginModel.value.user!.allSchedules;
+  List<Schedules> get shiftsSchedules {
+    return selectedDay.value.schedules;
   }
 
   String get currentSelectedDate {
@@ -105,9 +102,9 @@ class CalendarViewModel extends GetxController {
   //   return selectedDay.value.attendance.;
   // }
 
-  bool get noLeavingRegistered {
-    return  false;//selectedDay.value.attendance?.leaveTime == null;
-  }
+  // bool get noLeavingRegistered {
+  //   return  selectedDay.value.attendance?.leaveTime == null;
+  // }
 
 
 

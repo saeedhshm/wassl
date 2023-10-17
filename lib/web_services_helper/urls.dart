@@ -1,6 +1,8 @@
 
 
-const String appDomain = 'https://waslhr.com';
+// const String appDomain = 'https://waslhr.com';
+//                                dev.waslhr-test.com
+const String appDomain = 'https://dev.waslhr-test.com';
 // const String appDomain = 'https://wasl.trafficksa.com';
 //
 const String apiVrsion = '$appDomain/api/v1';

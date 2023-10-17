@@ -1,44 +1,44 @@
-import 'package:get/get.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
-
-import '../attendance.dart';
-
-
-
 class MonthAttendance {
   TotalAttendances? totalAttendances;
-  int? _countWorkDaysAbsent;
-  int? _countWorkDaysAttend;
+  int? countWorkDaysAbsent;
   int? countWorkDaysAttend;
   int? earlyLeaveDaysCount;
   int? lateAttendDaysCount;
   int? missingLeaveDaysCount;
-  List<AttendancesOfMonth> attendancesOfMonth = [];
-  List<TodayAttendance> todayAttendance = [];
+  List<AttendancesOfMonth>? attendancesOfMonth;
+  List<TodayAttendance>? todayAttendance;
   Schedule? schedule;
 
-  MonthAttendance();
-
+  MonthAttendance(
+      {this.totalAttendances,
+        this.countWorkDaysAbsent,
+        this.countWorkDaysAttend,
+        this.earlyLeaveDaysCount,
+        this.lateAttendDaysCount,
+        this.missingLeaveDaysCount,
+        this.attendancesOfMonth,
+        this.todayAttendance,
+        this.schedule});
 
   MonthAttendance.fromJson(Map<String, dynamic> json) {
     totalAttendances = json['totalAttendances'] != null
         ?  TotalAttendances.fromJson(json['totalAttendances'])
         : null;
-    _countWorkDaysAbsent = json['countWorkDaysAbsent'];
-    _countWorkDaysAttend = json['countWorkDaysAttend'];
+    countWorkDaysAbsent = json['countWorkDaysAbsent'];
+    countWorkDaysAttend = json['countWorkDaysAttend'];
     earlyLeaveDaysCount = json['earlyLeaveDaysCount'];
     lateAttendDaysCount = json['lateAttendDaysCount'];
     missingLeaveDaysCount = json['missingLeaveDaysCount'];
     if (json['attendancesOfMonth'] != null) {
       attendancesOfMonth = <AttendancesOfMonth>[];
       json['attendancesOfMonth'].forEach((v) {
-        attendancesOfMonth.add( AttendancesOfMonth.fromJson(v));
+        attendancesOfMonth!.add( AttendancesOfMonth.fromJson(v));
       });
     }
     if (json['todayAttendance'] != null) {
       todayAttendance = <TodayAttendance>[];
       json['todayAttendance'].forEach((v) {
-        todayAttendance.add( TodayAttendance.fromJson(v));
+        todayAttendance!.add( TodayAttendance.fromJson(v));
       });
     }
     schedule = json['schedule'] != null
@@ -46,33 +46,14 @@ class MonthAttendance {
         : null;
   }
 
-
-
-
-  int get missedRecords {
-    return missingLeaveDaysCount ?? 0;
-  }
-
-  int get countWorkDaysAbsent{
-    return _countWorkDaysAbsent ?? 0;
-  }
-
-  int get earlyLeaveCount{
-
-    return earlyLeaveDaysCount ?? 0;
-  }
-
-  int get lateAttendance{
-    return lateAttendDaysCount ?? 0;
-  }
 }
 
 class TotalAttendances {
   String? total;
   String? totalAttendanceLateTime;
   String? totalAttendanceOverTime;
-  String? totalLeaveEarlyTime;
-  dynamic totalLeaveOverTime;
+  dynamic totalLeaveEarlyTime;
+  String? totalLeaveOverTime;
   int? countWorkDays;
   int? countWorkHour;
 
@@ -96,33 +77,34 @@ class TotalAttendances {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data =  <String, dynamic>{};
     data['total'] = this.total;
-    data['total_attendance_late_time'] = totalAttendanceLateTime;
-    data['total_attendance_over_time'] = totalAttendanceOverTime;
-    data['total_leave_early_time'] = totalLeaveEarlyTime;
-    data['total_leave_over_time'] = totalLeaveOverTime;
-    data['countWorkDays'] = countWorkDays;
-    data['countWorkHour'] = countWorkHour;
+    data['total_attendance_late_time'] = this.totalAttendanceLateTime;
+    data['total_attendance_over_time'] = this.totalAttendanceOverTime;
+    data['total_leave_early_time'] = this.totalLeaveEarlyTime;
+    data['total_leave_over_time'] = this.totalLeaveOverTime;
+    data['countWorkDays'] = this.countWorkDays;
+    data['countWorkHour'] = this.countWorkHour;
     return data;
   }
 }
 
 class AttendancesOfMonth {
-
-
   Holiday? holiday;
   Vacation? vacation;
   String? day;
-  // List<Attendance> _attendance = <Attendance>[];
-  List<Schedules> schedules = <Schedules>[];
-  String? _status;
+  List<Attendance>? attendance;
+  List<Schedules>? schedules;
+  String? status;
 
-  // var selected = false;
+  AttendancesOfMonth(
+      {this.holiday,
+        this.vacation,
+        this.day,
+        this.attendance,
+        this.schedules,
+        this.status});
 
-
-
-  AttendancesOfMonth();
   AttendancesOfMonth.fromJson(Map<String, dynamic> json) {
     holiday =
     json['holiday'] != null ?  Holiday.fromJson(json['holiday']) : null;
@@ -130,94 +112,22 @@ class AttendancesOfMonth {
         ?  Vacation.fromJson(json['vacation'])
         : null;
     day = json['day'];
-    // if (json['attendance'] != null) {
-    //   _attendance = <Attendance>[];
-    //   json['attendance'].forEach((v) {
-    //     _attendance.add( Attendance.fromJson(v));
-    //   });
-    // }
-    _status = json['status'];
+    if (json['attendance'] != null) {
+      attendance = <Attendance>[];
+      json['attendance'].forEach((v) {
+        attendance!.add( Attendance.fromJson(v));
+      });
+    }
     if (json['schedules'] != null) {
       schedules = <Schedules>[];
       json['schedules'].forEach((v) {
-        Schedules schedule = Schedules.fromJson(v);
-        if(_status == 'weekEnd'){
-          schedule.attendanceStatus = 5;
-        }
-        if(_status == 'holiday'){
-          schedule.attendanceStatus = 0;
-        }
-        if(_status == 'exempt'){
-          schedule.attendanceStatus = 0;
-        }
-        schedules.add(schedule);
+        schedules!.add( Schedules.fromJson(v));
       });
     }
-
+    status = json['status'];
   }
-
-
-  String get status{
-    var st = _status ?? '';
-    // if(st == 'attend'){
-    //   for(var att in _attendance) {
-    //     if(att.leaveTime.contains('----')){
-    //       att.status = 'missed_leave';
-    //   }
-    //   }
-    // }
-
-    return st;
-  }
-
-  // List<Attendance> get attendance{
-  //   _attendance.sort((a, b){
-  //     if(a.empTimeIn != null && b.empTimeIn != null){
-  //       return a.empTimeIn!.compareTo(b.empTimeIn!);
-  //     }
-  //     return -1;
-  //   });
-  //
-  //   return _attendance;
-  // }
-
 
 }
-
-
-
-
-
-class TodayAttendance {
-  String? message;
-  int? attendanceStatus;
-  Attendance? attendance;
-  Vacation? vacation;
-  Schedule? schedule;
-
-  TodayAttendance({this.message, this.attendanceStatus, this.attendance});
-
-  TodayAttendance.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    attendanceStatus = json['attendance_status'];
-    attendance = json['attendance'] != null
-        ? Attendance.fromJson(json['attendance'])
-        : null;
-    vacation = json['vacation'] != null
-        ? Vacation.fromJson(json['vacation'])
-        : null;
-  }
-
-
-}
-
-
-
-
-
-
-
-
 
 class Holiday {
   int? id;
@@ -349,7 +259,53 @@ class OrderType {
 
 }
 
+class Attendance {
+  int? id;
+  int? userId;
+  String? attendanceTime;
+  String? attendanceOverTime;
+  String? attendanceLateTime;
+  int? attendanceStatus;
+  String? leaveTime;
+  String? leaveOverTime;
+  dynamic leaveEarlyTime;
+  int? leaveStatus;
+  int? scheduleId;
+  String? createdAt;
+  String? updatedAt;
 
+  Attendance(
+      {this.id,
+        this.userId,
+        this.attendanceTime,
+        this.attendanceOverTime,
+        this.attendanceLateTime,
+        this.attendanceStatus,
+        this.leaveTime,
+        this.leaveOverTime,
+        this.leaveEarlyTime,
+        this.leaveStatus,
+        this.scheduleId,
+        this.createdAt,
+        this.updatedAt});
+
+  Attendance.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    attendanceTime = json['attendance_time'];
+    attendanceOverTime = json['attendance_over_time'];
+    attendanceLateTime = json['attendance_late_time'];
+    attendanceStatus = json['attendance_status'];
+    leaveTime = json['leave_time'];
+    leaveOverTime = json['leave_over_time'];
+    leaveEarlyTime = json['leave_early_time'];
+    leaveStatus = json['leave_status'];
+    scheduleId = json['schedule_id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+}
 
 class Schedules {
   String? message;
@@ -375,24 +331,6 @@ class Schedules {
     schedule = json['schedule'] != null
         ?  Schedule.fromJson(json['schedule'])
         : null;
-  }
-
-  String get status {
-    switch(attendanceStatus){
-      case 0:
-        return 'holiday';
-      case 1:
-        return 'absent';
-      case 2:
-        return 'missed_leave';
-      case 3:
-        return 'attend';
-      case 4:
-        return 'exempt';
-      default:
-        return 'weekEnd';
-    }
-    return attendanceStatus == 0 ? 'holiday' : attendanceStatus == 1 ? 'absent' : attendanceStatus == 2 ? 'missed_leave' : 'attend';
   }
 
 }
@@ -427,24 +365,33 @@ class Info {
     timeOut = json['time_out'];
   }
 
+}
 
-  String get timeInEx{
-    // var time = '----';
-    // if(_timeIn != null){
-    //   time =  _timeIn?.split(' ')[1] ?? '----';
-    // }
-    return timeIn?.formattedTime() ?? '---';
-  }
-  String get timeOutEx{
-    // var time = '----';
-    // if(_timeOut != null){
-    //   time =  _timeOut?.split(' ')[1] ?? '----';
-    // }
-    return timeOut?.formattedTime() ?? '---';
+class TodayAttendance {
+  String? message;
+  int? attendanceStatus;
+  dynamic attendance;
+  dynamic vacation;
+  Schedule? schedule;
+
+  TodayAttendance(
+      {this.message,
+        this.attendanceStatus,
+        this.attendance,
+        this.vacation,
+        this.schedule});
+
+  TodayAttendance.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    attendanceStatus = json['attendance_status'];
+    attendance = json['attendance'];
+    vacation = json['vacation'];
+    schedule = json['schedule'] != null
+        ?  Schedule.fromJson(json['schedule'])
+        : null;
   }
 
 }
-
 
 
 class Schedule {
@@ -500,4 +447,3 @@ class Pivot {
   }
 
 }
-

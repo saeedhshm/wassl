@@ -306,6 +306,7 @@ Map<String,String>  arabicStrings = {
   'attend':'الحضور',
   'leaving':'الانصراف',
   'missed_leave':'سجل ناقص',
+  'exempt':"معفي من البصمة",
 
   'base_salary':'الراتب الاساسي',
   'insurance_pension':'معاش التأمينات الإجتماعية',
