@@ -54,14 +54,20 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
   @override
   Widget build(BuildContext context) {
 
-
-
     return Column(
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           // !appController.isHolidayDay ?
-          child:  !appController.isHolidayDay ? Obx(() =>IgnorePointer(
+          child: appController.isFingerPrintExempt ? Center(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text('exempt'.tr,style: const TextStyle(
+                  color: AppColors.darkGreyTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)),
+            ),
+          ) :  !appController.isHolidayDay ? Obx(() =>IgnorePointer(
             ignoring: controller.attendanceStatus.value == 3 ||
                 controller.sendingAttendance.value,
             // ignoring: false,
@@ -184,8 +190,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
               )
                   : AttendanceInfoWidget(),
             ),
-          ) ):
-          Center(
+          ) ): Center(
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text('today_holiday'.tr,style: const TextStyle(

@@ -379,6 +379,10 @@ class AppController extends GetxController{
     return false;
   }
 
+  bool get isFingerPrintExempt{
+    return (loginModel.value.user?.isExemptFingerprinting ?? 0) == 1;
+  }
+
   setLanguage(String langCode, String countryCode) async {
 
     Get.updateLocale( Locale(langCode,countryCode)) ;

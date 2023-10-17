@@ -148,7 +148,7 @@ class AttendancesOfMonth {
           schedule.attendanceStatus = 0;
         }
         if(_status == 'exempt'){
-          schedule.attendanceStatus = 0;
+          schedule.attendanceStatus = 4;
         }
         schedules.add(schedule);
       });

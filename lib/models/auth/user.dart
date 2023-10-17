@@ -37,7 +37,7 @@ class User {
   int? fullFinal;
   String? createdAt;
   String? updatedAt;
-
+  int? isExemptFingerprinting;
   String? nationalityNumber;
   String? email;
   String? typeId;
@@ -123,6 +123,7 @@ class User {
     dateOfConfirmation = json['date_of_confirmation'];
     departmentId = json['department_id'];
     salary = json['salary'];
+    isExemptFingerprinting = json['is_exempt_fingerprinting'];
     accountNumber = json['account_number'];
     bankName = json['bank_name'];
     unNumber = json['un_number'];
