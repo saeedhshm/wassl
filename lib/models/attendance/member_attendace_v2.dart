@@ -1,13 +1,15 @@
 
 import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 class TeamAttendanceV2{
   var teamAttendance = <MemberAttendance>[];
+
   TeamAttendanceV2();
 
   TeamAttendanceV2.fromJson(List json) {
-
+    println('inside TeamAttendanceV2');
     for (var v in json) {
 
       teamAttendance.add(MemberAttendance.fromJson(v));
@@ -26,6 +28,8 @@ class MemberAttendance {
   MemberAttendance();
 
   MemberAttendance.fromJson(Map<String, dynamic> json) {
+    println("inside MemberAttendance.fromJson");
+    println(json);
     id = json['id'];
     employeeId = json['employee_id'];
     responsibleEmployeeId = json['responsible_employee_id'];
@@ -54,7 +58,7 @@ class MemberAttendance {
     if(attendance.length > 1){
       return (attendance.first.attendance == null && attendance.last.attendance == null);
     }
-    return attendance.first.attendance == null;
+    return attendance.first.attendance == null && !attendance.first.isExempt;
   }
 
 
@@ -105,6 +109,10 @@ class Attendance {
     schedule = json['schedule'] != null
         ? Schedule.fromJson(json['schedule'])
         : null;
+  }
+
+  bool get isExempt{
+    return (_attendanceStatus ?? 0) == 4;
   }
 
   String get attendanceStatus{

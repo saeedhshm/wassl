@@ -2,7 +2,7 @@ Map<String,String>  englishString = {
   'lang':'en',
   'welcome_to_wasl':'Welcome to Wasl' ,
   "you_can_enter_to_account":"You can login to your account",
-  "email_or_job_number":"Email or job number",
+  "email_or_job_number":"Email ",
   "password":"Password",
   "login":"Login",
   "forget_password?":"Forgot your password?",

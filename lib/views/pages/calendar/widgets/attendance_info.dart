@@ -14,7 +14,6 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return Obx(()=>Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -29,6 +28,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
 
 
                     Container(
+                      width: double.maxFinite,
 
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -36,7 +36,15 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: Column(
+                        child: controller.appController.isFingerPrintExempt ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text('exempt'.tr,style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 17
+                            ),),
+                          ),
+                        ) : Column(
                           children: [
                             Text('working_time'.tr,style: const TextStyle(
                                 color: AppColors.darkGreyTextColor,
@@ -66,7 +74,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 20),
                     ),
 
-                    Container(
+                    controller.appController.isFingerPrintExempt ? const SizedBox() : Container(
                       margin: EdgeInsets.only(right: 'lang'.tr == 'ar' ? 20 : 0,left:'lang'.tr == 'ar' ? 0 : 20 ),
                       decoration: BoxDecoration(
                         color: Colors.white,

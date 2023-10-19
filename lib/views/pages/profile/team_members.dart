@@ -34,7 +34,7 @@ class TeamMembersPage extends StatelessWidget {
 
                 Column(
                   children: [
-                    SizedBox(height: 40,),
+                    const SizedBox(height: 40,),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -60,21 +60,31 @@ class TeamMembersPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    Expanded(child: Text('members'.tr,style: const TextStyle(
-                                      color: AppColors.darkGreyTextColor,
-                                        fontWeight: FontWeight.bold
-                                      // fontSize: 12
-                                    ),),flex: 7,),
-                                    Expanded(flex: 3,child: Text('attend'.tr,style: const TextStyle(
-                                      color: AppColors.darkGreyTextColor,
-                                        fontWeight: FontWeight.bold
-                                      // fontSize: 12
-                                    ),),),
-                                    Expanded(flex: 3,child: Text('leaving'.tr,style: const TextStyle(
-                                      color: AppColors.darkGreyTextColor,
-                                        fontWeight: FontWeight.bold
-                                      // fontSize: 12
-                                    ),),),
+                                    Expanded(child: Center(
+                                      child: Text('members'.tr,style: const TextStyle(
+                                        color: AppColors.darkGreyTextColor,
+                                          fontWeight: FontWeight.bold
+                                        // fontSize: 12
+                                      ),),
+                                    )),
+                                    Expanded(child: Row(
+                                      children: [
+                                        Expanded(child: Center(
+                                          child: Text('attend'.tr,style: const TextStyle(
+                                              color: AppColors.darkGreyTextColor,
+                                              fontWeight: FontWeight.bold
+                                            // fontSize: 12
+                                          ),),
+                                        ),),
+                                        Expanded(child: Center(
+                                          child: Text('leaving'.tr,style: const TextStyle(
+                                              color: AppColors.darkGreyTextColor,
+                                              fontWeight: FontWeight.bold
+                                            // fontSize: 12
+                                          ),),
+                                        ),),
+                                      ],
+                                    ))
                                   ],
                                 ),
                               ),
@@ -153,60 +163,82 @@ class MemberItemWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 8),
       child: Row(
         children: [
-          Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 1,
-                    offset: const Offset(0,0), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Image.asset('assets/images/profile/1.png',width: 40,)),
-          const SizedBox(width: 16,),
+
           Expanded(
 
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(memberAttendance.fullName,style: const TextStyle(
-                  color: AppColors.darkGreyTextColor,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 13
-                ),),
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(0,0), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Image.asset('assets/images/profile/1.png',width: 40,)),
+                const SizedBox(width: 12,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(memberAttendance.fullName,style: const TextStyle(
+                      color: AppColors.darkGreyTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13
+                    ),),
 
-                Text(memberAttendance.jobName,style: TextStyle(
-                    color: AppColors.lightGreyTextColor,
-                    fontSize: 12
-                ),),
+                    Text(memberAttendance.jobName,style: TextStyle(
+                        color: AppColors.lightGreyTextColor,
+                        fontSize: 12
+                    ),),
+                  ],
+                ),
               ],
             ),
-            flex: 4,
+
           ),
           Expanded(
-              flex: 5,
-              child: Column(
-            children: memberAttendance.attendance.map((e) => Row(
+
+              child:  Column(
+            children: memberAttendance.attendance.map((e) => e.isExempt ? Center(
+    child: Text('exempt'.tr,style: const TextStyle(
+    color: AppColors.darkGreyTextColor,
+    fontWeight: FontWeight.bold
+    // fontSize: 12
+    ),),
+    ) : e.attendanceTime.contains('--') ? Center(
+              child: Text(e.attendanceStatus.tr,style: const TextStyle(
+                  color: AppColors.darkGreyTextColor,
+                  fontWeight: FontWeight.bold
+                // fontSize: 12
+              ),),
+            ) :
+            Row(
               children: [
                 Expanded(
 
-                  child: Text(e.attendanceTime,style: const TextStyle(
-                      color: AppColors.darkGreyTextColor,
-                      fontWeight: FontWeight.bold
-                    // fontSize: 12
-                  ),),
+                  child: Center(
+                    child: Text(e.attendanceTime,style: const TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.bold
+                      // fontSize: 12
+                    ),),
+                  ),
                 ),
                 Expanded(
 
-                  child: Text(e.leaveTime,style: const TextStyle(
-                      color: AppColors.darkGreyTextColor,
-                      fontWeight: FontWeight.bold
-                    // fontSize: 12
-                  ),),
+                  child: Center(
+                    child: Text(e.leaveTime,style: const TextStyle(
+                        color: AppColors.darkGreyTextColor,
+                        fontWeight: FontWeight.bold
+                      // fontSize: 12
+                    ),),
+                  ),
                 ),
               ],
             ),).toList(),
