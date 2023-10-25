@@ -20,6 +20,10 @@ class PreviousRequestsController extends GetxController{
  List myOrders = <Order>[].obs;
  List teamOrders = <Order>[].obs;
 
+ bool firstRun = true;
+ var hasTeamRequests = false.obs;
+
+
   List menuItems = [
     ListItem('all_orders', 0,true),
     ListItem('await_status', 1,false),
@@ -29,7 +33,7 @@ class PreviousRequestsController extends GetxController{
   ];
 
   final _groupValue = ListItem('all_orders', 0,false).obs;
-  final _groupValueOfTeamOrders = ListItem('all_orders', 0,false).obs;
+  final groupValueOfTeamOrders = ListItem('all_orders', 0,false).obs;
 
   final AppController appController = Get.find();
 
@@ -41,6 +45,8 @@ class PreviousRequestsController extends GetxController{
     var url = '${AppUrls.getAllOrders}?page=$myOrdersPage';
 
       url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
+
+
 
 
     // return;
@@ -60,8 +66,8 @@ class PreviousRequestsController extends GetxController{
 
 
     var url = '${AppUrls.getTeamOrders}?page=$teamOrdersPage';
-    if(_groupValueOfTeamOrders.value.status != 0){
-      url = '$url&status=${_groupValueOfTeamOrders.value.status}';
+    if(groupValueOfTeamOrders.value.status != 0){
+      url = '$url&status=${groupValueOfTeamOrders.value.status}';
     }
     // url = '$url&status=${_groupValue.value.status != 0 ? _groupValue.value.status : _groupValue.value.status + 5 }';
 
@@ -73,9 +79,20 @@ class PreviousRequestsController extends GetxController{
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }
+
+    println('entring first run');
+
     var json = jsonDecode(response.body);
     previousTeamRequests.value = AllOrders.fromJson(json);
     teamOrders = previousTeamRequests.value.orders;
+
+    if(firstRun){
+      println('inside first run');
+      println(previousTeamRequests.value.orders.isNotEmpty);
+      hasTeamRequests.value = previousTeamRequests.value.orders.isNotEmpty;
+      println(hasTeamRequests.value );
+      firstRun = false;
+    }
 
   }
 
@@ -104,7 +121,7 @@ class PreviousRequestsController extends GetxController{
   }
 
   ListItem get groupValue {
-    return myOrdersSelected.value ? _groupValue.value : _groupValueOfTeamOrders.value;
+    return myOrdersSelected.value ? _groupValue.value : groupValueOfTeamOrders.value;
   }
 
   void set groupValue(ListItem value){
@@ -112,7 +129,7 @@ class PreviousRequestsController extends GetxController{
       _groupValue.value = value;
       getMyOrders();
     } else {
-      _groupValueOfTeamOrders.value = value;
+      groupValueOfTeamOrders.value = value;
       getTeamOrders();
     }
     Get.back();
@@ -123,6 +140,6 @@ class PreviousRequestsController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     _groupValue.value = menuItems[0];
-    _groupValueOfTeamOrders.value = menuItems[0];
+    groupValueOfTeamOrders.value = menuItems[0];
   }
 }

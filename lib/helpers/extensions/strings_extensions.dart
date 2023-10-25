@@ -42,7 +42,7 @@ extension FormatedDateTimeExtension on String {
       var timeIn24 = dateFormatOf24Hours.parse(this);
       myTime = getTimeFormatOf12hours(of: timeIn24);
     }catch(e){
-     println(e,'time exception');
+     // println(e,'time exception');
     }
 
     return myTime;
@@ -86,7 +86,7 @@ extension FormatedDateTimeExtension on String {
       var timeIn24 = dateFormatOf24Hours.parse(givenDate);
       return DateTimeParser(timeIn24);
     }catch(e){
-      println(e,dateFormat);
+      // println(e,dateFormat);
     }
 
     return null;
@@ -98,7 +98,7 @@ extension FormatedDateTimeExtension on String {
     try{
       exactTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,format.parse(this).hour,format.parse(this).minute);
     }catch(e){
-      println(e.toString());
+      // println(e.toString());
     }
     return exactTime;
   }
@@ -137,7 +137,6 @@ extension FormatedDateTimeExtension on String {
 
   String get timeFromTimeSelection {
 
-    println(this,'=>>>>timeFromTZone');
 
     var time = '-----';
     if (isNotEmpty) {
@@ -195,7 +194,7 @@ String? getTimeFormatOf12hours({required DateTime of}){
       result = '${timePieces.first} ${timePieces.last.tr}';
     }
   }catch (e){
-    println(e,'‼️');
+    // println(e,'‼️');
   }
 
 

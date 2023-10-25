@@ -9,7 +9,6 @@ class TeamAttendanceV2{
   TeamAttendanceV2();
 
   TeamAttendanceV2.fromJson(List json) {
-    println('inside TeamAttendanceV2');
     for (var v in json) {
 
       teamAttendance.add(MemberAttendance.fromJson(v));
@@ -28,8 +27,7 @@ class MemberAttendance {
   MemberAttendance();
 
   MemberAttendance.fromJson(Map<String, dynamic> json) {
-    println("inside MemberAttendance.fromJson");
-    println(json);
+
     id = json['id'];
     employeeId = json['employee_id'];
     responsibleEmployeeId = json['responsible_employee_id'];

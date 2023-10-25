@@ -16,7 +16,6 @@ class MembersAttendanceController extends GetxController{
 
   Future<void> getTeamAttendance() async {
 
-    println("inside getTeamAttendance()");
     var headers = {
       'Authorization':
       'bearer ${appController.loginModel.value.token?.accessToken}',
@@ -28,13 +27,10 @@ class MembersAttendanceController extends GetxController{
     _teamAttendance.value.teamAttendance.clear();
     var url = AppUrls.teamAttendanceApi;
 
-    println(url);
-    println(headers);
+
     final response = await AppApiHandler.getData(url: url,header: headers,);
     loading.value = false;
 
-    println("after calling api");
-    println(response.statusCode);
     if(response.statusCode != 200){
       // throw NoDataAvailableException();
     }

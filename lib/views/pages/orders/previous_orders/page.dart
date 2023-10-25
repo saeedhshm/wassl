@@ -175,7 +175,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
             ],
 
           ),
-          controller.previousTeamRequests.value.orders.isNotEmpty ? TabsWidget() : const SizedBox(),
+          controller.hasTeamRequests.value ? TabsWidget() : const SizedBox(),
          controller.myOrdersSelected.value ?
          Expanded(child: PreviousOrdersWidget()) : Expanded(child: TeamOrderPage()),
           SizedBox(height: widget.fromHomePage ? 0 : 100,)
