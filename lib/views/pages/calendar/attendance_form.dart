@@ -72,7 +72,7 @@ class AttendancePage extends StatelessWidget {
               ],
             )
           : Center(
-              child: Text('controller.noDataAttendanceAvailable.value.tr'),
+              child: Text(controller.noDataAttendanceAvailable.value.tr),
             )),
     );
   }
