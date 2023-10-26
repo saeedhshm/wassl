@@ -248,7 +248,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
             //
             // //// holiday days
             if (checkDayAs('holiday', day, controller)) {
-              var prev = !checkDayAs('holiday', DateTime(day.year,day.month,day.day - 1), controller);
+              var prev = day.day > 1 ? !checkDayAs('holiday', DateTime(day.year,day.month,day.day - 1), controller) : true;
               var next = !checkDayAs('holiday', DateTime(day.year,day.month,day.day + 1), controller) ;
 
               return Container(
