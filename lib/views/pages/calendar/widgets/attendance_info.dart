@@ -26,7 +26,6 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                 Stack(
                   children: [
 
-
                     Container(
                       width: double.maxFinite,
 
@@ -133,7 +132,7 @@ class MonthlyAttendanceInfoWidget extends StatelessWidget {
                       child: InkWell(
                         onTap: (){
                           if(controller.shiftsSchedules[i].attendanceStatus == 2){
-                            Get.to(()=> CorrectingFingerprintRequest());
+                            Get.to(()=> CorrectingFingerprintRequest(correctionDate: controller.currentSelectedDate,));
                           }
 
                         },

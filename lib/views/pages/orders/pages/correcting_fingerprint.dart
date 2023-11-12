@@ -33,7 +33,9 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
   final Order? order;
 
-   CorrectingFingerprintRequest({Key? key,this.onClose,this.order}) : super(key: key){
+  final String? correctionDate;
+
+   CorrectingFingerprintRequest({Key? key,this.onClose,this.order,this.correctionDate}) : super(key: key){
      if(order != null){
        var fingerPrint = order as FingerprintCorrectionsData;
        dateCtrl.text = fingerPrint.date ?? '';
@@ -45,6 +47,13 @@ class CorrectingFingerprintRequest extends StatelessWidget {
        controller.reason = fingerPrint.reason;
        controller.correctionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
 
+     }
+     if(correctionDate != null){
+       dateCtrl.text = '$correctionDate';
+       var endDateArr = correctionDate?.split('-');
+       controller.correctionDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
+       controller.attendanceStatus = OrderType(id: 2)..name = 'leaving'.tr;
+       println('dateCtrl.text =====>>> ${dateCtrl.text}');
      }
    }
 
