@@ -290,6 +290,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold, color: Colors.black87),
                               ),
+
                               const DotWidget(
                                 color: AppColors.redMissedDayColor,
                                 size: 5,

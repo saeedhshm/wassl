@@ -41,7 +41,7 @@ bool checkMissedDay(DateTime dateTime, CalendarViewModel controller) {
 
   var missed = false;
   final List<Schedules>  schedules = controller.attendanceOfMonth.value.attendancesOfMonth[dateTime.day - 1].schedules;
-  if(dateTime.day == 8){
+
 
     for(var sch in schedules){
 
@@ -53,7 +53,6 @@ bool checkMissedDay(DateTime dateTime, CalendarViewModel controller) {
       }
     }
 
-  }
 
   return (missed) &&
       (dateTime.day == today?.day && dateTime.month == today?.month && dateTime.year == today?.year);
