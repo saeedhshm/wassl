@@ -1,6 +1,7 @@
 Map<String,String>  arabicStrings = {
   'lang':'ar',
   'welcome_to_wasl':'مرحبا بك في وصل' ,
+  'welcome_to_wasl_test':'مرحبا بك في وصل النسخة التجريبية' ,
   "you_can_enter_to_account":"يمكنك تسجيل الدخول لحسابك",
   "email_or_job_number":"البريد الإلكتروني",
   "password":"كلمة المرور",
@@ -128,6 +129,7 @@ Map<String,String>  arabicStrings = {
   'employees_numb':'عدد الموظفين',
   'welcome':'مرحبا',
   'egypt':'مصر',
+  'back_to_live':'العودة إلى النسخة الكاملة',
   'working_period':'نوبة الدوام @name',
   'attendance':'حضور',
   'holiday':'أجازة',

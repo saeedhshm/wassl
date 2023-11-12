@@ -98,7 +98,7 @@ class DocItemWidget extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: (){
-                          String url = '$appDomain/documents/display/${doc.id}';
+                          String url = '${AppUrls.appDomain}/documents/display/${doc.id}';
                           // String url = '${appDomain}/${doc.file}';
 
                           _launchUrl(url);

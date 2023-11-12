@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:wassl/helpers/constants/print_ln.dart';
+
 import '../helpers/exceptions/no_internet.dart';
 import '../models/attendance/month_attendance.dart';
 import '../web_services_helper/api.dart';
@@ -16,6 +18,8 @@ class CalendarController{
     final response = await AppApiHandler.getData(url: url!,header: header,);
     //
     //
+    println(url);
+    println(response.statusCode);
     if(response.statusCode != 200){
       throw NoDataAvailableException();
     }

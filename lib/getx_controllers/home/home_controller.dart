@@ -81,6 +81,8 @@ class HomeController extends GetxController {
   }
 
   checkForAttendance() async {
+
+    println(AppUrls.attendanceCheck);
     var url = AppUrls.attendanceCheck;
     var headers = {
       'Authorization':

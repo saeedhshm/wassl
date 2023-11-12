@@ -15,7 +15,7 @@ class CountriesController {
 
   Future<List<Country>?> getAllCountries() async {
 
-    var response = await AppApiHandler.getData(url: '$apiVrsion/country-all',);
+    var response = await AppApiHandler.getData(url: '${AppUrls.apiVrsion}/country-all',);
 
     if(response.statusCode == 200){
 
@@ -36,7 +36,7 @@ class CountriesController {
 
   Future<List<City>?> getAllCities(String countryId) async {
 
-    var response = await AppApiHandler.getData(url: '$apiVrsion/country-ajax?type=$countryId',);
+    var response = await AppApiHandler.getData(url: '${AppUrls.apiVrsion}/country-ajax?type=$countryId',);
 
     if(response.statusCode == 200){
 

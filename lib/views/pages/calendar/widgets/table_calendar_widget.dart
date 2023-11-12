@@ -48,7 +48,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           outsideDaysVisible: true,
           // outsideTextStyle: TextStyle(color: Colors.red)
         ),
-        calendarBuilders: CalendarBuilders(
+        calendarBuilders: (controller.loading.value) ? CalendarBuilders() : CalendarBuilders(
 
           todayBuilder: (context, day, newDay) {
 
@@ -105,7 +105,10 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
 
           defaultBuilder: (context, day, newDay) {
             final today = DateTime.now();
+
             if(day.day == today.day && day.month == today.month && day.year == today.year){
+
+
 
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -145,25 +148,6 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 ],
               );
             }
-
-            //
-            // if(day.compareTo(DateTime.now() ) > 0) {
-            //   return Center(
-            //     child: Container(
-            //         margin: const EdgeInsets.symmetric(
-            //             horizontal: 8, vertical: 5),
-            //         width: double.infinity,
-            //         decoration: BoxDecoration(
-            //           // color:Colors.amber,
-            //             border: Border.all(color: Colors.white, width: 1),
-            //             borderRadius: BorderRadius.circular(100)),
-            //         child: Center(
-            //             child: Text(
-            //               day.day.toString(),
-            //               style: const TextStyle(fontWeight: FontWeight.bold),
-            //             ))),
-            //   );
-            // }
 
             if (checkDayAs('weekEnd', day, controller)){
               return Container(
@@ -423,7 +407,8 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
         },
 
       )),
-
     );
   }
+
+
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../consts_widgets/gradiants.dart';
@@ -14,6 +16,7 @@ class HomeBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).viewPadding.top;
+    println(AppUrls.appDomain,'AppUrls.appDomain');
     return  Column(
       children: [
         Container(
@@ -26,7 +29,7 @@ class HomeBarWidget extends StatelessWidget {
               child: Row(
                 children: [
                   LocalizedText(
-                    'welcome'.tr +' : ' + controller.appController.loginModel.value.user!.fullName,
+                    'welcome'.tr +' : ' + controller.appController.loginModel.value.user!.fullName + ' ' + (AppUrls.appDomain == 'https://waslhr.com' ? '' : ' (تجربة)'),
                     textStyle: const TextStyle(color: Colors.white, fontSize: 15,fontWeight: FontWeight.w600),
                   ),
                   const Spacer(),

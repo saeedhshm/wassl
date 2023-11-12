@@ -31,7 +31,7 @@ class AdItem {
   String? get details => _description;
 
   String get image {
-    var img = "$appDomain/$_image";
+    var img = "${AppUrls.appDomain}/$_image";
 
     return img;
   }

@@ -1,6 +1,7 @@
 Map<String,String>  englishString = {
   'lang':'en',
   'welcome_to_wasl':'Welcome to Wasl' ,
+  'welcome_to_wasl_test':'Welcome to Wasl test version' ,
   "you_can_enter_to_account":"You can login to your account",
   "email_or_job_number":"Email ",
   "password":"Password",
@@ -22,7 +23,7 @@ Map<String,String>  englishString = {
   'attendance_records':'Attendance records',
   'today':'Today',
   'working_time':'Shift time',
-
+   'back_to_live':'Back to full version',
   'attending':'Attendance',
   'order_laon':'Advance payment Request',
   'loan_type':'Advance payment Type',

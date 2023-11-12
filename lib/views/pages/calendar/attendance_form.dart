@@ -17,39 +17,13 @@ class AttendancePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.mainBackgroundColor,
-      body: Obx(() => controller.noDataAttendanceAvailable.value == ''
-          ? Column(
+      body: Column(
               children: [
                 MainAppbarWidget(
                   "attendance_records",
                 ),
                 Expanded(
-                    child: controller.loading.value
-                        ? const Center(
-                            child: SendingLoadingWidget(),
-                          )
-                        : controller.noInternetAvailable.value != ''
-                            ? Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.retrieveAttendanceData();
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                          controller.noInternetAvailable.value),
-                                      Text('tap_to_refresh'.tr),
-                                      const Icon(
-                                        Icons.refresh,
-                                        size: 40,
-                                        color: Colors.blue,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            : SingleChildScrollView(
+                    child:SingleChildScrollView(
                                 child: Column(
                                   children: [
                                     Column(
@@ -71,9 +45,7 @@ class AttendancePage extends StatelessWidget {
                               )),
               ],
             )
-          : Center(
-              child: Text(controller.noDataAttendanceAvailable.value.tr),
-            )),
+
     );
   }
 }

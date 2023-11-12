@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/pages/auth_test/login_test.dart';
 import 'package:wassl/views/pages/profile/profile_info.dart';
 import 'package:wassl/views/pages/profile/user_menu.dart';
 import 'package:wassl/views/reusable_widgets/custom_checkbox.dart';
@@ -16,16 +15,19 @@ import '../../reusable_widgets/svg_widget.dart';
 import '../main_tabs_page.dart';
 import 'login_widgets.dart';
 
-class LoginPage extends StatefulWidget {
+class TestLoginPage extends StatefulWidget {
 
 
-   LoginPage({Key? key}) : super(key: key);
+  TestLoginPage({Key? key}) : super(key: key){
+    AppUrls.appDomain =  'https://waslhr-test.com';
+    println(AppUrls.appDomain);
+  }
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<TestLoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>  {
+class _LoginPageState extends State<TestLoginPage>  {
   bool startAnim = true;
   bool showRestItems = false;
 
@@ -42,7 +44,6 @@ class _LoginPageState extends State<LoginPage>  {
   void initState() {
     // TODO: implement initState
     super.initState();
-    AppUrls.appDomain = 'https://waslhr.com';
     // emailController.addListener(() {
     //   setState(() {});
     // });
@@ -78,23 +79,31 @@ class _LoginPageState extends State<LoginPage>  {
                 // offset: emailOffset.value,
                 Hero(
                   tag: 'logoAppHeroTag',
-                  child: GestureDetector(
-                    onTap: (){
-                      AppUrls.appDomain =  'https://waslhr-test.com';
-                      Get.to(() => TestLoginPage());
-                    },
-                    child: AnimatedContainer(
-                        // color: Colors.blue,
-                        width: _width,
-                        height: _height,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.fastOutSlowIn,
-                        child: SvgWidget("assets/images/wasl.svg")),
-                  ),
+                  child: AnimatedContainer(
+                      // color: Colors.blue,
+                      width: _width,
+                      height: _height,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.fastOutSlowIn,
+                      child: SvgWidget("assets/images/wasl.svg")),
                 ),
               // ),
-              RestWidgets()
+              const RestWidgets(),
 
+              SafeArea(child: GestureDetector(
+                onTap: (){
+                  AppUrls.appDomain = 'https://waslhr.com';
+                  Get.back();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('back_to_live'.tr,style: TextStyle(
+                    color: AppColors.redMissedDayColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16
+                  ),),
+                ),
+              ))
             ],
           ),
         ),

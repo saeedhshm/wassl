@@ -14,7 +14,7 @@ class MonthReportWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Obx(() => Row(
       children: [
         ItemWidget(
           numberCount: controller.countWorkDaysAbsent,
@@ -37,7 +37,7 @@ class MonthReportWidget extends StatelessWidget {
           type: 'missed_leave'.tr,
         ),
       ],
-    );
+    ));
   }
 }
 

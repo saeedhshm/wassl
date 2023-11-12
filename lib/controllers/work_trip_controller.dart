@@ -16,7 +16,7 @@ class WorkTripCostController {
     required Map<String,String> header
   }) async {
 
-    var response = await AppApiHandler.getData(url: '$apiVrsion/city-ajax?start=$startDate&end=$endDate&country=$countryId&city=$cityId',header: header);
+    var response = await AppApiHandler.getData(url: '${AppUrls.apiVrsion}/city-ajax?start=$startDate&end=$endDate&country=$countryId&city=$cityId',header: header);
 
 
     if(response.statusCode == 200){

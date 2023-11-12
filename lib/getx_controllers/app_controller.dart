@@ -78,7 +78,7 @@ class AppController extends GetxController{
       'password':password
     });
     int statusCode = response.statusCode;
-
+    println(AppUrls.login);
 
     loading.value = false;
       if(statusCode == 200){

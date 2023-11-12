@@ -87,7 +87,7 @@ class OderDetailFragment extends StatelessWidget {
                             // launchUrlString('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
 
                             controller.appController.loading.value = true;
-                            Uint8List pdfData = await  controller.downloadPdfFile('$appDomain/${controller.order.file.replaceAll('public', 'storage')}');
+                            Uint8List pdfData = await  controller.downloadPdfFile('${AppUrls.appDomain}/${controller.order.file.replaceAll('public', 'storage')}');
                             controller.appController.loading.value = false;
                             // Get.to(()=> ShowPdfPage(pdfData));
 
