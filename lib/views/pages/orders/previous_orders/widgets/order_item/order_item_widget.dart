@@ -18,7 +18,7 @@ import '../../../../../../models/orders/over_time.dart';
 import '../../../../../../models/orders/tabreer.dart';
 import '../../../../../../models/orders/visa_order.dart';
 import '../../../../../reusable_widgets/icons/calendar_icon.dart';
-import '../../../../../reusable_widgets/snack_bars.dart';
+import '../../../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../pages/ask_permission.dart';
 import '../../../pages/correcting_fingerprint.dart';
 import '../../../pages/custody_request.dart';

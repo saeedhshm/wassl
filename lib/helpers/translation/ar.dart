@@ -115,6 +115,7 @@ Map<String,String>  arabicStrings = {
   'pm':'م',
   'AM':'ص',
   'PM':'م',
+  'ok':'تم',
   'confirmed_leaving_time':'وقت الانصراف المسجل',
   'press_to_correct':'اضغط للتصحيح',
   'custody_leaving':'تصفية عهدة',

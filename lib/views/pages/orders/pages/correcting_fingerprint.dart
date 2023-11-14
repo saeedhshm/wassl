@@ -17,13 +17,14 @@ import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/finger_print.dart';
 import '../../../consts_widgets/gradiants.dart';
+import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/icons/edit_icon.dart';
-import '../../../reusable_widgets/snack_bars.dart';
+import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
@@ -271,65 +272,74 @@ class CorrectingFingerprintRequest extends StatelessWidget {
     ));
   }
 
-  _addNewRequest() async{
+  _addNewRequest(context) async{
     try{
       await controller.sendRequest();
-      SnackBars.showConfirmedSnackBar('success'.tr, 'your_request_done'.tr);
-      Future.delayed(const Duration(milliseconds: 4600),(){
-        Get.back();
-      });
-    }on NoInternetException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-    }on NoDataAvailableException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-    }on StartDateException{
-      SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
-    }on ChooseTypeException{
-      SnackBars.showErrorSnackBar('error'.tr, 'choose_attend_leave'.tr);
-    }on ChooseTimeException{
-      SnackBars.showErrorSnackBar('error'.tr, 'ChooseTimeException'.tr);
-    }on EnterReasonException{
-      SnackBars.showErrorSnackBar('error'.tr, 'EnterReasonException'.tr);
-    }
-  }
-
-  _updateRequest() async{
-    try{
-      await controller.updateRequest('${order?.orderID}');
-      SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
-      Future.delayed(const Duration(milliseconds: 4600),(){
-        Get.back();
-      });
-    }on NoInternetException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-    }on NoDataAvailableException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-    }on StartDateException{
-      SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
-    }on ChooseTypeException{
-      SnackBars.showErrorSnackBar('error'.tr, 'choose_attend_leave'.tr);
-    }on ChooseTimeException{
-      SnackBars.showErrorSnackBar('error'.tr, 'ChooseTimeException'.tr);
-    }on EnterReasonException{
-      SnackBars.showErrorSnackBar('error'.tr, 'EnterReasonException'.tr);
-    }
-  }
-
-  _cancelRequest() async {
-    controller.loading.value = true;
-    try {
-      await controller.cancelRequest('${order?.orderID}');
-      SnackBars.showConfirmedSnackBar('success'.tr, 'request_canceled'.tr);
-      Future.delayed(const Duration(milliseconds: 4600), () {
-        if (onClose != null) {
+      successDialog(context,message: 'your_request_done'.tr,onPress: (){
+        if(onClose != null){
           onClose!();
         }
         Get.back();
-      });
+      }
+      );
+
+    }on NoInternetException catch(e){
+      errorDialog(context,message: e.errorMessage);
+    }on NoDataAvailableException catch(e){
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
+    }on StartDateException{
+      SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
+    }on ChooseTypeException{
+      SnackBars.showErrorSnackBar('error'.tr, 'choose_attend_leave'.tr);
+    }on ChooseTimeException{
+      SnackBars.showErrorSnackBar('error'.tr, 'ChooseTimeException'.tr);
+    }on EnterReasonException{
+      SnackBars.showErrorSnackBar('error'.tr, 'EnterReasonException'.tr);
+    }
+  }
+
+  _updateRequest(context) async{
+    try{
+      await controller.updateRequest('${order?.orderID}');
+      successDialog(context,message: 'request_updated'.tr,onPress: (){
+        if(onClose != null){
+          onClose!();
+        }
+        Get.back();
+      }
+      );
+
+    }on NoInternetException catch(e){
+      errorDialog(context,message: e.errorMessage);
+    }on NoDataAvailableException catch(e){
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
+    }on StartDateException{
+      SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
+    }on ChooseTypeException{
+      SnackBars.showErrorSnackBar('error'.tr, 'choose_attend_leave'.tr);
+    }on ChooseTimeException{
+      SnackBars.showErrorSnackBar('error'.tr, 'ChooseTimeException'.tr);
+    }on EnterReasonException{
+      SnackBars.showErrorSnackBar('error'.tr, 'EnterReasonException'.tr);
+    }
+  }
+
+  _cancelRequest(context) async {
+    controller.loading.value = true;
+    try {
+      await controller.cancelRequest('${order?.orderID}');
+      successDialog(context,message: 'request_canceled'.tr,onPress: (){
+        if(onClose != null){
+          onClose!();
+        }
+        Get.back();
+      }
+      );
+
     } on NoInternetException catch (e) {
-      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
+      errorDialog(context,message: e.errorMessage);
     } on NoDataAvailableException catch (e) {
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

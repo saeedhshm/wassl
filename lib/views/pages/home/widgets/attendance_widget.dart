@@ -13,7 +13,7 @@ import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/location_exceptions.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/circular_widget.dart';
-import '../../../reusable_widgets/snack_bars.dart';
+import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import 'attendance_info_widget.dart';
 
 class AttendanceWidget extends StatefulWidget {

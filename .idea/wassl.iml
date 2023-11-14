@@ -146,6 +146,15 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/open_file/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/ios/rive-cpp/dev/core_generator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/ios/rive-cpp/dev/core_generator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/ios/rive-cpp/dev/core_generator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/macos/rive-cpp/dev/core_generator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/macos/rive-cpp/dev/core_generator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/rive_common/macos/rive-cpp/dev/core_generator/.dart_tool" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

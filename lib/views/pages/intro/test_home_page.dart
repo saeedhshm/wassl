@@ -11,7 +11,7 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import '../../../getx_controllers/calendar/calendar_controller.dart';
 import '../../../getx_controllers/home/home_controller.dart';
 import '../../../helpers/exceptions/location_exceptions.dart';
-import '../../reusable_widgets/snack_bars.dart';
+import '../../reusable_widgets/dialogs_messages/snack_bars.dart';
 
 class TestHomePage extends StatefulWidget {
 

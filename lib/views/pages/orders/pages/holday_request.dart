@@ -1,5 +1,6 @@
 
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,15 +11,17 @@ import 'package:wassl/helpers/exceptions/custom_exception.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/models/countries/country.dart';
 import 'package:wassl/models/orders/holiday.dart';
+import 'package:wassl/test_page.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
-import 'package:wassl/views/reusable_widgets/snack_bars.dart';
+import 'package:wassl/views/reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../models/countries/city.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/order_type.dart';
+import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/attach_icon.dart';
@@ -43,38 +46,38 @@ class HolidayRequestPage extends StatelessWidget {
 
   final Order? order;
 
-   HolidayRequestPage({Key? key,this.onClose,this.order}) : super(key: key){
-     setUpOrderData();
-   }
+  HolidayRequestPage({Key? key,this.onClose,this.order}) : super(key: key){
+    setUpOrderData();
+  }
 
-   setUpOrderData() async{
-     if(order != null){
-       var holidayOrder = order as HolidaysData;
-       startDateCtrl.text = holidayOrder.holidayStart ?? '';
-       endDateCtrl.text = holidayOrder.holidayEnd ?? '';
-       controller.selectedType = holidayOrder.type;
+  setUpOrderData() async{
+    if(order != null){
+      var holidayOrder = order as HolidaysData;
+      startDateCtrl.text = holidayOrder.holidayStart ?? '';
+      endDateCtrl.text = holidayOrder.holidayEnd ?? '';
+      controller.selectedType = holidayOrder.type;
 
-       if(controller.selectedType!.name.contains('عمل')){
-         await controller.getAllCountries();
-         controller.selectedCountry = holidayOrder.confirmation?.first.businessTrip?.country;
-         await controller.getAllCities('${controller.selectedCountry?.id}');
-         controller.selectedCity = holidayOrder.confirmation?.first.businessTrip?.region;
-         controller.loadingCountries.value = true;
-         controller.loadingCities.value = true;
-       }
-       reasonCtrl.text = holidayOrder.reason;
-       fileCtrl.text = holidayOrder.file.split('/').last;
-       var startDateArr = holidayOrder.holidayStart?.split('-');
-       var endDateArr = holidayOrder.holidayEnd?.split('-');
-       controller.startDate = DateTime(int.tryParse(startDateArr?[0] ?? '') ?? 0,int.tryParse(startDateArr?[1] ?? '') ?? 0,int.tryParse(startDateArr?[2] ?? '') ?? 0,);
-       controller.endDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
+      if(controller.selectedType!.name.contains('عمل')){
+        await controller.getAllCountries();
+        controller.selectedCountry = holidayOrder.confirmation?.first.businessTrip?.country;
+        await controller.getAllCities('${controller.selectedCountry?.id}');
+        controller.selectedCity = holidayOrder.confirmation?.first.businessTrip?.region;
+        controller.loadingCountries.value = true;
+        controller.loadingCities.value = true;
+      }
+      reasonCtrl.text = holidayOrder.reason;
+      fileCtrl.text = holidayOrder.file.split('/').last;
+      var startDateArr = holidayOrder.holidayStart?.split('-');
+      var endDateArr = holidayOrder.holidayEnd?.split('-');
+      controller.startDate = DateTime(int.tryParse(startDateArr?[0] ?? '') ?? 0,int.tryParse(startDateArr?[1] ?? '') ?? 0,int.tryParse(startDateArr?[2] ?? '') ?? 0,);
+      controller.endDate = DateTime(int.tryParse(endDateArr?[0] ?? '') ?? 0,int.tryParse(endDateArr?[1] ?? '') ?? 0,int.tryParse(endDateArr?[2] ?? '') ?? 0,);
 
-       controller.holidayReason = holidayOrder.reason;
-       controller.filePath = holidayOrder.file == '' ? null : holidayOrder.file;
-       controller.setDifferenceInDays();
+      controller.holidayReason = holidayOrder.reason;
+      controller.filePath = holidayOrder.file == '' ? null : holidayOrder.file;
+      controller.setDifferenceInDays();
 
-     }
-   }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,8 +171,8 @@ class HolidayRequestPage extends StatelessWidget {
                                   },
                                   iconPadding: 16,
                                   prefixIcon: const SizedBox(
-                                      // width: 5,
-                                      // height: 5,
+                                    // width: 5,
+                                    // height: 5,
                                       child:
                                       LocationIcon()),
                                 ) : const SizedBox(),
@@ -386,7 +389,7 @@ class HolidayRequestPage extends StatelessWidget {
                             const SizedBox(height: 15,),
                             order == null ? SendButtonWidget(_sendData) :  CancelUpdateWidget(
                               onUpdateRequest: _updateHoliday,
-                              onCancelRequest: _cancelHolidayRequst,
+                              onCancelRequest: _cancelHolidayRequest,
                             ),
                             const SizedBox(height: 25,),
                           ],
@@ -413,15 +416,55 @@ class HolidayRequestPage extends StatelessWidget {
     );
   }
 
-  _sendData() async {
+  _sendData(context) async {
     controller.loading.value = true;
     try{
       await controller.sendHolidayRequest();
-      SnackBars.showConfirmedSnackBar('success'.tr, 'holiday_request_added'.tr);
 
-      Future.delayed(const Duration(milliseconds: 4600),(){
+      successDialog(context,message: 'holiday_request_added'.tr,onPress: (){
+        if(onClose != null){
+          onClose!();
+        }
         Get.back();
-      });
+      }
+      );
+
+
+    }on StartDateException {
+      SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
+
+    }on ChooseTypeException {
+      SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
+    }on EndDateException{
+      SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
+    }on EnterReasonException{
+      SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
+    }on NoInternetException catch(e){
+      errorDialog(context,message: e.errorMessage);
+    }on NoDataAvailableException catch(e){
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
+    }on CustomException catch(e){
+      errorDialog(context,message: e.errorMessage);
+    }finally{
+      controller.loading.value = false;
+    }
+  }
+
+  _updateHoliday(context) async{
+
+    controller.loading.value = true;
+
+    try{
+      await controller.updateRequest('${order?.orderID}');
+      // SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
+      successDialog(context,message: 'request_updated'.tr,onPress: (){
+        if(onClose != null){
+          onClose!();
+        }
+        Get.back();
+      }
+      );
+
     }on StartDateException {
       SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
     }on ChooseTypeException {
@@ -433,65 +476,31 @@ class HolidayRequestPage extends StatelessWidget {
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
     }on NoDataAvailableException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-    }on CustomException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
     }finally{
       controller.loading.value = false;
     }
   }
 
-  _updateHoliday() async{
-
-     controller.loading.value = true;
-     print('controller.filePath=-0=-0=-0=0=-0 ${controller.filePath}');
-     //
-     // return;
-
-     try{
-       await controller.updateRequest('${order?.orderID}');
-       SnackBars.showConfirmedSnackBar('success'.tr, 'request_updated'.tr);
-       Future.delayed(const Duration(milliseconds: 4600),(){
-         if(onClose != null){
-           onClose!();
-         }
-         Get.back();
-       });
-     }on StartDateException {
-       SnackBars.showErrorSnackBar('error'.tr, 'StartDateException'.tr);
-     }on ChooseTypeException {
-       SnackBars.showErrorSnackBar('error'.tr, 'HolidayTypeException'.tr);
-     }on EndDateException{
-       SnackBars.showErrorSnackBar('error'.tr, 'EndDateException'.tr);
-     }on EnterReasonException{
-       SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
-     }on NoInternetException catch(e){
-       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-     }on NoDataAvailableException catch(e){
-       SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-     }finally{
-       controller.loading.value = false;
-     }
-  }
-
-  _cancelHolidayRequst() async{
+  _cancelHolidayRequest(context) async{
 
     controller.loading.value = true;
     try{
       await controller.cancelRequest('${order?.orderID}');
-      SnackBars.showConfirmedSnackBar('success'.tr, 'request_canceled'.tr);
-      Future.delayed(const Duration(milliseconds: 4600),(){
+      successDialog(context,message: 'request_canceled'.tr,onPress: (){
         if(onClose != null){
           onClose!();
         }
         Get.back();
-      });
+      }
+      );
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
     }on NoDataAvailableException catch(e){
-      SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+      errorDialog(context,message: 'something_wrong_try_again'.tr);
     }finally{
       controller.loading.value = false;
     }
   }
 }
+

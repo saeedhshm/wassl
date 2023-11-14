@@ -5,8 +5,8 @@ import '../../../../consts_widgets/gradiants.dart';
 
 class CancelUpdateWidget extends StatelessWidget {
 
-  final Function ()?onUpdateRequest;
-  final Function ()?onCancelRequest;
+  final Function (BuildContext context)onUpdateRequest;
+  final Function (BuildContext context)onCancelRequest;
 
   const CancelUpdateWidget({Key? key,required this.onUpdateRequest,required this.onCancelRequest}) : super(key: key);
 
@@ -18,7 +18,9 @@ class CancelUpdateWidget extends StatelessWidget {
           Expanded(
             child: SizedBox(
               child: InkWell(
-                onTap: onUpdateRequest,
+                onTap: (){
+                  onUpdateRequest(context);
+                },
                 child: Container(
                   child: Padding(
                     padding:
@@ -55,7 +57,9 @@ class CancelUpdateWidget extends StatelessWidget {
           Expanded(
             child: SizedBox(
               child: InkWell(
-                onTap: onCancelRequest,
+                onTap: (){
+                  onCancelRequest(context);
+                },
                 child: Container(
                   child: Padding(
                     padding:

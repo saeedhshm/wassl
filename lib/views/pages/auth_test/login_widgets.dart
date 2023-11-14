@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 
-import 'package:wassl/views/reusable_widgets/snack_bars.dart';
+import 'package:wassl/views/reusable_widgets/dialogs_messages/snack_bars.dart';
 
 import '../../../helpers/constants/app_colors.dart';
 import '../../../helpers/exceptions/no_internet.dart';

@@ -6,7 +6,7 @@ import 'package:open_file/open_file.dart';
 import 'package:wassl/getx_controllers/orders/previous_requests.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
-import 'package:wassl/views/reusable_widgets/snack_bars.dart';
+import 'package:wassl/views/reusable_widgets/dialogs_messages/snack_bars.dart';
 
 import '../../utils/file_utils.dart';
 import '../../web_services_helper/api.dart';

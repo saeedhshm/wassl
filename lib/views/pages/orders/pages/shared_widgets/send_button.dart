@@ -5,13 +5,15 @@ import '../../../../consts_widgets/gradiants.dart';
 
 class SendButtonWidget extends StatelessWidget {
 
-  final Function ()_addNewRequest;
+  final Function (BuildContext context)_addNewRequest;
   const SendButtonWidget(this._addNewRequest,{Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _addNewRequest,
+      onTap: (){
+        _addNewRequest(context);
+      },
       child: Container(
         width: double.infinity,
         child: Padding(

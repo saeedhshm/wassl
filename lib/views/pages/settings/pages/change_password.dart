@@ -11,7 +11,7 @@ import '../../../../helpers/exceptions/passwords_exceptions.dart';
 import '../../../reusable_widgets/custom_text_form_field.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/snack_bars.dart';
+import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 
 class ChangePasswordPage extends StatefulWidget {
 
