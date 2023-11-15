@@ -23,7 +23,7 @@ class OrderDetailsController extends GetxController{
 
   OrderDetailsController(this.order);
 
-  Future setTeamOrderStatusRequest(String orderStatus,String comment) async {
+  Future<bool> setTeamOrderStatusRequest(String orderStatus,String comment) async {
 
     var body = {
       'order_type':order.confirmation?.first.orderType ?? '',
@@ -44,28 +44,15 @@ class OrderDetailsController extends GetxController{
 
 
     final response = await AppApiHandler.postData(url: AppUrls.setTeamOrderSatus, body: body,header: headers);
-
+println(response.statusCode);
     if(response.statusCode == 200){
       final message = orderStatus == '2' ? 'order_approved_success'.tr : 'order_disapproved_success'.tr;
       final PreviousRequestsController prevController = Get.find();
       await prevController.getMyOrders();
       await prevController.getTeamOrders();
-      Get.back();
-      Future.delayed(Duration.zero,(){
-        SnackBars.showConfirmedSnackBar('success'.tr, message);
-      });
-      // SnackBars.back();
-
-
-      Get.delete<OrderDetailsController>();
-      appController.loading.value = false;
+      return true;
     }else{
-      Get.back();
-      Future.delayed(Duration.zero,(){
-        SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
-      });
-
-      appController.loading.value = false;
+      return false;
     }
   }
 

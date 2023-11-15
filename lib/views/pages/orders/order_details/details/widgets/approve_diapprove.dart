@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
+import 'package:wassl/views/reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 
 import '../../../../../../getx_controllers/orders/order_details.dart';
 import '../../../../../../getx_controllers/orders/previous_requests.dart';
@@ -38,7 +39,28 @@ class ApproveDisapproveWidget extends StatelessWidget {
                       onTap: () async {
 
                         // await controller.setTeamOrderStatusRequest('2');
-                        controller.setTeamOrderStatusRequest('2',commentCtrl.text);
+                       final result = await controller.setTeamOrderStatusRequest('2',commentCtrl.text);
+
+                       if(result){
+
+                         controller.appController.loading.value = false;
+
+                         // SnackBars.back();
+                         successDialog(context,message: 'order_approved_success'.tr ,onPress: (){
+                           Get.back();
+                           Get.delete<OrderDetailsController>();
+                         });
+
+
+                       }else{
+                         // Get.back();
+                         // Future.delayed(Duration.zero,(){
+                         //   SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+                         // });
+
+                         controller.appController.loading.value = false;
+                         errorDialog(context,message: 'something_wrong_try_again'.tr);
+                       }
 
                       },
                       child: Container(
@@ -61,8 +83,28 @@ class ApproveDisapproveWidget extends StatelessWidget {
                   const SizedBox(width: 20,),
                   Expanded(
                     child: InkWell(
-                      onTap: (){
-                        controller.setTeamOrderStatusRequest('3',commentCtrl.text);
+                      onTap: () async {
+                        final result = await controller.setTeamOrderStatusRequest('3',commentCtrl.text);
+                        if(result){
+
+                          controller.appController.loading.value = false;
+
+                          // SnackBars.back();
+                          successDialog(context,message: 'order_disapproved_success'.tr ,onPress: (){
+                            Get.back();
+                            Get.delete<OrderDetailsController>();
+                          });
+
+
+                        }else{
+                          // Get.back();
+                          // Future.delayed(Duration.zero,(){
+                          //   SnackBars.showErrorSnackBar('error'.tr, 'something_wrong_try_again'.tr);
+                          // });
+
+                          controller.appController.loading.value = false;
+                          errorDialog(context,message: 'something_wrong_try_again'.tr);
+                        }
                       },
                       child: Container(
                         decoration: BoxDecoration(
