@@ -19,9 +19,12 @@ void main() async{
 
 
   WidgetsFlutterBinding.ensureInitialized();
+  AppController appController = Get.put(AppController());
   try{
+
     await Firebase.initializeApp();
     await FirebaseApi().initNotifications();
+   
   }catch(e){
     println(e.toString());
   }
@@ -29,7 +32,7 @@ void main() async{
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
-  AppController appController = Get.put(AppController());
+
   await appController.getLanguage();
 
   await initializeDateFormatting();

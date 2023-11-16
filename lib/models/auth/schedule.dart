@@ -8,8 +8,8 @@ class Schedule {
   int? scheduleId;
   int? minuteTimeOut;
   int? minuteTimeIn;
-  String? allowTimeOut;
-  String? allowTimeIn;
+  dynamic allowTimeOut;
+  dynamic allowTimeIn;
   Info? info;
 
   Schedule(

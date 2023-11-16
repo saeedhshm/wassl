@@ -118,7 +118,6 @@ class _RestWidgetsState extends State<RestWidgets>  {
            Obx(() => appController.loading.value ? const Center(
              child: SendingLoadingWidget(),
            ) : MainButtonWidget(btnTitle: 'login', onPressed: () async {
-
              try{
                appController.loading.value = false;
                await appController.login(email: userNameCtrl.text,password: passwordCtrl.text);

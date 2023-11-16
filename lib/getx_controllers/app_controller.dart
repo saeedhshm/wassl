@@ -77,11 +77,13 @@ class AppController extends GetxController{
       'email':email,
       'password':password
     });
-    int statusCode = response.statusCode;
-    println(AppUrls.login);
+    // int statusCode = response.statusCode;
+    // println(AppUrls.login);
+    // println(response.statusCode);
+    // println(response.body);
 
     loading.value = false;
-      if(statusCode == 200){
+      if(response.statusCode == 200){
         if(rememberMe){
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString(appStorageEmail, email);
@@ -90,10 +92,14 @@ class AppController extends GetxController{
         Map<String,dynamic> json = jsonDecode(response.body);
 
         loginModel.value.fromJson(json);
+        println(fCMToken);
+        println(AppUrls.updateToken);
+        println(appHeader);
         final fcmResponse = await AppApiHandler.postData(url: AppUrls.updateToken,header: appHeader ,body: {
           'token':fCMToken,
         });
-
+        println(fcmResponse.statusCode);
+        println(fcmResponse.body);
 
       }else{
         throw UserNotFoundException();
