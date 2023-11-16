@@ -391,10 +391,10 @@ class AppController extends GetxController{
   }
 
   getLanguage() async {
-
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final langCode = '${Get.deviceLocale?.languageCode}' == 'ar' ? 'ar' : 'en';
    langs = preferences.getStringList('language') ?? [langCode, '${Get.deviceLocale?.countryCode}'];
+
   }
 
 }

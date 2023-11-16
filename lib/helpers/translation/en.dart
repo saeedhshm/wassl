@@ -397,7 +397,7 @@ Map<String,String>  englishString = {
   'report':'Report',
   'first':'First',
   'second':'Second',
-
+  'close':'Close',
 
   'sickVacationsCount':'Sick Vacations',
   'unpaidVacationsCount':'Unpaid Vacation',

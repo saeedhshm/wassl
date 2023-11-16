@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/views/reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 
 import '../../../../getx_controllers/app_controller.dart';
 import '../../../../getx_controllers/home/home_controller.dart';
@@ -80,6 +81,30 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
                   LocationPermission permission =
                   await controller.appController.determinePosition();
                   if (permission == LocationPermission.whileInUse) {
+
+                    askDialogWith2Buttons(context, message: controller.attendanceStatus.value == 1
+                        ? 'sure_to_attend?'.tr
+                        : 'sure_to_leave?'.tr,
+                      btnOkIcon: Icons.check_circle,
+                      btnOkText: controller.attendanceStatus.value == 1
+                          ? 'attendance'.tr
+                          : 'leaving'.tr,
+                      onPress: () async {
+                        // await attend();
+                        var availableBiometrics = await _getAvailableBiometrics();
+                        var canUseBiometric = await _checkBiometrics();
+                        if(canUseBiometric){
+                          if(availableBiometrics.isEmpty){
+                            await attend();
+                          }else{
+                            _authenticateWithBiometrics();
+                          }
+                        }else{
+                          await attend();
+                        }
+                      }
+                    );
+                    return;
                     Get.defaultDialog(
                       title: controller.attendanceStatus.value == 1
                           ? 'reg_attend'.tr
@@ -138,47 +163,13 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
                     );
                   }
                 } on LocationDeniedException {
-                  SnackBars.showErrorSnackBar('error'.tr, 'LocationDeniedException');
+                  errorDialog(context,message: 'LocationDeniedException'.tr);
+
                 } catch (e) {
-                  Get.defaultDialog(
-                    title: 'location_error'.tr,
-                    middleText: 'must_enable_location'.tr,
-                    cancel: InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(16)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 30),
-                            child: Text(
-                              'cancel'.tr,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          )),
-                    ),
-                    confirm: InkWell(
-                      onTap: () async {
-                        Get.back();
-                        AppSettings.openAppSettings();
-                      },
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: AppColors.mainGreenColor,
-                              borderRadius: BorderRadius.circular(16)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 30),
-                            child: Text(
-                              'settings'.tr,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          )),
-                    ),
-                  );
+                  warningDialogWith2Buttons(context,btnOkText: 'settings'.tr,btnOkIcon: Icons.settings,message: 'must_enable_location'.tr,onPress: (){
+                    AppSettings.openAppSettings();
+                  });
+
                 } finally {
                   controller.sendingAttendance.value = false;
                 }

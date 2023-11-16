@@ -44,3 +44,51 @@ void errorDialog(context, { message, onPress}){
     btnOkColor: Colors.red,
   ).show();
 }
+
+void warningDialogWith2Buttons(context, {required String message,String? btnOkText,IconData? btnOkIcon,onPress}){
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    animType: AnimType.rightSlide,
+    showCloseIcon: false,
+    headerAnimationLoop: false,
+    title: ''.tr,
+    btnOkText: btnOkText ?? 'ok'.tr,
+    // closeIcon: const SizedBox(),
+    desc:message,
+    btnCancelText: 'close'.tr,
+    btnOkOnPress: () {
+
+      onPress();
+    },
+    btnOkIcon: btnOkIcon,
+    btnCancelColor: AppColors.redMissedDayColor,
+    btnOkColor: AppColors.mainGreenColor,
+    btnCancelIcon: Icons.close,
+    btnCancelOnPress: (){}
+  ).show();
+}
+
+void askDialogWith2Buttons(context, {required String message,String? btnOkText,IconData? btnOkIcon,onPress}){
+  AwesomeDialog(
+      context: context,
+      dialogType: DialogType.question,
+      animType: AnimType.rightSlide,
+      showCloseIcon: false,
+      headerAnimationLoop: false,
+      title: ''.tr,
+      btnOkText: btnOkText ?? 'ok'.tr,
+      // closeIcon: const SizedBox(),
+      desc:message,
+      btnCancelText: 'close'.tr,
+      btnOkOnPress: () {
+
+        onPress();
+      },
+      btnOkIcon: btnOkIcon,
+      btnCancelColor: AppColors.redMissedDayColor,
+      btnOkColor: AppColors.mainGreenColor,
+      btnCancelIcon: Icons.close,
+      btnCancelOnPress: (){}
+  ).show();
+}

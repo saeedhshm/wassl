@@ -6,6 +6,7 @@ import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
 import 'package:get/get.dart';
 import 'helpers/translation/local_strings.dart';
@@ -18,15 +19,21 @@ void main() async{
 
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  try{
+    await Firebase.initializeApp();
+    await FirebaseApi().initNotifications();
+  }catch(e){
+    println(e.toString());
+  }
 
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   tz.initializeTimeZones();
   AppController appController = Get.put(AppController());
+  await appController.getLanguage();
 
   await initializeDateFormatting();
-  await FirebaseApi().initNotifications();
+
 
   appController.deployingForApple = true;
   runApp( MyApp());
@@ -58,9 +65,9 @@ class MyApp extends StatelessWidget {
 
 
 
-    appController.testingUserName = 'mr.hussein.1416@gmail.com';
-    // appController.testingUserName = 'saeedhshm@gmail.com';
-    // appController.testingUserName = 'test2@waslhr.com';
+    // appController.testingUserName = 'mr.hussein.1416@gmail.com';
+    appController.testingUserName = 'saeedhshm@gmail.com';
+    appController.testingUserName = 'test2@waslhr.com';
     // appController.testingUserName = 'ceo@trafficksa.com'; //1234567 salem
     // appController.testingUserName = 'info@trafficksa.com'; //1234567 kholoud
     // appController.testingUserName = 'nawal@trafficksa.com'; //1234567 kholoud
