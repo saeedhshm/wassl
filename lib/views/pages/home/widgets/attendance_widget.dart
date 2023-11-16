@@ -68,8 +68,9 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold)),
             ),
-          ) :  !appController.isHolidayDay ? Obx(() =>IgnorePointer(
-            ignoring: controller.attendanceStatus.value == 3 ||
+          ) :  !appController.isHolidayDay ? Obx(() =>
+              IgnorePointer(
+            ignoring: controller.attendanceStatus.value == 0 || controller.attendanceStatus.value == 3 ||
                 controller.sendingAttendance.value,
             // ignoring: false,
             child: InkWell(
