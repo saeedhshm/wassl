@@ -2,18 +2,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/custoday_controller.dart';
-import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/person_in_lock.dart';
 
-import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/custoday.dart';
-import '../../../../models/orders/order_type.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
@@ -21,8 +18,6 @@ import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class CustodyRequestPage extends StatelessWidget {
@@ -86,7 +81,7 @@ class CustodyRequestPage extends StatelessWidget {
                                 items:  controller.orderTypes.value.data!.map((e) => e).toList(),
                                 selectedValue: controller.selectedType,
                                 onSelectedIndex: (value) {
-                                  controller.selectedType = value as OrderType?;
+                                  controller.selectedType = value;
                                 },
                                 prefixIcon: const SizedBox(
                                     width: 5,
@@ -240,7 +235,7 @@ class CustodyRequestPage extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

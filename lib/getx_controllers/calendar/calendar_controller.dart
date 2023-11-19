@@ -9,7 +9,7 @@ import '../app_controller.dart';
 class CalendarViewModel extends GetxController {
   final AppController appController = Get.find();
 
-  late CalendarController _calendarController = CalendarController(appController.appHeader);
+  late final CalendarController _calendarController = CalendarController(appController.appHeader);
 
   var loading = false.obs;
   var attendanceOfMonth = MonthAttendance().obs;
@@ -48,7 +48,7 @@ class CalendarViewModel extends GetxController {
       noInternetAvailable.value = '';
     } on NoInternetException catch (e) {
       noInternetAvailable.value = e.errorMessage;
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       noDataAttendanceAvailable.value = 'noDataAttendanceAvailable';
     } finally {
       loading.value = false;

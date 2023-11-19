@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
@@ -49,10 +47,10 @@ class _SplashScreenState extends State<SplashScreen> {
           title: 'error'.tr,
           middleText: e.errorMessage,
           barrierDismissible: false);
-    } on UserNotFoundException catch (e) {
-      Get.offAll(() => LoginPage(), duration: Duration.zero);
+    } on UserNotFoundException {
+      Get.offAll(() => const LoginPage(), duration: Duration.zero);
     } catch (e){
-      Get.offAll(() => LoginPage(), duration: Duration.zero);
+      Get.offAll(() => const LoginPage(), duration: Duration.zero);
     }
       });
 

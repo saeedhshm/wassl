@@ -18,7 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function (String)?onChange;
   final TextCapitalization textCapitalization;
 
-   CustomTextFormField({Key? key,this.maxLines = 1,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
+   const CustomTextFormField({Key? key,this.maxLines = 1,required this.hintText,this.labelText,this.suffixIcon,this.secureText = false,this.isValideField = true,this.errorMessage,this.controller,this.keyboardType = TextInputType.text,this.onFieldSubmitted,this.onChange,this.readOnly = false,this.textCapitalization =  TextCapitalization.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +76,14 @@ class CustomTextFormField extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 0,
                 blurRadius: 1,
-                offset: Offset(0, 0), // changes position of shadow
+                offset: const Offset(0, 0), // changes position of shadow
               ),
             ],
           ),
         ),
-       isValideField ? SizedBox() : Padding(
+       isValideField ? const SizedBox() : Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(errorMessage ?? '',style: TextStyle(
+          child: Text(errorMessage ?? '',style: const TextStyle(
             color: Colors.red,
             fontSize: 14
           ),),

@@ -28,7 +28,7 @@ class EmployeeDetailsWidget extends StatelessWidget {
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.bold
                 ),),
-                Spacer(),
+                const Spacer(),
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: AppColors.mainGreenColor,width: 0.5),

@@ -11,9 +11,7 @@ class HolidaysWidget extends StatelessWidget {
 
    HolidaysWidget({
     Key? key,
-  }) : super(key: key){
-
-   }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

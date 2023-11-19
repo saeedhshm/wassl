@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 
 

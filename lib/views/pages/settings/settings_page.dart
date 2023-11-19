@@ -10,7 +10,6 @@ import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../../reusable_widgets/main_appbar.dart';
 import '../auth/login.dart';
-import '../intro/splash_screen.dart';
 
 class SettingsPage extends StatelessWidget {
 
@@ -56,7 +55,7 @@ class SettingsPage extends StatelessWidget {
                     InkWell(
                       onTap: () async{
 
-                        Get.to(()=>ChangePasswordPage());
+                        Get.to(()=>const ChangePasswordPage());
                       },
                       child: ListProfileItemWidget(
                         title: "change_password".tr,
@@ -84,7 +83,7 @@ class SettingsPage extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         await appController.logout();
-                        Get.to(()=>LoginPage());
+                        Get.to(()=>const LoginPage());
                       },
                       child: ListProfileItemWidget(
                         title: "logout".tr,

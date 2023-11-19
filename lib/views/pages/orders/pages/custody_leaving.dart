@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../../models/orders/order_type.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
@@ -71,7 +69,7 @@ class CustodyLeavingOrder extends StatelessWidget {
                             ),
                           ),
                           TextFormFieldWithIcons(
-                            prefixIcon: SizedBox(
+                            prefixIcon: const SizedBox(
                               child: ChatConversationIcon(),
                             ),
                             maxLines: 5,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:wassl/views/pages/holidays/widgets/separator.dart';
 
 import '../../../../getx_controllers/vacations/vacation_view_model.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../../models/holidays/vacations.dart';
 import '../../../reusable_widgets/icons/back_arrow.dart';
 
 
@@ -29,7 +27,7 @@ class VacationsWidget extends StatelessWidget {
 class _VacationWidget extends StatelessWidget {
 
   final VacationViewModel viewModel;
-  const _VacationWidget(this.viewModel,{super.key});
+  const _VacationWidget(this.viewModel);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
 import '../../../../getx_controllers/attendance/member_attendance_controller.dart';
 import '../../../../getx_controllers/home/home_controller.dart';
@@ -76,7 +75,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -85,7 +84,7 @@ class ItemWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 0.5,
             blurRadius: 0.5,
-            offset: Offset(0,1), // changes position of shadow
+            offset: const Offset(0,1), // changes position of shadow
           ),
         ],
       ),
@@ -102,12 +101,12 @@ class ItemWidget extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 1,
-                    offset: Offset(0,0), // changes position of shadow
+                    offset: const Offset(0,0), // changes position of shadow
                   ),
                 ],
               ),
                 child: Image.asset('assets/images/profile/1.png',width: 35,color: AppColors.iconsColor,)),
-            SizedBox(width: 16,),
+            const SizedBox(width: 16,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -133,10 +132,10 @@ class ItemWidget extends StatelessWidget {
 
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(attendanceStatus.tr,style: TextStyle(
+              child: Text(attendanceStatus.tr,style: const TextStyle(
                 color: AppColors.lightGreyTextColor,
                 fontSize: 10,
               ),),

@@ -20,7 +20,7 @@ class _DropDownMenuState extends State<DropDownMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.borderTextFieldColor),
         borderRadius: BorderRadius.circular(8)
@@ -32,14 +32,14 @@ class _DropDownMenuState extends State<DropDownMenu> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: widget.prefixIcon,
             ),
-          ) : SizedBox(width: 16,),
+          ) : const SizedBox(width: 16,),
           Expanded(child: Text(textTitle ?? widget.textHint)),
           widget.suffixIcon != null ? SizedBox(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: widget.suffixIcon,
             ),
-          ) : SizedBox(),
+          ) : const SizedBox(),
         ],
       ),
     );

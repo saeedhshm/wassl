@@ -4,7 +4,6 @@ import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/finance_info/detials_widgets/net_salary_widget.dart';
 
 import '../../../getx_controllers/finance/all_salaries.dart';
-import '../../../getx_controllers/finance/finance_controller.dart';
 import '../../../models/finance/salaries.dart';
 import '../../consts_widgets/gradiants.dart';
 import '../../reusable_widgets/icons/back_arrow.dart';
@@ -36,9 +35,9 @@ class SalaryDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5),
                 child: Row(
                   children: [
-                    LocalizedText(
+                    const LocalizedText(
                       'salary_details',
-                      textStyle: const TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
+                      textStyle: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
                     ),
                     const Spacer(),
                     InkWell(
@@ -165,7 +164,7 @@ class SalaryDetailsPage extends StatelessWidget {
                                   fontSize: 14
                               ),),
                               const Spacer(),
-                              Text('${salary.discounts[i].amount}',style: TextStyle(
+                              Text('${salary.discounts[i].amount}',style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 
 import '../../consts_widgets/gradiants.dart';

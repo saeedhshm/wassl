@@ -41,7 +41,7 @@ class ShiftInfoWidget extends StatelessWidget {
             fontWeight: FontWeight.w500
         ),),
         const SizedBox(height: 20,),
-        AttendanceWidget(),
+        const AttendanceWidget(),
       ],
     ));
   }

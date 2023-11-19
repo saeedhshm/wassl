@@ -2,7 +2,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
-import '../../helpers/constants/print_ln.dart';
 
 abstract class DropItem{
   String get name;
@@ -33,7 +32,7 @@ class DropDownWidget<T extends DropItem> extends StatefulWidget {
       this.errorMessage,
         this.iconPadding = 8,
       this.prefixIcon})
-      : super(key: key) {}
+      : super(key: key);
 
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState<T>();

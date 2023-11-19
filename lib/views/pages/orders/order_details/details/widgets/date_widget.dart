@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:wassl/models/orders/AllOrders.dart';
 
 import '../../../../../../helpers/constants/app_colors.dart';
-import '../../../../../consts_widgets/gradiants.dart';
 import '../../../../../reusable_widgets/icons/calendar_icon.dart';
-import '../../../../../reusable_widgets/icons/status_icon.dart';
 
 class DateWidget extends StatelessWidget {
 

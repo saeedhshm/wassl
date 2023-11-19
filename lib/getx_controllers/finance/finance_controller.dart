@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../helpers/exceptions/no_internet.dart';
 import '../../models/finance/finance.dart';
@@ -52,6 +51,6 @@ class FinanceInfoController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    this._getTeamAttendance();
+    _getTeamAttendance();
   }
 }

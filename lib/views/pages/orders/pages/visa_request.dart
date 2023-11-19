@@ -9,12 +9,10 @@ import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/visa_order.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
@@ -23,8 +21,6 @@ import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class VisaRequestPage extends StatelessWidget {
@@ -111,7 +107,7 @@ class VisaRequestPage extends StatelessWidget {
                                               .toList() ??
                                           [],
                                       onSelectedIndex: (value) {
-                                        controller.selectedType = value as OrderType?;
+                                        controller.selectedType = value;
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -180,7 +176,7 @@ class VisaRequestPage extends StatelessWidget {
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                              Spacer(),
+                                              const Spacer(),
                                               Directionality(
                                                   textDirection:
                                                       TextDirection.ltr,
@@ -495,7 +491,7 @@ class VisaRequestPage extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

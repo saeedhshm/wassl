@@ -2,7 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/finger_print_controller.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
@@ -16,7 +15,6 @@ import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/finger_print.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
@@ -25,7 +23,6 @@ import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/icons/edit_icon.dart';
 import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class CorrectingFingerprintRequest extends StatelessWidget {
@@ -169,7 +166,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
                                       child: EditIcon()),
                                   const SizedBox(width: 8,),
                                   Text('press_to_correct'.tr),
-                                  Spacer(),
+                                  const Spacer(),
                                   // Spacer(),
                                   Obx(() => LocalizedText(
                                     controller.timeOfDay,
@@ -285,7 +282,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
     }on NoInternetException catch(e){
       errorDialog(context,message: e.errorMessage);
-    }on NoDataAvailableException catch(e){
+    }on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     }on StartDateException{
       SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
@@ -311,7 +308,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
     }on NoInternetException catch(e){
       errorDialog(context,message: e.errorMessage);
-    }on NoDataAvailableException catch(e){
+    }on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     }on StartDateException{
       SnackBars.showErrorSnackBar('error'.tr, 'inter_date_exception'.tr);
@@ -338,7 +335,7 @@ class CorrectingFingerprintRequest extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

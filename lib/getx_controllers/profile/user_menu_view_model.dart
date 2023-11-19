@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../app_controller.dart';
 

@@ -112,7 +112,7 @@ class PreviousRequestsController extends GetxController{
         myOrders = await previousRequests.value.getAllOrders();
         appController.loading.value = true;
         await getTeamOrders();
-      }on NoDataAvailableException catch (e){
+      }on NoDataAvailableException {
         //this is the catch block
       }finally{
         appController.loading.value = false;
@@ -124,7 +124,7 @@ class PreviousRequestsController extends GetxController{
     return myOrdersSelected.value ? _groupValue.value : groupValueOfTeamOrders.value;
   }
 
-  void set groupValue(ListItem value){
+  set groupValue(ListItem value){
     if(myOrdersSelected.value) {
       _groupValue.value = value;
       getMyOrders();

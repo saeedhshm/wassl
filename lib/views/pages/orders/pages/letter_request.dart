@@ -2,8 +2,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/letter_request.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/models/orders/order_type.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
@@ -21,8 +19,6 @@ import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/letter_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class LetterRequestPage extends StatelessWidget {
@@ -119,7 +115,7 @@ class LetterRequestPage extends StatelessWidget {
                                                 .map((e) => e)
                                                 .toList(),
                                             onSelectedIndex: (value) {
-                                              controller.selectedType = value as OrderType?;
+                                              controller.selectedType = value;
                                             },
                                             prefixIcon: const SizedBox(
                                                 width: 5,
@@ -307,7 +303,7 @@ class LetterRequestPage extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

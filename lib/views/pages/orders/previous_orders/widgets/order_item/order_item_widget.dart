@@ -6,7 +6,6 @@ import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/widg
 
 import '../../../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../../../../helpers/constants/app_colors.dart';
-import '../../../../../../helpers/exceptions/no_internet.dart';
 import '../../../../../../models/orders/AllOrders.dart';
 import '../../../../../../models/orders/ask_permission.dart';
 import '../../../../../../models/orders/financial_expenses.dart';
@@ -368,8 +367,6 @@ class OrderItemWidget extends StatelessWidget {
     Future.delayed(Duration.zero,()async{
       try{
         await controller.getMyOrders();
-      }on NoDataAvailableException catch (e){
-
       }finally{
         controller.appController.loading.value = false;
       }

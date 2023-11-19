@@ -11,7 +11,6 @@ import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../controllers/countries.dart';
 import '../../controllers/work_trip_controller.dart';
-import '../../helpers/constants/print_ln.dart';
 import '../../models/countries/city.dart';
 import '../../models/countries/country.dart';
 import '../orders/order_types_controller.dart';
@@ -94,7 +93,7 @@ class HolidayRequestController extends GetxController{
     };
 
 
-  var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addHolidayRequest}', body: body,header: appController.appHeader,fileName: filePath);
+  var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addHolidayRequest, body: body,header: appController.appHeader,fileName: filePath);
 
 
   if(response.statusCode != 200){
@@ -167,7 +166,7 @@ class HolidayRequestController extends GetxController{
       // errorsList.add('body: $body');
       errorsList.add('url: ${AppUrls.addHolidayRequest}d');
       errorsList.add('response.statusCode: ${response.statusCode}');
-      errorsList.add('response.body: ${await response.body}');
+      errorsList.add('response.body: ${response.body}');
       throw NoDataAvailableException();
     }
   }

@@ -6,7 +6,6 @@
 
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
-import '../../helpers/constants/print_ln.dart';
 import '../../web_services_helper/urls.dart';
 
 class AdItem {
@@ -60,7 +59,7 @@ class AdItem {
     _endDate = json['end_date'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
-    _pivot = json['pivot'] != null ? new Pivot.fromJson(json['pivot']) : null;
+    _pivot = json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null;
   }
 
 

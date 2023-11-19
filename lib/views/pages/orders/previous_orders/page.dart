@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/models/orders/AllOrders.dart';
-import 'package:wassl/models/orders/holiday.dart';
-import 'package:wassl/views/consts_widgets/loading_widgets.dart';
-import 'package:wassl/views/pages/orders/order_details/order_details.dart';
 import 'package:wassl/views/pages/orders/previous_orders/team_orders.dart';
-import 'package:wassl/views/pages/orders/previous_orders/widgets/order_item/order_item_widget.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/previous_orders.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/tabs.dart';
 
 import '../../../../getx_controllers/orders/previous_requests.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../reusable_widgets/app_bars/app_bar_with_icon.dart';
 import '../../../reusable_widgets/custom_radio_button/custom_radio_button.dart';
 import '../../../reusable_widgets/icons/back_arrow.dart';
-import '../../../reusable_widgets/main_appbar.dart';
 
 
 class PreviousRequestsPage extends StatefulWidget {
@@ -68,7 +59,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                       ),
                     ),
                     builder: (BuildContext context) {
-                      return Container(
+                      return SizedBox(
                         height: 500,
                         // color: Colors.black,
                         child: Column(
@@ -165,7 +156,7 @@ class _PreviousRequestsPageState extends State<PreviousRequestsPage> {
                       width: 22,
                     )),
               ),
-              SizedBox(width: 16,),
+              const SizedBox(width: 16,),
               widget.fromHomePage ? InkWell(
                 onTap: (){
                   Get.back();

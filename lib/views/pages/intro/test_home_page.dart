@@ -1,9 +1,5 @@
-import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
@@ -11,11 +7,10 @@ import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import '../../../getx_controllers/calendar/calendar_controller.dart';
 import '../../../getx_controllers/home/home_controller.dart';
 import '../../../helpers/exceptions/location_exceptions.dart';
-import '../../reusable_widgets/dialogs_messages/snack_bars.dart';
 
 class TestHomePage extends StatefulWidget {
 
-   TestHomePage({Key? key}) : super(key: key);
+   const TestHomePage({Key? key}) : super(key: key);
 
   @override
   State<TestHomePage> createState() => _TestHomePageState();
@@ -76,7 +71,7 @@ class _TestHomePageState extends State<TestHomePage> {
                   width: double.infinity,
                   color: Colors.lightBlue,
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Center(
                       child: Text('reg_attend'.tr),
                     ),

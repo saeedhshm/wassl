@@ -19,12 +19,12 @@ class SnackBars{
       desc:message,
       width: Get.width,
       barrierColor:null,
-      descTextStyle: TextStyle(
+      descTextStyle: const TextStyle(
         color: AppColors.redMissedDayColor,
         fontSize: 16,
         // fontWeight: FontWeight.bold
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       dialogBackgroundColor: null
     ).show();
     return;
@@ -51,12 +51,12 @@ class SnackBars{
         desc:message,
         width: Get.width,
         barrierColor:null,
-        descTextStyle: TextStyle(
+        descTextStyle: const TextStyle(
             color: AppColors.darkGreyTextColor,
             fontSize: 16,
             // fontWeight: FontWeight.bold
         ),
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         dialogBackgroundColor: null
     ).show();
     return;
@@ -89,12 +89,12 @@ void show(){
       desc:'message btnCancelOnPress btnCancelOnPress btnCancelOnPress',
       width: Get.width,
       barrierColor:null,
-      descTextStyle: TextStyle(
+      descTextStyle: const TextStyle(
           color: AppColors.darkGreyTextColor,
           fontSize: 16,
           fontWeight: FontWeight.bold
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       dialogBackgroundColor: null
   ).show();
 }

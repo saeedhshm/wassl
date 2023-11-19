@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/models/events/event.dart';
-import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/incomming_events/incoming_events.dart';
 import 'package:wassl/views/reusable_widgets/icons/back_arrow.dart';
 
@@ -103,7 +102,7 @@ class ItemWidget extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 5,),
-                  Text('${event.title}',style: const TextStyle(
+                  Text(event.title,style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 13
@@ -132,7 +131,7 @@ class ItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 10,)
+        const SizedBox(width: 10,)
       ],
     );
   }

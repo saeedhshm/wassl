@@ -27,13 +27,13 @@ class Branch {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['company_id'] = this.companyId;
-    data['name_ar'] = this._nameAr;
-    data['name_en'] = this._nameEn;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['company_id'] = companyId;
+    data['name_ar'] = _nameAr;
+    data['name_en'] = _nameEn;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
 import '../../../models/ads/Ad.dart';
@@ -21,7 +20,7 @@ class AdDetailsPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 width: double.infinity,
                 child: ImageController(
-                  '${adItem.image}',
+                  adItem.image,
                   fit: BoxFit.cover,
 
                 ).loadImage(),
@@ -53,13 +52,13 @@ class AdDetailsPage extends StatelessWidget {
               children: [
                 Text(
                   '${adItem.title}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColors.mainGreenColor
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
@@ -73,7 +72,7 @@ class AdDetailsPage extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(0, 1),
+                            offset: const Offset(0, 1),
                           ),
                         ],
                       ),
@@ -85,10 +84,10 @@ class AdDetailsPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Text(
                       '${adItem.dateTime}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: AppColors.darkGreyTextColor
@@ -96,10 +95,10 @@ class AdDetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   '${adItem.details}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                       color: AppColors.darkGreyTextColor
                   ),

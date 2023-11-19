@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/notif_model.dart';
 
 class NotifsController extends GetxController{
@@ -25,7 +24,7 @@ class NotifsController extends GetxController{
     // TODO: implement onInit
     super.onInit();
     loading.value = true;
-    Future.delayed(Duration(seconds: 1),(){
+    Future.delayed(const Duration(seconds: 1),(){
       notifications.add(NotifModel());
       notifications.add(NotifModel());
       notifications.add(NotifModel());

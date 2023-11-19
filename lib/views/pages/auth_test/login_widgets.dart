@@ -68,13 +68,13 @@ class _RestWidgetsState extends State<RestWidgets>  {
     return  Column(
         children: [
           const SizedBox(height: 30,),
-          LocalizedText(
+          const LocalizedText(
             "welcome_to_wasl_test",
-            textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),
+            textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.black,),
           ),
-          LocalizedText(
+          const LocalizedText(
             "you_can_enter_to_account",
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
                 fontSize: 18,
                 // fontWeight: FontWeight.bold,
                 color: Colors.grey),
@@ -83,7 +83,7 @@ class _RestWidgetsState extends State<RestWidgets>  {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(width:double.infinity,child: MainTitleText("email_or_job_number")),
+              const SizedBox(width:double.infinity,child: MainTitleText("email_or_job_number")),
               const SizedBox(height: 0,),
               CustomTextFormField(
                 hintText: 'email_address@email.com',
@@ -91,7 +91,7 @@ class _RestWidgetsState extends State<RestWidgets>  {
                 controller: userNameCtrl,
               ),
               const SizedBox(height: 20,),
-              SizedBox(width:double.infinity,child: MainTitleText("password")),
+              const SizedBox(width:double.infinity,child: MainTitleText("password")),
               const SizedBox(height: 0,),
               CustomTextFormField(
                 hintText: '⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆',
@@ -137,7 +137,7 @@ class _RestWidgetsState extends State<RestWidgets>  {
              //
            }),),
           const SizedBox(height: 10,),
-          MainTitleText("forget_password?"),
+          const MainTitleText("forget_password?"),
           const SizedBox(height: 20,),
         ],
       );

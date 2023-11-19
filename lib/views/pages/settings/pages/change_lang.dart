@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../../../getx_controllers/app_controller.dart';
 import '../../../reusable_widgets/dark_text_widget.dart';
@@ -78,7 +76,7 @@ class LanguageItemWidget extends StatelessWidget {
               children: [
                 Text(title),
                 const Spacer(),
-               isSelected ? const Icon(Icons.check) : SizedBox()
+               isSelected ? const Icon(Icons.check) : const SizedBox()
               ],
             ),
           ),

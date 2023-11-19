@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wassl/views/pages/orders/previous_orders/widgets/tab.dart';
 
 import '../../../../../getx_controllers/orders/previous_requests.dart';
-import '../../../../../helpers/constants/app_colors.dart';
 
 class TabsWidget extends StatelessWidget {
    TabsWidget({Key? key}) : super(key: key);

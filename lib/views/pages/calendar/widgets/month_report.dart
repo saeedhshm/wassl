@@ -57,7 +57,7 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(child: Container(
       height: Get.width / 4.5,
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16)
@@ -67,7 +67,7 @@ class ItemWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Text('$numberCount',style: TextStyle(
+             Text(numberCount,style: TextStyle(
                 color: numberColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold

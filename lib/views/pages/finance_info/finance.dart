@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/finance/finance_controller.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 
-import '../../../helpers/constants/app_colors.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
 import '../../reusable_widgets/light_text_widget.dart';
 import '../../reusable_widgets/main_appbar.dart';
@@ -48,7 +47,7 @@ class FinanceInfoPage extends StatelessWidget {
                   // SizedBox(height: ,),
 
                   const SizedBox(height: 16,),
-                  DarkTextWidget("money_info",fontSize: 24,),
+                  const DarkTextWidget("money_info",fontSize: 24,),
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,13 +62,13 @@ class FinanceInfoPage extends StatelessWidget {
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 5,),
-                      const LightTextWidget('insurance_pension',fontSize: 17,),
-                      const SizedBox(height: 3,),
+                    children: const [
+                      SizedBox(height: 5,),
+                      LightTextWidget('insurance_pension',fontSize: 17,),
+                      SizedBox(height: 3,),
                       DarkTextWidget('---',fontSize: 17,),
-                      const SizedBox(height: 5,),
-                      const Divider()
+                      SizedBox(height: 5,),
+                      Divider()
                     ],
                   ),
                   Column(
@@ -84,7 +83,7 @@ class FinanceInfoPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16,),
-                  DarkTextWidget("frequent_allowances",fontSize: 24,),
+                  const DarkTextWidget("frequent_allowances",fontSize: 24,),
                   for(int i=0;i<controller.finance.allowances.length; i++)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

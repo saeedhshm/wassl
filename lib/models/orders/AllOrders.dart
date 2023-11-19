@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/orders/tabreer.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
@@ -179,10 +178,10 @@ class ResponsibleEmployee {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['full_name'] = this._fullName;
-    data['full_name_en'] = this._fullNameEn;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['full_name'] = _fullName;
+    data['full_name_en'] = _fullNameEn;
     return data;
   }
 

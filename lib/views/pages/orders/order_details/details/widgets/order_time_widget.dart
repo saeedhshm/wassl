@@ -76,7 +76,7 @@ class OrderTimeWidget extends StatelessWidget {
                         Text('time_out'.tr,
                           style: const TextStyle(fontSize: 14,color: AppColors.darkGreyTextColor),),
 
-                        Spacer(),
+                        const Spacer(),
                         LocalizedText(
                           '${(order as AskPermissionsData).timeOut}'.formattedTime() ?? '--:--',
                           textStyle: const TextStyle(
@@ -94,6 +94,6 @@ class OrderTimeWidget extends StatelessWidget {
         ),
         const SeparatorWidget(),
       ],
-    ) : SizedBox();
+    ) : const SizedBox();
   }
 }

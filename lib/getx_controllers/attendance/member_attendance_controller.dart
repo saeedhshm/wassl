@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
-import '../../helpers/exceptions/no_internet.dart';
 import '../../models/attendance/member_attendace_v2.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
@@ -11,7 +9,7 @@ import '../app_controller.dart';
 
 class MembersAttendanceController extends GetxController{
   final AppController appController = Get.find();
-  var _teamAttendance = TeamAttendanceV2().obs;
+  final _teamAttendance = TeamAttendanceV2().obs;
   var loading = false.obs;
 
   Future<void> getTeamAttendance() async {

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/docs/documents.dart';
 
 import '../../helpers/exceptions/no_internet.dart';

@@ -4,7 +4,6 @@ import 'package:wassl/getx_controllers/home/home_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/home/widgets/app_bar_widget.dart';
-import 'package:wassl/views/pages/home/widgets/attendance_widget.dart';
 import 'package:wassl/views/pages/home/widgets/correcting_widget.dart';
 import 'package:wassl/views/pages/home/widgets/shift_info_widget.dart';
 

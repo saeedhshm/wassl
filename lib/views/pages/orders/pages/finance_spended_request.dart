@@ -2,30 +2,24 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/money_on_hand.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
-import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../../../getx_controllers/orders/financial_expenses.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/financial_expenses.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
-import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/dollar_on_hand.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class FinanceSpendedRequest extends StatelessWidget {
@@ -131,6 +125,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 prefixIcon: const MoneyOnHandIcon(),
                                 hintText: 'value'.tr,
                                 controller: amountCtrl,
+                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                 onChange: (value) {
                                   controller.amount = value;
                                 },
@@ -275,7 +270,7 @@ class FinanceSpendedRequest extends StatelessWidget {
                       child: const Center(
                         child: SendingLoadingWidget(),
                       ))
-                  : SizedBox(),
+                  : const SizedBox(),
               controller.errorsList.isNotEmpty
                   ? ErrorMessageWidget(
                       errorList: controller.errorsList,
@@ -343,7 +338,7 @@ class FinanceSpendedRequest extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

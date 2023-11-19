@@ -1,7 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
@@ -15,15 +14,12 @@ import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/over_time.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
-import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class ExtraWorkRequest extends StatelessWidget {
@@ -345,7 +341,7 @@ class ExtraWorkRequest extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

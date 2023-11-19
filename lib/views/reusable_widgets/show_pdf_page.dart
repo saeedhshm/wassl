@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ import 'icons/back_arrow.dart';
 class ShowPdfPage extends StatelessWidget {
 
   final Uint8List pdfData;
-  ShowPdfPage(this.pdfData,{super.key});
+  const ShowPdfPage(this.pdfData,{super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../getx_controllers/app_controller.dart';
 import '../../../../getx_controllers/profile/user_menu_view_model.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../reusable_widgets/circular_widget.dart';

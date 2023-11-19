@@ -1,4 +1,3 @@
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 class Vacations {
   bool? success;

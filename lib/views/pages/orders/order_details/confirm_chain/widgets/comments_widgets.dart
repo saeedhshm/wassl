@@ -27,7 +27,7 @@ class CommentsWidget extends StatelessWidget {
             const SizedBox(width: 10,),
             Expanded(
               child: TextFormFieldWithIcons(
-                prefixIcon: SizedBox(
+                prefixIcon: const SizedBox(
                   child: ChatConversationIcon(),
                 ),
                 maxLines: 1,

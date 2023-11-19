@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 import '../attendance.dart';
@@ -97,7 +96,7 @@ class TotalAttendances {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['total'] = this.total;
+    data['total'] = total;
     data['total_attendance_late_time'] = totalAttendanceLateTime;
     data['total_attendance_over_time'] = totalAttendanceOverTime;
     data['total_leave_early_time'] = totalLeaveEarlyTime;

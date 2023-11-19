@@ -55,7 +55,7 @@ class TeamMembersPage extends StatelessWidget {
                                   color: AppColors.lightGreyTextColor,
                                   // fontSize: 12
                               ),),
-                              SizedBox(height: 20,),
+                              const SizedBox(height: 20,),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
@@ -192,7 +192,7 @@ class MemberItemWidget extends StatelessWidget {
                       fontSize: 13
                     ),),
 
-                    Text(memberAttendance.jobName,style: TextStyle(
+                    Text(memberAttendance.jobName,style: const TextStyle(
                         color: AppColors.lightGreyTextColor,
                         fontSize: 12
                     ),),

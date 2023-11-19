@@ -5,7 +5,6 @@ import 'package:wassl/views/pages/profile/profile_info.dart';
 import 'package:wassl/views/pages/profile/team_members.dart';
 import 'package:wassl/views/pages/profile/widgets/header_widget.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
-import '../../../getx_controllers/app_controller.dart';
 import '../../../getx_controllers/attendance/member_attendance_controller.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../covenant/page.dart';
@@ -80,7 +79,7 @@ class UserProfilePage extends StatelessWidget {
                     title: "team_member",
                     icon: "assets/images/profile/team.png",
                   ),
-                ) : SizedBox(),
+                ) : const SizedBox(),
 
                 //working information
                 menuViewModel.hideSections ? const SizedBox() :  const ListProfileItemWidget(

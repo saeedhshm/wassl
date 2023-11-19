@@ -3,22 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:wassl/getx_controllers/orders/loan_order_controller.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/helpers/exceptions/custom_exception.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
-import 'package:wassl/views/reusable_widgets/icons/mony_on_hand.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
-import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/loan_order.dart';
-import '../../../../models/orders/order_type.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
@@ -26,8 +21,6 @@ import '../../../reusable_widgets/icons/attach_icon.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/dollar_on_hand.dart';
 import '../../../reusable_widgets/icons/money_on_hand.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class NewLoanOrder extends StatelessWidget {
@@ -112,7 +105,7 @@ class NewLoanOrder extends StatelessWidget {
                                           .map((e) => e)
                                           .toList(),
                                       onSelectedIndex: (value) {
-                                        controller.selectedType = value as OrderType?;
+                                        controller.selectedType = value;
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -127,7 +120,7 @@ class NewLoanOrder extends StatelessWidget {
                                       prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'value'.tr,
                                       controller: amountCtrl,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                       onChange: (value) {
                                         controller.amount = value;
                                       },
@@ -137,7 +130,7 @@ class NewLoanOrder extends StatelessWidget {
                                           child: Text(
                                             'SAR'.tr,
                                             style:
-                                                TextStyle(color: Colors.grey,fontSize: 12),
+                                                const TextStyle(color: Colors.grey,fontSize: 12),
                                           ),
                                         ),
                                       ),
@@ -174,11 +167,12 @@ class NewLoanOrder extends StatelessWidget {
                                     const SizedBox(
                                       height: 15,
                                     ),
+
                                     TextFormFieldWithIcons(
                                       prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'installmentMonthlyAmount'.tr,
                                       controller: monthlyAmountCtrl,
-                                      keyboardType: TextInputType.number,
+                                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                       onChange: (value) {
                                         controller.installmentMonthlyAmount =
                                             value;
@@ -189,7 +183,7 @@ class NewLoanOrder extends StatelessWidget {
                                           child: Text(
                                             'SAR'.tr,
                                             style:
-                                                TextStyle(color: Colors.grey,fontSize: 12),
+                                                const TextStyle(color: Colors.grey,fontSize: 12),
                                           ),
                                         ),
                                       ),
@@ -366,7 +360,7 @@ class NewLoanOrder extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

@@ -17,13 +17,13 @@ class EmpNameWidget extends StatelessWidget {
             fontWeight: FontWeight.normal,
             fontSize: 13
         ),),
-        SizedBox(),
+        const SizedBox(),
         Text(nameEmployee ?? '' ,style: const TextStyle(
             color: AppColors.darkGreyTextColor,
             fontWeight: FontWeight.normal,
             fontSize: 13
         ),),
       ],
-    ) : SizedBox();
+    ) : const SizedBox();
   }
 }

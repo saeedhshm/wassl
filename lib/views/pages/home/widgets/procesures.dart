@@ -8,7 +8,6 @@ import 'package:wassl/views/reusable_widgets/icons/mony_on_hand.dart';
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../reusable_widgets/icons/edit_pen_paper.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../documents/page.dart';
 
 class Procedures extends StatelessWidget {

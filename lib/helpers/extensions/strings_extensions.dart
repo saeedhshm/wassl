@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../models/date_time_parser.dart';
-import '../constants/print_ln.dart';
 
 extension NumberParsing on String {
   int parseInt() {
@@ -111,7 +110,7 @@ extension FormatedDateTimeExtension on String {
     var timeList = splittedArray[1].split(':');
     int hours = int.tryParse(timeList[0]) ?? 0;
     int minutes = int.tryParse(timeList[1]) ?? 0;
-    var pm_am = hours > 12 ? 'pm'.tr : 'am'.tr;
+    var pmAm = hours > 12 ? 'pm'.tr : 'am'.tr;
     hours = hours > 12 ? hours - 12 : hours;
     myTime = hours == 0
         ? '12'
@@ -119,7 +118,7 @@ extension FormatedDateTimeExtension on String {
         ? '0$hours'
         : '$hours';
     myTime += minutes < 10 ? ':0$minutes' : ':$minutes';
-    myTime = '$myTime $pm_am';
+    myTime = '$myTime $pmAm';
     return myTime;
   }
 
@@ -143,7 +142,7 @@ extension FormatedDateTimeExtension on String {
       var timeList = split(':');
       int hours = int.tryParse(timeList[0]) ?? 0;
       int minutes = int.tryParse(timeList[1]) ?? 0;
-      var pm_am = hours > 12 ? 'pm'.tr : 'am'.tr;
+      var pmAm = hours > 12 ? 'pm'.tr : 'am'.tr;
       hours = hours > 12 ? hours - 12 : hours;
       time = hours == 0
           ? '12'
@@ -151,7 +150,7 @@ extension FormatedDateTimeExtension on String {
               ? '0$hours'
               : '$hours';
       time += minutes < 10 ? ':0$minutes' : ':$minutes';
-      time = '$time $pm_am';
+      time = '$time $pmAm';
     }
 
     return time;

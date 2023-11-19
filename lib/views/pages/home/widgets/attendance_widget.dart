@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/views/reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 
@@ -13,13 +12,12 @@ import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/location_exceptions.dart';
 import '../../../consts_widgets/loading_widgets.dart';
-import '../../../reusable_widgets/circular_widget.dart';
 import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import 'attendance_info_widget.dart';
 
 class AttendanceWidget extends StatefulWidget {
 
-  AttendanceWidget({Key? key}) : super(key: key);
+  const AttendanceWidget({Key? key}) : super(key: key);
 
   @override
   State<AttendanceWidget> createState() => _AttendanceWidgetState();

@@ -55,7 +55,7 @@ class IncomingEvent {
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
     _location = json['location'];
-    _pivot = json['pivot'] != null ? new Pivot.fromJson(json['pivot']) : null;
+    _pivot = json['pivot'] != null ? Pivot.fromJson(json['pivot']) : null;
   }
 
 }

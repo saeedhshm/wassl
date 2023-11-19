@@ -7,7 +7,7 @@ class MainButtonWidget extends StatelessWidget {
 
   final String btnTitle;
   final Function ()onPressed;
-   MainButtonWidget({Key? key,required this.btnTitle,required this.onPressed}) : super(key: key);
+   const MainButtonWidget({Key? key,required this.btnTitle,required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MainButtonWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(btnTitle.tr,
-              style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.bold),
             ),
           ),
         ),

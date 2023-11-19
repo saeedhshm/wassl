@@ -59,7 +59,7 @@ class SalaryOfMonth {
     if (json['allowances'] != null) {
 
       json['allowances'].forEach((v) {
-        allowances.add(new Allowances.fromJson(v));
+        allowances.add(Allowances.fromJson(v));
       });
     }
     if (json['discounts'] != null) {
@@ -81,7 +81,7 @@ class SalaryOfMonth {
   }
 
   String get year{
-    var y = _month?.split('-').first ?? '';;
+    var y = _month?.split('-').first ?? '';
 
     return y;
   }
@@ -106,7 +106,7 @@ class Discounts {
     employeeSalariesDiscountsTypeId =
     json['employee_salaries_discounts_type_id'];
     employeeSalaryDiscountType = json['employee_salary_discount_type'] != null
-        ? new AllowancesType.fromJson(json['employee_salary_discount_type'])
+        ? AllowancesType.fromJson(json['employee_salary_discount_type'])
         : null;
   }
 
@@ -139,7 +139,7 @@ class Allowances {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     allowancesType = json['allowances_type'] != null
-        ? new AllowancesType.fromJson(json['allowances_type'])
+        ? AllowancesType.fromJson(json['allowances_type'])
         : null;
   }
 

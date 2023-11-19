@@ -4,7 +4,6 @@ import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/models/orders/letter.dart';
 
 import '../../../../../../helpers/constants/app_colors.dart';
-import '../../../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../../../reusable_widgets/icons/doc_icon.dart';
 import '../../../../holidays/widgets/separator.dart';
 
@@ -79,6 +78,6 @@ class DirectedToWidget extends StatelessWidget {
         ),
         const SeparatorWidget(),
       ],
-    ) : SizedBox();
+    ) : const SizedBox();
   }
 }

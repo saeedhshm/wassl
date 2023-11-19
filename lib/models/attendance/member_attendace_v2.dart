@@ -1,6 +1,5 @@
 
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
 class TeamAttendanceV2{
@@ -223,7 +222,7 @@ class Schedule {
     minuteTimeIn = json['minute_time_in'];
     allowTimeOut = json['allow_time_out'];
     allowTimeIn = json['allow_time_in'];
-    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    info = json['info'] != null ? Info.fromJson(json['info']) : null;
   }
 
 }
@@ -276,7 +275,7 @@ class Employee {
     _fullName = json['full_name'];
     _fullNameEn = json['full_name_en'];
     jobId = json['job_id'];
-    job = json['job'] != null ? new Job.fromJson(json['job']) : null;
+    job = json['job'] != null ? Job.fromJson(json['job']) : null;
   }
 
   String get fullName{

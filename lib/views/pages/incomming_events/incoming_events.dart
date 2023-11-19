@@ -120,7 +120,7 @@ class IncomingEventsPage extends StatelessWidget {
                           child: Image.asset('assets/images/ad_details/icon.png',color: AppColors.iconsColor,),
                         ),
                       ),
-                      SizedBox(width: 16,),
+                      const SizedBox(width: 16,),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -130,7 +130,7 @@ class IncomingEventsPage extends StatelessWidget {
                               ),),
                           Row(
                             children: [
-                              Text('${event.location}',style: const TextStyle(
+                              Text(event.location,style: const TextStyle(
                                   color: AppColors.lightGreyTextColor,
 
                               ),),
@@ -141,13 +141,13 @@ class IncomingEventsPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16,),
-                  Text('about_event'.tr,style: TextStyle(
+                  Text('about_event'.tr,style: const TextStyle(
                       color: AppColors.mainGreenColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold
                   ),),
                   const SizedBox(height: 16,),
-                  Text('${event.details}',style: const TextStyle(
+                  Text(event.details,style: const TextStyle(
                       color: AppColors.lightGreyTextColor,
 
                   ),)

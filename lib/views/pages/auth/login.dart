@@ -2,24 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/auth_test/login_test.dart';
-import 'package:wassl/views/pages/profile/profile_info.dart';
-import 'package:wassl/views/pages/profile/user_menu.dart';
-import 'package:wassl/views/reusable_widgets/custom_checkbox.dart';
-import 'package:wassl/views/reusable_widgets/main_button.dart';
-import '../../../helpers/constants/print_ln.dart';
-import '../../../helpers/constants/string_constants.dart';
 import '../../../web_services_helper/urls.dart';
-import '../../reusable_widgets/custom_text_form_field.dart';
-import '../../reusable_widgets/localized_text.dart';
-import '../../reusable_widgets/main_title_text.dart';
 import '../../reusable_widgets/svg_widget.dart';
-import '../main_tabs_page.dart';
 import 'login_widgets.dart';
 
 class LoginPage extends StatefulWidget {
 
 
-   LoginPage({Key? key}) : super(key: key);
+   const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -64,7 +54,7 @@ class _LoginPageState extends State<LoginPage>  {
     return Scaffold(
 
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         width: double.infinity,
         height: double.infinity,
         color: AppColors.mainBackgroundColor,
@@ -73,7 +63,7 @@ class _LoginPageState extends State<LoginPage>  {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height:  60,),
+              const SizedBox(height:  60,),
               // Transform.translate(
                 // offset: emailOffset.value,
                 Hero(
@@ -89,11 +79,11 @@ class _LoginPageState extends State<LoginPage>  {
                         height: _height,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.fastOutSlowIn,
-                        child: SvgWidget("assets/images/wasl.svg")),
+                        child: const SvgWidget("assets/images/wasl.svg")),
                   ),
                 ),
               // ),
-              RestWidgets()
+              const RestWidgets()
 
             ],
           ),

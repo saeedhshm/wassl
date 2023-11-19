@@ -78,13 +78,13 @@ class TotalAttendances {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  <String, dynamic>{};
-    data['total'] = this.total;
-    data['total_attendance_late_time'] = this.totalAttendanceLateTime;
-    data['total_attendance_over_time'] = this.totalAttendanceOverTime;
-    data['total_leave_early_time'] = this.totalLeaveEarlyTime;
-    data['total_leave_over_time'] = this.totalLeaveOverTime;
-    data['countWorkDays'] = this.countWorkDays;
-    data['countWorkHour'] = this.countWorkHour;
+    data['total'] = total;
+    data['total_attendance_late_time'] = totalAttendanceLateTime;
+    data['total_attendance_over_time'] = totalAttendanceOverTime;
+    data['total_leave_early_time'] = totalLeaveEarlyTime;
+    data['total_leave_over_time'] = totalLeaveOverTime;
+    data['countWorkDays'] = countWorkDays;
+    data['countWorkHour'] = countWorkHour;
     return data;
   }
 }

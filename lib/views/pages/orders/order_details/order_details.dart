@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 
-import '../../../../getx_controllers/orders/previous_requests.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/icons/back_arrow.dart';

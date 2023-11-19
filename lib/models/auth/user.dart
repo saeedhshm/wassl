@@ -44,7 +44,7 @@ class User {
   int? isActive;
   int? stop;
   String? fcmToken;
-  List<Schedule>  _allSchedules = <Schedule>[];
+  final List<Schedule>  _allSchedules = <Schedule>[];
   Schedule? schedule;
   Branch? branch;
   Branch? job;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
@@ -16,7 +15,7 @@ import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 class ChangePasswordPage extends StatefulWidget {
 
 
-   ChangePasswordPage({Key? key}) : super(key: key);
+   const ChangePasswordPage({Key? key}) : super(key: key);
 
   @override
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
@@ -62,7 +61,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
 
-                child: Container(
+                child: SizedBox(
                   height: Get.height - 130,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -8,7 +8,7 @@ class CircularWidget extends StatelessWidget {
   final double borderWidth;
   final Widget child;
   final double padding;
-   CircularWidget({Key? key,required this.child,required this.size,this.borderColor = AppColors.mainGreenColor,this.borderWidth = 1, this.padding = 0}) : super(key: key);
+   const CircularWidget({Key? key,required this.child,required this.size,this.borderColor = AppColors.mainGreenColor,this.borderWidth = 1, this.padding = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

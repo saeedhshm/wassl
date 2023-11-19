@@ -68,7 +68,7 @@ class ChainItemWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Column(
                           children: [
                             Text(date,style: const TextStyle(
@@ -101,7 +101,7 @@ class ChainItemWidget extends StatelessWidget {
 
                             ],
                           ),
-                        )) : SizedBox(),
+                        )) : const SizedBox(),
                   ],
                 ),
               ),

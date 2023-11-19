@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/models/notif_model.dart';
 import 'package:wassl/views/reusable_widgets/load_image.dart';
-import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../../getx_controllers/settings/notifs_controllers.dart';
 import '../../../consts_widgets/gradiants.dart';

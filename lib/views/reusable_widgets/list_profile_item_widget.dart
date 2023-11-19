@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/dark_text_widget.dart';
 
-import 'load_image.dart';
 
 class ListProfileItemWidget extends StatelessWidget {
 

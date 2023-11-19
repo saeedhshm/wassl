@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/calendar/widgets/day_builder.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
@@ -48,7 +47,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
           outsideDaysVisible: true,
           // outsideTextStyle: TextStyle(color: Colors.red)
         ),
-        calendarBuilders: (controller.loading.value) ? CalendarBuilders() : CalendarBuilders(
+        calendarBuilders: (controller.loading.value) ? const CalendarBuilders() : CalendarBuilders(
 
           todayBuilder: (context, day, newDay) {
 
@@ -300,6 +299,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                 ],
               );
             }
+            return null;
 
           },
           holidayBuilder: (context, day, newDay) {
@@ -355,7 +355,7 @@ class _TableCalendarWidgetState extends State<TableCalendarWidget> {
                             color: Colors.grey.withOpacity(0.4),
                             spreadRadius: 0,
                             blurRadius: 7,
-                            offset: Offset(0, 0), // changes position of shadow
+                            offset: const Offset(0, 0), // changes position of shadow
                           ),
                         ],
                         borderRadius: BorderRadius.circular(100)),

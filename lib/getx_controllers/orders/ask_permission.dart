@@ -1,12 +1,9 @@
-import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/controllers/types_controllers.dart';
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 import 'package:wassl/models/orders/order_type.dart';
 import 'package:intl/intl.dart';
-import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/custom_exception.dart';
 import '../../helpers/exceptions/no_internet.dart';
 import '../../web_services_helper/api.dart';
@@ -64,7 +61,7 @@ class AskPermissionController extends GetxController{
 
 
     loading.value = true;
-    var response = await  AppApiHandler.postDataWithFile(url: '${AppUrls.addPermission}', body: body,header: appController.appHeader,fileName: filePath);
+    var response = await  AppApiHandler.postDataWithFile(url: AppUrls.addPermission, body: body,header: appController.appHeader,fileName: filePath);
 
 
     loading.value = false;

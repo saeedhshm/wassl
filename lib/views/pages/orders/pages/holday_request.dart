@@ -1,24 +1,19 @@
 
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/holiday/holiday_request_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/custom_exception.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
-import 'package:wassl/models/countries/country.dart';
 import 'package:wassl/models/orders/holiday.dart';
-import 'package:wassl/test_page.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/cancel_update.dart';
 import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../../helpers/exceptions/date_exceptions.dart';
-import '../../../../models/countries/city.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/order_type.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
@@ -31,7 +26,6 @@ import '../../../reusable_widgets/icons/mony_on_hand.dart';
 import '../../../reusable_widgets/icons/umbrella_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class HolidayRequestPage extends StatelessWidget {
@@ -146,7 +140,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   selectedValue: controller.selectedCountry,
                                   items:  controller.countries.map((e) => e).toList(),
                                   onSelectedIndex: (value) async {
-                                    controller.selectedCountry = value as Country?;
+                                    controller.selectedCountry = value;
                                     await controller.getAllCities('${controller.selectedCountry?.id}');
                                     controller.loadingCities.value = true;
                                     controller.setDifferenceInDays();
@@ -166,7 +160,7 @@ class HolidayRequestPage extends StatelessWidget {
                                   selectedValue: controller.selectedCity,
                                   items:  controller.cities.map((e) => e).toList(),
                                   onSelectedIndex: (value) {
-                                    controller.selectedCity = value as City?;
+                                    controller.selectedCity = value;
                                     controller.setDifferenceInDays();
                                   },
                                   iconPadding: 16,
@@ -405,7 +399,7 @@ class HolidayRequestPage extends StatelessWidget {
               child: const Center(
                 child: SendingLoadingWidget(),
               ),
-            ):SizedBox(),
+            ):const SizedBox(),
             controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
               ////
               controller.errorsList.clear();
@@ -441,7 +435,7 @@ class HolidayRequestPage extends StatelessWidget {
       SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
     }on NoInternetException catch(e){
       errorDialog(context,message: e.errorMessage);
-    }on NoDataAvailableException catch(e){
+    }on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     }on CustomException catch(e){
       errorDialog(context,message: e.errorMessage);
@@ -475,7 +469,7 @@ class HolidayRequestPage extends StatelessWidget {
       SnackBars.showErrorSnackBar('error'.tr, 'HolidayReasonException'.tr);
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-    }on NoDataAvailableException catch(e){
+    }on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     }finally{
       controller.loading.value = false;
@@ -496,7 +490,7 @@ class HolidayRequestPage extends StatelessWidget {
       );
     }on NoInternetException catch(e){
       SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
-    }on NoDataAvailableException catch(e){
+    }on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     }finally{
       controller.loading.value = false;

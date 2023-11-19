@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../getx_controllers/app_controller.dart';
@@ -35,7 +34,7 @@ class InfoPage extends StatelessWidget {
           },),
           Expanded(child: SingleChildScrollView(
             child: Padding(
-              padding:  EdgeInsets.only(
+              padding:  const EdgeInsets.only(
                   top: 16,
                   left: 16,
                   right: 16
@@ -47,9 +46,9 @@ class InfoPage extends StatelessWidget {
                     size: 100,
                     child: Image.asset('assets/images/profile/1.png'),
                   ),
-                  SizedBox(height: 16,),
+                  const SizedBox(height: 16,),
                   Row(
-                    children: [
+                    children: const [
                       DarkTextWidget("general_info",fontSize: 24,),
                       Spacer(),
                       // InkWell(onTap: (){
@@ -59,17 +58,17 @@ class InfoPage extends StatelessWidget {
                     ],
                   ),
                   for(int i=0;i<items.length;i++)
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           LightTextWidget(items[i].title!,fontSize: 17,),
                           // SizedBox(height: 10,),
                           DarkTextWidget(items[i].value!,fontSize: 17,),
-                          SizedBox(height: 5,),
-                          Divider()
+                          const SizedBox(height: 5,),
+                          const Divider()
                         ],
                       ),
                     )

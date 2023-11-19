@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/date_exceptions.dart';
 import 'package:wassl/models/orders/order_type.dart';
 
@@ -122,11 +121,11 @@ class FingerPrintController extends GetxController{
       var timeList = correctionTime.split(':');
       int hours = int.tryParse(timeList[0]) ?? 0;
       int minutes = int.tryParse(timeList[1]) ?? 0;
-      var pm_am = hours > 12 ? 'pm'.tr : 'am'.tr;
+      var pmAm = hours > 12 ? 'pm'.tr : 'am'.tr;
       hours = hours > 12 ? hours - 12 : hours;
       time = hours == 0 ? '12' : hours < 10 ? '0$hours' : '$hours';
       time += minutes < 10 ? ':0$minutes' : ':$minutes';
-      time = '$time $pm_am';
+      time = '$time $pmAm';
     }
 
     return time;

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:get/get.dart';
 
 class FirebaseApi{

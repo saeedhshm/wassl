@@ -24,12 +24,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('coven_name'.tr,style: TextStyle(
+                  child: Text('coven_name'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.name ?? '')),
               ],
             ),
@@ -38,12 +38,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('coven_type'.tr,style: TextStyle(
+                  child: Text('coven_type'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.type ?? '')),
               ],
             ),
@@ -52,12 +52,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('status'.tr,style: TextStyle(
+                  child: Text('status'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.status ?? '')),
               ],
             ),
@@ -66,12 +66,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('received_date'.tr,style: TextStyle(
+                  child: Text('received_date'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.receivedDate ?? '')),
               ],
             ),
@@ -80,12 +80,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('eviction_date'.tr,style: TextStyle(
+                  child: Text('eviction_date'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.evictionDate ?? '')),
               ],
             ),
@@ -94,12 +94,12 @@ class CovenantItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('description'.tr,style: TextStyle(
+                  child: Text('description'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(covenant.description ?? '')),
               ],
             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 import '../../../../models/docs/document.dart';
 import '../../../../web_services_helper/urls.dart';
@@ -18,7 +17,7 @@ class DocItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8)
@@ -32,12 +31,12 @@ class DocItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('doc_name'.tr,style: TextStyle(
+                  child: Text('doc_name'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text('${doc.name}'),),
               ],
             ),
@@ -46,12 +45,12 @@ class DocItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('description'.tr,style: TextStyle(
+                  child: Text('description'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child:  Text('${doc.descrition}')),
               ],
             ),
@@ -60,12 +59,12 @@ class DocItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('created_at'.tr,style: TextStyle(
+                  child: Text('created_at'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text('${doc.createdAt?.split('T')[0]}'),),
               ],
             ),
@@ -74,12 +73,12 @@ class DocItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('eviction_date'.tr,style: TextStyle(
+                  child: Text('eviction_date'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Text(doc.evictionDate ?? '')),
               ],
             ),
@@ -88,12 +87,12 @@ class DocItemWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 2,
-                  child: Text('download_file'.tr,style: TextStyle(
+                  child: Text('download_file'.tr,style: const TextStyle(
                     // color: Colors.red
                   ),),
                 ),
-                Text(':'),
-                SizedBox(width: 5,),
+                const Text(':'),
+                const SizedBox(width: 5,),
                 Expanded( flex: 6,child: Row(
                   children: [
                     InkWell(

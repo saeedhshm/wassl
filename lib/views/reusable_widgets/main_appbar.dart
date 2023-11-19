@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 
-import '../../helpers/constants/app_colors.dart';
 import '../consts_widgets/gradiants.dart';
 import 'icons/back_arrow.dart';
 
@@ -26,9 +25,9 @@ class MainAppbarWidget extends StatelessWidget {
             children: [
               LocalizedText(
                 title,
-                textStyle: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
+                textStyle: const TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.w500),
               ),
-              Spacer(),
+              const Spacer(),
               onBack != null ?   InkWell(
                 onTap: (){
                   if(onBack != null){
@@ -37,8 +36,8 @@ class MainAppbarWidget extends StatelessWidget {
                     Get.back();
                   }
                 },
-                child: BackArrowIcon(),
-              ) : SizedBox(),
+                child: const BackArrowIcon(),
+              ) : const SizedBox(),
             ],
           ),
         ),

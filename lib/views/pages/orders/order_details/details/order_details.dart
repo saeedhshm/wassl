@@ -1,13 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wassl/getx_controllers/orders/order_details.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
-import 'package:wassl/views/consts_widgets/gradiants.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/approve_diapprove.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/country_region_widget.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/date_widget.dart';
@@ -18,14 +14,9 @@ import 'package:wassl/views/pages/orders/order_details/details/widgets/order_tim
 import 'package:wassl/views/pages/orders/order_details/details/widgets/order_type_widget.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/reason_widget.dart';
 import 'package:wassl/views/pages/orders/order_details/details/widgets/status_widget.dart';
-import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
-import 'package:wassl/views/reusable_widgets/icons/doc_icon.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 import '../../../../../models/orders/holiday.dart';
 import '../../../../consts_widgets/loading_widgets.dart';
-import '../../../../reusable_widgets/icons/chat_icon.dart';
-import '../../../../reusable_widgets/icons/status_icon.dart';
-import '../../../../reusable_widgets/show_pdf_page.dart';
 
 class OderDetailFragment extends StatelessWidget {
 

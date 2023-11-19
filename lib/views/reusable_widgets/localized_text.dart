@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class LocalizedText extends StatelessWidget {
   final String text;
   final TextStyle? textStyle;
-   LocalizedText(this.text,{Key? key,this.textStyle}) : super(key: key);
+   const LocalizedText(this.text,{Key? key,this.textStyle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

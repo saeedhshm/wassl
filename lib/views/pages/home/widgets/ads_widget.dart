@@ -5,7 +5,6 @@ import 'package:wassl/views/pages/ads/ads_page.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/load_image.dart';
 
 class AdsWidget extends StatelessWidget {
@@ -119,7 +118,7 @@ class ItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 10,)
+        const SizedBox(width: 10,)
       ],
     );
   }

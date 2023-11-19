@@ -37,7 +37,7 @@ class HolidayDurationWidget extends StatelessWidget {
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.bold
                 ),),
-                Spacer(),
+                const Spacer(),
 
                 Container(
                   decoration: BoxDecoration(
@@ -70,22 +70,22 @@ class HolidayDurationWidget extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                Spacer(),
-                Text(((controller.order as HolidaysData).holidayStart ?? ''),style: TextStyle(
+                const Spacer(),
+                Text(((controller.order as HolidaysData).holidayStart ?? ''),style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.bold
                 ),),
-                SizedBox(width: 16,),
+                const SizedBox(width: 16,),
                 SizedBox(
                   width: 25,
                   child: Image.asset('assets/images/order_details/arrow.png'),
                 ),
-                SizedBox(width: 16,),
-                Text(((controller.order as HolidaysData).holidayEnd ?? ''),style: TextStyle(
+                const SizedBox(width: 16,),
+                Text(((controller.order as HolidaysData).holidayEnd ?? ''),style: const TextStyle(
                     color: AppColors.darkGreyTextColor,
                     fontWeight: FontWeight.bold
                 ),),
-                Spacer(),
+                const Spacer(),
 
 
               ],
@@ -101,6 +101,6 @@ class HolidayDurationWidget extends StatelessWidget {
           ),
         ),
       ],
-    ) : SizedBox();
+    ) : const SizedBox();
   }
 }

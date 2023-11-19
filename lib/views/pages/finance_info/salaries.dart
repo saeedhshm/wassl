@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/finance/all_salaries.dart';
-import 'package:wassl/models/finance/salaries.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/finance_info/salary_details.dart';
 
-import '../../../getx_controllers/finance/finance_controller.dart';
 import '../../../getx_controllers/finance/salary_month_view_model.dart';
 import '../../../helpers/constants/app_colors.dart';
 import '../../reusable_widgets/dark_text_widget.dart';
@@ -40,7 +38,7 @@ class AllSalariesPage extends StatelessWidget {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        DarkTextWidget('base_salary',fontSize: 17,),
+                        const DarkTextWidget('base_salary',fontSize: 17,),
                         LightTextWidget(controller.baseSalary,fontSize: 15,),
                       ],
                     ),

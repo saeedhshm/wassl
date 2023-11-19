@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/calendar/calendar_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/calendar/widgets/attendance_info.dart';
 import 'package:wassl/views/pages/calendar/widgets/month_report.dart';
 import 'package:wassl/views/pages/calendar/widgets/table_calendar_widget.dart';

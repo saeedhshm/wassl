@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../../helpers/constants/print_ln.dart';
 import '../../views/reusable_widgets/drop_down_widget.dart';
 
 
@@ -50,7 +49,7 @@ class OrderType extends DropItem{
     return ('lang_code'.tr == 'ar' ? nameAr : _nameEn) ?? '';
  }
 
- void set name(value){
+ set name(value){
    _nameEn = value;
    nameAr = value;
  }

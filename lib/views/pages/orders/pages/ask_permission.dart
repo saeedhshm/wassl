@@ -7,15 +7,10 @@ import 'package:wassl/views/pages/orders/pages/shared_widgets/send_button.dart';
 import 'package:wassl/views/reusable_widgets/icons/calendar_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 
-import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/print_ln.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/date_exceptions.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/ask_permission.dart';
-import '../../../../models/orders/order_type.dart';
-import '../../../consts_widgets/gradiants.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
 import '../../../reusable_widgets/drop_down_widget.dart';
@@ -25,7 +20,6 @@ import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class AskPermissionPage extends StatelessWidget {
@@ -132,7 +126,7 @@ class AskPermissionPage extends StatelessWidget {
                                   .map((e) => e)
                                   .toList(),
                               onSelectedIndex: (value) {
-                                controller.selectedType = value as OrderType?;
+                                controller.selectedType = value;
                               },
                               prefixIcon: const SizedBox(
                                   width: 5,
@@ -325,7 +319,7 @@ class AskPermissionPage extends StatelessWidget {
                 child: const Center(
                   child: SendingLoadingWidget(),
                 ))
-                : SizedBox(),
+                : const SizedBox(),
             controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
               ////
               controller.errorsList.clear();
@@ -394,7 +388,7 @@ class AskPermissionPage extends StatelessWidget {
 
     } on NoInternetException catch (e) {
       errorDialog(context,message: e.errorMessage.tr);
-    } on NoDataAvailableException catch (e) {
+    } on NoDataAvailableException {
       errorDialog(context,message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;

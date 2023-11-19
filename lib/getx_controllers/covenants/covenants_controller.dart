@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../../helpers/constants/print_ln.dart';
 import '../../helpers/exceptions/no_internet.dart';
 import '../../models/covenant/covenants.dart';
 import '../../web_services_helper/api.dart';

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/views/pages/home/widgets/abcents.dart';
@@ -6,9 +5,7 @@ import 'package:wassl/views/pages/home/widgets/procesures.dart';
 
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import 'ads_widget.dart';
-import 'holidays_widget.dart';
 import 'next_events.dart';
 
 class CorrectingWidget extends StatelessWidget {

@@ -7,21 +7,21 @@ class Vacation {
   String? type;
   String? holidayStart;
   String? holidayEnd;
-  Null? ticket;
-  Null? ticketType;
-  Null? goDate;
-  Null? returnDate;
-  Null? exitAndReturnVisa;
-  Null? visaType;
-  Null? visaTime;
-  Null? visaRequireBefore;
+  void ticket;
+  void ticketType;
+  void goDate;
+  void returnDate;
+  void exitAndReturnVisa;
+  void visaType;
+  void visaTime;
+  void visaRequireBefore;
   String? reason;
   int? status;
-  Null? file;
+  void file;
   String? createdAt;
   String? updatedAt;
-  Null? hrComment;
-  Null? activeResponsibleId;
+  void hrComment;
+  void activeResponsibleId;
   String? typeOfOrder;
   OrderType? orderType;
 
@@ -51,7 +51,7 @@ class Vacation {
     activeResponsibleId = json['active_responsible_id'];
     typeOfOrder = json['type_of_order'];
     orderType = json['order_type'] != null
-        ? new OrderType.fromJson(json['order_type'])
+        ? OrderType.fromJson(json['order_type'])
         : null;
   }
 

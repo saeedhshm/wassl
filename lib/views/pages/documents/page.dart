@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:wassl/getx_controllers/docs/docs_get.dart';
-import 'package:wassl/models/docs/document.dart';
 import 'package:wassl/views/consts_widgets/loading_widgets.dart';
 import 'package:wassl/views/pages/documents/widgets/doc_item.dart';
-import 'package:wassl/views/reusable_widgets/load_image.dart';
 
 import '../../../helpers/constants/app_colors.dart';
 import '../../reusable_widgets/main_appbar.dart';

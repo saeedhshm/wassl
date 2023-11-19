@@ -9,8 +9,6 @@ import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
 import '../../../../helpers/exceptions/no_internet.dart';
 import '../../../../models/orders/AllOrders.dart';
-import '../../../../models/orders/letter.dart';
-import '../../../../models/orders/order_type.dart';
 import '../../../../models/orders/tabreer.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
@@ -22,8 +20,6 @@ import '../../../reusable_widgets/icons/chat_icon.dart';
 import '../../../reusable_widgets/icons/letter_icon.dart';
 import '../../../reusable_widgets/localized_text.dart';
 import '../../../reusable_widgets/main_appbar.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
-import '../../../reusable_widgets/svg_widget.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class ApologyRequestPage extends StatelessWidget {
@@ -121,7 +117,7 @@ class ApologyRequestPage extends StatelessWidget {
                                       .map((e) => e)
                                       .toList(),
                                   onSelectedIndex: (value) {
-                                    controller.selectedType = value as OrderType?;
+                                    controller.selectedType = value;
                                   },
                                   prefixIcon: const SizedBox(
                                       width: 5,
@@ -317,7 +313,7 @@ class ApologyRequestPage extends StatelessWidget {
 
      } on NoInternetException catch (e) {
        errorDialog(context,message: e.errorMessage.tr);
-     } on NoDataAvailableException catch (e) {
+     } on NoDataAvailableException {
        errorDialog(context,message: 'something_wrong_try_again'.tr);
      } finally {
        controller.loading.value = false;

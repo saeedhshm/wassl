@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/views/pages/orders/requests_page.dart';
 import 'package:wassl/views/pages/profile/user_menu.dart';
 import 'package:wassl/views/pages/updating_page.dart';
@@ -9,10 +8,8 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../getx_controllers/app_controller.dart';
 import '../../getx_controllers/calendar/calendar_controller.dart';
-import '../../getx_controllers/orders/previous_requests.dart';
 import 'calendar/attendance_form.dart';
 import 'home/home_page.dart';
-import 'orders/pages/loan_order.dart';
 import 'orders/previous_orders/page.dart';
 
 class MainTabsPage extends StatefulWidget {
@@ -45,7 +42,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
           pages[_index-1],
           Align(
             alignment: FractionalOffset.bottomCenter,
-            child: Container(
+            child: SizedBox(
 
 // color:Colors.red,
               height: 100,
@@ -62,7 +59,7 @@ class _MainTabsPageState extends State<MainTabsPage> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: Offset(0, 3), // changes position of shadow
+                              offset: const Offset(0, 3), // changes position of shadow
                             ),
                           ],
                           borderRadius: BorderRadius.circular(20)),

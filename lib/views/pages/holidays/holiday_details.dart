@@ -119,11 +119,11 @@ class HolidaysDetails extends StatelessWidget {
                                 ),
 
 
-                                SizedBox(width: 16,)
+                                const SizedBox(width: 16,)
                               ],
                             ),
                           ),
-                          SizedBox(height: 20,)
+                          const SizedBox(height: 20,)
                         ],
                       ),
                     ),
