@@ -9,7 +9,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
@@ -18,6 +17,8 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../helpers/constants/string_constants.dart';
+import '../helpers/location/huawei_location.dart';
+import '../helpers/location/position.dart';
 import '../models/auth/holidays.dart';
 
 class AppController extends GetxController {
@@ -27,6 +28,8 @@ class AppController extends GetxController {
   var holidaysBalance = Holidays().obs;
 
   String testingUserName = '';
+
+  late HuaweiLocationServices huaweiLocationServices;
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -43,7 +46,7 @@ class AppController extends GetxController {
   var loginModel = LoginModel().obs;
   var rememberMe = true;
 
-  Position? position;
+  AppPosition? position;
 
   var deployingForApple = false;
 
@@ -85,17 +88,12 @@ class AppController extends GetxController {
 
       loginModel.value.fromJson(json);
       if (fCMToken != null) {
-        println(fCMToken);
-        println(AppUrls.updateToken);
-        println(appHeader);
         final fcmResponse = await AppApiHandler.postData(
             url: AppUrls.updateToken,
             header: appHeader,
             body: {
               'token': fCMToken,
             });
-        println(fcmResponse.statusCode);
-        println(fcmResponse.body);
       }
     } else {
       throw UserNotFoundException();
@@ -188,6 +186,7 @@ class AppController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
+    huaweiLocationServices = HuaweiLocationServices();
     await getLanguage();
     checkVersion();
     // initPlatformState();
@@ -237,9 +236,7 @@ class AppController extends GetxController {
       throw LocationDisabledException();
       // return Future.error('Location services are disabled.');
     }
-
     permission = await Geolocator.checkPermission();
-
     // return Future.error('Location permissions are denied');
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -249,6 +246,7 @@ class AppController extends GetxController {
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
+
         listOfErrors
             .add(' LocationPermission.denied is LocationDeniedException');
         throw LocationDeniedException();
@@ -265,8 +263,17 @@ class AppController extends GetxController {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
+    var deviceData = await initPlatformState();
+    if (deviceData['brand'] == 'Huawei') {
+      position = await huaweiLocationServices.getLastLocation();
+      // println(position.toString());
+    } else {
+      try {
+        var p = await Geolocator.getCurrentPosition();
+        position = AppPosition(latitude: p.latitude, longitude: p.longitude);
+      } catch (e) {}
+    }
 
-    position = await Geolocator.getCurrentPosition();
     listOfErrors.add(
         'getCurrentPosition lat: ${position?.latitude} long: ${position?.longitude}');
 
@@ -277,7 +284,7 @@ class AppController extends GetxController {
     return permission;
   }
 
-  Future<void> initPlatformState() async {
+  Future<Map<String, dynamic>> initPlatformState() async {
     var deviceData = <String, dynamic>{};
 
     try {
@@ -294,6 +301,7 @@ class AppController extends GetxController {
         'Error:': 'Failed to get platform version.'
       };
     }
+    return deviceData;
 
     // if (!mounted) return;
   }
@@ -304,7 +312,7 @@ class AppController extends GetxController {
     listOfErrors.add('model: ${build.model}');
     listOfErrors.add('version.baseOS: ${build.version.baseOS}');
 
-    return <String, dynamic>{
+    var androidDeviceInfo = <String, dynamic>{
       'version.securityPatch': build.version.securityPatch,
       'version.sdkInt': build.version.sdkInt,
       'version.previewSdkInt': build.version.previewSdkInt,
@@ -340,6 +348,8 @@ class AppController extends GetxController {
       'displayYDpi': build.displayMetrics.yDpi,
       'serialNumber': build.serialNumber,
     };
+
+    return androidDeviceInfo;
   }
 
   Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {

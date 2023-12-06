@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:timezone/standalone.dart' as tz;
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
-
 import 'package:wassl/helpers/extensions/date_time.dart';
 import 'package:wassl/models/ads/ads.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -12,7 +13,6 @@ import '../../models/auth/attendance_check.dart';
 import '../../models/events/events.dart';
 import '../../web_services_helper/api.dart';
 import '../calendar/calendar_controller.dart';
-import 'package:timezone/standalone.dart' as tz;
 
 class HomeController extends GetxController {
   final AppController appController = Get.find();
@@ -42,7 +42,7 @@ class HomeController extends GetxController {
       'schedule_id': '${currentShift.value.schedule?.scheduleId}'
     };
 
-
+    println(body);
     var headers = {
       'Authorization':
           'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
@@ -81,8 +81,6 @@ class HomeController extends GetxController {
   }
 
   checkForAttendance() async {
-
-    println(AppUrls.attendanceCheck);
     var url = AppUrls.attendanceCheck;
     var headers = {
       'Authorization':
@@ -90,25 +88,21 @@ class HomeController extends GetxController {
       // "x-localization": 'lang_code'.tr,
     };
 
-
-
     sendingAttendance.value = true;
     var response = await AppApiHandler.getData(url: url, header: headers);
     sendingAttendance.value = false;
 
-
     if (response.statusCode == 200) {
-
-      try{
+      try {
         var json = jsonDecode(response.body) as List;
 
         checkList = json.map((e) => AttendanceCheck.fromJson(e)).toList();
-      }catch (e){
+      } catch (e) {
         var json = jsonDecode(response.body);
         checkList.add(AttendanceCheck.fromJson(json));
       }
 
-      checkList.sort((a, b){
+      checkList.sort((a, b) {
         return a.empTimeIn.compareTo(b.empTimeIn);
       });
 
@@ -119,10 +113,8 @@ class HomeController extends GetxController {
         employeeHasTowShifts.value = true;
 
         if (DateTime.now().isAfter(currentShift.value.empAllowTimeOut)) {
-
           currentShift.value = checkList.last;
           currentShift.value.shiftIndex = 1;
-
         }
       }
       attendanceStatus.value = currentShift.value.attendanceStatus ?? 0;
@@ -136,7 +128,6 @@ class HomeController extends GetxController {
           }
         }
       }
-
     }
   }
 
@@ -180,25 +171,24 @@ class HomeController extends GetxController {
   }
 
   String get currentShiftTimeIn {
-      return currentShift.value.schedule?.timeIn ?? '';
-
+    return currentShift.value.schedule?.timeIn ?? '';
   }
 
   String get currentShiftTimeOut {
-
-      return currentShift.value.schedule?.timeOut ?? '';
-
+    return currentShift.value.schedule?.timeOut ?? '';
   }
 
   String get branchName {
     return appController.loginModel.value.user!.branch?.name ?? '';
   }
 
-  String get currentShiftTitle{
-    if(employeeHasTowShifts.value) {
-      return 'working_period'.trParams({'name':currentShift.value.shiftIndex == 0 ? 'first'.tr : 'second'.tr});
+  String get currentShiftTitle {
+    if (employeeHasTowShifts.value) {
+      return 'working_period'.trParams({
+        'name': currentShift.value.shiftIndex == 0 ? 'first'.tr : 'second'.tr
+      });
     }
-    return 'working_period'.trParams({'name':''});
+    return 'working_period'.trParams({'name': ''});
   }
 
   bool get isLocationDisabled {
@@ -208,7 +198,6 @@ class HomeController extends GetxController {
   //controller lifecycle
   @override
   void onInit() {
-
     super.onInit();
 
     final detroit = tz.getLocation('Asia/Riyadh');

@@ -16,7 +16,6 @@ import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import 'attendance_info_widget.dart';
 
 class AttendanceWidget extends StatefulWidget {
-
   const AttendanceWidget({Key? key}) : super(key: key);
 
   @override
@@ -24,9 +23,6 @@ class AttendanceWidget extends StatefulWidget {
 }
 
 class _AttendanceWidgetState extends State<AttendanceWidget> {
-
-
-
   final HomeController controller = Get.find();
 
   final LocalAuthentication auth = LocalAuthentication();
@@ -43,152 +39,172 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
     super.initState();
     auth.isDeviceSupported().then(
           (bool isSupported) => setState(() => _supportState = isSupported
-          ? _SupportState.supported
-          : _SupportState.unsupported),
-    );
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           // !appController.isHolidayDay ?
-          child: appController.isFingerPrintExempt ? Center(
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text('exempt'.tr,style: const TextStyle(
-                  color: AppColors.darkGreyTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold)),
-            ),
-          ) :  !appController.isHolidayDay ? Obx(() =>
-              IgnorePointer(
-            ignoring: controller.attendanceStatus.value == 0 || controller.attendanceStatus.value == 3 ||
-                controller.sendingAttendance.value,
-            // ignoring: false,
-            child: InkWell(
-              onTap: () async {
-                // println(appController.isHolidayDay);
-                // return;
-                controller.sendingAttendance.value = true;
-                try {
-                  LocationPermission permission =
-                  await controller.appController.determinePosition();
-                  if (permission == LocationPermission.whileInUse) {
+          child: appController.isFingerPrintExempt
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Text('exempt'.tr,
+                        style: const TextStyle(
+                            color: AppColors.darkGreyTextColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                )
+              : !appController.isHolidayDay
+                  ? Obx(() => IgnorePointer(
+                        ignoring: controller.attendanceStatus.value == 0 ||
+                            controller.attendanceStatus.value == 3 ||
+                            controller.sendingAttendance.value,
+                        // ignoring: false,
+                        child: InkWell(
+                          onTap: () async {
+                            // println(appController.isHolidayDay);
+                            // return;
 
-                    askDialogWith2Buttons(context, message: controller.attendanceStatus.value == 1
-                        ? 'sure_to_attend?'.tr
-                        : 'sure_to_leave?'.tr,
-                      btnOkIcon: Icons.check_circle,
-                      btnOkText: controller.attendanceStatus.value == 1
-                          ? 'attendance'.tr
-                          : 'leaving'.tr,
-                      onPress: () async {
-                        // await attend();
-                        var availableBiometrics = await _getAvailableBiometrics();
-                        var canUseBiometric = await _checkBiometrics();
-                        if(canUseBiometric){
-                          if(availableBiometrics.isEmpty){
-                            await attend();
-                          }else{
-                            _authenticateWithBiometrics();
-                          }
-                        }else{
-                          await attend();
-                        }
-                      }
-                    );
-                    return;
-                    Get.defaultDialog(
-                      title: controller.attendanceStatus.value == 1
-                          ? 'reg_attend'.tr
-                          : 'reg_leaving'.tr,
-                      middleText: controller.attendanceStatus.value == 1
-                          ? 'sure_to_attend?'.tr
-                          : 'sure_to_leave?'.tr,
-                      cancel: InkWell(
-                        onTap: () {
-                          Get.back();
-                          controller.sendingAttendance.value = false;
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 30),
-                              child: Text(
-                                'cancel'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )),
+                            controller.sendingAttendance.value = true;
+                            try {
+                              LocationPermission permission = await controller
+                                  .appController
+                                  .determinePosition();
+                              if (permission == LocationPermission.whileInUse) {
+                                askDialogWith2Buttons(context,
+                                    message:
+                                        controller.attendanceStatus.value == 1
+                                            ? 'sure_to_attend?'.tr
+                                            : 'sure_to_leave?'.tr,
+                                    btnOkIcon: Icons.check_circle,
+                                    btnOkText:
+                                        controller.attendanceStatus.value == 1
+                                            ? 'attendance'.tr
+                                            : 'leaving'.tr, onPress: () async {
+                                  // await attend();
+
+                                  var availableBiometrics =
+                                      await _getAvailableBiometrics();
+                                  var canUseBiometric =
+                                      await _checkBiometrics();
+                                  if (canUseBiometric) {
+                                    if (availableBiometrics.isEmpty) {
+                                      await attend();
+                                    } else {
+                                      _authenticateWithBiometrics();
+                                    }
+                                  } else {
+                                    await attend();
+                                  }
+                                });
+                                return;
+                                Get.defaultDialog(
+                                  title: controller.attendanceStatus.value == 1
+                                      ? 'reg_attend'.tr
+                                      : 'reg_leaving'.tr,
+                                  middleText:
+                                      controller.attendanceStatus.value == 1
+                                          ? 'sure_to_attend?'.tr
+                                          : 'sure_to_leave?'.tr,
+                                  cancel: InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                      controller.sendingAttendance.value =
+                                          false;
+                                    },
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4, horizontal: 30),
+                                          child: Text(
+                                            'cancel'.tr,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        )),
+                                  ),
+                                  confirm: InkWell(
+                                    onTap: () async {
+                                      // await attend();
+                                      var availableBiometrics =
+                                          await _getAvailableBiometrics();
+                                      var canUseBiometric =
+                                          await _checkBiometrics();
+                                      if (canUseBiometric) {
+                                        if (availableBiometrics.isEmpty) {
+                                          await attend();
+                                        } else {
+                                          _authenticateWithBiometrics();
+                                        }
+                                      } else {
+                                        await attend();
+                                      }
+                                    },
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            color: AppColors.mainGreenColor,
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 4, horizontal: 30),
+                                          child: Text(
+                                            controller.attendanceStatus.value ==
+                                                    1
+                                                ? 'attendance'.tr
+                                                : 'leaving'.tr,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        )),
+                                  ),
+                                );
+                              }
+                            } on LocationDeniedException {
+                              errorDialog(context,
+                                  message: 'LocationDeniedException'.tr);
+                            } catch (e) {
+                              warningDialogWith2Buttons(context,
+                                  btnOkText: 'settings'.tr,
+                                  btnOkIcon: Icons.settings,
+                                  message: 'must_enable_location'.tr,
+                                  onPress: () {
+                                AppSettings.openAppSettings();
+                              });
+                            } finally {
+                              controller.sendingAttendance.value = false;
+                            }
+                          },
+                          child: controller.sendingAttendance.value
+                              ? const Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: SendingLoadingWidget(),
+                                )
+                              : AttendanceInfoWidget(),
+                        ),
+                      ))
+                  : Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text('today_holiday'.tr,
+                            style: const TextStyle(
+                                color: AppColors.darkGreyTextColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold)),
                       ),
-                      confirm: InkWell(
-                        onTap: () async {
-                          // await attend();
-                         var availableBiometrics = await _getAvailableBiometrics();
-                         var canUseBiometric = await _checkBiometrics();
-                         if(canUseBiometric){
-                           if(availableBiometrics.isEmpty){
-                             await attend();
-                           }else{
-                             _authenticateWithBiometrics();
-                           }
-                         }else{
-                           await attend();
-                         }
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.mainGreenColor,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 30),
-                              child: Text(
-                                controller.attendanceStatus.value == 1
-                                    ? 'attendance'.tr
-                                    : 'leaving'.tr,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            )),
-                      ),
-                    );
-                  }
-                } on LocationDeniedException {
-                  errorDialog(context,message: 'LocationDeniedException'.tr);
-
-                } catch (e) {
-                  warningDialogWith2Buttons(context,btnOkText: 'settings'.tr,btnOkIcon: Icons.settings,message: 'must_enable_location'.tr,onPress: (){
-                    AppSettings.openAppSettings();
-                  });
-
-                } finally {
-                  controller.sendingAttendance.value = false;
-                }
-              },
-              child: controller.sendingAttendance.value
-                  ? const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: SendingLoadingWidget(),
-              )
-                  : AttendanceInfoWidget(),
-            ),
-          ) ): Center(
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text('today_holiday'.tr,style: const TextStyle(
-                  color: AppColors.darkGreyTextColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold)),
-            ),
-          ),
+                    ),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -209,18 +225,13 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
   Future<void> attend() async {
     Get.back();
     try {
-      var attendanceDone =
-      await controller.registerAttendance();
-      SnackBars.showConfirmedSnackBar(
-          'success'.tr, attendanceDone);
+      var attendanceDone = await controller.registerAttendance();
+      SnackBars.showConfirmedSnackBar('success'.tr, attendanceDone);
     } on NoInternetException catch (e) {
-      SnackBars.showErrorSnackBar(
-          'error'.tr, e.errorMessage);
+      SnackBars.showErrorSnackBar('error'.tr, e.errorMessage);
     } catch (exception) {
-      var errorMessage =
-          'something_wrong_try_again'.tr;
-      SnackBars.showErrorSnackBar(
-          'error'.tr, exception.toString());
+      var errorMessage = 'something_wrong_try_again'.tr;
+      SnackBars.showErrorSnackBar('error'.tr, exception.toString());
     } finally {
       controller.sendingAttendance.value = false;
     }
@@ -245,7 +256,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
   }
 
   Future<List<BiometricType>> _getAvailableBiometrics() async {
-     List<BiometricType> availableBiometrics = [];
+    List<BiometricType> availableBiometrics = [];
     try {
       availableBiometrics = await auth.getAvailableBiometrics();
     } on PlatformException catch (e) {
@@ -256,8 +267,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       return availableBiometrics;
     }
 
-
-     return availableBiometrics;
+    return availableBiometrics;
   }
 
   Future<void> _authenticate() async {
@@ -289,7 +299,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
     }
 
     setState(
-            () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
   }
 
   Future<void> _authenticateWithBiometrics() async {
@@ -302,7 +312,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       });
       authenticated = await auth.authenticate(
         localizedReason:
-        'Scan your fingerprint (or face or whatever) to authenticate',
+            'Scan your fingerprint (or face or whatever) to authenticate',
         options: const AuthenticationOptions(
           stickyAuth: true,
           biometricOnly: false,
@@ -312,9 +322,9 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
         _isAuthenticating = false;
         _authorized = 'Authenticating';
       });
-      if(authenticated){
+      if (authenticated) {
         await attend();
-      }else{
+      } else {
         SnackBars.showErrorSnackBar('error'.tr, 'try again'.tr);
       }
       // await attend();
@@ -341,6 +351,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
     setState(() => _isAuthenticating = false);
   }
 }
+
 enum _SupportState {
   unknown,
   supported,

@@ -167,6 +167,14 @@ packages:
       relative: true
     source: path
     version: "1.9.1"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -427,6 +435,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  huawei_location:
+    dependency: "direct main"
+    description:
+      name: huawei_location
+      sha256: de7048ed6e132afed49c5e3c22b060a42b5a4c730958d27eda721dbbfa75f709
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.12.0+300"
   image:
     dependency: transitive
     description:
