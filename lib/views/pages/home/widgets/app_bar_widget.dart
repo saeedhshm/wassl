@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wassl/features/notifications/data/data_sources/data_source.dart';
+import 'package:wassl/features/notifications/domain/use_cases/get_notifications.dart';
+import 'package:wassl/features/notifications/presentation/manager/notifications_controller.dart';
+import 'package:wassl/features/notifications/presentation/pages/notif_page.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
+import '../../../../features/notifications/data/repositories/repository_impl.dart';
 import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/localized_text.dart';
@@ -41,13 +46,23 @@ class HomeBarWidget extends StatelessWidget {
                         fontWeight: FontWeight.w600),
                   ),
                   const Spacer(),
-                  SizedBox(
-                      height: 35,
-                      width: 35,
-                      child: Image.asset(
-                        'assets/images/settingicons/12.png',
-                        color: Colors.white,
-                      )),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => NotificationsPage(
+                          controller: Get.put(NotificationsController(
+                              getNotificationsUseCase: GetNotificationsUseCase(
+                                  repository: NotificationRepositoryImpl(
+                                      NotificationsTestDataSource())))
+                            ..getAllNotifications())));
+                    },
+                    child: SizedBox(
+                        height: 35,
+                        width: 35,
+                        child: Image.asset(
+                          'assets/images/settingicons/12.png',
+                          color: Colors.white,
+                        )),
+                  ),
                 ],
               ),
             ),
