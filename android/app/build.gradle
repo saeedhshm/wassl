@@ -27,6 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.huawei.agconnect'
 
+
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
@@ -58,6 +59,16 @@ android {
             keyPassword keystoreProperties['keyPassword']
             storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
             storePassword keystoreProperties['storePassword']
+
+            // Signing certificate.
+            storeFile file("upload-keystore.jks")
+            // KeyStore password.
+            storePassword "123456"
+            // Alias.
+            keyAlias "upload"
+            // Key password.
+            keyPassword "123456"
+            v2SigningEnabled true
         }
     }
     buildTypes {
@@ -77,6 +88,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
     implementation 'com.huawei.agconnect:agconnect-core:1.8.1.300'
+    implementation 'com.huawei.hms:location:6.12.0.300'
+
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 }

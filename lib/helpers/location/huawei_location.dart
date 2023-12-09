@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:huawei_location/huawei_location.dart';
 import 'package:wassl/helpers/location/position.dart';
@@ -10,40 +12,65 @@ class HuaweiLocationServices {
   final LocationRequest _locationRequest = LocationRequest()..interval = 500;
   late LocationSettingsRequest _locationSettingsRequest;
 
+  late StreamSubscription<Location> _streamSubscription;
+  int? _requestCode;
   HuaweiLocationServices() {
+    _streamSubscription = _locationService.onLocationData!.listen(
+      (Location location) {
+        println('=-=--=--=-=-> ${location.toString()}');
+      },
+    );
+    _requestLocationUpdates();
     getLastLocation();
-    // _locationSettingsRequest =
-    //     LocationSettingsRequest(requests: <LocationRequest>[_locationRequest]);
-    // _requestPermission();
   }
 
-  void _checkLocationSettings() async {
+  Future<UserPosition> getLastLocation() async {
     try {
-      final LocationSettingsStates states = await _locationService
-          .checkLocationSettings(_locationSettingsRequest);
-
-      // debugPrint(states.toString());
-    } on PlatformException catch (e) {}
-  }
-
-  // TODO: Please implement your own 'Permission Handler'.
-  void _requestPermission() async {
-    // Huawei Location needs some permissions to work properly.
-    // You are expected to handle these permissions to use Huawei Location Demo.
-
-    // You can learn more about the required permissions from our official documentations.
-    // https://developer.huawei.com/consumer/en/doc/development/HMS-Plugin-Guides/dev-process-0000001089376648?ha_source=hms1
-  }
-
-  Future<AppPosition> getLastLocation() async {
-    try {
+      println('location1.toString()');
+      _locationSettingsRequest = LocationSettingsRequest(
+          requests: <LocationRequest>[_locationRequest]);
       final Location location = await _locationService.getLastLocation();
       println(location.toString());
-      return AppPosition(
+
+      return UserPosition(
           latitude: location.latitude ?? 0.0,
           longitude: location.longitude ?? 0.0);
     } catch (e) {
       rethrow;
+    } finally {
+      _removeLocationUpdates();
+    }
+  }
+
+  void _requestLocationUpdates() async {
+    if (_requestCode == null) {
+      try {
+        final int requestCode = (await (_locationService
+            .requestLocationUpdates(_locationRequest)))!;
+        _requestCode = requestCode;
+        println('Location updates requested successfully');
+      } on PlatformException catch (e) {
+        println(e.toString());
+      }
+    } else {
+      println(
+        'Already requested location updates. Try removing location updates',
+      );
+    }
+  }
+
+  void _removeLocationUpdates() async {
+    if (_requestCode != null) {
+      try {
+        await _locationService.removeLocationUpdates(_requestCode!);
+        _requestCode = null;
+        _streamSubscription.cancel();
+        println('Location updates are removed successfully');
+      } on PlatformException catch (e) {
+        println(e.toString());
+      }
+    } else {
+      println('requestCode does not exist. Request location updates first');
     }
   }
 }

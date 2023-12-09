@@ -9,6 +9,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
@@ -46,7 +47,7 @@ class AppController extends GetxController {
   var loginModel = LoginModel().obs;
   var rememberMe = true;
 
-  AppPosition? position;
+  UserPosition? position;
 
   var deployingForApple = false;
 
@@ -227,50 +228,63 @@ class AppController extends GetxController {
 
     // Test if location services are enabled.
     listOfErrors.add('enter determinePosition');
+    println('===>>> in determinePosition 1');
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    println('===>>> in determinePosition 2');
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
       listOfErrors.add('serviceEnabled is false');
+      println('===>>> in determinePosition 3');
       throw LocationDisabledException();
       // return Future.error('Location services are disabled.');
     }
     permission = await Geolocator.checkPermission();
     // return Future.error('Location permissions are denied');
+    println('===>>> in determinePosition 4');
     if (permission == LocationPermission.denied) {
+      println('===>>> in determinePosition 5');
       permission = await Geolocator.requestPermission();
+      println('===>>> in determinePosition 6');
       if (permission == LocationPermission.denied) {
         // Permissions are denied, next time you could try
         // requesting permissions again (this is also where
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-
+        println('===>>> in determinePosition 7');
         listOfErrors
             .add(' LocationPermission.denied is LocationDeniedException');
         throw LocationDeniedException();
         // return permission;
       }
     }
-
+    println('===>>> in determinePosition 8');
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       listOfErrors.add('permission = LocationPermission.deniedForever');
+      println('===>>> in determinePosition 8');
       throw LocationDisabledException();
       // return permission;
     }
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
+    println('===>>> in determinePosition 9');
     var deviceData = await initPlatformState();
+    println('===>>> in determinePosition 10');
     if (deviceData['brand'] == 'Huawei') {
+      println('===>>> in determinePosition 11');
       position = await huaweiLocationServices.getLastLocation();
+      println('===>>> in determinePosition 12');
       // println(position.toString());
     } else {
+      println('===>>> in determinePosition 13');
       try {
         var p = await Geolocator.getCurrentPosition();
-        position = AppPosition(latitude: p.latitude, longitude: p.longitude);
+        position = UserPosition(latitude: p.latitude, longitude: p.longitude);
+        println(position.toString());
       } catch (e) {}
     }
 

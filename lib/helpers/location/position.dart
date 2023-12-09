@@ -1,12 +1,12 @@
-class AppPosition {
+class UserPosition {
   final double latitude;
   final double longitude;
 
-  AppPosition({required this.latitude, required this.longitude});
+  UserPosition({required this.latitude, required this.longitude});
 
   @override
   String toString() {
     // TODO: implement toString
-    return "latitude: $latitude, longitude: $longitude";
+    return "user position: latitude: $latitude, longitude: $longitude";
   }
 }
