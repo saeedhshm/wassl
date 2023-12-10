@@ -2,20 +2,16 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/device_info/device_info.dart';
 
 class DeviceInfoChecker {
   final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
   Future<DeviceInfo> initPlatformState() async {
-    println('=-=-=- indeivce checker 1');
     try {
       if (Platform.isAndroid) {
-        println('=-=-=- indeivce checker 2');
         var deviceInfoMap =
             _readAndroidBuildData(await _deviceInfoPlugin.androidInfo);
-        println('=-=-=- indeivce checker 3');
         return DeviceInfo.fromMap(deviceInfoMap);
       } else if (Platform.isIOS) {
         var deviceInfoMap = _readIosDeviceInfo(await _deviceInfoPlugin.iosInfo);
@@ -27,10 +23,9 @@ class DeviceInfoChecker {
       // deviceData = <String, dynamic>{
       //   'Error:': 'Failed to get platform version.'
       // };
-      println('=-=-=- indeivce checker exception');
+
       rethrow;
     } catch (e) {
-      println('=-=-=- indeivce checker exception 2 ${e.toString()}');
       rethrow;
     }
 
@@ -75,9 +70,6 @@ class DeviceInfoChecker {
       // 'serialNumber': build.serialNumber,
     };
 
-    println('=-=-=-=-=-=-==-=-=->>>>>>');
-    println(androidDeviceInfo);
-    println('=-=-=-=-=-=-==-=-=->>>>>>');
     return androidDeviceInfo;
   }
 

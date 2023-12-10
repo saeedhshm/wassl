@@ -1,15 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
@@ -18,7 +14,7 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../helpers/constants/string_constants.dart';
-import '../helpers/location/huawei_location.dart';
+import '../helpers/location/geolocation.dart';
 import '../helpers/location/position.dart';
 import '../models/auth/holidays.dart';
 
@@ -30,9 +26,7 @@ class AppController extends GetxController {
 
   String testingUserName = '';
 
-  late HuaweiLocationServices huaweiLocationServices;
-
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+  // late HuaweiLocationServices huaweiLocationServices;
 
   var listOfErrors = <String>[].obs;
 
@@ -89,15 +83,12 @@ class AppController extends GetxController {
 
       loginModel.value.fromJson(json);
       if (fCMToken != null) {
-        println("=-=-=- fCMToken $fCMToken");
         final fcmResponse = await AppApiHandler.postData(
             url: AppUrls.updateToken,
             header: appHeader,
             body: {
               'token': fCMToken,
             });
-      } else {
-        println("=-=-=- fCMToken $fCMToken");
       }
     } else {
       throw UserNotFoundException();
@@ -190,7 +181,7 @@ class AppController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     super.onInit();
-    huaweiLocationServices = HuaweiLocationServices();
+    // huaweiLocationServices = HuaweiLocationServices();
     await getLanguage();
     checkVersion();
     // initPlatformState();
@@ -231,65 +222,41 @@ class AppController extends GetxController {
 
     // Test if location services are enabled.
     listOfErrors.add('enter determinePosition');
-    println('===>>> in determinePosition 1');
+
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    println('===>>> in determinePosition 2');
+
     if (!serviceEnabled) {
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
       listOfErrors.add('serviceEnabled is false');
-      println('===>>> in determinePosition 3');
       throw LocationDisabledException();
       // return Future.error('Location services are disabled.');
     }
     permission = await Geolocator.checkPermission();
-    // return Future.error('Location permissions are denied');
-    println('===>>> in determinePosition 4');
     if (permission == LocationPermission.denied) {
-      println('===>>> in determinePosition 5');
       permission = await Geolocator.requestPermission();
-      println('===>>> in determinePosition 6');
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        println('===>>> in determinePosition 7');
         listOfErrors
             .add(' LocationPermission.denied is LocationDeniedException');
         throw LocationDeniedException();
         // return permission;
       }
     }
-    println('===>>> in determinePosition 8');
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
       listOfErrors.add('permission = LocationPermission.deniedForever');
-      println('===>>> in determinePosition 8');
+
       throw LocationDisabledException();
       // return permission;
     }
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    println('===>>> in determinePosition 9');
-    var deviceData = await initPlatformState();
-    println('===>>> in determinePosition 10');
-    if (deviceData['brand'] == 'Huawei') {
-      println('===>>> in determinePosition 11');
-      position = await huaweiLocationServices.getLastLocation();
-      println('===>>> in determinePosition 12');
-      // println(position.toString());
-    } else {
-      println('===>>> in determinePosition 13');
-      try {
-        var p = await Geolocator.getCurrentPosition();
-        position = UserPosition(latitude: p.latitude, longitude: p.longitude);
-        println(position.toString());
-      } catch (e) {}
-    }
+
+    try {
+      position = await MyGeoLocation().returnUserLocationposition();
+    } catch (e) {}
 
     listOfErrors.add(
         'getCurrentPosition lat: ${position?.latitude} long: ${position?.longitude}');
@@ -299,91 +266,6 @@ class AppController extends GetxController {
     // var first = addresses.first;
     // return first.countryName; // this will return country name
     return permission;
-  }
-
-  Future<Map<String, dynamic>> initPlatformState() async {
-    var deviceData = <String, dynamic>{};
-
-    try {
-      if (Platform.isAndroid) {
-        deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
-      } else if (Platform.isIOS) {
-        deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
-        deviceData.forEach((key, value) {
-          listOfErrors.add('$key: $value');
-        });
-      }
-    } on PlatformException {
-      deviceData = <String, dynamic>{
-        'Error:': 'Failed to get platform version.'
-      };
-    }
-    return deviceData;
-
-    // if (!mounted) return;
-  }
-
-  Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
-    listOfErrors.add('version.release: ${build.version.release},');
-    listOfErrors.add('brand: ${build.brand}');
-    listOfErrors.add('model: ${build.model}');
-    listOfErrors.add('version.baseOS: ${build.version.baseOS}');
-
-    var androidDeviceInfo = <String, dynamic>{
-      'version.securityPatch': build.version.securityPatch,
-      'version.sdkInt': build.version.sdkInt,
-      'version.previewSdkInt': build.version.previewSdkInt,
-      'version.incremental': build.version.incremental,
-      'version.codename': build.version.codename,
-      'version.baseOS': build.version.baseOS,
-      'board': build.board,
-      'bootloader': build.bootloader,
-      'brand': build.brand,
-      'device': build.device,
-      'display': build.display,
-      'fingerprint': build.fingerprint,
-      'hardware': build.hardware,
-      'host': build.host,
-      'id': build.id,
-      'manufacturer': build.manufacturer,
-      'model': build.model,
-      'product': build.product,
-      'supported32BitAbis': build.supported32BitAbis,
-      'supported64BitAbis': build.supported64BitAbis,
-      'supportedAbis': build.supportedAbis,
-      'tags': build.tags,
-      'type': build.type,
-      'isPhysicalDevice': build.isPhysicalDevice,
-      'systemFeatures': build.systemFeatures,
-      'displaySizeInches':
-          ((build.displayMetrics.sizeInches * 10).roundToDouble() / 10),
-      'displayWidthPixels': build.displayMetrics.widthPx,
-      'displayWidthInches': build.displayMetrics.widthInches,
-      'displayHeightPixels': build.displayMetrics.heightPx,
-      'displayHeightInches': build.displayMetrics.heightInches,
-      'displayXDpi': build.displayMetrics.xDpi,
-      'displayYDpi': build.displayMetrics.yDpi,
-      'serialNumber': build.serialNumber,
-    };
-
-    return androidDeviceInfo;
-  }
-
-  Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
-    return <String, dynamic>{
-      'name': data.name,
-      'systemName': data.systemName,
-      'systemVersion': data.systemVersion,
-      'model': data.model,
-      // 'localizedModel': data.localizedModel,
-      // 'identifierForVendor': data.identifierForVendor,
-      // 'isPhysicalDevice': data.isPhysicalDevice,
-      // 'utsname.sysname:': data.utsname.sysname,
-      // 'utsname.nodename:': data.utsname.nodename,
-      // 'utsname.release:': data.utsname.release,
-      // 'utsname.version:': data.utsname.version,
-      // 'utsname.machine:': data.utsname.machine,
-    };
   }
 
   bool get isHolidayDay {

@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:timezone/standalone.dart' as tz;
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/date_time.dart';
 import 'package:wassl/models/ads/ads.dart';
 import 'package:wassl/web_services_helper/urls.dart';
@@ -42,7 +41,6 @@ class HomeController extends GetxController {
       'schedule_id': '${currentShift.value.schedule?.scheduleId}'
     };
 
-    println(body);
     var headers = {
       'Authorization':
           'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',

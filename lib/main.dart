@@ -1,4 +1,3 @@
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -24,20 +23,11 @@ void main() async {
   await initializeDateFormatting();
 
   appController.deployingForApple = true;
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key) {
-    // _readAndroidBuildData().then((value) {
-    //   value.forEach((key, value) {
-    //     println('--->>$key --->> $value');
-    //   });
-    // });
-  }
-
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-
+  const MyApp({Key? key}) : super(key: key);
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -45,15 +35,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   AppController appController = Get.find();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    initNotifications();
-  }
-
-  initNotifications() async {}
 
   @override
   Widget build(BuildContext context) {

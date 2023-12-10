@@ -1,5 +1,3 @@
-import '../constants/print_ln.dart';
-
 class DeviceInfo {
   String? deviceName;
   String? systemName;
@@ -31,7 +29,6 @@ class DeviceInfo {
       this.product});
 
   DeviceInfo.fromMap(Map<String?, dynamic> info) {
-    println('kjkjkjkjjkjkjkjkjkjkjkjj');
     // iPhone
     deviceModel = info['model'];
     deviceName = info['name'];

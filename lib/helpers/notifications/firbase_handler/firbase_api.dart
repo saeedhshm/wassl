@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
-import 'package:wassl/helpers/constants/print_ln.dart';
 
 class FirebaseApi {
   static const notifIcon = '@drawable/ic_stat_wasl_ic';
@@ -12,8 +11,6 @@ class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async {
-    println("initNotifications vfvf ");
-
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();
     final AppController appController = Get.find();

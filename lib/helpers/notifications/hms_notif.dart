@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:huawei_push/huawei_push.dart';
 
-import '../constants/print_ln.dart';
-
 class HMSService {
   String token = '';
 
@@ -28,7 +26,6 @@ class HMSService {
     // Requested tokens can be obtained here
 
     token = event;
-    println('token in hsm $token');
   }
 
   void _onTokenError(Object error) {
@@ -50,13 +47,10 @@ class HMSService {
 
   void getiId() async {
     String? result = await Push.getId();
-    println("result id $result");
   }
 
   static void backgroundMessageCallback(RemoteMessage remoteMessage) async {
     String? data = remoteMessage.data;
-    println('remoteMessage.data');
-    println(data);
 
     Push.localNotification({
       HMSLocalNotificationAttr.TITLE: '[Headless] DataMessage Received',
@@ -65,16 +59,12 @@ class HMSService {
   }
 
   void _onNotificationOpenedApp(dynamic initialNotification) {
-    if (initialNotification != null) {
-      println(initialNotification.toString(), 'onNotificationOpenedApp');
-    }
+    if (initialNotification != null) {}
   }
 
   void _onMessageReceived(RemoteMessage remoteMessage) {
     // Called when a data message is received
     String? data = remoteMessage.data;
-    println('remoteMessage.data');
-    println(remoteMessage.data);
   }
 
   void _onMessageReceiveError(Object error) {
@@ -89,7 +79,6 @@ class HMSService {
 
   void turnOnPush() async {
     String result = await Push.turnOnPush();
-    println('Push.turnOnPush(): $result');
     // Push.showToast(result);
   }
 }

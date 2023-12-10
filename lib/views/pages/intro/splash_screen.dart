@@ -7,11 +7,10 @@ import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
-import '../../../firbase_handler/firbase_api.dart';
-import '../../../helpers/constants/print_ln.dart';
 import '../../../helpers/constants/string_constants.dart';
 import '../../../helpers/device_info/device_info_checker.dart';
 import '../../../helpers/exceptions/no_internet.dart';
+import '../../../helpers/notifications/firbase_handler/firbase_api.dart';
 import '../../../helpers/notifications/hms_notif.dart';
 import '../main_tabs_page.dart';
 
@@ -39,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     if (deviceInfo.isHuaweiPhone) {
       var token = await HMSService().init();
-      println('token in main $token');
     } else {
       try {
         await Firebase.initializeApp();
