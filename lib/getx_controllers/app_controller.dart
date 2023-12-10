@@ -89,12 +89,15 @@ class AppController extends GetxController {
 
       loginModel.value.fromJson(json);
       if (fCMToken != null) {
+        println("=-=-=- fCMToken $fCMToken");
         final fcmResponse = await AppApiHandler.postData(
             url: AppUrls.updateToken,
             header: appHeader,
             body: {
               'token': fCMToken,
             });
+      } else {
+        println("=-=-=- fCMToken $fCMToken");
       }
     } else {
       throw UserNotFoundException();

@@ -52,7 +52,10 @@ android {
         versionName flutterVersionName
 
     }
-
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -60,18 +63,21 @@ android {
             storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
             storePassword keystoreProperties['storePassword']
 
-            // Signing certificate.
-            storeFile file("upload-keystore.jks")
-            // KeyStore password.
-            storePassword "123456"
-            // Alias.
-            keyAlias "upload"
-            // Key password.
-            keyPassword "123456"
+//            // Signing certificate.
+//            storeFile file("/Users/mac/Desktop/wassal/app/wassl/wassl/android/upload-keystore.jks")
+//            // KeyStore password.
+//            storePassword "123456"
+//            // Alias.
+//            keyAlias "upload"
+//            // Key password.
+//            keyPassword "123456"
             v2SigningEnabled true
         }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             signingConfig signingConfigs.release
         }
@@ -90,8 +96,8 @@ dependencies {
     implementation 'com.huawei.agconnect:agconnect-core:1.8.1.300'
     implementation 'com.huawei.hms:location:6.12.0.300'
 
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
+    implementation 'com.huawei.hms:push:6.11.0.300'
+    implementation 'com.huawei.hms:hmscoreinstaller:6.7.0.300'
 }
 flutter {
     source '../..'

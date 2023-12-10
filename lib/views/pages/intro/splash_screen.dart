@@ -1,17 +1,21 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/views/pages/auth/login.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
+import '../../../firbase_handler/firbase_api.dart';
+import '../../../helpers/constants/print_ln.dart';
 import '../../../helpers/constants/string_constants.dart';
+import '../../../helpers/device_info/device_info_checker.dart';
 import '../../../helpers/exceptions/no_internet.dart';
+import '../../../helpers/notifications/hms_notif.dart';
 import '../main_tabs_page.dart';
 
 class SplashScreen extends StatefulWidget {
-
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -31,29 +35,36 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   onStartScreen() async {
+    var deviceInfo = await DeviceInfoChecker().initPlatformState();
+
+    if (deviceInfo.isHuaweiPhone) {
+      var token = await HMSService().init();
+      println('token in main $token');
+    } else {
+      try {
+        await Firebase.initializeApp();
+        await FirebaseApi().initNotifications();
+      } catch (e) {}
+    }
     var userCreds = await appController.retrieveUserAuth();
     var email = userCreds['email'] ?? '';
     var password = userCreds['password'] ?? '';
-    timer = Timer(const Duration(seconds: 3), ()async {
-    try {
+    timer = Timer(const Duration(seconds: 3), () async {
+      try {
+        await appController.login(email: email, password: password);
 
-          await appController.login(email: email, password: password);
-
-          Get.offAll(() => const MainTabsPage(), duration: Duration.zero);
-
-
-    } on NoInternetException catch (e) {
-      Get.defaultDialog(
-          title: 'error'.tr,
-          middleText: e.errorMessage,
-          barrierDismissible: false);
-    } on UserNotFoundException {
-      Get.offAll(() => const LoginPage(), duration: Duration.zero);
-    } catch (e){
-      Get.offAll(() => const LoginPage(), duration: Duration.zero);
-    }
-      });
-
+        Get.offAll(() => const MainTabsPage(), duration: Duration.zero);
+      } on NoInternetException catch (e) {
+        Get.defaultDialog(
+            title: 'error'.tr,
+            middleText: e.errorMessage,
+            barrierDismissible: false);
+      } on UserNotFoundException {
+        Get.offAll(() => const LoginPage(), duration: Duration.zero);
+      } catch (e) {
+        Get.offAll(() => const LoginPage(), duration: Duration.zero);
+      }
+    });
   }
 
   @override

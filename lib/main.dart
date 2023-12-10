@@ -1,12 +1,10 @@
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:month_year_picker/month_year_picker.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:wassl/firbase_handler/firbase_api.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/pages/intro/splash_screen.dart';
@@ -16,10 +14,6 @@ import 'helpers/translation/local_strings.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppController appController = Get.put(AppController());
-  try {
-    await Firebase.initializeApp();
-    await FirebaseApi().initNotifications();
-  } catch (e) {}
 
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -33,7 +27,7 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({Key? key}) : super(key: key) {
     // _readAndroidBuildData().then((value) {
     //   value.forEach((key, value) {
@@ -42,12 +36,24 @@ class MyApp extends StatelessWidget {
     // });
   }
 
-  // This widget is the root of your application.
+  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
   AppController appController = Get.find();
 
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  final Map<String, dynamic> _deviceData = <String, dynamic>{};
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initNotifications();
+  }
+
+  initNotifications() async {}
 
   @override
   Widget build(BuildContext context) {

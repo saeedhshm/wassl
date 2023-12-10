@@ -395,6 +395,13 @@
             </list>
           </value>
         </entry>
+        <entry key="huawei_push">
+          <value>
+            <list>
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/huawei_push-6.11.0+300/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="image">
           <value>
             <list>
@@ -1000,6 +1007,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/http-0.13.6/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/huawei_location-6.12.0+300/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/huawei_push-6.11.0+300/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/image-3.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/internet_connection_checker-1.0.0+1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/intl-0.17.0/lib" />
