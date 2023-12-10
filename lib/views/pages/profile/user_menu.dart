@@ -5,6 +5,7 @@ import 'package:wassl/views/pages/profile/profile_info.dart';
 import 'package:wassl/views/pages/profile/team_members.dart';
 import 'package:wassl/views/pages/profile/widgets/header_widget.dart';
 import 'package:wassl/views/reusable_widgets/light_text_widget.dart';
+
 import '../../../getx_controllers/attendance/member_attendance_controller.dart';
 import '../../reusable_widgets/list_profile_item_widget.dart';
 import '../covenant/page.dart';
@@ -13,12 +14,10 @@ import '../finance_info/finance.dart';
 import '../finance_info/salaries.dart';
 import '../holidays/holiday_details.dart';
 
-
 class UserProfilePage extends StatelessWidget {
-
-   UserProfilePage({Key? key}) : super(key: key);
-   final UserMenuViewModel menuViewModel = Get.put(UserMenuViewModel());
-   final membersAttendanceController = Get.put(MembersAttendanceController());
+  UserProfilePage({Key? key}) : super(key: key);
+  final UserMenuViewModel menuViewModel = Get.put(UserMenuViewModel());
+  final membersAttendanceController = Get.put(MembersAttendanceController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,40 +29,52 @@ class UserProfilePage extends StatelessWidget {
         height: double.infinity,
         child: SingleChildScrollView(
           child: Padding(
-            padding:  EdgeInsets.only(
-              top: height*1.5,
-              left: 16,
-              right: 16
-            ),
+            padding: EdgeInsets.only(top: height * 1.5, left: 16, right: 16),
             child: Column(
               children: [
                 // SizedBox(height: ,),
                 // image, name, job and settings
                 HeaderWidget(),
                 // vacations
-                const SizedBox(width:double.infinity,child: LightTextWidget('anual_vacations',fontSize: 15
-                  ,)),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                    width: double.infinity,
+                    child: LightTextWidget(
+                      'anual_vacations',
+                      fontSize: 15,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
 
                 // vacations information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>HolidaysDetails());
+                  onTap: () {
+                    Get.to(() => HolidaysDetails());
                   },
                   child: ListProfileItemWidget(
-                    title: "${'vacations_balance'.tr} ${menuViewModel.availableVacationsCount} ${'days_available_to_use'.tr}",
+                    title:
+                        "${'vacations_balance'.tr} ${menuViewModel.availableVacationsCount} ${'days_available_to_use'.tr}",
                     icon: "assets/images/profile/vacation.png",
                   ),
                 ),
 
-                const SizedBox(height: 20,),
-                const SizedBox(width:double.infinity,child: LightTextWidget('profile',fontSize: 15,)),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                    width: double.infinity,
+                    child: LightTextWidget(
+                      'profile',
+                      fontSize: 15,
+                    )),
+                const SizedBox(
+                  height: 10,
+                ),
 
                 // profile information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>InfoPage());
+                  onTap: () {
+                    Get.to(() => InfoPage());
                   },
                   child: const ListProfileItemWidget(
                     title: "profile_info",
@@ -71,26 +82,30 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
                 // team members attendance
-                membersAttendanceController.hasTeamMembers ? InkWell(
-                  onTap: (){
-                    Get.to(()=>TeamMembersPage());
-                  },
-                  child: const ListProfileItemWidget(
-                    title: "team_member",
-                    icon: "assets/images/profile/team.png",
-                  ),
-                ) : const SizedBox(),
+                membersAttendanceController.hasTeamMembers
+                    ? InkWell(
+                        onTap: () {
+                          Get.to(() => TeamMembersPage());
+                        },
+                        child: const ListProfileItemWidget(
+                          title: "team_member",
+                          icon: "assets/images/profile/team.png",
+                        ),
+                      )
+                    : const SizedBox(),
 
                 //working information
-                menuViewModel.hideSections ? const SizedBox() :  const ListProfileItemWidget(
-                  title: "work_info",
-                  icon: "assets/images/profile/2.png",
-                ),
+                menuViewModel.hideSections
+                    ? const SizedBox()
+                    : const ListProfileItemWidget(
+                        title: "work_info",
+                        icon: "assets/images/profile/2.png",
+                      ),
 
                 //finance information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>FinanceInfoPage());
+                  onTap: () {
+                    Get.to(() => FinanceInfoPage());
                   },
                   child: const ListProfileItemWidget(
                     title: "money_info",
@@ -100,8 +115,8 @@ class UserProfilePage extends StatelessWidget {
 
                 //salaries information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>AllSalariesPage());
+                  onTap: () {
+                    Get.to(() => AllSalariesPage());
                   },
                   child: const ListProfileItemWidget(
                     title: "salaries",
@@ -111,8 +126,8 @@ class UserProfilePage extends StatelessWidget {
 
                 // documents information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>DocsPage());
+                  onTap: () {
+                    Get.to(() => DocsPage());
                   },
                   child: const ListProfileItemWidget(
                     title: "docs",
@@ -121,15 +136,17 @@ class UserProfilePage extends StatelessWidget {
                 ),
 
                 //contracts information
-                menuViewModel.hideSections ? const SizedBox() :   const ListProfileItemWidget(
-                  title: "contracts",
-                  icon: "assets/images/profile/5.png",
-                ),
+                menuViewModel.hideSections
+                    ? const SizedBox()
+                    : const ListProfileItemWidget(
+                        title: "contracts",
+                        icon: "assets/images/profile/5.png",
+                      ),
 
                 //Covenant information
                 InkWell(
-                  onTap: (){
-                    Get.to(()=>CovenantPage());
+                  onTap: () {
+                    Get.to(() => CovenantPage());
                   },
                   child: const ListProfileItemWidget(
                     title: "Custodys",
@@ -137,8 +154,9 @@ class UserProfilePage extends StatelessWidget {
                   ),
                 ),
 
-
-                const SizedBox(height: 110,)
+                const SizedBox(
+                  height: 110,
+                )
               ],
             ),
           ),
@@ -147,5 +165,3 @@ class UserProfilePage extends StatelessWidget {
     );
   }
 }
-
-

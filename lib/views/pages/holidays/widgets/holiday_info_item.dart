@@ -6,12 +6,9 @@ class HolidayInfoItemWidget extends StatelessWidget {
   final String icon;
   final String title;
   final String count;
-  const HolidayInfoItemWidget({
-    Key? key,
-    required this.count,
-    required this.title,
-    required this.icon
-  }) : super(key: key);
+  const HolidayInfoItemWidget(
+      {Key? key, required this.count, required this.title, required this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,26 +21,32 @@ class HolidayInfoItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(icon,width: 45,color: AppColors.iconsColor.withOpacity(0.7),),
+            Image.asset(
+              icon,
+              width: 45,
+              color: AppColors.iconsColor.withOpacity(0.7),
+            ),
             const Spacer(),
-            Text(title,style: const TextStyle(
-              color: AppColors.darkGreyTextColor,
-              fontSize: 18,
-              fontWeight: FontWeight.w500
-            ),),
+            Text(
+              title,
+              style: const TextStyle(
+                  color: AppColors.darkGreyTextColor,
+                  fontSize: 16.5,
+                  fontWeight: FontWeight.w500),
+            ),
             const Spacer(),
-            Text(count,style: const TextStyle(
-                color: AppColors.lightGreyTextColor,
-                fontSize: 18,
-                fontWeight: FontWeight.w600
-            ),),
+            Text(
+              count,
+              style: const TextStyle(
+                  color: AppColors.lightGreyTextColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
+            ),
           ],
         ),
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16)
-      ),
+          color: Colors.white, borderRadius: BorderRadius.circular(16)),
     );
   }
 }

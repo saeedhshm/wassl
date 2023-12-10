@@ -19,81 +19,76 @@ class Procedures extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal:8.0),
-            child: Row(
-              children: [
-                Text(
-                  'my_procedures'.tr,
-                  style: const TextStyle(
-                      color: AppColors.iconsColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                // Text(
-                //   'more'.tr,
-                //   style: const TextStyle(
-                //       color: AppColors.lightGreyTextColor,
-                //       fontSize: 14,
-                //       fontWeight: FontWeight.normal),
-                // ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
             children: [
-              Expanded(
-                child: InkWell(
-                  onTap: (){
-                    Get.to(DocsPage());
-                  },
-                  child: ItemWidget(
-                    icon:  const DocIcon(),
-                    title: 'papers'.tr,
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'my_procedures'.tr,
+                      style: const TextStyle(
+                          color: AppColors.iconsColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                  ],
                 ),
               ),
-              const SizedBox(width: 16,),
-              Expanded(
-                child: InkWell(
-                  onTap: (){
-                    Get.to(PreviousRequestsPage(fromHomePage: true,));
-                  },
-                  child: ItemWidget(
-                    icon: const EditBenOnPaperIcon(),
-                    title: 'my_orders'.tr,
-                  ),
-                ),
+              const SizedBox(
+                height: 20,
               ),
-              const SizedBox(width: 16,),
-              Expanded(
-                child: InkWell(
-                  onTap: (){
-                    Get.to(()=>AllSalariesPage());
-                  },
-                  child: ItemWidget(
-                    icon:  const SalaryMoneyOnHandIcon(),
-                    title: 'salaries'.tr,
+              Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(DocsPage());
+                      },
+                      child: ItemWidget(
+                        icon: const DocIcon(),
+                        title: 'papers'.tr,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-
-
-
-
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(PreviousRequestsPage(
+                          fromHomePage: true,
+                        ));
+                      },
+                      child: ItemWidget(
+                        icon: const EditBenOnPaperIcon(),
+                        title: 'my_orders'.tr,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(() => AllSalariesPage());
+                      },
+                      child: ItemWidget(
+                        icon: const SalaryMoneyOnHandIcon(),
+                        title: 'salaries'.tr,
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
-        ],
-      ),
-    ),
+          ),
+        ),
       ],
     );
   }
@@ -111,7 +106,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.width / 4.5,
+      height: Get.width / 4.0,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -121,7 +116,7 @@ class ItemWidget extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 0.5,
             blurRadius: 0.5,
-            offset: const Offset(0,1), // changes position of shadow
+            offset: const Offset(0, 1), // changes position of shadow
           ),
         ],
       ),
@@ -129,17 +124,16 @@ class ItemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child:SizedBox(width: 20,child: icon),
+            padding: const EdgeInsets.all(0.0),
+            child: SizedBox(width: Get.width / 13, child: icon),
           ),
           const SizedBox(
-            height: 5,
+            height: 10,
           ),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 12,
-                color: AppColors.darkGreyTextColor),
+            style: TextStyle(
+                fontSize: Get.width / 27.5, color: AppColors.darkGreyTextColor),
           )
         ],
       ),
