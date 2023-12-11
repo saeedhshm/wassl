@@ -11,15 +11,14 @@ class LocationPermissionHandler {
 
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-
-      //if loaction permission denied
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
+    } else if (permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
     }
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      throw LocationDeniedDisabledException();
+    if (permission == LocationPermission.denied) {
+      throw LocationDeniedException();
+    }
+    if (permission == LocationPermission.deniedForever) {
+      throw LocationDeniedForeverException();
     }
   }
 }

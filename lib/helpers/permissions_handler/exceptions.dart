@@ -1,5 +1,5 @@
 class SystemLocationDisabledException implements Exception {}
 
-class LocationDeniedForeverDisabledException implements Exception {}
+class LocationDeniedForeverException implements Exception {}
 
-class LocationDeniedDisabledException implements Exception {}
+class LocationDeniedException implements Exception {}

@@ -255,7 +255,7 @@ class AppController extends GetxController {
     // continue accessing the position of the device.
 
     try {
-      position = await MyGeoLocation().returnUserLocationposition();
+      position = await UserLocationPosition().getUserLocationPosition();
     } catch (e) {}
 
     listOfErrors.add(
