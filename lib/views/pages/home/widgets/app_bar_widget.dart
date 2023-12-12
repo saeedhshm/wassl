@@ -6,8 +6,8 @@ import 'package:wassl/features/notifications/presentation/manager/notifications_
 import 'package:wassl/features/notifications/presentation/pages/notif_page.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
+import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../features/notifications/data/repositories/repository_impl.dart';
-import '../../../../getx_controllers/home/home_controller.dart';
 import '../../../consts_widgets/gradiants.dart';
 import '../../../reusable_widgets/localized_text.dart';
 

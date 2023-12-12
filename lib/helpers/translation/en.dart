@@ -143,11 +143,11 @@ Map<String, String> englishString = {
   'cancel_order': 'Cancel request',
   'sure_to_attend?': 'Do you want to register attendance?',
   'sure_to_leave?': 'Do you want to leave?',
-  'must_enable_location':
-      'Location services must be activated first in order to be able to register attendance and leave',
+  'must_enable_location': 'Location must be enabled',
   'location_error': 'Error',
   'job_code': 'Job code',
   'full_name': 'Full name',
+  'enable': 'Enable',
   'email': 'Email',
   'date_of_birth': 'Birth of date',
   'mobile_number': 'Phone number',

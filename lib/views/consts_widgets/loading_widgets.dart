@@ -8,11 +8,13 @@ class SendingLoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: Padding(
+        padding: EdgeInsets.all(18.0),
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
-
 
 class WaitingRequestLoadingWidget extends StatelessWidget {
   const WaitingRequestLoadingWidget({Key? key}) : super(key: key);
@@ -24,9 +26,10 @@ class WaitingRequestLoadingWidget extends StatelessWidget {
       height: double.infinity,
       color: Colors.white.withOpacity(0.5),
       child: const Center(
-        child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(AppColors.mainGreenColor)),
+        child: CircularProgressIndicator(
+            valueColor:
+                AlwaysStoppedAnimation<Color>(AppColors.mainGreenColor)),
       ),
     );
   }
 }
-

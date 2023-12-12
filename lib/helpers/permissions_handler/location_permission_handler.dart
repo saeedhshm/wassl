@@ -7,6 +7,7 @@ class LocationPermissionHandler {
     LocationPermission permission;
     var serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) throw SystemLocationDisabledException();
+
     permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {

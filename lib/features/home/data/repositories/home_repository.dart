@@ -37,4 +37,16 @@ class HomeRepositoryImpl extends HomeRepository {
       return Left(LocationServiceDisabledFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> checkAttendanceStatus() {
+    // TODO: implement checkAttendanceStatus
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, Unit>> registerAttendanceLeave() {
+    // TODO: implement registerAttendanceLeave
+    throw UnimplementedError();
+  }
 }

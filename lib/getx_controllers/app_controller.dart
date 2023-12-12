@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wassl/helpers/exceptions/location_exceptions.dart';
 import 'package:wassl/helpers/exceptions/no_internet.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
@@ -14,7 +12,6 @@ import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
 import '../helpers/constants/string_constants.dart';
-import '../helpers/location/geolocation.dart';
 import '../helpers/location/position.dart';
 import '../models/auth/holidays.dart';
 
@@ -216,57 +213,7 @@ class AppController extends GetxController {
   ///
   /// When the location services are not enabled or permissions
   /// are denied the `Future` will return an error.
-  Future<LocationPermission> determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    listOfErrors.add('enter determinePosition');
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      listOfErrors.add('serviceEnabled is false');
-      throw LocationDisabledException();
-      // return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        listOfErrors
-            .add(' LocationPermission.denied is LocationDeniedException');
-        throw LocationDeniedException();
-        // return permission;
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      listOfErrors.add('permission = LocationPermission.deniedForever');
-
-      throw LocationDisabledException();
-      // return permission;
-    }
-
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-
-    try {
-      position = await UserLocationPosition().getUserLocationPosition();
-    } catch (e) {}
-
-    listOfErrors.add(
-        'getCurrentPosition lat: ${position?.latitude} long: ${position?.longitude}');
-
-    // final coordinates = new Coordinates(position.latitude, position.longitude);
-    // var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
-    // var first = addresses.first;
-    // return first.countryName; // this will return country name
-    return permission;
-  }
+  Future<void> determdinePosition() async {}
 
   bool get isHolidayDay {
     var weekEnds = (loginModel.value.user?.schedule?.info?.weekEndDays ?? '')

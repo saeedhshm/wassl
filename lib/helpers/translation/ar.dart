@@ -141,9 +141,9 @@ Map<String, String> arabicStrings = {
   'cancel_order': 'إلغاء الطلب',
   'sure_to_attend?': 'هل تريد تسجيل الحضور؟',
   'sure_to_leave?': 'هل تريد تسجيل الانصراف',
-  'must_enable_location':
-      ' يجب تفعيل خدمات الموقع اولا لتتمكن من تسجيل الحضور والانصراف',
+  'must_enable_location': ' يجب تفعيل خدمات الموقع',
   'location_error': 'خطأ',
+  'enable': 'تفعيل',
   'job_code': 'الرقم الوظيفي',
   'full_name': 'الاسم كاملا',
   'email': 'البريد الإلكتروني',

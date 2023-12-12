@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../getx_controllers/home/home_controller.dart';
+import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../reusable_widgets/circular_widget.dart';
 
@@ -10,8 +10,6 @@ class AttendanceInfoWidget extends StatelessWidget {
   final HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-
-
     return Row(
       children: [
         const SizedBox(
@@ -24,7 +22,9 @@ class AttendanceInfoWidget extends StatelessWidget {
               padding: 0,
               borderColor: Colors.transparent,
               child: Image.asset(
-                  'assets/images/profile/1.png',color: AppColors.iconsColor,)),
+                'assets/images/profile/1.png',
+                color: AppColors.iconsColor,
+              )),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(50),
@@ -64,8 +64,7 @@ class AttendanceInfoWidget extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(
-              top: 20, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: SizedBox(
             width: 35,
             child: ClipRRect(
@@ -73,8 +72,7 @@ class AttendanceInfoWidget extends StatelessWidget {
                   bottomLeft: Radius.circular(16),
                   bottomRight: Radius.circular(16),
                 ),
-                child: Image.asset(
-                    'assets/images/attend_print_ic.png')),
+                child: Image.asset('assets/images/attend_print_ic.png')),
           ),
         )
       ],
