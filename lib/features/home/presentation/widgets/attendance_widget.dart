@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../features/home/presentation/manager/status/attendance_state.dart';
@@ -9,8 +9,8 @@ import '../../../../features/home/presentation/widgets/attendance/widgets/messag
 import '../../../../getx_controllers/app_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/constants/print_ln.dart';
-import '../../../consts_widgets/loading_widgets.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
+import '../../../../views/consts_widgets/loading_widgets.dart';
+import '../../../../views/reusable_widgets/dialogs_messages/snack_bars.dart';
 import 'attendance_info_widget.dart';
 
 class AttendanceWidget extends StatefulWidget {
@@ -45,9 +45,7 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
             return AttendanceMessageWidget('today_holiday'.tr);
           case HomeLocationEnabledState:
             return IgnorePointer(
-              ignoring: controller.attendanceStatus.value == 0 ||
-                  controller.attendanceStatus.value == 3 ||
-                  controller.sendingAttendance.value,
+              ignoring: controller.attendanceRegisterBlocker,
               // ignoring: false,
               child: InkWell(
                 onTap: () async {

@@ -10,7 +10,7 @@ import 'package:wassl/views/reusable_widgets/icons/extra_work_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/visa_order.dart';
 import '../../../consts_widgets/loading_widgets.dart';
@@ -100,8 +100,7 @@ class VisaRequestPage extends StatelessWidget {
                                   children: [
                                     DropDownWidget<OrderType>(
                                       hintText: 'visa_type'.tr,
-                                      selectedValue:
-                                          controller.selectedType,
+                                      selectedValue: controller.selectedType,
                                       items: controller.visaTypes.value.data
                                               ?.map((e) => e)
                                               .toList() ??
@@ -119,15 +118,14 @@ class VisaRequestPage extends StatelessWidget {
                                     ),
                                     DropDownWidget<OrderType>(
                                       hintText: 'visa_time'.tr,
-                                      selectedValue:
-                                          controller.selectedTime,
+                                      selectedValue: controller.selectedTime,
                                       items: controller.visaTimes.value.data
                                               ?.map((e) => e)
                                               .toList() ??
                                           [],
                                       onSelectedIndex: (value) {
-                                        controller.selectedTime = value as OrderType;
-
+                                        controller.selectedTime =
+                                            value as OrderType;
                                       },
                                       prefixIcon: const SizedBox(
                                           width: 5,
@@ -251,15 +249,13 @@ class VisaRequestPage extends StatelessWidget {
                                                     .selectedTicketType,
                                                 items: controller
                                                         .ticketTypes.value.data
-                                                        ?.map(
-                                                            (e) => e)
+                                                        ?.map((e) => e)
                                                         .toList() ??
                                                     [],
                                                 onSelectedIndex: (value) {
                                                   controller
                                                           .selectedTicketType =
                                                       value as OrderType;
-
                                                 },
                                                 prefixIcon: const SizedBox(
                                                     width: 5,
@@ -292,7 +288,8 @@ class VisaRequestPage extends StatelessWidget {
                                                   }
                                                 },
                                                 child: TextFormFieldWithIcons(
-                                                  prefixIcon: const PrefCalendarIcon(),
+                                                  prefixIcon:
+                                                      const PrefCalendarIcon(),
                                                   hintText: 'go_date'.tr,
                                                   enabled: false,
                                                   controller: goDateCtrl,
@@ -334,7 +331,8 @@ class VisaRequestPage extends StatelessWidget {
                                                       },
                                                       child:
                                                           TextFormFieldWithIcons(
-                                                        prefixIcon: const PrefCalendarIcon(),
+                                                        prefixIcon:
+                                                            const PrefCalendarIcon(),
                                                         hintText:
                                                             'back_date'.tr,
                                                         enabled: false,
@@ -385,7 +383,7 @@ class VisaRequestPage extends StatelessWidget {
                                         }
                                       },
                                       child: TextFormFieldWithIcons(
-                                        prefixIcon:const AttachmentIcon(),
+                                        prefixIcon: const AttachmentIcon(),
                                         hintText: 'attach_file'.tr,
                                         enabled: false,
                                         controller: fileCtrl,
@@ -440,18 +438,16 @@ class VisaRequestPage extends StatelessWidget {
   _sendData(context) async {
     try {
       await controller.addNewRequest();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -460,18 +456,16 @@ class VisaRequestPage extends StatelessWidget {
   _updateRequest(context) async {
     try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -481,18 +475,16 @@ class VisaRequestPage extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

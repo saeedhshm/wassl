@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../../helpers/exceptions/no_internet.dart';
+import '../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../models/finance/finance.dart';
 import '../../web_services_helper/api.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
 
 class FinanceInfoController extends GetxController {
+  String? month;
+  String? year;
 
-  String? month; String? year;
-
-  FinanceInfoController({this.month,this.year});
+  FinanceInfoController({this.month, this.year});
 
   final AppController appController = Get.find();
   var loading = false.obs;
@@ -29,7 +29,7 @@ class FinanceInfoController extends GetxController {
 
     var url =
         '${AppUrls.salaryDetailsApi}/${appController.loginModel.value.user?.id}';
-    if(month != null && year != null){
+    if (month != null && year != null) {
       url += '?year=$year&month=$month';
     }
     final response = await AppApiHandler.getData(

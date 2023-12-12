@@ -9,7 +9,7 @@ import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 
 import '../../../../helpers/constants/app_colors.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/letter.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
@@ -37,8 +37,6 @@ class LetterRequestPage extends StatelessWidget {
       directedToArCtrl.text = request.directedToAr ?? '';
       directedToEnCtrl.text = request.directedToEn ?? '';
       reasonCtrl.text = request.reason;
-
-
     }
   }
 
@@ -51,13 +49,10 @@ class LetterRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    if(order != null){
-      if(controller
-          .orderTypes.value.data != null ){
-        for(var type in controller
-            .orderTypes.value.data!){
-          if(type.id == order?.type?.id){
+    if (order != null) {
+      if (controller.orderTypes.value.data != null) {
+        for (var type in controller.orderTypes.value.data!) {
+          if (type.id == order?.type?.id) {
             controller.selectedType = type;
           }
         }
@@ -122,7 +117,6 @@ class LetterRequestPage extends StatelessWidget {
                                                 height: 35,
                                                 child: LetterIcon()),
                                           ),
-
 
                                           const SizedBox(
                                             height: 15,
@@ -213,9 +207,11 @@ class LetterRequestPage extends StatelessWidget {
                                           order == null
                                               ? SendButtonWidget(_addNewRequest)
                                               : CancelUpdateWidget(
-                                            onUpdateRequest: _updateRequest,
-                                            onCancelRequest: _cancelRequest,
-                                          ),
+                                                  onUpdateRequest:
+                                                      _updateRequest,
+                                                  onCancelRequest:
+                                                      _cancelRequest,
+                                                ),
                                           const SizedBox(
                                             height: 25,
                                           ),
@@ -252,18 +248,16 @@ class LetterRequestPage extends StatelessWidget {
   _addNewRequest(context) async {
     try {
       await controller.addNewLetter();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -272,18 +266,16 @@ class LetterRequestPage extends StatelessWidget {
   _updateRequest(context) async {
     try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -293,18 +285,16 @@ class LetterRequestPage extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

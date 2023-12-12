@@ -1,17 +1,16 @@
 import 'package:wassl/helpers/extensions/strings_extensions.dart';
 
-import '../attendance.dart';
-import '../schedule.dart';
+import '../../../../models/schedule.dart';
+import 'attendance.dart';
 
 class AttendanceCheck {
-
   String? message;
   int? attendanceStatus;
   Attendance? attendance;
   dynamic vacation;
   Schedule? schedule;
   int? shiftIndex;
-
+  bool haseTowShifts = false;
 
   AttendanceCheck();
 
@@ -22,37 +21,28 @@ class AttendanceCheck {
         ? Attendance.fromJson(json['attendance'])
         : null;
     vacation = json['vacation'];
-    schedule = json['schedule'] != null
-        ? Schedule.fromJson(json['schedule'])
-        : null;
+    schedule =
+        json['schedule'] != null ? Schedule.fromJson(json['schedule']) : null;
   }
-
-
-
 }
 
-
-
-
-extension SecheduleTimes on AttendanceCheck{
-  DateTime get empTimeIn{
+extension SecheduleTimes on AttendanceCheck {
+  DateTime get empTimeIn {
     return (schedule?.info?.timeIn ?? '').exactDateTimeFromGivenHours!;
   }
 
-  DateTime get empTimeOut{
+  DateTime get empTimeOut {
     return (schedule?.info?.timeOut ?? '').exactDateTimeFromGivenHours!;
   }
 
-  DateTime get empAllowTimeIn{
-
+  DateTime get empAllowTimeIn {
     return (schedule?.allowTimeIn ?? '').exactDateTimeFromGivenHours!;
   }
 
-  DateTime get empAllowTimeOut{
-    if(schedule?.allowTimeOut != null) {
+  DateTime get empAllowTimeOut {
+    if (schedule?.allowTimeOut != null) {
       return (schedule?.allowTimeOut ?? '').exactDateTimeFromGivenHours!;
     }
     return empTimeOut.add(const Duration(minutes: 40));
   }
 }
-

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -6,7 +5,7 @@ import 'package:wassl/models/orders/tabreer.dart';
 import 'package:wassl/models/orders/visa_order.dart';
 
 import '../../getx_controllers/app_controller.dart';
-import '../../helpers/exceptions/no_internet.dart';
+import '../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../web_services_helper/api.dart';
 import '../countries/city.dart';
 import '../countries/country.dart';
@@ -22,7 +21,6 @@ import 'order_type.dart';
 import 'over_time.dart';
 
 class AllOrders {
-
   List<Order> orders = [];
   bool? success;
   String? message;
@@ -38,56 +36,49 @@ class AllOrders {
     var orderType = 'type_of_order';
 
     if (json['orders'] != null) {
-
       json['orders'].forEach((v) {
-
-        if(v[orderType] == 'permission'){
-          orders.add( AskPermissionsData.fromJson(v));
-        }else if(v[orderType] == 'holiday'){
-          orders.add( HolidaysData.fromJson(v));
-        }else if(v[orderType] == 'fingerprint'){
-          orders.add( FingerprintCorrectionsData.fromJson(v));
-        }else if(v[orderType] == 'loan'){
-          orders.add( LoansData.fromJson(v));
-        }else if(v[orderType] == 'letter'){
-          orders.add( LetterDate.fromJson(v));
-        }else if(v[orderType] == 'custody'){
-          orders.add( CustodyDate.fromJson(v));
-        }else if(v[orderType] == 'visa'){
+        if (v[orderType] == 'permission') {
+          orders.add(AskPermissionsData.fromJson(v));
+        } else if (v[orderType] == 'holiday') {
+          orders.add(HolidaysData.fromJson(v));
+        } else if (v[orderType] == 'fingerprint') {
+          orders.add(FingerprintCorrectionsData.fromJson(v));
+        } else if (v[orderType] == 'loan') {
+          orders.add(LoansData.fromJson(v));
+        } else if (v[orderType] == 'letter') {
+          orders.add(LetterDate.fromJson(v));
+        } else if (v[orderType] == 'custody') {
+          orders.add(CustodyDate.fromJson(v));
+        } else if (v[orderType] == 'visa') {
           orders.add(OrderVisaData.fromJson(v));
-        }else if(v[orderType] == 'overtime'){
-          orders.add( OvertimeData.fromJson(v));
-        }else if(v[orderType] == 'financial'){
-          orders.add( FinancialExpensesDate.fromJson(v));
-        }else if(v[orderType] == 'tabrir'){
-          orders.add( ApologyData.fromJson(v));
+        } else if (v[orderType] == 'overtime') {
+          orders.add(OvertimeData.fromJson(v));
+        } else if (v[orderType] == 'financial') {
+          orders.add(FinancialExpensesDate.fromJson(v));
+        } else if (v[orderType] == 'tabrir') {
+          orders.add(ApologyData.fromJson(v));
         }
       });
     }
-
 
     message = json['message'];
   }
 
   Future<List<Order>> getAllOrders() async {
+    var response = await AppApiHandler.getData(
+        url: url!, header: appController!.appHeader);
 
-
-
-    var response = await AppApiHandler.getData(url: url!,header: appController!.appHeader);
-
-
-    if(response.statusCode != 200){
+    if (response.statusCode != 200) {
       throw NoDataAvailableException();
     }
     var json = jsonDecode(response.body);
     var value = AllOrders.fromJson(json);
 
     return value.orders;
-
   }
-
 }
-abstract class Order{
+
+abstract class Order {
   String get orderName;
   String get orderDate;
   String get orderStatus;
@@ -106,7 +97,6 @@ abstract class Order{
 
   OrderType? type;
 }
-
 
 class Confirmation {
   int? id;
@@ -128,15 +118,15 @@ class Confirmation {
 
   Confirmation(
       {this.id,
-        this.employeeId,
-        this.orderId,
-        this.responsibleEmployeeId,
-        this.sortOrder,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.orderType,
-        this.responsibleEmployee});
+      this.employeeId,
+      this.orderId,
+      this.responsibleEmployeeId,
+      this.sortOrder,
+      this.status,
+      this.createdAt,
+      this.updatedAt,
+      this.orderType,
+      this.responsibleEmployee});
 
   Confirmation.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -161,7 +151,6 @@ class Confirmation {
         ? ResponsibleEmployee.fromJson(json['responsible_employee'])
         : null;
   }
-
 }
 
 class ResponsibleEmployee {
@@ -169,7 +158,9 @@ class ResponsibleEmployee {
   String? _fullName;
   String? _fullNameEn;
 
-  ResponsibleEmployee({this.id,});
+  ResponsibleEmployee({
+    this.id,
+  });
 
   ResponsibleEmployee.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -185,7 +176,7 @@ class ResponsibleEmployee {
     return data;
   }
 
-  String get fullName{
+  String get fullName {
     return ('lang_code'.tr == 'ar' ? _fullName : _fullNameEn) ?? '';
   }
 }
@@ -203,14 +194,14 @@ class BusinessTrip {
 
   BusinessTrip(
       {this.id,
-        this.companyId,
-        this.countryId,
-        this.regionId,
-        this.costPerDay,
-        this.createdAt,
-        this.updatedAt,
-        this.country,
-        this.region});
+      this.companyId,
+      this.countryId,
+      this.regionId,
+      this.costPerDay,
+      this.createdAt,
+      this.updatedAt,
+      this.country,
+      this.region});
 
   BusinessTrip.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -221,16 +212,7 @@ class BusinessTrip {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     country =
-    json['country'] != null ? Country.fromJson(json['country']) : null;
-    region =
-    json['region'] != null ? City.fromJson(json['region']) : null;
+        json['country'] != null ? Country.fromJson(json['country']) : null;
+    region = json['region'] != null ? City.fromJson(json['region']) : null;
   }
-
 }
-
-
-
-
-
-
-

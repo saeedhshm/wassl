@@ -11,7 +11,7 @@ import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/loan_order.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
@@ -99,8 +99,7 @@ class NewLoanOrder extends StatelessWidget {
                                     // DropDownMenu(textHint: 'loan_type'.tr,)
                                     DropDownWidget(
                                       hintText: 'loan_type'.tr,
-                                      selectedValue:
-                                          controller.selectedType,
+                                      selectedValue: controller.selectedType,
                                       items: controller.orderTypes.value.data!
                                           .map((e) => e)
                                           .toList(),
@@ -120,17 +119,20 @@ class NewLoanOrder extends StatelessWidget {
                                       prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'value'.tr,
                                       controller: amountCtrl,
-                                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                      keyboardType:
+                                          const TextInputType.numberWithOptions(
+                                              decimal: true),
                                       onChange: (value) {
                                         controller.amount = value;
                                       },
-                                      suffixIcon:  SizedBox(
+                                      suffixIcon: SizedBox(
                                         width: 25,
                                         child: Center(
                                           child: Text(
                                             'SAR'.tr,
-                                            style:
-                                                const TextStyle(color: Colors.grey,fontSize: 12),
+                                            style: const TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
                                           ),
                                         ),
                                       ),
@@ -172,18 +174,21 @@ class NewLoanOrder extends StatelessWidget {
                                       prefixIcon: const MoneyOnHandIcon(),
                                       hintText: 'installmentMonthlyAmount'.tr,
                                       controller: monthlyAmountCtrl,
-                                      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                      keyboardType:
+                                          const TextInputType.numberWithOptions(
+                                              decimal: true),
                                       onChange: (value) {
                                         controller.installmentMonthlyAmount =
                                             value;
                                       },
-                                      suffixIcon:  SizedBox(
+                                      suffixIcon: SizedBox(
                                         width: 25,
                                         child: Center(
                                           child: Text(
                                             'SAR'.tr,
-                                            style:
-                                                const TextStyle(color: Colors.grey,fontSize: 12),
+                                            style: const TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12),
                                           ),
                                         ),
                                       ),
@@ -272,9 +277,9 @@ class NewLoanOrder extends StatelessWidget {
                                     order == null
                                         ? SendButtonWidget(_addNewRequest)
                                         : CancelUpdateWidget(
-                                      onUpdateRequest: _updateRequest,
-                                      onCancelRequest: _cancelRequest,
-                                    ),
+                                            onUpdateRequest: _updateRequest,
+                                            onCancelRequest: _cancelRequest,
+                                          ),
                                     const SizedBox(
                                       height: 25,
                                     ),
@@ -309,18 +314,16 @@ class NewLoanOrder extends StatelessWidget {
   _addNewRequest(context) async {
     try {
       await controller.addNewLoad();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -329,18 +332,16 @@ class NewLoanOrder extends StatelessWidget {
   _updateRequest(context) async {
     try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -350,18 +351,16 @@ class NewLoanOrder extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

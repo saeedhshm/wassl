@@ -5,7 +5,7 @@ import 'package:wassl/models/orders/AllOrders.dart';
 import 'package:wassl/web_services_helper/api.dart';
 import 'package:wassl/web_services_helper/urls.dart';
 
-import '../../helpers/exceptions/no_internet.dart';
+import '../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../views/pages/orders/previous_orders/page.dart';
 import '../app_controller.dart';
 

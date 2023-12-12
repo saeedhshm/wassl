@@ -8,8 +8,8 @@ import 'package:wassl/web_services_helper/urls.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../features/notifications/data/repositories/repository_impl.dart';
-import '../../../consts_widgets/gradiants.dart';
-import '../../../reusable_widgets/localized_text.dart';
+import '../../../../views/consts_widgets/gradiants.dart';
+import '../../../../views/reusable_widgets/localized_text.dart';
 
 class HomeBarWidget extends StatelessWidget {
   final HomeController controller = Get.find();

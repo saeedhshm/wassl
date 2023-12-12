@@ -9,7 +9,7 @@ import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
 import '../../../helpers/constants/string_constants.dart';
 import '../../../helpers/device_info/device_info_checker.dart';
-import '../../../helpers/exceptions/no_internet.dart';
+import '../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../helpers/notifications/firbase_handler/firbase_api.dart';
 import '../../../helpers/notifications/hms_notif.dart';
 import '../main_tabs_page.dart';

@@ -88,10 +88,7 @@ class DeviceInfoChecker {
       // 'utsname.version:': data.utsname.version,
       'utsname.machine:': data.utsname.machine,
     };
-    print('=-=-=-=-=-=-==-=-=->>>>>>');
-    print(androidDeviceInfo);
-    // println(androidDeviceInfo);
-    print('=-=-=-=-=-=-==-=-=->>>>>>');
+
     return androidDeviceInfo;
   }
 }

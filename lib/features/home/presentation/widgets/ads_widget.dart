@@ -5,7 +5,7 @@ import 'package:wassl/views/pages/ads/ads_page.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../reusable_widgets/load_image.dart';
+import '../../../../views/reusable_widgets/load_image.dart';
 
 class AdsWidget extends StatelessWidget {
   AdsWidget({Key? key}) : super(key: key);

@@ -14,11 +14,13 @@ class LocationFailure extends Failure {
   List<Object?> get props => [message];
 }
 
-class DataFailure extends Failure {
-  final String message;
-
-  DataFailure(this.message);
+class NoDataFailure extends Failure {
+  NoDataFailure();
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [];
 }
+
+class UnknownFailure extends Failure {}
+
+class NoInternetFailure extends Failure {}

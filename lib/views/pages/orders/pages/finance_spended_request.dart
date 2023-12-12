@@ -11,7 +11,7 @@ import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../../getx_controllers/orders/financial_expenses.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/financial_expenses.dart';
 import '../../../consts_widgets/loading_widgets.dart';
@@ -125,16 +125,20 @@ class FinanceSpendedRequest extends StatelessWidget {
                                 prefixIcon: const MoneyOnHandIcon(),
                                 hintText: 'value'.tr,
                                 controller: amountCtrl,
-                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
                                 onChange: (value) {
                                   controller.amount = value;
                                 },
-                                suffixIcon:  SizedBox(
+                                suffixIcon: SizedBox(
                                   width: 25,
                                   child: Center(
                                     child: Text(
                                       'SAR'.tr,
-                                      style: const TextStyle(color: AppColors.iconsColor,fontSize: 12),
+                                      style: const TextStyle(
+                                          color: AppColors.iconsColor,
+                                          fontSize: 12),
                                     ),
                                   ),
                                 ),
@@ -248,9 +252,9 @@ class FinanceSpendedRequest extends StatelessWidget {
                               order == null
                                   ? SendButtonWidget(_addNewRequest)
                                   : CancelUpdateWidget(
-                                onUpdateRequest: _updateRequest,
-                                onCancelRequest: _cancelRequest,
-                              ),
+                                      onUpdateRequest: _updateRequest,
+                                      onCancelRequest: _cancelRequest,
+                                    ),
                               const SizedBox(
                                 height: 25,
                               ),
@@ -287,18 +291,16 @@ class FinanceSpendedRequest extends StatelessWidget {
   _addNewRequest(context) async {
     try {
       await controller.addNewRequest();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -307,18 +309,16 @@ class FinanceSpendedRequest extends StatelessWidget {
   _updateRequest(context) async {
     try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -328,18 +328,16 @@ class FinanceSpendedRequest extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

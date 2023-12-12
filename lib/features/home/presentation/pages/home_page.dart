@@ -4,19 +4,22 @@ import 'package:wassl/features/home/data/repositories/home_repository.dart';
 import 'package:wassl/features/home/presentation/manager/home_controller.dart';
 import 'package:wassl/helpers/constants/app_colors.dart';
 import 'package:wassl/views/consts_widgets/gradiants.dart';
-import 'package:wassl/views/pages/home/widgets/app_bar_widget.dart';
-import 'package:wassl/views/pages/home/widgets/correcting_widget.dart';
-import 'package:wassl/views/pages/home/widgets/shift_info_widget.dart';
 
-import '../../../features/home/domain/use_cases/location_use_case.dart';
-import '../holidays/holiday_details.dart';
-import 'widgets/holidays_widget.dart';
+import '../../../../views/pages/holidays/holiday_details.dart';
+import '../../domain/use_cases/attendance_use_case.dart';
+import '../../domain/use_cases/location_use_case.dart';
+import '../widgets/app_bar_widget.dart';
+import '../widgets/correcting_widget.dart';
+import '../widgets/holidays_widget.dart';
+import '../widgets/shift_info_widget.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
-  final HomeController controller = Get.put(
-      HomeController(LocationUseCase(homeRepository: HomeRepositoryImpl())));
+  final HomeController controller = Get.put(HomeController(
+      locationUseCase: LocationUseCase(homeRepository: HomeRepositoryImpl()),
+      attendanceUseCases:
+          AttendanceUseCases(homeRepository: HomeRepositoryImpl())));
 
   @override
   Widget build(BuildContext context) {

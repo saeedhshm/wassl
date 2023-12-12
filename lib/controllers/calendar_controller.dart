@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../helpers/exceptions/no_internet.dart';
+import '../helpers/exceptions/internet_api_exceptions.dart';
 import '../models/attendance/month_attendance.dart';
 import '../web_services_helper/api.dart';
 

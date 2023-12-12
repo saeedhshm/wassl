@@ -11,15 +11,15 @@ import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../../getx_controllers/orders/overtime_work.dart';
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/over_time.dart';
 import '../../../consts_widgets/loading_widgets.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';
+import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../reusable_widgets/error_message_widget.dart';
 import '../../../reusable_widgets/icons/calendar_icon.dart';
 import '../../../reusable_widgets/icons/chat_icon.dart';
-import '../../../reusable_widgets/dialogs_messages/snack_bars.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class ExtraWorkRequest extends StatelessWidget {
@@ -251,9 +251,9 @@ class ExtraWorkRequest extends StatelessWidget {
                               order == null
                                   ? SendButtonWidget(_addNewRequest)
                                   : CancelUpdateWidget(
-                                onUpdateRequest: _updateRequest,
-                                onCancelRequest: _cancelRequest,
-                              ),
+                                      onUpdateRequest: _updateRequest,
+                                      onCancelRequest: _cancelRequest,
+                                    ),
                               const SizedBox(
                                 height: 25,
                               ),
@@ -290,18 +290,16 @@ class ExtraWorkRequest extends StatelessWidget {
   _addNewRequest(context) async {
     try {
       await controller.addNewRequest();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -310,18 +308,16 @@ class ExtraWorkRequest extends StatelessWidget {
   _updateRequest(context) async {
     try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on CustomException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } finally {
       controller.loading.value = false;
     }
@@ -331,18 +327,16 @@ class ExtraWorkRequest extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

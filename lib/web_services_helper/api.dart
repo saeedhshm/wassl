@@ -2,30 +2,19 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:wassl/helpers/exceptions/no_internet.dart';
-
+import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
 
 class AppApiHandler {
-
-  static  Future<http.Response> getData(
+  static Future<http.Response> getData(
       {required String url,
       Map<String, String>? header,
       Map<String, dynamic>? body}) async {
-
-    // bool result = await InternetConnectionChecker().hasConnection;
-    // if(result == true) {
-    //   return Future.error('YAY! Free cute dog pics!');
-    // } else {
-    //   return Future.error('No internet :( Reason:');
-    //   // print(InternetConnectionChecker().);
-    // }
     bool result = await InternetConnectionChecker().hasConnection;
-    if(!result) {
+    if (!result) {
       throw NoInternetException();
     }
     var uri = Uri.parse(url);
     final response = await http.get(uri, headers: header);
-
 
     return response;
   }
@@ -37,7 +26,7 @@ class AppApiHandler {
     var uri = Uri.parse(url);
 
     bool result = await InternetConnectionChecker().hasConnection;
-    if(!result) {
+    if (!result) {
       throw NoInternetException();
     }
     final response = await http.post(uri, body: body, headers: header);
@@ -46,24 +35,22 @@ class AppApiHandler {
   }
 
   //
-  static Future<Uint8List> downloadMyFile({required String url,
-    required dynamic body,
-    Map<String, String>? header}) async {
-
+  static Future<Uint8List> downloadMyFile(
+      {required String url,
+      required dynamic body,
+      Map<String, String>? header}) async {
     var uri = Uri.parse(url);
-    final response = await http.readBytes(uri,headers: header);
+    final response = await http.readBytes(uri, headers: header);
 
     return response;
   }
 
   static Future<http.Response> putData(
-      {required String url,
-        dynamic body,
-        Map<String, String>? header}) async {
+      {required String url, dynamic body, Map<String, String>? header}) async {
     var uri = Uri.parse(url);
 
     bool result = await InternetConnectionChecker().hasConnection;
-    if(!result) {
+    if (!result) {
       throw NoInternetException();
     }
     final response = await http.put(uri, body: body, headers: header);
@@ -73,35 +60,29 @@ class AppApiHandler {
 
   static Future<http.StreamedResponse> postDataWithFile(
       {required String url,
-        required dynamic body,
-        Map<String, String>? header,String? fileName}) async {
-
+      required dynamic body,
+      Map<String, String>? header,
+      String? fileName}) async {
     bool result = await InternetConnectionChecker().hasConnection;
-    if(!result) {
+    if (!result) {
       throw NoInternetException();
     }
 
     var uri = Uri.parse(url);
 
-
     var request = http.MultipartRequest('POST', uri);
-    if(header != null){
+    if (header != null) {
       request.headers.addAll(header);
     }
 
-
     request.fields.addAll(body);
 
-    if(fileName != null ){
-
-      if(!fileName.contains('public/file/')) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'file', fileName));
+    if (fileName != null) {
+      if (!fileName.contains('public/file/')) {
+        request.files.add(await http.MultipartFile.fromPath('file', fileName));
       }
     }
     var response = await request.send();
     return response;
-
   }
 }
-

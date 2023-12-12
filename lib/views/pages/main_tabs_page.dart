@@ -6,10 +6,10 @@ import 'package:wassl/views/pages/profile/user_menu.dart';
 import 'package:wassl/views/pages/updating_page.dart';
 import 'package:wassl/views/reusable_widgets/svg_widget.dart';
 
+import '../../features/home/presentation/pages/home_page.dart';
 import '../../getx_controllers/app_controller.dart';
 import '../../getx_controllers/calendar/calendar_controller.dart';
 import 'calendar/attendance_form.dart';
-import 'home/home_page.dart';
 import 'orders/previous_orders/page.dart';
 
 class MainTabsPage extends StatefulWidget {
@@ -20,141 +20,152 @@ class MainTabsPage extends StatefulWidget {
 }
 
 class _MainTabsPageState extends State<MainTabsPage> {
-
   int _index = 4;
 
-  final CalendarViewModel calendarController =  Get.put(CalendarViewModel());
+  final CalendarViewModel calendarController = Get.put(CalendarViewModel());
 
   final AppController appController = Get.find();
 
   var pages = [
-     UserProfilePage(),
-    Center(child: PreviousRequestsPage(),),
+    UserProfilePage(),
+    Center(
+      child: PreviousRequestsPage(),
+    ),
     AttendancePage(),
-    Center(child: HomePage(),),
+    Center(
+      child: HomePage(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {
-
-    return  Scaffold(
-      body:calendarController.appController.canUpdate ? UpdatingAppPage(): Stack(
-        children: [
-          pages[_index-1],
-          Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: SizedBox(
-
+    return Scaffold(
+      body: calendarController.appController.canUpdate
+          ? UpdatingAppPage()
+          : Stack(
+              children: [
+                pages[_index - 1],
+                Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: SizedBox(
 // color:Colors.red,
-              height: 100,
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 25, left: 16, right: 16, bottom: 16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset: const Offset(0, 3), // changes position of shadow
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              child:
-                              GestureDetector(
-                                onTap: (){
-                                  _index = 4;
-                                  setState((){});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/4.svg",color: _tabIconColor(4),),
-                                ),
-                              )),
-                          Expanded(
-                              child:
-                              GestureDetector(
-                                onTap: (){
-                                  _index = 3;
-
-                                  setState((){});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/3.svg",color: _tabIconColor(3)),
-                                ),
-                              )),
-                          const Spacer(),
-                          Expanded(
-                              child:
-                              GestureDetector(
-                                onTap: (){
-                                  _index = 2;
-
-                                  setState((){});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget("assets/images/bottom_nav/2.svg",color: _tabIconColor(2),),
-                                ),
-                              )),
-                          Expanded(
-                              child:  GestureDetector(
-                                onTap: (){
-                                  _index = 1;
-                                  setState((){});
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: SvgWidget(
-                                    "assets/images/bottom_nav/1.svg",
-                                      color: _tabIconColor(1)
+                    height: 100,
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 25, left: 16, right: 16, bottom: 16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 7,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
                                   ),
-                                ),
-                              )),
-                        ],
-                      ),
-                    ),
-                  ),
-                 Align(
-                    alignment: FractionalOffset.topCenter,
-                    child: InkWell(
-                      onTap: (){
-                        Get.to(()=> RequestsPage());
-                      },
-                      child: Container(
-                        height: 65,
-                        width: 65,
-                        child: const Padding(
-                          padding: EdgeInsets.all(15.0),
-                          child: SvgWidget('assets/images/bottom_nav/plus.svg'),
-                        ),
-                        decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                              colors: AppColors.gradiantGreen,
+                                ],
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    _index = 4;
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: SvgWidget(
+                                      "assets/images/bottom_nav/4.svg",
+                                      color: _tabIconColor(4),
+                                    ),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    _index = 3;
+
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: SvgWidget(
+                                        "assets/images/bottom_nav/3.svg",
+                                        color: _tabIconColor(3)),
+                                  ),
+                                )),
+                                const Spacer(),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    _index = 2;
+
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: SvgWidget(
+                                      "assets/images/bottom_nav/2.svg",
+                                      color: _tabIconColor(2),
+                                    ),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    _index = 1;
+                                    setState(() {});
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: SvgWidget(
+                                        "assets/images/bottom_nav/1.svg",
+                                        color: _tabIconColor(1)),
+                                  ),
+                                )),
+                              ],
                             ),
-                            borderRadius: BorderRadius.circular(100)),
-                      ),
+                          ),
+                        ),
+                        Align(
+                          alignment: FractionalOffset.topCenter,
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(() => RequestsPage());
+                            },
+                            child: Container(
+                              height: 65,
+                              width: 65,
+                              child: const Padding(
+                                padding: EdgeInsets.all(15.0),
+                                child: SvgWidget(
+                                    'assets/images/bottom_nav/plus.svg'),
+                              ),
+                              decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.centerRight,
+                                    end: Alignment.centerLeft,
+                                    colors: AppColors.gradiantGreen,
+                                  ),
+                                  borderRadius: BorderRadius.circular(100)),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 
-  Color _tabIconColor(int index){
-    return _index == index ? AppColors.iconsColor : AppColors.mainGreenColor.withOpacity(0.5);
+  Color _tabIconColor(int index) {
+    return _index == index
+        ? AppColors.iconsColor
+        : AppColors.mainGreenColor.withOpacity(0.5);
   }
 }

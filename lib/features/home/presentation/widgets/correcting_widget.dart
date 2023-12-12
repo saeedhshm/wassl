@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wassl/views/pages/home/widgets/abcents.dart';
-import 'package:wassl/views/pages/home/widgets/procesures.dart';
+import 'package:wassl/features/home/presentation/widgets/procesures.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
+import 'abcents.dart';
 import 'ads_widget.dart';
 import 'next_events.dart';
 

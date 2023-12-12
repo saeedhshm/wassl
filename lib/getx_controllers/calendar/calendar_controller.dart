@@ -1,7 +1,7 @@
-
 import 'package:get/get.dart';
 import 'package:wassl/controllers/calendar_controller.dart';
-import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
+
 import '../../models/attendance/month_attendance.dart';
 import '../../web_services_helper/urls.dart';
 import '../app_controller.dart';
@@ -9,7 +9,8 @@ import '../app_controller.dart';
 class CalendarViewModel extends GetxController {
   final AppController appController = Get.find();
 
-  late final CalendarController _calendarController = CalendarController(appController.appHeader);
+  late final CalendarController _calendarController =
+      CalendarController(appController.appHeader);
 
   var loading = false.obs;
   var attendanceOfMonth = MonthAttendance().obs;
@@ -21,25 +22,20 @@ class CalendarViewModel extends GetxController {
   var noDataAttendanceAvailable = ''.obs;
 
   Future<void> _checkForMonthAttendance() async {
-
-
     attendanceOfMonth.value.attendancesOfMonth.clear();
     _calendarController.url =
         '${AppUrls.monthlyAttendance}?month=${dateTime.month}&year=${dateTime.year}';
 
     var monthAttendance = await _calendarController.checkForMonthAttendance();
 
-    if(monthAttendance != null){
+    if (monthAttendance != null) {
       attendanceOfMonth.value = monthAttendance;
 
       setSelectedDate(DateTime.now());
-    }else{
+    } else {
       throw NoDataAvailableException();
     }
-
   }
-
-
 
   void retrieveAttendanceData() async {
     try {
@@ -54,9 +50,6 @@ class CalendarViewModel extends GetxController {
       loading.value = false;
     }
   }
-
-
-
 
   String get countWorkDaysAbsent {
     return attendanceOfMonth.value.countWorkDaysAbsent.toString();
@@ -106,14 +99,12 @@ class CalendarViewModel extends GetxController {
   //   return  selectedDay.value.attendance?.leaveTime == null;
   // }
 
-
-
   setSelectedDate(DateTime dateTime) {
-    for (AttendancesOfMonth dayInMonth in attendanceOfMonth.value.attendancesOfMonth) {
+    for (AttendancesOfMonth dayInMonth
+        in attendanceOfMonth.value.attendancesOfMonth) {
       if (DateTime.tryParse(dayInMonth.day ?? '') ==
           DateTime(dateTime.year, dateTime.month, dateTime.day)) {
         selectedDay.value = dayInMonth;
-
       }
     }
   }

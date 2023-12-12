@@ -5,7 +5,7 @@ import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wassl/helpers/exceptions/no_internet.dart';
+import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
 import 'package:wassl/web_services_helper/api.dart';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../reusable_widgets/circular_widget.dart';
+import '../../../../views/reusable_widgets/circular_widget.dart';
 
 class AttendanceInfoWidget extends StatelessWidget {
   AttendanceInfoWidget({Key? key}) : super(key: key);

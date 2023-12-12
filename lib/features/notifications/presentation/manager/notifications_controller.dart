@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:wassl/features/notifications/domain/use_cases/get_notifications.dart';
-import 'package:wassl/helpers/errors/failures.dart';
 
 import '../../../../helpers/constants/page_status.dart';
 import '../../domain/entities/notification.dart';
@@ -17,7 +16,7 @@ class NotificationsController extends GetxController {
     pageStatus.value = LoadingPageStatus();
     final eitherResult = await getNotificationsUseCase();
     eitherResult.fold((l) {
-      pageStatus.value = ErrorPageStatus((l as DataFailure).message);
+      pageStatus.value = ErrorPageStatus('no_data_available');
     }, (List<NotificationEntity> r) {
       pageStatus.value = SuccessPageStatus<List<NotificationEntity>>(r);
     });

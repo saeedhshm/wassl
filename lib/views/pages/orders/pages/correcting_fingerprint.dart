@@ -11,7 +11,7 @@ import 'package:wassl/views/reusable_widgets/localized_text.dart';
 import 'package:wassl/views/reusable_widgets/main_appbar.dart';
 
 import '../../../../helpers/exceptions/date_exceptions.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/finger_print.dart';
 import '../../../reusable_widgets/dialogs_messages/awsom_dialogs.dart';

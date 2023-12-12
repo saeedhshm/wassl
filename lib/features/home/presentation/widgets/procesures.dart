@@ -7,8 +7,8 @@ import 'package:wassl/views/reusable_widgets/icons/mony_on_hand.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../reusable_widgets/icons/edit_pen_paper.dart';
-import '../../documents/page.dart';
+import '../../../../views/pages/documents/page.dart';
+import '../../../../views/reusable_widgets/icons/edit_pen_paper.dart';
 
 class Procedures extends StatelessWidget {
   Procedures({Key? key}) : super(key: key);

@@ -8,7 +8,7 @@ import 'package:wassl/views/reusable_widgets/icons/chat_icon.dart';
 import 'package:wassl/views/reusable_widgets/icons/person_in_lock.dart';
 
 import '../../../../helpers/exceptions/custom_exception.dart';
-import '../../../../helpers/exceptions/no_internet.dart';
+import '../../../../helpers/exceptions/internet_api_exceptions.dart';
 import '../../../../models/orders/AllOrders.dart';
 import '../../../../models/orders/custoday.dart';
 import '../../../consts_widgets/loading_widgets.dart';
@@ -21,202 +21,208 @@ import '../../../reusable_widgets/main_appbar.dart';
 import '../../../reusable_widgets/textfield_with_icons.dart';
 
 class CustodyRequestPage extends StatelessWidget {
-
   final Function? onClose;
   final Order? order;
 
-   CustodyRequestPage({Key? key,this.onClose, this.order}) : super(key: key){
-     if(order != null) {
-       var custodyDate = order as CustodyDate;
-       controller.selectedType = custodyDate.type;
-       controller.reason = custodyDate.reason;
-       reasonCtrl.text = custodyDate.reason;
-       fileCtrl.text = custodyDate.file.split('/').last;
-     }
-
-   }
-   final CustodyRequestController controller = Get.put(CustodyRequestController());
-   final fileCtrl = TextEditingController();
+  CustodyRequestPage({Key? key, this.onClose, this.order}) : super(key: key) {
+    if (order != null) {
+      var custodyDate = order as CustodyDate;
+      controller.selectedType = custodyDate.type;
+      controller.reason = custodyDate.reason;
+      reasonCtrl.text = custodyDate.reason;
+      fileCtrl.text = custodyDate.file.split('/').last;
+    }
+  }
+  final CustodyRequestController controller =
+      Get.put(CustodyRequestController());
+  final fileCtrl = TextEditingController();
   final reasonCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(()=>Stack(
-        children: [
-          Column(
+      body: Obx(() => Stack(
             children: [
-              MainAppbarWidget(
-                'order_custody',
-                onBack: () {
-                  Get.back();
-                },
+              Column(
+                children: [
+                  MainAppbarWidget(
+                    'order_custody',
+                    onBack: () {
+                      Get.back();
+                    },
+                  ),
+                  Expanded(
+                      child: controller.loadingTypes.value
+                          ? const Center(
+                              child: SendingLoadingWidget(),
+                            )
+                          : SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(8),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: LocalizedText(
+                                              'custody_details'.tr,
+                                              textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        // DropDownMenu(textHint: 'loan_type'.tr,)
+                                        DropDownWidget(
+                                          hintText: 'custody_type'.tr,
+                                          items: controller
+                                              .orderTypes.value.data!
+                                              .map((e) => e)
+                                              .toList(),
+                                          selectedValue:
+                                              controller.selectedType,
+                                          onSelectedIndex: (value) {
+                                            controller.selectedType = value;
+                                          },
+                                          prefixIcon: const SizedBox(
+                                              width: 5,
+                                              height: 35,
+                                              child: PersonInLockIcon()),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: LocalizedText(
+                                              'clear_reason'.tr,
+                                              textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        TextFormFieldWithIcons(
+                                          prefixIcon: const SizedBox(
+                                            child: ChatConversationIcon(),
+                                          ),
+                                          maxLines: 5,
+                                          hintText: 'the_reason'.tr,
+                                          height: 130,
+                                          controller: reasonCtrl,
+                                          onChange: (value) {
+                                            controller.reason = value;
+                                          },
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        InkWell(
+                                          onTap: () async {
+                                            FilePickerResult? result =
+                                                await FilePicker.platform
+                                                    .pickFiles(
+                                              type: FileType.custom,
+                                              allowedExtensions: ['pdf'],
+                                            );
+
+                                            if (result != null) {
+                                              String filePath =
+                                                  result.files.single.path ??
+                                                      '';
+
+                                              if (filePath.isNotEmpty) {
+                                                controller.filePath = filePath;
+                                                fileCtrl.text =
+                                                    filePath.split('/').last;
+                                                // File file = File(filePath);
+                                              }
+                                            } else {
+                                              // User canceled the picker
+                                            }
+                                          },
+                                          child: TextFormFieldWithIcons(
+                                            prefixIcon: const AttachmentIcon(),
+                                            hintText: 'attach_file'.tr,
+                                            enabled: false,
+                                            controller: fileCtrl,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        order == null
+                                            ? SendButtonWidget(_addNewRequest)
+                                            : CancelUpdateWidget(
+                                                onUpdateRequest: _updateRequest,
+                                                onCancelRequest: _cancelRequest,
+                                              ),
+                                        const SizedBox(
+                                          height: 25,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ))
+                ],
               ),
-              Expanded(
-                  child: controller.loadingTypes.value ?
-                  const Center(
-                    child: SendingLoadingWidget(),
-                  ) : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width:double.infinity,
-                                  child: LocalizedText(
-                                    'custody_details'.tr,
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              // DropDownMenu(textHint: 'loan_type'.tr,)
-                              DropDownWidget(
-                                hintText: 'custody_type'.tr,
-                                items:  controller.orderTypes.value.data!.map((e) => e).toList(),
-                                selectedValue: controller.selectedType,
-                                onSelectedIndex: (value) {
-                                  controller.selectedType = value;
-                                },
-                                prefixIcon: const SizedBox(
-                                    width: 5,
-                                    height: 35,
-                                    child: PersonInLockIcon()),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SizedBox(
-                                  width:double.infinity,
-                                  child: LocalizedText(
-                                    'clear_reason'.tr,
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              TextFormFieldWithIcons(
-                                prefixIcon: const SizedBox(
-                                  child: ChatConversationIcon(),
-                                ),
-                                maxLines: 5,
-                                hintText: 'the_reason'.tr,
-                                height: 130,
-                                controller: reasonCtrl,
-                                onChange: (value){
-                                  controller.reason = value;
-                                },
-                              ),
-                              const SizedBox(height: 15,),
-                              InkWell(
-                                onTap: () async {
-                                  FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['pdf'],
-                                  );
-
-                                  if (result != null) {
-                                    String filePath = result.files.single.path ?? '';
-
-                                    if(filePath.isNotEmpty){
-                                      controller.filePath = filePath;
-                                      fileCtrl.text = filePath.split('/').last;
-                                      // File file = File(filePath);
-                                    }
-
-                                  } else {
-                                    // User canceled the picker
-                                  }
-                                },
-                                child: TextFormFieldWithIcons(
-                                  prefixIcon: const AttachmentIcon(),
-                                  hintText: 'attach_file'.tr,
-
-                                  enabled: false,
-                                  controller: fileCtrl,
-                                ),
-                              ),
-                              const SizedBox(height: 15,),
-                              order == null
-                                  ? SendButtonWidget(_addNewRequest)
-                                  : CancelUpdateWidget(
-                                onUpdateRequest: _updateRequest,
-                                onCancelRequest: _cancelRequest,
-                              ),
-                              const SizedBox(height: 25,),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ))
+              controller.loading.value
+                  ? Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black.withOpacity(0.3),
+                      child: const Center(
+                        child: SendingLoadingWidget(),
+                      ))
+                  : const SizedBox(),
+              controller.errorsList.isNotEmpty
+                  ? ErrorMessageWidget(
+                      errorList: controller.errorsList,
+                      onTap: () {
+                        ////
+                        controller.errorsList.clear();
+                      })
+                  : const SizedBox()
             ],
-          ),
-          controller.loading.value
-              ? Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: Colors.black.withOpacity(0.3),
-              child: const Center(
-                child: SendingLoadingWidget(),
-              ))
-              : const SizedBox(),
-          controller.errorsList.isNotEmpty ? ErrorMessageWidget(errorList: controller.errorsList,onTap:(){
-            ////
-            controller.errorsList.clear();
-          }): const SizedBox()
-        ],
-      )),
+          )),
     );
   }
 
-  _addNewRequest(context)async{
-    try{
+  _addNewRequest(context) async {
+    try {
       await controller.addNewPermission();
-      successDialog(context,message: 'your_request_done'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'your_request_done'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
-    }on NoInternetException catch(e){
-      errorDialog(context,message: e.errorMessage.tr);
-
-    }on CustomException catch(e){
-      errorDialog(context,message: e.errorMessage.tr);
-
-    }finally{
+      });
+    } on NoInternetException catch (e) {
+      errorDialog(context, message: e.errorMessage.tr);
+    } on CustomException catch (e) {
+      errorDialog(context, message: e.errorMessage.tr);
+    } finally {
       controller.loading.value = false;
     }
   }
 
-  _updateRequest(context)async{
-    try{
+  _updateRequest(context) async {
+    try {
       await controller.updateRequest('${order?.orderID}');
-      successDialog(context,message: 'request_updated'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_updated'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
-
-    }on NoInternetException catch(e){
-      errorDialog(context,message: e.errorMessage.tr);
-
-    }on CustomException catch(e){
-      errorDialog(context,message: e.errorMessage.tr);
-
-    }finally{
+      });
+    } on NoInternetException catch (e) {
+      errorDialog(context, message: e.errorMessage.tr);
+    } on CustomException catch (e) {
+      errorDialog(context, message: e.errorMessage.tr);
+    } finally {
       controller.loading.value = false;
     }
   }
@@ -225,18 +231,16 @@ class CustodyRequestPage extends StatelessWidget {
     controller.loading.value = true;
     try {
       await controller.cancelRequest('${order?.orderID}');
-      successDialog(context,message: 'request_canceled'.tr,onPress: (){
-        if(onClose != null){
+      successDialog(context, message: 'request_canceled'.tr, onPress: () {
+        if (onClose != null) {
           onClose!();
         }
         Get.back();
-      }
-      );
-
+      });
     } on NoInternetException catch (e) {
-      errorDialog(context,message: e.errorMessage.tr);
+      errorDialog(context, message: e.errorMessage.tr);
     } on NoDataAvailableException {
-      errorDialog(context,message: 'something_wrong_try_again'.tr);
+      errorDialog(context, message: 'something_wrong_try_again'.tr);
     } finally {
       controller.loading.value = false;
     }

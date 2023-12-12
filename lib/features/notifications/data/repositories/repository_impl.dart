@@ -16,7 +16,7 @@ class NotificationRepositoryImpl extends NotificationsRepository {
       final notifications = await dataSource.getNotifications();
       return Right(notifications);
     } catch (e) {
-      return Left(DataFailure(e.toString()));
+      return Left(NoDataFailure());
     }
   }
 
