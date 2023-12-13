@@ -62,8 +62,19 @@ class HomeRepositoryImpl extends HomeRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> registerAttendanceLeave() {
-    // TODO: implement registerAttendanceLeave
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> registerAttendanceLeave(
+      {required String url,
+      required Map<String, dynamic> body,
+      required Map<String, String> header}) async {
+    try {
+      await dataSource.registerAttendanceLeave(
+          url: url, body: body, header: header);
+
+      return const Right(unit);
+    } on NoInternetException {
+      return Left(NoInternetFailure());
+    } catch (e) {
+      return Left(UnknownFailure());
+    }
   }
 }

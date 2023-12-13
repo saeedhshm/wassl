@@ -7,8 +7,14 @@ abstract class AttendanceStatusState extends Equatable {
 
 class AttendanceStatusInitState extends AttendanceStatusState {}
 
+class AttendanceLoadingState extends AttendanceStatusState {}
+
 class RegisterAttendanceStatusState extends AttendanceStatusState {}
 
 class RegisterLeaveStatusState extends AttendanceStatusState {}
 
 class ShiftDoneStatusState extends AttendanceStatusState {}
+
+class AttendanceFingerPrintExceptionState extends AttendanceStatusState {}
+
+class AttendanceHolidayState extends AttendanceStatusState {}

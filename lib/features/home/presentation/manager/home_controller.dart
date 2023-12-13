@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:timezone/standalone.dart' as tz;
 import 'package:wassl/features/home/data/repositories/location_failurs.dart';
 import 'package:wassl/features/home/domain/use_cases/attendance_use_case.dart';
-import 'package:wassl/features/home/presentation/manager/status/attendance_state.dart';
+import 'package:wassl/features/home/presentation/manager/status/attendance_status_state.dart';
+import 'package:wassl/features/home/presentation/manager/status/location_state.dart';
 import 'package:wassl/getx_controllers/app_controller.dart';
 import 'package:wassl/helpers/constants/print_ln.dart';
 import 'package:wassl/helpers/extensions/date_time.dart';
@@ -26,9 +27,9 @@ class HomeController extends GetxController {
   HomeController(
       {required this.locationUseCase, required this.attendanceUseCases});
 
-  Rx<AttendanceState> homeAttendanceStatus = Rx(AttendanceInitState());
-  // Rx<AttendanceStatusState> attendanceStatusState =
-  //     Rx(AttendanceStatusInitState());
+  Rx<LocationState> locationState = Rx(LocationLoadingState());
+  Rx<AttendanceStatusState> attendanceStatusState =
+      Rx(AttendanceStatusInitState());
 
   final AppController appController = Get.find();
 
@@ -51,35 +52,34 @@ class HomeController extends GetxController {
 
   // page :- apis retriever
   Future<String> registerAttendance({String? bearer}) async {
-    sendingAttendance.value = true;
-    var body = {
-      'longitude': '${appController.position?.longitude}',
-      'latitude': '${appController.position?.latitude}',
-      'schedule_id': '${currentShift.value.schedule?.scheduleId}'
-    };
+    locationState.value = LocationLoadingState();
+    var either = await locationUseCase.getUserLocationPosition();
+    either.fold((l) {
+      locationState.value = LocationDeniedForeverState();
+      return '';
+    }, (position) async {
+      var body = {
+        'longitude': '${position.longitude}',
+        'latitude': '${position.latitude}',
+        'schedule_id': '${currentShift.value.schedule?.scheduleId}'
+      };
 
-    var headers = {
-      'Authorization':
-          'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
+      var header = {
+        'Authorization':
+            'bearer ${bearer ?? appController.loginModel.value.token?.accessToken}',
+        // "x-localization": 'lang_code'.tr,
+      };
 
-    var url = '';
-    if (attendanceStatus.value == 2) {
-      url = AppUrls.leaving;
-    } else {
-      url = AppUrls.attendance;
-    }
+      var url = AppUrls.registerAttendance(attendanceStatus.value);
 
-    final response =
-        await AppApiHandler.postData(url: url, body: body, header: headers);
-
-    sendingAttendance.value = false;
-
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-
-      if (json['success'] == true) {
+      var eitherAttend = await attendanceUseCases.registerAttendanceLeave(
+          url: url, body: body, header: header);
+      locationState.value = LocationEnabledState();
+      eitherAttend.fold((failure) {
+        println('=-==-=-=-=-= $failure');
+        // lo
+      }, (r) {
+        println("=-=-=->>>>3 ${attendanceStatus.value}");
         attendanceStatus.value = attendanceStatus.value == 2 ? 3 : 2;
         calendarController.retrieveAttendanceData();
         if (attendanceStatus.value == 2) {
@@ -87,12 +87,11 @@ class HomeController extends GetxController {
         } else {
           return 'leaving_done_successfully'.tr;
         }
-      } else {
-        Future.error(json['message']);
-      }
-    }
-    return Future.error(
-        '${response.body}\n${appController.position?.longitude},${appController.position?.latitude}');
+      });
+
+      sendingAttendance.value = false;
+    });
+    return '';
   }
 
   checkForAttendance() async {
@@ -174,16 +173,19 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (appController.isFingerPrintExempt) {
-      homeAttendanceStatus.value = AttendanceFingerPrintExceptionState();
-    } else if (appController.isHolidayDay) {
-      homeAttendanceStatus.value = AttendanceHolidayState();
-    } else {
-      getUserLocationPermission();
-    }
-    final detroit = tz.getLocation('Asia/Riyadh');
+    appInit();
+  }
 
-    checkForAttendance();
+  appInit() async {
+    if (appController.isFingerPrintExempt) {
+      attendanceStatusState.value = AttendanceFingerPrintExceptionState();
+    } else if (appController.isHolidayDay) {
+      attendanceStatusState.value = AttendanceHolidayState();
+    } else {
+      await getUserLocationPermission();
+    }
+    await checkForAttendance();
+    final detroit = tz.getLocation('Asia/Riyadh');
     Timer.periodic(const Duration(seconds: 1), (timer) {
       dt.value = tz.TZDateTime.from(DateTime.now(), detroit);
     });
@@ -194,7 +196,7 @@ class HomeController extends GetxController {
 
   reEnableLocationServices() async {
     await getUserLocationPermission();
-    if (homeAttendanceStatus.value is HomeLocationDeniedForeverState) {
+    if (locationState.value is LocationDeniedForeverState) {
       await Geolocator.openAppSettings();
     }
   }
@@ -216,21 +218,21 @@ class HomeController extends GetxController {
   }
 
   Future getUserLocationPermission() async {
-    homeAttendanceStatus.value = AttendanceLoadingState();
+    locationState.value = LocationLoadingState();
     var eitherResult = await locationUseCase.checkLocationPermission();
 
     eitherResult.fold((failure) {
       println(failure);
       if (failure is LocationDeniedFailure) {
-        homeAttendanceStatus.value = HomeLocationDeniedState();
+        locationState.value = LocationDeniedState();
       } else if (failure is LocationDeniedForeverFailure) {
-        homeAttendanceStatus.value = HomeLocationDeniedForeverState();
+        locationState.value = LocationDeniedForeverState();
       } else {
         // system location disable
-        homeAttendanceStatus.value = HomeLocationSystemDisabledState();
+        locationState.value = LocationSystemDisabledState();
       }
     }, (r) {
-      homeAttendanceStatus.value = HomeLocationEnabledState();
+      locationState.value = LocationEnabledState();
     });
   }
 }

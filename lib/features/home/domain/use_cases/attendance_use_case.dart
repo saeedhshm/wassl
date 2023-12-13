@@ -14,7 +14,11 @@ class AttendanceUseCases {
     return await homeRepository.checkAttendanceStatus(header);
   }
 
-  Future<Either<Failure, Unit>> registerAttendanceLeave() async {
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> registerAttendanceLeave(
+      {required String url,
+      required Map<String, dynamic> body,
+      required Map<String, String> header}) async {
+    return await homeRepository.registerAttendanceLeave(
+        url: url, body: body, header: header);
   }
 }

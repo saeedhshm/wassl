@@ -11,5 +11,8 @@ abstract class HomeRepository {
   Future<Either<Failure, AttendanceCheck>> checkAttendanceStatus(
       Map<String, String> header);
 
-  Future<Either<Failure, Unit>> registerAttendanceLeave();
+  Future<Either<Failure, Unit>> registerAttendanceLeave(
+      {required String url,
+      required Map<String, dynamic> body,
+      required Map<String, String> header});
 }

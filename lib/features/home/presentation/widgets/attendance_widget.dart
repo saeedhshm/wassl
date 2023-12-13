@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
 
 import '../../../../features/home/presentation/manager/home_controller.dart';
-import '../../../../features/home/presentation/manager/status/attendance_state.dart';
+import '../../../../features/home/presentation/manager/status/location_state.dart';
 import '../../../../features/home/presentation/widgets/attendance/widgets/attendance_message.dart';
 import '../../../../features/home/presentation/widgets/attendance/widgets/message_widget.dart';
 import '../../../../getx_controllers/app_controller.dart';
 import '../../../../helpers/constants/app_colors.dart';
-import '../../../../helpers/constants/print_ln.dart';
 import '../../../../views/consts_widgets/loading_widgets.dart';
 import '../../../../views/reusable_widgets/dialogs_messages/snack_bars.dart';
+import '../manager/status/attendance_status_state.dart';
 import 'attendance_info_widget.dart';
 
 class AttendanceWidget extends StatefulWidget {
@@ -36,34 +36,31 @@ class _AttendanceWidgetState extends State<AttendanceWidget> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       // !appController.isHolidayDay ?
       child: Obx(() {
-        switch (controller.homeAttendanceStatus.value.runtimeType) {
-          case AttendanceLoadingState:
+        if (controller.attendanceStatusState.value
+            is AttendanceFingerPrintExceptionState) {
+          return AttendanceMessageWidget('exempt'.tr);
+        }
+        if (controller.attendanceStatusState.value is AttendanceHolidayState) {
+          return AttendanceMessageWidget('today_holiday'.tr);
+        }
+        switch (controller.locationState.value.runtimeType) {
+          case LocationLoadingState:
             return const SendingLoadingWidget();
-          case AttendanceFingerPrintExceptionState:
-            return AttendanceMessageWidget('exempt'.tr);
-          case AttendanceHolidayState:
-            return AttendanceMessageWidget('today_holiday'.tr);
-          case HomeLocationEnabledState:
+          case LocationEnabledState:
             return IgnorePointer(
-              ignoring: controller.attendanceRegisterBlocker,
-              // ignoring: false,
-              child: InkWell(
-                onTap: () async {
-                  println(appController.isHolidayDay);
-                  // return;
-                },
-                child: AttendanceInfoWidget(),
-              ),
+              // ignoring: controller.attendanceRegisterBlocker,
+              ignoring: false,
+              child: AttendanceInfoWidget(),
             );
-          case HomeLocationDeniedState:
+          case LocationDeniedState:
             return AttendanceLocationErrorMessageWidget(
               'must_enable_location'.tr,
             );
-          case HomeLocationDeniedForeverState:
+          case LocationDeniedForeverState:
             return AttendanceLocationErrorMessageWidget(
               'must_enable_location'.tr,
             );
-          case HomeLocationSystemDisabledState:
+          case LocationSystemDisabledState:
             return AttendanceLocationErrorMessageWidget(
               'must_enable_location_in_system'.tr,
             );
