@@ -149,7 +149,6 @@ class _RestWidgetsState extends State<RestWidgets> {
                   btnTitle: 'login',
                   onPressed: () async {
                     try {
-                      appController.loading.value = false;
                       await appController.login(
                           email: userNameCtrl.text,
                           password: passwordCtrl.text);

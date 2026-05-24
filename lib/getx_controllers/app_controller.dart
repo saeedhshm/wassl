@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wassl/features/auth/data/datasource/auth_data_sources.dart';
+import 'package:wassl/features/auth/data/datasource/mock_auth_data_source.dart';
 import 'package:wassl/helpers/exceptions/internet_api_exceptions.dart';
 import 'package:wassl/helpers/exceptions/passwords_exceptions.dart';
 import 'package:wassl/models/auth/LoginModel.dart';
@@ -45,50 +48,128 @@ class AppController extends GetxController {
   final _checker = AppVersionChecker();
 
   getHolidaysData() async {
-    var url = AppUrls.vacationsApi;
-    var headers = {
-      'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
     gettingHolidays.value = true;
-    var response = await AppApiHandler.getData(url: url, header: headers);
-    gettingHolidays.value = false;
+    if (useMocks) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      holidaysBalance.value = Holidays.fromJson({
+        'success': true,
+        'data': {
+          'id': 1,
+          'employee_id': 1,
+          'opening_vacations_count': 30,
+          'used_vacations_count': 10,
+          'available_vacations_count': 20,
+          'discount_vacations_count': 0,
+          'sick_vacations_count': 2,
+          'unpaid_vacations_count': 1,
+        },
+      });
+    } else {
+      var url = AppUrls.vacationsApi;
+      var headers = {
+        'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
+        // "x-localization": 'lang_code'.tr,
+      };
+      var response = await AppApiHandler.getData(url: url, header: headers);
 
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      holidaysBalance.value = Holidays.fromJson(json);
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.body);
+        holidaysBalance.value = Holidays.fromJson(json);
+      }
     }
+    gettingHolidays.value = false;
   }
+
+  bool get useMocks =>
+      GetIt.instance.isRegistered<AuthRemoteDataSource>() &&
+      GetIt.instance<AuthRemoteDataSource>() is MockAuthRemoteDataSource;
 
   Future<void> login({required String email, required String password}) async {
     loading.value = true;
-    final response = await AppApiHandler.postData(
-        url: AppUrls.login, body: {'email': email, 'password': password});
-    // int statusCode = response.statusCode;
-    // println(AppUrls.login);
-    // println(response.statusCode);
-    // println(response.body);
+    try {
+      if (useMocks) {
+        final authDataSource = GetIt.instance<AuthRemoteDataSource>();
+        final response = await authDataSource.login(email, password);
 
-    loading.value = false;
-    if (response.statusCode == 200) {
-      if (rememberMe) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString(appStorageEmail, email);
-        await prefs.setString(appStoragePassword, password);
-      }
-      Map<String, dynamic> json = jsonDecode(response.body);
+        loading.value = false;
 
-      loginModel.value.fromJson(json);
-      if (fCMToken != null) {
-        final fcmResponse = await AppApiHandler.postData(
-            url: AppUrls.updateToken,
-            header: appHeader,
-            body: {
-              'token': fCMToken,
-            });
+        if (rememberMe) {
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(appStorageEmail, email);
+          await prefs.setString(appStoragePassword, password);
+        }
+
+        loginModel.value.fromJson({
+          'success': response.success,
+          'token': response.token != null
+              ? {
+                  'access_token': response.token!.accessToken,
+                  'token_type': response.token!.tokenType,
+                  'expires_in': response.token!.expiresIn,
+                }
+              : null,
+          'user': response.user != null
+              ? {
+                  'id': response.user!.id,
+                  'full_name': response.user!.fullName,
+                  'full_name_en': response.user!.fullNameEn,
+                  'email': response.user!.email,
+                  'code': response.user!.code,
+                  'salary': response.user!.salary,
+                  'is_exempt_fingerprinting':
+                      response.user!.isExemptFingerprinting,
+                  'branch': {
+                    'id': 1,
+                    'name_ar': 'الفرع الرئيسي',
+                    'name_en': 'Main Branch',
+                  },
+                  'schedule': {
+                    'id': 1,
+                    'time_in': '08:00:00',
+                    'time_out': '17:00:00',
+                    'info': {
+                      'id': 1,
+                      'time_in': '08:00:00',
+                      'time_out': '17:00:00',
+                      'week_end_days': '5,6',
+                    },
+                  },
+                }
+              : null,
+        });
+
+        if (fCMToken != null) {
+          await authDataSource.updateFcmToken(fCMToken!);
+        }
+      } else {
+        final response = await AppApiHandler.postData(
+            url: AppUrls.login, body: {'email': email, 'password': password});
+
+        loading.value = false;
+        if (response.statusCode == 200) {
+          if (rememberMe) {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString(appStorageEmail, email);
+            await prefs.setString(appStoragePassword, password);
+          }
+          Map<String, dynamic> json = jsonDecode(response.body);
+
+          loginModel.value.fromJson(json);
+          if (fCMToken != null) {
+            final fcmResponse = await AppApiHandler.postData(
+                url: AppUrls.updateToken,
+                header: appHeader,
+                body: {
+                  'token': fCMToken,
+                });
+          }
+        } else {
+          throw UserNotFoundException();
+        }
       }
-    } else {
-      throw UserNotFoundException();
+    } catch (e) {
+      loading.value = false;
+      rethrow;
     }
   }
 
@@ -119,48 +200,58 @@ class AppController extends GetxController {
     }
 
     loading.value = true;
-    var headers = {
-      'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
-      "x-localization": 'lang_code'.tr,
-    };
-    final response = await AppApiHandler.postData(
-        url: AppUrls.changePassword,
-        header: headers,
-        body: {
-          'currentPassword': currentPassword,
-          'password': newPassword,
-          'confirmPassword': newPassword
-        });
+    try {
+      var headers = {
+        'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
+        "x-localization": 'lang_code'.tr,
+      };
+      final response = await AppApiHandler.postData(
+          url: AppUrls.changePassword,
+          header: headers,
+          body: {
+            'currentPassword': currentPassword,
+            'password': newPassword,
+            'confirmPassword': newPassword
+          });
 
-    loading.value = false;
-    if (response.statusCode != 200) {
-      throw ChangePasswordException();
+      loading.value = false;
+      if (response.statusCode != 200) {
+        throw ChangePasswordException();
+      }
+      if (response.statusCode == 200) {
+        await prefs.setString(appStoragePassword, newPassword);
+        return 'password_changed';
+      }
+      return Future.error('password_didnt_change');
+    } catch (e) {
+      loading.value = false;
+      rethrow;
     }
-    if (response.statusCode == 200) {
-      await prefs.setString(appStoragePassword, newPassword);
-      return 'password_changed';
-    }
-    return Future.error('password_didnt_change');
   }
 
   Future logout() async {
-    var headers = {
-      'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
     loading.value = true;
-    final response = await AppApiHandler.getData(
-      url: AppUrls.logout,
-      header: headers,
-    );
+    try {
+      var headers = {
+        'Authorization': 'bearer ${loginModel.value.token?.accessToken}',
+        // "x-localization": 'lang_code'.tr,
+      };
+      final response = await AppApiHandler.getData(
+        url: AppUrls.logout,
+        header: headers,
+      );
 
-    loading.value = false;
-    if (response.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(appStorageEmail, 'null');
-      await prefs.setString(appStoragePassword, 'null');
+      loading.value = false;
+      if (response.statusCode == 200) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString(appStorageEmail, 'null');
+        await prefs.setString(appStoragePassword, 'null');
 
-      loginModel.value = LoginModel();
+        loginModel.value = LoginModel();
+      }
+    } catch (e) {
+      loading.value = false;
+      rethrow;
     }
   }
 

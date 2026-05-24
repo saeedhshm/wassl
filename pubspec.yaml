@@ -18,7 +18,7 @@ version: 1.1.16+63
 
 
 environment:
-  sdk: ">=2.19.6 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -44,7 +44,7 @@ dependencies:
   flutter_app_badger:
   shared_preferences:
   geolocator: ^9.0.2
-  app_settings: ^4.2.0
+  app_settings: ^7.0.0
   internet_connection_checker: ^1.0.0+1
   flutter_app_version_checker: ^0.3.2
   flutter_local_notifications:
@@ -64,19 +64,21 @@ dependencies:
   awesome_dialog:
     path: ../wassl/plugins/awesome_dialog-3.1.0
   equatable: ^2.0.5
-#  huawei_location: ^6.12.0+300
   dartz: ^0.10.1
   huawei_push: ^6.11.0+300
-
-
-#  overlay_support: ^2.1.0
+  flutter_bloc: ^8.1.3
+  bloc: ^8.1.2
+  dio: ^5.4.0
+  get_it: ^7.6.4
 
 dependency_overrides:
   firebase_core_platform_interface: 4.5.1
+  win32: 4.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: ^9.1.4
   flutter_launcher_icons: "^0.11.0"
 
   # The "flutter_lints" package below contains a set of recommended lints to

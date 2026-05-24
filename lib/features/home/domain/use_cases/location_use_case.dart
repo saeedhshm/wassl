@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:wassl/features/home/data/models/attendance_check.dart';
 import 'package:wassl/features/home/domain/repositories/home_repository.dart';
-
-import '../../../../helpers/errors/failures.dart';
-import '../../../../helpers/location/position.dart';
+import 'package:wassl/helpers/errors/failures.dart';
+import 'package:wassl/helpers/location/position.dart';
 
 class LocationUseCase {
   final HomeRepository homeRepository;

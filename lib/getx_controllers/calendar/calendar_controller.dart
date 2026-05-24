@@ -40,7 +40,58 @@ class CalendarViewModel extends GetxController {
   void retrieveAttendanceData() async {
     try {
       loading.value = true;
-      await _checkForMonthAttendance();
+      if (appController.useMocks) {
+        await Future.delayed(const Duration(milliseconds: 500));
+        final now = DateTime.now();
+        final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+        final attendances = <Map<String, dynamic>>[];
+        for (int i = 1; i <= daysInMonth; i++) {
+          final day = DateTime(now.year, now.month, i);
+          final isWeekend = day.weekday == DateTime.friday || day.weekday == DateTime.saturday;
+          attendances.add({
+            'day': day.toIso8601String(),
+            'status': isWeekend
+                ? 'weekEnd'
+                : (i <= 22 ? 'attend' : 'absent'),
+            'schedules': isWeekend
+                ? []
+                : [
+                    {
+                      'attendance_status': i <= 22 ? 3 : 1,
+                      'attendance': i <= 22
+                          ? {
+                              'id': i,
+                              'attendance_time': '${day.toIso8601String().split('T')[0]} 08:00:00',
+                              'leave_time': '${day.toIso8601String().split('T')[0]} 17:00:00',
+                            }
+                          : null,
+                      'schedule': {
+                        'id': 1,
+                        'time_in': '08:00:00',
+                        'time_out': '17:00:00',
+                      },
+                    },
+                  ],
+          });
+        }
+        attendanceOfMonth.value = MonthAttendance.fromJson({
+          'countWorkDaysAbsent': daysInMonth - 22,
+          'countWorkDaysAttend': 22,
+          'earlyLeaveDaysCount': 1,
+          'lateAttendDaysCount': 2,
+          'missingLeaveDaysCount': 0,
+          'totalAttendances': {
+            'total': '176:00:00',
+            'total_attendance_late_time': '00:45:00',
+            'countWorkDays': 22,
+            'countWorkHour': 176,
+          },
+          'attendancesOfMonth': attendances,
+        });
+        setSelectedDate(DateTime.now());
+      } else {
+        await _checkForMonthAttendance();
+      }
       noInternetAvailable.value = '';
     } on NoInternetException catch (e) {
       noInternetAvailable.value = e.errorMessage;

@@ -20,6 +20,73 @@ import '../../../../web_services_helper/api.dart';
 import '../../data/models/attendance_check.dart';
 import '../../domain/use_cases/location_use_case.dart';
 
+Map<String, dynamic> _mockAdsJson = {
+  'success': true,
+  'advertisements': [
+    {
+      'id': 1,
+      'title': 'Company Annual Meeting',
+      'description': 'Join us for the annual company meeting where we will discuss our achievements and future plans.',
+      'image': '',
+      'status': 1,
+      'start_date': '2026-06-01',
+      'end_date': '2026-06-01',
+      'created_at': '2026-05-01',
+      'updated_at': '2026-05-01',
+    },
+    {
+      'id': 2,
+      'title': 'Health Insurance Update',
+      'description': 'New health insurance plans available for all employees. Check your eligibility now.',
+      'image': '',
+      'status': 1,
+      'start_date': '2026-06-15',
+      'end_date': '2026-07-15',
+      'created_at': '2026-05-15',
+      'updated_at': '2026-05-15',
+    },
+  ],
+};
+
+Map<String, dynamic> _mockEventsJson = {
+  'success': true,
+  'covenants': [
+    {
+      'id': 1,
+      'title': 'Team Building Workshop',
+      'description': 'An interactive workshop to improve team collaboration and communication skills.',
+      'status': 1,
+      'start_date': '2026-06-10T10:00:00.000',
+      'end_date': '2026-06-10T15:00:00.000',
+      'created_at': '2026-05-20T00:00:00.000',
+      'updated_at': '2026-05-20T00:00:00.000',
+      'location': 'Conference Room A',
+    },
+    {
+      'id': 2,
+      'title': 'Quarterly Review',
+      'description': 'Q2 performance review meeting with department heads.',
+      'status': 1,
+      'start_date': '2026-07-01T09:00:00.000',
+      'end_date': '2026-07-01T12:00:00.000',
+      'created_at': '2026-06-01T00:00:00.000',
+      'updated_at': '2026-06-01T00:00:00.000',
+      'location': 'Main Hall',
+    },
+    {
+      'id': 3,
+      'title': 'Training Session',
+      'description': 'Mandatory training session on new company policies.',
+      'status': 1,
+      'start_date': '2026-06-20T08:00:00.000',
+      'end_date': '2026-06-20T16:00:00.000',
+      'created_at': '2026-06-05T00:00:00.000',
+      'updated_at': '2026-06-05T00:00:00.000',
+      'location': 'Training Room B',
+    },
+  ],
+};
+
 class HomeController extends GetxController {
   final LocationUseCase locationUseCase;
   final AttendanceUseCases attendanceUseCases;
@@ -95,26 +162,52 @@ class HomeController extends GetxController {
   }
 
   checkForAttendance() async {
-    var headers = {
-      'Authorization':
-          'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
+    if (appController.useMocks) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      currentShift.value = AttendanceCheck.fromJson({
+        'attendance_status': 2,
+        'attendance': {
+          'id': 1,
+          'attendance_time': '${DateTime.now().toIso8601String().split('T')[0]} 08:00:00',
+          'leave_time': '${DateTime.now().toIso8601String().split('T')[0]} 17:00:00',
+        },
+        'schedule': {
+          'id': 1,
+          'time_in': '08:00:00',
+          'time_out': '17:00:00',
+          'allow_time_in': '08:30:00',
+          'allow_time_out': '17:40:00',
+          'info': {
+            'id': 1,
+            'time_in': '08:00:00',
+            'time_out': '17:00:00',
+            'week_end_days': '5,6',
+          },
+        },
+      });
+      attendanceStatus.value = 2;
+    } else {
+      var headers = {
+        'Authorization':
+            'bearer ${appController.loginModel.value.token?.accessToken}',
+        // "x-localization": 'lang_code'.tr,
+      };
 
-    var eitherResult = await attendanceUseCases.checkAttendanceStatus(headers);
+      var eitherResult = await attendanceUseCases.checkAttendanceStatus(headers);
 
-    eitherResult.fold((l) {}, (r) {
-      currentShift.value = r;
-    });
+      eitherResult.fold((l) {}, (r) {
+        currentShift.value = r;
+      });
 
-    attendanceStatus.value = currentShift.value.attendanceStatus ?? 0;
-    if (currentShift.value.attendance != null) {
-      if (attendanceStatus.value == 1) {
-        if (DateTime.now().isAfter(currentShift.value.empTimeIn) &&
-            DateTime.now().isBefore(currentShift.value.empAllowTimeOut)) {
-          attendanceStatus.value = 2;
-        } else {
-          attendanceStatus.value = 1;
+      attendanceStatus.value = currentShift.value.attendanceStatus ?? 0;
+      if (currentShift.value.attendance != null) {
+        if (attendanceStatus.value == 1) {
+          if (DateTime.now().isAfter(currentShift.value.empTimeIn) &&
+              DateTime.now().isBefore(currentShift.value.empAllowTimeOut)) {
+            attendanceStatus.value = 2;
+          } else {
+            attendanceStatus.value = 1;
+          }
         }
       }
     }
@@ -122,24 +215,34 @@ class HomeController extends GetxController {
 
   Future getIncomingEvents() async {
     nextEventsLoading.value = true;
-    var response = await AppApiHandler.getData(
-        url: AppUrls.meetingsApi, header: appController.appHeader);
+    if (appController.useMocks) {
+      await Future.delayed(const Duration(milliseconds: 400));
+      events.value = IncomingEvents.fromJson(_mockEventsJson);
+    } else {
+      var response = await AppApiHandler.getData(
+          url: AppUrls.meetingsApi, header: appController.appHeader);
 
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      events.value = IncomingEvents.fromJson(json);
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.body);
+        events.value = IncomingEvents.fromJson(json);
+      }
     }
     nextEventsLoading.value = false;
   }
 
   Future getAppAds() async {
     appAdsLoading.value = true;
-    var response = await AppApiHandler.getData(
-        url: AppUrls.adsApi, header: appController.appHeader);
+    if (appController.useMocks) {
+      await Future.delayed(const Duration(milliseconds: 400));
+      ads.value = AppAds.fromJson(_mockAdsJson);
+    } else {
+      var response = await AppApiHandler.getData(
+          url: AppUrls.adsApi, header: appController.appHeader);
 
-    if (response.statusCode == 200) {
-      var json = jsonDecode(response.body);
-      ads.value = AppAds.fromJson(json);
+      if (response.statusCode == 200) {
+        var json = jsonDecode(response.body);
+        ads.value = AppAds.fromJson(json);
+      }
     }
     appAdsLoading.value = false;
   }

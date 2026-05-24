@@ -13,31 +13,68 @@ class MembersAttendanceController extends GetxController{
   var loading = false.obs;
 
   Future<void> getTeamAttendance() async {
-
-    var headers = {
-      'Authorization':
-      'bearer ${appController.loginModel.value.token?.accessToken}',
-      // "x-localization": 'lang_code'.tr,
-    };
-
-
     loading.value = true;
     _teamAttendance.value.teamAttendance.clear();
-    var url = AppUrls.teamAttendanceApi;
+
+    if (appController.useMocks) {
+      await Future.delayed(const Duration(milliseconds: 400));
+      _teamAttendance.value = TeamAttendanceV2.fromJson([
+        {
+          'id': 1,
+          'employee_id': 2,
+          'employee': {
+            'id': 2,
+            'full_name': 'Ahmed Mohammed',
+            'full_name_en': 'Ahmed Mohammed',
+            'code': 'EMP002',
+            'job': {'id': 1, 'name_ar': 'مهندس', 'name_en': 'Engineer'},
+          },
+          'attendance': [
+            {
+              'attendance_status': 3,
+              'attendance': {
+                'id': 1,
+                'attendance_time': '2026-05-24 08:00:00',
+                'leave_time': '2026-05-24 17:00:00',
+              },
+            },
+          ],
+        },
+        {
+          'id': 2,
+          'employee_id': 3,
+          'employee': {
+            'id': 3,
+            'full_name': 'Sarah Ali',
+            'full_name_en': 'Sarah Ali',
+            'code': 'EMP003',
+            'job': {'id': 2, 'name_ar': 'محاسب', 'name_en': 'Accountant'},
+          },
+          'attendance': [
+            {
+              'attendance_status': 1,
+              'attendance': null,
+            },
+          ],
+        },
+      ]);
+    } else {
+      var headers = {
+        'Authorization':
+        'bearer ${appController.loginModel.value.token?.accessToken}',
+        // "x-localization": 'lang_code'.tr,
+      };
 
 
-    final response = await AppApiHandler.getData(url: url,header: headers,);
+      var url = AppUrls.teamAttendanceApi;
+      final response = await AppApiHandler.getData(url: url,header: headers,);
+
+      if(response.statusCode == 200){
+        var json = jsonDecode(response.body);
+        _teamAttendance.value = TeamAttendanceV2.fromJson(json);
+      }
+    }
     loading.value = false;
-
-    if(response.statusCode != 200){
-      // throw NoDataAvailableException();
-    }
-    if(response.statusCode == 200){
-      var json = jsonDecode(response.body);
-      _teamAttendance.value = TeamAttendanceV2.fromJson(json);
-
-
-    }
   }
 
   @override

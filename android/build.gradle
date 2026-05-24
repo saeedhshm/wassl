@@ -1,41 +1,46 @@
-buildscript {
-    ext.kotlin_version = '1.8.0'
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://developer.huawei.com/repo/' }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.4.0'
-        classpath 'com.huawei.agconnect:agcp:1.9.1.300'
-    }
-}
-
 allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {url 'https://developer.huawei.com/repo/'}
     }
 }
 
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
-    project.configurations.all {
-        resolutionStrategy.eachDependency { details ->
-            if (details.requested.group == 'com.android.support'
-                    && !details.requested.name.contains('multidex') ) {
-                details.useVersion "27.1.1"
+
+    afterEvaluate { p ->
+        if (p.hasProperty('android')) {
+            if (p.android.hasProperty('namespace') && p.android.namespace == null) {
+                def manifestFile = p.android.sourceSets.main.manifest.srcFile
+                if (manifestFile.exists()) {
+                    def manifestText = manifestFile.text
+                    def matcher = manifestText =~ /package="([^"]+)"/
+                    if (matcher.find()) {
+                        p.android.setNamespace(matcher.group(1))
+                    }
+                }
+            }
+            if (p.android.hasProperty('buildFeatures')) {
+                p.android.buildFeatures.buildConfig = true
+            }
+            try {
+                if (p.android.hasProperty('compileOptions')) {
+                    p.android.compileOptions.setSourceCompatibility(JavaVersion.VERSION_17)
+                    p.android.compileOptions.setTargetCompatibility(JavaVersion.VERSION_17)
+                }
+            } catch (Exception e) {
+                // ignore
+            }
+        }
+        p.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+            kotlinOptions {
+                jvmTarget = "17"
             }
         }
     }
+
+    project.evaluationDependsOn(':app')
 }
 
 tasks.register("clean", Delete) {
