@@ -1,6 +1,8 @@
 
 # Wassl
 
+**Download the latest APK:** https://drive.google.com/file/d/1uwriVRpiQK2JfkHPt4rzJiCxfmZHeTqV/view?usp=sharing
+
 Wassl is a comprehensive HR management mobile application built with Flutter. It streamlines employee attendance tracking, leave/vacation management, financial requests, and team coordination.
 
 > **Note:** The app currently uses **mock data** for all features. No backend connection is required.
